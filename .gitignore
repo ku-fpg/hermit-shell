@@ -1,0 +1,13 @@
+dist/
+*~
+*.hi
+*.o
+*.swp
+*.swo
+*.DS_Store
+*.dump-simpl
+*.dump-prep
+
+# Generated files
+.ghci
+GenerateMe.hs
