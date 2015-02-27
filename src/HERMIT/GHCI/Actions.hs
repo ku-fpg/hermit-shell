@@ -1,4 +1,4 @@
-{-# LANGUAGE CPP, LambdaCase, OverloadedStrings #-}
+{-# LANGUAGE LambdaCase, OverloadedStrings #-}
 module HERMIT.GHCI.Actions
     ( connect
     , command
@@ -7,24 +7,22 @@ module HERMIT.GHCI.Actions
     , complete
     ) where
 
+import           Control.Arrow
 import           Control.Concurrent.MVar
 import           Control.Concurrent.STM
-#if MIN_VERSION_mtl(2,2,1)
-import           Control.Monad.Except
-#else
-import           Control.Monad.Error
-#endif
+import           Control.Monad.Trans.Except
 import           Control.Monad.Reader
 import qualified Control.Monad.State.Lazy as State
 
 import           Data.Char (isSpace)
 import           Data.Either
 import qualified Data.Map as Map
+import           Data.Maybe (fromMaybe)
 import           Data.Monoid
 
 import           HERMIT.Dictionary
 import           HERMIT.External
-import           HERMIT.Kernel.Scoped
+import           HERMIT.Kernel
 import           HERMIT.Kure
 import           HERMIT.Parser
 
@@ -46,19 +44,19 @@ import           Web.Scotty.Trans
 
 ------------------------- connecting a new user -------------------------------
 
-connect :: PassInfo -> ScopedKernel -> SAST -> ActionH ()
-connect passInfo kernel sast = do
+connect :: PassInfo -> Kernel -> AST -> ActionH ()
+connect passInfo kernel ast = do
     uid <- webm $ do sync <- ask
                      liftIO $ do
                         chan <- atomically newTChan
-                        cls <- mkCLState chan passInfo kernel sast
+                        cls <- mkCLState chan passInfo kernel ast
                         mvar <- newMVar cls
                         atomically $ do
                             st <- readTVar sync
                             let k = nextKey (users st)
                             writeTVar sync $ st { users = Map.insert k (mvar,chan) (users st) }
                             return k
-    json $ Token uid sast
+    json $ Token uid ast
 
 -- | Generate the next user id.
 nextKey :: Map.Map Integer a -> Integer
@@ -66,9 +64,9 @@ nextKey m | Map.null m = 0
           | otherwise = let (k,_) = Map.findMax m in k + 1
 
 -- | Build a default state for a new user.
-mkCLState :: TChan (Either String [Glyph]) -> PassInfo -> ScopedKernel -> SAST -> IO CommandLineState
-mkCLState chan passInfo kernel sast = do
-    ps <- defPS sast kernel passInfo
+mkCLState :: TChan (Either String [Glyph]) -> PassInfo -> Kernel -> AST -> IO CommandLineState
+mkCLState chan passInfo kernel ast = do
+    ps <- defPS ast kernel passInfo
     return $ CommandLineState
                 { cl_pstate = ps { ps_render = webChannel chan }
                 , cl_height         = 30
@@ -76,28 +74,26 @@ mkCLState chan passInfo kernel sast = do
                 , cl_window         = mempty
                 , cl_externals      = shell_externals ++ externals
                 , cl_scripts        = []
-                , cl_initSAST       = sast
-                , cl_version        = VersionStore
-                                        { vs_graph = []
-                                        , vs_tags  = []
-                                        }
                 , cl_running_script = Nothing
+                , cl_foci           = Map.empty
+                , cl_proofstack     = Map.empty
+                , cl_tags           = Map.empty
                 }
 
 --------------------------- running a command ---------------------------------
 
 command :: ActionH ()
 command = do
-    Command (Token u sast) cmd mWidth <- jsonData
+    Command (Token u ast) cmd mWidth <- jsonData
 
     let changeState st = let st' = maybe st (\w -> setPrettyOpts st ((cl_pretty_opts st) { po_width = w })) mWidth
-                         in setCursor st' sast
+                         in setCursor ast st'
 
-    ast <- clm u changeState $ evalScript interpShellCommand cmd >> State.gets cl_cursor
+    ast' <- clm u changeState $ evalScript interpShellCommand cmd >> State.gets cl_cursor
 
     es <- webm $ liftM snd (viewUser u) >>= liftIO . getUntilEmpty
     let (ms,gs) = partitionEithers es
-    json $ CommandResponse (optionalMsg ms) (optionalAST gs) ast
+    json $ CommandResponse (optionalMsg ms) (optionalAST gs) ast'
 
 optionalAST :: [[Glyph]] -> Maybe [Glyph]
 optionalAST [] = Nothing
@@ -127,9 +123,10 @@ commands = json
 history :: ActionH ()
 history = do
     Token u _ <- jsonData
-    v <- clm u id $ State.gets cl_version
-    json $ History [ HCmd from (unparseExprH e) to | (from,e,to) <- vs_graph v ]
-                   [ HTag str ast | (str,ast) <- vs_tags v ]
+    (cur,(k,tags)) <- clm u id $ State.gets (cl_cursor &&& cl_kernel &&& cl_tags)
+    all_asts <- listK k
+    json $ History [ HCmd from (fromMaybe "-- missing command!" msg) to | (to, msg, Just from) <- all_asts ]
+                   [ HTag tag ast | (ast,ts) <- Map.toList tags, tag <- ts ]
 
 ---------------------------- get completions ----------------------------------
 

@@ -1,4 +1,4 @@
-{-# LANGUAGE CPP, LambdaCase, OverloadedStrings #-}
+{-# LANGUAGE LambdaCase, OverloadedStrings #-}
 module HERMIT.GHCI (plugin) where
 
 import           Blaze.ByteString.Builder (fromLazyByteString)
@@ -6,11 +6,7 @@ import           Blaze.ByteString.Builder (fromLazyByteString)
 import           Control.Concurrent
 import           Control.Concurrent.STM
 import           Control.Exception.Base
-#if MIN_VERSION_mtl(2,2,1)
-import           Control.Monad.Except
-#else
-import           Control.Monad.Error
-#endif
+import           Control.Monad.Trans.Except
 import           Control.Monad.Reader
 
 import qualified Data.Aeson as Aeson
@@ -18,7 +14,7 @@ import           Data.Default
 
 import           HERMIT.GHC hiding ((<>), liftIO)
 import           HERMIT.Plugin.Builder
-import           HERMIT.Kernel.Scoped
+import           HERMIT.Kernel
 
 import           HERMIT.GHCI.Actions
 import           HERMIT.GHCI.JSON
@@ -35,22 +31,18 @@ import           Web.Scotty.Trans
 ------------------------------- the plugin ------------------------------------
 
 plugin :: Plugin
-plugin = buildPlugin $ \ passInfo -> if passNum passInfo == 0
-                                      then scopedKernel . server passInfo
-                                      else const return
+plugin = buildPlugin $ \ store passInfo -> if passNum passInfo == 0
+                                           then hermitKernel store "front end" . server passInfo
+                                           else const return
 
 -- | The meat of the plugin, which implements the actual Web API.
-server :: PassInfo -> [CommandLineOption] -> ScopedKernel -> SAST -> IO ()
-server passInfo _opts skernel initSAST = do
+server :: PassInfo -> [CommandLineOption] -> Kernel -> AST -> IO ()
+server passInfo _opts skernel initAST = do
     sync <- newTVarIO def
 
     let -- Functions required by Scotty to run our custom WebM monad.
         response :: WebM a -> IO (Either WebAppException a)
-#if MIN_VERSION_mtl(2,2,1)
         response = flip runReaderT sync . runExceptT . runWebT
-#else
-        response = flip runReaderT sync . runErrorT . runWebT
-#endif
 
         runWebM :: WebM a -> IO a
         runWebM m = do
@@ -68,7 +60,7 @@ server passInfo _opts skernel initSAST = do
 
     tid <- forkIO $ scottyT 3000 runWebM runAction $ do
         middleware logStdoutDev
-        post "/connect"  $ connect passInfo skernel initSAST
+        post "/connect"  $ connect passInfo skernel initAST
         post "/command"    command
         get  "/commands"   commands
         post "/history"    history
@@ -84,12 +76,12 @@ server passInfo _opts skernel initSAST = do
     throwTo tid UserInterrupt
 
 -- | Turn WebAppException into a Response.
-handleError :: ScopedKernel -> WebAppException -> IO Wai.Response
+handleError :: Kernel -> WebAppException -> IO Wai.Response
 handleError k WAEAbort = do
-    abortS k
+    abortK k
     return $ msgBuilder "HERMIT Aborting" status200
 handleError k (WAEResume sast) = do
-    resumeS k sast
+    resumeK k sast
     return $ msgBuilder "HERMIT Resuming" status200
 handleError _ (WAEError str) = return $ msgBuilder str status500
 

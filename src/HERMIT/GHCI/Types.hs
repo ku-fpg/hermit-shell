@@ -1,21 +1,18 @@
-{-# LANGUAGE CPP, GeneralizedNewtypeDeriving, LambdaCase, TupleSections #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving, LambdaCase, TupleSections #-}
 module HERMIT.GHCI.Types where
 
 import           Control.Applicative
 import           Control.Concurrent.MVar
 import           Control.Concurrent.STM
-#if MIN_VERSION_mtl(2,2,1)
-import           Control.Monad.Except
-#else
-import           Control.Monad.Error
-#endif
+import           Control.Monad.Error.Class
+import           Control.Monad.Trans.Except
 import           Control.Monad.Reader
 
 import           Data.Default
 import qualified Data.Map as Map
 import           Data.Text.Lazy (Text)
 
-import           HERMIT.Kernel.Scoped
+import           HERMIT.Kernel
 import           HERMIT.Shell.Types hiding (clm)
 import           HERMIT.GHCI.JSON
 
@@ -42,18 +39,10 @@ newtype WebAppState = WebAppState { users :: Map.Map UserID (MVar CommandLineSta
 instance Default WebAppState where
     def = WebAppState { users = Map.empty }
 
-data WebAppException = WAEAbort | WAEResume SAST | WAEError String
+data WebAppException = WAEAbort | WAEResume AST | WAEError String
     deriving (Show)
 
-#if !(MIN_VERSION_mtl(2,2,1))
-instance Error WebAppException where strMsg = WAEError
-#endif
-
-#if MIN_VERSION_mtl(2,2,1)
 newtype WebT m a = WebT { runWebT :: ExceptT WebAppException (ReaderT (TVar WebAppState) m) a }
-#else
-newtype WebT m a = WebT { runWebT :: ErrorT WebAppException (ReaderT (TVar WebAppState) m) a }
-#endif
     deriving (Functor, Applicative, Monad, MonadIO, MonadReader (TVar WebAppState), MonadError WebAppException)
 
 instance MonadTrans WebT where

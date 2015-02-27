@@ -12,7 +12,7 @@ import qualified Data.Text.Lazy as TL
 import           HERMIT.Core (Crumb(..))
 import           HERMIT.Kure (Path)
 import           HERMIT.External
-import           HERMIT.Kernel.Scoped (SAST(..))
+import           HERMIT.Kernel (AST)
 
 import           System.Console.Haskeline.Completion (Completion(..))
 
@@ -31,7 +31,7 @@ instance FromJSON Msg where
     parseJSON _          = mzero
 
 -- | Token
-data Token = Token { tUser :: Integer , tAst :: SAST }
+data Token = Token { tUser :: Integer , tAst :: AST }
 
 instance ToJSON Token where
     toJSON (Token u a) = object [ "user" .= u , "ast" .= a ]
@@ -53,12 +53,12 @@ instance FromJSON Command where
     parseJSON (Object v) = Command <$> v .: "token" <*> v .: "cmd" <*> v .:? "width"
     parseJSON _          = mzero
 
--- | SAST
-instance ToJSON SAST where
-    toJSON (SAST i) = toJSON i
+-- | AST
+instance ToJSON AST where
+    toJSON = toJSON . fromEnum
 
-instance FromJSON SAST where
-    parseJSON j = SAST <$> parseJSON j
+instance FromJSON AST where
+    parseJSON j = toEnum <$> parseJSON j
 
 -- | Crumb
 instance ToJSON Crumb where
@@ -88,7 +88,7 @@ instance FromJSON Crumb where
 -- | CommandResponse
 data CommandResponse = CommandResponse { crMsg :: Maybe String
                                        , crGlyphs :: Maybe [Glyph]
-                                       , crAst :: SAST
+                                       , crAst :: AST
                                        }
 
 fromMaybeAttr :: ToJSON a => T.Text -> Maybe a -> [Pair]
@@ -171,8 +171,8 @@ data History = History { hCmds :: [HCmd]
                        , hTags :: [HTag]
                        }
 
-data HCmd = HCmd SAST String SAST
-data HTag = HTag String SAST
+data HCmd = HCmd AST String AST
+data HTag = HTag String AST
 
 instance ToJSON History where
     toJSON h = object [ "cmds" .= hCmds h , "tags" .= hTags h ]
