@@ -72,7 +72,7 @@ server passInfo _opts skernel initAST = do
         , "t <- connect"
         , ":def send \\cmd -> GenerateMe.send t cmd >> return \"\""
         ]
-    callProcess "ghci" []
+    callProcess "ghc" ["--interactive"]
     throwTo tid UserInterrupt
 
 -- | Turn WebAppException into a Response.
