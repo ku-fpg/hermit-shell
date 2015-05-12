@@ -3,6 +3,7 @@ module HERMIT.GHCI.Types where
 
 import           Control.Concurrent.MVar
 import           Control.Concurrent.STM
+import           Control.Applicative
 import           Control.Monad.Error.Class
 import           Control.Monad.Trans.Except
 import           Control.Monad.Reader

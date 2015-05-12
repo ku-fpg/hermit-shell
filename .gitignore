@@ -11,3 +11,5 @@ dist/
 # Generated files
 .ghci
 GenerateMe.hs
+.cabal-sandbox
+cabal.sandbox.config

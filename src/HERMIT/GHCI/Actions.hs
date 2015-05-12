@@ -15,6 +15,7 @@ import qualified Control.Monad.State.Lazy as State
 import           Data.Char (isSpace)
 import           Data.Either
 import qualified Data.Map as Map
+import           Data.Monoid
 
 import           HERMIT.Dictionary
 import           HERMIT.External
