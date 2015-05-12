@@ -1,7 +1,6 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving, LambdaCase, TupleSections #-}
 module HERMIT.GHCI.Types where
 
-import           Control.Applicative
 import           Control.Concurrent.MVar
 import           Control.Concurrent.STM
 import           Control.Monad.Error.Class
@@ -13,6 +12,7 @@ import qualified Data.Map as Map
 import           Data.Text.Lazy (Text)
 
 import           HERMIT.Kernel
+import           HERMIT.Plugin.Types
 import           HERMIT.Shell.Types hiding (clm)
 import           HERMIT.GHCI.JSON
 
@@ -34,7 +34,8 @@ import           Web.Scotty.Trans
 --
 --   2. Calls to /command by the _same user_ will block each other,
 --      allowing commands to complete in order. See defn of 'clm' below.
-newtype WebAppState = WebAppState { users :: Map.Map UserID (MVar CommandLineState, TChan (Either String [Glyph])) }
+newtype WebAppState = WebAppState
+    { users :: Map.Map UserID (PluginReader, MVar CommandLineState, TChan (Either String [Glyph])) }
 
 instance Default WebAppState where
     def = WebAppState { users = Map.empty }
@@ -62,15 +63,15 @@ view = ask >>= liftIO . readTVarIO
 views :: (WebAppState -> b) -> WebM b
 views f = view >>= return . f
 
-viewUser :: UserID -> WebM (MVar CommandLineState, TChan (Either String [Glyph]))
+viewUser :: UserID -> WebM (PluginReader, MVar CommandLineState, TChan (Either String [Glyph]))
 viewUser u = views users >>= maybe (throwError $ WAEError "User Not Found") return . Map.lookup u
 
 -- Do something in the CLM IO monad for a given user and state modifier.
 clm :: MonadTrans t => UserID -> (CommandLineState -> CommandLineState) -> CLT IO a -> t WebM a
 clm u f m = lift $ do
-    mvar <- liftM fst $ viewUser u
+    (pr,mvar,_) <- viewUser u
     r <- liftIO $ do s <- takeMVar mvar
-                     (r,s') <- runCLT (f s) m
+                     (r,s') <- runCLT pr (f s) m
                      let (s'',r') = either (\case CLAbort         -> (s , Left WAEAbort)
                                                   CLResume   sast -> (s', Left (WAEResume sast))
                                                   CLError    err  -> (s , Left (WAEError err))

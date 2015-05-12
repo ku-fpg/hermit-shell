@@ -7,24 +7,19 @@ module HERMIT.GHCI.Actions
     , complete
     ) where
 
-import           Control.Arrow
 import           Control.Concurrent.MVar
 import           Control.Concurrent.STM
-import           Control.Monad.Trans.Except
 import           Control.Monad.Reader
 import qualified Control.Monad.State.Lazy as State
 
 import           Data.Char (isSpace)
 import           Data.Either
 import qualified Data.Map as Map
-import           Data.Maybe (fromMaybe)
-import           Data.Monoid
 
 import           HERMIT.Dictionary
 import           HERMIT.External
 import           HERMIT.Kernel
 import           HERMIT.Kure
-import           HERMIT.Parser
 
 import           HERMIT.Plugin
 import           HERMIT.Plugin.Builder
@@ -33,6 +28,7 @@ import           HERMIT.Plugin.Types
 import           HERMIT.PrettyPrinter.Common (po_width)
 
 import           HERMIT.Shell.Command
+import           HERMIT.Shell.Completion
 import           HERMIT.Shell.Externals
 import           HERMIT.Shell.Types hiding (clm)
 
@@ -49,12 +45,13 @@ connect passInfo kernel ast = do
     uid <- webm $ do sync <- ask
                      liftIO $ do
                         chan <- atomically newTChan
-                        cls <- mkCLState chan passInfo kernel ast
+                        cls <- mkCLState chan ast
                         mvar <- newMVar cls
                         atomically $ do
                             st <- readTVar sync
                             let k = nextKey (users st)
-                            writeTVar sync $ st { users = Map.insert k (mvar,chan) (users st) }
+                                pr = PluginReader kernel passInfo
+                            writeTVar sync $ st { users = Map.insert k (pr,mvar,chan) (users st) }
                             return k
     json $ Token uid ast
 
@@ -64,9 +61,10 @@ nextKey m | Map.null m = 0
           | otherwise = let (k,_) = Map.findMax m in k + 1
 
 -- | Build a default state for a new user.
-mkCLState :: TChan (Either String [Glyph]) -> PassInfo -> Kernel -> AST -> IO CommandLineState
-mkCLState chan passInfo kernel ast = do
-    ps <- defPS ast kernel passInfo
+mkCLState :: TChan (Either String [Glyph]) -> AST -> IO CommandLineState
+mkCLState chan ast = do
+    ps <- defPS ast
+    tlv <- newTVarIO []
     return $ CommandLineState
                 { cl_pstate = ps { ps_render = webChannel chan }
                 , cl_height         = 30
@@ -78,6 +76,10 @@ mkCLState chan passInfo kernel ast = do
                 , cl_foci           = Map.empty
                 , cl_proofstack     = Map.empty
                 , cl_tags           = Map.empty
+                , cl_safety         = NormalSafety
+                , cl_templemmas     = tlv
+                , cl_failhard       = False
+                , cl_diffonly       = False
                 }
 
 --------------------------- running a command ---------------------------------
@@ -89,9 +91,10 @@ command = do
     let changeState st = let st' = maybe st (\w -> setPrettyOpts st ((cl_pretty_opts st) { po_width = w })) mWidth
                          in setCursor ast st'
 
-    ast' <- clm u changeState $ evalScript interpShellCommand cmd >> State.gets cl_cursor
+    ast' <- clm u changeState $ evalScript cmd >> State.gets cl_cursor
 
-    es <- webm $ liftM snd (viewUser u) >>= liftIO . getUntilEmpty
+    (_,_,c) <- webm $ viewUser u
+    es <- liftIO (getUntilEmpty c)
     let (ms,gs) = partitionEithers es
     json $ CommandResponse (optionalMsg ms) (optionalAST gs) ast'
 
@@ -121,12 +124,7 @@ commands = json
 -------------------------- get version history --------------------------------
 
 history :: ActionH ()
-history = do
-    Token u _ <- jsonData
-    (cur,(k,tags)) <- clm u id $ State.gets (cl_cursor &&& cl_kernel &&& cl_tags)
-    all_asts <- listK k
-    json $ History [ HCmd from (fromMaybe "-- missing command!" msg) to | (to, msg, Just from) <- all_asts ]
-                   [ HTag tag ast | (ast,ts) <- Map.toList tags, tag <- ts ]
+history = fail "unimplemented"
 
 ---------------------------- get completions ----------------------------------
 
@@ -134,5 +132,5 @@ complete :: ActionH ()
 complete = do
     Complete u cmd <- jsonData
     let (rCmd,rPrev) = break isSpace $ reverse cmd
-    res <- clm u id $ shellComplete rPrev $ reverse rCmd
+    res <- clm u id $ completer rPrev $ reverse rCmd
     json $ Completions res

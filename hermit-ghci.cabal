@@ -35,6 +35,7 @@ library
                         scotty >= 0.9.1,
                         stm,
                         text,
+                        transformers >= 0.2,
                         transformers-compat >= 0.4,
                         wai,
                         wai-extra,
