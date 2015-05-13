@@ -62,6 +62,7 @@ server passInfo _opts skernel initAST = do
         middleware logStdoutDev
         post "/connect"  $ connect passInfo skernel initAST
         post "/command"    command
+        post "/display"  $ command' (interpHermitCommand Display ())
         get  "/commands"   commands
         post "/history"    history
         post "/complete"   complete
@@ -106,6 +107,11 @@ fileContents = unlines
     , "send :: Token -> String -> IO ()"
     , "send t cmd = do"
     , "  r <- post \"http://localhost:3000/command\" $ toJSON $ Command t cmd (Just 80)"
+    , "  print r"
+    , ""
+    , "disp :: Token -> String -> IO ()"
+    , "disp t cmd = do"
+    , "  r <- post \"http://localhost:3000/display\" $ toJSON $ Command t cmd (Just 80)"
     , "  print r"
     , ""
     , "connect :: IO Token"
