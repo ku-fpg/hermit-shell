@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings, ScopedTypeVariables #-}
+{-# LANGUAGE OverloadedStrings, ScopedTypeVariables, KindSignatures, GADTs, ConstraintKinds, FlexibleContexts #-}
 module HERMIT.GHCI.JSON where
 
 import           Control.Applicative
@@ -13,6 +13,10 @@ import           HERMIT.Core (Crumb(..))
 import           HERMIT.Kure (Path)
 import           HERMIT.External
 import           HERMIT.Kernel (AST)
+import           HERMIT.Shell.Types (CLMonad, showWindowAlways)
+import           HERMIT.Shell.ShellEffect
+
+import           Language.KURE.MonadCatch
 
 import           System.Console.Haskeline.Completion (Completion(..))
 
@@ -221,3 +225,23 @@ instance ToJSON Completion where
 instance FromJSON Completion where
     parseJSON (Object v) = Completion <$> v .: "replacement" <*> v .: "display" <*> v .: "isFinished"
     parseJSON _          = mzero
+
+data Transport :: (* -> *) -> * where
+  Transport :: (ToJSON (f a), ToJSON a) => f a -> Transport f
+
+instance ToJSON (Transport f) where
+  toJSON (Transport f) = toJSON f
+
+
+data HermitCommand :: * -> * -> * where
+   BetaReduce :: HermitCommand () ()
+--   AnyTD      :: HermitCommand () -> HermitCommand ()
+   Display    :: HermitCommand () ()
+
+--
+
+interpHermitCommand :: (MonadCatch m,CLMonad m) => HermitCommand a b -> a -> m b
+interpHermitCommand Display () = performShellEffect (CLSModify $ showWindowAlways Nothing) 
+
+-- (CLSModify $ showWindowAlways Nothing)
+

@@ -2,6 +2,7 @@
 module HERMIT.GHCI.Actions
     ( connect
     , command
+    , command'
     , commands
     , history
     , complete
@@ -98,6 +99,21 @@ command = do
     es <- liftIO (getUntilEmpty c)
     let (ms,gs) = partitionEithers es
     json $ CommandResponse (optionalMsg ms) (optionalAST gs) ast'
+
+command' :: CLT IO () -> ActionH ()
+command' eval = do
+    Command (Token u ast) cmd mWidth <- jsonData
+
+    let changeState st = let st' = maybe st (\w -> setPrettyOpts st ((cl_pretty_opts st) { po_width = w })) mWidth
+                         in setCursor ast st'
+
+    ast' <- clm u changeState $ eval >> State.gets cl_cursor
+
+    (_,_,c) <- webm $ viewUser u
+    es <- liftIO (getUntilEmpty c)
+    let (ms,gs) = partitionEithers es
+    json $ CommandResponse (optionalMsg ms) (optionalAST gs) ast'
+
 
 optionalAST :: [[Glyph]] -> Maybe [Glyph]
 optionalAST [] = Nothing

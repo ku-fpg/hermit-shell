@@ -30,6 +30,7 @@ library
                         haskeline,
                         hermit >= 0.4,
                         http-types,
+                        kure,
                         mtl,
                         process,
                         scotty >= 0.9.1,
