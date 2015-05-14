@@ -20,6 +20,10 @@ import           HERMIT.GHCI.Actions
 import           HERMIT.GHCI.JSON
 import           HERMIT.GHCI.Types
 
+import           HERMIT.Shell.Command
+import           HERMIT.Shell.ShellEffect
+import           HERMIT.Shell.Types
+
 import           Network.HTTP.Types (Status, status200, status500)
 import qualified Network.Wai as Wai
 import           Network.Wai.Middleware.RequestLogger (logStdoutDev)
@@ -62,7 +66,7 @@ server passInfo _opts skernel initAST = do
         middleware logStdoutDev
         post "/connect"  $ connect passInfo skernel initAST
         post "/command"    command
-        post "/display"  $ command' (interpHermitCommand Display ())
+        post "/display"  $ command' (performTypedEffectH $ EffectH $ CLSModify $ showWindowAlways Nothing)
         get  "/commands"   commands
         post "/history"    history
         post "/complete"   complete

@@ -15,6 +15,7 @@ import           HERMIT.External
 import           HERMIT.Kernel (AST)
 import           HERMIT.Shell.Types (CLMonad, showWindowAlways)
 import           HERMIT.Shell.ShellEffect
+import           HERMIT.Shell.KernelEffect
 
 import           Language.KURE.MonadCatch
 
@@ -236,12 +237,7 @@ instance ToJSON (Transport f) where
 data HermitCommand :: * -> * -> * where
    BetaReduce :: HermitCommand () ()
 --   AnyTD      :: HermitCommand () -> HermitCommand ()
+--   ShellEffect :: ShellEffect -> 
    Display    :: HermitCommand () ()
 
 --
-
-interpHermitCommand :: (MonadCatch m,CLMonad m) => HermitCommand a b -> a -> m b
-interpHermitCommand Display () = performShellEffect (CLSModify $ showWindowAlways Nothing) 
-
--- (CLSModify $ showWindowAlways Nothing)
-
