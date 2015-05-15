@@ -66,7 +66,7 @@ server passInfo _opts skernel initAST = do
         middleware logStdoutDev
         post "/connect"  $ connect passInfo skernel initAST
         post "/command"    command
-        post "/display"  $ command' (performTypedEffectH $ EffectH $ CLSModify $ showWindowAlways Nothing)
+        post "/display"  $ command' (performTypedEffectH "GHCi" $ ShellEffectH $ CLSModify $ showWindowAlways Nothing)
         get  "/commands"   commands
         post "/history"    history
         post "/complete"   complete
