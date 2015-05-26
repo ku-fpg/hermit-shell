@@ -37,6 +37,7 @@ instance FromJSON Msg where
 
 -- | Token
 data Token = Token { tUser :: Integer , tAst :: AST }
+  deriving Show
 
 instance ToJSON Token where
     toJSON (Token u a) = object [ "user" .= u , "ast" .= a ]

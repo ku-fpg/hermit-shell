@@ -103,16 +103,28 @@ command = do
 command' :: CLT IO () -> ActionH ()
 command' eval = do
     Command (Token u ast) cmd mWidth <- jsonData
+    -- u      :: Int      -- User Number
+    -- ast    :: Int      -- AST number
+    -- cmd    :: String   -- string of the command
+    -- mWidth :: Just Int -- Just (width of screen)
+
+    liftIO $ print (u,ast,cmd,mWidth)
+    
+     -- change the width of the screen (mWidth), inside the given ast # (ast).
 
     let changeState st = let st' = maybe st (\w -> setPrettyOpts st ((cl_pretty_opts st) { po_width = w })) mWidth
                          in setCursor ast st'
 
+    -- Call the shell, using the (u :: user-number), and get the result ast'
+    
     ast' <- clm u changeState $ eval >> State.gets cl_cursor
 
     (_,_,c) <- webm $ viewUser u
     es <- liftIO (getUntilEmpty c)
     let (ms,gs) = partitionEithers es
     json $ CommandResponse (optionalMsg ms) (optionalAST gs) ast'
+
+
 
 
 optionalAST :: [[Glyph]] -> Maybe [Glyph]

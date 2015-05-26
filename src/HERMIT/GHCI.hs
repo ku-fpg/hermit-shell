@@ -65,6 +65,8 @@ server passInfo _opts skernel initAST = do
     tid <- forkIO $ scottyT 3000 runWebM runAction $ do
         middleware logStdoutDev
         post "/connect"  $ connect passInfo skernel initAST
+--        post "/send"     $ send 
+        -- 
         post "/command"    command
         post "/display"  $ command' (performTypedEffectH "GHCi" $ ShellEffectH $ CLSModify $ showWindowAlways Nothing)
         get  "/commands"   commands
