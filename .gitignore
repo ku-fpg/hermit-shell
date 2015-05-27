@@ -9,7 +9,7 @@ dist/
 *.dump-prep
 
 # Generated files
-.ghci
+.ghci-hermit
 GenerateMe.hs
 .cabal-sandbox
 cabal.sandbox.config

@@ -90,12 +90,15 @@ server passInfo _opts skernel initAST = do
         post "/" $ jsonRpc
         
     writeFile "GenerateMe.hs" fileContents
-    writeFile ".ghci" $ unlines
-        [":load GenerateMe.hs"
---        , "t <- connect"
---        , ":def send \\cmd -> GenerateMe.send t cmd >> return \"\""
+    writeFile ".ghci-hermit" $ unlines
+        ["import HERMIT.API"
+        ,":set prompt \"HERMIT> \""
+        ,"send welcome" -- welcome message (interactive only)
+        ,"send display" -- where am I (interactive only)
         ]
-    callProcess "ghc" ["--interactive"]
+    callProcess "ghc" ["--interactive", "-ghci-script=.ghci-hermit"]
+
+    -- What and Why?
     throwTo tid UserInterrupt
 
 -- | Turn WebAppException into a Response.

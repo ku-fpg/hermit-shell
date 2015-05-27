@@ -1,10 +1,9 @@
-How to invoke.
+How to invoke. Make sure you are in the sandbox (cabal exec bash, in root)
 
 ````
 % hermit-ghci Reverse.hs +Main Reverse.hss
 [Boot screen]
-GenerateMe> import HERMIT.API
-GenerateMe> send display
+HERMIT> send display
 ````
 
 How to invoke the (orignal) version
