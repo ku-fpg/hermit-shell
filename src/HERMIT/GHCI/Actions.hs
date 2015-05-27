@@ -1,6 +1,8 @@
 {-# LANGUAGE LambdaCase, OverloadedStrings #-}
 module HERMIT.GHCI.Actions
-    ( connect
+    ( initCommandLineState
+    , performTypedEffect
+    , connect
     , command
     , command'
     , commands
@@ -17,6 +19,7 @@ import           Data.Char (isSpace)
 import           Data.Either
 import qualified Data.Map as Map
 import           Data.Monoid
+import qualified Data.Aeson as Aeson
 
 import           HERMIT.Dictionary
 import           HERMIT.External
@@ -39,6 +42,9 @@ import           HERMIT.GHCI.Renderer
 import           HERMIT.GHCI.Types
 
 import           Web.Scotty.Trans
+
+import           HERMIT.Shell.ShellEffect
+
 
 ------------------------- connecting a new user -------------------------------
 
@@ -84,6 +90,10 @@ mkCLState chan ast = do
                 , cl_diffonly       = False
                 }
 
+
+data ServerCommand =
+     ServerCommand Aeson.Value (TMVar Aeson.Value)
+
 --------------------------- running a command ---------------------------------
 
 command :: ActionH ()
@@ -115,18 +125,61 @@ command' eval = do
     let changeState st = let st' = maybe st (\w -> setPrettyOpts st ((cl_pretty_opts st) { po_width = w })) mWidth
                          in setCursor ast st'
 
-    -- Call the shell, using the (u :: user-number), and get the result ast'
+    -- Call the shell, using the (u :: user-number), and get the result ast #.
     
     ast' <- clm u changeState $ eval >> State.gets cl_cursor
 
+    -- Find infomation about this user TChan
     (_,_,c) <- webm $ viewUser u
+    -- read the TChan until all is read
     es <- liftIO (getUntilEmpty c)
+    -- split into messages, and AST(s)?
     let (ms,gs) = partitionEithers es
     json $ CommandResponse (optionalMsg ms) (optionalAST gs) ast'
 
+initCommandLineState :: AST -> IO CommandLineState 
+initCommandLineState ast = do
+    ps <- defPS ast
+    tlv <- newTVarIO []
+    return $ CommandLineState
+                { cl_pstate         = ps 
+                , cl_height         = 30
+                , cl_nav            = False
+                , cl_window         = mempty
+                , cl_externals      = shell_externals ++ externals
+                , cl_scripts        = []
+                , cl_running_script = Nothing
+                , cl_foci           = Map.empty
+                , cl_proofstack     = Map.empty
+                , cl_tags           = Map.empty
+                , cl_safety         = NormalSafety
+                , cl_templemmas     = tlv
+                , cl_failhard       = False
+                , cl_diffonly       = False
+                }        
+
+performTypedEffect :: PluginReader -> TMVar CommandLineState -> (Aeson.Value -> IO Aeson.Value)
+performTypedEffect plug ref val = do
+  case parseCLT val of
+    Nothing -> return $ Aeson.Null
+    Just m -> do
+        cls <- atomically $ takeTMVar ref
+        (r,cls') <- runCLT plug cls $ m
+        atomically $ putTMVar ref cls'
+        case r of
+          Left exc  -> return $ Aeson.Null
+          Right val -> return $ val
+
+parseCLT :: (MonadIO m, Functor m) => Aeson.Value -> Maybe (CLT m Aeson.Value)
+parseCLT v = fmap (const Aeson.Null) <$> performTypedEffectH (show v) <$> ShellEffectH <$> parseShellEffect v
+        
+        
+parseShellEffect :: Aeson.Value -> Maybe ShellEffect
+parseShellEffect _ = return $ CLSModify $ showWindowAlways Nothing
+--parseShellEffect _ = fail "no parseShellEffect"
 
 
-
+        
 optionalAST :: [[Glyph]] -> Maybe [Glyph]
 optionalAST [] = Nothing
 optionalAST gs = Just (last gs)
