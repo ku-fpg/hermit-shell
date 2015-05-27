@@ -10,6 +10,5 @@ dist/
 
 # Generated files
 .ghci-hermit
-GenerateMe.hs
 .cabal-sandbox
 cabal.sandbox.config

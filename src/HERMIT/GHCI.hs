@@ -89,7 +89,6 @@ server passInfo _opts skernel initAST = do
         middleware logStdoutDev
         post "/" $ jsonRpc
         
-    writeFile "GenerateMe.hs" fileContents
     writeFile ".ghci-hermit" $ unlines
         ["import HERMIT.API"
         ,":set prompt \"HERMIT> \""
