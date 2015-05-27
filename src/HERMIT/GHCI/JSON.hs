@@ -161,16 +161,18 @@ fromJSONString _ = mzero
 
 -- | Glyph
 data Glyph = Glyph { gText :: String
-                   , gPath :: Path Crumb
                    , gStyle :: Maybe Style
-                   , gBndr :: Maybe (Path Crumb)
                    } deriving Show
 
+showGlyph :: Glyph -> String
+showGlyph = gText
+
 instance ToJSON Glyph where
-    toJSON g = object (("text" .= gText g) : ("path" .= gPath g) : (fromMaybeAttr "style" (gStyle g) ++ fromMaybeAttr "bindingSite" (gBndr g)))
+    toJSON g = object (("text" .= gText g) : (fromMaybeAttr "style" (gStyle g)))
 
 instance FromJSON Glyph where
-    parseJSON (Object v) = Glyph <$> v .: "text" <*> v .: "path" <*> v .:? "style" <*> v .:? "bindingSite"
+    parseJSON (Object v) = Glyph <$> v .: "text" 
+                                 <*> v .:? "style" 
     parseJSON _          = mzero
 
 data History = History { hCmds :: [HCmd]

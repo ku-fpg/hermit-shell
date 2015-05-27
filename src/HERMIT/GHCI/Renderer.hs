@@ -12,16 +12,16 @@ import HERMIT.GHCI.JSON
 
 import System.IO
 
-webChannel :: TChan (Either String [Glyph]) -> Handle -> PrettyOptions -> Either String DocH -> IO ()
-webChannel chan _ _    (Left s)    = atomically $ writeTChan chan $ Left s
+webChannel :: TChan [Glyph] -> Handle -> PrettyOptions -> Either String DocH -> IO ()
+webChannel chan _ _    (Left s)    = atomically $ writeTChan chan [Glyph s Nothing]
 webChannel chan _ opts (Right doc) = let Runes rs = renderCode opts doc
-                                     in atomically $ writeTChan chan $ Right $ runesToGlyphs rs
+                                     in atomically $ writeTChan chan $ runesToGlyphs rs
 
 runesToGlyphs :: [Rune] -> [Glyph]
 runesToGlyphs = go [] Nothing Nothing
     where go :: Path Crumb -> Maybe Style -> Maybe (Path Crumb) -> [Rune] -> [Glyph]
           go _ _ _ [] = []
-          go p s bp (Rune str:r) = Glyph str p s bp : go p s bp r
+          go p s bp (Rune str:r) = Glyph str s : go p s bp r
           go p _ bp (Markup s:r) = go p (Just s) bp r
           go _ s bp (PathA p :r) = go p s bp r
           go p s _  (BndrA bp:r) = go p s (Just bp) r

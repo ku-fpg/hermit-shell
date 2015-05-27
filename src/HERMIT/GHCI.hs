@@ -77,7 +77,10 @@ server passInfo _opts skernel initAST = do
     
     let jsonRpc :: ActionH ()
         jsonRpc = do
-                r <- jsonData >>= liftIO . fns
+                d <- jsonData
+                liftIO $ print d
+                r <- liftIO $ fns d
+                liftIO $ print r
                 case r of
                   Nothing -> return ()
                   Just v -> json v
@@ -85,21 +88,7 @@ server passInfo _opts skernel initAST = do
     tid <- forkIO $ scottyT 3000 runWebM runAction $ do
         middleware logStdoutDev
         post "/" $ jsonRpc
-                
-{-
-        post "/connect"  $ connect passInfo skernel initAST
---        post "/send"     $ send 
-        -- 
-        post "/command"    command
-        post "/display"  $ command' (performTypedEffectH "GHCi" $ ShellEffectH $ CLSModify $ showWindowAlways Nothing)
-        get  "/commands"   commands
-        post "/history"    history
-        post "/complete"   complete
--}        
         
-        
-        
-
     writeFile "GenerateMe.hs" fileContents
     writeFile ".ghci" $ unlines
         [":load GenerateMe.hs"

@@ -2,12 +2,12 @@
 module HERMIT.GHCI.Actions
     ( initCommandLineState
     , performTypedEffect
-    , connect
-    , command
-    , command'
-    , commands
+--    , connect
+--    , command
+--    , command'
+--    , commands
     , history
-    , complete
+--    , complete
     ) where
 
 import           Control.Concurrent.MVar
@@ -19,7 +19,7 @@ import           Data.Char (isSpace)
 import           Data.Either
 import qualified Data.Map as Map
 import           Data.Monoid
-import qualified Data.Aeson as Aeson
+import           Data.Aeson as Aeson
 
 import           HERMIT.Dictionary
 import           HERMIT.External
@@ -41,15 +41,13 @@ import           HERMIT.GHCI.JSON
 import           HERMIT.GHCI.Renderer
 import           HERMIT.GHCI.Types
 
-import           Web.Scotty.Trans
-
 import           HERMIT.Shell.ShellEffect
 
 import           System.IO (Handle)
 
 
 ------------------------- connecting a new user -------------------------------
-
+{-
 connect :: PassInfo -> Kernel -> AST -> ActionH ()
 connect passInfo kernel ast = do
     uid <- webm $ do sync <- ask
@@ -71,12 +69,13 @@ nextKey m | Map.null m = 0
           | otherwise = let (k,_) = Map.findMax m in k + 1
 
 -- | Build a default state for a new user.
+-- DEAD CODE
 mkCLState :: TChan (Either String [Glyph]) -> AST -> IO CommandLineState
 mkCLState chan ast = do
     ps <- defPS ast
     tlv <- newTVarIO []
     return $ CommandLineState
-                { cl_pstate = ps { ps_render = webChannel chan }
+                { cl_pstate = ps -- { ps_render = webChannel chan }
                 , cl_height         = 30
                 , cl_nav            = False
                 , cl_window         = mempty
@@ -95,9 +94,9 @@ mkCLState chan ast = do
 
 data ServerCommand =
      ServerCommand Aeson.Value (TMVar Aeson.Value)
-
+-}
 --------------------------- running a command ---------------------------------
-
+{-
 command :: ActionH ()
 command = do
     Command (Token u ast) cmd mWidth <- jsonData
@@ -138,7 +137,7 @@ command' eval = do
     -- split into messages, and AST(s)?
     let (ms,gs) = partitionEithers es
     json $ CommandResponse (optionalMsg ms) (optionalAST gs) ast'
-
+-}
 initCommandLineState :: AST -> IO CommandLineState 
 initCommandLineState ast = do
     ps <- defPS ast
@@ -182,12 +181,10 @@ performTypedEffect plug ref [val] = do
         es <- liftIO (getUntilEmpty chan)
         print "6"
         -- split into messages, and AST(s)?
-        let (ms,gs) = partitionEithers es
-        print ("MS",ms)
-        print ("GS",gs)
         case r of
           Left exc  -> return $ Aeson.Null
-          Right val -> return $ val
+          Right val -> return $ object [ "result" .= val, "output" .= es ]
+
 
 newRenderer :: (Handle -> PrettyOptions -> Either String DocH -> IO ()) -> CommandLineState -> CommandLineState
 newRenderer rndr cls = cls { cl_pstate = (cl_pstate cls) { ps_render = rndr } }
@@ -217,7 +214,7 @@ getUntilEmpty chan = ifM (atomically $ isEmptyTChan chan)
                          (atomically (readTChan chan) >>= flip liftM (getUntilEmpty chan) . (:))
 
 -------------------------- get list of commands -------------------------------
-
+{-
 -- TODO: get per-user list of commands
 commands :: ActionH ()
 commands = json
@@ -225,17 +222,18 @@ commands = json
            [ CommandInfo (externName e) (unlines $ externHelp e) (externTags e) aTys rTy
            | e <- shell_externals ++ externals
            , let (aTys, rTy) = externTypeArgResString e ]
-
+-}
 -------------------------- get version history --------------------------------
 
 history :: ActionH ()
 history = fail "unimplemented"
 
 ---------------------------- get completions ----------------------------------
-
+{-
 complete :: ActionH ()
 complete = do
     Complete u cmd <- jsonData
     let (rCmd,rPrev) = break isSpace $ reverse cmd
     res <- clm u id $ completer rPrev $ reverse rCmd
     json $ Completions res
+-}
