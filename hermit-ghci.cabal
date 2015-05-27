@@ -22,7 +22,7 @@ cabal-version:       >=1.14
 library
   ghc-options:          -Wall
                         -fno-warn-orphans
-  build-depends:        aeson,
+  build-depends:        aeson >= 0.8 && < 0.9,
                         base >= 4 && < 5,
                         blaze-builder,
                         containers,
@@ -33,6 +33,7 @@ library
                         kure,
                         mtl,
                         process,
+                        remote-json,
                         scotty >= 0.9.1,
                         stm,
                         text,
@@ -59,6 +60,7 @@ executable hermit-ghci
   hs-source-dirs:       driver
   default-language:     Haskell2010
   build-depends:        base >= 4 && < 5,
+                        remote-json,
                         hermit,
                         hermit-ghci,
                         split
