@@ -72,7 +72,7 @@ server passInfo _opts skernel initAST = do
     let pr = PluginReader skernel passInfo    
 
     let fns = router
-            [("invoke", performTypedEffect pr clsVar)
+            [("send", performTypedEffect pr clsVar)
             ]
     
     let jsonRpc :: ActionH ()
@@ -95,8 +95,8 @@ server passInfo _opts skernel initAST = do
 --        , "t <- connect"
 --        , ":def send \\cmd -> GenerateMe.send t cmd >> return \"\""
         ]
---    callProcess "ghc" ["--interactive"]
---    throwTo tid UserInterrupt
+    callProcess "ghc" ["--interactive"]
+    throwTo tid UserInterrupt
 
 -- | Turn WebAppException into a Response.
 handleError :: Kernel -> WebAppException -> IO Wai.Response
@@ -126,20 +126,8 @@ fileContents = unlines
     , "import HERMIT.GHCI.JSON"
     , "import Network.Wreq"
     , ""
-    , "send :: Token -> String -> IO ()"
-    , "send t cmd = do"
-    , "  r <- post \"http://localhost:3000/command\" $ toJSON $ Command t cmd (Just 80)"
-    , "  print r"
+    , "import HERMIT.API"
     , ""
-    , "disp :: Token -> String -> IO ()"
-    , "disp t cmd = do"
-    , "  r <- post \"http://localhost:3000/display\" $ toJSON $ Command t cmd (Just 80)"
-    , "  print r"
-    , ""
-    , "connect :: IO Token"
-    , "connect = do"
-    , "  r <- asJSON =<< post \"http://localhost:3000/connect\" (\"\" :: ByteString)"
-    , "  return $ r ^. responseBody"
     ]
 
 
