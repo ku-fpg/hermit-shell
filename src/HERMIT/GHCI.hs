@@ -14,6 +14,8 @@ import           Data.Default
 
 import           HERMIT.GHC hiding ((<>), liftIO)
 import           HERMIT.Plugin.Builder
+import           HERMIT.Plugin.Types
+
 import           HERMIT.Kernel
 
 import           HERMIT.GHCI.Actions
@@ -31,6 +33,7 @@ import           Network.Wai.Middleware.RequestLogger (logStdoutDev)
 import           System.Process
 
 import           Web.Scotty.Trans
+import           Control.Monad.Remote.JSON
 
 ------------------------------- the plugin ------------------------------------
 
@@ -64,12 +67,25 @@ server passInfo _opts skernel initAST = do
 
 
     cls <- initCommandLineState initAST
+    clsVar <- atomically $ newTMVar cls
+ 
+    let pr = PluginReader skernel passInfo    
+
+    let fns = router
+            [("invoke", performTypedEffect pr clsVar)
+            ]
     
-    let db = []
-    
+    let jsonRpc :: ActionH ()
+        jsonRpc = do
+                r <- jsonData >>= liftIO . fns
+                case r of
+                  Nothing -> return ()
+                  Just v -> json v
 
     tid <- forkIO $ scottyT 3000 runWebM runAction $ do
         middleware logStdoutDev
+        post "/" $ jsonRpc
+                
 {-
         post "/connect"  $ connect passInfo skernel initAST
 --        post "/send"     $ send 
@@ -87,11 +103,11 @@ server passInfo _opts skernel initAST = do
     writeFile "GenerateMe.hs" fileContents
     writeFile ".ghci" $ unlines
         [":load GenerateMe.hs"
-        , "t <- connect"
-        , ":def send \\cmd -> GenerateMe.send t cmd >> return \"\""
+--        , "t <- connect"
+--        , ":def send \\cmd -> GenerateMe.send t cmd >> return \"\""
         ]
-    callProcess "ghc" ["--interactive"]
-    throwTo tid UserInterrupt
+--    callProcess "ghc" ["--interactive"]
+--    throwTo tid UserInterrupt
 
 -- | Turn WebAppException into a Response.
 handleError :: Kernel -> WebAppException -> IO Wai.Response

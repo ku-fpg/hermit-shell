@@ -164,7 +164,7 @@ data Glyph = Glyph { gText :: String
                    , gPath :: Path Crumb
                    , gStyle :: Maybe Style
                    , gBndr :: Maybe (Path Crumb)
-                   }
+                   } deriving Show
 
 instance ToJSON Glyph where
     toJSON g = object (("text" .= gText g) : ("path" .= gPath g) : (fromMaybeAttr "style" (gStyle g) ++ fromMaybeAttr "bindingSite" (gBndr g)))

@@ -30,7 +30,7 @@ import           HERMIT.Plugin
 import           HERMIT.Plugin.Builder
 import           HERMIT.Plugin.Types
 
-import           HERMIT.PrettyPrinter.Common (po_width)
+import           HERMIT.PrettyPrinter.Common (po_width, PrettyOptions, DocH)
 
 import           HERMIT.Shell.Command
 import           HERMIT.Shell.Completion
@@ -44,6 +44,8 @@ import           HERMIT.GHCI.Types
 import           Web.Scotty.Trans
 
 import           HERMIT.Shell.ShellEffect
+
+import           System.IO (Handle)
 
 
 ------------------------- connecting a new user -------------------------------
@@ -158,17 +160,38 @@ initCommandLineState ast = do
                 , cl_diffonly       = False
                 }        
 
-performTypedEffect :: PluginReader -> TMVar CommandLineState -> (Aeson.Value -> IO Aeson.Value)
-performTypedEffect plug ref val = do
+-- 'performTypedEffect' takes the Plugin Reader Data, a mutable CommandLineState,
+-- and return a function from JSON list to JSON.
+performTypedEffect :: PluginReader -> TMVar CommandLineState -> ([Aeson.Value] -> IO Aeson.Value)
+performTypedEffect plug ref [val] = do
+  print "1"
   case parseCLT val of
     Nothing -> return $ Aeson.Null
     Just m -> do
-        cls <- atomically $ takeTMVar ref
-        (r,cls') <- runCLT plug cls $ m
-        atomically $ putTMVar ref cls'
+        print "2"
+        cls0 <- atomically $ takeTMVar ref
+        -- Now, add a command-specific logger
+        let orig_logger = ps_render $ cl_pstate $ cls0
+        chan <- atomically $ newTChan
+        let cls1 = newRenderer (webChannel chan) $ cls0 
+        print "3"
+        (r,cls2) <- runCLT plug cls1 $ m
+        print "4"
+        atomically $ putTMVar ref $ newRenderer orig_logger cls2
+        print "5"
+        es <- liftIO (getUntilEmpty chan)
+        print "6"
+        -- split into messages, and AST(s)?
+        let (ms,gs) = partitionEithers es
+        print ("MS",ms)
+        print ("GS",gs)
         case r of
           Left exc  -> return $ Aeson.Null
           Right val -> return $ val
+
+newRenderer :: (Handle -> PrettyOptions -> Either String DocH -> IO ()) -> CommandLineState -> CommandLineState
+newRenderer rndr cls = cls { cl_pstate = (cl_pstate cls) { ps_render = rndr } }
+        
 
 parseCLT :: (MonadIO m, Functor m) => Aeson.Value -> Maybe (CLT m Aeson.Value)
 parseCLT v = fmap (const Aeson.Null) <$> performTypedEffectH (show v) <$> ShellEffectH <$> parseShellEffect v
