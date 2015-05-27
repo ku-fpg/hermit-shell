@@ -62,8 +62,15 @@ server passInfo _opts skernel initAST = do
                 Left err -> handleError skernel err
                 Right r' -> return r'
 
+
+    cls <- initCommandLineState initAST
+    
+    let db = []
+    
+
     tid <- forkIO $ scottyT 3000 runWebM runAction $ do
         middleware logStdoutDev
+{-
         post "/connect"  $ connect passInfo skernel initAST
 --        post "/send"     $ send 
         -- 
@@ -72,6 +79,10 @@ server passInfo _opts skernel initAST = do
         get  "/commands"   commands
         post "/history"    history
         post "/complete"   complete
+-}        
+        
+        
+        
 
     writeFile "GenerateMe.hs" fileContents
     writeFile ".ghci" $ unlines
@@ -125,3 +136,7 @@ fileContents = unlines
     , "  r <- asJSON =<< post \"http://localhost:3000/connect\" (\"\" :: ByteString)"
     , "  return $ r ^. responseBody"
     ]
+
+
+data ServerCommand = 
+     ServerCommand Aeson.Value (TMVar Aeson.Value)
