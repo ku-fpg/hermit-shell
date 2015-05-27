@@ -191,8 +191,7 @@ newRenderer rndr cls = cls { cl_pstate = (cl_pstate cls) { ps_render = rndr } }
         
 
 parseCLT :: (MonadIO m, Functor m) => Aeson.Value -> Maybe (CLT m Aeson.Value)
-parseCLT v = fmap (const Aeson.Null) <$> performTypedEffectH (show v) <$> ShellEffectH <$> parseShellEffect v
-        
+parseCLT v = fmap (const (toJSON ())) <$> performTypedEffectH (show v) <$> ShellEffectH <$> parseShellEffect v
         
 parseShellEffect :: Aeson.Value -> Maybe ShellEffect
 parseShellEffect _ = return $ CLSModify $ showWindowAlways Nothing

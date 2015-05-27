@@ -5,6 +5,8 @@ import Control.Applicative
 import Control.Monad (void)
 import Control.Lens ((^.))
 import Data.Aeson
+import Data.Aeson.Types
+import Data.Maybe
 import Control.Monad.Remote.JSON as JSONRPC
 import Network.Wreq
 import HERMIT.GHCI.JSON 
@@ -39,10 +41,10 @@ prim = undefined
 
 class Shell f where
   toShell   :: f a -> Value
-  fromShell :: f a -> Value -> Maybe a
+  fromShell :: f a -> Value -> ShellResult a
 
 data ShellResult a
-  = ShellResult [Glyph] a -- When was said, what was returned
+  = ShellResult [[Glyph]] a -- When was said, what was returned
   | ShellFailure String -- something went wrong
     deriving Show
 
@@ -57,7 +59,7 @@ data ShellEffect :: * -> * where
 
 instance Shell ShellEffect where
   toShell (ShellEffect v) = v
-  fromShell (ShellEffect {}) _ = return ()
+  fromShell (ShellEffect {}) = fromJust . parseMaybe parseJSON
 
 
 display :: ShellEffect ()
@@ -78,5 +80,11 @@ send g = do
        print (toShell g)
        v <- JSONRPC.send session $ JSONRPC.method "send" [toShell g]
        case fromShell g v of
-         Nothing -> error $ "failed to parse result value " ++ show v
-         Just r -> return r
+         ShellFailure msg -> error $ "failed to parse result value: " ++ show v ++ " : " ++ msg
+         ShellResult gss a -> do
+                 sequence_ [ putStr txt
+                           | gs <- gss
+                           , Glyph txt _ <- gs
+                           ]
+                 putStrLn "\n[Done]\n"           
+                 return a
