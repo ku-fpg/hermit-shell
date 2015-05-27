@@ -1,15 +1,14 @@
 {-# LANGUAGE LambdaCase, OverloadedStrings, KindSignatures, GADTs #-}
-module HERMIT.API where
+module HERMIT.API 
+        ( -- HERMIT.API.ShellEffect
+          module HERMIT.API.ShellEffect
+          -- Utilties
+        , send
+        ) where
 
-import Control.Applicative
-import Control.Monad (void)
-import Control.Lens ((^.))
-import Data.Aeson
-import Data.Aeson.Types
-import Data.Maybe
-import Control.Monad.Remote.JSON as JSONRPC
-import Network.Wreq
-import HERMIT.GHCI.JSON 
+import HERMIT.API.ShellEffect
+import HERMIT.API.Types
+import HERMIT.GHCI.Client
 
 {-        
 import HERMIT.GHCI.Session
@@ -35,7 +34,6 @@ shellEffect = print 'ShellEffectH
 
 prim :: Name -> [Value] -> Value
 prim = undefined
--}
 
 --- Main call-HERMIT function
 
@@ -60,7 +58,6 @@ data ShellEffect :: * -> * where
 instance Shell ShellEffect where
   toShell (ShellEffect v) = v
   fromShell (ShellEffect {}) = fromJust . parseMaybe parseJSON
-
 
 display :: ShellEffect ()
 display = ShellEffect $ object ["method" .= ("display" :: String)]
@@ -88,3 +85,4 @@ send g = do
                            ]
                  putStrLn "\n[Done]\n"           
                  return a
+-}

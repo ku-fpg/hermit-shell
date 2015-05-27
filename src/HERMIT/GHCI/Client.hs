@@ -1,53 +1,53 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE LambdaCase, OverloadedStrings, KindSignatures, GADTs #-}
 module HERMIT.GHCI.Client where
 
-import Control.Concurrent.STM
-import System.IO.Unsafe
-import Control.Lens
-import Data.Aeson (toJSON, encode, Value)
-import Data.Aeson.Lens
-import Data.ByteString.Lazy (ByteString)
+import Control.Applicative
+import Control.Monad (void)
+import Control.Lens ((^.))
+import Data.Aeson
+import Data.Aeson.Types
+import Data.Maybe
+import Control.Monad.Remote.JSON as JSONRPC
 import Network.Wreq
+import HERMIT.GHCI.JSON 
 
-import HERMIT.GHCI.JSON
+--- Main call-HERMIT function
 
--- Call once at start. Sets up session for this GHCi process.
--- There can only be one session per GHCi process.
+class Shell f where
+  toShell   :: f a -> Value
+  fromShell :: f a -> Value -> ShellResult a
 
+data ShellResult a
+  = ShellResult [[Glyph]] a -- When was said, what was returned
+  | ShellFailure String -- something went wrong
+    deriving Show
 
-initalize :: IO ()
-initalize = do
-  r <- asJSON =<< post "http://localhost:3000/connect" ("" :: ByteString)
-  atomically $ writeTVar globalSessionState $ Just $ GlobalSessionState
-          { gss_token = r ^. responseBody
-          }
-  return ()
-
-{-# NOINLINE globalSessionState #-}
-globalSessionState :: TVar (Maybe GlobalSessionState)
-globalSessionState = unsafePerformIO $ newTVarIO $ Nothing
+instance FromJSON a => FromJSON (ShellResult a) where
+  parseJSON (Object o) = ShellResult <$> o .: "output"
+                                     <*> o .: "result"
+                      <|> return (ShellFailure "malformed Object returned from Server")                                      
+  parseJSON _ = return (ShellFailure "Object not returned from Server")
         
-data GlobalSessionState = GlobalSessionState
-  { gss_token :: Token -- User Id, and which AST (id) we are looking at.
-  } 
-  deriving Show
+session :: JSONRPC.Session
+session = Session 
+  { sync = \ v -> do
+          r <- asJSON =<< post "http://localhost:3000/" (toJSON v)
+          return $ r ^. responseBody
+  , async = \ v -> do
+          post "http://localhost:3000/" (toJSON v)
+          return ()
+  }        
 
---data ClientRequest = ClientRequest Token Value
---data ClientResponse = ClientRequest 
-
--- Send 
-getGlobalSessionState :: IO GlobalSessionState
-getGlobalSessionState = atomically $ do
-     g <- readTVar globalSessionState
-     case g of
-       Nothing -> retry
-       Just v -> return v
-
-send :: Value -> IO Value
-send inp = do
-  glob <- getGlobalSessionState
-  print glob               
-  r <- asJSON =<< post "http://localhost:3000/send" (encode (gss_token glob,inp))
-  print (r ^. responseBody :: Value)
---  setGlobalSessionState $ glob { 
-  return inp
+send :: Shell f => f a -> IO a
+send g = do
+       print (toShell g)
+       v <- JSONRPC.send session $ JSONRPC.method "send" [toShell g]
+       case fromShell g v of
+         ShellFailure msg -> error $ "failed to parse result value: " ++ show v ++ " : " ++ msg
+         ShellResult gss a -> do
+                 sequence_ [ putStr txt
+                           | gs <- gss
+                           , Glyph txt _ <- gs
+                           ]
+                 putStrLn "\n[Done]\n"           
+                 return a
