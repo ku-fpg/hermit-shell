@@ -1,7 +1,12 @@
-{-# LANGUAGE OverloadedStrings, ScopedTypeVariables, KindSignatures, GADTs, ConstraintKinds, FlexibleContexts #-}
+{-# LANGUAGE ConstraintKinds #-}
+{-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE GADTs #-}
+{-# LANGUAGE KindSignatures #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 module HERMIT.GHCI.JSON where
 
-import           Control.Applicative
 import           Control.Monad
 
 import           Data.Aeson hiding (json)
@@ -10,14 +15,10 @@ import qualified Data.Text as T
 import qualified Data.Text.Lazy as TL
 
 import           HERMIT.Core (Crumb(..))
-import           HERMIT.Kure (Path)
 import           HERMIT.External
 import           HERMIT.Kernel (AST)
-import           HERMIT.Shell.Types (CLMonad, showWindowAlways)
-import           HERMIT.Shell.ShellEffect
-import           HERMIT.Shell.KernelEffect
 
-import           Language.KURE.MonadCatch
+import           Prelude.Compat
 
 import           System.Console.Haskeline.Completion (Completion(..))
 

@@ -1,12 +1,12 @@
-{-# LANGUAGE LambdaCase, OverloadedStrings, KindSignatures, GADTs #-}
+{-# LANGUAGE GADTs #-}
+{-# LANGUAGE KindSignatures #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
 module HERMIT.GHCI.Client where
 
-import Control.Applicative
-import Control.Monad (void)
 import Control.Lens ((^.))
+import Control.Monad (void)
 import Data.Aeson
-import Data.Aeson.Types
-import Data.Maybe
 import Control.Monad.Remote.JSON as JSONRPC
 import Network.Wreq
 import HERMIT.GHCI.JSON 
@@ -20,7 +20,7 @@ session = Session
           r <- asJSON =<< post "http://localhost:3000/" (toJSON v)
           return $ r ^. responseBody
   , async = \ v -> do
-          post "http://localhost:3000/" (toJSON v)
+          void $ post "http://localhost:3000/" (toJSON v)
           return ()
   }        
 

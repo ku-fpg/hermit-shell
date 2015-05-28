@@ -1,14 +1,15 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module HERMIT.GHCI.Renderer (webChannel) where
 
 import Control.Concurrent.STM
-
-import Data.Monoid
 
 import HERMIT.Core
 import HERMIT.Kure
 import HERMIT.PrettyPrinter.Common
 
 import HERMIT.GHCI.JSON
+
+import Prelude.Compat
 
 import System.IO
 

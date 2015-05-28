@@ -22,10 +22,6 @@ import           HERMIT.GHCI.Actions
 import           HERMIT.GHCI.JSON
 import           HERMIT.GHCI.Types
 
-import           HERMIT.Shell.Command
-import           HERMIT.Shell.ShellEffect
-import           HERMIT.Shell.Types
-
 import           Network.HTTP.Types (Status, status200, status500)
 import qualified Network.Wai as Wai
 import           Network.Wai.Middleware.RequestLogger (logStdoutDev)
@@ -41,20 +37,20 @@ plugin :: Plugin
 plugin = buildPlugin $ \ store passInfo -> 
   if passNum passInfo == 0
   then \ o p ->
-           do liftIO $ print "Hey"
+           do liftIO $ print ("Hey" :: String)
               r <- hermitKernel store "front end" (server passInfo o) p
-              liftIO $ print "Jude"
+              liftIO $ print ("Jude" :: String)
               return r
   else const return
 
 -- | The meat of the plugin, which implements the actual Web API.
 server :: PassInfo -> [CommandLineOption] -> Kernel -> AST -> IO ()
 server passInfo _opts skernel initAST = do
-    sync <- newTVarIO def
+    sync' <- newTVarIO def
 
     let -- Functions required by Scotty to run our custom WebM monad.
         response :: WebM a -> IO (Either WebAppException a)
-        response = flip runReaderT sync . runExceptT . runWebT
+        response = flip runReaderT sync' . runExceptT . runWebT
 
         runWebM :: WebM a -> IO a
         runWebM m = do
@@ -108,9 +104,9 @@ server passInfo _opts skernel initAST = do
         ]
 
     -- What and Why?
-    print "Killing server"
+    print ("Killing server" :: String)
     throwTo tid UserInterrupt
-    print "Killed server"
+    print ("Killed server" :: String)
 
 -- | Turn WebAppException into a Response.
 handleError :: Kernel -> WebAppException -> IO Wai.Response
@@ -127,23 +123,23 @@ msgBuilder :: String -> Status -> Wai.Response
 msgBuilder msg s = Wai.responseBuilder s [("Content-Type","application/json")]
                                      $ fromLazyByteString $ Aeson.encode $ Msg msg
 
-fileContents :: String
-fileContents = unlines
-    [ "{-# LANGUAGE OverloadedStrings #-}"
-    , ""
-    , "module GenerateMe where"
-    , ""
-    , "import Control.Lens"
-    , "import Data.Aeson (toJSON)"
-    , "import Data.Aeson.Lens"
-    , "import Data.ByteString.Lazy (ByteString)"
-    , "import HERMIT.GHCI.JSON"
-    , "import Network.Wreq"
-    , ""
-    , "import HERMIT.API"
-    , ""
-    ]
-
-
-data ServerCommand = 
-     ServerCommand Aeson.Value (TMVar Aeson.Value)
+-- fileContents :: String
+-- fileContents = unlines
+--     [ "{-# LANGUAGE OverloadedStrings #-}"
+--     , ""
+--     , "module GenerateMe where"
+--     , ""
+--     , "import Control.Lens"
+--     , "import Data.Aeson (toJSON)"
+--     , "import Data.Aeson.Lens"
+--     , "import Data.ByteString.Lazy (ByteString)"
+--     , "import HERMIT.GHCI.JSON"
+--     , "import Network.Wreq"
+--     , ""
+--     , "import HERMIT.API"
+--     , ""
+--     ]
+-- 
+-- 
+-- data ServerCommand = 
+--      ServerCommand Aeson.Value (TMVar Aeson.Value)

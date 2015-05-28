@@ -1,9 +1,11 @@
-{-# LANGUAGE GeneralizedNewtypeDeriving, LambdaCase, TupleSections #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE TupleSections #-}
 module HERMIT.GHCI.Types where
 
 import           Control.Concurrent.MVar
 import           Control.Concurrent.STM
-import           Control.Applicative
 import           Control.Monad.Error.Class
 import           Control.Monad.Trans.Except
 import           Control.Monad.Reader
@@ -16,6 +18,8 @@ import           HERMIT.Kernel
 import           HERMIT.Plugin.Types
 import           HERMIT.Shell.Types hiding (clm)
 import           HERMIT.GHCI.JSON
+
+import           Prelude.Compat
 
 import           Web.Scotty.Trans
 

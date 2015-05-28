@@ -22,8 +22,9 @@ cabal-version:       >=1.14
 library
   ghc-options:          -Wall
                         -fno-warn-orphans
-  build-depends:        aeson >= 0.8 && < 0.9,
-                        base >= 4 && < 5,
+  build-depends:        aeson               >= 0.8   && < 0.10,
+                        base                >= 4     && < 5,
+                        base-compat         >= 0.8.1 && < 1,
                         blaze-builder,
                         containers,
                         data-default,
@@ -35,10 +36,10 @@ library
                         mtl,
                         process,
                         remote-json,
-                        scotty >= 0.9.1,
+                        scotty              >= 0.9.1,
                         stm,
                         text,
-                        transformers >= 0.2,
+                        transformers        >= 0.2,
                         transformers-compat >= 0.4,
                         wai,
                         wai-extra,

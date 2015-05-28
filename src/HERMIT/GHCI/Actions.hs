@@ -1,4 +1,6 @@
-{-# LANGUAGE LambdaCase, OverloadedStrings #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings #-}
 module HERMIT.GHCI.Actions
     ( initCommandLineState
     , performTypedEffect
@@ -10,40 +12,43 @@ module HERMIT.GHCI.Actions
 --    , complete
     ) where
 
-import           Control.Concurrent.MVar
+-- import           Control.Concurrent.MVar
 import           Control.Concurrent.STM
 import           Control.Monad.Reader
-import qualified Control.Monad.State.Lazy as State
+-- import qualified Control.Monad.State.Lazy as State
 
 import           Data.Aeson as Aeson
 import           Data.Aeson.Types (parseMaybe)
-import           Data.Char (isSpace)
+-- import           Data.Char (isSpace)
 import           Data.Either
 import qualified Data.Map as Map
 import           Data.Monoid
 import           Data.Text (Text)
 
 import           HERMIT.Dictionary
-import           HERMIT.External
+-- import           HERMIT.External
 import           HERMIT.Kernel
 import           HERMIT.Kure
 
 import           HERMIT.Plugin
-import           HERMIT.Plugin.Builder
+-- import           HERMIT.Plugin.Builder
 import           HERMIT.Plugin.Types
 
-import           HERMIT.PrettyPrinter.Common (po_width, PrettyOptions, DocH)
+import           HERMIT.PrettyPrinter.Common (PrettyOptions, DocH)
+-- import           HERMIT.PrettyPrinter.Common (po_width)
 
 import           HERMIT.Shell.Command
-import           HERMIT.Shell.Completion
+-- import           HERMIT.Shell.Completion
 import           HERMIT.Shell.Externals
 import           HERMIT.Shell.Types hiding (clm)
 
-import           HERMIT.GHCI.JSON
+-- import           HERMIT.GHCI.JSON
 import           HERMIT.GHCI.Renderer
 import           HERMIT.GHCI.Types
 
 import           HERMIT.Shell.ShellEffect
+
+import           Prelude.Compat hiding ((<$>))
 
 import           System.IO (Handle)
 
@@ -167,10 +172,10 @@ performTypedEffect :: PluginReader -> TMVar CommandLineState -> ([Aeson.Value] -
 performTypedEffect plug ref [val] = do
   case parseCLT val of
     Nothing -> do
-            print ("ParseCLT fail:",val)
+            print ("ParseCLT fail:" :: String, val)
             return $ Aeson.Null
     Just m -> do
-        print "sending to internal shell"
+        print ("sending to internal shell" :: String)
         cls0 <- atomically $ takeTMVar ref
         -- Now, add a command-specific logger
         let orig_logger = ps_render $ cl_pstate $ cls0
@@ -182,11 +187,11 @@ performTypedEffect plug ref [val] = do
         -- split into messages, and AST(s)?
         case r of
           Left (CLResume sast) -> do
-             print ("resume",sast)
+             print ("resume" :: String, sast)
              resumeK (pr_kernel plug) sast
              return $ object [ "shutdown" .= ("resume" :: Text) ]
-          Left exc  -> return $ Aeson.Null
-          Right val -> return $ object [ "result" .= val, "output" .= es ]
+          Left _exc  -> return $ Aeson.Null
+          Right val' -> return $ object [ "result" .= val', "output" .= es ]
 
 
 newRenderer :: (Handle -> PrettyOptions -> Either String DocH -> IO ()) -> CommandLineState -> CommandLineState
@@ -212,13 +217,13 @@ method nm e (Object o) = case parseMaybe (.: "method") o of
         Just nm' | nm' == nm -> return e
         _ -> Nothing
 
-optionalAST :: [[Glyph]] -> Maybe [Glyph]
-optionalAST [] = Nothing
-optionalAST gs = Just (last gs)
+-- optionalAST :: [[Glyph]] -> Maybe [Glyph]
+-- optionalAST [] = Nothing
+-- optionalAST gs = Just (last gs)
 
-optionalMsg :: [String] -> Maybe String
-optionalMsg [] = Nothing
-optionalMsg ss = Just (unlines ss)
+-- optionalMsg :: [String] -> Maybe String
+-- optionalMsg [] = Nothing
+-- optionalMsg ss = Just (unlines ss)
 
 getUntilEmpty :: TChan a -> IO [a]
 getUntilEmpty chan = ifM (atomically $ isEmptyTChan chan)

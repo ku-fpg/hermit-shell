@@ -1,9 +1,5 @@
 {-# LANGUAGE OverloadedStrings, KindSignatures, GADTs #-}
 module HERMIT.API.Shell where
-        
-import Data.Aeson
-import Data.Aeson.Types
-import Data.Maybe
 
 import HERMIT.API.Types
 
