@@ -38,9 +38,14 @@ import           Control.Monad.Remote.JSON
 ------------------------------- the plugin ------------------------------------
 
 plugin :: Plugin
-plugin = buildPlugin $ \ store passInfo -> if passNum passInfo == 0
-                                           then hermitKernel store "front end" . server passInfo
-                                           else const return
+plugin = buildPlugin $ \ store passInfo -> 
+  if passNum passInfo == 0
+  then \ o p ->
+           do liftIO $ print "Hey"
+              r <- hermitKernel store "front end" (server passInfo o) p
+              liftIO $ print "Jude"
+              return r
+  else const return
 
 -- | The meat of the plugin, which implements the actual Web API.
 server :: PassInfo -> [CommandLineOption] -> Kernel -> AST -> IO ()
@@ -80,7 +85,7 @@ server passInfo _opts skernel initAST = do
                 d <- jsonData
                 liftIO $ print d
                 r <- liftIO $ fns d
-                liftIO $ print r
+--                liftIO $ print r
                 case r of
                   Nothing -> return ()
                   Just v -> json v
@@ -103,7 +108,9 @@ server passInfo _opts skernel initAST = do
         ]
 
     -- What and Why?
+    print "Killing server"
     throwTo tid UserInterrupt
+    print "Killed server"
 
 -- | Turn WebAppException into a Response.
 handleError :: Kernel -> WebAppException -> IO Wai.Response

@@ -13,4 +13,4 @@ display = Shell $ method "display" []
 
 -- | stops HERMIT; resumes compile.
 resume :: Shell ()
-resume = Shell $ method "display" []
+resume = Shell $ method "resume" []

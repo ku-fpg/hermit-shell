@@ -165,25 +165,26 @@ initCommandLineState ast = do
 -- and return a function from JSON list to JSON.
 performTypedEffect :: PluginReader -> TMVar CommandLineState -> ([Aeson.Value] -> IO Aeson.Value)
 performTypedEffect plug ref [val] = do
-  print "1"
   case parseCLT val of
-    Nothing -> return $ Aeson.Null
+    Nothing -> do
+            print ("ParseCLT fail:",val)
+            return $ Aeson.Null
     Just m -> do
-        print "2"
+        print "sending to internal shell"
         cls0 <- atomically $ takeTMVar ref
         -- Now, add a command-specific logger
         let orig_logger = ps_render $ cl_pstate $ cls0
         chan <- atomically $ newTChan
         let cls1 = newRenderer (webChannel chan) $ cls0 
-        print "3"
         (r,cls2) <- runCLT plug cls1 $ m
-        print "4"
         atomically $ putTMVar ref $ newRenderer orig_logger cls2
-        print "5"
         es <- liftIO (getUntilEmpty chan)
-        print "6"
         -- split into messages, and AST(s)?
         case r of
+          Left (CLResume sast) -> do
+             print ("resume",sast)
+             resumeK (pr_kernel plug) sast
+             return $ object [ "shutdown" .= ("resume" :: Text) ]
           Left exc  -> return $ Aeson.Null
           Right val -> return $ object [ "result" .= val, "output" .= es ]
 
@@ -195,8 +196,17 @@ parseCLT :: (MonadIO m, Functor m) => Aeson.Value -> Maybe (CLT m Aeson.Value)
 parseCLT v = fmap (const (toJSON ())) <$> performTypedEffectH (show v) <$> ShellEffectH <$> parseShellEffect v
         
 parseShellEffect :: Aeson.Value -> Maybe ShellEffect
-parseShellEffect = method "display" $ CLSModify $ showWindowAlways Nothing
-        
+parseShellEffect = alts
+  [ method "display" $ CLSModify $ showWindowAlways Nothing
+  , method "resume"  $ Resume
+  ]
+
+alts :: [a -> Maybe b] -> a -> Maybe b
+alts as a = f $ map ($ a) as
+  where f (Just b:_) = Just b
+        f (_:bs)     = f bs
+        f []         = Nothing
+
 method :: Text -> e -> Value -> Maybe e
 method nm e (Object o) = case parseMaybe (.: "method") o of
         Just nm' | nm' == nm -> return e

@@ -24,7 +24,9 @@ fromShell (Shell {}) = fromJust . parseMaybe parseJSON
 
 data ShellResult a
   = ShellResult [[Glyph]] a -- When was said, what was returned
-  | ShellFailure String -- something went wrong
+  | ShellFailure String     -- something went wrong
+  | ShellAbort              -- HERMIT has returned control to GHCI;
+                            -- please stop sending messages.
     deriving Show
 
 instance FromJSON a => FromJSON (ShellResult a) where
