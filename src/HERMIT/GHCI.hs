@@ -99,7 +99,7 @@ server passInfo _opts skernel initAST = do
         ["--interactive"
         , "-ghci-script=.ghci-hermit"
         ,"-XOverloadedStrings"
-        ,"-interactive-print=HERMIT.API.printRepl"
+        ,"-interactive-print=HERMIT.GHCI.Printer.printForRepl"
         ]
 
     -- What and Why?

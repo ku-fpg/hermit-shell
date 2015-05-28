@@ -49,12 +49,13 @@ library
 
   exposed-modules:      HERMIT.API             
                         HERMIT.API.Path
-                        HERMIT.API.ShellEffect
+                        HERMIT.API.Effect
                         HERMIT.API.Types
                         HERMIT.GHCI
                         HERMIT.GHCI.Actions
                         HERMIT.GHCI.Client
                         HERMIT.GHCI.JSON
+                        HERMIT.GHCI.Printer
                         HERMIT.GHCI.Renderer
                         HERMIT.GHCI.Types
                         Paths_hermit_ghci

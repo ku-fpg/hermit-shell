@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings, KindSignatures, GADTs #-}
-module HERMIT.API.ShellEffect where
+module HERMIT.API.Shell where
         
 import Data.Aeson
 import Data.Aeson.Types
@@ -11,3 +11,6 @@ import HERMIT.API.Types
 display :: Shell ()
 display = Shell $ method "display" []
 
+-- | stops HERMIT; resumes compile.
+resume :: Shell ()
+resume = Shell $ method "display" []
