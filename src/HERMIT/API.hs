@@ -1,10 +1,11 @@
-{-# LANGUAGE LambdaCase, OverloadedStrings, KindSignatures, GADTs #-}
+{-# LANGUAGE LambdaCase, OverloadedStrings, KindSignatures, GADTs, UndecidableInstances, FlexibleInstances, IncoherentInstances #-}
 module HERMIT.API 
         ( -- Modules
           module HERMIT.API.Path
         , module HERMIT.API.ShellEffect
           -- Utilties
         , send
+        , printRepl
         ) where
 
 import HERMIT.API.ShellEffect
@@ -12,6 +13,17 @@ import HERMIT.API.Path
 import HERMIT.API.Types
 
 import HERMIT.GHCI.Client
+
+class Repl a where
+  printRepl :: a -> IO ()
+
+instance {- OVERLAPPABLE -} Show a => Repl a where
+  printRepl = print
+  
+instance {- OVERLAPPING -} Repl (Shell a) where  
+  printRepl sh = do
+        r <- send sh
+        print ()
 
 {-        
 import HERMIT.GHCI.Session

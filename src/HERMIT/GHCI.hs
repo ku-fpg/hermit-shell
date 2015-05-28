@@ -95,7 +95,12 @@ server passInfo _opts skernel initAST = do
         ,"send welcome" -- welcome message (interactive only)
         ,"send display" -- where am I (interactive only)
         ]
-    callProcess "ghc" ["--interactive", "-ghci-script=.ghci-hermit","-XOverloadedStrings"]
+    callProcess "ghc" 
+        ["--interactive"
+        , "-ghci-script=.ghci-hermit"
+        ,"-XOverloadedStrings"
+        ,"-interactive-print=HERMIT.API.printRepl"
+        ]
 
     -- What and Why?
     throwTo tid UserInterrupt
