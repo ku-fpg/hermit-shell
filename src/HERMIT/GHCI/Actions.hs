@@ -15,11 +15,13 @@ import           Control.Concurrent.STM
 import           Control.Monad.Reader
 import qualified Control.Monad.State.Lazy as State
 
+import           Data.Aeson as Aeson
+import           Data.Aeson.Types (parseMaybe)
 import           Data.Char (isSpace)
 import           Data.Either
 import qualified Data.Map as Map
 import           Data.Monoid
-import           Data.Aeson as Aeson
+import           Data.Text (Text)
 
 import           HERMIT.Dictionary
 import           HERMIT.External
@@ -189,16 +191,17 @@ performTypedEffect plug ref [val] = do
 newRenderer :: (Handle -> PrettyOptions -> Either String DocH -> IO ()) -> CommandLineState -> CommandLineState
 newRenderer rndr cls = cls { cl_pstate = (cl_pstate cls) { ps_render = rndr } }
         
-
 parseCLT :: (MonadIO m, Functor m) => Aeson.Value -> Maybe (CLT m Aeson.Value)
 parseCLT v = fmap (const (toJSON ())) <$> performTypedEffectH (show v) <$> ShellEffectH <$> parseShellEffect v
         
 parseShellEffect :: Aeson.Value -> Maybe ShellEffect
-parseShellEffect _ = return $ CLSModify $ showWindowAlways Nothing
---parseShellEffect _ = fail "no parseShellEffect"
-
-
+parseShellEffect = method "display" $ CLSModify $ showWindowAlways Nothing
         
+method :: Text -> e -> Value -> Maybe e
+method nm e (Object o) = case parseMaybe (.: "method") o of
+        Just nm' | nm' == nm -> return e
+        _ -> Nothing
+
 optionalAST :: [[Glyph]] -> Maybe [Glyph]
 optionalAST [] = Nothing
 optionalAST gs = Just (last gs)

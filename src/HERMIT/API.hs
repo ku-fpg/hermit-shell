@@ -1,13 +1,16 @@
 {-# LANGUAGE LambdaCase, OverloadedStrings, KindSignatures, GADTs #-}
 module HERMIT.API 
-        ( -- HERMIT.API.ShellEffect
-          module HERMIT.API.ShellEffect
+        ( -- Modules
+          module HERMIT.API.Path
+        , module HERMIT.API.ShellEffect
           -- Utilties
         , send
         ) where
 
 import HERMIT.API.ShellEffect
+import HERMIT.API.Path
 import HERMIT.API.Types
+
 import HERMIT.GHCI.Client
 
 {-        

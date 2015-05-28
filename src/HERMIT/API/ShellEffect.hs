@@ -7,7 +7,7 @@ import Data.Maybe
 
 import HERMIT.API.Types
 
--- | redisplays current state
-display :: ShellEffect ()
-display = ShellEffect $ method "display" []
+-- | redisplays current state.
+display :: Shell ()
+display = Shell $ method "display" []
 

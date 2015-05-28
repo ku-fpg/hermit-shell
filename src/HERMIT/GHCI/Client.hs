@@ -10,23 +10,9 @@ import Data.Maybe
 import Control.Monad.Remote.JSON as JSONRPC
 import Network.Wreq
 import HERMIT.GHCI.JSON 
+import HERMIT.API.Types
 
 --- Main call-HERMIT function
-
-class Shell f where
-  toShell   :: f a -> Value
-  fromShell :: f a -> Value -> ShellResult a
-
-data ShellResult a
-  = ShellResult [[Glyph]] a -- When was said, what was returned
-  | ShellFailure String -- something went wrong
-    deriving Show
-
-instance FromJSON a => FromJSON (ShellResult a) where
-  parseJSON (Object o) = ShellResult <$> o .: "output"
-                                     <*> o .: "result"
-                      <|> return (ShellFailure "malformed Object returned from Server")                                      
-  parseJSON _ = return (ShellFailure "Object not returned from Server")
         
 session :: JSONRPC.Session
 session = Session 
@@ -38,7 +24,7 @@ session = Session
           return ()
   }        
 
-send :: Shell f => f a -> IO a
+send :: Shell a -> IO a
 send g = do
        print (toShell g)
        v <- JSONRPC.send session $ JSONRPC.method "send" [toShell g]
