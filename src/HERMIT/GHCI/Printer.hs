@@ -6,6 +6,8 @@ module HERMIT.GHCI.Printer
 import HERMIT.API.Types
 import HERMIT.GHCI.Client
 
+import Control.Monad (when)
+
 -- There is some serious hackery here; it will be better in 7.10.
 
 class Repl a where
@@ -14,7 +16,9 @@ class Repl a where
 instance {- OVERLAPPABLE -} Show a => Repl a where
   printForRepl = print
   
-instance {- OVERLAPPING -} Show a => Repl (Shell a) where  
+instance {- OVERLAPPING -} Response a => Repl (Shell a) where  
   printForRepl sh = do
         r <- send sh
-        print r
+        let txt = showResponse r
+        when (not $ null $ txt) $ do
+          putStrLn txt

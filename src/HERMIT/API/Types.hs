@@ -35,6 +35,28 @@ instance FromJSON a => FromJSON (ShellResult a) where
                       <|> return (ShellFailure "malformed Object returned from Server")                                      
   parseJSON _ = return (ShellFailure "Object not returned from Server")
 
+
+------------------------------------------------------------------------
+
+-- | The 'Guts' of GHC, is anything we can rewrite and transform.
+class Guts a
+
+------------------------------------------------------------------------
+-- | The 'Response' of doing a 'Shell' effect.
+
+class FromJSON a => Response a where
+  showResponse :: a -> String 
+
+instance Response () where
+  showResponse () = ""
+
+------------------------------------------------------------------------
+
+type Rewrite a = Transform a a
+
+data Transform :: * -> * -> * where
+  Transform :: Value -> Transform a b
+  
 ------------------------------------------------------------------------
 
 newtype Name = Name String
@@ -57,6 +79,16 @@ instance FromJSON LocalPath where
 
 instance ToJSON LocalPath where
   toJSON = undefined
+
+instance Response LocalPath where
+  showResponse (LocalPath txt) = show txt
+
+------------------------------------------------------------------------
+
+data LCoreTC = LCoreTC
+
+instance Guts LCoreTC 
+
 
 
 ------------------------------------------------------------------------
