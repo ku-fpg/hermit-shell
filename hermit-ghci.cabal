@@ -49,7 +49,7 @@ library
 
   exposed-modules:      HERMIT.API             
                         HERMIT.API.Path
-                        HERMIT.API.Effect
+                        HERMIT.API.Shell
                         HERMIT.API.Types
                         HERMIT.GHCI
                         HERMIT.GHCI.Actions
