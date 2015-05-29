@@ -42,7 +42,7 @@ parseTopLevel v = fmap (const (toJSON ()))
                <$> (parseExternal v :: Parser (TypedEffectH ()))
 
 instance External (TypedEffectH ()) where
-  parseExternal = alts 
+  parseExternals =
     [ fmap ShellEffectH . parseExternal
 --     , external "setPath" (SetPathH :: TransformH LCoreTC LocalPathH -> TypedEffectH ())
 --        ["sets the path"]
