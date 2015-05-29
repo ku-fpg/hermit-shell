@@ -10,6 +10,8 @@ import           HERMIT.Server.Parser.Utils
 
 instance External ShellEffect where
   parseExternal = alts 
-    [ external "display" $ CLSModify $ showWindowAlways Nothing
-    , external "resume"  $ Resume
+    [ external "resume"  Resume
+        [ "stops HERMIT; resumes compile" ]
+    , external "display" (CLSModify $ showWindowAlways Nothing)
+        [ "redisplays current state" ]
     ]
