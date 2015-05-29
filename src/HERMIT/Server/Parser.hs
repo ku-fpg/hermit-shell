@@ -14,8 +14,9 @@ import           Control.Monad.Reader
 
 import           Data.Aeson as Aeson
 import           Data.Aeson.Types (parseMaybe, Parser)
-import           HERMIT.Kure hiding ((<$>),(<*>))
 
+import           HERMIT.Context
+import           HERMIT.Kure hiding ((<$>),(<*>))
 import           HERMIT.Shell.Command
 import           HERMIT.Shell.Types hiding (clm)
 
@@ -44,10 +45,10 @@ parseTopLevel v = fmap (const (toJSON ()))
 instance External (TypedEffectH ()) where
   parseExternals =
     [ fmap ShellEffectH . parseExternal
---     , external "setPath" (SetPathH :: TransformH LCoreTC LocalPathH -> TypedEffectH ())
---        ["sets the path"]
---     , external "query"   (QueryH :: QueryFun -> TypedEffectH ())
---        ["performs query"]
+    , external "setPath" (SetPathH :: TransformH LCoreTC LocalPathH -> TypedEffectH ())
+        ["sets the path"]
+    , external "query"   (QueryH :: QueryFun -> TypedEffectH ())
+        ["performs query"]
     , external "rewrite" (RewriteLCoreH :: RewriteH LCore -> TypedEffectH ())
        ["performs query"]
     , external "eval" (EvalH :: String -> TypedEffectH ())
