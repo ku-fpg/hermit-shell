@@ -10,5 +10,5 @@ import           HERMIT.Server.Parser.Utils
 import           HERMIT.Server.Parser.Transform()
 
 instance External QueryFun where
-  parseExternal = alts 
+  parseExternals =
     [ fmap (QueryUnit :: TransformH LCore () -> QueryFun) . parseExternal ]

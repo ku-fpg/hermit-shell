@@ -13,7 +13,7 @@ import           HERMIT.Server.Parser.Name()
 import           HERMIT.Server.Parser.Utils
 
 instance External (TransformH LCoreTC LocalPathH) where
-  parseExternal = alts 
+  parseExternals =
     [ external "rhsOf"      (rhsOfT . mkRhsOfPred       :: RhsOfName -> TransformH LCoreTC LocalPathH)
             [ "Find the path to the RHS of the binding of the named variable." ]
     , external "bindingOf" (bindingOfT . mkBindingPred :: BindingName -> TransformH LCoreTC LocalPathH)
@@ -21,7 +21,7 @@ instance External (TransformH LCoreTC LocalPathH) where
     ]
 
 instance External (TransformH LCore ()) where
-  parseExternal = alts 
+  parseExternals =
     [ external "remember" (promoteCoreT . rememberR :: LemmaName -> TransformH LCore ()) -- Done not smell right (return ()?)
         [ "Remember the current binding, allowing it to be folded/unfolded in the future." ] .+ Context
     ]

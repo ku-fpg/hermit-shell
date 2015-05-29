@@ -1,6 +1,6 @@
 {-# LANGUAGE LambdaCase, OverloadedStrings, FlexibleInstances, FlexibleContexts, TypeFamilies, DefaultSignatures, GADTs #-}
 module HERMIT.Server.Parser.Utils 
-        ( External(..)
+        ( External(parseExternal, parseExternals)
         , external
         , alts
         , CmdTag(..)
@@ -37,6 +37,10 @@ class External e where
   type R e = e  -- default
   
   parseExternal :: Value -> Parser e
+  parseExternal = alts parseExternals
+
+  parseExternals :: [Value -> Parser e]
+  parseExternals = [parseExternal]
 
   matchExternal :: e -> [Value] -> Parser (R e)
 
