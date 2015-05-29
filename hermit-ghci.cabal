@@ -59,6 +59,10 @@ library
                         HERMIT.GHCI.Renderer
                         HERMIT.GHCI.Types
                         HERMIT.Server.Parser
+                        HERMIT.Server.Parser.Name
+                        HERMIT.Server.Parser.ShellEffect
+                        HERMIT.Server.Parser.Transform
+                        HERMIT.Server.Parser.Utils
                         Paths_hermit_ghci
   hs-source-dirs:       src
 
