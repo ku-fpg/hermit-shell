@@ -1,0 +1,4 @@
+binding-of 'fib
+remember orig-fib
+any-call (unfold-remembered orig-fib)
+resume

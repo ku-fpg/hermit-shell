@@ -52,13 +52,6 @@ server passInfo _opts skernel initAST = do
         response :: WebM a -> IO (Either WebAppException a)
         response = flip runReaderT sync' . runExceptT . runWebT
 
-        runWebM :: WebM a -> IO a
-        runWebM m = do
-            r <- response m
-            case r of
-                Left err -> fail $ "Startup error: " ++ show err
-                Right r' -> return r'
-
         runAction :: WebM Wai.Response -> IO Wai.Response
         runAction m = do
             r <- response m
@@ -86,15 +79,16 @@ server passInfo _opts skernel initAST = do
                   Nothing -> return ()
                   Just v -> json v
 
-    tid <- forkIO $ scottyT 3000 runWebM runAction $ do
+    tid <- forkIO $ scottyT 3000 runAction $ do
         middleware logStdoutDev
         post "/" $ jsonRpc
         
     writeFile ".ghci-hermit" $ unlines
         ["import HERMIT.API"
         ,":set prompt \"HERMIT> \""
-        ,"send welcome" -- welcome message (interactive only)
+--        ,"send welcome" -- welcome message (interactive only)
         ,"send display" -- where am I (interactive only)
+        ,"setPath (rhsOf \"rev\")"
         ]
     callProcess "ghc" 
         ["--interactive"

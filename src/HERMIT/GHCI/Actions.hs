@@ -18,7 +18,7 @@ import           Control.Monad.Reader
 -- import qualified Control.Monad.State.Lazy as State
 
 import           Data.Aeson as Aeson
-import           Data.Aeson.Types (parseMaybe)
+-- import           Data.Aeson.Types (parseMaybe)
 -- import           Data.Char (isSpace)
 import           Data.Either
 import qualified Data.Map as Map
@@ -37,12 +37,12 @@ import           HERMIT.Plugin.Types
 import           HERMIT.PrettyPrinter.Common (PrettyOptions, DocH)
 -- import           HERMIT.PrettyPrinter.Common (po_width)
 
-import           HERMIT.Shell.Command
+-- import           HERMIT.Shell.Command
 -- import           HERMIT.Shell.Completion
 import           HERMIT.Shell.Externals
 import           HERMIT.Shell.Types hiding (clm)
 
--- import           HERMIT.GHCI.JSON
+import           HERMIT.GHCI.JSON
 import           HERMIT.GHCI.Renderer
 import           HERMIT.GHCI.Types
 
@@ -52,6 +52,7 @@ import           Prelude.Compat hiding ((<$>))
 
 import           System.IO (Handle)
 
+import           HERMIT.Server.Parser (parseCLT)
 
 ------------------------- connecting a new user -------------------------------
 {-
@@ -196,31 +197,11 @@ performTypedEffect plug ref [val] = do
 
 newRenderer :: (Handle -> PrettyOptions -> Either String DocH -> IO ()) -> CommandLineState -> CommandLineState
 newRenderer rndr cls = cls { cl_pstate = (cl_pstate cls) { ps_render = rndr } }
-        
-parseCLT :: (MonadIO m, Functor m) => Aeson.Value -> Maybe (CLT m Aeson.Value)
-parseCLT v = fmap (const (toJSON ())) <$> performTypedEffectH (show v) <$> ShellEffectH <$> parseShellEffect v
-        
-parseShellEffect :: Aeson.Value -> Maybe ShellEffect
-parseShellEffect = alts
-  [ method "display" $ CLSModify $ showWindowAlways Nothing
-  , method "resume"  $ Resume
-  ]
-
-alts :: [a -> Maybe b] -> a -> Maybe b
-alts as a = f $ map ($ a) as
-  where f (Just b:_) = Just b
-        f (_:bs)     = f bs
-        f []         = Nothing
-
-method :: Text -> e -> Value -> Maybe e
-method nm e (Object o) = case parseMaybe (.: "method") o of
-        Just nm' | nm' == nm -> return e
-        _ -> Nothing
 
 -- optionalAST :: [[Glyph]] -> Maybe [Glyph]
 -- optionalAST [] = Nothing
 -- optionalAST gs = Just (last gs)
-
+-- 
 -- optionalMsg :: [String] -> Maybe String
 -- optionalMsg [] = Nothing
 -- optionalMsg ss = Just (unlines ss)
