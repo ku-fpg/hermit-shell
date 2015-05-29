@@ -58,6 +58,7 @@ library
                         HERMIT.GHCI.Printer
                         HERMIT.GHCI.Renderer
                         HERMIT.GHCI.Types
+                        HERMIT.Server.Parser
                         Paths_hermit_ghci
   hs-source-dirs:       src
 
