@@ -89,6 +89,9 @@ data LCoreTC = LCoreTC
 
 instance Guts LCoreTC 
 
+data LCore = LCore
+
+instance Guts LCore 
 
 
 ------------------------------------------------------------------------

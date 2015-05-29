@@ -1,6 +1,8 @@
+{-# LANGUAGE OverloadedStrings #-}
+import HERMIT.API
 script = do
   setPath (bindingOf "fib")
-  --remember orig-fib
-  --any-call (unfold-remembered orig-fib)
-  --resume
+  query (remember "orig-fib")
+  rewrite (anyCall (unfoldRemembered "orig-fib"))
+  resume
   

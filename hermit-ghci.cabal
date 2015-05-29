@@ -48,7 +48,9 @@ library
   default-language:     Haskell2010
 
   exposed-modules:      HERMIT.API             
+                        HERMIT.API.KURE
                         HERMIT.API.Path
+                        HERMIT.API.Remember
                         HERMIT.API.Shell
                         HERMIT.API.Types
                         HERMIT.GHCI
@@ -60,7 +62,9 @@ library
                         HERMIT.GHCI.Types
                         HERMIT.Server.Parser
                         HERMIT.Server.Parser.Name
+                        HERMIT.Server.Parser.QueryFun
                         HERMIT.Server.Parser.ShellEffect
+                        HERMIT.Server.Parser.Rewrite
                         HERMIT.Server.Parser.Transform
                         HERMIT.Server.Parser.Utils
                         Paths_hermit_ghci

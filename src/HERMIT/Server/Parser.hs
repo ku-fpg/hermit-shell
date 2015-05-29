@@ -16,7 +16,9 @@ import           HERMIT.Shell.Types hiding (clm)
 
 import           HERMIT.Context
 
+import           HERMIT.Server.Parser.QueryFun()
 import           HERMIT.Server.Parser.ShellEffect()
+import           HERMIT.Server.Parser.Rewrite()
 import           HERMIT.Server.Parser.Transform()
 import           HERMIT.Server.Parser.Utils
 
@@ -37,5 +39,9 @@ instance External (TypedEffectH ()) where
     [ fmap ShellEffectH . parseExternal
     , external "setPath" (SetPathH :: TransformH LCoreTC LocalPathH -> TypedEffectH ())
        ["sets the path"]
+    , external "query"   (QueryH :: QueryFun -> TypedEffectH ())
+       ["performs query"]
+    , external "rewrite" (RewriteLCoreH :: RewriteH LCore -> TypedEffectH ())
+       ["performs query"]
     ]
 

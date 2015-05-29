@@ -15,9 +15,9 @@ display = Shell $ method "display" []
 resume :: Shell ()
 resume = Shell $ method "resume" []
 
--- | promote a `Transform` to top-level, run it, and return the result.
---query :: (Guts a, Response b) => Transform a b -> Shell b
---query (Transform t) = Shell $ method "query" [t]
+-- | promote a `Transform` to top-level, run it, and print the result.
+query :: (Guts a) => Transform a b -> Shell ()
+query (Transform t) = Shell $ method "query" [t]
         
 -- | promote a `Rewrite` to top-level, run it, and update global state with the result.
 rewrite :: Guts a => Rewrite a -> Shell ()

@@ -7,6 +7,7 @@ import           Data.Aeson
 import qualified Data.Text as Text
 
 import           HERMIT.Name
+import           HERMIT.Lemma
 
 import           HERMIT.Server.Parser.Utils
 
@@ -18,3 +19,6 @@ instance External BindingName where
   parseExternal (String txt) = return $ BindingName $ parseName $ Text.unpack $ txt
   parseExternal _            = fail "fail: BindingName"          
 
+instance External LemmaName where
+  parseExternal (String txt) = return $ LemmaName $ Text.unpack $ txt
+  parseExternal _            = fail "fail: LemmaName"          
