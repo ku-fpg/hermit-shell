@@ -14,3 +14,7 @@ instance External RhsOfName where
   parseExternal (String txt) = return $ RhsOfName $ parseName $ Text.unpack $ txt
   parseExternal _            = fail "fail: RhsOfName"          
 
+instance External BindingName where
+  parseExternal (String txt) = return $ BindingName $ parseName $ Text.unpack $ txt
+  parseExternal _            = fail "fail: BindingName"          
+
