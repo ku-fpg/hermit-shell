@@ -1,4 +1,4 @@
-name:                hermit-ghci
+name:                hermit-shell
 
 -- The package version.  See the Haskell package versioning policy (PVP)
 -- for standards guiding when and how versions should be incremented.
@@ -68,10 +68,10 @@ library
                         HERMIT.Server.Parser.Rewrite
                         HERMIT.Server.Parser.Transform
                         HERMIT.Server.Parser.Utils
-                        Paths_hermit_ghci
+                        Paths_hermit_shell
   hs-source-dirs:       src
 
-executable hermit-ghci
+executable hermit-shell
   ghc-options:          -Wall
   main-is:              Main.hs
   hs-source-dirs:       driver
@@ -79,5 +79,5 @@ executable hermit-ghci
   build-depends:        base >= 4 && < 5,
                         remote-json,
                         hermit,
-                        hermit-ghci,
+                        hermit-shell,
                         split

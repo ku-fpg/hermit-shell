@@ -1,7 +1,7 @@
 How to invoke. Make sure you are in the sandbox (cabal exec bash, in root)
 
 ````
-% hermit-ghci Reverse.hs +Main 
+% hermit-shell Reverse.hs +Main 
 [Boot screen]
 HERMIT> send display
 ````

@@ -1,4 +1,4 @@
-# HERMIT GHCi
+# HERMIT shell
 
 Implements RESTful web service interface to HERMIT,
 spawns GHCi in a separate process to communicate with it.
@@ -6,7 +6,7 @@ spawns GHCi in a separate process to communicate with it.
 ## Running
 
     cabal install
-    hermit-ghci SomeFile.hs
+    hermit-shell SomeFile.hs
 
 Once started, the only command is currently ':send'
 

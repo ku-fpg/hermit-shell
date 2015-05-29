@@ -8,13 +8,13 @@ import System.Environment
 import Data.List
 import Data.List.Split
 import Data.Version
-import Paths_hermit_ghci as P
+import Paths_hermit_shell as P
 
 hermitGHCIVersion :: String
 hermitGHCIVersion = "HERMIT-GHCi v" ++ showVersion P.version
 
 hermitGHCIUsage :: IO ()
-hermitGHCIUsage = mapM_ putStrLn [hermitGHCIVersion, "", replace "hermit" "hermit-ghci" usageOutput]
+hermitGHCIUsage = mapM_ putStrLn [hermitGHCIVersion, "", replace "hermit" "hermit-shell" usageOutput]
     where replace :: String -> String -> String -> String
           replace old new = intercalate new . splitOn old
 
