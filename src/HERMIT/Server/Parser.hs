@@ -51,68 +51,52 @@ import           Debug.Trace
 
 parseCLT :: (MonadIO m, Functor m) => Aeson.Value -> Maybe (CLT m Aeson.Value)
 parseCLT = parseMaybe parseTopLevel
-{-
-  where topLevel =  alts
-          [ parseTopLevel ShellEffectH
-          , parseTopLevel (SetPathH      ::  TransformH LCoreTC LocalPathH -> TypedEffectH ())
-          ]
--}          
+
 parseTopLevel :: (MonadIO m, Functor m)
               => Aeson.Value -> Parser (CLT m Aeson.Value)
 parseTopLevel v = fmap (const (toJSON ())) 
                <$> performTypedEffectH (show v) 
-               <$> (parseClient v :: Parser (TypedEffectH ()))
+               <$> (parseExternal v :: Parser (TypedEffectH ()))
 
 -----------------------------------------------
 
---data ShellH where
---   ShellH :: (MonadIO m, Functor m) => CLT m Aeson.Value -> ShellH
-
-instance External (TypedEffectH ())
-
-instance FromJSON (Client (TypedEffectH ())) where
-  parseJSON = alts 
-    [ fmap (Client . ShellEffectH) . parseClient
+instance External (TypedEffectH ()) where
+  parseExternal = alts 
+    [ fmap ShellEffectH . parseExternal
     , external "setPath" (SetPathH :: TransformH LCoreTC LocalPathH -> TypedEffectH ())
     ]
 
 -----------------------------------------------
 
-instance FromJSON (Client (TransformH LCoreTC LocalPathH)) where
-  parseJSON = alts 
+instance External (TransformH LCoreTC LocalPathH) where
+  parseExternal = alts 
     [ external "rhsOf" (rhsOfT . mkRhsOfPred :: RhsOfName -> TransformH LCoreTC LocalPathH)
     ]
 
 -----------------------------------------------
 
-
-instance FromJSON (Client ShellEffect) where
-  parseJSON = alts
+instance External ShellEffect where
+  parseExternal = alts 
     [ external "display" $ CLSModify $ showWindowAlways Nothing
     , external "resume"  $ Resume
     ]
 
-instance FromJSON (Client RhsOfName) where
-  parseJSON (String txt) = return $ Client $ RhsOfName $ parseName $ Text.unpack $ txt
-  parseJSON _ = fail "fail: RhsOfName"          
-        
+instance External RhsOfName where
+  parseExternal (String txt) = return $ RhsOfName $ parseName $ Text.unpack $ txt
+  parseExternal _            = fail "fail: RhsOfName"          
+
 -----------------------------------------------
 -- Utils
 
 alts :: [a -> Parser b] -> a -> Parser b
 alts as a = foldr (<|>) (fail "no match") $ map ($ a) as
 
-method :: Text -> e -> Value -> Parser e
-method nm e (Object o) = case parseMaybe (.: "method") o of
-        Just nm' | nm' == nm -> return e
-        _                    -> fail $ "no match for " ++ show nm
-
 -----------------------------------------------
 
-external :: External a => Text -> a -> Value -> Parser (Client (R a))
+external :: External a => Text -> a -> Value -> Parser (R a)
 external nm f v | traceShow ("external",nm,v) False = undefined
 external nm f v@(Object o) = case parseMaybe p o of
-        Just (nm',args) | nm' == nm -> Client <$> parseExternal f args
+        Just (nm',args) | nm' == nm -> matchExternal f args
         _                           -> fail $ "no match for " ++ show nm
  where p o = (,) <$> o .: "method"
                  <*> o .: "params"
@@ -120,29 +104,21 @@ external nm f v@(Object o) = case parseMaybe p o of
 class External e where
   type R e :: *
   type R e = e  -- default
-
-  parseExternal :: e -> [Value] -> Parser (R e)
-
-  default parseExternal :: e -> [Value] -> Parser e
-  parseExternal e [] = return e
-  parseExternal e _ = fail "wrong number of arguments"
   
-instance (FromJSON (Client a), External b) => External (a -> b) where
+  parseExternal :: Value -> Parser e
+
+  matchExternal :: e -> [Value] -> Parser (R e)
+
+  default matchExternal :: e -> [Value] -> Parser e
+  matchExternal e [] = return e
+  matchExternal e _ = fail "wrong number of arguments"
+  
+instance (External a, External b) => External (a -> b) where
   type R (a -> b) = R b
-  parseExternal e (v:vs) = do
-          a <- parseClient v
-          parseExternal (e a) vs
+  parseExternal _ = error "can not parseExternal for function"
+  matchExternal e (v:vs) = do
+          a <- parseExternal v
+          matchExternal (e a) vs
           
-  parseExternal e _ = fail "wrong number of arguments"
-
-class Argument e where
-  parseArgument :: Value -> Parser e
-
-instance External ShellEffect 
-instance External (TransformH a b)      -- a bit to open, I think
-
-newtype Client a = Client a       -- name something better
-
-parseClient :: FromJSON (Client e) => Value -> Parser e
-parseClient v = (\ (Client e) -> e) <$> parseJSON v
+  matchExternal e _ = fail "wrong number of arguments"
 
