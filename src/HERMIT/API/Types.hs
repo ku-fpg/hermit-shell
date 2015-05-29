@@ -2,6 +2,7 @@
 module HERMIT.API.Types where
         
 import Control.Applicative
+import Control.Monad
 
 import Data.Aeson
 import Data.Aeson.Types
@@ -15,6 +16,20 @@ import HERMIT.GHCI.JSON
 
 data Shell :: * -> * where
   Shell :: FromJSON a => Value -> Shell a
+  Bind   :: Shell a -> (a -> Shell b) -> Shell b
+  Return :: a -> Shell a
+  Fail   :: String -> Shell a
+  
+instance Functor Shell where
+  fmap f s = pure f <*> s
+  
+instance Applicative Shell where
+  pure a = Return a
+  (<*>) = liftM2 ($)
+
+instance Monad Shell where
+  return a = Return a
+  (>>=) = Bind
 
 toShell   :: Shell a -> Value
 toShell (Shell v) = v
