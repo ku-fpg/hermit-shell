@@ -1,6 +1,8 @@
 {-# LANGUAGE OverloadedStrings, KindSignatures, GADTs #-}
 module HERMIT.API.Shell where
 
+import Data.Aeson
+
 import HERMIT.API.Types
 
 -- | redisplays current state.
@@ -22,3 +24,7 @@ rewrite (Transform t) = Shell $ method "rewrite" [t]
 -- | set the local path, based on a transformation.
 setPath :: Guts a => Transform a LocalPath -> Shell ()
 setPath (Transform t) = Shell $ method "setPath" [t]
+
+-- | backdoor into the old shell. This will be removed at some point
+eval :: String -> Shell ()
+eval s = Shell $ method "eval" [toJSON s]

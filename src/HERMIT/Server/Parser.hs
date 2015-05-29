@@ -50,5 +50,7 @@ instance External (TypedEffectH ()) where
 --        ["performs query"]
     , external "rewrite" (RewriteLCoreH :: RewriteH LCore -> TypedEffectH ())
        ["performs query"]
+    , external "eval" (EvalH :: String -> TypedEffectH ())
+       ["performs legacy shell"]
     ]
 

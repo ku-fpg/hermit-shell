@@ -11,7 +11,7 @@ import           Control.Applicative
 
 import           Data.Aeson as Aeson
 import           Data.Aeson.Types (parseMaybe, Parser)
-import           Data.Text (Text)
+import           Data.Text (Text, unpack)
 
 import           Data.Typeable
 
@@ -75,6 +75,11 @@ infixl 3 .+
 (.+) :: b -> a -> b
 (.+) = \ b _ -> b
 
+
+
+instance External String where
+  parseExternal (String txt) = return $ unpack $ txt
+  parseExternal _            = fail "fail: String"
 
 -- We put *all* *hermit* and *GHC* types here. Otherwise, put beside the type
 
