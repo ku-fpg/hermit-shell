@@ -88,7 +88,7 @@ server passInfo _opts skernel initAST = do
         ,":set prompt \"HERMIT> \""
 --        ,"send welcome" -- welcome message (interactive only)
         ,"send display" -- where am I (interactive only)
-        ,"setPath (rhsOf \"rev\")"
+--        ,"setPath (rhsOf \"rev\")"
         ]
     callProcess "ghc" 
         ["--interactive"
