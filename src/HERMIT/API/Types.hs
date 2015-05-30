@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings, KindSignatures, GADTs #-}
+{-# LANGUAGE OverloadedStrings, KindSignatures, GADTs, ScopedTypeVariables, RankNTypes, DeriveDataTypeable #-}
 module HERMIT.API.Types where
         
 import Control.Applicative
@@ -9,6 +9,9 @@ import Data.Aeson.Types
 import Data.Maybe
 import Data.Text
 import Data.String
+import Data.Typeable
+
+import HERMIT.Typeable()
 
 import HERMIT.GHCI.JSON 
 
@@ -54,7 +57,10 @@ instance FromJSON a => FromJSON (ShellResult a) where
 ------------------------------------------------------------------------
 
 -- | The 'Guts' of GHC, is anything we can rewrite and transform.
-class Guts a
+class Typeable a => Guts a
+
+proxyToJSON :: forall a . Typeable a => Proxy a -> Value
+proxyToJSON Proxy = String $ pack $ show $ typeOf (undefined :: a)
 
 ------------------------------------------------------------------------
 -- | The 'Response' of doing a 'Shell' effect.
@@ -101,13 +107,13 @@ instance Response LocalPath where
 ------------------------------------------------------------------------
 
 data LCoreTC = LCoreTC
-
-instance Guts LCoreTC 
+  deriving Typeable
+instance Guts LCoreTC
 
 data LCore = LCore
-
+  deriving Typeable
+  
 instance Guts LCore 
-
 
 ------------------------------------------------------------------------
 
