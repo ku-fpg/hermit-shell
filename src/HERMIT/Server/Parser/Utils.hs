@@ -11,21 +11,12 @@ import           Control.Applicative
 
 import           Data.Aeson as Aeson
 import           Data.Aeson.Types (parseMaybe, Parser)
-import           Data.Text (Text, unpack)
+import           Data.Text (Text, unpack, pack)
 
 import           Data.Typeable
 
 import           HERMIT.External (CmdTag(..))
 
--- For the instances: To remove for 7.10
-import          HERMIT.Context
-import          HERMIT.Core
-import          HERMIT.Kure.Universes
-import          HERMIT.Monad
-import          HERMIT.Shell.Command
-import          Language.KURE
-
--- For now
 import           Debug.Trace
 
 alts :: [a -> Parser b] -> a -> Parser b
@@ -81,13 +72,8 @@ instance External String where
   parseExternal (String txt) = return $ unpack $ txt
   parseExternal _            = fail "fail: String"
 
--- We put *all* *hermit* and *GHC* types here. Otherwise, put beside the type
+instance forall g . Typeable g => External (Proxy g) where
+  parseExternal (String txt) | txt ==  pack (show (typeOf (undefined :: g)))
+                             = return $ Proxy
+  parseExternal _            = fail $ "fail: Proxy for " ++ show (typeOf (undefined :: g))
 
-deriving instance Typeable Crumb
-deriving instance Typeable HermitC
-deriving instance Typeable HermitM
-deriving instance Typeable LCore
-deriving instance Typeable LCoreTC
-deriving instance Typeable SnocPath
-deriving instance Typeable Transform                    -- KURE
-deriving instance Typeable TypedEffectH

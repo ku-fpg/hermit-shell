@@ -68,6 +68,7 @@ library
                         HERMIT.Server.Parser.Rewrite
                         HERMIT.Server.Parser.Transform
                         HERMIT.Server.Parser.Utils
+                        HERMIT.Typeable
                         Paths_hermit_shell
   hs-source-dirs:       src
 

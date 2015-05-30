@@ -3,11 +3,13 @@
 
 module HERMIT.Server.Parser.Transform where
 
+
 import           HERMIT.Context
 import           HERMIT.Dictionary
 import           HERMIT.Kure
 import           HERMIT.Lemma
 import           HERMIT.Name
+import           HERMIT.Typeable()
 
 import           HERMIT.Server.Parser.Name()
 import           HERMIT.Server.Parser.Utils
