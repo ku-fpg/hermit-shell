@@ -1,4 +1,10 @@
-{-# LANGUAGE LambdaCase, OverloadedStrings, FlexibleInstances, FlexibleContexts, TypeFamilies, DefaultSignatures, GADTs #-}
+{-# LANGUAGE DefaultSignatures #-}
+{-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GADTs #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TypeFamilies #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module HERMIT.Server.Parser.Transform where
@@ -9,7 +15,6 @@ import           HERMIT.Dictionary
 import           HERMIT.Kure
 import           HERMIT.Lemma
 import           HERMIT.Name
-import           HERMIT.Typeable()
 
 import           HERMIT.Server.Parser.Name()
 import           HERMIT.Server.Parser.Utils

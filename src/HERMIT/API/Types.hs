@@ -11,8 +11,6 @@ import Data.Text
 import Data.String
 import Data.Typeable
 
-import HERMIT.Typeable()
-
 import HERMIT.GHCI.JSON 
 
 ------------------------------------------------------------------------

@@ -1,4 +1,10 @@
-{-# LANGUAGE LambdaCase, OverloadedStrings, FlexibleInstances, FlexibleContexts, TypeFamilies, DefaultSignatures, GADTs #-}
+{-# LANGUAGE DefaultSignatures #-}
+{-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE GADTs #-}
+{-# LANGUAGE LambdaCase #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TypeFamilies #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module HERMIT.Server.Parser.Rewrite where
@@ -6,13 +12,11 @@ module HERMIT.Server.Parser.Rewrite where
 import           Data.Proxy
 
 import           HERMIT.Dictionary
-import           HERMIT.Dictionary.Kure
 import           HERMIT.Kure
 import           HERMIT.Lemma
 
-import           HERMIT.Server.Parser.Name()
+import           HERMIT.Server.Parser.Name ()
 import           HERMIT.Server.Parser.Utils
-import           HERMIT.Typeable()
 
 instance External (RewriteH LCore) where
   parseExternals =
