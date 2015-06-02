@@ -1,0 +1,68 @@
+load-as-rewrite "WWA" "WW-Ass-A.hss"
+flatten-module
+
+binding-of 'fib
+
+{
+
+ww-split [| wrap |] [| unwrap |] (ww-AssA-to-AssC WWA)
+binding-of 'work ; remember origwork
+
+-- work = unwrap (f (wrap work))
+
+def-rhs ; eta-expand 'n
+
+-- work n = unwrap (f (wrap work)) n
+
+any-call (unfold 'unwrap)
+
+-- work n = (f (wrap work) n, f (wrap work) (n+1))
+
+lam-body ; case-split-inline 'n
+
+-- work 0     = (f (wrap work) 0, f (wrap work) 1)
+-- work (n+1) = (f (wrap work) (n+1), f (wrap work) (n+2))
+
+{ case-alt 0 ; any-call (unfold 'f) }
+{ [ case-alt 1, alt-rhs, app-arg] ; any-call (unfold 'f) }
+simplify
+
+-- work 0     = (0, 1)
+-- work (n+1) = (f (wrap work) (n+1), wrap work (n+1) + wrap work n)
+
+[ case-alt 1, alt-rhs ]
+{ app-arg ; any-call (unfold-remembered origwork) }
+
+-- work 0     = (0, 1)
+-- work (n+1) = (f (wrap work) (n+1), wrap (unwrap (f (wrap work))) (n+1) + wrap (unwrap (f (wrap work))) n)
+
+any-bu (forward (ww-assumption-A [| wrap |] [| unwrap |] WWA ))
+
+-- work 0     = (0, 1)
+-- work (n+1) = (f (wrap work) (n+1), f (wrap work) (n+1) + f (wrap work) n)
+
+{ arg 3 ; arg 1 ; let-intro 'x }
+{ arg 2 ; let-intro 'y }
+innermost let-float
+try (reorder-lets ['x,'y])
+one-td (fold 'y)
+let-tuple 'xy
+
+-- work 0     = (0, 1)
+-- work (n+1) = let (x,y) = (f (wrap work) n, f (wrap work) (n+1)) in (y,x+y)
+
+one-td (fold 'unwrap)
+
+-- work 0     = (0, 1)
+-- work (n+1) = let (x,y) = unwrap (f (wrap work)) n in (y,x+y)
+
+one-td (fold-remembered origwork)
+
+-- work 0     = (0, 1)
+-- work (n+1) = let (x,y) = work n in (y,x+y)
+
+}
+
+{ def-rhs ; let-elim }
+
+any-call (unfold 'wrap)
