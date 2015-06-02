@@ -44,7 +44,8 @@ library
                         wai,
                         wai-extra,
                         -- needed by generated code
-                        wreq
+                        wreq,
+                        unix
 
   default-language:     Haskell2010
 

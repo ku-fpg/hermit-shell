@@ -43,12 +43,18 @@ data ShellResult a
   | ShellFailure String     -- something went wrong
   | ShellAbort              -- HERMIT has returned control to GHCI;
                             -- please stop sending messages.
+  | ShellResume             -- Resume compilation
     deriving Show
 
 instance FromJSON a => FromJSON (ShellResult a) where
   parseJSON (Object o) = ShellResult <$> o .: "output"
                                      <*> o .: "result"
-                      <|> return (ShellFailure "malformed Object returned from Server")                                      
+                      <|> parseResume
+                      <|> return (ShellFailure "malformed Object returned from Server")
+    where
+      parseResume = do
+        "resume" :: String <- o .: "shutdown"
+        return ShellResume
   parseJSON _ = return (ShellFailure "Object not returned from Server")
 
 
