@@ -49,7 +49,7 @@ instance External (RewriteH LCore) where
 --         [ "Run \"smash\" extended with additional rewrites.",
 --           "Note: be sure that the new rewrite either fails or makes progress, else this may loop."
 --         ] .+ Eval .+ Deep .+ Loop
-    , external "bash-debug" (bashDebugR :: RewriteH LCore)
+    , external "bashDebug" (bashDebugR :: RewriteH LCore)
         [ "verbose bash - most useful with set-auto-corelint True" ] .+ Eval .+ Deep .+ Loop
 
       -- ???
@@ -58,4 +58,18 @@ instance External (RewriteH LCore) where
     , external "anyCall"   (const anyCallR_LCore :: Proxy LCore -> RewriteH LCore -> RewriteH LCore)
         [ "any-call (.. unfold command ..) applies an unfold command to all applications."
         , "Preference is given to applications with more arguments." ] .+ Deep
+    ]
+
+instance External (RewriteH LCoreTC) where
+  parseExternals =
+    [
+      -- HERMIT.API.Dictionary.Debug
+      external "trace" (traceR :: String -> RewriteH LCoreTC)
+        [ "give a side-effect message as output when processing this command" ]
+    , external "observe" (observeR :: String -> RewriteH LCoreTC)
+        [ "give a side-effect message as output, and observe the value being processed" ]
+    , external "observeFailure" (observeFailureR :: String -> RewriteH LCoreTC -> RewriteH LCoreTC)
+        [ "give a side-effect message if the rewrite fails, including the failing input" ]
+    , external "bracket" (bracketR :: String -> RewriteH LCoreTC -> RewriteH LCoreTC)
+        [ "if given rewrite succeeds, see its input and output" ]
     ]

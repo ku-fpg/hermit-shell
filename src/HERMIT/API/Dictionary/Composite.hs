@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 module HERMIT.API.Dictionary.Composite where
 
-import Data.Aeson
+-- import Data.Aeson
 import HERMIT.API.Types
 
 -- | Unfold the current expression if it is one of the basic combinators:
