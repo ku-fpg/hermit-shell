@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings, KindSignatures, GADTs, ScopedTypeVariables, RankNTypes #-}
-module HERMIT.API.KURE where
+module HERMIT.API.Dictionary.KURE where
         
 import Data.Proxy
 import HERMIT.API.Types

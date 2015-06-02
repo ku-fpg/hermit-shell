@@ -12,11 +12,10 @@ module HERMIT.API
         , send
         ) where
 
-import HERMIT.API.KURE
+import HERMIT.API.Dictionary.KURE
+import HERMIT.API.Dictionary.Navigation
+import HERMIT.API.Dictionary.Remembered
 import HERMIT.API.Shell
-import HERMIT.API.Path
-import HERMIT.API.Remember
-
 import HERMIT.API.Types
 
 import HERMIT.GHCI.Client

@@ -1,5 +1,5 @@
-{-# LANGUAGE OverloadedStrings, KindSignatures, GADTs #-}
-module HERMIT.API.Path where
+{-# LANGUAGE OverloadedStrings #-}
+module HERMIT.API.Dictionary.Navigation where
         
 import Data.Aeson
 

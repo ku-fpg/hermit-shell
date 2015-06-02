@@ -49,10 +49,10 @@ library
 
   default-language:     Haskell2010
 
-  exposed-modules:      HERMIT.API             
-                        HERMIT.API.KURE
-                        HERMIT.API.Path
-                        HERMIT.API.Remember
+  exposed-modules:      HERMIT.API
+                        HERMIT.API.Dictionary.KURE
+                        HERMIT.API.Dictionary.Navigation
+                        HERMIT.API.Dictionary.Remembered
                         HERMIT.API.Shell
                         HERMIT.API.Types
                         HERMIT.GHCI
