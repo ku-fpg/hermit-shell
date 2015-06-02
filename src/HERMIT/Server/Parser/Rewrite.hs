@@ -20,7 +20,18 @@ import           HERMIT.Server.Parser.Utils
 
 instance External (RewriteH LCore) where
   parseExternals =
-    [ external "unfoldRemembered" (promoteExprR . unfoldRememberedR Obligation :: LemmaName -> RewriteH LCore)
+    [ 
+      -- HERMIT.API.Dictionary.AlphaConversion
+      external "alpha" (promoteCoreR alphaR :: RewriteH LCore)
+        [ "Renames the bound variables at the current node."]
+    , external "alphaCase" (promoteExprR alphaCaseR :: RewriteH LCore)
+        [ "Renames all binders in a Case alternative."]
+    , external "alphaProg" (promoteProgR alphaProgR :: RewriteH LCore)
+        [ "Rename all top-level identifiers in the program."]
+    ,  external "unshadow" (promoteCoreR unshadowR :: RewriteH LCore)
+        [ "Rename local variables with manifestly unique names (x, x0, x1, ...)."]
+    
+    , external "unfoldRemembered" (promoteExprR . unfoldRememberedR Obligation :: LemmaName -> RewriteH LCore)
         [ "Unfold a remembered definition." ] .+ Deep .+ Context
     , external "anyCall"   (const anyCallR_LCore :: Proxy LCore -> RewriteH LCore -> RewriteH LCore)
         [ "any-call (.. unfold command ..) applies an unfold command to all applications."
