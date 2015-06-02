@@ -1,0 +1,9 @@
+-- Worker/Wrapper (Result Variant) Assumption A:  absH (repH x) <=> x
+
+--  absH (repH x)
+                                       { unfold 'absH }
+--  repH x []
+                                       { unfold 'repH }
+--  x ++ []
+                                       { unfold-rule-unsafe "++ []" }
+--  x

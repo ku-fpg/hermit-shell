@@ -1,0 +1,15 @@
+load-as-rewrite "WWA" "WW-Ass-A.hss"
+define-rewrite "WWC" "ww-result-AssA-to-AssC WWA"
+load-as-rewrite "StrictRepH" "StrictRepH.hss"
+
+run-script "do-the-ww-split" -- ugly hack because we lack paramaterisable scripts
+
+bash
+{ rhs-of 'work
+  lam-body
+  eta-expand 'acc
+  lam-body
+  bash-extended-with [ push 'repH StrictRepH, forward ww-result-fusion, unfold-rules-unsafe ["repH ++","repH (:)","repH []"] ]
+  try (bash-extended-with [push-unsafe 'work])
+}
+one-td (unfold 'absH)
