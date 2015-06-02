@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings, KindSignatures, GADTs #-}
-module HERMIT.API.Remember where
+module HERMIT.API.Dictionary.Remembered where
         
 import Data.Aeson
 
