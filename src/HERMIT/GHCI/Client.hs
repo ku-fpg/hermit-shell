@@ -2,6 +2,7 @@
 {-# LANGUAGE KindSignatures #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 module HERMIT.GHCI.Client where
 
 import Control.Lens ((^.))
@@ -14,6 +15,8 @@ import qualified Control.Monad.Remote.JSON as JSONRPC
 import Network.Wreq
 import HERMIT.GHCI.JSON 
 import HERMIT.API.Types
+
+import System.Exit
 
 --- Main call-HERMIT function
         
@@ -42,4 +45,5 @@ send (Shell g) = do
                            ]
                  putStrLn "\n[Done]\n"           
                  return a
+         ShellResume -> exitSuccess
 

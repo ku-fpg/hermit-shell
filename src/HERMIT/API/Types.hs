@@ -121,6 +121,10 @@ instance Guts LCore
 
 ------------------------------------------------------------------------
 
+data KernelEffect = KernelEffect Value
+
+------------------------------------------------------------------------
+
 method :: Text -> [Value] -> Value
 method nm params = object ["method" .= nm, "params" .= params]
 

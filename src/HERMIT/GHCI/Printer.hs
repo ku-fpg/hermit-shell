@@ -37,3 +37,7 @@ instance
         let txt = showResponse r
         when (not $ null $ txt) $ do
           putStrLn txt
+
+instance Repl KernelEffect where
+  printForRepl (KernelEffect v) = printForRepl (Shell v :: Shell ())
+

@@ -4,6 +4,7 @@ module HERMIT.API
         , module HERMIT.API.Dictionary.Navigation
         , module HERMIT.API.Dictionary.Remembered
         , module HERMIT.API.Shell
+        , module HERMIT.API.Shell.Externals
           -- Types
         , Shell
         , Name
@@ -17,6 +18,8 @@ import HERMIT.API.Dictionary.Navigation
 import HERMIT.API.Dictionary.Remembered
 import HERMIT.API.Shell
 import HERMIT.API.Types
+
+import HERMIT.API.Shell.Externals
 
 import HERMIT.GHCI.Client
 
