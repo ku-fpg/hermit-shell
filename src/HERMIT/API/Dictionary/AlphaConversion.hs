@@ -2,7 +2,6 @@
 module HERMIT.API.Dictionary.AlphaConversion where
 
 import Data.Aeson
-
 import HERMIT.API.Types
 
 -- | Renames the bound variables at the current node.
