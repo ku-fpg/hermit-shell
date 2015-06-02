@@ -1,8 +1,8 @@
 module HERMIT.API 
         ( -- Modules
-          module HERMIT.API.KURE
-        , module HERMIT.API.Path
-        , module HERMIT.API.Remember
+          module HERMIT.API.Dictionary.KURE
+        , module HERMIT.API.Dictionary.Navigation
+        , module HERMIT.API.Dictionary.Remembered
         , module HERMIT.API.Shell
           -- Types
         , Shell
