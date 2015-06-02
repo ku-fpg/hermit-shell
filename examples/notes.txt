@@ -1,0 +1,7 @@
+* The `assume` command only exists in interactive proof mode, so we can't access
+  it with `eval`. This causes the `nub` and `qsort` examples to fail.
+
+* The following items fail in hermit-shell with the error
+    "Rewrite failed:This rewrite can only succeed at quantified nodes.":
+  - NewLast.hss works with hermit but not hermit-shell
+  - new_reverse works with hermit but not hermit-shell
