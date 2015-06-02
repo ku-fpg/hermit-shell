@@ -191,6 +191,9 @@ performTypedEffect plug ref [val] = do
              print ("resume" :: String, sast)
              resumeK (pr_kernel plug) sast
              return $ object [ "shutdown" .= ("resume" :: Text) ]
+          Left (CLError e) -> do
+             putStrLn e
+             return Aeson.Null
           Left _exc  -> return $ Aeson.Null
           Right val' -> return $ object [ "result" .= val', "output" .= es ]
 
