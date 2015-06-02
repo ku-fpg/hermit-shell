@@ -49,6 +49,9 @@ library
   default-language:     Haskell2010
 
   exposed-modules:      HERMIT.API
+                        HERMIT.API.Dictionary.AlphaConversion
+                        HERMIT.API.Dictionary.Composite
+                        HERMIT.API.Dictionary.Debug
                         HERMIT.API.Dictionary.KURE
                         HERMIT.API.Dictionary.Navigation
                         HERMIT.API.Dictionary.Remembered

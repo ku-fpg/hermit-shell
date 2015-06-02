@@ -82,6 +82,9 @@ type Rewrite a = Transform a a
 data Transform :: * -> * -> * where
   Transform :: Value -> Transform a b
   
+instance ToJSON (Transform a b) where
+  toJSON (Transform v) = v
+
 ------------------------------------------------------------------------
 
 newtype Name = Name String
