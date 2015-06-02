@@ -1,4 +1,11 @@
-{-# LANGUAGE UndecidableInstances, FlexibleInstances, IncoherentInstances #-}
+{-# LANGUAGE CPP #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE UndecidableInstances #-}
+
+#if __GLASGOW_HASKELL <= 708 && __GLASGOW_HASKELL__ < 710
+{-# LANGUAGE OverlappingInstances #-}
+#endif
+
 module HERMIT.GHCI.Printer
         ( printForRepl
         ) where
@@ -8,15 +15,23 @@ import HERMIT.GHCI.Client
 
 import Control.Monad (when)
 
--- There is some serious hackery here; it will be better in 7.10.
-
 class Repl a where
   printForRepl :: a -> IO ()
 
-instance {- OVERLAPPABLE -} Show a => Repl a where
+#if __GLASGOW_HASKELL__ >= 710
+instance {-# OVERLAPPABLE #-}
+#else
+instance
+#endif
+    Show a => Repl a where
   printForRepl = print
-  
-instance {- OVERLAPPING -} Response a => Repl (Shell a) where  
+
+#if __GLASGOW_HASKELL >= 710
+instance {-# OVERLAPPING #-}
+#else
+instance
+#endif
+    Response a => Repl (Shell a) where
   printForRepl sh = do
         r <- send sh
         let txt = showResponse r
