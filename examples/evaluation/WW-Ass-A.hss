@@ -1,0 +1,11 @@
+-- Worker/Wrapper (Result Variant) Assumption A:  abs (rep a) <=> a
+
+--  abs (rep a)
+                                       { unfold 'abs }
+--  rep a Just Nothing
+                                       { unfold 'rep }
+--  case a of
+--    Nothing -> Nothing
+--    Just n  -> Just n
+                                       { case-elim-merge-alts }
+--  a
