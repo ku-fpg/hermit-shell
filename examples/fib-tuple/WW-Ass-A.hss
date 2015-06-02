@@ -1,0 +1,11 @@
+-- Worker/Wrapper Assumption A:  wrap (unwrap h) <=> h
+
+--  wrap (unwrap h)
+                              { eta-expand 'n }
+--  \ n -> wrap (unwrap h) n
+                              { any-call (unfold 'wrap) }
+--  \ n -> fst (unwrap h n)
+                              { any-call (unfold 'unwrap) }
+--  \ n -> fst (h n, h (S n))
+                              { bash }
+--  h
