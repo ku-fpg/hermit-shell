@@ -43,6 +43,7 @@ library
                         transformers-compat >= 0.4,
                         wai,
                         wai-extra,
+                        unix,
                         -- needed by generated code
                         wreq
 

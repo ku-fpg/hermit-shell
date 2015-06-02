@@ -31,6 +31,9 @@ import           System.Process
 import           Web.Scotty.Trans
 import           Control.Monad.Remote.JSON
 
+import           System.Exit
+import           System.Posix.Signals
+
 ------------------------------- the plugin ------------------------------------
 
 plugin :: Plugin
@@ -102,6 +105,7 @@ server passInfo _opts skernel initAST = do
     print ("Killing server" :: String)
     throwTo tid UserInterrupt
     print ("Killed server" :: String)
+    raiseSignal sigTERM
 
 -- | Turn WebAppException into a Response.
 handleError :: Kernel -> WebAppException -> IO Wai.Response
