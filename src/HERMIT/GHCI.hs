@@ -88,7 +88,6 @@ server passInfo _opts skernel initAST = do
         
     writeFile ".ghci-hermit" $ unlines
         ["import HERMIT.API"
-        ,":def resume \\s -> return \":quit\""
         ,":set prompt \"HERMIT> \""
 --        ,"send welcome" -- welcome message (interactive only)a
         ,"send display" -- where am I (interactive only)
@@ -105,7 +104,7 @@ server passInfo _opts skernel initAST = do
     print ("Killing server" :: String)
     throwTo tid UserInterrupt
     print ("Killed server" :: String)
-    raiseSignal sigTERM
+ --   raiseSignal sigTERM
 
 -- | Turn WebAppException into a Response.
 handleError :: Kernel -> WebAppException -> IO Wai.Response
