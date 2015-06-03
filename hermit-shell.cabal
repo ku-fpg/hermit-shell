@@ -74,10 +74,8 @@ library
                         HERMIT.GHCI.Renderer
                         HERMIT.GHCI.Types
                         HERMIT.Server.Parser
-                        HERMIT.Server.Parser.BiRewrite
                         HERMIT.Server.Parser.Name
                         HERMIT.Server.Parser.QueryFun
-                        HERMIT.Server.Parser.Rewrite
                         HERMIT.Server.Parser.ShellEffect
                         HERMIT.Server.Parser.String
                         HERMIT.Server.Parser.Transform
