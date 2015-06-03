@@ -23,6 +23,10 @@ instance External ShellEffect where
   parseExternals =
     [ external "resume"  Resume
         [ "stops HERMIT; resumes compile" ]
+    , external "abort"            Abort     -- UNIX Exit
+        [ "hard UNIX-style exit; does not return to GHC; does not save" ]
+    , external "continue"         Continue  -- Shell Exit, but not HERMIT
+        [ "exits shell; resumes HERMIT" ]
     , external "display" (CLSModify $ showWindowAlways Nothing)
         [ "redisplays current state" ]
 --  , external "navigate" (CLSModify $ modify $ \ st -> st { cl_nav = True })

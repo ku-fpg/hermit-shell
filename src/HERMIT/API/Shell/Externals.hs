@@ -7,13 +7,16 @@ import           Data.Aeson
 import           Data.String (fromString)
 
 -- | stops HERMIT; resumes compile
--- resume :: ShellEffect
+--resume :: ShellEffect
+--resume = ShellEffect $ method
 
 -- | hard UNIX-style exit; does not return to GHC; does not save
--- abort :: ShellEffect
+abort :: ShellEffect
+abort = ShellEffect $ method "abort" []
 
 -- | exits shell; resumes HERMIT
--- continue :: ShellEffect
+continue :: ShellEffect
+continue = ShellEffect $ method "continue" []
 
 -- | garbage-collect all ASTs except for the initial and current AST
 -- gc :: ShellEffect
@@ -121,4 +124,22 @@ load scriptName fileName = ScriptEffect $ method "load" [String $ fromString scr
 -- | loadAndRun <file-name> : load a HERMIT script from a file and run it immediately.
 loadAndRun :: String -> ScriptEffect
 loadAndRun fileName = ScriptEffect $ method "loadAndRun" [String $ fromString fileName]
+
+-- | save <filename> : save the current complete derivation into a file.
+save :: String -> ScriptEffect
+save fileName = ScriptEffect $ method "save" [String $ fromString fileName]
+
+-- | saveVerbose <filename> : save the current complete derivation into a file,
+--   including output of each command as a comment.
+saveVerbose :: String -> ScriptEffect
+saveVerbose fileName = ScriptEffect $ method "saveVerbose" [String $ fromString fileName]
+
+-- | save-script <filename> <script name> : save a loaded or manually defined script to a file.
+saveScript :: String -> String -> ScriptEffect
+saveScript fileName scriptName = ScriptEffect $ method "saveScript" [String $ fromString fileName, String $ fromString scriptName]
+
+-- | loadAsRewrite <rewrite-name> <filepath> : load a HERMIT script from a file, and convert it to a rewrite.
+--   Note that there are significant limitations on the commands the script may contain.
+loadAsRewrite :: String -> String -> ScriptEffect
+loadAsRewrite rewriteName filePath = ScriptEffect $ method "loadAsRewrite" [String $ fromString rewriteName, String $ fromString filePath]
 
