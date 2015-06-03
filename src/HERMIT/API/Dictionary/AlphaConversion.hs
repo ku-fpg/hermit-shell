@@ -1,12 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
 module HERMIT.API.Dictionary.AlphaConversion where
 
-import Data.Aeson
+-- import Data.Aeson
 import HERMIT.API.Types
 
 -- | Renames the bound variables at the current node.
-alpha :: String -> Rewrite LCore
-alpha str = Transform $ method "alpha" [toJSON str]
+alpha :: Rewrite LCore
+alpha = Transform $ method "alpha" []
 
 -- -- | Renames the bound variable in a Lambda expression to the given name.
 -- alphaLam :: String -> Rewrite LCore

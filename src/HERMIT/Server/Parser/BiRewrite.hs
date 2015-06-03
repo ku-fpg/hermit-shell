@@ -48,4 +48,10 @@ instance External (BiRewriteH LCore) where
         , "f (fix g) <==> fix h"
         , "Note that the preconditions that f (g a) == h (f a) and that f is strict are required to hold."
         ] .+ Context .+ PreCondition
+
+      -- HERMIT.API.Dictionary.KURE
+--     , external ">>>"        ((>>>) :: BiRewriteH LCore -> BiRewriteH LCore -> BiRewriteH LCore)
+--         [ "Compose bidirectional rewrites, requiring both to succeed." ]
+--     , external "invert"     (invertBiT :: BiRewriteH LCore -> BiRewriteH LCore)
+--         [ "Reverse a bidirectional rewrite." ]
     ]
