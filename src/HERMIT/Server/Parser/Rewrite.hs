@@ -14,6 +14,7 @@ import Data.Proxy
 import HERMIT.Dictionary
 import HERMIT.Kure
 import HERMIT.Lemma
+import HERMIT.Name
 
 import HERMIT.Server.Parser.Name ()
 import HERMIT.Server.Parser.Utils
@@ -55,6 +56,20 @@ instance External (RewriteH LCore) where
       -- HERMIT.API.Dictionary.FixPoint
     , external "fixIntro" (promoteCoreR fixIntroR :: RewriteH LCore)
         [ "rewrite a function binding into a non-recursive binding using fix" ] .+ Introduce .+ Context
+
+      -- HERMIT.API.Dictionary.Fold
+    , external "fold" (promoteExprR . foldR :: HermitName -> RewriteH LCore)
+        [ "fold a definition"
+        , ""
+        , "double :: Int -> Int"
+        , "double x = x + x"
+        , ""
+        , "5 + 5 + 6"
+        , "any-bu (fold 'double)"
+        , "double 5 + 6"
+        , ""
+        , "Note: due to associativity, if you wanted to fold 5 + 6 + 6, "
+        , "you first need to apply an associativity rewrite." ]  .+ Context .+ Deep
 
       -- ???
     , external "unfoldRemembered" (promoteExprR . unfoldRememberedR Obligation :: LemmaName -> RewriteH LCore)
