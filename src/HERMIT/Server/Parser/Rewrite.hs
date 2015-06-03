@@ -71,6 +71,14 @@ instance External (RewriteH LCore) where
         , "Note: due to associativity, if you wanted to fold 5 + 6 + 6, "
         , "you first need to apply an associativity rewrite." ]  .+ Context .+ Deep
 
+      -- HERMIT.API.Dictionary.Function
+    , external "static-arg" (promoteDefR staticArgR :: RewriteH LCore)
+        [ "perform the static argument transformation on a recursive function." ]
+    , external "static-arg-types" (promoteDefR staticArgTypesR :: RewriteH LCore)
+        [ "perform the static argument transformation on a recursive function, only transforming type arguments." ]
+--     , external "static-arg-pos" (promoteDefR . staticArgPosR :: [Int] -> RewriteH LCore)
+--         [ "perform the static argument transformation on a recursive function, only transforming the arguments specified (by index)." ]
+
       -- ???
     , external "unfoldRemembered" (promoteExprR . unfoldRememberedR Obligation :: LemmaName -> RewriteH LCore)
         [ "Unfold a remembered definition." ] .+ Deep .+ Context
