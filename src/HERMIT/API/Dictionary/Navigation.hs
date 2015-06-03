@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 module HERMIT.API.Dictionary.Navigation where
-        
+
 import Data.Aeson
 
 import HERMIT.API.Types
