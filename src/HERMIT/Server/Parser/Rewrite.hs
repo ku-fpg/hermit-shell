@@ -90,8 +90,20 @@ instance External (RewriteH LCore) where
       -- HERMIT.API.Dictionary.Induction
     , external "induction" (promoteClauseR . caseSplitOnR True . cmpHN2Var :: HermitName -> RewriteH LCore)
         [ "Induct on specified value quantifier." ]
-    , external "prove-by-cases" (promoteClauseR . caseSplitOnR False . cmpHN2Var :: HermitName -> RewriteH LCore)
+    , external "proveByCases" (promoteClauseR . caseSplitOnR False . cmpHN2Var :: HermitName -> RewriteH LCore)
         [ "Case split on specified value quantifier." ]
+
+      -- HERMIT.API.Dictionary.Inline
+--     , external "inline" (promoteExprR inlineR :: RewriteH LCore)
+--         [ "(Var v) ==> <defn of v>" ].+ Eval .+ Deep
+--     , external "inline" (promoteExprR . inlineMatchingPredR . mkOccPred :: OccurrenceName -> RewriteH LCore)
+--         [ "Given a specific v, (Var v) ==> <defn of v>" ] .+ Eval .+ Deep
+--     , external "inline" (promoteExprR . inlineNamesR :: [String] -> RewriteH LCore)
+--         [ "If the current variable matches any of the given names, then inline it." ] .+ Eval .+ Deep
+    , external "inlineCaseScrutinee" (promoteExprR inlineCaseScrutineeR :: RewriteH LCore)
+        [ "if v is a case binder, replace (Var v) with the bound case scrutinee." ] .+ Eval .+ Deep
+    , external "inlineCaseAlternative" (promoteExprR inlineCaseAlternativeR :: RewriteH LCore)
+        [ "if v is a case binder, replace (Var v) with the bound case-alternative pattern." ] .+ Eval .+ Deep
 
       -- ???
     , external "unfoldRemembered" (promoteExprR . unfoldRememberedR Obligation :: LemmaName -> RewriteH LCore)

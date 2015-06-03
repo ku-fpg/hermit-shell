@@ -58,6 +58,7 @@ library
                         HERMIT.API.Dictionary.Function
                         HERMIT.API.Dictionary.GHC
                         HERMIT.API.Dictionary.Induction
+                        HERMIT.API.Dictionary.Inline
                         HERMIT.API.Dictionary.KURE
                         HERMIT.API.Dictionary.Navigation
                         HERMIT.API.Dictionary.Remembered
