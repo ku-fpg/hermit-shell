@@ -11,6 +11,7 @@ module HERMIT.API
         , module HERMIT.API.Dictionary.KURE
         , module HERMIT.API.Dictionary.Navigation
         , module HERMIT.API.Dictionary.Remembered
+        , module HERMIT.API.Dictionary.WorkerWrapper.FixResult
         , module HERMIT.API.Shell
         , module HERMIT.API.Shell.Externals
           -- Types
@@ -35,6 +36,7 @@ import HERMIT.API.Dictionary.Induction
 import HERMIT.API.Dictionary.KURE
 import HERMIT.API.Dictionary.Navigation
 import HERMIT.API.Dictionary.Remembered
+import HERMIT.API.Dictionary.WorkerWrapper.FixResult
 import HERMIT.API.Shell
 import HERMIT.API.Types
 

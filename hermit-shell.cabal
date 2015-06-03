@@ -61,6 +61,7 @@ library
                         HERMIT.API.Dictionary.KURE
                         HERMIT.API.Dictionary.Navigation
                         HERMIT.API.Dictionary.Remembered
+                        HERMIT.API.Dictionary.WorkerWrapper.FixResult
                         HERMIT.API.Shell
                         HERMIT.API.Shell.Externals
                         HERMIT.API.Types
