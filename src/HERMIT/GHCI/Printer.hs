@@ -39,14 +39,17 @@ instance
           putStrLn txt
 
 instance Repl KernelEffect where
-  printForRepl (KernelEffect v) = printForRepl $ (Shell v :: Shell ())
+  printForRepl (KernelEffect v) = printForRepl (Shell v :: Shell ())
 
 instance Repl ShellEffect where
-  printForRepl (ShellEffect v) = printForRepl $ (Shell v :: Shell ())
+  printForRepl (ShellEffect v) = printForRepl (Shell v :: Shell ())
 
 instance Repl ScriptEffect where
-  printForRepl (ScriptEffect v) = printForRepl $ (Shell v :: Shell ())
+  printForRepl (ScriptEffect v) = printForRepl (Shell v :: Shell ())
 
 instance Repl QueryFun where
-  printForRepl (QueryFun v) = printForRepl $ (Shell v :: Shell ())
+  printForRepl (QueryFun v) = printForRepl (Shell v :: Shell ())
+
+instance Repl (BiTransform a b) where
+  printForRepl (BiTransform v) = printForRepl (Shell v :: Shell ())
 

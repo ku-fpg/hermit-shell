@@ -4,8 +4,13 @@
 module HERMIT.Server.Parser.BiRewrite where
 
 import HERMIT.Dictionary.FixPoint
+import HERMIT.Dictionary.WorkerWrapper.Common
+import HERMIT.Dictionary.WorkerWrapper.Fix
+import HERMIT.ParserCore
+import HERMIT.GHC
 import HERMIT.External (CoreString)
 import HERMIT.Kure
+
 import HERMIT.Server.Parser.Rewrite ()
 import HERMIT.Server.Parser.String ()
 import HERMIT.Server.Parser.Utils
@@ -54,4 +59,29 @@ instance External (BiRewriteH LCore) where
 --         [ "Compose bidirectional rewrites, requiring both to succeed." ]
 --     , external "invert"     (invertBiT :: BiRewriteH LCore -> BiRewriteH LCore)
 --         [ "Reverse a bidirectional rewrite." ]
+
+    , external "wwResultFactorisation" ((\ abs rep assC -> promoteExprBiR $ wwFac (mkWWAssC assC) abs rep)
+                                          :: CoreString -> CoreString -> RewriteH LCore -> BiRewriteH LCore)
+                [ "Worker/Wrapper Factorisation (Result Variant)",
+                  "For any \"f :: (X -> A) -> (X -> A)\", and given \"abs :: B -> A\" and \"rep :: A -> B\" as arguments,",
+                  "and a proof of Assumption C (fix (X -> A) (\\ h x -> abs (rep (f h x))) ==> fix (X->A) f), then",
+                  "fix (X->A) f  ==>  \\ x1 -> abs (fix (X->B) (\\ h x2 -> rep (f (\\ x3 -> abs (h x3)) x2)) x1"
+                ] .+ Introduce .+ Context
+    , external "wwResultFactorisationUnsafe" ((\ wrap unwrap -> promoteExprBiR $ wwFac Nothing wrap unwrap)
+                                               :: CoreString -> CoreString -> BiRewriteH LCore)
+                [ "Unsafe Worker/Wrapper Factorisation",
+                  "For any \"f :: A -> A\", and given \"wrap :: B -> A\" and \"unwrap :: A -> B\" as arguments, then",
+                  "fix A f  <==>  wrap (fix B (\\ b -> unwrap (f (wrap b))))",
+                  "Note: the pre-condition \"fix A (\\ a -> wrap (unwrap (f a))) == fix A f\" is expected to hold."
+                ] .+ Introduce .+ Context .+ PreCondition
     ]
+    where
+      mkWWAssC :: RewriteH LCore -> Maybe WWAssumption
+      mkWWAssC r = Just (WWAssumption C (extractR r))
+
+-- | For any @f :: A -> A@, and given @wrap :: B -> A@ and @unwrap :: A -> B@ as arguments, then
+--   @fix A f@  \<==\>  @wrap (fix B (\\ b -> unwrap (f (wrap b))))@
+wwFac :: Maybe WWAssumption -> CoreString -> CoreString -> BiRewriteH CoreExpr
+wwFac mAss = parse2beforeBiR (wwFacBR mAss)
+
+

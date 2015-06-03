@@ -168,6 +168,11 @@ newtype ScriptEffect = ScriptEffect Value
 
 ------------------------------------------------------------------------
 
+type RewriteH   a = Rewrite a
+type BiRewriteH a = BiRewrite a
+
+------------------------------------------------------------------------
+
 method :: Text -> [Value] -> Value
 method nm params = object ["method" .= nm, "params" .= params]
 
