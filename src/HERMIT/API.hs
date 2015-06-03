@@ -12,6 +12,7 @@ module HERMIT.API
         , module HERMIT.API.Shell.Externals
           -- Types
         , Shell
+        , QueryFun
         , Name
         , LocalPath
         , AST

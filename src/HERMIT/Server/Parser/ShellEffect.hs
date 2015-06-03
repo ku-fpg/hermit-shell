@@ -11,7 +11,6 @@ import           HERMIT.Server.Parser.Utils
 import           Control.Monad.State (modify)
 import           HERMIT.Shell.Externals
 
-
 instance External ShellEffect where
   parseExternals =
     [ external "resume"  Resume
@@ -28,5 +27,5 @@ instance External ShellEffect where
         [ "step forward in the derivation" ]
     , external "tag"             (CLSModify . versionCmd . Tag)
         [ "name the current step in the derivation" ]
-    ]
+   ]
 

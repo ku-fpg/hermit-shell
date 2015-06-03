@@ -63,6 +63,6 @@ step = ShellEffect $ method "step" []
 tag :: String -> ShellEffect
 tag name = ShellEffect $ method "tag" [String (fromString name)]
 
-diff :: AST -> AST -> ShellEffect
-diff a b = ShellEffect $ method "diff" [Number (fromInteger $ toInteger a), Number (fromInteger $ toInteger b)]
+diff :: AST -> AST -> QueryFun
+diff a b = QueryFun $ method "diff" [Number (fromInteger $ toInteger a), Number (fromInteger $ toInteger b)]
 
