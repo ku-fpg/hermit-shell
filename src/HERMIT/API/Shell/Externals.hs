@@ -143,3 +143,33 @@ saveScript fileName scriptName = ScriptEffect $ method "saveScript" [String $ fr
 loadAsRewrite :: String -> String -> ScriptEffect
 loadAsRewrite rewriteName filePath = ScriptEffect $ method "loadAsRewrite" [String $ fromString rewriteName, String $ fromString filePath]
 
+-- |  scriptToRewrite <rewrite-name> <script-name> : create a new rewrite from a pre-loaded (or manually defined) HERMIT script.
+--    Note that there are significant limitations on the commands the script may contain.
+scriptToRewrite :: String -> String -> ScriptEffect
+scriptToRewrite rewriteName filePath = ScriptEffect $ method "scriptToRewrite" [String $ fromString rewriteName, String $ fromString filePath]
+
+-- |  Define a new HERMIT script and bind it to a name.
+--    Note that any names in the script will not be resolved until the script is *run*.
+--    Example usage: defineScript "MyScriptName" "anyTd betaReduce ; letSubst ; bash"
+defineScript :: String -> String -> ScriptEffect
+defineScript scriptName script = ScriptEffect $ method "defineScript" [String $ fromString scriptName, String $ fromString script]
+
+-- |  Define a new HERMIT rewrite and bind it to a name.
+--    Note that this also saves the input script under the same name.
+--    Example usage: defineRewrite "MyRewriteName" "let-subst >>> bash"
+defineRewrite :: String -> String -> ScriptEffect
+defineRewrite rewriteName rewrite = ScriptEffect $ method "defineRewrite" [String $ fromString rewriteName, String $ fromString rewrite]
+
+-- |  Run a pre-loaded (or manually defined) HERMIT script.
+--    Note that any names in the script will not be resolved until the script is *run*.
+runScript :: String -> ScriptEffect
+runScript script = ScriptEffect $ method "runScript" [String $ fromString script]
+
+-- | Display all loaded scripts.
+displayScripts :: QueryFun
+displayScripts = QueryFun $ method "displayScripts" []
+
+-- | Stop running the current script.
+stopScript :: ShellEffect
+stopScript = ShellEffect $ method "stopScript" []
+

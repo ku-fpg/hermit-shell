@@ -21,6 +21,8 @@ instance External QueryFun where
         [ "go back in the derivation" ]
     , external "diff"            Diff
         [ "show diff of two ASTs" ]
+    , external "displayScripts" displayScripts
+        ["Display all loaded scripts."]
     ]
 
 instance External AST where

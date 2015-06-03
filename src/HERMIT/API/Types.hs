@@ -173,6 +173,11 @@ type BiRewriteH a = BiRewrite a
 
 ------------------------------------------------------------------------
 
+newtype CommandLineState = CommandLineState Value
+  deriving ToJSON
+
+------------------------------------------------------------------------
+
 method :: Text -> [Value] -> Value
 method nm params = object ["method" .= nm, "params" .= params]
 

@@ -83,7 +83,8 @@ instance External ShellEffect where
                            showWindow Nothing
             _        -> fail "valid arguments are True and False")
         ["set whether uniques are printed with variable names"]
-
+    , external "stopScript" (CLSModify $ setRunningScript Nothing)
+        [ "Stop running the current script." ]
    ]
 
 instance External Int where
