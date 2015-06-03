@@ -88,6 +88,7 @@ server passInfo _opts skernel initAST = do
         
     writeFile ".ghci-hermit" $ unlines
         ["import HERMIT.API"
+        ,"import Prelude hiding (log)"
         ,":set prompt \"HERMIT> \""
 --        ,"send welcome" -- welcome message (interactive only)a
         ,"send display" -- where am I (interactive only)

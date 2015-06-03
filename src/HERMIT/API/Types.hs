@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings, KindSignatures, GADTs, ScopedTypeVariables, RankNTypes, DeriveDataTypeable #-}
+{-# LANGUAGE OverloadedStrings, KindSignatures, GADTs, ScopedTypeVariables, RankNTypes, DeriveDataTypeable, GeneralizedNewtypeDeriving #-}
 module HERMIT.API.Types where
         
 import Control.Applicative
@@ -11,7 +11,9 @@ import Data.Text
 import Data.String
 import Data.Typeable
 
-import HERMIT.GHCI.JSON 
+import HERMIT.GHCI.JSON
+
+import Data.Coerce
 
 ------------------------------------------------------------------------
 
@@ -124,7 +126,28 @@ instance Guts LCore
 
 ------------------------------------------------------------------------
 
-data KernelEffect = KernelEffect Value
+newtype KernelEffect = KernelEffect Value
+
+------------------------------------------------------------------------
+
+newtype ShellEffect = ShellEffect Value
+
+------------------------------------------------------------------------
+
+newtype QueryFun = QueryFun Value
+
+------------------------------------------------------------------------
+
+newtype AST = AST Int
+    deriving (Num, Enum, Ord, Eq, Integral, Real)
+
+instance Show AST where
+    show (AST n) = show n
+
+instance Read AST where
+    readsPrec n = fmap (first (coerce :: Int -> AST)) . readsPrec n
+      where
+        first f (x, y) = (f x, y)
 
 ------------------------------------------------------------------------
 
