@@ -17,6 +17,7 @@ module HERMIT.API
         , Name
         , LocalPath
         , AST
+        , PpType (..)
           -- Utilities
         , send
         ) where

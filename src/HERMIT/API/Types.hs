@@ -159,6 +159,15 @@ instance Read AST where
 
 ------------------------------------------------------------------------
 
+data PpType = Show | Abstract | Omit
+    deriving (Show, Read)
+
+------------------------------------------------------------------------
+
+newtype ScriptEffect = ScriptEffect Value
+
+------------------------------------------------------------------------
+
 method :: Text -> [Value] -> Value
 method nm params = object ["method" .= nm, "params" .= params]
 
