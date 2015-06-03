@@ -87,6 +87,12 @@ instance External (RewriteH LCore) where
     , external "occurrenceAnalysis" (occurrenceAnalysisR :: RewriteH LCore)
         [ "Perform dependency analysis on all sub-expressions; simplifying and updating identifer info."] .+ Deep
 
+      -- HERMIT.API.Dictionary.Induction
+    , external "induction" (promoteClauseR . caseSplitOnR True . cmpHN2Var :: HermitName -> RewriteH LCore)
+        [ "Induct on specified value quantifier." ]
+    , external "prove-by-cases" (promoteClauseR . caseSplitOnR False . cmpHN2Var :: HermitName -> RewriteH LCore)
+        [ "Case split on specified value quantifier." ]
+
       -- ???
     , external "unfoldRemembered" (promoteExprR . unfoldRememberedR Obligation :: LemmaName -> RewriteH LCore)
         [ "Unfold a remembered definition." ] .+ Deep .+ Context
