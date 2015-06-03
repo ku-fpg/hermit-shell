@@ -73,7 +73,7 @@ library
                         HERMIT.Server.Parser.QueryFun
                         HERMIT.Server.Parser.Rewrite
                         HERMIT.Server.Parser.ShellEffect
-                        HERMIT.Server.Parsre.String
+                        HERMIT.Server.Parser.String
                         HERMIT.Server.Parser.Transform
                         HERMIT.Server.Parser.Utils
                         Paths_hermit_shell
