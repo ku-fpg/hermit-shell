@@ -3,6 +3,7 @@ module HERMIT.API
           module HERMIT.API.Dictionary.AlphaConversion
         , module HERMIT.API.Dictionary.Composite
         , module HERMIT.API.Dictionary.Debug
+        , module HERMIT.API.Dictionary.FixPoint
         , module HERMIT.API.Dictionary.KURE
         , module HERMIT.API.Dictionary.Navigation
         , module HERMIT.API.Dictionary.Remembered
@@ -19,6 +20,7 @@ module HERMIT.API
 import HERMIT.API.Dictionary.AlphaConversion
 import HERMIT.API.Dictionary.Composite
 import HERMIT.API.Dictionary.Debug
+import HERMIT.API.Dictionary.FixPoint
 import HERMIT.API.Dictionary.KURE
 import HERMIT.API.Dictionary.Navigation
 import HERMIT.API.Dictionary.Remembered

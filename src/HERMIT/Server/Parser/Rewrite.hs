@@ -9,14 +9,14 @@
 
 module HERMIT.Server.Parser.Rewrite where
 
-import           Data.Proxy
+import Data.Proxy
 
-import           HERMIT.Dictionary
-import           HERMIT.Kure
-import           HERMIT.Lemma
+import HERMIT.Dictionary
+import HERMIT.Kure
+import HERMIT.Lemma
 
-import           HERMIT.Server.Parser.Name ()
-import           HERMIT.Server.Parser.Utils
+import HERMIT.Server.Parser.Name ()
+import HERMIT.Server.Parser.Utils
 
 instance External (RewriteH LCore) where
   parseExternals =
@@ -51,6 +51,10 @@ instance External (RewriteH LCore) where
 --         ] .+ Eval .+ Deep .+ Loop
     , external "bashDebug" (bashDebugR :: RewriteH LCore)
         [ "verbose bash - most useful with set-auto-corelint True" ] .+ Eval .+ Deep .+ Loop
+
+      -- HERMIT.API.Dictionary.FixPoint
+    , external "fixIntro" (promoteCoreR fixIntroR :: RewriteH LCore)
+        [ "rewrite a function binding into a non-recursive binding using fix" ] .+ Introduce .+ Context
 
       -- ???
     , external "unfoldRemembered" (promoteExprR . unfoldRememberedR Obligation :: LemmaName -> RewriteH LCore)

@@ -31,8 +31,8 @@ import           System.Process
 import           Web.Scotty.Trans
 import           Control.Monad.Remote.JSON
 
-import           System.Exit
-import           System.Posix.Signals
+-- import           System.Exit
+-- import           System.Posix.Signals
 
 ------------------------------- the plugin ------------------------------------
 

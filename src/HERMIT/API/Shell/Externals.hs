@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 module HERMIT.API.Shell.Externals where
 
-import HERMIT.API.Types
+-- import HERMIT.API.Types
 
 -- | stops HERMIT; resumes compile
 -- resume :: ShellEffect

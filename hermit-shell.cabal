@@ -53,6 +53,7 @@ library
                         HERMIT.API.Dictionary.AlphaConversion
                         HERMIT.API.Dictionary.Composite
                         HERMIT.API.Dictionary.Debug
+                        HERMIT.API.Dictionary.FixPoint
                         HERMIT.API.Dictionary.KURE
                         HERMIT.API.Dictionary.Navigation
                         HERMIT.API.Dictionary.Remembered
@@ -67,10 +68,12 @@ library
                         HERMIT.GHCI.Renderer
                         HERMIT.GHCI.Types
                         HERMIT.Server.Parser
+                        HERMIT.Server.Parser.BiRewrite
                         HERMIT.Server.Parser.Name
                         HERMIT.Server.Parser.QueryFun
-                        HERMIT.Server.Parser.ShellEffect
                         HERMIT.Server.Parser.Rewrite
+                        HERMIT.Server.Parser.ShellEffect
+                        HERMIT.Server.Parsre.String
                         HERMIT.Server.Parser.Transform
                         HERMIT.Server.Parser.Utils
                         Paths_hermit_shell

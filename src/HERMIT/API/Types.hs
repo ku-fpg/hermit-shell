@@ -1,4 +1,8 @@
-{-# LANGUAGE OverloadedStrings, KindSignatures, GADTs, ScopedTypeVariables, RankNTypes, DeriveDataTypeable #-}
+{-# LANGUAGE GADTs #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE PolyKinds #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 module HERMIT.API.Types where
         
 import Control.Applicative
@@ -63,7 +67,7 @@ instance FromJSON a => FromJSON (ShellResult a) where
 -- | The 'Guts' of GHC, is anything we can rewrite and transform.
 class Typeable a => Guts a
 
-proxyToJSON :: forall a . Typeable a => Proxy a -> Value
+proxyToJSON :: forall (a :: *) . Typeable a => Proxy a -> Value
 proxyToJSON Proxy = String $ pack $ show $ typeOf (undefined :: a)
 
 ------------------------------------------------------------------------
@@ -79,11 +83,15 @@ instance Response () where
 
 type Rewrite a = Transform a a
 
-data Transform :: * -> * -> * where
-  Transform :: Value -> Transform a b
-  
-instance ToJSON (Transform a b) where
-  toJSON (Transform v) = v
+newtype Transform a b = Transform Value
+  deriving ToJSON
+
+------------------------------------------------------------------------
+
+type BiRewrite a = BiTransform a a
+
+newtype BiTransform a b = BiTransform Value
+  deriving ToJSON
 
 ------------------------------------------------------------------------
 
