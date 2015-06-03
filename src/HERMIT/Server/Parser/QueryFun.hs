@@ -12,6 +12,7 @@ import           HERMIT.Server.Parser.Utils
 import           HERMIT.Server.Parser.Transform()
 
 import           Data.Aeson
+import           Control.Monad
 
 instance External QueryFun where
   parseExternals =
@@ -26,4 +27,5 @@ instance External AST where
   parseExternal (Number n) = return $ (integerToAST . toInteger . floor) n
     where
       integerToAST = read . show
+  parseExternal _ = mzero
 

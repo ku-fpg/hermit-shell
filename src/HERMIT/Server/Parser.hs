@@ -26,6 +26,7 @@ import           HERMIT.Shell.KernelEffect
 import           HERMIT.Server.Parser.QueryFun()
 import           HERMIT.Server.Parser.ShellEffect()
 import           HERMIT.Server.Parser.KernelEffect()
+import           HERMIT.Server.Parser.ScriptEffect()
 import           HERMIT.Server.Parser.Rewrite()
 import           HERMIT.Server.Parser.Transform()
 import           HERMIT.Server.Parser.BiRewrite ()

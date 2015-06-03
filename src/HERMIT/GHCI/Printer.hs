@@ -44,6 +44,9 @@ instance Repl KernelEffect where
 instance Repl ShellEffect where
   printForRepl (ShellEffect v) = printForRepl $ (Shell v :: Shell ())
 
+instance Repl ScriptEffect where
+  printForRepl (ScriptEffect v) = printForRepl $ (Shell v :: Shell ())
+
 instance Repl QueryFun where
   printForRepl (QueryFun v) = printForRepl $ (Shell v :: Shell ())
 
