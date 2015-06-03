@@ -28,6 +28,10 @@ import           HERMIT.Server.Parser.ShellEffect()
 import           HERMIT.Server.Parser.KernelEffect()
 import           HERMIT.Server.Parser.Rewrite()
 import           HERMIT.Server.Parser.Transform()
+import           HERMIT.Server.Parser.BiRewrite ()
+import           HERMIT.Server.Parser.Name ()
+import           HERMIT.Server.Parser.String ()
+import           HERMIT.Server.Parser.Transform ()
 import           HERMIT.Server.Parser.Utils
 
 import           Prelude.Compat
