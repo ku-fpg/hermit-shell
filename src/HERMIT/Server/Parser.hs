@@ -19,14 +19,17 @@ import           HERMIT.Context
 import           HERMIT.Kure hiding ((<$>),(<*>))
 import           HERMIT.Shell.Command
 import           HERMIT.Shell.Types hiding (clm)
+import           HERMIT.Shell.KernelEffect
 
 -- import           HERMIT.Context
 
+import           HERMIT.Server.Parser.QueryFun()
+import           HERMIT.Server.Parser.ShellEffect()
+import           HERMIT.Server.Parser.KernelEffect()
+import           HERMIT.Server.Parser.Rewrite()
+import           HERMIT.Server.Parser.Transform()
 import           HERMIT.Server.Parser.BiRewrite ()
 import           HERMIT.Server.Parser.Name ()
-import           HERMIT.Server.Parser.QueryFun ()
-import           HERMIT.Server.Parser.Rewrite ()
-import           HERMIT.Server.Parser.ShellEffect ()
 import           HERMIT.Server.Parser.String ()
 import           HERMIT.Server.Parser.Transform ()
 import           HERMIT.Server.Parser.Utils
@@ -48,6 +51,7 @@ parseTopLevel v = fmap (const (toJSON ()))
 instance External (TypedEffectH ()) where
   parseExternals =
     [ fmap ShellEffectH . parseExternal
+    , fmap QueryH . parseExternal
     , external "setPath" (SetPathH :: TransformH LCoreTC LocalPathH -> TypedEffectH ())
         ["sets the path"]
     , external "query"   (QueryH :: QueryFun -> TypedEffectH ())

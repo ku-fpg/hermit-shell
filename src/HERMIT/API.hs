@@ -15,6 +15,7 @@ module HERMIT.API
         , Shell
         , Name
         , LocalPath
+        , AST
           -- Utilities
         , send
         ) where

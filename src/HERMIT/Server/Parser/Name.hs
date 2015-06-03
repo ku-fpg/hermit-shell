@@ -26,3 +26,4 @@ instance External BindingName where
 instance External LemmaName where
   parseExternal (String txt) = return . LemmaName $ Text.unpack txt
   parseExternal _            = fail "fail: LemmaName"          
+

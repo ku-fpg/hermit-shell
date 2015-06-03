@@ -5,10 +5,25 @@ module HERMIT.Server.Parser.QueryFun where
 
 import           HERMIT.Kure
 import           HERMIT.Shell.Types
+import           HERMIT.Shell.Externals
+import           HERMIT.Kernel (AST)
 
 import           HERMIT.Server.Parser.Utils
 import           HERMIT.Server.Parser.Transform()
 
+import           Data.Aeson
+
 instance External QueryFun where
   parseExternals =
-    [ fmap (QueryUnit :: TransformH LCore () -> QueryFun) . parseExternal ]
+    [ fmap (QueryUnit :: TransformH LCore () -> QueryFun) . parseExternal
+    , external "log"             (Inquiry showDerivationTree)
+        [ "go back in the derivation" ]
+    , external "diff"            Diff
+        [ "show diff of two ASTs" ]
+    ]
+
+instance External AST where
+  parseExternal (Number n) = return $ (integerToAST . toInteger . floor) n
+    where
+      integerToAST = read . show
+
