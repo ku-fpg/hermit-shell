@@ -86,6 +86,3 @@ instance External ShellEffect where
 
    ]
 
-instance External Int where
-  parseExternal (Number n) = return $ floor n
-

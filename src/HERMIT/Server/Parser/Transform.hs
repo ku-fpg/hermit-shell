@@ -68,11 +68,12 @@ instance External (BiRewriteH LCore) where
         ] .+ Context .+ PreCondition
 
       -- HERMIT.API.Dictionary.KURE
---     , external ">>>"        ((>>>) :: BiRewriteH LCore -> BiRewriteH LCore -> BiRewriteH LCore)
---         [ "Compose bidirectional rewrites, requiring both to succeed." ]
---     , external "invert"     (invertBiT :: BiRewriteH LCore -> BiRewriteH LCore)
---         [ "Reverse a bidirectional rewrite." ]
+    , external ">>>"        ((>>>) :: BiRewriteH LCore -> BiRewriteH LCore -> BiRewriteH LCore)
+        [ "Compose bidirectional rewrites, requiring both to succeed." ]
+    , external "invert"     (invertBiT :: BiRewriteH LCore -> BiRewriteH LCore)
+        [ "Reverse a bidirectional rewrite." ]
 
+      -- ??
     , external "wwResultFactorisation" ((\ abs rep assC -> promoteExprBiR $ wwFac (mkWWAssC assC) abs rep)
                                           :: CoreString -> CoreString -> RewriteH LCore -> BiRewriteH LCore)
                 [ "Worker/Wrapper Factorisation (Result Variant)",
@@ -186,69 +187,69 @@ instance External (RewriteH LCore) where
         [ "if v is a case binder, replace (Var v) with the bound case-alternative pattern." ] .+ Eval .+ Deep
 
       -- HERMIT.API.Dictionary.KURE
---     , external "id_"         (idR :: RewriteH LCore)
---         [ "Perform an identity rewrite."] .+ Shallow
---     , external "fail_"       (fail :: String -> RewriteH LCore)
---         [ "A failing rewrite."]
---     , external "<+"         ((<+) :: RewriteH LCore -> RewriteH LCore -> RewriteH LCore)
---         [ "Perform the first rewrite, and then, if it fails, perform the second rewrite." ]
---     , external ">>>"        ((>>>) :: RewriteH LCore -> RewriteH LCore -> RewriteH LCore)
---         [ "Compose rewrites, requiring both to succeed." ]
---     , external ">+>"        ((>+>) :: RewriteH LCore -> RewriteH LCore -> RewriteH LCore)
---         [ "Compose rewrites, allowing one to fail." ]
---     , external "try"        (tryR :: RewriteH LCore -> RewriteH LCore)
---         [ "Try a rewrite, and perform the identity if the rewrite fails." ]
---     , external "repeat"     (repeatR :: RewriteH LCore -> RewriteH LCore)
---         [ "Repeat a rewrite until it would fail." ] .+ Loop
---     , external "replicate"  ((\ n -> andR . replicate n)  :: Int -> RewriteH LCore -> RewriteH LCore)
---         [ "Repeat a rewrite n times." ]
---     , external "all"        (allR :: RewriteH LCore -> RewriteH LCore)
---         [ "Apply a rewrite to all children of the node, requiring success at every child." ] .+ Shallow
---     , external "any"        (anyR :: RewriteH LCore -> RewriteH LCore)
---         [ "Apply a rewrite to all children of the node, requiring success for at least one child." ] .+ Shallow
---     , external "one"        (oneR :: RewriteH LCore -> RewriteH LCore)
---         [ "Apply a rewrite to the first child of the node for which it can succeed." ] .+ Shallow
---     , external "allBU"     (allbuR :: RewriteH LCore -> RewriteH LCore)
---         [ "Promote a rewrite to operate over an entire tree in bottom-up order, requiring success at every node." ] .+ Deep
---     , external "allTD"     (alltdR :: RewriteH LCore -> RewriteH LCore)
---         [ "Promote a rewrite to operate over an entire tree in top-down order, requiring success at every node." ] .+ Deep
---     , external "allDU"     (allduR :: RewriteH LCore -> RewriteH LCore)
---         [ "Apply a rewrite twice, in a top-down and bottom-up way, using one single tree traversal,",
---           "succeeding if they all succeed."] .+ Deep
---     , external "anyBU"     (anybuR :: RewriteH LCore -> RewriteH LCore)
---         [ "Promote a rewrite to operate over an entire tree in bottom-up order, requiring success for at least one node." ] .+ Deep
---     , external "anyTD"     (anytdR :: RewriteH LCore -> RewriteH LCore)
---         [ "Promote a rewrite to operate over an entire tree in top-down order, requiring success for at least one node." ] .+ Deep
---     , external "anyDU"     (anyduR :: RewriteH LCore -> RewriteH LCore)
---         [ "Apply a rewrite twice, in a top-down and bottom-up way, using one single tree traversal,",
---           "succeeding if any succeed."] .+ Deep
---     , external "oneTD"     (onetdR :: RewriteH LCore -> RewriteH LCore)
---         [ "Apply a rewrite to the first node (in a top-down order) for which it can succeed." ] .+ Deep
---     , external "oneBU"     (onebuR :: RewriteH LCore -> RewriteH LCore)
---         [ "Apply a rewrite to the first node (in a bottom-up order) for which it can succeed." ] .+ Deep
---     , external "pruneTD"   (prunetdR :: RewriteH LCore -> RewriteH LCore)
---         [ "Attempt to apply a rewrite in a top-down manner, prunning at successful rewrites." ] .+ Deep
---     , external "innermost"  (innermostR :: RewriteH LCore -> RewriteH LCore)
---         [ "A fixed-point traveral, starting with the innermost term." ] .+ Deep .+ Loop
--- --     , external "focus"      (hfocusR :: TransformH LCore LocalPathH -> RewriteH LCore -> RewriteH LCore)
--- --         [ "Apply a rewrite to a focal point."] .+ Navigation .+ Deep
--- --     , external "focus"      ((\p -> hfocusR (return p)) :: LocalPathH -> RewriteH LCore -> RewriteH LCore)
--- --         [ "Apply a rewrite to a focal point."] .+ Navigation .+ Deep
---     , external "when"       ((>>) :: TransformH LCore () -> RewriteH LCore -> RewriteH LCore)
---         [ "Apply a rewrite only if the check succeeds." ] .+ Predicate
---     , external "forward"    (forwardT :: BiRewriteH LCore -> RewriteH LCore)
---         [ "Apply a bidirectional rewrite forewards." ]
---     , external "backward"   (backwardT :: BiRewriteH LCore -> RewriteH LCore)
---         [ "Apply a bidirectional rewrite backwards." ]
---     , external "anyCall"   (const anyCallR_LCore :: Proxy LCore -> RewriteH LCore -> RewriteH LCore)
---         [ "any-call (.. unfold command ..) applies an unfold command to all applications."
---         , "Preference is given to applications with more arguments." ] .+ Deep
--- --     , external "extract"    (extractR :: RewriteH LCoreTC -> RewriteH LCore)
--- --         [ "Extract a RewriteCore from a RewriteCoreTC" ]
--- --    , external "atPath"     (flip hfocusT idR :: TransformH LCore LocalPathH -> TransformH LCore LCore)
--- --        [ "return the expression found at the given path" ]
--- --    , external "atPath"     (extractT . flip hfocusT projectT :: TransformH LCoreTC LocalPathH -> TransformH LCore LCore)
--- --        [ "return the expression found at the given path" ]
+    , external "id_"         (idR :: RewriteH LCore)
+        [ "Perform an identity rewrite."] .+ Shallow
+    , external "fail_"       (fail :: String -> RewriteH LCore)
+        [ "A failing rewrite."]
+    , external "<+"         ((<+) :: RewriteH LCore -> RewriteH LCore -> RewriteH LCore)
+        [ "Perform the first rewrite, and then, if it fails, perform the second rewrite." ]
+    , external ">>>"        ((>>>) :: RewriteH LCore -> RewriteH LCore -> RewriteH LCore)
+        [ "Compose rewrites, requiring both to succeed." ]
+    , external ">+>"        ((>+>) :: RewriteH LCore -> RewriteH LCore -> RewriteH LCore)
+        [ "Compose rewrites, allowing one to fail." ]
+    , external "try"        (tryR :: RewriteH LCore -> RewriteH LCore)
+        [ "Try a rewrite, and perform the identity if the rewrite fails." ]
+    , external "repeat"     (repeatR :: RewriteH LCore -> RewriteH LCore)
+        [ "Repeat a rewrite until it would fail." ] .+ Loop
+    , external "replicate"  ((\ n -> andR . replicate n)  :: Int -> RewriteH LCore -> RewriteH LCore)
+        [ "Repeat a rewrite n times." ]
+    , external "all"        (allR :: RewriteH LCore -> RewriteH LCore)
+        [ "Apply a rewrite to all children of the node, requiring success at every child." ] .+ Shallow
+    , external "any"        (anyR :: RewriteH LCore -> RewriteH LCore)
+        [ "Apply a rewrite to all children of the node, requiring success for at least one child." ] .+ Shallow
+    , external "one"        (oneR :: RewriteH LCore -> RewriteH LCore)
+        [ "Apply a rewrite to the first child of the node for which it can succeed." ] .+ Shallow
+    , external "allBU"     (allbuR :: RewriteH LCore -> RewriteH LCore)
+        [ "Promote a rewrite to operate over an entire tree in bottom-up order, requiring success at every node." ] .+ Deep
+    , external "allTD"     (alltdR :: RewriteH LCore -> RewriteH LCore)
+        [ "Promote a rewrite to operate over an entire tree in top-down order, requiring success at every node." ] .+ Deep
+    , external "allDU"     (allduR :: RewriteH LCore -> RewriteH LCore)
+        [ "Apply a rewrite twice, in a top-down and bottom-up way, using one single tree traversal,",
+          "succeeding if they all succeed."] .+ Deep
+    , external "anyBU"     (anybuR :: RewriteH LCore -> RewriteH LCore)
+        [ "Promote a rewrite to operate over an entire tree in bottom-up order, requiring success for at least one node." ] .+ Deep
+    , external "anyTD"     (anytdR :: RewriteH LCore -> RewriteH LCore)
+        [ "Promote a rewrite to operate over an entire tree in top-down order, requiring success for at least one node." ] .+ Deep
+    , external "anyDU"     (anyduR :: RewriteH LCore -> RewriteH LCore)
+        [ "Apply a rewrite twice, in a top-down and bottom-up way, using one single tree traversal,",
+          "succeeding if any succeed."] .+ Deep
+    , external "oneTD"     (onetdR :: RewriteH LCore -> RewriteH LCore)
+        [ "Apply a rewrite to the first node (in a top-down order) for which it can succeed." ] .+ Deep
+    , external "oneBU"     (onebuR :: RewriteH LCore -> RewriteH LCore)
+        [ "Apply a rewrite to the first node (in a bottom-up order) for which it can succeed." ] .+ Deep
+    , external "pruneTD"   (prunetdR :: RewriteH LCore -> RewriteH LCore)
+        [ "Attempt to apply a rewrite in a top-down manner, prunning at successful rewrites." ] .+ Deep
+    , external "innermost"  (innermostR :: RewriteH LCore -> RewriteH LCore)
+        [ "A fixed-point traveral, starting with the innermost term." ] .+ Deep .+ Loop
+--     , external "focus"      (hfocusR :: TransformH LCore LocalPathH -> RewriteH LCore -> RewriteH LCore)
+--         [ "Apply a rewrite to a focal point."] .+ Navigation .+ Deep
+--     , external "focus"      ((\p -> hfocusR (return p)) :: LocalPathH -> RewriteH LCore -> RewriteH LCore)
+--         [ "Apply a rewrite to a focal point."] .+ Navigation .+ Deep
+    , external "when"       ((>>) :: TransformH LCore () -> RewriteH LCore -> RewriteH LCore)
+        [ "Apply a rewrite only if the check succeeds." ] .+ Predicate
+    , external "forward"    (forwardT :: BiRewriteH LCore -> RewriteH LCore)
+        [ "Apply a bidirectional rewrite forewards." ]
+    , external "backward"   (backwardT :: BiRewriteH LCore -> RewriteH LCore)
+        [ "Apply a bidirectional rewrite backwards." ]
+    , external "anyCall"   (const anyCallR_LCore :: Proxy LCore -> RewriteH LCore -> RewriteH LCore)
+        [ "any-call (.. unfold command ..) applies an unfold command to all applications."
+        , "Preference is given to applications with more arguments." ] .+ Deep
+--     , external "extract"    (extractR :: RewriteH LCoreTC -> RewriteH LCore)
+--         [ "Extract a RewriteCore from a RewriteCoreTC" ]
+--    , external "atPath"     (flip hfocusT idR :: TransformH LCore LocalPathH -> TransformH LCore LCore)
+--        [ "return the expression found at the given path" ]
+--    , external "atPath"     (extractT . flip hfocusT projectT :: TransformH LCoreTC LocalPathH -> TransformH LCore LCore)
+--        [ "return the expression found at the given path" ]
 
       -- ???
     , external "unfoldRemembered" (promoteExprR . unfoldRememberedR Obligation :: LemmaName -> RewriteH LCore)
@@ -269,20 +270,20 @@ instance External (RewriteH LCoreTC) where
         [ "if given rewrite succeeds, see its input and output" ]
 
       -- HERMIT.API.Dictionary.KURE
---     , external "id"         (idR :: RewriteH LCoreTC)
---         [ "Perform an identity rewrite."] .+ Shallow
--- --     , external "focus"      ((\p -> hfocusR (return p)) :: LocalPathH -> RewriteH LCoreTC -> RewriteH LCoreTC)
--- --         [ "Apply a rewrite to a focal point."] .+ Navigation .+ Deep
--- --     , external "focus"      (hfocusR :: TransformH LCoreTC LocalPathH -> RewriteH LCoreTC -> RewriteH LCoreTC)
--- --         [ "Apply a rewrite to a focal point."] .+ Navigation .+ Deep
---     , external ">>>"        ((>>>) :: RewriteH LCoreTC -> RewriteH LCoreTC -> RewriteH LCoreTC)
---         [ "Compose rewrites, requiring both to succeed." ]
---     , external "promote"    (promoteR :: RewriteH LCore -> RewriteH LCoreTC)
---         [ "Promote a RewriteCore to a RewriteCoreTC" ]
---     , external "between"    (betweenR :: Int -> Int -> RewriteH LCoreTC -> RewriteH LCoreTC)
---         [ "between x y rr -> perform rr at least x times and at most y times." ]
--- --    , external "atPath"     (flip hfocusT idR :: TransformH LCoreTC LocalPathH -> TransformH LCoreTC LCoreTC)
--- --        [ "return the expression found at the given path" ]
+    , external "id"         (idR :: RewriteH LCoreTC)
+        [ "Perform an identity rewrite."] .+ Shallow
+--     , external "focus"      ((\p -> hfocusR (return p)) :: LocalPathH -> RewriteH LCoreTC -> RewriteH LCoreTC)
+--         [ "Apply a rewrite to a focal point."] .+ Navigation .+ Deep
+--     , external "focus"      (hfocusR :: TransformH LCoreTC LocalPathH -> RewriteH LCoreTC -> RewriteH LCoreTC)
+--         [ "Apply a rewrite to a focal point."] .+ Navigation .+ Deep
+    , external ">>>"        ((>>>) :: RewriteH LCoreTC -> RewriteH LCoreTC -> RewriteH LCoreTC)
+        [ "Compose rewrites, requiring both to succeed." ]
+    , external "promote"    (promoteR :: RewriteH LCore -> RewriteH LCoreTC)
+        [ "Promote a RewriteCore to a RewriteCoreTC" ]
+    , external "between"    (betweenR :: Int -> Int -> RewriteH LCoreTC -> RewriteH LCoreTC)
+        [ "between x y rr -> perform rr at least x times and at most y times." ]
+--    , external "atPath"     (flip hfocusT idR :: TransformH LCoreTC LocalPathH -> TransformH LCoreTC LCoreTC)
+--        [ "return the expression found at the given path" ]
     ]
 
 -------------------------------------------------------------------------------
@@ -327,12 +328,12 @@ instance External (TransformH LCore ()) where
         [ "Inject a dependency on the given module." ]
 
       -- HERMIT.API.Dictionary.KURE
---     , external "<+"         ((<+) :: TransformH LCore () -> TransformH LCore () -> TransformH LCore ())
---         [ "Perform the first check, and then, if it fails, perform the second check." ]
---     , external "success"    (successT :: TransformH LCore ())
---         [ "An always succeeding translation." ]
---     , external "not_"        (notM :: TransformH LCore () -> TransformH LCore ())
---        [ "Cause a failing check to succeed, a succeeding check to fail."  ] .+ Predicate
+    , external "<+"         ((<+) :: TransformH LCore () -> TransformH LCore () -> TransformH LCore ())
+        [ "Perform the first check, and then, if it fails, perform the second check." ]
+    , external "success"    (successT :: TransformH LCore ())
+        [ "An always succeeding translation." ]
+    , external "not_"        (notM :: TransformH LCore () -> TransformH LCore ())
+       [ "Cause a failing check to succeed, a succeeding check to fail."  ] .+ Predicate
 
       -- ???
     , external "remember" (promoteCoreT . rememberR :: LemmaName -> TransformH LCore ()) -- Done not smell right (return ()?)
@@ -349,12 +350,12 @@ instance External (TransformH LCore String) where
 --         [ "Dynamically load a specific lemma from a library of lemmas." ]
 
       -- HERMIT.API.Dictionary.KURE
--- --     , external "focus"      (hfocusT :: TransformH LCore LocalPathH -> TransformH LCore String -> TransformH LCore String)
--- --         [ "Apply a query at a focal point."] .+ Navigation .+ Deep
--- --     , external "focus"      ((\p -> hfocusT (return p)) :: LocalPathH -> TransformH LCore String -> TransformH LCore String)
--- --         [ "Apply a query at a focal point."] .+ Navigation .+ Deep
---       external "test"       (testQuery :: RewriteH LCore -> TransformH LCore String)
---         [ "Determine if a rewrite could be successfully applied." ]
--- --     , external "extract"    (extractT :: TransformH LCoreTC String -> TransformH LCore String)
--- --         [ "Extract a TransformLCoreString from a TransformLCoreTCString" ]
+--     , external "focus"      (hfocusT :: TransformH LCore LocalPathH -> TransformH LCore String -> TransformH LCore String)
+--         [ "Apply a query at a focal point."] .+ Navigation .+ Deep
+--     , external "focus"      ((\p -> hfocusT (return p)) :: LocalPathH -> TransformH LCore String -> TransformH LCore String)
+--         [ "Apply a query at a focal point."] .+ Navigation .+ Deep
+      external "test"       (testQuery :: RewriteH LCore -> TransformH LCore String)
+        [ "Determine if a rewrite could be successfully applied." ]
+--     , external "extract"    (extractT :: TransformH LCoreTC String -> TransformH LCore String)
+--         [ "Extract a TransformLCoreString from a TransformLCoreTCString" ]
     ]
