@@ -56,6 +56,8 @@ library
                         HERMIT.API.Dictionary.FixPoint
                         HERMIT.API.Dictionary.Fold
                         HERMIT.API.Dictionary.Function
+                        HERMIT.API.Dictionary.GHC
+                        HERMIT.API.Dictionary.Induction
                         HERMIT.API.Dictionary.KURE
                         HERMIT.API.Dictionary.Navigation
                         HERMIT.API.Dictionary.Remembered
