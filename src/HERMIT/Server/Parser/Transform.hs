@@ -27,6 +27,8 @@ import           HERMIT.Server.Parser.Name ()
 import           HERMIT.Server.Parser.String ()
 import           HERMIT.Server.Parser.Utils
 
+import           Prelude hiding (abs)
+
 -------------------------------------------------------------------------------
 
 instance External (BiRewriteH LCore) where
@@ -46,7 +48,7 @@ instance External (BiRewriteH LCore) where
                                                                 :: CoreString -> CoreString -> CoreString
                                                                     -> RewriteH LCore -> RewriteH LCore
                                                                     -> RewriteH LCore -> BiRewriteH LCore)
-        [ "Fixed-point Fusion Rule"
+        [ "FixedPoint Fusion Rule"
         , "Given f :: A -> B, g :: A -> A, h :: B -> B, and"
         , "proofs that, for some x, (f (g a) ==> x) and (h (f a) ==> x) and that f is strict, then"
         , "f (fix g) <==> fix h"
@@ -54,7 +56,7 @@ instance External (BiRewriteH LCore) where
     , external "fixFusionRuleUnsafe" ((\ f g h r1 r2 -> promoteExprBiR (fixFusionRule (Just (r1,r2)) Nothing f g h))
                                                             :: CoreString -> CoreString -> CoreString
                                                                 -> RewriteH LCore -> RewriteH LCore -> BiRewriteH LCore)
-        [ "(Unsafe) Fixed-point Fusion Rule"
+        [ "(Unsafe) FixedPoint Fusion Rule"
         , "Given f :: A -> B, g :: A -> A, h :: B -> B, and"
         , "a proof that, for some x, (f (g a) ==> x) and (h (f a) ==> x), then"
         , "f (fix g) <==> fix h"
@@ -62,7 +64,7 @@ instance External (BiRewriteH LCore) where
         ] .+ Context .+ PreCondition
     , external "fixFusionRuleUnsafe" ((\ f g h -> promoteExprBiR (fixFusionRule Nothing Nothing f g h))
                                                         :: CoreString -> CoreString -> CoreString -> BiRewriteH LCore)
-        [ "(Very Unsafe) Fixed-point Fusion Rule"
+        [ "(Very Unsafe) FixedPoint Fusion Rule"
         , "Given f :: A -> B, g :: A -> A, h :: B -> B, then"
         , "f (fix g) <==> fix h"
         , "Note that the preconditions that f (g a) == h (f a) and that f is strict are required to hold."
@@ -87,7 +89,7 @@ instance External (BiRewriteH LCore) where
                 [ "Unsafe Worker/Wrapper Factorisation",
                   "For any \"f :: A -> A\", and given \"wrap :: B -> A\" and \"unwrap :: A -> B\" as arguments, then",
                   "fix A f  <==>  wrap (fix B (\\ b -> unwrap (f (wrap b))))",
-                  "Note: the pre-condition \"fix A (\\ a -> wrap (unwrap (f a))) == fix A f\" is expected to hold."
+                  "Note: the preCondition \"fix A (\\ a -> wrap (unwrap (f a))) == fix A f\" is expected to hold."
                 ] .+ Introduce .+ Context .+ PreCondition
     , external "wwResultAssumptionA" ((\ abs rep assA -> promoteExprBiR $ wwA (Just $ extractR assA) abs rep)
                                        :: CoreString -> CoreString -> RewriteH LCore -> BiRewriteH LCore)
@@ -127,7 +129,7 @@ instance External (BiRewriteH LCore) where
     , external "wwResultFusion" (promoteExprBiR wwFusion :: BiRewriteH LCore)
                 [ "Worker/Wrapper Fusion (Result Variant)",
                   "rep (abs (work x))  <==>  work x",
-                  "Note: you are required to have previously executed the command \"ww-generate-fusion\" on the definition",
+                  "Note: you are required to have previously executed the command \"ww-generateFusion\" on the definition",
                   "      work = \\ x1 -> rep (f (\\ x2 -> abs (work x2)) x1)"
                 ] .+ Introduce .+ Context .+ PreCondition .+ TODO
 
@@ -143,7 +145,7 @@ instance External (BiRewriteH LCore) where
                 [ "Unsafe Worker/Wrapper Factorisation",
                   "For any \"f :: A -> A\", and given \"wrap :: B -> A\" and \"unwrap :: A -> B\" as arguments, then",
                   "fix A f  <==>  wrap (fix B (\\ b -> unwrap (f (wrap b))))",
-                  "Note: the pre-condition \"fix A (\\ a -> wrap (unwrap (f a))) == fix A f\" is expected to hold."
+                  "Note: the preCondition \"fix A (\\ a -> wrap (unwrap (f a))) == fix A f\" is expected to hold."
                 ] .+ Introduce .+ Context .+ PreCondition
     , external "wwAssumptionA" ((\ wrap unwrap assA -> promoteExprBiR $ wwA (Just $ extractR assA) wrap unwrap)
                                        :: CoreString -> CoreString -> RewriteH LCore -> BiRewriteH LCore)
@@ -190,7 +192,7 @@ instance External (BiRewriteH LCore) where
     , external "wwFusion" (promoteExprBiR wwFusion :: BiRewriteH LCore)
                 [ "Worker/Wrapper Fusion",
                   "unwrap (wrap work)  <==>  work",
-                  "Note: you are required to have previously executed the command \"ww-generate-fusion\" on the definition",
+                  "Note: you are required to have previously executed the command \"ww-generateFusion\" on the definition",
                   "      work = unwrap (f (wrap work))"
                 ] .+ Introduce .+ Context .+ PreCondition .+ TODO
     ]
@@ -214,7 +216,7 @@ instance External (RewriteH LCore) where
     , external "alphaCase" (promoteExprR alphaCaseR :: RewriteH LCore)
         [ "Renames all binders in a Case alternative."]
     , external "alphaProg" (promoteProgR alphaProgR :: RewriteH LCore)
-        [ "Rename all top-level identifiers in the program."]
+        [ "Rename all topLevel identifiers in the program."]
     ,  external "unshadow" (promoteCoreR unshadowR :: RewriteH LCore)
         [ "Rename local variables with manifestly unique names (x, x0, x1, ...)."]
 
@@ -223,7 +225,7 @@ instance External (RewriteH LCore) where
         [ "Unfold the current expression if it is one of the basic combinators:"
         , "($), (.), id, flip, const, fst, snd, curry, and uncurry." ]
     , external "simplify" (simplifyR :: RewriteH LCore)
-        [ "innermost (unfold-basic-combinator <+ betaReduce-plus <+ safeLet-subst <+ caseReduce <+ letElim)" ]
+        [ "innermost (unfoldBasicCombinator <+ betaReducePlus <+ safeLetSubst <+ caseReduce <+ letElim)" ]
     , external "bash" (bashR :: RewriteH LCore)
         bashHelp .+ Eval .+ Deep .+ Loop
     , external "smash" (smashR :: RewriteH LCore)
@@ -237,11 +239,11 @@ instance External (RewriteH LCore) where
 --           "Note: be sure that the new rewrite either fails or makes progress, else this may loop."
 --         ] .+ Eval .+ Deep .+ Loop
     , external "bashDebug" (bashDebugR :: RewriteH LCore)
-        [ "verbose bash - most useful with set-auto-corelint True" ] .+ Eval .+ Deep .+ Loop
+        [ "verbose bash - most useful with setAutoCorelint True" ] .+ Eval .+ Deep .+ Loop
 
       -- HERMIT.API.Dictionary.FixPoint
     , external "fixIntro" (promoteCoreR fixIntroR :: RewriteH LCore)
-        [ "rewrite a function binding into a non-recursive binding using fix" ] .+ Introduce .+ Context
+        [ "rewrite a function binding into a nonRecursive binding using fix" ] .+ Introduce .+ Context
 
       -- HERMIT.API.Dictionary.Fold
     , external "fold" (promoteExprR . foldR :: HermitName -> RewriteH LCore)
@@ -251,7 +253,7 @@ instance External (RewriteH LCore) where
         , "double x = x + x"
         , ""
         , "5 + 5 + 6"
-        , "any-bu (fold 'double)"
+        , "anyBu (fold 'double)"
         , "double 5 + 6"
         , ""
         , "Note: due to associativity, if you wanted to fold 5 + 6 + 6, "
@@ -271,7 +273,7 @@ instance External (RewriteH LCore) where
     , external "dezombify" (promoteExprR dezombifyR :: RewriteH LCore)
         [ "Zap the occurrence information in the current identifer if it is a zombie."] .+ Shallow
     , external "occurrenceAnalysis" (occurrenceAnalysisR :: RewriteH LCore)
-        [ "Perform dependency analysis on all sub-expressions; simplifying and updating identifer info."] .+ Deep
+        [ "Perform dependency analysis on all subExpressions; simplifying and updating identifer info."] .+ Deep
 
       -- HERMIT.API.Dictionary.Induction
     , external "induction" (promoteClauseR . caseSplitOnR True . cmpHN2Var :: HermitName -> RewriteH LCore)
@@ -315,27 +317,27 @@ instance External (RewriteH LCore) where
     , external "one"        (oneR :: RewriteH LCore -> RewriteH LCore)
         [ "Apply a rewrite to the first child of the node for which it can succeed." ] .+ Shallow
     , external "allBU"     (allbuR :: RewriteH LCore -> RewriteH LCore)
-        [ "Promote a rewrite to operate over an entire tree in bottom-up order, requiring success at every node." ] .+ Deep
+        [ "Promote a rewrite to operate over an entire tree in bottomUp order, requiring success at every node." ] .+ Deep
     , external "allTD"     (alltdR :: RewriteH LCore -> RewriteH LCore)
         [ "Promote a rewrite to operate over an entire tree in top-down order, requiring success at every node." ] .+ Deep
     , external "allDU"     (allduR :: RewriteH LCore -> RewriteH LCore)
-        [ "Apply a rewrite twice, in a top-down and bottom-up way, using one single tree traversal,",
+        [ "Apply a rewrite twice, in a top-down and bottomUp way, using one single tree traversal,",
           "succeeding if they all succeed."] .+ Deep
     , external "anyBU"     (anybuR :: RewriteH LCore -> RewriteH LCore)
-        [ "Promote a rewrite to operate over an entire tree in bottom-up order, requiring success for at least one node." ] .+ Deep
+        [ "Promote a rewrite to operate over an entire tree in bottomUp order, requiring success for at least one node." ] .+ Deep
     , external "anyTD"     (anytdR :: RewriteH LCore -> RewriteH LCore)
         [ "Promote a rewrite to operate over an entire tree in top-down order, requiring success for at least one node." ] .+ Deep
     , external "anyDU"     (anyduR :: RewriteH LCore -> RewriteH LCore)
-        [ "Apply a rewrite twice, in a top-down and bottom-up way, using one single tree traversal,",
+        [ "Apply a rewrite twice, in a top-down and bottomUp way, using one single tree traversal,",
           "succeeding if any succeed."] .+ Deep
     , external "oneTD"     (onetdR :: RewriteH LCore -> RewriteH LCore)
         [ "Apply a rewrite to the first node (in a top-down order) for which it can succeed." ] .+ Deep
     , external "oneBU"     (onebuR :: RewriteH LCore -> RewriteH LCore)
-        [ "Apply a rewrite to the first node (in a bottom-up order) for which it can succeed." ] .+ Deep
+        [ "Apply a rewrite to the first node (in a bottomUp order) for which it can succeed." ] .+ Deep
     , external "pruneTD"   (prunetdR :: RewriteH LCore -> RewriteH LCore)
         [ "Attempt to apply a rewrite in a top-down manner, prunning at successful rewrites." ] .+ Deep
     , external "innermost"  (innermostR :: RewriteH LCore -> RewriteH LCore)
-        [ "A fixed-point traveral, starting with the innermost term." ] .+ Deep .+ Loop
+        [ "A fixedPoint traveral, starting with the innermost term." ] .+ Deep .+ Loop
 --     , external "focus"      (hfocusR :: TransformH LCore LocalPathH -> RewriteH LCore -> RewriteH LCore)
 --         [ "Apply a rewrite to a focal point."] .+ Navigation .+ Deep
 --     , external "focus"      ((\p -> hfocusR (return p)) :: LocalPathH -> RewriteH LCore -> RewriteH LCore)
@@ -347,7 +349,7 @@ instance External (RewriteH LCore) where
     , external "backward"   (backwardT :: BiRewriteH LCore -> RewriteH LCore)
         [ "Apply a bidirectional rewrite backwards." ]
     , external "anyCall"   (const anyCallR_LCore :: Proxy LCore -> RewriteH LCore -> RewriteH LCore)
-        [ "any-call (.. unfold command ..) applies an unfold command to all applications."
+        [ "anyCall (.. unfold command ..) applies an unfold command to all applications."
         , "Preference is given to applications with more arguments." ] .+ Deep
 --     , external "extract"    (extractR :: RewriteH LCoreTC -> RewriteH LCore)
 --         [ "Extract a RewriteCore from a RewriteCoreTC" ]
@@ -358,10 +360,10 @@ instance External (RewriteH LCore) where
 
       -- HERMIT.API.Dictionary.Local.Bind
     , external "nonrecToRec" (promoteBindR nonrecToRecR :: RewriteH LCore)
-        [ "Convert a non-recursive binding into a recursive binding group with a single definition."
+        [ "Convert a nonRecursive binding into a recursive binding group with a single definition."
         , "NonRec v e ==> Rec [Def v e]" ]                           .+ Shallow
     , external "recToNonrec" (promoteBindR recToNonrecR :: RewriteH LCore)
-        [ "Convert a singleton recursive binding into a non-recursive binding group."
+        [ "Convert a singleton recursive binding into a nonRecursive binding group."
         , "Rec [Def v e] ==> NonRec v e,  (v not free in e)" ]
 
       -- HERMIT.API.Dictionary.Local.Case
@@ -442,6 +444,77 @@ instance External (RewriteH LCore) where
     , external "caseFoldBinder" (promoteExprR caseFoldBinderR :: RewriteH LCore)
         [ "In the case alternatives, fold any occurrences of the case alt patterns to the case binder." ]
 
+      -- HERMIT.API.Dictionary.Local.Let
+    , external "letSubst" (promoteExprR letSubstR :: RewriteH LCore)
+        [ "Let substitution: (let x = e1 in e2) ==> (e2[e1/x])"
+        , "x must not be free in e1." ]                                         .+ Deep .+ Eval
+    , external "letSubstSafe" (promoteExprR letSubstSafeR :: RewriteH LCore)
+        [ "Safe let substitution"
+        , "let x = e1 in e2, safe to inline without duplicating work ==> e2[e1/x],"
+        , "x must not be free in e1." ]                                         .+ Deep .+ Eval
+    , external "letNonrecSubstSafe" (promoteExprR letNonRecSubstSafeR :: RewriteH LCore)
+        [ "As letSubstSafe, but does not try to convert a recursive let into a nonRecursive let first." ] .+ Deep .+ Eval
+    , external "letIntro" (promoteExprR . letIntroR :: String -> RewriteH LCore)
+        [ "e => (let v = e in v), name of v is provided" ]                      .+ Shallow .+ Introduce
+    , external "letIntroUnfolding" (promoteExprR . letIntroUnfoldingR :: HermitName -> RewriteH LCore)
+        [ "e => let f' = defn[f'/f] in e[f'/f], name of f is provided" ]
+    , external "letElim" (promoteExprR letElimR :: RewriteH LCore)
+        [ "Remove an unused let binding."
+        , "(let v = e1 in e2) ==> e2, if v is not free in e1 or e2." ]          .+ Eval .+ Shallow
+    , external "letFloatApp" (promoteExprR letFloatAppR :: RewriteH LCore)
+        [ "(let v = ev in e) x ==> let v = ev in e x" ]                         .+ Commute .+ Shallow
+    , external "letFloatArg" (promoteExprR letFloatArgR :: RewriteH LCore)
+        [ "f (let v = ev in e) ==> let v = ev in f e" ]                         .+ Commute .+ Shallow
+    , external "letFloatLam" (promoteExprR letFloatLamR :: RewriteH LCore)
+        [ "The Full Laziness Transformation"
+        , "(\\ v1 -> let v2 = e1 in e2)  ==>  let v2 = e1 in (\\ v1 -> e2), if v1 is not free in e2."
+        , "If v1 = v2 then v1 will be alphaRenamed." ]                         .+ Commute .+ Shallow
+    , external "letFloatLet" (promoteExprR letFloatLetR :: RewriteH LCore)
+        [ "let v = (let w = ew in ev) in e ==> let w = ew in let v = ev in e" ] .+ Commute .+ Shallow
+    , external "letFloatCase" (promoteExprR letFloatCaseR :: RewriteH LCore)
+        [ "case (let v = ev in e) of ... ==> let v = ev in case e of ..." ]     .+ Commute .+ Shallow .+ Eval
+    , external "letFloatCaseAlt" (promoteExprR (letFloatCaseAltR Nothing) :: RewriteH LCore)
+        [ "case s of { ... ; p -> let v = ev in e ; ... } "
+        , "==> let v = ev in case s of { ... ; p -> e ; ... } " ]               .+ Commute .+ Shallow .+ Eval
+    , external "letFloatCaseAlt" (promoteExprR . letFloatCaseAltR . Just :: Int -> RewriteH LCore)
+        [ "Float a let binding from specified alternative."
+        , "case s of { ... ; p -> let v = ev in e ; ... } "
+        , "==> let v = ev in case s of { ... ; p -> e ; ... } " ]               .+ Commute .+ Shallow .+ Eval
+    , external "letFloatCast" (promoteExprR letFloatCastR :: RewriteH LCore)
+        [ "cast (let bnds in e) co ==> let bnds in cast e co" ]                 .+ Commute .+ Shallow
+    , external "letFloatTop" (promoteProgR letFloatTopR :: RewriteH LCore)
+        [ "v = (let bds in e) : prog ==> bds : v = e : prog" ]                  .+ Commute .+ Shallow
+    , external "letFloat" (promoteProgR letFloatTopR <+ promoteExprR letFloatExprR :: RewriteH LCore)
+        [ "Float a Let whatever the context." ]                                 .+ Commute .+ Shallow  -- Don't include in bash, as each subRewrite is tagged "Bash" already.
+    , external "letToCase" (promoteExprR letToCaseR :: RewriteH LCore)
+        [ "let v = ev in e ==> case ev of v -> e" ]                             .+ Commute .+ Shallow .+ PreCondition
+    , external "letFloatIn" (promoteExprR letFloatInR >+> anybuR (promoteExprR letElimR) :: RewriteH LCore)
+        [ "FloatIn a let if possible." ]                                        .+ Commute .+ Shallow
+    , external "letFloatInApp" ((promoteExprR letFloatInAppR >+> anybuR (promoteExprR letElimR)) :: RewriteH LCore)
+        [ "let v = ev in f a ==> (let v = ev in f) (let v = ev in a)" ]         .+ Commute .+ Shallow
+    , external "letFloatInCase" ((promoteExprR letFloatInCaseR >+> anybuR (promoteExprR letElimR)) :: RewriteH LCore)
+        [ "let v = ev in case s of p -> e ==> case (let v = ev in s) of p -> let v = ev in e"
+        , "if v does not shadow a pattern binder in p" ]                        .+ Commute .+ Shallow
+    , external "letFloatInLam" ((promoteExprR letFloatInLamR >+> anybuR (promoteExprR letElimR)) :: RewriteH LCore)
+        [ "let v = ev in \\ x -> e ==> \\ x -> let v = ev in e"
+        , "if v does not shadow x" ]                                            .+ Commute .+ Shallow
+--     , external "reorderLets" (promoteExprR . reorderNonRecLetsR :: [String] -> RewriteH LCore)
+--         [ "Reorder a sequence of nested nonRecursive let bindings."
+--         , "The argument list should contain the letBound variables, in the desired order." ]
+    , external "letTuple" (promoteExprR . letTupleR :: String -> RewriteH LCore)
+        [ "Combine nested nonRecursive lets into case of a tuple."
+        , "E.g. let {v1 = e1 ; v2 = e2 ; v3 = e3} in body ==> case (e1,e2,e3) of {(v1,v2,v3) -> body}" ] .+ Commute
+    , external "progBindElim" (promoteProgR progBindElimR :: RewriteH LCore)
+        [ "Remove unused topLevel binding(s)."
+        , "progBindNonrecElim <+ progBindRecElim" ]                       .+ Eval .+ Shallow
+    , external "progBindNonrecElim" (promoteProgR progBindNonRecElimR :: RewriteH LCore)
+        [ "Remove unused topLevel binding(s)."
+        , "v = e : prog ==> prog, if v is not free in prog and not exported." ] .+ Eval .+ Shallow
+    , external "progBindRecElim" (promoteProgR progBindRecElimR :: RewriteH LCore)
+        [ "Remove unused topLevel binding(s)."
+        , "v+ = e+ : prog ==> v* = e* : prog, where v* is a subset of v+ consisting"
+        , "of vs that are free in prog or e+, or exported." ]                   .+ Eval .+ Shallow
+
       -- ???
     , external "unfoldRemembered" (promoteExprR . unfoldRememberedR Obligation :: LemmaName -> RewriteH LCore)
         [ "Unfold a remembered definition." ] .+ Deep .+ Context
@@ -462,7 +535,7 @@ instance External (RewriteH LCore) where
                   "prog = expr  ==>  prog = let f = \\ prog -> expr",
                   "                          in let work = \\ x1 -> rep (f (\\ x2 -> abs (work x2)) x1)",
                   "                              in \\ x0 -> abs (work x0)",
-                  "Note: the pre-condition \"fix (X->A) (\\ h x -> abs (rep (f h x))) == fix (X->A) f\" is expected to hold."
+                  "Note: the preCondition \"fix (X->A) (\\ h x -> abs (rep (f h x))) == fix (X->A) f\" is expected to hold."
                 ] .+ Introduce .+ Context .+ PreCondition .+ Unsafe
     , external "wwResultSplitStaticArg"  ((\ n is abs rep assC -> promoteDefR $ wwResultSplitStaticArg n is (mkWWAssC assC) abs rep)
                                       :: Int -> [Int] -> CoreString -> CoreString -> RewriteH LCore -> RewriteH LCore)
@@ -501,7 +574,7 @@ instance External (RewriteH LCore) where
                   "prog = expr  ==>  prog = let f = \\ prog -> expr",
                   "                          in let work = unwrap (f (wrap work))",
                   "                              in wrap work",
-                  "Note: the pre-condition \"fix A (wrap . unwrap . f) == fix A f\" is expected to hold."
+                  "Note: the preCondition \"fix A (wrap . unwrap . f) == fix A f\" is expected to hold."
                 ] .+ Introduce .+ Context .+ PreCondition
     , external "wwSplitStaticArg" ((\ n is wrap unwrap assC -> promoteDefR $ wwSplitStaticArg n is (mkWWAssC assC) wrap unwrap)
                                       :: Int -> [Int] -> CoreString -> CoreString -> RewriteH LCore -> RewriteH LCore)
@@ -536,11 +609,11 @@ instance External (RewriteH LCoreTC) where
     [
       -- HERMIT.API.Dictionary.Debug
       external "trace" (traceR :: String -> RewriteH LCoreTC)
-        [ "give a side-effect message as output when processing this command" ]
+        [ "give a sideEffect message as output when processing this command" ]
     , external "observe" (observeR :: String -> RewriteH LCoreTC)
-        [ "give a side-effect message as output, and observe the value being processed" ]
+        [ "give a sideEffect message as output, and observe the value being processed" ]
     , external "observeFailure" (observeFailureR :: String -> RewriteH LCoreTC -> RewriteH LCoreTC)
-        [ "give a side-effect message if the rewrite fails, including the failing input" ]
+        [ "give a sideEffect message if the rewrite fails, including the failing input" ]
     , external "bracket" (bracketR :: String -> RewriteH LCoreTC -> RewriteH LCoreTC)
         [ "if given rewrite succeeds, see its input and output" ]
 
@@ -580,7 +653,7 @@ instance External (TransformH LCoreTC String) where
       -- HERMIT.API.Dictionary.GHC
       external "lintExpr" (promoteExprT lintExprT :: TransformH LCoreTC String)
         [ "Runs GHC's Core Lint, which typechecks the current expression."
-        , "Note: this can miss several things that a whole-module core lint will find."
+        , "Note: this can miss several things that a whole module core lint will find."
         , "For instance, running this on the RHS of a binding, the type of the RHS will"
         , "not be checked against the type of the binding. Running on the whole let expression"
         , "will catch that however."] .+ Deep .+ Debug .+ Query
@@ -617,23 +690,23 @@ instance External (TransformH LCore ()) where
 
     , external "wwResultGenerateFusion" (wwResultGenerateFusionT . mkWWAssC :: RewriteH LCore -> TransformH LCore ())
                    [ "Given a proof of Assumption C (fix (X->A) (\\ h x -> abs (rep (f h x))) ==> fix (X->A) f), then",
-                     "execute this command on \"work = \\ x1 -> rep (f (\\ x2 -> abs (work x2)) x1)\" to enable the \"ww-result-fusion\" rule thereafter.",
-                     "Note that this is performed automatically as part of \"ww-result-split\"."
+                     "execute this command on \"work = \\ x1 -> rep (f (\\ x2 -> abs (work x2)) x1)\" to enable the \"wwResultFusion\" rule thereafter.",
+                     "Note that this is performed automatically as part of \"wwResultSplit\"."
                    ] .+ Experiment .+ TODO
     , external "wwResultGenerateFusionUnsafe" (wwResultGenerateFusionT Nothing :: TransformH LCore ())
-                   [ "Execute this command on \"work = \\ x1 -> rep (f (\\ x2 -> abs (work x2)) x1)\" to enable the \"ww-fusion\" rule thereafter.",
+                   [ "Execute this command on \"work = \\ x1 -> rep (f (\\ x2 -> abs (work x2)) x1)\" to enable the \"wwFusion\" rule thereafter.",
                      "The precondition \"fix (X->A) (\\ h x -> abs (rep (f h x))) == fix (X->A) f\" is expected to hold.",
-                     "Note that this is performed automatically as part of \"ww-result-split\"."
+                     "Note that this is performed automatically as part of \"wwResultSplit\"."
                    ] .+ Experiment .+ TODO
      , external "wwGenerateFusion" (wwGenerateFusionT . mkWWAssC :: RewriteH LCore -> TransformH LCore ())
                    [ "Given a proof of Assumption C (fix A (\\ a -> wrap (unwrap (f a))) ==> fix A f), then",
-                     "execute this command on \"work = unwrap (f (wrap work))\" to enable the \"ww-fusion\" rule thereafter.",
-                     "Note that this is performed automatically as part of \"ww-split\"."
+                     "execute this command on \"work = unwrap (f (wrap work))\" to enable the \"wwFusion\" rule thereafter.",
+                     "Note that this is performed automatically as part of \"wwSplit\"."
                    ] .+ Experiment .+ TODO
     , external "wwGenerateFusionUnsafe" (wwGenerateFusionT Nothing :: TransformH LCore ())
-                   [ "Execute this command on \"work = unwrap (f (wrap work))\" to enable the \"ww-fusion\" rule thereafter.",
+                   [ "Execute this command on \"work = unwrap (f (wrap work))\" to enable the \"wwFusion\" rule thereafter.",
                      "The precondition \"fix A (wrap . unwrap . f) == fix A f\" is expected to hold.",
-                     "Note that this is performed automatically as part of \"ww-split\"."
+                     "Note that this is performed automatically as part of \"wwSplit\"."
                    ] .+ Experiment .+ TODO
    ]
     where

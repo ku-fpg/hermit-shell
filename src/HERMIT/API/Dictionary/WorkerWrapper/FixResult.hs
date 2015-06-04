@@ -1,11 +1,13 @@
 {-# LANGUAGE OverloadedStrings #-}
 module HERMIT.API.Dictionary.WorkerWrapper.FixResult where
 
-import           HERMIT.API.Types
-
 import           Data.Aeson
 import           Data.String (fromString)
 import           Data.Vector (fromList)
+
+import           HERMIT.API.Types
+
+import           Prelude hiding (abs)
 
 -- | "Worker/Wrapper Factorisation",
 --   For any "f :: A -> A", and given "wrap :: B -> A" and "unwrap :: A -> B" as arguments,
