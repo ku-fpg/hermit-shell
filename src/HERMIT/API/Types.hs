@@ -178,6 +178,11 @@ newtype CommandLineState = CommandLineState Value
 
 ------------------------------------------------------------------------
 
+newtype LemmaName = LemmaName String
+  deriving (ToJSON, IsString)
+
+------------------------------------------------------------------------
+
 method :: Text -> [Value] -> Value
 method nm params = object ["method" .= nm, "params" .= params]
 

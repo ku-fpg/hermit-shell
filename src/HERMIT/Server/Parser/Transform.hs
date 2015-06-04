@@ -525,6 +525,20 @@ instance External (RewriteH LCore) where
     , external "wwAssAToAssC" (promoteExprR . wwAssAimpliesAssC . extractR :: RewriteH LCore -> RewriteH LCore)
                    [ "Convert a proof of worker/wrapper Assumption A into a proof of worker/wrapper Assumption C."
                    ]
+   , external "split1Beta" (\ nm absC -> promoteExprR . parse2BeforeT (split1BetaR Obligation nm) absC :: CoreString -> RewriteH LCore)
+        [ "split1Beta <name> <abs expression> <rep expression>"
+        , "Perform worker/wrapper split with condition 1-beta."
+        , "Given lemma name argument is used as prefix to two introduced lemmas."
+        , "  <name>-assumption: unproven lemma for w/w assumption C."
+        , "  <name>-fusion: assumed lemma for w/w fusion."
+        ]
+   , external "split2Beta" (\ nm absC -> promoteExprR . parse2BeforeT (split2BetaR Obligation nm) absC :: CoreString -> RewriteH LCore)
+        [ "split2Beta <name> <abs expression> <rep expression>"
+        , "Perform worker/wrapper split with condition 2-beta."
+        , "Given lemma name argument is used as prefix to two introduced lemmas."
+        , "  <name>-assumption: unproven lemma for w/w assumption C."
+        , "  <name>-fusion: assumed lemma for w/w fusion."
+        ]
 
     ]
     where
@@ -635,6 +649,25 @@ instance External (TransformH LCore ()) where
                      "The precondition \"fix A (wrap . unwrap . f) == fix A f\" is expected to hold.",
                      "Note that this is performed automatically as part of \"ww-split\"."
                    ] .+ Experiment .+ TODO
+
+   , external "introWWAssumptionA"
+      (\nm absC repC -> do
+            q <- parse2BeforeT assumptionAClauseT absC repC
+            insertLemmaT nm $ Lemma q NotProven NotUsed :: TransformH LCore ())
+        [ "Introduce a lemma for worker/wrapper assumption A"
+        , "using given abs and rep functions." ]
+   , external "introWWAssumptionB"
+      (\nm absC repC bodyC -> do
+            q <- parse3BeforeT assumptionBClauseT absC repC bodyC
+            insertLemmaT nm $ Lemma q NotProven NotUsed :: TransformH LCore ())
+        [ "Introduce a lemma for worker/wrapper assumption B"
+        , "using given abs, rep, and body functions." ]
+   , external "introWWAssumptionC"
+      (\nm absC repC bodyC -> do
+            q <- parse3BeforeT assumptionCClauseT absC repC bodyC
+            insertLemmaT nm $ Lemma q NotProven NotUsed :: TransformH LCore ())
+        [ "Introduce a lemma for worker/wrapper assumption C"
+        , "using given abs, rep, and body functions." ]
    ]
     where
       mkWWAssC :: RewriteH LCore -> Maybe WWAssumption
