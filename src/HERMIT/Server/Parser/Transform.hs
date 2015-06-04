@@ -619,6 +619,39 @@ instance External (RewriteH LCore) where
         [ "Unfold a definition only if the function is fully applied." ] .+ Deep .+ Context
     , external "specialize" (promoteExprR specializeR :: RewriteH LCore)
         [ "Specialize an application to its type and coercion arguments." ] .+ Deep .+ Context
+
+    , external "replaceCurrentExprWithUndefined" (promoteExprR replaceCurrentExprWithUndefinedR :: RewriteH LCore)
+        [ "Set the current expression to \"undefined\"."
+        ] .+ Shallow .+ Context .+ Unsafe
+    , external "replaceIdWithUndefined" (promoteCoreR . replaceIdWithUndefined :: HermitName -> RewriteH LCore)
+        [ "Replace the specified identifier with \"undefined\"."
+        ] .+ Deep .+ Context .+ Unsafe
+    , external "errorToUndefined" (promoteExprR errorToUndefinedR :: RewriteH LCore)
+        [ "error ty string  ==>  undefined ty"
+        ] .+ Shallow .+ Context
+    , external "undefinedExpr" (promoteExprR undefinedExprR :: RewriteH LCore)
+        [ "undefined-app <+ undefined-lam <+ undefined-let <+ undefined-cast <+ undefined-tick <+ undefined-case"
+        ] .+ Eval .+ Shallow .+ Context
+    , external "undefinedApp"  (promoteExprR undefinedAppR :: RewriteH LCore)
+        [ "(undefined ty1) e  ==>  undefined ty2"
+        ] .+ Eval .+ Shallow .+ Context
+    , external "undefinedLam" (promoteExprR undefinedLamR :: RewriteH LCore)
+        [ "(\\ v -> undefined ty1)  ==>  undefined ty2   (where v is not a 'TyVar')"
+        ] .+ Eval .+ Shallow .+ Context
+    , external "undefinedLet" (promoteExprR undefinedLetR :: RewriteH LCore)
+        [ "let bds in (undefined ty)  ==>  undefined ty"
+        ] .+ Eval .+ Shallow .+ Context
+    , external "undefinedCase" (promoteExprR undefinedCaseR :: RewriteH LCore)
+        [ "case (undefined ty) of alts  ==>  undefined ty"
+        , "OR"
+        , "case e of {pat_1 -> undefined ty ; pat_2 -> undefined ty ; ... ; pat_n -> undefined ty} ==> undefined ty"
+        ] .+ Eval .+ Shallow .+ Context
+    , external "undefinedCast" (promoteExprR undefinedCastR :: RewriteH LCore)
+        [ "Cast (undefined ty1) co  ==>  undefined ty2"
+        ] .+ Eval .+ Shallow .+ Context
+    , external "undefinedTick" (promoteExprR undefinedTickR :: RewriteH LCore)
+        [ "Tick tick (undefined ty1)  ==>  undefined ty1"
+        ] .+ Eval .+ Shallow .+ Context
     ]
     where
       mkWWAssC :: RewriteH LCore -> Maybe WWAssumption
@@ -747,6 +780,9 @@ instance External (TransformH LCore ()) where
             insertLemmaT nm $ Lemma q NotProven NotUsed :: TransformH LCore ())
         [ "Introduce a lemma for worker/wrapper assumption C"
         , "using given abs, rep, and body functions." ]
+    , external "isUndefinedVal" (promoteExprT isUndefinedValT :: TransformH LCore ())
+        [ "Succeed if the current expression is an undefined value."
+        ] .+ Shallow .+ Context .+ Predicate
    ]
     where
       mkWWAssC :: RewriteH LCore -> Maybe WWAssumption

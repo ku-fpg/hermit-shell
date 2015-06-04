@@ -183,6 +183,11 @@ newtype LemmaName = LemmaName String
 
 ------------------------------------------------------------------------
 
+newtype HermitName = HermitName Value
+  deriving (ToJSON)
+
+------------------------------------------------------------------------
+
 method :: Text -> [Value] -> Value
 method nm params = object ["method" .= nm, "params" .= params]
 
