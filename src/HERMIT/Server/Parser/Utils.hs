@@ -17,6 +17,8 @@ import           Data.Text (Text, unpack, pack)
 import           Data.Typeable
 
 import           HERMIT.External (CmdTag(..))
+import           HERMIT.Dictionary.Rules (RuleName(..))
+import           HERMIT.PrettyPrinter.Common (PrettyPrinter)
 
 import           Debug.Trace
 
@@ -81,4 +83,15 @@ instance forall g . Typeable g => External (Proxy g) where
 
 instance External [Int] where
   parseExternal (Array as) = mapM parseExternal $ toList as
+
+instance External RuleName where
+  parseExternal (String s) = return . RuleName $ unpack s
+  parseExternal x          = fail $ "fail: External RuleName: " ++ show x
+
+instance External [RuleName] where
+  parseExternal (Array as) = mapM parseExternal $ toList as
+
+-----------------------------------------------------------------
+instance External PrettyPrinter where
+  parseExternal = undefined -- TODO: Implement
 

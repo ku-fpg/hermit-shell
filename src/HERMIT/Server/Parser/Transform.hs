@@ -22,12 +22,15 @@ import           HERMIT.Kure
 import           HERMIT.Lemma
 import           HERMIT.Name
 import           HERMIT.ParserCore
+import           HERMIT.PrettyPrinter.Common
+import           HERMIT.Dictionary.Rules
 
 import           HERMIT.Server.Parser.Name ()
 import           HERMIT.Server.Parser.String ()
 import           HERMIT.Server.Parser.Utils
 
 import           Prelude hiding (abs)
+import           Data.String (fromString)
 
 -------------------------------------------------------------------------------
 
@@ -668,6 +671,24 @@ instance External (RewriteH LCore) where
     , external "undefinedTick" (promoteExprR undefinedTickR :: RewriteH LCore)
         [ "Tick tick (undefined ty1)  ==>  undefined ty1"
         ] .+ Eval .+ Shallow .+ Context
+
+    , external "foldRule" (promoteExprR . foldRuleR Obligation :: RuleName -> RewriteH LCore)
+        [ "Apply a named GHC rule right-to-left." ] .+ Shallow
+    , external "foldRules" (promoteExprR . foldRulesR Obligation :: [RuleName] -> RewriteH LCore)
+        [ "Apply named GHC rules right-to-left, succeed if any of the rules succeed." ] .+ Shallow
+    , external "unfoldRule" (promoteExprR . unfoldRuleR Obligation :: RuleName -> RewriteH LCore)
+        [ "Apply a named GHC rule left-to-right." ] .+ Shallow
+    , external "unfoldRuleUnsafe" (promoteExprR . unfoldRuleR UnsafeUsed :: RuleName -> RewriteH LCore)
+        [ "Apply a named GHC rule left-to-right." ] .+ Shallow .+ Unsafe
+    , external "unfoldRules" (promoteExprR . unfoldRulesR Obligation :: [RuleName] -> RewriteH LCore)
+        [ "Apply named GHC rules left-to-right, succeed if any of the rules succeed" ] .+ Shallow
+    , external "unfoldRulesUnsafe" (promoteExprR . unfoldRulesR UnsafeUsed :: [RuleName] -> RewriteH LCore)
+        [ "Apply named GHC rules left-to-right, succeed if any of the rules succeed" ] .+ Shallow .+ Unsafe
+    , external "specConstr" (promoteModGutsR specConstrR :: RewriteH LCore)
+        [ "Run GHC's SpecConstr pass, which performs call pattern specialization."] .+ Deep
+    , external "specialise" (promoteModGutsR specialiseR :: RewriteH LCore)
+        [ "Run GHC's specialisation pass, which performs type and dictionary specialisation."] .+ Deep
+
     ]
     where
       mkWWAssC :: RewriteH LCore -> Maybe WWAssumption
@@ -736,6 +757,10 @@ instance External (TransformH LCoreTC String) where
 -- --         [ "Apply a query at a focal point."] .+ Navigation .+ Deep
 -- --     , external "focus"      ((\p -> hfocusT (return p)) :: LocalPathH -> TransformH LCoreTC String -> TransformH LCoreTC String)
 -- --         [ "Apply a query at a focal point."] .+ Navigation .+ Deep
+
+    , external "showRules" (rulesHelpListT :: TransformH LCoreTC String)
+        [ "List all the rules in scope." ] .+ Query
+
     ]
 
 instance External (TransformH LCore ()) where
@@ -823,4 +848,17 @@ instance External (TransformH LCore String) where
 --     , external "extract"    (extractT :: TransformH LCoreTC String -> TransformH LCore String)
 --         [ "Extract a TransformLCoreString from a TransformLCoreTCString" ]
     ]
+
+instance External (TransformH LCore DocH) where
+  parseExternals =
+    [ external "ruleToLemma" ((\pp nm -> ruleToLemmaT nm >> liftPrettyH (pOptions pp) (showLemmaT (fromString (show nm)) pp)) :: PrettyPrinter -> RuleName -> TransformH LCore DocH)
+        [ "Create a lemma from a GHC RULE." ]
+    ]
+
+instance External (TransformH LCoreTC DocH) where
+  parseExternals =
+    [ external "showRule" (ruleHelpT :: PrettyPrinter -> RuleName -> TransformH LCoreTC DocH)
+        [ "Display details on the named rule." ] .+ Query
+    ]
+  
 

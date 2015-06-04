@@ -17,6 +17,7 @@ module HERMIT.API
         , module HERMIT.API.Dictionary.WorkerWrapper.Fix
         , module HERMIT.API.Dictionary.Unfold
         , module HERMIT.API.Dictionary.Undefined
+        , module HERMIT.API.Dictionary.Rules
         , module HERMIT.API.Shell
         , module HERMIT.API.Shell.Externals
         , module HERMIT.API.Dictionary.WorkerWrapper.Common
@@ -49,6 +50,7 @@ import HERMIT.API.Dictionary.WorkerWrapper.Fix
 import HERMIT.API.Dictionary.WorkerWrapper.Common
 import HERMIT.API.Dictionary.Unfold
 import HERMIT.API.Dictionary.Undefined
+import HERMIT.API.Dictionary.Rules
 import HERMIT.API.Shell
 import HERMIT.API.Types
 

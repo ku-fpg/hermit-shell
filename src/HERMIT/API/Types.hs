@@ -188,6 +188,19 @@ newtype HermitName = HermitName Value
 
 ------------------------------------------------------------------------
 
+newtype Doc           = Doc Value
+  deriving (ToJSON)
+
+newtype PrettyPrinter = PrettyPrinter Value
+  deriving (ToJSON)
+
+------------------------------------------------------------------------
+
+newtype RuleName = RuleName String
+  deriving (ToJSON)
+
+------------------------------------------------------------------------
+
 method :: Text -> [Value] -> Value
 method nm params = object ["method" .= nm, "params" .= params]
 
