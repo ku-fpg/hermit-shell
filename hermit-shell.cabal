@@ -60,6 +60,7 @@ library
                         HERMIT.API.Dictionary.Induction
                         HERMIT.API.Dictionary.Inline
                         HERMIT.API.Dictionary.KURE
+                        HERMIT.API.Dictionary.Local
                         HERMIT.API.Dictionary.Navigation
                         HERMIT.API.Dictionary.Remembered
                         HERMIT.API.Dictionary.WorkerWrapper.FixResult

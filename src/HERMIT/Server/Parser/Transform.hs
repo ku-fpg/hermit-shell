@@ -251,6 +251,14 @@ instance External (RewriteH LCore) where
 --    , external "atPath"     (extractT . flip hfocusT projectT :: TransformH LCoreTC LocalPathH -> TransformH LCore LCore)
 --        [ "return the expression found at the given path" ]
 
+      -- HERMIT.API.Dictionary.Local
+    , external "nonrecToRec" (promoteBindR nonrecToRecR :: RewriteH LCore)
+        [ "Convert a non-recursive binding into a recursive binding group with a single definition."
+        , "NonRec v e ==> Rec [Def v e]" ]                           .+ Shallow
+    , external "recToNonrec" (promoteBindR recToNonrecR :: RewriteH LCore)
+        [ "Convert a singleton recursive binding into a non-recursive binding group."
+        , "Rec [Def v e] ==> NonRec v e,  (v not free in e)" ]
+
       -- ???
     , external "unfoldRemembered" (promoteExprR . unfoldRememberedR Obligation :: LemmaName -> RewriteH LCore)
         [ "Unfold a remembered definition." ] .+ Deep .+ Context
