@@ -15,6 +15,7 @@ module HERMIT.API
         , module HERMIT.API.Dictionary.Remembered
         , module HERMIT.API.Dictionary.WorkerWrapper.FixResult
         , module HERMIT.API.Dictionary.WorkerWrapper.Fix
+        , module HERMIT.API.Dictionary.Unfold
         , module HERMIT.API.Shell
         , module HERMIT.API.Shell.Externals
         , module HERMIT.API.Dictionary.WorkerWrapper.Common
@@ -45,6 +46,7 @@ import HERMIT.API.Dictionary.Remembered
 import HERMIT.API.Dictionary.WorkerWrapper.FixResult
 import HERMIT.API.Dictionary.WorkerWrapper.Fix
 import HERMIT.API.Dictionary.WorkerWrapper.Common
+import HERMIT.API.Dictionary.Unfold
 import HERMIT.API.Shell
 import HERMIT.API.Types
 
