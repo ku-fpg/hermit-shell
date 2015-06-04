@@ -17,6 +17,7 @@ module HERMIT.API
         , module HERMIT.API.Dictionary.WorkerWrapper.Fix
         , module HERMIT.API.Shell
         , module HERMIT.API.Shell.Externals
+        , module HERMIT.API.Dictionary.WorkerWrapper.Common
           -- Types
         , Shell
         , QueryFun
@@ -43,6 +44,7 @@ import HERMIT.API.Dictionary.Navigation
 import HERMIT.API.Dictionary.Remembered
 import HERMIT.API.Dictionary.WorkerWrapper.FixResult
 import HERMIT.API.Dictionary.WorkerWrapper.Fix
+import HERMIT.API.Dictionary.WorkerWrapper.Common
 import HERMIT.API.Shell
 import HERMIT.API.Types
 
