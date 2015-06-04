@@ -8,6 +8,7 @@ module HERMIT.Server.Parser.Utils
         ) where
 
 import           Control.Applicative
+import           Data.Foldable (toList)
 
 import           Data.Aeson as Aeson
 import           Data.Aeson.Types (parseMaybe, Parser)
@@ -77,4 +78,7 @@ instance forall g . Typeable g => External (Proxy g) where
   parseExternal (String txt) | txt ==  pack (show (typeOf (undefined :: g)))
                              = return $ Proxy
   parseExternal _            = fail $ "fail: Proxy for " ++ show (typeOf (undefined :: g))
+
+instance External [Int] where
+  parseExternal (Array as) = mapM parseExternal $ toList as
 

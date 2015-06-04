@@ -50,6 +50,9 @@ instance Repl ScriptEffect where
 instance Repl QueryFun where
   printForRepl (QueryFun v) = printForRepl (Shell v :: Shell ())
 
+instance Repl (Transform a b) where
+  printForRepl (Transform v) = printForRepl (Shell v :: Shell ())
+
 instance Repl (BiTransform a b) where
   printForRepl (BiTransform v) = printForRepl (Shell v :: Shell ())
 

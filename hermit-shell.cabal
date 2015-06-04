@@ -44,6 +44,7 @@ library
                         wai,
                         wai-extra,
                         unix,
+                        vector,
                         -- needed by generated code
                         wreq
 
