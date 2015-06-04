@@ -629,6 +629,12 @@ instance External (RewriteH LCore) where
         , "  <name>-fusion: assumed lemma for w/w fusion."
         ]
 
+    , external "betaReducePlus" (promoteExprR betaReducePlusR :: RewriteH LCore)
+        [ "Perform one or more beta-reductions."]                               .+ Eval .+ Shallow
+    , external "unfoldSaturated" (promoteExprR unfoldSaturatedR :: RewriteH LCore)
+        [ "Unfold a definition only if the function is fully applied." ] .+ Deep .+ Context
+    , external "specialize" (promoteExprR specializeR :: RewriteH LCore)
+        [ "Specialize an application to its type and coercion arguments." ] .+ Deep .+ Context
     ]
     where
       mkWWAssC :: RewriteH LCore -> Maybe WWAssumption
