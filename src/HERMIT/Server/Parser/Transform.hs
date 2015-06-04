@@ -130,6 +130,69 @@ instance External (BiRewriteH LCore) where
                   "Note: you are required to have previously executed the command \"ww-generate-fusion\" on the definition",
                   "      work = \\ x1 -> rep (f (\\ x2 -> abs (work x2)) x1)"
                 ] .+ Introduce .+ Context .+ PreCondition .+ TODO
+
+    , external "wwFactorisation" ((\ wrap unwrap assC -> promoteExprBiR $ wwFac (mkWWAssC assC) wrap unwrap)
+                                          :: CoreString -> CoreString -> RewriteH LCore -> BiRewriteH LCore)
+                [ "Worker/Wrapper Factorisation",
+                  "For any \"f :: A -> A\", and given \"wrap :: B -> A\" and \"unwrap :: A -> B\" as arguments,",
+                  "and a proof of Assumption C (fix A (\\ a -> wrap (unwrap (f a))) ==> fix A f), then",
+                  "fix A f  ==>  wrap (fix B (\\ b -> unwrap (f (wrap b))))"
+                ] .+ Introduce .+ Context
+    , external "wwFactorisationUnsafe" ((\ wrap unwrap -> promoteExprBiR $ wwFac Nothing wrap unwrap)
+                                               :: CoreString -> CoreString -> BiRewriteH LCore)
+                [ "Unsafe Worker/Wrapper Factorisation",
+                  "For any \"f :: A -> A\", and given \"wrap :: B -> A\" and \"unwrap :: A -> B\" as arguments, then",
+                  "fix A f  <==>  wrap (fix B (\\ b -> unwrap (f (wrap b))))",
+                  "Note: the pre-condition \"fix A (\\ a -> wrap (unwrap (f a))) == fix A f\" is expected to hold."
+                ] .+ Introduce .+ Context .+ PreCondition
+    , external "wwAssumptionA" ((\ wrap unwrap assA -> promoteExprBiR $ wwA (Just $ extractR assA) wrap unwrap)
+                                       :: CoreString -> CoreString -> RewriteH LCore -> BiRewriteH LCore)
+                [ "Worker/Wrapper Assumption A",
+                  "For a \"wrap :: B -> A\" and an \"unwrap :: A -> B\",",
+                  "and given a proof of \"wrap (unwrap a) ==> a\", then",
+                  "wrap (unwrap a)  <==>  a"
+                ] .+ Introduce .+ Context
+    , external "wwAssumptionB" ((\ wrap unwrap f assB -> promoteExprBiR $ wwB (Just $ extractR assB) wrap unwrap f)
+                                       :: CoreString -> CoreString -> CoreString -> RewriteH LCore -> BiRewriteH LCore)
+                [ "Worker/Wrapper Assumption B",
+                  "For a \"wrap :: B -> A\", an \"unwrap :: A -> B\", and an \"f :: A -> A\",",
+                  "and given a proof of \"wrap (unwrap (f a)) ==> f a\", then",
+                  "wrap (unwrap (f a))  <==>  f a"
+                ] .+ Introduce .+ Context
+    , external "wwAssumptionC" ((\ wrap unwrap f assC -> promoteExprBiR $ wwC (Just $ extractR assC) wrap unwrap f)
+                                       :: CoreString -> CoreString -> CoreString -> RewriteH LCore -> BiRewriteH LCore)
+                [ "Worker/Wrapper Assumption C",
+                  "For a \"wrap :: B -> A\", an \"unwrap :: A -> B\", and an \"f :: A -> A\",",
+                  "and given a proof of \"fix A (\\ a -> wrap (unwrap (f a))) ==> fix A f\", then",
+                  "fix A (\\ a -> wrap (unwrap (f a)))  <==>  fix A f"
+                ] .+ Introduce .+ Context
+    , external "wwAssumptionAUnsafe" ((\ wrap unwrap -> promoteExprBiR $ wwA Nothing wrap unwrap)
+                                              :: CoreString -> CoreString -> BiRewriteH LCore)
+                [ "Unsafe Worker/Wrapper Assumption A",
+                  "For a \"wrap :: B -> A\" and an \"unwrap :: A -> B\", then",
+                  "wrap (unwrap a)  <==>  a",
+                  "Note: only use this if it's true!"
+                ] .+ Introduce .+ Context .+ PreCondition
+    , external "wwAssumptionBUnsafe" ((\ wrap unwrap f -> promoteExprBiR $ wwB Nothing wrap unwrap f)
+                                              :: CoreString -> CoreString -> CoreString -> BiRewriteH LCore)
+                [ "Unsafe Worker/Wrapper Assumption B",
+                  "For a \"wrap :: B -> A\", an \"unwrap :: A -> B\", and an \"f :: A -> A\", then",
+                  "wrap (unwrap (f a))  <==>  f a",
+                  "Note: only use this if it's true!"
+                ] .+ Introduce .+ Context .+ PreCondition
+    , external "wwAssumptionCUnsafe" ((\ wrap unwrap f -> promoteExprBiR $ wwC Nothing wrap unwrap f)
+                                              :: CoreString -> CoreString -> CoreString -> BiRewriteH LCore)
+                [ "Unsafe Worker/Wrapper Assumption C",
+                  "For a \"wrap :: B -> A\", an \"unwrap :: A -> B\", and an \"f :: A -> A\", then",
+                  "fix A (\\ a -> wrap (unwrap (f a)))  <==>  fix A f",
+                  "Note: only use this if it's true!"
+                ] .+ Introduce .+ Context .+ PreCondition
+    , external "wwFusion" (promoteExprBiR wwFusion :: BiRewriteH LCore)
+                [ "Worker/Wrapper Fusion",
+                  "unwrap (wrap work)  <==>  work",
+                  "Note: you are required to have previously executed the command \"ww-generate-fusion\" on the definition",
+                  "      work = unwrap (f (wrap work))"
+                ] .+ Introduce .+ Context .+ PreCondition .+ TODO
     ]
     where
       mkWWAssC :: RewriteH LCore -> Maybe WWAssumption
@@ -422,6 +485,47 @@ instance External (RewriteH LCore) where
     , external "wwResultAssAToAssC" (promoteExprR . wwResultAssAimpliesAssC . extractR :: RewriteH LCore -> RewriteH LCore)
                    [ "Convert a proof of worker/wrapper Assumption A into a proof of worker/wrapper Assumption C."
                    ]
+    , external "wwSplit" ((\ wrap unwrap assC -> promoteDefR $ wwSplit (mkWWAssC assC) wrap unwrap)
+                                  :: CoreString -> CoreString -> RewriteH LCore -> RewriteH LCore)
+                [ "Worker/Wrapper Split",
+                  "For any \"prog :: A\", and given \"wrap :: B -> A\" and \"unwrap :: A -> B\" as arguments,",
+                  "and a proof of Assumption C (fix A (\\ a -> wrap (unwrap (f a))) ==> fix A f), then",
+                  "prog = expr  ==>  prog = let f = \\ prog -> expr",
+                  "                          in let work = unwrap (f (wrap work))",
+                  "                              in wrap work"
+                ] .+ Introduce .+ Context
+    , external "wwSplitUnsafe" ((\ wrap unwrap -> promoteDefR $ wwSplit Nothing wrap unwrap)
+                                       :: CoreString -> CoreString -> RewriteH LCore)
+                [ "Unsafe Worker/Wrapper Split",
+                  "For any \"prog :: A\", and given \"wrap :: B -> A\" and \"unwrap :: A -> B\" as arguments, then",
+                  "prog = expr  ==>  prog = let f = \\ prog -> expr",
+                  "                          in let work = unwrap (f (wrap work))",
+                  "                              in wrap work",
+                  "Note: the pre-condition \"fix A (wrap . unwrap . f) == fix A f\" is expected to hold."
+                ] .+ Introduce .+ Context .+ PreCondition
+    , external "wwSplitStaticArg" ((\ n is wrap unwrap assC -> promoteDefR $ wwSplitStaticArg n is (mkWWAssC assC) wrap unwrap)
+                                      :: Int -> [Int] -> CoreString -> CoreString -> RewriteH LCore -> RewriteH LCore)
+                [ "Worker/Wrapper Split - Static Argument Variant",
+                  "Perform the static argument transformation on the first n arguments, then perform the worker/wrapper split,",
+                  "applying the given wrap and unwrap functions to the specified (by index) static arguments before use."
+                ] .+ Introduce .+ Context
+    , external "wwSplitStaticArgUnsafe"  ((\ n is wrap unwrap -> promoteDefR $ wwSplitStaticArg n is Nothing wrap unwrap)
+                                      :: Int -> [Int] -> CoreString -> CoreString -> RewriteH LCore)
+                [ "Unsafe Worker/Wrapper Split - Static Argument Variant",
+                  "Perform the static argument transformation on the first n arguments, then perform the (unsafe) worker/wrapper split,",
+                  "applying the given wrap and unwrap functions to the specified (by index) static arguments before use."
+                ] .+ Introduce .+ Context .+ PreCondition
+
+    , external "wwAssAToAssB" (promoteExprR . wwAssAimpliesAssB . extractR :: RewriteH LCore -> RewriteH LCore)
+                   [ "Convert a proof of worker/wrapper Assumption A into a proof of worker/wrapper Assumption B."
+                   ]
+    , external "wwAssBToAssC" (promoteExprR . wwAssBimpliesAssC . extractR :: RewriteH LCore -> RewriteH LCore)
+                   [ "Convert a proof of worker/wrapper Assumption B into a proof of worker/wrapper Assumption C."
+                   ]
+    , external "wwAssAToAssC" (promoteExprR . wwAssAimpliesAssC . extractR :: RewriteH LCore -> RewriteH LCore)
+                   [ "Convert a proof of worker/wrapper Assumption A into a proof of worker/wrapper Assumption C."
+                   ]
+
     ]
     where
       mkWWAssC :: RewriteH LCore -> Maybe WWAssumption
@@ -455,7 +559,6 @@ instance External (RewriteH LCoreTC) where
         [ "between x y rr -> perform rr at least x times and at most y times." ]
 --    , external "atPath"     (flip hfocusT idR :: TransformH LCoreTC LocalPathH -> TransformH LCoreTC LCoreTC)
 --        [ "return the expression found at the given path" ]
-
 
     ]
 
@@ -522,7 +625,17 @@ instance External (TransformH LCore ()) where
                      "The precondition \"fix (X->A) (\\ h x -> abs (rep (f h x))) == fix (X->A) f\" is expected to hold.",
                      "Note that this is performed automatically as part of \"ww-result-split\"."
                    ] .+ Experiment .+ TODO
-    ]
+     , external "wwGenerateFusion" (wwGenerateFusionT . mkWWAssC :: RewriteH LCore -> TransformH LCore ())
+                   [ "Given a proof of Assumption C (fix A (\\ a -> wrap (unwrap (f a))) ==> fix A f), then",
+                     "execute this command on \"work = unwrap (f (wrap work))\" to enable the \"ww-fusion\" rule thereafter.",
+                     "Note that this is performed automatically as part of \"ww-split\"."
+                   ] .+ Experiment .+ TODO
+    , external "wwGenerateFusionUnsafe" (wwGenerateFusionT Nothing :: TransformH LCore ())
+                   [ "Execute this command on \"work = unwrap (f (wrap work))\" to enable the \"ww-fusion\" rule thereafter.",
+                     "The precondition \"fix A (wrap . unwrap . f) == fix A f\" is expected to hold.",
+                     "Note that this is performed automatically as part of \"ww-split\"."
+                   ] .+ Experiment .+ TODO
+   ]
     where
       mkWWAssC :: RewriteH LCore -> Maybe WWAssumption
       mkWWAssC r = Just (WWAssumption C (extractR r))

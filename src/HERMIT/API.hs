@@ -14,6 +14,7 @@ module HERMIT.API
         , module HERMIT.API.Dictionary.Navigation
         , module HERMIT.API.Dictionary.Remembered
         , module HERMIT.API.Dictionary.WorkerWrapper.FixResult
+        , module HERMIT.API.Dictionary.WorkerWrapper.Fix
         , module HERMIT.API.Shell
         , module HERMIT.API.Shell.Externals
           -- Types
@@ -41,6 +42,7 @@ import HERMIT.API.Dictionary.Local
 import HERMIT.API.Dictionary.Navigation
 import HERMIT.API.Dictionary.Remembered
 import HERMIT.API.Dictionary.WorkerWrapper.FixResult
+import HERMIT.API.Dictionary.WorkerWrapper.Fix
 import HERMIT.API.Shell
 import HERMIT.API.Types
 
