@@ -1,6 +1,9 @@
 {-# LANGUAGE OverloadedStrings #-}
 module HERMIT.API.Dictionary.Local.Let where
 
+import Data.Aeson
+import HERMIT.API.Types
+
 -- | Let substitution: (let x = e1 in e2) ==> (e2[e1/x])
 -- x must not be free in e1.
 letSubst :: Rewrite LCore
@@ -51,20 +54,18 @@ letFloatLet = Transform $ method "letFloatLet" []
 letFloatCase :: Rewrite LCore
 letFloatCase = Transform $ method "letFloatCase" []
 
--- | case s of { ... ; p -> let v = ev in e ; ... }
--- ==> let v = ev in case s of { ... ; p -> e ; ... }
-letFloatCaseAlt :: Rewrite LCore
-letFloatCaseAlt = Transform $ method "letFloatCaseAlt" []
-
--- | Float a let binding from specified alternative.
--- case s of { ... ; p -> let v = ev in e ; ... }
--- ==> let v = ev in case s of { ... ; p -> e ; ... }
-letFloatCaseAlt :: Int -> Rewrite LCore
-letFloatCaseAlt int = Transform $ method "letFloatCaseAlt" [toJSON int]
+-- -- | case s of { ... ; p -> let v = ev in e ; ... }
+-- -- ==> let v = ev in case s of { ... ; p -> e ; ... }
+-- letFloatCaseAlt :: Rewrite LCore
+--
+-- -- | Float a let binding from specified alternative.
+-- -- case s of { ... ; p -> let v = ev in e ; ... }
+-- -- ==> let v = ev in case s of { ... ; p -> e ; ... }
+-- letFloatCaseAlt :: Int -> Rewrite LCore
 
 -- | cast (let bnds in e) co ==> let bnds in cast e co
 letFloatCast :: Rewrite LCore
-letFloatCase = Transform $ method "letFloatCast" []
+letFloatCast = Transform $ method "letFloatCast" []
 
 -- | v = (let bds in e) : prog ==> bds : v = e : prog
 letFloatTop :: Rewrite LCore
@@ -103,7 +104,7 @@ letFloatInLam = Transform $ method "letFloatInLam" []
 -- | Combine nested non-recursive lets into case of a tuple.
 -- E.g. let {v1 = e1 ; v2 = e2 ; v3 = e3} in body ==> case (e1,e2,e3) of {(v1,v2,v3) -> body}
 letTuple :: String -> Rewrite LCore
-letTuple = Transform $ method "letTuple" []
+letTuple str = Transform $ method "letTuple" [toJSON str]
 
 -- | Remove unused top-level binding(s).
 -- prog-bind-nonrec-elim <+ prog-bind-rec-elim

@@ -444,6 +444,22 @@ instance External (RewriteH LCore) where
     , external "caseFoldBinder" (promoteExprR caseFoldBinderR :: RewriteH LCore)
         [ "In the case alternatives, fold any occurrences of the case alt patterns to the case binder." ]
 
+      -- HERMIT.API.Dictionary.Local.Cast
+    , external "castElim" (promoteExprR castElimR :: RewriteH LCore)
+        [ "castElimRefl <+ castElimSym" ] .+ Shallow -- don't include in "Bash", as sub-rewrites are tagged "Bash" already.
+    , external "castElimRefl" (promoteExprR castElimReflR :: RewriteH LCore)
+        [ "cast e co ==> e ; if co is a reflexive coercion" ] .+ Shallow
+    , external "castElimSym" (promoteExprR castElimSymR :: RewriteH LCore)
+        [ "removes pairs of symmetric casts" ]                .+ Shallow
+    , external "castElimSymPlus" (promoteExprR castElimSymPlusR :: RewriteH LCore)
+        [ "removes pairs of symmetric casts possibly separated by let or case forms" ] .+ Deep .+ TODO
+    , external "castFloatApp" (promoteExprR castFloatAppR :: RewriteH LCore)
+        [ "(cast e (c1 -> c2)) x ==> cast (e (cast x (sym c1))) c2" ] .+ Shallow
+    , external "castFloatLam" (promoteExprR castFloatLamR :: RewriteH LCore)
+        [ "\\ x::a -> cast x (a -> b) ==> cast (\\x::a -> x) ((a -> a) -> (a -> b))" ] .+ Shallow
+    , external "castElimUnsafe" (promoteExprR castElimUnsafeR :: RewriteH LCore)
+        [ "removes casts regardless of whether it is safe to do so" ] .+ Shallow .+ Experiment .+ Unsafe .+ TODO
+
       -- HERMIT.API.Dictionary.Local.Let
     , external "letSubst" (promoteExprR letSubstR :: RewriteH LCore)
         [ "Let substitution: (let x = e1 in e2) ==> (e2[e1/x])"
@@ -473,13 +489,13 @@ instance External (RewriteH LCore) where
         [ "let v = (let w = ew in ev) in e ==> let w = ew in let v = ev in e" ] .+ Commute .+ Shallow
     , external "letFloatCase" (promoteExprR letFloatCaseR :: RewriteH LCore)
         [ "case (let v = ev in e) of ... ==> let v = ev in case e of ..." ]     .+ Commute .+ Shallow .+ Eval
-    , external "letFloatCaseAlt" (promoteExprR (letFloatCaseAltR Nothing) :: RewriteH LCore)
-        [ "case s of { ... ; p -> let v = ev in e ; ... } "
-        , "==> let v = ev in case s of { ... ; p -> e ; ... } " ]               .+ Commute .+ Shallow .+ Eval
-    , external "letFloatCaseAlt" (promoteExprR . letFloatCaseAltR . Just :: Int -> RewriteH LCore)
-        [ "Float a let binding from specified alternative."
-        , "case s of { ... ; p -> let v = ev in e ; ... } "
-        , "==> let v = ev in case s of { ... ; p -> e ; ... } " ]               .+ Commute .+ Shallow .+ Eval
+--     , external "letFloatCaseAlt" (promoteExprR (letFloatCaseAltR Nothing) :: RewriteH LCore)
+--         [ "case s of { ... ; p -> let v = ev in e ; ... } "
+--         , "==> let v = ev in case s of { ... ; p -> e ; ... } " ]               .+ Commute .+ Shallow .+ Eval
+--     , external "letFloatCaseAlt" (promoteExprR . letFloatCaseAltR . Just :: Int -> RewriteH LCore)
+--         [ "Float a let binding from specified alternative."
+--         , "case s of { ... ; p -> let v = ev in e ; ... } "
+--         , "==> let v = ev in case s of { ... ; p -> e ; ... } " ]               .+ Commute .+ Shallow .+ Eval
     , external "letFloatCast" (promoteExprR letFloatCastR :: RewriteH LCore)
         [ "cast (let bnds in e) co ==> let bnds in cast e co" ]                 .+ Commute .+ Shallow
     , external "letFloatTop" (promoteProgR letFloatTopR :: RewriteH LCore)
