@@ -10,6 +10,7 @@
 module HERMIT.Server.Parser.Transform where
 
 import           Control.Arrow
+import           Control.Monad
 
 import           Data.Proxy
 
@@ -159,7 +160,7 @@ instance External (RewriteH LCore) where
         [ "Unfold the current expression if it is one of the basic combinators:"
         , "($), (.), id, flip, const, fst, snd, curry, and uncurry." ]
     , external "simplify" (simplifyR :: RewriteH LCore)
-        [ "innermost (unfold-basic-combinator <+ beta-reduce-plus <+ safe-let-subst <+ case-reduce <+ let-elim)" ]
+        [ "innermost (unfold-basic-combinator <+ betaReduce-plus <+ safeLet-subst <+ caseReduce <+ letElim)" ]
     , external "bash" (bashR :: RewriteH LCore)
         bashHelp .+ Eval .+ Deep .+ Loop
     , external "smash" (smashR :: RewriteH LCore)
@@ -194,11 +195,11 @@ instance External (RewriteH LCore) where
         , "you first need to apply an associativity rewrite." ]  .+ Context .+ Deep
 
       -- HERMIT.API.Dictionary.Function
-    , external "static-arg" (promoteDefR staticArgR :: RewriteH LCore)
+    , external "staticArg" (promoteDefR staticArgR :: RewriteH LCore)
         [ "perform the static argument transformation on a recursive function." ]
-    , external "static-arg-types" (promoteDefR staticArgTypesR :: RewriteH LCore)
+    , external "staticArgTypes" (promoteDefR staticArgTypesR :: RewriteH LCore)
         [ "perform the static argument transformation on a recursive function, only transforming type arguments." ]
---     , external "static-arg-pos" (promoteDefR . staticArgPosR :: [Int] -> RewriteH LCore)
+--     , external "staticArgPos" (promoteDefR . staticArgPosR :: [Int] -> RewriteH LCore)
 --         [ "perform the static argument transformation on a recursive function, only transforming the arguments specified (by index)." ]
 
       -- HERMIT.API.Dictionary.GHC
@@ -225,7 +226,7 @@ instance External (RewriteH LCore) where
     , external "inlineCaseScrutinee" (promoteExprR inlineCaseScrutineeR :: RewriteH LCore)
         [ "if v is a case binder, replace (Var v) with the bound case scrutinee." ] .+ Eval .+ Deep
     , external "inlineCaseAlternative" (promoteExprR inlineCaseAlternativeR :: RewriteH LCore)
-        [ "if v is a case binder, replace (Var v) with the bound case-alternative pattern." ] .+ Eval .+ Deep
+        [ "if v is a case binder, replace (Var v) with the bound caseAlternative pattern." ] .+ Eval .+ Deep
 
       -- HERMIT.API.Dictionary.KURE
     , external "id_"         (idR :: RewriteH LCore)
@@ -291,6 +292,92 @@ instance External (RewriteH LCore) where
 --        [ "return the expression found at the given path" ]
 --    , external "atPath"     (extractT . flip hfocusT projectT :: TransformH LCoreTC LocalPathH -> TransformH LCore LCore)
 --        [ "return the expression found at the given path" ]
+
+      -- HERMIT.API.Dictionary.Local.Bind
+    , external "nonrecToRec" (promoteBindR nonrecToRecR :: RewriteH LCore)
+        [ "Convert a non-recursive binding into a recursive binding group with a single definition."
+        , "NonRec v e ==> Rec [Def v e]" ]                           .+ Shallow
+    , external "recToNonrec" (promoteBindR recToNonrecR :: RewriteH LCore)
+        [ "Convert a singleton recursive binding into a non-recursive binding group."
+        , "Rec [Def v e] ==> NonRec v e,  (v not free in e)" ]
+
+      -- HERMIT.API.Dictionary.Local.Case
+    , external "caseFloatApp" (promoteExprR caseFloatAppR :: RewriteH LCore)
+        [ "(case ec of alt -> e) v ==> case ec of alt -> e v" ] .+ Commute .+ Shallow
+    , external "caseFloatArg" ((\ strict -> promoteExprR (caseFloatArg Nothing (Just strict))) :: RewriteH LCore -> RewriteH LCore)
+        [ "Given a proof that f is strict, then"
+        , "f (case s of alt -> e) ==> case s of alt -> f e" ]   .+ Commute .+ Shallow
+    , external "caseFloatArg" ((\ f strict -> promoteExprR (caseFloatArg (Just f) (Just strict))) :: CoreString -> RewriteH LCore -> RewriteH LCore)
+        [ "For a specified f, given a proof that f is strict, then"
+        , "f (case s of alt -> e) ==> case s of alt -> f e" ]   .+ Commute .+ Shallow
+    , external "caseFloatArgUnsafe" ((\ f -> promoteExprR (caseFloatArg (Just f) Nothing)) :: CoreString -> RewriteH LCore)
+        [ "For a specified f,"
+        , "f (case s of alt -> e) ==> case s of alt -> f e" ]   .+ Commute .+ Shallow .+ PreCondition .+ Strictness
+    , external "caseFloatArgUnsafe" (promoteExprR . caseFloatArgLemmaR UnsafeUsed :: LemmaName -> RewriteH LCore)
+        [ "f (case s of alt -> e) ==> case s of alt -> f e" ]   .+ Commute .+ Shallow .+ PreCondition .+ Strictness .+ Unsafe
+    , external "caseFloatArgLemma" (promoteExprR . caseFloatArgLemmaR Obligation :: LemmaName -> RewriteH LCore)
+        [ "f (case s of alt -> e) ==> case s of alt -> f e"
+        , "Generates a lemma with given name for strictness side condition on f." ] .+ Commute .+ Shallow .+ PreCondition .+ Strictness
+    , external "caseFloatCase" (promoteExprR caseFloatCaseR :: RewriteH LCore)
+        [ "case (case ec of alt1 -> e1) of alta -> ea ==> case ec of alt1 -> case e1 of alta -> ea" ] .+ Commute .+ Eval
+    , external "caseFloatCase" (promoteExprR caseFloatCastR :: RewriteH LCore)
+        [ "cast (case s of p -> e) co ==> case s of p -> cast e co" ]        .+ Shallow .+ Commute
+    , external "caseFloatLet" (promoteExprR caseFloatLetR :: RewriteH LCore)
+        [ "let v = case ec of alt1 -> e1 in e ==> case ec of alt1 -> let v = e1 in e" ] .+ Commute .+ Shallow .+ Strictness
+    , external "caseFloat" (promoteExprR caseFloatR :: RewriteH LCore)
+        [ "caseFloat = caseFloatApp <+ caseFloatCase <+ caseFloatLet <+ caseFloatCase" ] .+ Commute .+ Shallow .+ Strictness
+    , external "caseFloatIn" (promoteExprR caseFloatInR :: RewriteH LCore)
+        [ "Float in a Case whatever the context." ]                             .+ Commute .+ Shallow .+ PreCondition
+    , external "caseFloatInArgs" (promoteExprR caseFloatInArgsR :: RewriteH LCore)
+        [ "Float in a Case whose alternatives are parallel applications of the same function." ] .+ Commute .+ Shallow .+ PreCondition .+ Strictness
+    , external "caseReduce" (promoteExprR (caseReduceR True) :: RewriteH LCore)
+        [ "Case of Known Constructor"
+        , "caseReduceDatacon <+ caseReduceLiteral" ]                     .+ Shallow .+ Eval
+    , external "caseReduceDatacon" (promoteExprR (caseReduceDataconR True) :: RewriteH LCore)
+        [ "Case of Known Constructor"
+        , "case C v1..vn of C w1..wn -> e ==> let { w1 = v1 ; .. ; wn = vn } in e" ]    .+ Shallow .+ Eval
+    , external "caseReduceLiteral" (promoteExprR (caseReduceLiteralR True) :: RewriteH LCore)
+        [ "Case of Known Constructor"
+        , "case L of L -> e ==> e" ]                                         .+ Shallow .+ Eval
+    , external "caseReduceUnfold" (promoteExprR (caseReduceUnfoldR True) :: RewriteH LCore)
+        [ "Unfold the case scrutinee and then caseReduce." ] .+ Shallow .+ Eval .+ Context
+    , external "caseSplit" ((\nm -> findVarT (unOccurrenceName nm) >>= promoteExprR . caseSplitR . varToCoreExpr) :: OccurrenceName -> RewriteH LCore)
+        [ "caseSplit 'x"
+        , "e ==> case x of C1 vs -> e; C2 vs -> e, where x is free in e" ] .+ Deep .+ Strictness
+    , external "caseSplit" (parseCoreExprT >=> promoteR . caseSplitR :: CoreString -> RewriteH LCore)
+        [ "caseSplit [| expr |]"
+        , "e ==> case expr of C1 vs -> e; C2 vs -> e"] .+ Deep .+ Strictness
+    , external "caseSplitInline" ((\nm -> findVarT (unOccurrenceName nm) >>= promoteExprR . caseSplitInlineR . varToCoreExpr) :: OccurrenceName -> RewriteH LCore)
+        [ "Like caseSplit, but additionally inlines the matched constructor "
+        , "applications for all occurances of the named variable." ] .+ Deep .+ Strictness
+    , external "caseSplitInline" (parseCoreExprT >=> promoteExprR . caseSplitInlineR :: CoreString -> RewriteH LCore)
+        [ "Like caseSplit, but additionally inlines the matched constructor "
+        , "applications for all occurances of the case binder." ] .+ Deep .+ Strictness
+    , external "caseIntroSeq" (promoteExprR . caseIntroSeqR . cmpString2Var :: String -> RewriteH LCore)
+        [ "Force evaluation of a variable by introducing a case."
+        , "caseIntroSeq 'v is is equivalent to adding @(seq v)@ in the source code." ] .+ Shallow .+ Introduce .+ Strictness
+    , external "caseElimSeq" (promoteExprR caseElimSeqR :: RewriteH LCore)
+        [ "Eliminate a case that corresponds to a pointless seq."  ] .+ Deep .+ Eval .+ Strictness
+    , external "caseInlineAlternative" (promoteExprR caseInlineAlternativeR :: RewriteH LCore)
+        [ "Inline the case binder as the caseAlternative pattern everywhere in the case alternatives." ] .+ Deep
+    , external "caseInlineScrutinee" (promoteExprR caseInlineScrutineeR :: RewriteH LCore)
+        [ "Inline the case binder as the case scrutinee everywhere in the case alternatives." ] .+ Deep
+    , external "caseMergeAlts" (promoteExprR caseMergeAltsR :: RewriteH LCore)
+        [ "Merge all case alternatives into a single default case."
+        , "The RHS of each alternative must be the same."
+        , "case s of {pat1 -> e ; pat2 -> e ; ... ; patn -> e} ==> case s of {_ -> e}" ]
+    , external "caseMergeAltsWithBinder" (promoteExprR caseMergeAltsWithBinderR :: RewriteH LCore)
+        [ "A cleverer version of 'mergeCaseAlts' that first attempts to"
+        , "abstract out any occurrences of the alternative pattern using the case binder." ] .+ Deep
+    , external "caseElim" (promoteExprR caseElimR :: RewriteH LCore)
+        [ "case s of w; C vs -> e ==> e if w and vs are not free in e" ]     .+ Shallow .+ Strictness
+    , external "caseElimInlineScrutinee" (promoteExprR caseElimInlineScrutineeR :: RewriteH LCore)
+        [ "Eliminate a case, inlining any occurrences of the case binder as the scrutinee." ] .+ Deep
+    , external "caseElimMergeAlts" (promoteExprR caseElimMergeAltsR :: RewriteH LCore)
+        [ "Eliminate a case, merging the case alternatives into a single default alternative",
+          "and inlining the case binder as the scrutinee (if possible)." ] .+ Deep
+    , external "caseFoldBinder" (promoteExprR caseFoldBinderR :: RewriteH LCore)
+        [ "In the case alternatives, fold any occurrences of the case alt patterns to the case binder." ]
 
       -- ???
     , external "unfoldRemembered" (promoteExprR . unfoldRememberedR Obligation :: LemmaName -> RewriteH LCore)

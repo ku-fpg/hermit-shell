@@ -10,6 +10,7 @@ module HERMIT.API
         , module HERMIT.API.Dictionary.Induction
         , module HERMIT.API.Dictionary.Inline
         , module HERMIT.API.Dictionary.KURE
+        , module HERMIT.API.Dictionary.Local
         , module HERMIT.API.Dictionary.Navigation
         , module HERMIT.API.Dictionary.Remembered
         , module HERMIT.API.Dictionary.WorkerWrapper.FixResult
@@ -36,6 +37,7 @@ import HERMIT.API.Dictionary.GHC
 import HERMIT.API.Dictionary.Induction
 import HERMIT.API.Dictionary.Inline
 import HERMIT.API.Dictionary.KURE
+import HERMIT.API.Dictionary.Local
 import HERMIT.API.Dictionary.Navigation
 import HERMIT.API.Dictionary.Remembered
 import HERMIT.API.Dictionary.WorkerWrapper.FixResult
