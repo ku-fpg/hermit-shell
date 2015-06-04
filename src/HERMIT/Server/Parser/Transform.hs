@@ -361,6 +361,33 @@ instance External (RewriteH LCore) where
 --    , external "atPath"     (extractT . flip hfocusT projectT :: TransformH LCoreTC LocalPathH -> TransformH LCore LCore)
 --        [ "return the expression found at the given path" ]
 
+      -- HERMIT.API.Dictionary.Local
+    , external "betaReduce" (promoteExprR betaReduceR :: RewriteH LCore)
+        [ "((\\ v -> E1) E2) ==> let v = E2 in E1"
+        , "This form of beta-reduction is safe if E2 is an arbitrary expression"
+        , "(won't duplicate work)." ]                                 .+ Eval .+ Shallow
+    , external "betaExpand" (promoteExprR betaExpandR :: RewriteH LCore)
+        [ "(let v = e1 in e2) ==> (\\ v -> e2) e1" ]                            .+ Shallow
+    , external "etaReduce" (promoteExprR etaReduceR :: RewriteH LCore)
+        [ "(\\ v -> e1 v) ==> e1" ]                                             .+ Eval .+ Shallow
+    , external "etaExpand" (promoteExprR . etaExpandR :: String -> RewriteH LCore)
+        [ "\"eta-expand 'v\" performs e1 ==> (\\ v -> e1 v)" ]                  .+ Shallow .+ Introduce
+    , external "flattenModule" (promoteModGutsR flattenModuleR :: RewriteH LCore)
+        [ "Flatten all the top-level binding groups in the module to a single recursive binding group."
+        , "This can be useful if you intend to appply GHC RULES." ]
+    , external "flattenProgram" (promoteProgR flattenProgramR :: RewriteH LCore)
+        [ "Flatten all the top-level binding groups in a program (list of binding groups) to a single"
+        , "recursive binding group.  This can be useful if you intend to apply GHC RULES." ]
+    , external "abstract" (promoteExprR . abstractR . mkOccPred :: OccurrenceName -> RewriteH LCore)
+        [ "Abstract over a variable using a lambda."
+        , "e  ==>  (\\ x -> e) x" ]                                             .+ Shallow .+ Introduce .+ Context
+    , external "push" ((\ nm strictf -> push (Just strictf) (cmpString2Var nm)) :: String -> RewriteH LCore -> RewriteH LCore)
+        [ "Push a function 'f into a case-expression or let-expression argument,"
+        , "given a proof that f (fully saturated with type arguments) is strict." ] .+ Shallow .+ Commute
+    , external "pushUnsafe" (push Nothing . cmpString2Var :: String -> RewriteH LCore)
+        [ "Push a function 'f into a case-expression or let-expression argument."
+        , "Requires 'f to be strict." ] .+ Shallow .+ Commute .+ PreCondition .+ Unsafe
+
       -- HERMIT.API.Dictionary.Local.Bind
     , external "nonrecToRec" (promoteBindR nonrecToRecR :: RewriteH LCore)
         [ "Convert a nonRecursive binding into a recursive binding group with a single definition."
