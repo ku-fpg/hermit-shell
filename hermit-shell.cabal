@@ -61,6 +61,7 @@ library
                         HERMIT.API.Dictionary.Inline
                         HERMIT.API.Dictionary.KURE
                         HERMIT.API.Dictionary.Local
+                        HERMIT.API.Dictionary.Local.Bind
                         HERMIT.API.Dictionary.Navigation
                         HERMIT.API.Dictionary.Remembered
                         HERMIT.API.Dictionary.WorkerWrapper.FixResult

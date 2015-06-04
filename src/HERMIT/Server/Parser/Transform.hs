@@ -251,7 +251,7 @@ instance External (RewriteH LCore) where
 --    , external "atPath"     (extractT . flip hfocusT projectT :: TransformH LCoreTC LocalPathH -> TransformH LCore LCore)
 --        [ "return the expression found at the given path" ]
 
-      -- HERMIT.API.Dictionary.Local
+      -- HERMIT.API.Dictionary.Local.Bind
     , external "nonrecToRec" (promoteBindR nonrecToRecR :: RewriteH LCore)
         [ "Convert a non-recursive binding into a recursive binding group with a single definition."
         , "NonRec v e ==> Rec [Def v e]" ]                           .+ Shallow

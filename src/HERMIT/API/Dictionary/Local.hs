@@ -1,10 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
-module HERMIT.API.Dictionary.Local where
+module HERMIT.API.Dictionary.Local
+    ( module HERMIT.API.Dictionary.Local.Bind
+    ) where
 
-import HERMIT.API.Types
-
-nonrecToRec :: Rewrite LCore
-nonrecToRec = Transform $ method "nonrecToRec" []
-
-recToNonrec :: Rewrite LCore
-recToNonrec = Transform $ method "recToNonrec" []
+import HERMIT.API.Dictionary.Local.Bind
