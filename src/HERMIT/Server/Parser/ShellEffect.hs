@@ -87,6 +87,3 @@ instance External ShellEffect where
         [ "Stop running the current script." ]
    ]
 
-instance External Int where
-  parseExternal (Number n) = return $ floor n
-

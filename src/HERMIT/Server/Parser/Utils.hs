@@ -66,7 +66,8 @@ infixl 3 .+
 (.+) :: b -> a -> b
 (.+) = \ b _ -> b
 
-
+instance External Int where
+  parseExternal (Number n) = return $ floor n
 
 instance External String where
   parseExternal (String txt) = return $ unpack $ txt
