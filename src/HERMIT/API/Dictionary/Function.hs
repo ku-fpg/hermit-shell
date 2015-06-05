@@ -1,7 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 module HERMIT.API.Dictionary.Function where
 
-import Data.Aeson
 import HERMIT.API.Types
 
 -- | perform the static argument transformation on a recursive function.

@@ -19,7 +19,6 @@ import           HERMIT.Context
 import           HERMIT.Kure hiding ((<$>),(<*>))
 import           HERMIT.Shell.Command
 import           HERMIT.Shell.Types hiding (clm)
-import           HERMIT.Shell.KernelEffect
 
 -- import           HERMIT.Context
 

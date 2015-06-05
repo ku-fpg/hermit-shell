@@ -6,7 +6,6 @@ module HERMIT.Server.Parser.ShellEffect where
 import           HERMIT.Shell.ShellEffect
 import           HERMIT.Shell.Types
 import           HERMIT.Shell.Dictionary
-import           HERMIT.Shell.ScriptToRewrite
 import           HERMIT.PrettyPrinter.Common
 
 import           HERMIT.Server.Parser.Utils
@@ -16,8 +15,6 @@ import           HERMIT.Shell.Externals
 
 import qualified Data.Map as M
 import           Data.List (intercalate)
-
-import           Data.Aeson
 
 instance External ShellEffect where
   parseExternals =

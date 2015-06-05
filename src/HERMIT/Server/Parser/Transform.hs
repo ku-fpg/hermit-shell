@@ -23,7 +23,6 @@ import           HERMIT.Lemma
 import           HERMIT.Name
 import           HERMIT.ParserCore
 import           HERMIT.PrettyPrinter.Common
-import           HERMIT.Dictionary.Rules
 
 import           HERMIT.Server.Parser.Name ()
 import           HERMIT.Server.Parser.String ()

@@ -2,7 +2,7 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE UndecidableInstances #-}
 
-#if __GLASGOW_HASKELL <= 708 && __GLASGOW_HASKELL__ < 710
+#if __GLASGOW_HASKELL__ <= 708 && __GLASGOW_HASKELL__ < 710
 {-# LANGUAGE OverlappingInstances #-}
 #endif
 
@@ -26,7 +26,7 @@ instance
     Show a => Repl a where
   printForRepl = print
 
-#if __GLASGOW_HASKELL >= 710
+#if __GLASGOW_HASKELL__ >= 710
 instance {-# OVERLAPPING #-}
 #else
 instance

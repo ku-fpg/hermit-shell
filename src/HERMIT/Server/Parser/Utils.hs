@@ -1,4 +1,9 @@
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE LambdaCase, OverloadedStrings, FlexibleInstances, FlexibleContexts, TypeFamilies, DefaultSignatures, GADTs, RankNTypes, ScopedTypeVariables, StandaloneDeriving, DeriveDataTypeable #-}
+#if __GLASGOW_HASKELL__ <= 708 && __GLASGOW_HASKELL__ < 710
+{-# LANGUAGE OverlappingInstances #-}
+#endif
+
 module HERMIT.Server.Parser.Utils 
         ( External(parseExternal, parseExternals)
         , external
@@ -71,25 +76,35 @@ infixl 3 .+
 
 instance External Int where
   parseExternal (Number n) = return $ floor n
-
-instance External String where
-  parseExternal (String txt) = return $ unpack $ txt
-  parseExternal _            = fail "fail: String"
+  parseExternal _          = fail "parseExternal: Int"
 
 instance forall g . Typeable g => External (Proxy g) where
   parseExternal (String txt) | txt ==  pack (show (typeOf (undefined :: g)))
                              = return $ Proxy
-  parseExternal _            = fail $ "fail: Proxy for " ++ show (typeOf (undefined :: g))
-
-instance External [Int] where
-  parseExternal (Array as) = mapM parseExternal $ toList as
+  parseExternal _            = fail $ "parseExternal: Proxy for " ++ 
+                                      show (typeOf (undefined :: g))
 
 instance External RuleName where
   parseExternal (String s) = return . RuleName $ unpack s
-  parseExternal x          = fail $ "fail: External RuleName: " ++ show x
+  parseExternal x          = fail $ "parseExternal: RuleName -- " ++ show x
 
-instance External [RuleName] where
+#if __GLASGOW_HASKELL__ >= 710
+instance {-# OVERLAPPABLE #-}
+#else
+instance
+#endif
+  External e => External [e] where
   parseExternal (Array as) = mapM parseExternal $ toList as
+  parseExternal _          = fail "parseExternal: Array"
+
+#if __GLASGOW_HASKELL__ >= 710
+instance {-# OVERLAPPING #-}
+#else
+instance
+#endif
+  External String where
+  parseExternal (String txt) = return $ unpack $ txt
+  parseExternal _            = fail "parseExternal: String" 
 
 -----------------------------------------------------------------
 instance External PrettyPrinter where

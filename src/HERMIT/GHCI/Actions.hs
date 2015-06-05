@@ -167,9 +167,12 @@ initCommandLineState ast = do
                 , cl_diffonly       = False
                 }        
 
--- 'performTypedEffect' takes the Plugin Reader Data, a mutable CommandLineState,
--- and return a function from JSON list to JSON.
-performTypedEffect :: PluginReader -> TMVar CommandLineState -> ([Aeson.Value] -> IO Aeson.Value)
+{- 
+  'performTypedEffect' takes the Plugin Reader Data, a mutable CommandLineState,
+  and return a function from JSON list to JSON.
+-}
+performTypedEffect :: PluginReader -> TMVar CommandLineState 
+                   -> ([Aeson.Value] -> IO Aeson.Value)
 performTypedEffect plug ref [val] = do
   case parseCLT val of
     Nothing -> do
@@ -196,6 +199,8 @@ performTypedEffect plug ref [val] = do
              return Aeson.Null
           Left _exc  -> return $ Aeson.Null
           Right val' -> return $ object [ "result" .= val', "output" .= es ]
+performTypedEffect _ _ _ =
+    fail "performTypedEffect: typed effects are expected to be unary."
 
 
 newRenderer :: (Handle -> PrettyOptions -> Either String DocH -> IO ()) -> CommandLineState -> CommandLineState

@@ -26,8 +26,9 @@ instance External QueryFun where
     ]
 
 instance External AST where
-  parseExternal (Number n) = return $ (integerToAST . toInteger . floor) n
+  parseExternal (Number n) = return $ (integerToAST . fromInteger . floor) n
     where
+      integerToAST :: Int -> AST
       integerToAST = read . show
   parseExternal _ = mzero
 

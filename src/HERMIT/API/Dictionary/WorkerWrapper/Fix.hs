@@ -2,9 +2,7 @@
 module HERMIT.API.Dictionary.WorkerWrapper.Fix where
 
 import HERMIT.API.Types
-import Data.String (fromString)
 import Data.Aeson
-import Data.Vector (fromList)
 
 -- | Worker/Wrapper Factorisation
 --   For any "f :: A -> A", and given "wrap :: B -> A" and "unwrap :: A -> B" as arguments,
@@ -13,8 +11,8 @@ import Data.Vector (fromList)
 wwFactorisation :: String -> String -> BiRewrite LCore -> BiRewrite LCore
 wwFactorisation wrap unwrap assC
   = BiTransform $ method "wwFactorisation"
-                         [ String $ fromString wrap
-                         , String $ fromString unwrap
+                         [ toJSON wrap
+                         , toJSON unwrap
                          , toJSON assC
                          ]
 
@@ -25,8 +23,8 @@ wwFactorisation wrap unwrap assC
 wwFactorisationUnsafe :: String -> String -> BiRewrite LCore
 wwFactorisationUnsafe wrap unwrap
   = BiTransform $ method "wwFactorisationUnsafe"
-                         [ String $ fromString wrap
-                         , String $ fromString unwrap
+                         [ toJSON wrap
+                         , toJSON unwrap
                          ]
 
 -- | Worker/Wrapper Split
@@ -38,8 +36,8 @@ wwFactorisationUnsafe wrap unwrap
 wwSplit :: String -> String -> Rewrite LCore -> Rewrite LCore
 wwSplit wrap unwrap assC
   = Transform $ method "wwSplit"
-                       [ String $ fromString wrap
-                       , String $ fromString unwrap
+                       [ toJSON wrap
+                       , toJSON unwrap
                        , toJSON assC
                        ]
 
@@ -52,8 +50,8 @@ wwSplit wrap unwrap assC
 wwSplitUnsafe :: String -> String -> Rewrite LCore
 wwSplitUnsafe wrap unwrap
   = Transform $ method "wwSplitUnsafe"
-                       [ String $ fromString wrap
-                       , String $ fromString unwrap
+                       [ toJSON wrap
+                       , toJSON unwrap
                        ]
 
 -- | Worker/Wrapper Split - Static Argument Variant
@@ -62,10 +60,10 @@ wwSplitUnsafe wrap unwrap
 wwSplitStaticArg :: Int -> [Int] -> String -> String -> Rewrite LCore -> Rewrite LCore
 wwSplitStaticArg n is wrap unwrap assC
   = Transform $ method "wwSplitStaticArg"
-                       [ Number $ fromIntegral n
-                       , Array . fromList $ map (Number . fromIntegral) is
-                       , String $ fromString wrap
-                       , String $ fromString unwrap
+                       [ toJSON n
+                       , toJSON is
+                       , toJSON wrap
+                       , toJSON unwrap
                        , toJSON assC
                        ]
 
@@ -75,10 +73,10 @@ wwSplitStaticArg n is wrap unwrap assC
 wwSplitStaticArgUnsafe :: Int -> [Int] -> String -> String -> Rewrite LCore
 wwSplitStaticArgUnsafe n is wrap unwrap
   = Transform $ method "wwSplitStaticArgUnsafe"
-                       [ Number $ fromIntegral n
-                       , Array . fromList $ map (Number . fromIntegral) is
-                       , String $ fromString wrap
-                       , String $ fromString unwrap
+                       [ toJSON n
+                       , toJSON is
+                       , toJSON wrap
+                       , toJSON unwrap
                        ]
 
 -- | Worker/Wrapper Assumption A
@@ -88,8 +86,8 @@ wwSplitStaticArgUnsafe n is wrap unwrap
 wwAssumptionA :: String -> String -> Rewrite LCore -> BiRewrite LCore
 wwAssumptionA wrap unwrap assA
   = BiTransform $ method "wwAssumptionA"
-                         [ String $ fromString wrap
-                         , String $ fromString unwrap
+                         [ toJSON wrap
+                         , toJSON unwrap
                          , toJSON assA
                          ]
 -- | Worker/Wrapper Assumption B
@@ -99,8 +97,9 @@ wwAssumptionA wrap unwrap assA
 wwAssumptionB :: String -> String -> String -> Rewrite LCore -> BiRewrite LCore
 wwAssumptionB wrap unwrap f assB
   = BiTransform $ method "wwAssumptionB"
-                         [ String $ fromString wrap
-                         , String $ fromString unwrap
+                         [ toJSON wrap
+                         , toJSON unwrap
+                         , toJSON f
                          , toJSON assB
                          ]
 
@@ -111,8 +110,9 @@ wwAssumptionB wrap unwrap f assB
 wwAssumptionC :: String -> String -> String -> Rewrite LCore -> BiRewrite LCore
 wwAssumptionC wrap unwrap f assC
   = BiTransform $ method "wwAssumptionC"
-                         [ String $ fromString wrap
-                         , String $ fromString unwrap
+                         [ toJSON wrap
+                         , toJSON unwrap
+                         , toJSON f
                          , toJSON assC
                          ]
 
@@ -123,8 +123,8 @@ wwAssumptionC wrap unwrap f assC
 wwAssumptionAUnsafe :: String -> String -> BiRewrite LCore
 wwAssumptionAUnsafe wrap unwrap
   = BiTransform $ method "wwAssumptionAUnsafe"
-                         [ String $ fromString wrap
-                         , String $ fromString unwrap
+                         [ toJSON wrap
+                         , toJSON unwrap
                          ]
 
 -- | Unsafe Worker/Wrapper Assumption B
@@ -134,8 +134,9 @@ wwAssumptionAUnsafe wrap unwrap
 wwAssumptionBUnsafe :: String -> String -> String -> BiRewrite LCore
 wwAssumptionBUnsafe wrap unwrap f
   = BiTransform $ method "wwAssumptionBUnsafe"
-                         [ String $ fromString wrap
-                         , String $ fromString unwrap
+                         [ toJSON wrap
+                         , toJSON unwrap
+                         , toJSON f
                          ]
 
 -- | Unsafe Worker/Wrapper Assumption C
@@ -145,8 +146,9 @@ wwAssumptionBUnsafe wrap unwrap f
 wwAssumptionCUnsafe :: String -> String -> String -> BiRewrite LCore
 wwAssumptionCUnsafe wrap unwrap f
   = BiTransform $ method "wwAssumptionCUnsafe"
-                         [ String $ fromString wrap
-                         , String $ fromString unwrap
+                         [ toJSON wrap
+                         , toJSON unwrap
+                         , toJSON f
                          ]
 
 -- | Convert a proof of worker/wrapper Assumption A into a proof of worker/wrapper Assumption B.

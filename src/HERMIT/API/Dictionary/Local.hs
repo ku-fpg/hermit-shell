@@ -4,6 +4,15 @@ module HERMIT.API.Dictionary.Local
     , module HERMIT.API.Dictionary.Local.Case
     , module HERMIT.API.Dictionary.Local.Cast
     , module HERMIT.API.Dictionary.Local.Let
+    , betaReduce
+    , betaExpand
+    , etaReduce
+    , etaExpand
+    , flattenModule
+    , flattenProgram
+    , abstract
+    , push
+    , pushUnsafe
     ) where
 
 import Data.Aeson

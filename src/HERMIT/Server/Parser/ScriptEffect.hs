@@ -2,7 +2,6 @@
 module HERMIT.Server.Parser.ScriptEffect where
 
 import           HERMIT.Shell.ScriptToRewrite
-import           HERMIT.Shell.Externals
 import           HERMIT.Server.Parser.Utils
 
 instance External ScriptEffect where

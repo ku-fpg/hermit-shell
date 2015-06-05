@@ -38,11 +38,13 @@ instance Monad Shell where
   return a = Return a
   (>>=) = Bind
 
-toShell   :: Shell a -> Value
-toShell (Shell v) = v
+toShell   :: Shell a -> Maybe Value
+toShell (Shell v) = Just v
+toShell _         = Nothing
 
 fromShell :: Shell a -> Value -> ShellResult a
-fromShell (Shell {}) = fromJust . parseMaybe parseJSON
+fromShell (Shell {}) v = fromJust $ parseMaybe parseJSON v
+fromShell _ _          = ShellFailure "fromShell"
 
 data ShellResult a
   = ShellResult [[Glyph]] a -- When was said, what was returned
