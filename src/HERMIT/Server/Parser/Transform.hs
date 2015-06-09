@@ -570,6 +570,13 @@ instance External (RewriteH LCore) where
         , "v+ = e+ : prog ==> v* = e* : prog, where v* is a subset of v+ consisting"
         , "of vs that are free in prog or e+, or exported." ]                   .+ Eval .+ Shallow
 
+      -- HERMIT.API.Dictionary.New
+    , external "nonrecIntro" ((\ s str -> promoteCoreR (nonRecIntro s str)) :: String -> CoreString -> RewriteH LCore)
+                [ "Introduce a new non-recursive binding.  Only works at Expression or Program nodes."
+                , "nonrec-into 'v [| e |]"
+                , "body ==> let v = e in body"
+                ] .+ Introduce .+ Shallow
+
       -- ???
     , external "unfoldRemembered" (promoteExprR . unfoldRememberedR Obligation :: LemmaName -> RewriteH LCore)
         [ "Unfold a remembered definition." ] .+ Deep .+ Context
@@ -882,6 +889,12 @@ instance External (TransformH LCore ()) where
         [ "An always succeeding translation." ]
     , external "not_"        (notM :: TransformH LCore () -> TransformH LCore ())
        [ "Cause a failing check to succeed, a succeeding check to fail."  ] .+ Predicate
+
+      -- HERMIT.API.Dictionary.New
+    , external "var" (promoteExprT . isVar :: String -> TransformH LCore ())
+                [ "var '<v> returns successfully for variable v, and fails otherwise."
+                , "Useful in combination with \"when\", as in: when (var v) r"
+                ] .+ Predicate
 
       -- ???
     , external "remember" (promoteCoreT . rememberR :: LemmaName -> TransformH LCore ()) -- Done not smell right (return ()?)
