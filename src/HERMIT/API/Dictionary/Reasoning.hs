@@ -19,6 +19,7 @@ retraction f g r
 --   f (g y) <==> y.
 --   Note that the precondition (f (g y) == y) is expected to hold.
 -- retractionUnsafe :: String -> String -> BiRewrite LCore
+retractionUnsafe :: String -> String -> BiRewrite LCore
 retractionUnsafe f g
   = BiTransform $ method "retractionUnsafe"
                          [ toJSON f

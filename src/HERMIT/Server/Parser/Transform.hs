@@ -242,14 +242,14 @@ instance External (RewriteH LCore) where
         bashHelp .+ Eval .+ Deep .+ Loop
     , external "smash" (smashR :: RewriteH LCore)
         smashHelp .+ Eval .+ Deep .+ Loop .+ Experiment
---     , external "bashExtendedWith" (bashExtendedWithR :: [RewriteH LCore] -> RewriteH LCore)
---         [ "Run \"bash\" extended with additional rewrites.",
---           "Note: be sure that the new rewrite either fails or makes progress, else this may loop."
---         ] .+ Eval .+ Deep .+ Loop
---     , external "smashExtendedWith" (smashExtendedWithR :: [RewriteH LCore] -> RewriteH LCore)
---         [ "Run \"smash\" extended with additional rewrites.",
---           "Note: be sure that the new rewrite either fails or makes progress, else this may loop."
---         ] .+ Eval .+ Deep .+ Loop
+    , external "bashExtendedWith" (bashExtendedWithR :: [RewriteH LCore] -> RewriteH LCore)
+        [ "Run \"bash\" extended with additional rewrites.",
+          "Note: be sure that the new rewrite either fails or makes progress, else this may loop."
+        ] .+ Eval .+ Deep .+ Loop
+    , external "smashExtendedWith" (smashExtendedWithR :: [RewriteH LCore] -> RewriteH LCore)
+        [ "Run \"smash\" extended with additional rewrites.",
+          "Note: be sure that the new rewrite either fails or makes progress, else this may loop."
+        ] .+ Eval .+ Deep .+ Loop
     , external "bashDebug" (bashDebugR :: RewriteH LCore)
         [ "verbose bash - most useful with setAutoCorelint True" ] .+ Eval .+ Deep .+ Loop
 
