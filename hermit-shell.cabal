@@ -18,6 +18,7 @@ maintainer:          afarmer@ittc.ku.edu
 category:            Language
 build-type:          Simple
 cabal-version:       >=1.14
+extra-source-files:  README.md, include/*.h
 
 library
   ghc-options:          -Wall
@@ -88,6 +89,9 @@ library
                         HERMIT.Server.Parser.Utils
                         Paths_hermit_shell
   hs-source-dirs:       src
+  include-dirs:        include
+  includes:            overlap.h
+  install-includes:    overlap.h
 
 executable hermit-shell
   ghc-options:          -Wall
