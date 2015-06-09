@@ -72,7 +72,13 @@ library
                         HERMIT.API.Dictionary.New
                         HERMIT.API.Dictionary.Query
                         HERMIT.API.Dictionary.Remembered
+                        HERMIT.API.Dictionary.Rules
+                        HERMIT.API.Dictionary.Undefined
+                        HERMIT.API.Dictionary.Unfold
+                        HERMIT.API.Dictionary.WorkerWrapper.Common
+                        HERMIT.API.Dictionary.WorkerWrapper.Fix
                         HERMIT.API.Dictionary.WorkerWrapper.FixResult
+                        HERMIT.API.Dictionary.Reasoning
                         HERMIT.API.Shell
                         HERMIT.API.Shell.Externals
                         HERMIT.API.Types
