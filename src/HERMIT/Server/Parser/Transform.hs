@@ -559,6 +559,12 @@ instance External (RewriteH LCore) where
     , external "unfoldRemembered" (promoteExprR . unfoldRememberedR Obligation :: LemmaName -> RewriteH LCore)
         [ "Unfold a remembered definition." ] .+ Deep .+ Context
 
+    , external "foldRemembered" (promoteExprR . foldRememberedR Obligation :: LemmaName -> RewriteH LCore)
+        [ "Fold a remembered definition." ]                      .+ Context .+ Deep
+
+    , external "foldAnyRemembered" (promoteExprR foldAnyRememberedR :: RewriteH LCore)
+        [ "Attempt to fold any of the remembered definitions." ] .+ Context .+ Deep
+
     , external "wwResultSplit" ((\ abs rep assC -> promoteDefR $ wwSplit (mkWWAssC assC) abs rep)
                                   :: CoreString -> CoreString -> RewriteH LCore -> RewriteH LCore)
                 [ "Worker/Wrapper Split (Result Variant)",
@@ -709,7 +715,6 @@ instance External (RewriteH LCore) where
         [ "Run GHC's SpecConstr pass, which performs call pattern specialization."] .+ Deep
     , external "specialise" (promoteModGutsR specialiseR :: RewriteH LCore)
         [ "Run GHC's specialisation pass, which performs type and dictionary specialisation."] .+ Deep
-
     ]
     where
       mkWWAssC :: RewriteH LCore -> Maybe WWAssumption
