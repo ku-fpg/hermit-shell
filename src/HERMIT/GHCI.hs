@@ -90,6 +90,10 @@ server passInfo _opts skernel initAST = do
         ["import HERMIT.API"
         ,"import Prelude hiding (log)"
         ,":set prompt \"HERMIT> \""
+
+        -- To get around an issue where the '-interactive-print' option gets reset:
+        ,":def l \\s -> return $ \":load \" ++ s ++ \"\\n:set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
+        ,":def r \\s -> return $ \":reload \" ++ s ++ \"\\n:set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
 --        ,"send welcome" -- welcome message (interactive only)a
         ,"send display" -- where am I (interactive only)
 --        ,"setPath (rhsOf \"rev\")"
