@@ -958,7 +958,7 @@ instance External (TransformH LCore ()) where
     , external "conjunct" (\n1 n2 n3 -> conjunctLemmasT n1 n2 n3 :: TransformH LCore ())
         [ "conjunct new-name lhs-name rhs-name" ]
     , external "disjunct" (\n1 n2 n3 -> disjunctLemmasT n1 n2 n3 :: TransformH LCore ())
-        [ "disjunt new-name lhs-name rhs-name" ]
+        [ "disjunct new-name lhs-name rhs-name" ]
    ]
     where
       mkWWAssC :: RewriteH LCore -> Maybe WWAssumption
