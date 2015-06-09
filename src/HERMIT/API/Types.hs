@@ -161,6 +161,11 @@ instance Read AST where
 
 ------------------------------------------------------------------------
 
+newtype Crumb = Crumb Value
+    deriving ToJSON
+
+------------------------------------------------------------------------
+
 data PpType = Show | Abstract | Omit
     deriving (Show, Read)
 
@@ -205,6 +210,3 @@ newtype RuleName = RuleName String
 
 method :: Text -> [Value] -> Value
 method nm params = object ["method" .= nm, "params" .= params]
-
-
-
