@@ -205,6 +205,3 @@ newtype RuleName = RuleName String
 
 method :: Text -> [Value] -> Value
 method nm params = object ["method" .= nm, "params" .= params]
-
-
-
