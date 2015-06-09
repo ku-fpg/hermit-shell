@@ -26,6 +26,7 @@ import           Data.Text (Text, unpack, pack)
 import           Data.Typeable
 
 import           HERMIT.External (CmdTag(..))
+import           HERMIT.Dictionary.Navigation (Considerable(..))
 import           HERMIT.Dictionary.Rules (RuleName(..))
 import           HERMIT.PrettyPrinter.Common (PrettyPrinter)
 
@@ -104,3 +105,5 @@ instance __OVERLAPPING__ External String where
 instance External PrettyPrinter where
   parseExternal = undefined -- TODO: Implement
 
+instance External Considerable where
+  parseExternal = undefined -- TODO: Implement

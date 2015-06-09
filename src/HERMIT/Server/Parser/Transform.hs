@@ -570,6 +570,13 @@ instance External (RewriteH LCore) where
         , "v+ = e+ : prog ==> v* = e* : prog, where v* is a subset of v+ consisting"
         , "of vs that are free in prog or e+, or exported." ]                   .+ Eval .+ Shallow
 
+      -- HERMIT.API.Dictionary.New
+    , external "nonrecIntro" ((\ s str -> promoteCoreR (nonRecIntro s str)) :: String -> CoreString -> RewriteH LCore)
+                [ "Introduce a new non-recursive binding.  Only works at Expression or Program nodes."
+                , "nonrec-into 'v [| e |]"
+                , "body ==> let v = e in body"
+                ] .+ Introduce .+ Shallow
+
       -- ???
     , external "unfoldRemembered" (promoteExprR . unfoldRememberedR Obligation :: LemmaName -> RewriteH LCore)
         [ "Unfold a remembered definition." ] .+ Deep .+ Context
@@ -806,14 +813,40 @@ instance External (RewriteH LCoreTC) where
 
 -------------------------------------------------------------------------------
 
+instance External (TransformH LCore LocalPathH) where
+  parseExternals =
+    [
+      -- HERMIT.API.Dictionary.Navigation
+--       external "consider" (considerConstructT :: Considerable -> TransformH LCore LocalPathH)
+--         [ "consider <c> focuses on the first construct <c>.", recognizedConsiderables ]
+      external "arg" (promoteExprT . nthArgPath :: Int -> TransformH LCore LocalPathH)
+        [ "arg n focuses on the (n-1)th argument of a nested application." ]
+    , external "lamsBody" (promoteExprT lamsBodyT :: TransformH LCore LocalPathH)
+        [ "Descend into the body after a sequence of lambdas." ]
+    , external "letsBody" (promoteExprT letsBodyT :: TransformH LCore LocalPathH)
+        [ "Descend into the body after a sequence of let bindings." ]
+    , external "progEnd" (promoteModGutsT gutsProgEndT <+ promoteProgT progEndT :: TransformH LCore LocalPathH)
+        [ "Descend to the end of a program." ]
+{-    , external "parentOf" (parentOfT :: TransformH LCore LocalPathH -> TransformH LCore LocalPathH)
+        [ "Focus on the parent of another focal point." ]  -}
+    ]
+
 instance External (TransformH LCoreTC LocalPathH) where
   parseExternals =
     [
-      -- ???
-      external "rhsOf"      (rhsOfT . mkRhsOfPred       :: RhsOfName -> TransformH LCoreTC LocalPathH)
-            [ "Find the path to the RHS of the binding of the named variable." ]
+      -- HERMIT.API.Dictionary.Navigation
+      external "rhsOf" (rhsOfT . mkRhsOfPred :: RhsOfName -> TransformH LCoreTC LocalPathH)
+        [ "Find the path to the RHS of the binding of the named variable." ]
+    , external "bindingGroupOf" (bindingGroupOfT . cmpString2Var :: String -> TransformH LCoreTC LocalPathH)
+        [ "Find the path to the binding group of the named variable." ]
     , external "bindingOf" (bindingOfT . mkBindingPred :: BindingName -> TransformH LCoreTC LocalPathH)
-            [ "Find the path to the binding of the named variable." ]
+        [ "Find the path to the binding of the named variable." ]
+    , external "occurrenceOf" (occurrenceOfT . mkOccPred :: OccurrenceName -> TransformH LCoreTC LocalPathH)
+        [ "Find the path to the first occurrence of the named variable." ]
+    , external "applicationOf" (applicationOfT . mkOccPred :: OccurrenceName -> TransformH LCoreTC LocalPathH)
+        [ "Find the path to the first application of the named variable." ]
+--     , external "parentOf" (parentOfT :: TransformH LCoreTC LocalPathH -> TransformH LCoreTC LocalPathH)
+--         [ "Focus on the parent of another focal point." ]
     ]
 
 instance External (TransformH LCoreTC String) where
@@ -840,6 +873,9 @@ instance External (TransformH LCoreTC String) where
     , external "showRules" (rulesHelpListT :: TransformH LCoreTC String)
         [ "List all the rules in scope." ] .+ Query
 
+      -- HERMIT.API.Dictionary.Query
+    , external "info" (promoteCoreTCT infoT :: TransformH LCoreTC String)
+        [ "Display information about the current node." ] .+ Query
     ]
 
 instance External (TransformH LCore ()) where
@@ -856,6 +892,12 @@ instance External (TransformH LCore ()) where
         [ "An always succeeding translation." ]
     , external "not_"        (notM :: TransformH LCore () -> TransformH LCore ())
        [ "Cause a failing check to succeed, a succeeding check to fail."  ] .+ Predicate
+
+      -- HERMIT.API.Dictionary.New
+    , external "var" (promoteExprT . isVar :: String -> TransformH LCore ())
+                [ "var '<v> returns successfully for variable v, and fails otherwise."
+                , "Useful in combination with \"when\", as in: when (var v) r"
+                ] .+ Predicate
 
       -- ???
     , external "remember" (promoteCoreT . rememberR :: LemmaName -> TransformH LCore ()) -- Done not smell right (return ()?)
@@ -957,6 +999,15 @@ instance External (TransformH LCoreTC DocH) where
         [ "Display details on the named rule." ] .+ Query
     ]
 
+instance External (TransformH LCoreTC ()) where
+  parseExternals =
+    [
+      -- HERMIT.API.Dictionary.Query
+      external "compareBoundIds" (compareBoundIds :: HermitName -> HermitName -> TransformH LCoreTC ())
+        [ "Compare the definitions of two in-scope identifiers for alpha equality."] .+ Query .+ Predicate
+    , external "compareCoreAt" (compareCoreAtT ::  TransformH LCoreTC LocalPathH -> TransformH LCoreTC LocalPathH -> TransformH LCoreTC ())
+        [ "Compare the core fragments at the end of the given paths for alpha-equality."] .+ Query .+ Predicate
+    ]
 
 instance External (PrettyH LCore) where
   parseExternals =
