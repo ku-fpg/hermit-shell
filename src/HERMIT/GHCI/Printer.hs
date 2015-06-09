@@ -2,9 +2,8 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE UndecidableInstances #-}
 
-#if __GLASGOW_HASKELL__ <= 708 && __GLASGOW_HASKELL__ < 710
-{-# LANGUAGE OverlappingInstances #-}
-#endif
+#include "overlap.h"
+__LANGUAGE_OVERLAPPING_INSTANCES__
 
 module HERMIT.GHCI.Printer
         ( printForRepl
@@ -18,20 +17,10 @@ import Control.Monad (when)
 class Repl a where
   printForRepl :: a -> IO ()
 
-#if __GLASGOW_HASKELL__ >= 710
-instance {-# OVERLAPPABLE #-}
-#else
-instance
-#endif
-    Show a => Repl a where
+instance __OVERLAPPABLE__ Show a => Repl a where
   printForRepl = print
 
-#if __GLASGOW_HASKELL__ >= 710
-instance {-# OVERLAPPING #-}
-#else
-instance
-#endif
-    Response a => Repl (Shell a) where
+instance __OVERLAPPING__ Response a => Repl (Shell a) where
   printForRepl sh = do
         r <- send sh
         let txt = showResponse r

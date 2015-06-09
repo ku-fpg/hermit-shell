@@ -1,10 +1,10 @@
 {-# LANGUAGE CPP #-}
 {-# LANGUAGE LambdaCase, OverloadedStrings, FlexibleInstances, FlexibleContexts, TypeFamilies, DefaultSignatures, GADTs, RankNTypes, ScopedTypeVariables, StandaloneDeriving, DeriveDataTypeable #-}
-#if __GLASGOW_HASKELL__ <= 708 && __GLASGOW_HASKELL__ < 710
-{-# LANGUAGE OverlappingInstances #-}
-#endif
 
-module HERMIT.Server.Parser.Utils 
+#include "overlap.h"
+__LANGUAGE_OVERLAPPING_INSTANCES__
+
+module HERMIT.Server.Parser.Utils
         ( External(parseExternal, parseExternals)
         , external
         , alts
@@ -44,7 +44,7 @@ external nm _ _ _ = fail $ "no match for " ++ show nm
 class Typeable e => External e where
   type R e :: *
   type R e = e  -- default
-  
+
   parseExternal :: Value -> Parser e
   parseExternal = alts parseExternals
 
@@ -58,7 +58,7 @@ class Typeable e => External e where
   matchExternal _ _ = fail "wrong number of arguments"
 
   {-# MINIMAL parseExternal | parseExternals #-}
-  
+
 instance (External a, External b) => External (a -> b) where
   type R (a -> b) = R b
 --  typeString (Proxy :: Proxy (a -> b)) = typeString (Proxy :: Proxy a) ++ " -> " ++ typeString (Proxy :: Proxy b)
@@ -81,30 +81,20 @@ instance External Int where
 instance forall g . Typeable g => External (Proxy g) where
   parseExternal (String txt) | txt ==  pack (show (typeOf (undefined :: g)))
                              = return $ Proxy
-  parseExternal _            = fail $ "parseExternal: Proxy for " ++ 
+  parseExternal _            = fail $ "parseExternal: Proxy for " ++
                                       show (typeOf (undefined :: g))
 
 instance External RuleName where
   parseExternal (String s) = return . RuleName $ unpack s
   parseExternal x          = fail $ "parseExternal: RuleName -- " ++ show x
 
-#if __GLASGOW_HASKELL__ >= 710
-instance {-# OVERLAPPABLE #-}
-#else
-instance
-#endif
-  External e => External [e] where
+instance __OVERLAPPABLE__ External e => External [e] where
   parseExternal (Array as) = mapM parseExternal $ toList as
   parseExternal _          = fail "parseExternal: Array"
 
-#if __GLASGOW_HASKELL__ >= 710
-instance {-# OVERLAPPING #-}
-#else
-instance
-#endif
-  External String where
+instance __OVERLAPPING__ External String where
   parseExternal (String txt) = return $ unpack $ txt
-  parseExternal _            = fail "parseExternal: String" 
+  parseExternal _            = fail "parseExternal: String"
 
 -----------------------------------------------------------------
 instance External PrettyPrinter where
