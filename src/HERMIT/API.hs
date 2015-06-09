@@ -10,6 +10,8 @@ module HERMIT.API
         , LocalPath
         , AST
         , PpType (..)
+        , Rewrite
+        , LCore
           -- Utilities
         , send
         ) where
