@@ -753,14 +753,40 @@ instance External (RewriteH LCoreTC) where
 
 -------------------------------------------------------------------------------
 
+instance External (TransformH LCore LocalPathH) where
+  parseExternals =
+    [
+      -- HERMIT.API.Dictionary.Navigation
+--       external "consider" (considerConstructT :: Considerable -> TransformH LCore LocalPathH)
+--         [ "consider <c> focuses on the first construct <c>.", recognizedConsiderables ]
+      external "arg" (promoteExprT . nthArgPath :: Int -> TransformH LCore LocalPathH)
+        [ "arg n focuses on the (n-1)th argument of a nested application." ]
+    , external "lamsBody" (promoteExprT lamsBodyT :: TransformH LCore LocalPathH)
+        [ "Descend into the body after a sequence of lambdas." ]
+    , external "letsBody" (promoteExprT letsBodyT :: TransformH LCore LocalPathH)
+        [ "Descend into the body after a sequence of let bindings." ]
+    , external "progEnd" (promoteModGutsT gutsProgEndT <+ promoteProgT progEndT :: TransformH LCore LocalPathH)
+        [ "Descend to the end of a program." ]
+{-    , external "parentOf" (parentOfT :: TransformH LCore LocalPathH -> TransformH LCore LocalPathH)
+        [ "Focus on the parent of another focal point." ]  -}
+    ]
+
 instance External (TransformH LCoreTC LocalPathH) where
   parseExternals =
     [
-      -- ???
-      external "rhsOf"      (rhsOfT . mkRhsOfPred       :: RhsOfName -> TransformH LCoreTC LocalPathH)
-            [ "Find the path to the RHS of the binding of the named variable." ]
+      -- HERMIT.API.Dictionary.Navigation
+      external "rhsOf" (rhsOfT . mkRhsOfPred :: RhsOfName -> TransformH LCoreTC LocalPathH)
+        [ "Find the path to the RHS of the binding of the named variable." ]
+    , external "bindingGroupOf" (bindingGroupOfT . cmpString2Var :: String -> TransformH LCoreTC LocalPathH)
+        [ "Find the path to the binding group of the named variable." ]
     , external "bindingOf" (bindingOfT . mkBindingPred :: BindingName -> TransformH LCoreTC LocalPathH)
-            [ "Find the path to the binding of the named variable." ]
+        [ "Find the path to the binding of the named variable." ]
+    , external "occurrenceOf" (occurrenceOfT . mkOccPred :: OccurrenceName -> TransformH LCoreTC LocalPathH)
+        [ "Find the path to the first occurrence of the named variable." ]
+    , external "applicationOf" (applicationOfT . mkOccPred :: OccurrenceName -> TransformH LCoreTC LocalPathH)
+        [ "Find the path to the first application of the named variable." ]
+--     , external "parentOf" (parentOfT :: TransformH LCoreTC LocalPathH -> TransformH LCoreTC LocalPathH)
+--         [ "Focus on the parent of another focal point." ]
     ]
 
 instance External (TransformH LCoreTC String) where
