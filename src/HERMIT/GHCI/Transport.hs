@@ -1,4 +1,4 @@
-{-# LANGUAGE TemplateHaskell, GADTs, KindSignatures #-}
+{-# LANGUAGE GADTs, KindSignatures #-}
 
 module Transport where
 

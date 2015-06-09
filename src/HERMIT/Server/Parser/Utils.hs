@@ -1,5 +1,9 @@
 {-# LANGUAGE CPP #-}
-{-# LANGUAGE LambdaCase, OverloadedStrings, FlexibleInstances, FlexibleContexts, TypeFamilies, DefaultSignatures, GADTs, RankNTypes, ScopedTypeVariables, StandaloneDeriving, DeriveDataTypeable #-}
+{-# LANGUAGE DefaultSignatures #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE TypeFamilies #-}
 
 #include "overlap.h"
 __LANGUAGE_OVERLAPPING_INSTANCES__
@@ -72,7 +76,7 @@ instance (External a, External b) => External (a -> b) where
 infixl 3 .+
 
 (.+) :: b -> a -> b
-(.+) = \ b _ -> b
+(.+) = const
 
 instance External Int where
   parseExternal (Number n) = return $ floor n
@@ -80,7 +84,7 @@ instance External Int where
 
 instance forall g . Typeable g => External (Proxy g) where
   parseExternal (String txt) | txt ==  pack (show (typeOf (undefined :: g)))
-                             = return $ Proxy
+                             = return Proxy
   parseExternal _            = fail $ "parseExternal: Proxy for " ++
                                       show (typeOf (undefined :: g))
 
@@ -93,7 +97,7 @@ instance __OVERLAPPABLE__ External e => External [e] where
   parseExternal _          = fail "parseExternal: Array"
 
 instance __OVERLAPPING__ External String where
-  parseExternal (String txt) = return $ unpack $ txt
+  parseExternal (String txt) = return $ unpack txt
   parseExternal _            = fail "parseExternal: String"
 
 -----------------------------------------------------------------

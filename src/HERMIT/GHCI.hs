@@ -1,4 +1,4 @@
-{-# LANGUAGE LambdaCase, OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings #-}
 module HERMIT.GHCI (plugin) where
 
 import           Blaze.ByteString.Builder (fromLazyByteString)
@@ -6,10 +6,12 @@ import           Blaze.ByteString.Builder (fromLazyByteString)
 import           Control.Concurrent
 import           Control.Concurrent.STM
 import           Control.Exception.Base
+import           Control.Monad.IO.Class
 import           Control.Monad.Trans.Except
-import           Control.Monad.Reader
+import           Control.Monad.Trans.Reader
 
 import qualified Data.Aeson as Aeson
+import           Data.Foldable.Compat (forM_)
 import           Data.Default
 
 import           HERMIT.GHC hiding ((<>), liftIO)
@@ -37,7 +39,7 @@ import           Control.Monad.Remote.JSON
 ------------------------------- the plugin ------------------------------------
 
 plugin :: Plugin
-plugin = buildPlugin $ \ store passInfo -> 
+plugin = buildPlugin $ \ store passInfo ->
   if passNum passInfo == 0
   then \ o p ->
            do liftIO $ print ("Hey" :: String)
@@ -65,27 +67,25 @@ server passInfo _opts skernel initAST = do
 
     cls <- initCommandLineState initAST
     clsVar <- atomically $ newTMVar cls
- 
-    let pr = PluginReader skernel passInfo    
+
+    let pr = PluginReader skernel passInfo
 
     let fns = router
             [("send", performTypedEffect pr clsVar)
             ]
-    
+
     let jsonRpc :: ActionH ()
         jsonRpc = do
                 d <- jsonData
                 liftIO $ print d
                 r <- liftIO $ fns d
 --                liftIO $ print r
-                case r of
-                  Nothing -> return ()
-                  Just v -> json v
+                forM_ r json
 
     tid <- forkIO $ scottyT 3000 runAction $ do
         middleware logStdoutDev
-        post "/" $ jsonRpc
-        
+        post "/" jsonRpc
+
     writeFile ".ghci-hermit" $ unlines
         ["import HERMIT.API"
         ,"import Prelude hiding (log)"
@@ -94,7 +94,7 @@ server passInfo _opts skernel initAST = do
         ,"send display" -- where am I (interactive only)
 --        ,"setPath (rhsOf \"rev\")"
         ]
-    callProcess "ghc" 
+    callProcess "ghc"
         ["--interactive"
         , "-ghci-script=.ghci-hermit"
         ,"-XOverloadedStrings"
@@ -138,7 +138,7 @@ msgBuilder msg s = Wai.responseBuilder s [("Content-Type","application/json")]
 --     , "import HERMIT.API"
 --     , ""
 --     ]
--- 
--- 
--- data ServerCommand = 
+--
+--
+-- data ServerCommand =
 --      ServerCommand Aeson.Value (TMVar Aeson.Value)

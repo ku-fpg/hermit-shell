@@ -26,7 +26,6 @@ import           HERMIT.Server.Parser.QueryFun()
 import           HERMIT.Server.Parser.ShellEffect()
 import           HERMIT.Server.Parser.KernelEffect()
 import           HERMIT.Server.Parser.ScriptEffect()
-import           HERMIT.Server.Parser.Transform()
 import           HERMIT.Server.Parser.Name ()
 import           HERMIT.Server.Parser.String ()
 import           HERMIT.Server.Parser.Transform ()
@@ -42,8 +41,8 @@ parseCLT = parseMaybe parseTopLevel
 
 parseTopLevel :: (MonadIO m, Functor m)
               => Aeson.Value -> Parser (CLT m Aeson.Value)
-parseTopLevel v = fmap (const (toJSON ())) 
-               <$> performTypedEffectH (show v) 
+parseTopLevel v = fmap (const (toJSON ()))
+               <$> performTypedEffectH (show v)
                <$> (parseExternal v :: Parser (TypedEffectH ()))
 
 instance External (TypedEffectH ()) where

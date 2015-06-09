@@ -66,7 +66,7 @@ view :: WebM WebAppState
 view = ask >>= liftIO . readTVarIO
 
 views :: (WebAppState -> b) -> WebM b
-views f = view >>= return . f
+views f = fmap f view
 
 viewUser :: UserID -> WebM (PluginReader, MVar CommandLineState, TChan (Either String [Glyph]))
 viewUser u = views users >>= maybe (throwError $ WAEError "User Not Found") return . Map.lookup u

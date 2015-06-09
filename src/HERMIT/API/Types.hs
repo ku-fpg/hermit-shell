@@ -4,7 +4,7 @@
 {-# LANGUAGE PolyKinds #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 module HERMIT.API.Types where
-        
+
 import Control.Applicative
 import Control.Monad
 
@@ -22,21 +22,21 @@ import Data.Coerce
 ------------------------------------------------------------------------
 
 data Shell :: * -> * where
-  Shell :: FromJSON a => Value -> Shell a
+  Shell  :: FromJSON a => Value -> Shell a
   Bind   :: Shell a -> (a -> Shell b) -> Shell b
   Return :: a -> Shell a
   Fail   :: String -> Shell a
-  
+
 instance Functor Shell where
   fmap f s = pure f <*> s
-  
+
 instance Applicative Shell where
-  pure a = Return a
+  pure  = Return
   (<*>) = liftM2 ($)
 
 instance Monad Shell where
-  return a = Return a
-  (>>=) = Bind
+  return = Return
+  (>>=)  = Bind
 
 toShell   :: Shell a -> Maybe Value
 toShell (Shell v) = Just v
@@ -78,7 +78,7 @@ proxyToJSON Proxy = String $ pack $ show $ typeOf (undefined :: a)
 -- | The 'Response' of doing a 'Shell' effect.
 
 class FromJSON a => Response a where
-  showResponse :: a -> String 
+  showResponse :: a -> String
 
 instance Response () where
   showResponse () = ""
@@ -105,7 +105,7 @@ newtype Name = Name String
 instance Show Name where show (Name nm) = nm
 
 instance IsString Name where
-  fromString = Name        
+  fromString = Name
 
 instance ToJSON Name where
   toJSON (Name nm) = toJSON nm
@@ -131,8 +131,8 @@ instance Guts LCoreTC
 
 data LCore = LCore
   deriving Typeable
-  
-instance Guts LCore 
+
+instance Guts LCore
 
 ------------------------------------------------------------------------
 

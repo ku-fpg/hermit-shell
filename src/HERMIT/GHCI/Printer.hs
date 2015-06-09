@@ -12,7 +12,7 @@ module HERMIT.GHCI.Printer
 import HERMIT.API.Types
 import HERMIT.GHCI.Client
 
-import Control.Monad (when)
+import Control.Monad (unless)
 
 class Repl a where
   printForRepl :: a -> IO ()
@@ -24,8 +24,7 @@ instance __OVERLAPPING__ Response a => Repl (Shell a) where
   printForRepl sh = do
         r <- send sh
         let txt = showResponse r
-        when (not $ null $ txt) $ do
-          putStrLn txt
+        unless (null txt) $ putStrLn txt
 
 instance Repl KernelEffect where
   printForRepl (KernelEffect v) = printForRepl (Shell v :: Shell ())
