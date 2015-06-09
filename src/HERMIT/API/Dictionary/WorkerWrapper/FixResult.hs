@@ -2,8 +2,6 @@
 module HERMIT.API.Dictionary.WorkerWrapper.FixResult where
 
 import           Data.Aeson
-import           Data.String (fromString)
-import           Data.Vector (fromList)
 
 import           HERMIT.API.Types
 
@@ -16,8 +14,8 @@ import           Prelude hiding (abs)
 wwResultFactorisation :: String -> String -> RewriteH LCore -> BiRewriteH LCore
 wwResultFactorisation abs rep assC
   = BiTransform $ method "wwResultFactorisation"
-                        [ String $ fromString abs
-                        , String $ fromString rep
+                        [ toJSON abs
+                        , toJSON rep
                         , toJSON assC
                         ]
 
@@ -28,8 +26,8 @@ wwResultFactorisation abs rep assC
 wwResultFactorisationUnsafe :: String -> String -> BiRewriteH LCore
 wwResultFactorisationUnsafe abs rep
   = BiTransform $ method "wwResultFactorisationUnsafe"
-                         [ String $ fromString abs
-                         , String $ fromString rep
+                         [ toJSON abs
+                         , toJSON rep
                          ]
 -- | Worker/Wrapper Split (Result Variant)
 --   For any "prog :: X -> A", and given "abs :: B -> A" and "rep :: A -> B" as arguments,
@@ -40,8 +38,8 @@ wwResultFactorisationUnsafe abs rep
 wwResultSplit :: String -> String -> RewriteH LCore -> RewriteH LCore
 wwResultSplit abs rep assC
   = Transform $ method "wwResultSplit"
-                       [ String $ fromString abs
-                       , String $ fromString rep
+                       [ toJSON abs
+                       , toJSON rep
                        , toJSON assC
                        ]
 
@@ -55,8 +53,8 @@ wwResultSplit abs rep assC
 wwResultSplitUnsafe :: String -> String -> RewriteH LCore
 wwResultSplitUnsafe abs rep
   = Transform $ method "wwResultSplitUnsafe"
-                       [ String $ fromString abs
-                       , String $ fromString rep
+                       [ toJSON abs
+                       , toJSON rep
                        ]
 
 -- | Worker/Wrapper Split - Static Argument Variant (Result Variant)
@@ -65,10 +63,10 @@ wwResultSplitUnsafe abs rep
 wwResultSplitStaticArg :: Int -> [Int] -> String -> String -> RewriteH LCore -> RewriteH LCore
 wwResultSplitStaticArg n is abs rep assC
   = Transform $ method "wwResultSplitStaticArg"
-                       [ Number $ fromIntegral n
-                       , Array . fromList $ map (Number . fromIntegral) is
-                       , String $ fromString abs
-                       , String $ fromString rep
+                       [ toJSON n
+                       , toJSON is
+                       , toJSON abs
+                       , toJSON rep
                        , toJSON assC
                        ]
 
@@ -78,10 +76,10 @@ wwResultSplitStaticArg n is abs rep assC
 wwResultSplitStaticArgUnsafe :: Int -> [Int] -> String -> String -> RewriteH LCore
 wwResultSplitStaticArgUnsafe n is abs rep
   = Transform $ method "wwResultSplitStaticArgUnsafe"
-                       [ Number $ fromIntegral n
-                       , Array . fromList $ map (Number . fromIntegral) is
-                       , String $ fromString abs
-                       , String $ fromString rep
+                       [ toJSON n
+                       , toJSON is
+                       , toJSON abs
+                       , toJSON rep
                        ]
 
 -- | Worker/Wrapper Assumption A (Result Variant)
@@ -91,8 +89,8 @@ wwResultSplitStaticArgUnsafe n is abs rep
 wwResultAssumptionA :: String -> String -> RewriteH LCore -> BiRewriteH LCore
 wwResultAssumptionA abs rep assA
   = BiTransform $ method "wwResultAssumptionA"
-                         [ String $ fromString abs
-                         , String $ fromString rep
+                         [ toJSON abs
+                         , toJSON rep
                          , toJSON assA
                          ]
 
@@ -103,9 +101,9 @@ wwResultAssumptionA abs rep assA
 wwResultAssumptionB :: String -> String -> String -> RewriteH LCore -> BiRewriteH LCore
 wwResultAssumptionB abs rep f assA
   = BiTransform $ method "wwResultAssumptionB"
-                         [ String $ fromString abs
-                         , String $ fromString rep
-                         , String $ fromString f
+                         [ toJSON abs
+                         , toJSON rep
+                         , toJSON f
                          , toJSON assA
                          ]
 
@@ -116,9 +114,9 @@ wwResultAssumptionB abs rep f assA
 wwResultAssumptionC :: String -> String -> String -> RewriteH LCore -> BiRewriteH LCore
 wwResultAssumptionC abs rep f assA
   = BiTransform $ method "wwResultAssumptionC"
-                         [ String $ fromString abs
-                         , String $ fromString rep
-                         , String $ fromString f
+                         [ toJSON abs
+                         , toJSON rep
+                         , toJSON f
                          , toJSON assA
                          ]
 
@@ -130,8 +128,8 @@ wwResultAssumptionC abs rep f assA
 wwResultAssumptionAUnsafe :: String -> String -> BiRewriteH LCore
 wwResultAssumptionAUnsafe abs rep
   = BiTransform $ method "wwResultAssumptionAUnsafe"
-                         [ String $ fromString abs
-                         , String $ fromString rep
+                         [ toJSON abs
+                         , toJSON rep
                          ]
 
 
@@ -142,9 +140,9 @@ wwResultAssumptionAUnsafe abs rep
 wwResultAssumptionBUnsafe :: String -> String -> String -> BiRewriteH LCore
 wwResultAssumptionBUnsafe abs rep f
   = BiTransform $ method "wwResultAssumptionBUnsafe"
-                         [ String $ fromString abs
-                         , String $ fromString rep
-                         , String $ fromString f
+                         [ toJSON abs
+                         , toJSON rep
+                         , toJSON f
                          ]
 
 -- |  Unsafe Worker/Wrapper Assumption C (Result Variant)
@@ -154,9 +152,9 @@ wwResultAssumptionBUnsafe abs rep f
 wwResultAssumptionCUnsafe :: String -> String -> String -> BiRewriteH LCore
 wwResultAssumptionCUnsafe abs rep f
   = BiTransform $ method "wwResultAssumptionCUnsafe"
-                         [ String $ fromString abs
-                         , String $ fromString rep
-                         , String $ fromString f
+                         [ toJSON abs
+                         , toJSON rep
+                         , toJSON f
                          ]
 
 -- | Convert a proof of worker/wrapper Assumption A into a proof of worker/wrapper Assumption B.

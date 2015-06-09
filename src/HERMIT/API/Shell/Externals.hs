@@ -4,7 +4,6 @@ module HERMIT.API.Shell.Externals where
 import           HERMIT.API.Types
 
 import           Data.Aeson
-import           Data.String (fromString)
 
 -- | stops HERMIT; resumes compile
 --resume :: ShellEffect
@@ -64,28 +63,28 @@ step = ShellEffect $ method "step" []
 
 -- | name the current step in the derivation
 tag :: String -> ShellEffect
-tag name = ShellEffect $ method "tag" [String (fromString name)]
+tag name = ShellEffect $ method "tag" [toJSON name]
 
 -- | show diff of two ASTs
 diff :: AST -> AST -> QueryFun
-diff a b = QueryFun $ method "diff" [Number . fromInteger $ toInteger a, Number . fromInteger $ toInteger b]
+diff a b = QueryFun $ method "diff" [toJSON a, toJSON b]
 
 -- |  print diffs rather than full code after a rewrite
 setPpDiffOnly :: Bool -> ShellEffect
-setPpDiffOnly b = ShellEffect $ method "setPpDiffOnly" [String . fromString $ show b]
+setPpDiffOnly b = ShellEffect $ method "setPpDiffOnly" [toJSON $ show b]
 
 -- | any rewrite failure causes compilation to abort
 setFailHard :: Bool -> ShellEffect
-setFailHard b = ShellEffect $ method "setFailHard" [String . fromString $ show b]
+setFailHard b = ShellEffect $ method "setFailHard" [toJSON $ show b]
 
 -- | run core lint type-checker after every rewrite, reverting on failure
 setAutoCorelint :: Bool -> ShellEffect
-setAutoCorelint b = ShellEffect $ method "setAutoCorelint" [String . fromString $ show b]
+setAutoCorelint b = ShellEffect $ method "setAutoCorelint" [toJSON $ show b]
 
 -- | set the pretty printer
 --   use 'setPp ls' to list available pretty printers"
 setPp :: String -> ShellEffect
-setPp s = ShellEffect $ method "setPp" [String (fromString s)]
+setPp s = ShellEffect $ method "setPp" [toJSON s]
 
 -- setPpRenderer
 
@@ -95,19 +94,19 @@ setPp s = ShellEffect $ method "setPp" [String (fromString s)]
 
 -- | set the width of the screen
 setPpWidth :: Int -> ShellEffect
-setPpWidth width = ShellEffect $ method "setPpWidth" [Number . fromInteger $ toInteger width]
+setPpWidth width = ShellEffect $ method "setPpWidth" [toJSON width]
 
 -- | set how to show expression-level types (Show|Abstact|Omit)
 setPpType :: PpType -> ShellEffect
-setPpType ppType = ShellEffect $ method "setPpType" [String . fromString $ show ppType]
+setPpType ppType = ShellEffect $ method "setPpType" [toJSON $ show ppType]
 
 -- | set how to show coercions (Show|Abstact|Omit)
 setPpCoercion :: PpType -> ShellEffect
-setPpCoercion ppType = ShellEffect $ method "setPpCoercion" [String . fromString $ show ppType]
+setPpCoercion ppType = ShellEffect $ method "setPpCoercion" [toJSON $ show ppType]
 
 -- | set whether uniques are printed with variable names
 setPpUniques :: Bool -> ShellEffect
-setPpUniques b = ShellEffect $ method "setPpUniques" [String . fromString $ show b]
+setPpUniques b = ShellEffect $ method "setPpUniques" [toJSON $ show b]
 
 -- | push current lens onto a stack
 beginScope :: KernelEffect
@@ -119,51 +118,51 @@ endScope = KernelEffect $ method "endScope" []
 
 -- | load <script-name> <file-name> : load a HERMIT script from a file and save it under the specified name.
 load :: String -> String -> ScriptEffect
-load scriptName fileName = ScriptEffect $ method "load" [String $ fromString scriptName, String $ fromString fileName]
+load scriptName fileName = ScriptEffect $ method "load" [toJSON scriptName, toJSON fileName]
 
 -- | loadAndRun <file-name> : load a HERMIT script from a file and run it immediately.
 loadAndRun :: String -> ScriptEffect
-loadAndRun fileName = ScriptEffect $ method "loadAndRun" [String $ fromString fileName]
+loadAndRun fileName = ScriptEffect $ method "loadAndRun" [toJSON fileName]
 
 -- | save <filename> : save the current complete derivation into a file.
 save :: String -> ScriptEffect
-save fileName = ScriptEffect $ method "save" [String $ fromString fileName]
+save fileName = ScriptEffect $ method "save" [toJSON fileName]
 
 -- | saveVerbose <filename> : save the current complete derivation into a file,
 --   including output of each command as a comment.
 saveVerbose :: String -> ScriptEffect
-saveVerbose fileName = ScriptEffect $ method "saveVerbose" [String $ fromString fileName]
+saveVerbose fileName = ScriptEffect $ method "saveVerbose" [toJSON fileName]
 
 -- | save-script <filename> <script name> : save a loaded or manually defined script to a file.
 saveScript :: String -> String -> ScriptEffect
-saveScript fileName scriptName = ScriptEffect $ method "saveScript" [String $ fromString fileName, String $ fromString scriptName]
+saveScript fileName scriptName = ScriptEffect $ method "saveScript" [toJSON fileName, toJSON scriptName]
 
 -- | loadAsRewrite <rewrite-name> <filepath> : load a HERMIT script from a file, and convert it to a rewrite.
 --   Note that there are significant limitations on the commands the script may contain.
 loadAsRewrite :: String -> String -> ScriptEffect
-loadAsRewrite rewriteName filePath = ScriptEffect $ method "loadAsRewrite" [String $ fromString rewriteName, String $ fromString filePath]
+loadAsRewrite rewriteName filePath = ScriptEffect $ method "loadAsRewrite" [toJSON rewriteName, toJSON filePath]
 
 -- |  scriptToRewrite <rewrite-name> <script-name> : create a new rewrite from a pre-loaded (or manually defined) HERMIT script.
 --    Note that there are significant limitations on the commands the script may contain.
 scriptToRewrite :: String -> String -> ScriptEffect
-scriptToRewrite rewriteName filePath = ScriptEffect $ method "scriptToRewrite" [String $ fromString rewriteName, String $ fromString filePath]
+scriptToRewrite rewriteName filePath = ScriptEffect $ method "scriptToRewrite" [toJSON rewriteName, toJSON filePath]
 
 -- |  Define a new HERMIT script and bind it to a name.
 --    Note that any names in the script will not be resolved until the script is *run*.
 --    Example usage: defineScript "MyScriptName" "anyTd betaReduce ; letSubst ; bash"
 defineScript :: String -> String -> ScriptEffect
-defineScript scriptName script = ScriptEffect $ method "defineScript" [String $ fromString scriptName, String $ fromString script]
+defineScript scriptName script = ScriptEffect $ method "defineScript" [toJSON scriptName, toJSON script]
 
 -- |  Define a new HERMIT rewrite and bind it to a name.
 --    Note that this also saves the input script under the same name.
 --    Example usage: defineRewrite "MyRewriteName" "let-subst >>> bash"
 defineRewrite :: String -> String -> ScriptEffect
-defineRewrite rewriteName rewrite = ScriptEffect $ method "defineRewrite" [String $ fromString rewriteName, String $ fromString rewrite]
+defineRewrite rewriteName rewrite = ScriptEffect $ method "defineRewrite" [toJSON rewriteName, toJSON rewrite]
 
 -- |  Run a pre-loaded (or manually defined) HERMIT script.
 --    Note that any names in the script will not be resolved until the script is *run*.
 runScript :: String -> ScriptEffect
-runScript script = ScriptEffect $ method "runScript" [String $ fromString script]
+runScript script = ScriptEffect $ method "runScript" [toJSON script]
 
 -- | Display all loaded scripts.
 displayScripts :: QueryFun
