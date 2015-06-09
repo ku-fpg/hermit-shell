@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 module HERMIT.API.Dictionary.Composite where
 
--- import Data.Aeson
+import Data.Aeson
 import HERMIT.API.Types
 
 -- | Unfold the current expression if it is one of the basic combinators:
@@ -21,15 +21,15 @@ bash = Transform $ method "bash" []
 smash :: Rewrite LCore
 smash = Transform $ method "smash" []
 
--- -- | Run \"bash\" extended with additional rewrites.
--- -- Note: be sure that the new rewrite either fails or makes progress, else this may loop.
--- bashExtendedWith :: [Rewrite LCore] -> Rewrite LCore
--- bashExtendedWith = Transform . method "bashExtendedWith" . map toJSON
--- 
--- -- | Run \"smash\" extended with additional rewrites.
--- -- Note: be sure that the new rewrite either fails or makes progress, else this may loop.
--- smashExtendedWith :: [Rewrite LCore] -> Rewrite LCore
--- smashExtendedWith = Transform . method "smashExtendedWith" . map toJSON
+-- | Run \"bash\" extended with additional rewrites.
+-- Note: be sure that the new rewrite either fails or makes progress, else this may loop.
+bashExtendedWith :: [Rewrite LCore] -> Rewrite LCore
+bashExtendedWith rws = Transform $ method "bashExtendedWith" [toJSON rws]
+
+-- | Run \"smash\" extended with additional rewrites.
+-- Note: be sure that the new rewrite either fails or makes progress, else this may loop.
+smashExtendedWith :: [Rewrite LCore] -> Rewrite LCore
+smashExtendedWith rws = Transform $ method "smashExtendedWith" [toJSON rws]
 
 -- | verbose bash - most useful with set-auto-corelint True
 bashDebug :: Rewrite LCore
