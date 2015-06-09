@@ -28,6 +28,7 @@ import HERMIT.API.Dictionary.Local                   as Dictionary
 import HERMIT.API.Dictionary.Navigation              as Dictionary
 import HERMIT.API.Dictionary.Navigation.Crumbs       as Dictionary
 import HERMIT.API.Dictionary.New                     as Dictionary
+import HERMIT.API.Dictionary.Query                   as Dictionary
 import HERMIT.API.Dictionary.Remembered              as Dictionary
 import HERMIT.API.Dictionary.Rules                   as Dictionary
 import HERMIT.API.Dictionary.Undefined               as Dictionary

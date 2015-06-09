@@ -70,6 +70,7 @@ library
                         HERMIT.API.Dictionary.Navigation
                         HERMIT.API.Dictionary.Navigation.Crumbs
                         HERMIT.API.Dictionary.New
+                        HERMIT.API.Dictionary.Query
                         HERMIT.API.Dictionary.Remembered
                         HERMIT.API.Dictionary.WorkerWrapper.FixResult
                         HERMIT.API.Shell

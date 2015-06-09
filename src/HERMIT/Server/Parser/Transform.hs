@@ -873,6 +873,9 @@ instance External (TransformH LCoreTC String) where
     , external "showRules" (rulesHelpListT :: TransformH LCoreTC String)
         [ "List all the rules in scope." ] .+ Query
 
+      -- HERMIT.API.Dictionary.Query
+    , external "info" (promoteCoreTCT infoT :: TransformH LCoreTC String)
+        [ "Display information about the current node." ] .+ Query
     ]
 
 instance External (TransformH LCore ()) where
@@ -996,6 +999,15 @@ instance External (TransformH LCoreTC DocH) where
         [ "Display details on the named rule." ] .+ Query
     ]
 
+instance External (TransformH LCoreTC ()) where
+  parseExternals =
+    [
+      -- HERMIT.API.Dictionary.Query
+      external "compareBoundIds" (compareBoundIds :: HermitName -> HermitName -> TransformH LCoreTC ())
+        [ "Compare the definitions of two in-scope identifiers for alpha equality."] .+ Query .+ Predicate
+    , external "compareCoreAt" (compareCoreAtT ::  TransformH LCoreTC LocalPathH -> TransformH LCoreTC LocalPathH -> TransformH LCoreTC ())
+        [ "Compare the core fragments at the end of the given paths for alpha-equality."] .+ Query .+ Predicate
+    ]
 
 instance External (PrettyH LCore) where
   parseExternals =
