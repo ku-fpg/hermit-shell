@@ -1,4 +1,5 @@
-{-# LANGUAGE OverloadedStrings, KindSignatures, GADTs, ScopedTypeVariables, RankNTypes #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 module HERMIT.API.Dictionary.KURE where
 
 import Data.Aeson
@@ -8,7 +9,7 @@ import HERMIT.API.Types
 
 -- -- | Perform an identity rewrite.
 -- id_ :: Rewrite LCore
--- 
+--
 -- -- | Perform an identity rewrite.
 -- id_ :: Rewrite LCoreTC
 
@@ -22,13 +23,13 @@ fail_ str = Transform $ method "fail_" [toJSON str]
 
 -- -- | Perform the first rewrite, and then, if it fails, perform the second rewrite.
 -- (<+) :: Transform LCore () -> Transform LCore () -> Transform LCore ()
--- 
+--
 -- -- | Perform the first check, and then, if it fails, perform the second check.
 -- (<+) :: Rewrite LCore -> Rewrite LCore -> Rewrite LCore
--- 
+--
 -- -- | Compose rewrites, requiring both to succeed.
 -- (>>>) :: Rewrite LCore -> Rewrite LCore -> Rewrite LCore
--- 
+--
 -- -- | Compose bidirectional rewrites, requiring both to succeed.
 -- (>>>) :: BiRewrite LCore -> BiRewrite LCore -> BiRewrite LCore
 
@@ -104,25 +105,25 @@ innermost r = Transform $ method "innermost" [toJSON r]
 
 -- -- | Apply a rewrite to a focal point.
 -- focus :: Transform LCoreTC LocalPath -> Rewrite LCoreTC -> Rewrite LCoreTC)
--- 
+--
 -- -- | Apply a query at a focal point.
 -- focus :: Transform LCoreTC LocalPath -> Transform LCoreTC String -> Transform LCoreTC String
--- 
+--
 -- -- | Apply a rewrite to a focal point.
 -- focus :: LocalPath -> Rewrite LCoreTC -> Rewrite LCoreTC
--- 
+--
 -- -- | Apply a query at a focal point.
 -- focus :: LocalPath -> Transform LCoreTC String -> Transform LCoreTC String
--- 
+--
 -- -- | Apply a rewrite to a focal point.
 -- focus :: Transform LCore LocalPath -> Rewrite LCore -> Rewrite LCore
--- 
+--
 -- -- | Apply a query at a focal point.
 -- focus :: Transform LCore LocalPath -> Transform LCore String -> Transform LCore String
--- 
+--
 -- -- | Apply a rewrite to a focal point.
 -- focus :: LocalPath -> Rewrite LCore -> Rewrite LCore
--- 
+--
 -- -- | Apply a query at a focal point
 -- focus :: LocalPath -> Transform LCore String -> Transform LCore String
 
@@ -152,8 +153,8 @@ test r = Transform $ method "test" [toJSON r]
 
 -- | @any-call (.. unfold command ..)@ applies an unfold command to all applications.
 --   Preference is given to applications with more arguments.
-anyCall :: forall g . Guts g => Rewrite g -> Rewrite g
-anyCall (Transform rr) = Transform $ method "anyCall" $ [proxyToJSON (Proxy :: Proxy g) , rr]
+anyCall :: forall g. Guts g => Rewrite g -> Rewrite g
+anyCall (Transform rr) = Transform $ method "anyCall" [proxyToJSON (Proxy :: Proxy g) , rr]
 
 -- | Promote a RewriteCore to a RewriteCoreTC
 promote :: Rewrite LCore -> Rewrite LCoreTC
@@ -161,7 +162,7 @@ promote r = Transform $ method "promote" [toJSON r]
 
 -- -- | Extract a RewriteCore from a RewriteCoreTC"
 -- extract :: Rewrite LCore -> Rewrite LCoreTC
--- 
+--
 -- -- | Extract a TransformLCoreString from a TransformLCoreTCString
 -- extract :: TransformH LCoreTC String -> TransformH LCore String
 
@@ -171,9 +172,9 @@ between x y rr = Transform $ method "between" [toJSON x, toJSON y, toJSON rr]
 
 -- -- | return the expression found at the given path
 -- atPath :: TransformH LCore LocalPathH -> TransformH LCore LCore
--- 
+--
 -- -- | return the expression found at the given path
 -- atPath :: TransformH LCoreTC LocalPathH -> TransformH LCoreTC LCoreTC
--- 
+--
 -- -- | return the expression found at the given path
 -- atPath :: TransformH LCoreTC LocalPathH -> TransformH LCore LCore

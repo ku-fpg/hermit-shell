@@ -169,11 +169,11 @@ showGlyph :: Glyph -> String
 showGlyph = gText
 
 instance ToJSON Glyph where
-    toJSON g = object (("text" .= gText g) : (fromMaybeAttr "style" (gStyle g)))
+    toJSON g = object $ ("text" .= gText g) : fromMaybeAttr "style" (gStyle g)
 
 instance FromJSON Glyph where
-    parseJSON (Object v) = Glyph <$> v .: "text" 
-                                 <*> v .:? "style" 
+    parseJSON (Object v) = Glyph <$> v .: "text"
+                                 <*> v .:? "style"
     parseJSON _          = mzero
 
 data History = History { hCmds :: [HCmd]
@@ -241,7 +241,7 @@ instance ToJSON (Transport f) where
 data HermitCommand :: * -> * -> * where
    BetaReduce :: HermitCommand () ()
 --   AnyTD      :: HermitCommand () -> HermitCommand ()
---   ShellEffect :: ShellEffect -> 
+--   ShellEffect :: ShellEffect ->
    Display    :: HermitCommand () ()
 
 --

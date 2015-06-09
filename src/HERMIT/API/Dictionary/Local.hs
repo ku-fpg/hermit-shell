@@ -1,9 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 module HERMIT.API.Dictionary.Local
-    ( module HERMIT.API.Dictionary.Local.Bind
-    , module HERMIT.API.Dictionary.Local.Case
-    , module HERMIT.API.Dictionary.Local.Cast
-    , module HERMIT.API.Dictionary.Local.Let
+    ( module Local
     , betaReduce
     , betaExpand
     , etaReduce
@@ -17,10 +14,10 @@ module HERMIT.API.Dictionary.Local
 
 import Data.Aeson
 
-import HERMIT.API.Dictionary.Local.Bind
-import HERMIT.API.Dictionary.Local.Case
-import HERMIT.API.Dictionary.Local.Cast
-import HERMIT.API.Dictionary.Local.Let
+import HERMIT.API.Dictionary.Local.Bind as Local
+import HERMIT.API.Dictionary.Local.Case as Local
+import HERMIT.API.Dictionary.Local.Cast as Local
+import HERMIT.API.Dictionary.Local.Let  as Local
 import HERMIT.API.Types
 
 -- | ((\\ v -> E1) E2) ==> let v = E2 in E1

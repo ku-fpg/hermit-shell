@@ -128,14 +128,14 @@ command' eval = do
     -- mWidth :: Just Int -- Just (width of screen)
 
     liftIO $ print (u,ast,cmd,mWidth)
-    
+
      -- change the width of the screen (mWidth), inside the given ast # (ast).
 
     let changeState st = let st' = maybe st (\w -> setPrettyOpts st ((cl_pretty_opts st) { po_width = w })) mWidth
                          in setCursor ast st'
 
     -- Call the shell, using the (u :: user-number), and get the result ast #.
-    
+
     ast' <- clm u changeState $ eval >> State.gets cl_cursor
 
     -- Find infomation about this user TChan
@@ -146,12 +146,12 @@ command' eval = do
     let (ms,gs) = partitionEithers es
     json $ CommandResponse (optionalMsg ms) (optionalAST gs) ast'
 -}
-initCommandLineState :: AST -> IO CommandLineState 
+initCommandLineState :: AST -> IO CommandLineState
 initCommandLineState ast = do
-    ps <- defPS ast
+    ps  <- defPS ast
     tlv <- newTVarIO []
-    return $ CommandLineState
-                { cl_pstate         = ps 
+    return CommandLineState
+                { cl_pstate         = ps
                 , cl_height         = 30
                 , cl_nav            = False
                 , cl_window         = mempty
@@ -165,27 +165,29 @@ initCommandLineState ast = do
                 , cl_templemmas     = tlv
                 , cl_failhard       = False
                 , cl_diffonly       = False
-                }        
+                }
 
-{- 
+{-
   'performTypedEffect' takes the Plugin Reader Data, a mutable CommandLineState,
   and return a function from JSON list to JSON.
 -}
-performTypedEffect :: PluginReader -> TMVar CommandLineState 
-                   -> ([Aeson.Value] -> IO Aeson.Value)
-performTypedEffect plug ref [val] = do
+performTypedEffect :: PluginReader
+                   -> TMVar CommandLineState
+                   -> [Aeson.Value]
+                   -> IO Aeson.Value
+performTypedEffect plug ref [val] =
   case parseCLT val of
     Nothing -> do
             print ("ParseCLT fail:" :: String, val)
-            return $ Aeson.Null
+            return Aeson.Null
     Just m -> do
         print ("sending to internal shell" :: String)
         cls0 <- atomically $ takeTMVar ref
         -- Now, add a command-specific logger
-        let orig_logger = ps_render $ cl_pstate $ cls0
-        chan <- atomically $ newTChan
-        let cls1 = newRenderer (webChannel chan) $ cls0 
-        (r,cls2) <- runCLT plug cls1 $ m
+        let orig_logger = ps_render $ cl_pstate cls0
+        chan <- atomically newTChan
+        let cls1 = newRenderer (webChannel chan) cls0
+        (r,cls2) <- runCLT plug cls1 m
         atomically $ putTMVar ref $ newRenderer orig_logger cls2
         es <- liftIO (getUntilEmpty chan)
         -- split into messages, and AST(s)?
@@ -197,7 +199,7 @@ performTypedEffect plug ref [val] = do
           Left (CLError e) -> do
              putStrLn e
              return Aeson.Null
-          Left _exc  -> return $ Aeson.Null
+          Left _exc  -> return Aeson.Null
           Right val' -> return $ object [ "result" .= val', "output" .= es ]
 performTypedEffect _ _ _ =
     fail "performTypedEffect: typed effects are expected to be unary."
@@ -209,7 +211,7 @@ newRenderer rndr cls = cls { cl_pstate = (cl_pstate cls) { ps_render = rndr } }
 -- optionalAST :: [[Glyph]] -> Maybe [Glyph]
 -- optionalAST [] = Nothing
 -- optionalAST gs = Just (last gs)
--- 
+--
 -- optionalMsg :: [String] -> Maybe String
 -- optionalMsg [] = Nothing
 -- optionalMsg ss = Just (unlines ss)

@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings, KindSignatures, GADTs #-}
+{-# LANGUAGE OverloadedStrings #-}
 module HERMIT.API.Shell where
 
 import Data.Aeson
@@ -14,7 +14,7 @@ resume :: Shell ()
 resume = Shell $ method "resume" []
 
 -- | promote a `Transform` to top-level, run it, and print the result.
-query :: (Guts a) => Transform a b -> Shell ()
+query :: Guts a => Transform a b -> Shell ()
 query (Transform t) = Shell $ method "query" [t]
 
 -- | promote a `Rewrite` to top-level, run it, and update global state with the result.

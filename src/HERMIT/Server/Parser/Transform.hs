@@ -398,7 +398,7 @@ instance External (RewriteH LCore) where
       -- HERMIT.API.Dictionary.Local.Case
     , external "caseFloatApp" (promoteExprR caseFloatAppR :: RewriteH LCore)
         [ "(case ec of alt -> e) v ==> case ec of alt -> e v" ] .+ Commute .+ Shallow
-    , external "caseFloatArg" ((\ strict -> promoteExprR (caseFloatArg Nothing (Just strict))) :: RewriteH LCore -> RewriteH LCore)
+    , external "caseFloatArg" (promoteExprR . caseFloatArg Nothing . Just :: RewriteH LCore -> RewriteH LCore)
         [ "Given a proof that f is strict, then"
         , "f (case s of alt -> e) ==> case s of alt -> f e" ]   .+ Commute .+ Shallow
     , external "caseFloatArg" ((\ f strict -> promoteExprR (caseFloatArg (Just f) (Just strict))) :: CoreString -> RewriteH LCore -> RewriteH LCore)
@@ -886,5 +886,5 @@ instance External (TransformH LCoreTC DocH) where
     [ external "showRule" (ruleHelpT :: PrettyPrinter -> RuleName -> TransformH LCoreTC DocH)
         [ "Display details on the named rule." ] .+ Query
     ]
-  
+
 
