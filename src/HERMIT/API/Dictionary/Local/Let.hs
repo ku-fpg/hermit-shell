@@ -97,9 +97,10 @@ letFloatInCase = Transform $ method "letFloatInCase" []
 letFloatInLam :: Rewrite LCore
 letFloatInLam = Transform $ method "letFloatInLam" []
 
--- -- | Re-order a sequence of nested non-recursive let bindings.
--- -- The argument list should contain the let-bound variables, in the desired order.
--- reorderLets :: [String] -> Rewrite LCore
+-- | Re-order a sequence of nested non-recursive let bindings.
+-- The argument list should contain the let-bound variables, in the desired order.
+reorderLets :: [String] -> Rewrite LCore
+reorderLets lets = Transform $ method "reorderLets" [toJSON lets]
 
 -- | Combine nested non-recursive lets into case of a tuple.
 -- E.g. let {v1 = e1 ; v2 = e2 ; v3 = e3} in body ==> case (e1,e2,e3) of {(v1,v2,v3) -> body}

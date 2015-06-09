@@ -553,9 +553,9 @@ instance External (RewriteH LCore) where
     , external "letFloatInLam" ((promoteExprR letFloatInLamR >+> anybuR (promoteExprR letElimR)) :: RewriteH LCore)
         [ "let v = ev in \\ x -> e ==> \\ x -> let v = ev in e"
         , "if v does not shadow x" ]                                            .+ Commute .+ Shallow
---     , external "reorderLets" (promoteExprR . reorderNonRecLetsR :: [String] -> RewriteH LCore)
---         [ "Reorder a sequence of nested nonRecursive let bindings."
---         , "The argument list should contain the letBound variables, in the desired order." ]
+     , external "reorderLets" (promoteExprR . reorderNonRecLetsR :: [String] -> RewriteH LCore)
+         [ "Reorder a sequence of nested nonRecursive let bindings."
+         , "The argument list should contain the letBound variables, in the desired order." ]
     , external "letTuple" (promoteExprR . letTupleR :: String -> RewriteH LCore)
         [ "Combine nested nonRecursive lets into case of a tuple."
         , "E.g. let {v1 = e1 ; v2 = e2 ; v3 = e3} in body ==> case (e1,e2,e3) of {(v1,v2,v3) -> body}" ] .+ Commute
