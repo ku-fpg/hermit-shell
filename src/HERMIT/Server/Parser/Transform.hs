@@ -955,7 +955,7 @@ instance External (TransformH LCore ()) where
         [ "Copy a given lemma, with a new name." ]
         , external "modifyLemma" ((\ nm rr -> modifyLemmaT nm id (extractR rr) (const NotProven) (const NotUsed)) :: LemmaName -> RewriteH LCore -> TransformH LCore ())
         [ "Modify a given lemma. Resets proven status to Not Proven and used status to Not Used." ]
-    , external "conjuct" (\n1 n2 n3 -> conjunctLemmasT n1 n2 n3 :: TransformH LCore ())
+    , external "conjunct" (\n1 n2 n3 -> conjunctLemmasT n1 n2 n3 :: TransformH LCore ())
         [ "conjunct new-name lhs-name rhs-name" ]
     , external "disjunct" (\n1 n2 n3 -> disjunctLemmasT n1 n2 n3 :: TransformH LCore ())
         [ "disjunt new-name lhs-name rhs-name" ]
