@@ -149,7 +149,7 @@ newtype QueryFun = QueryFun Value
 ------------------------------------------------------------------------
 
 newtype AST = AST Int
-    deriving (Num, Enum, Ord, Eq, Integral, Real)
+    deriving (Num, Enum, Ord, Eq, Integral, Real, ToJSON)
 
 instance Show AST where
     show (AST n) = show n
