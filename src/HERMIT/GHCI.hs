@@ -1,8 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 module HERMIT.GHCI (plugin) where
 
-import           Blaze.ByteString.Builder (fromLazyByteString)
-
 import           Control.Concurrent
 import           Control.Concurrent.STM
 import           Control.Exception.Base
@@ -11,6 +9,7 @@ import           Control.Monad.Trans.Except
 import           Control.Monad.Trans.Reader
 
 import qualified Data.Aeson as Aeson
+import           Data.ByteString.Builder (lazyByteString)
 import           Data.Foldable.Compat (forM_)
 import           Data.Default
 
@@ -120,7 +119,7 @@ handleError _ (WAEError str) = return $ msgBuilder str status500
 -- | Turn a string and status into a Response containing a JSON-encoded Msg.
 msgBuilder :: String -> Status -> Wai.Response
 msgBuilder msg s = Wai.responseBuilder s [("Content-Type","application/json")]
-                                     $ fromLazyByteString $ Aeson.encode $ Msg msg
+    . lazyByteString . Aeson.encode $ Msg msg
 
 -- fileContents :: String
 -- fileContents = unlines
