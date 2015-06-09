@@ -17,11 +17,11 @@ import           HERMIT.Shell.Types hiding (clm)
 
 -- import           HERMIT.Context
 
-import           HERMIT.Server.Parser.QueryFun()
-import           HERMIT.Server.Parser.ShellEffect()
-import           HERMIT.Server.Parser.KernelEffect()
-import           HERMIT.Server.Parser.ScriptEffect()
+import           HERMIT.Server.Parser.KernelEffect ()
 import           HERMIT.Server.Parser.Name ()
+import           HERMIT.Server.Parser.QueryFun ()
+import           HERMIT.Server.Parser.ScriptEffect ()
+import           HERMIT.Server.Parser.ShellEffect ()
 import           HERMIT.Server.Parser.String ()
 import           HERMIT.Server.Parser.Transform ()
 import           HERMIT.Server.Parser.Utils

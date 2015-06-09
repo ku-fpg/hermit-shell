@@ -68,6 +68,7 @@ library
                         HERMIT.API.Dictionary.Local.Cast
                         HERMIT.API.Dictionary.Local.Let
                         HERMIT.API.Dictionary.Navigation
+                        HERMIT.API.Dictionary.Navigation.Crumbs
                         HERMIT.API.Dictionary.Remembered
                         HERMIT.API.Dictionary.WorkerWrapper.FixResult
                         HERMIT.API.Shell
@@ -81,6 +82,7 @@ library
                         HERMIT.GHCI.Renderer
                         HERMIT.GHCI.Types
                         HERMIT.Server.Parser
+                        HERMIT.Server.Parser.Crumb
                         HERMIT.Server.Parser.Name
                         HERMIT.Server.Parser.QueryFun
                         HERMIT.Server.Parser.ShellEffect

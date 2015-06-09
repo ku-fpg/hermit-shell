@@ -161,6 +161,11 @@ instance Read AST where
 
 ------------------------------------------------------------------------
 
+newtype Crumb = Crumb Value
+    deriving ToJSON
+
+------------------------------------------------------------------------
+
 data PpType = Show | Abstract | Omit
     deriving (Show, Read)
 
