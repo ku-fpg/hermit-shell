@@ -197,6 +197,21 @@ instance External (BiRewriteH LCore) where
                   "Note: you are required to have previously executed the command \"ww-generateFusion\" on the definition",
                   "      work = unwrap (f (wrap work))"
                 ] .+ Introduce .+ Context .+ PreCondition .+ TODO
+
+    , external "retraction" ((\ f g r -> promoteExprBiR $ retraction (Just r) f g) :: CoreString -> CoreString -> RewriteH LCore -> BiRewriteH LCore)
+        [ "Given f :: X -> Y and g :: Y -> X, and a proof that f (g y) ==> y, then"
+        , "f (g y) <==> y."
+        ] .+ Shallow
+    , external "retractionUnsafe" ((\ f g -> promoteExprBiR $ retraction Nothing f g) :: CoreString -> CoreString -> BiRewriteH LCore)
+        [ "Given f :: X -> Y and g :: Y -> X, then"
+        , "f (g y) <==> y."
+        , "Note that the precondition (f (g y) == y) is expected to hold."
+        ] .+ Shallow .+ PreCondition
+    , external "lemmaBirewrite" (promoteExprBiR . lemmaBiR Obligation :: LemmaName -> BiRewriteH LCore)
+        [ "Generate a bi-directional rewrite from a lemma." ]
+        , external "lemmaConsequentBirewrite" (promoteExprBiR . lemmaConsequentBiR Obligation :: LemmaName -> BiRewriteH LCore)
+        [ "Generate a bi-directional rewrite from the consequent of an implication lemma."
+        , "The antecedent is instantiated and introduced as an unproven obligation." ]
     ]
     where
       mkWWAssC :: RewriteH LCore -> Maybe WWAssumption
@@ -720,6 +735,42 @@ instance External (RewriteH LCore) where
         [ "Run GHC's SpecConstr pass, which performs call pattern specialization."] .+ Deep
     , external "specialise" (promoteModGutsR specialiseR :: RewriteH LCore)
         [ "Run GHC's specialisation pass, which performs type and dictionary specialisation."] .+ Deep
+    , external "mergeQuantifiers" (\n1 n2 -> promoteR (mergeQuantifiersR (cmpHN2Var n1) (cmpHN2Var n2)) :: RewriteH LCore)
+        [ "Merge quantifiers from two clauses if they have the same type."
+        , "Example:"
+        , "(forall (x::Int). foo x = x) ^ (forall (y::Int). bar y y = 5)"
+        , "merge-quantifiers 'x 'y"
+        , "forall (x::Int). (foo x = x) ^ (bar x x = 5)"
+        , "Note: if only one quantifier matches, it will be floated if possible." ]
+    , external "floatLeft" (\n1 -> promoteR (mergeQuantifiersR (cmpHN2Var n1) (const False)) :: RewriteH LCore)
+        [ "Float quantifier out of left-hand side." ]
+    , external "foldRight" (\n1 -> promoteR (mergeQuantifiersR (const False) (cmpHN2Var n1)) :: RewriteH LCore)
+        [ "Float quantifier out of right-hand side." ]
+    , external "lemmaForward" (forwardT . promoteExprBiR . lemmaBiR Obligation :: LemmaName -> RewriteH LCore)
+        [ "Generate a rewrite from a lemma, left-to-right." ]
+    , external "lemmaBackward" (backwardT . promoteExprBiR . lemmaBiR Obligation :: LemmaName -> RewriteH LCore)
+        [ "Generate a rewrite from a lemma, right-to-left." ]
+    , external "lemma-consequent" (promoteClauseR . lemmaConsequentR Obligation :: LemmaName -> RewriteH LCore)
+        [ "Match the current lemma with the consequent of an implication lemma."
+        , "Upon success, replaces with antecedent of the implication, properly instantiated." ]
+    , external "lemmaLhsIntro" (promoteCoreR . lemmaLhsIntroR :: LemmaName -> RewriteH LCore)
+        [ "Introduce the LHS of a lemma as a non-recursive binding, in either an expression or a program."
+        , "body ==> let v = lhs in body" ] .+ Introduce .+ Shallow
+    , external "lemmaRhsIntro" (promoteCoreR . lemmaRhsIntroR :: LemmaName -> RewriteH LCore)
+        [ "Introduce the RHS of a lemma as a non-recursive binding, in either an expression or a program."
+        , "body ==> let v = rhs in body" ] .+ Introduce .+ Shallow
+    , external "instDictionaries" (promoteClauseR instantiateDictsR :: RewriteH LCore)
+        [ "Instantiate all of the universally quantified dictionaries of the given lemma." ]
+    , external "reflexivity" (promoteClauseR (forallR idR reflexivityR <+ reflexivityR) :: RewriteH LCore)
+        [ "Rewrite alpha-equivalence to true." ]
+    , external "simplifyLemma" (simplifyClauseR :: RewriteH LCore)
+        [ "Reduce a proof by applying reflexivity and logical operator identities." ]
+    , external "splitAntecedent" (promoteClauseR splitAntecedentR :: RewriteH LCore)
+        [ "Split an implication of the form (q1 ^ q2) => q3 into q1 => (q2 => q3)" ]
+    , external "lemma" (promoteClauseR . lemmaR Obligation :: LemmaName -> RewriteH LCore)
+        [ "Rewrite clause to true using given lemma." ]
+    , external "lemmaUnsafe" (promoteClauseR . lemmaR UnsafeUsed :: LemmaName -> RewriteH LCore)
+        [ "Rewrite clause to true using given lemma." ] .+ Unsafe
     ]
     where
       mkWWAssC :: RewriteH LCore -> Maybe WWAssumption
@@ -754,6 +805,8 @@ instance External (RewriteH LCoreTC) where
 --    , external "atPath"     (flip hfocusT idR :: TransformH LCoreTC LocalPathH -> TransformH LCoreTC LCoreTC)
 --        [ "return the expression found at the given path" ]
 
+    , external "unshadowQuantified" (promoteClauseR unshadowClauseR :: RewriteH LCoreTC)
+        [ "Unshadow a quantified clause." ]
     ]
 
 -------------------------------------------------------------------------------
@@ -855,6 +908,20 @@ instance External (TransformH LCore ()) where
     , external "isUndefinedVal" (promoteExprT isUndefinedValT :: TransformH LCore ())
         [ "Succeed if the current expression is an undefined value."
         ] .+ Shallow .+ Context .+ Predicate
+    , external "imply" (\n1 n2 n3 -> implyLemmasT n1 n2 n3 :: TransformH LCore ())
+        [ "imply new-name antecedent-name consequent-name" ]
+    , external "instLemma" (\ nm v cs -> modifyLemmaT nm id (instantiateClauseVarR (cmpHN2Var v) cs) id id :: TransformH LCore ())
+        [ "Instantiate one of the universally quantified variables of the given lemma,"
+        , "with the given Core expression, creating a new lemma. Instantiating an"
+        , "already proven lemma will result in the new lemma being considered proven." ]
+   , external "copyLemma" (\ nm newName -> modifyLemmaT nm (const newName) idR id id :: TransformH LCore ())
+        [ "Copy a given lemma, with a new name." ]
+        , external "modifyLemma" ((\ nm rr -> modifyLemmaT nm id (extractR rr) (const NotProven) (const NotUsed)) :: LemmaName -> RewriteH LCore -> TransformH LCore ())
+        [ "Modify a given lemma. Resets proven status to Not Proven and used status to Not Used." ]
+    , external "conjuct" (\n1 n2 n3 -> conjunctLemmasT n1 n2 n3 :: TransformH LCore ())
+        [ "conjunt new-name lhs-name rhs-name" ]
+    , external "disjunct" (\n1 n2 n3 -> disjunctLemmasT n1 n2 n3 :: TransformH LCore ())
+        [ "disjunt new-name lhs-name rhs-name" ]
    ]
     where
       mkWWAssC :: RewriteH LCore -> Maybe WWAssumption
@@ -878,6 +945,9 @@ instance External (TransformH LCore String) where
         [ "Determine if a rewrite could be successfully applied." ]
 --     , external "extract"    (extractT :: TransformH LCoreTC String -> TransformH LCore String)
 --         [ "Extract a TransformLCoreString from a TransformLCoreTCString" ]
+
+    , external "queryLemma" ((\ nm t -> getLemmaByNameT nm >>> arr lemmaC >>> extractT t) :: LemmaName -> TransformH LCore String -> TransformH LCore String)
+        [ "Apply a transformation to a lemma, returning the result." ]
     ]
 
 instance External (TransformH LCore DocH) where
@@ -892,4 +962,10 @@ instance External (TransformH LCoreTC DocH) where
         [ "Display details on the named rule." ] .+ Query
     ]
 
+
+instance External (PrettyH LCore) where
+  parseExternals =
+    [ external "showLemma"((\pp n -> showLemmaT n pp) :: PrettyPrinter -> LemmaName -> PrettyH LCore)
+        [ "Display a lemma." ]
+    ]
 
