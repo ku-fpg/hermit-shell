@@ -96,6 +96,7 @@ server passInfo _opts skernel initAST = do
         ,":def l \\s -> return $ \":load \" ++ s ++ \"\\n:set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
         ,":def r \\s -> return $ \":reload \" ++ s ++ \"\\n:set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
         ,":def hermit \\s -> return $ \":set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
+        ,":def resume \\s -> return $ \"resume\\n:quit\""
         ,":def abort \\s -> return $ \"abort\\n:quit\""
 --        ,"send welcome" -- welcome message (interactive only)a
         ,"send display" -- where am I (interactive only)
