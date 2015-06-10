@@ -1,5 +1,7 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE DeriveDataTypeable #-} -- TODO: until 7.10-only
+{-# LANGUAGE StandaloneDeriving #-} -- TODO: until 7.10-only
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module HERMIT.Server.Parser.Transform where
@@ -25,7 +27,9 @@ import           HERMIT.Server.Parser.Utils
 
 import           Prelude hiding (abs)
 import           Data.String (fromString)
+import           Data.Typeable
 
+import           Text.PrettyPrint.MarkedHughesPJ (MDoc) -- TODO: until 7.10
 -------------------------------------------------------------------------------
 
 instance External (BiRewriteH LCore) where
@@ -1008,6 +1012,18 @@ instance External (TransformH LCoreTC ()) where
     , external "compareCoreAt" (compareCoreAtT ::  TransformH LCoreTC LocalPathH -> TransformH LCoreTC LocalPathH -> TransformH LCoreTC ())
         [ "Compare the core fragments at the end of the given paths for alpha-equality."] .+ Query .+ Predicate
     ]
+
+
+------------------------------------------------------------------------------
+
+deriving instance Typeable MDoc
+
+{-
+src/HERMIT/Server/Parser/Transform.hs:1028:10:
+    No instance for (Typeable Text.PrettyPrint.MarkedHughesPJ.MDoc)
+      arising from the superclasses of an instance declaration
+    In the instance declaration for ‘External (PrettyH LCore)’
+-}
 
 instance External (PrettyH LCore) where
   parseExternals =

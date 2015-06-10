@@ -47,7 +47,9 @@ library
                         unix,
                         vector,
                         -- needed by generated code
-                        wreq
+                        wreq,
+			-- until 7.10 only			
+                        marked-pretty
 
   default-language:     Haskell2010
 

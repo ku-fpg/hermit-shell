@@ -3,6 +3,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PolyKinds #-}
 {-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE DeriveDataTypeable #-}
 module HERMIT.API.Types where
 
 import Control.Applicative
@@ -127,6 +128,7 @@ instance Response LocalPath where
 
 data LCoreTC = LCoreTC
   deriving Typeable
+
 instance Guts LCoreTC
 
 data LCore = LCore
@@ -215,3 +217,4 @@ newtype RuleName = RuleName String
 
 method :: Text -> [Value] -> Value
 method nm params = object ["method" .= nm, "params" .= params]
+
