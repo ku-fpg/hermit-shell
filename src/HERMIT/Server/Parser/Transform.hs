@@ -703,6 +703,12 @@ instance External (RewriteH LCore) where
 
     , external "betaReducePlus" (promoteExprR betaReducePlusR :: RewriteH LCore)
         [ "Perform one or more beta-reductions."]                               .+ Eval .+ Shallow
+    , external "unfold" (promoteExprR unfoldR :: RewriteH LCore)
+        [ "In application f x y z, unfold f." ] .+ Deep .+ Context
+    , external "unfoldOne" (promoteExprR . unfoldNameR . unOccurrenceName :: OccurrenceName -> RewriteH LCore)
+        [ "Inline a definition, and apply the arguments; traditional unfold." ] .+ Deep .+ Context
+    , external "unfoldMany" (promoteExprR . unfoldNamesR . map unOccurrenceName:: [OccurrenceName] -> RewriteH LCore)
+        [ "Unfold a definition if it is named in the list." ] .+ Deep .+ Context
     , external "unfoldSaturated" (promoteExprR unfoldSaturatedR :: RewriteH LCore)
         [ "Unfold a definition only if the function is fully applied." ] .+ Deep .+ Context
     , external "specialize" (promoteExprR specializeR :: RewriteH LCore)

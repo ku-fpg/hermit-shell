@@ -229,11 +229,10 @@ type family ReturnType i :: * where
 
 ------------------------------------------------------------------------
 
-
-
 -- Rewrites with optional name
-class RewriteWithName a where
-    rewriteWithName :: ReturnType a ~ Rewrite LCore => Text -> a
+class ReturnType a ~ Rewrite LCore =>
+  RewriteWithName a where
+    rewriteWithName :: Text -> a
 
 instance RewriteWithName (Rewrite LCore) where
   rewriteWithName x = Transform $ method x [toJSON (Nothing :: Maybe String)]
@@ -241,9 +240,12 @@ instance RewriteWithName (Rewrite LCore) where
 instance (IsString a, a ~ String) => RewriteWithName (a -> Rewrite LCore) where
   rewriteWithName x str = Transform $ method x [toJSON $ Just str]
 
+------------------------------------------------------------------------
+
 -- Rewrites with optional name list
-class RewriteWithNames a where
-    rewriteWithNames :: ReturnType a ~ Rewrite LCore => Text -> a
+class ReturnType a ~ Rewrite LCore =>
+  RewriteWithNames a where
+    rewriteWithNames :: Text -> a
 
 instance RewriteWithNames (Rewrite LCore) where
   rewriteWithNames x = Transform $ method x []
@@ -251,3 +253,19 @@ instance RewriteWithNames (Rewrite LCore) where
 instance (IsString a, a ~ String) =>
          RewriteWithNames ([a] -> Rewrite LCore) where
   rewriteWithNames x strs = Transform $ method (x <> "With") [toJSON strs]
+
+------------------------------------------------------------------------
+
+-- Rewrites with optional name (or list of names)
+class ReturnType a ~ Rewrite LCore =>
+  RewriteWithOneOrMoreNames a where
+    rewriteWithOneOrMoreNames :: Text -> a
+
+instance RewriteWithOneOrMoreNames (Rewrite LCore) where
+  rewriteWithOneOrMoreNames x = Transform $ method x []
+
+instance RewriteWithOneOrMoreNames (Name -> Rewrite LCore) where
+  rewriteWithOneOrMoreNames x nm = Transform $ method (x <> "One") [toJSON nm]
+
+instance RewriteWithOneOrMoreNames ([Name] -> Rewrite LCore) where
+  rewriteWithOneOrMoreNames x nms = Transform $ method (x <> "Many") [toJSON nms]

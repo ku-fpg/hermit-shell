@@ -1,4 +1,5 @@
-{-# LANGUAGE OverloadedStrings, TypeFamilies #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TypeFamilies #-}
 module HERMIT.API.Dictionary.AlphaConversion where
 
 import HERMIT.API.Types
@@ -8,7 +9,7 @@ import HERMIT.API.Types
 alpha :: Rewrite LCore
 alpha = Transform $ method "alpha" []
 
-  -- | Renames the bound variable in a Lambda expression.  Optionally accepts a new name to use.
+-- | Renames the bound variable in a Lambda expression.  Optionally accepts a new name to use.
 alphaLam :: (ReturnType a ~ Rewrite LCore, RewriteWithName a) => a
 alphaLam = rewriteWithName "alphaLam"
 
