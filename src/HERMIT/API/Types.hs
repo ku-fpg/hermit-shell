@@ -53,20 +53,15 @@ fromShell _ _          = ShellFailure "fromShell"
 data ShellResult a
   = ShellResult [[Glyph]] a -- When was said, what was returned
   | ShellFailure String     -- something went wrong
-  | ShellAbort              -- HERMIT has returned control to GHCI;
-                            -- please stop sending messages.
-  | ShellResume             -- Resume compilation
+  | ShellException String   -- The remote HERMIT monad failed on the server with this
     deriving Show
 
+-- TODO: add ShellException
 instance FromJSON a => FromJSON (ShellResult a) where
   parseJSON (Object o) = ShellResult <$> o .: "output"
                                      <*> o .: "result"
-                      <|> parseResume
                       <|> return (ShellFailure "malformed Object returned from Server")
     where
-      parseResume = do
-        "resume" :: String <- o .: "shutdown"
-        return ShellResume
   parseJSON _ = return (ShellFailure "Object not returned from Server")
 
 

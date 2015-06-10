@@ -50,7 +50,7 @@ plugin = buildPlugin $ \ store passInfo ->
 -- | The meat of the plugin, which implements the actual Web API.
 server :: PassInfo -> [CommandLineOption] -> Kernel -> AST -> IO ()
 server passInfo _opts skernel initAST = do
-    sync' <- newTVarIO def
+    sync' <- newTVarIO def -- TODO: is this used anywhere?
 
     let -- Functions required by Scotty to run our custom WebM monad.
         response :: WebM a -> IO (Either WebAppException a)
@@ -68,9 +68,11 @@ server passInfo _opts skernel initAST = do
     clsVar <- atomically $ newTMVar cls
 
     let pr = PluginReader skernel passInfo
+  
+    lastCall <- newTVarIO (abortK (pr_kernel pr) :: IO ())
 
     let fns = router
-            [("send", performTypedEffect pr clsVar)
+            [("send", performTypedEffect lastCall pr clsVar)
             ]
 
     let jsonRpc :: ActionH ()
@@ -93,6 +95,8 @@ server passInfo _opts skernel initAST = do
         -- To get around an issue where the '-interactive-print' option gets reset:
         ,":def l \\s -> return $ \":load \" ++ s ++ \"\\n:set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
         ,":def r \\s -> return $ \":reload \" ++ s ++ \"\\n:set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
+        ,":def hermit \\s -> return $ \":set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
+        ,":def abort \\s -> return $ \"abort\\n:quit\""
 --        ,"send welcome" -- welcome message (interactive only)a
         ,"send display" -- where am I (interactive only)
 --        ,"setPath (rhsOf \"rev\")"
@@ -108,6 +112,11 @@ server passInfo _opts skernel initAST = do
     print ("Killing server" :: String)
     throwTo tid UserInterrupt
     print ("Killed server" :: String)
+
+    print ("Last Call" :: String)
+    atomically (readTVar lastCall) >>= id       -- do last call
+    
+    print ("Last Called" :: String)    
  --   raiseSignal sigTERM
 
 -- | Turn WebAppException into a Response.
