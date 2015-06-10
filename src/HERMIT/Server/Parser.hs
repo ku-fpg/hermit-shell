@@ -47,6 +47,7 @@ instance External (TypedEffectH ()) where
     , fmap RewriteLCoreTCH . parseExternal
     , fmap QueryH . parseExternal
     , fmap SetPathH . (parseExternal :: Value -> Parser (TransformH LCoreTC LocalPathH))
+    , fmap SetPathH . (parseExternal :: Value -> Parser (TransformH LCore LocalPathH))
     , external "setPath" (SetPathH :: TransformH LCoreTC LocalPathH -> TypedEffectH ())
         ["sets the path"]
     , external "query"   (QueryH :: QueryFun -> TypedEffectH ())
