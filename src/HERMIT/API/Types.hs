@@ -229,37 +229,37 @@ type family ReturnType i :: * where
 
 ------------------------------------------------------------------------
 
--- Rewrites with optional name
-class ReturnType a ~ Rewrite LCore =>
-  RewriteWithName a where
-    rewriteWithName :: Text -> a
+-- Rewrites with an optional string
+class ReturnType a ~ Rewrite LCore
+    => RewriteWithString a where
+  rewriteWithString :: Text -> a
 
-instance RewriteWithName (Rewrite LCore) where
-  rewriteWithName x = Transform $ method x [toJSON (Nothing :: Maybe String)]
+instance RewriteWithString (Rewrite LCore) where
+  rewriteWithString x = Transform $ method x [toJSON (Nothing :: Maybe String)]
 
-instance (IsString a, a ~ String) => RewriteWithName (a -> Rewrite LCore) where
-  rewriteWithName x str = Transform $ method x [toJSON $ Just str]
+instance (IsString a, a ~ String) => RewriteWithString (a -> Rewrite LCore) where
+  rewriteWithString x str = Transform $ method x [toJSON $ Just str]
 
 ------------------------------------------------------------------------
 
--- Rewrites with optional name list
-class ReturnType a ~ Rewrite LCore =>
-  RewriteWithNames a where
-    rewriteWithNames :: Text -> a
+-- Rewrites with optional list of strings
+class ReturnType a ~ Rewrite LCore
+    => RewriteWithStrings a where
+  rewriteWithStrings :: Text -> a
 
-instance RewriteWithNames (Rewrite LCore) where
-  rewriteWithNames x = Transform $ method x []
+instance RewriteWithStrings (Rewrite LCore) where
+  rewriteWithStrings x = Transform $ method x []
 
 instance (IsString a, a ~ String) =>
-         RewriteWithNames ([a] -> Rewrite LCore) where
-  rewriteWithNames x strs = Transform $ method (x <> "With") [toJSON strs]
+         RewriteWithStrings ([a] -> Rewrite LCore) where
+  rewriteWithStrings x strs = Transform $ method (x <> "With") [toJSON strs]
 
 ------------------------------------------------------------------------
 
 -- Rewrites with optional name (or list of names)
-class ReturnType a ~ Rewrite LCore =>
-  RewriteWithOneOrMoreNames a where
-    rewriteWithOneOrMoreNames :: Text -> a
+class ReturnType a ~ Rewrite LCore
+    => RewriteWithOneOrMoreNames a where
+  rewriteWithOneOrMoreNames :: Text -> a
 
 instance RewriteWithOneOrMoreNames (Rewrite LCore) where
   rewriteWithOneOrMoreNames x = Transform $ method x []
