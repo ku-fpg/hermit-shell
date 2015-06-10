@@ -14,6 +14,7 @@ import           HERMIT.Context
 import           HERMIT.Kure hiding ((<$>),(<*>))
 import           HERMIT.Shell.Command
 import           HERMIT.Shell.Types hiding (clm)
+import           HERMIT.Core (Crumb)
 
 -- import           HERMIT.Context
 
@@ -25,6 +26,7 @@ import           HERMIT.Server.Parser.ShellEffect ()
 import           HERMIT.Server.Parser.String ()
 import           HERMIT.Server.Parser.Transform ()
 import           HERMIT.Server.Parser.Utils
+import           HERMIT.Server.Parser.Crumb()
 
 import           Prelude.Compat
 
@@ -43,14 +45,19 @@ parseTopLevel v = fmap (const (toJSON ()))
 instance External (TypedEffectH ()) where
   parseExternals =
     [ fmap ShellEffectH . parseExternal
-    , fmap RewriteLCoreH . parseExternal
+--     , fmap RewriteLCoreH . parseExternal
     , fmap RewriteLCoreTCH . parseExternal
-    , fmap QueryH . parseExternal
-    , fmap SetPathH . (parseExternal :: Value -> Parser (TransformH LCoreTC LocalPathH))
-    , fmap SetPathH . (parseExternal :: Value -> Parser (TransformH LCore LocalPathH))
+--     , fmap QueryH . parseExternal
+--     , fmap SetPathH . (parseExternal :: Value -> Parser (TransformH LCoreTC LocalPathH))
+--     , fmap SetPathH . (parseExternal :: Value -> Parser (TransformH LCore LocalPathH))
     , external "setPath" (SetPathH :: TransformH LCoreTC LocalPathH -> TypedEffectH ())
         ["sets the path"]
-    , external "query"   (QueryH :: QueryFun -> TypedEffectH ())
+      -- XXX: Is this okay to do?
+    , external "setPath" (SetPathH :: TransformH LCore LocalPathH -> TypedEffectH ())
+        ["sets the path"]
+    , external "setPath" ((SetPathH :: TransformH LCore LocalPathH -> TypedEffectH ()) . (\crumb -> transform (\ _hermitC _lcore -> return (singletonSnocPath crumb))) :: Crumb -> TypedEffectH ()) -- XXX: Is this how it should work?
+        ["sets the path"]
+     , external "query"   (QueryH :: QueryFun -> TypedEffectH ())
         ["performs query"]
     , external "rewrite" (RewriteLCoreH :: RewriteH LCore -> TypedEffectH ())
        ["performs query"]
