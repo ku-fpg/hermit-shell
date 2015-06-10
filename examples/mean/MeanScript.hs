@@ -1,32 +1,77 @@
+{-# LANGUAGE OverloadedStrings #-}
+module MeanScript where
+
 import HERMIT.API
+
+import Data.Aeson
+
+
 script :: Shell ()
 script = do
-  eval "{rhs-of 'mean ; lam-body"
-  eval "  { arg 2 ; let-intro 's }"
-  eval "  { arg 3 ; let-intro 'l }"
-  eval "  innermost let-float"
-  eval "  try (reorder-lets ['s,'l])"
-  eval "  let-tuple 'sl"
-  eval "  { case-expr ; abstract 'xs ; app-fun ; let-intro 'sumlength }"
+  eval "{"
+  setPath $ rhsOf "mean"
+  sendCrumb lamBody
+
+  eval "{"
+  setPath $ arg 2
+  apply $ letIntro "s"
   eval "}"
-  eval "innermost let-float"
-  eval "binding-group-of 'sumlength"
-  eval "nonrec-to-rec           -- since we intend sumlength to be a recursive function"
-  eval "binding-of 'sumlength"
-  eval "remember sumlen"
-  eval "{ [def-rhs, lam-body]"
-  eval "  case-split-inline 'xs"
-  eval "  any-call (unfold 'sum)"
-  eval "  any-call (unfold 'length)"
-  eval "  simplify"
-  eval "  case-alt 1"
-  eval "  alpha-alt ['y,'ys]"
-  eval "  alt-rhs"
-  eval "  { arg 3 ; arg 3 ; let-intro 'l }"
-  eval "  { arg 2 ; arg 3 ; let-intro 's }"
-  eval "  innermost let-float"
-  eval "  try (reorder-lets ['s,'l])"
-  eval "  let-tuple 'sl"
-  eval "  { case-expr ; fold-remembered sumlen }"
+
+  eval "{"
+  setPath $ arg 3
+  apply $ letIntro "l"
+  eval "}"
+
+  apply $ innermost letFloat
+  apply . try $ reorderLets ["s", "l"]
+  apply $ letTuple "sl"
+
+  eval "{"
+  sendCrumb caseExpr
+  apply $ abstract "xs"
+  sendCrumb appFun
+  apply $ letIntro "sumlength"
+  eval "}"
+
+  eval "}"
+
+
+  apply $ innermost letFloat
+  setPath $ bindingGroupOf "sumlength"
+  apply nonrecToRec
+  setPath $ bindingOf "sumlength"
+  query $ remember "sumlen"
+
+
+  eval "{ [def-rhs, lam-body]"  -- Why are there square brackets here?
+  eval $ "case-split-inline 'xs"
+  eval $ "any-call (unfold 'sum)"
+  eval $ "any-call (unfold 'length)"
+  apply simplify
+  eval "case-alt 1"
+  apply $ alphaAlt ["y", "ys"]
+  eval "alt-rhs"
+
+  eval "{"
+  setPath $ arg 3
+  setPath $ arg 3
+  apply $ letIntro "l"
+  eval "}"
+
+  eval "{"
+  setPath $ arg 2
+  setPath $ arg 3
+  apply $ letIntro "s"
+  eval "}"
+
+  apply $ innermost letFloat
+  apply . try $ reorderLets ["s", "l"]
+  apply $ letTuple "sl"
+
+  eval "{"
+  eval "case-expr"
+  apply $ foldRemembered "sumlen"
+  eval "}"
+
   eval "}"
 
