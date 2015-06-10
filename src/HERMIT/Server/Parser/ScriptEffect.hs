@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# OPTIONS_GHC -fno-warn-orphans #-}
 module HERMIT.Server.Parser.ScriptEffect where
 
 import           HERMIT.Shell.ScriptToRewrite

@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# OPTIONS_GHC -fno-warn-orphans #-}
 module HERMIT.Server.Parser.KernelEffect where
 
 import           HERMIT.Server.Parser.Utils
