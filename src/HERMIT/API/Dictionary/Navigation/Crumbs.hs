@@ -3,6 +3,8 @@ module HERMIT.API.Dictionary.Navigation.Crumbs where
 
 import HERMIT.API.Types
 
+import Data.Aeson
+
 -- | Descend into the program within a module.
 prog :: Crumb
 prog = Crumb $ method "prog" []
@@ -56,8 +58,8 @@ caseType :: Crumb
 caseType = Crumb $ method "caseType" []
 
 -- | Descend into the (n-1)th alternative in a case expression.
-caseAlt :: Crumb
-caseAlt = Crumb $ method "caseAlt" []
+caseAlt :: Int -> Crumb
+caseAlt n = Crumb $ method "caseAlt" [toJSON n]
 
 -- | Descend into the expression in a cast.
 castExpr :: Crumb

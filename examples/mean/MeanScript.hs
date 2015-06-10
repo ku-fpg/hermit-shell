@@ -42,8 +42,8 @@ script = do
   setPath $ bindingOf "sumlength"
   query $ remember "sumlen"
 
-
-  eval "{ [def-rhs, lam-body]"  -- Why are there square brackets here?
+  -- XXX: Why are there square brackets here?
+  eval "{ [def-rhs, lam-body]"
   eval $ "case-split-inline 'xs"
   eval $ "any-call (unfold 'sum)"
   eval $ "any-call (unfold 'length)"
