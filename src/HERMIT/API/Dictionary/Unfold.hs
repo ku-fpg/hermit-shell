@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TypeFamilies #-}
 module HERMIT.API.Dictionary.Unfold where
 
 import HERMIT.API.Types
@@ -7,9 +8,17 @@ import HERMIT.API.Types
 betaReducePlus :: Rewrite LCore
 betaReducePlus = Transform $ method "betaReducePlus" []
 
--- unfold :: Rewrite LCore
--- unfold :: OccurenceName -> Rewrite LCore
--- unfold :: [OccurenceName] -> Rewrite LCore
+-- | @unfold :: Rewrite LCore@
+-- In application f x y z, unfold f.
+--
+-- @unfold :: Name -> Rewrite LCore@
+-- Inline a definition, and apply the arguments; traditional unfold.
+--
+-- @unfold :: [Name] -> Rewrite LCore@
+-- Unfold a definition if it is named in the list.
+unfold :: (ReturnType a ~ Rewrite LCore, RewriteWithOneOrMoreNames a)
+       => a
+unfold = rewriteWithOneOrMoreNames "unfold"
 
 -- | Unfold a definition only if the function is fully applied.
 unfoldSaturated :: Rewrite LCore
