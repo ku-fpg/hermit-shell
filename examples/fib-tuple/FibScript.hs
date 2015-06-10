@@ -1,4 +1,6 @@
+{-# LANGUAGE OverloadedStrings #-}
 import HERMIT.API
+
 script :: Shell ()
 script = do
   eval "load-as-rewrite \"WWA\" \"WW-Ass-A.hss\""
@@ -9,64 +11,64 @@ script = do
   eval "{"
 
   eval "ww-split [| wrap |] [| unwrap |] (ww-AssA-to-AssC WWA)"
-  eval "binding-of 'work ; remember origwork"
+  setPath (bindingOf "work") ; query $ remember "origwork"
 
-  eval "-- work = unwrap (f (wrap work))"
+  -- work = unwrap (f (wrap work))
 
-  eval "def-rhs ; eta-expand 'n"
+  sendCrumb defRhs ; apply $ etaExpand "n"
 
-  eval "-- work n = unwrap (f (wrap work)) n"
+  -- work n = unwrap (f (wrap work)) n
 
-  eval "any-call (unfold 'unwrap)"
+  apply $ anyCall (unfold ("unwrap" :: Name))
 
-  eval "-- work n = (f (wrap work) n, f (wrap work) (n+1))"
+  -- work n = (f (wrap work) n, f (wrap work) (n+1))
 
-  eval "lam-body ; case-split-inline 'n"
+  sendCrumb lamBody ; eval "case-split-inline 'n"
 
-  eval "-- work 0     = (f (wrap work) 0, f (wrap work) 1)"
-  eval "-- work (n+1) = (f (wrap work) (n+1), f (wrap work) (n+2))"
+  -- work 0     = (f (wrap work) 0, f (wrap work) 1)
+  -- work (n+1) = (f (wrap work) (n+1), f (wrap work) (n+2))
 
-  eval "{ case-alt 0 ; any-call (unfold 'f) }"
-  eval "{ [ case-alt 1, alt-rhs, app-arg] ; any-call (unfold 'f) }"
-  eval "simplify"
+  eval "{" ; sendCrumb $ caseAlt 0 ; apply $ anyCall (unfold ("f" :: Name)) ; eval "}"
+  eval "{" ; sendCrumb (caseAlt 1) ; sendCrumb altRhs ; sendCrumb appArg ; apply $ anyCall (unfold ("f" :: Name)) ; eval "}"
+  apply simplify
 
-  eval "-- work 0     = (0, 1)"
-  eval "-- work (n+1) = (f (wrap work) (n+1), wrap work (n+1) + wrap work n)"
+  -- work 0     = (0, 1)
+  -- work (n+1) = (f (wrap work) (n+1), wrap work (n+1) + wrap work n)
 
-  eval "[ case-alt 1, alt-rhs ]"
-  eval "{ app-arg ; any-call (unfold-remembered origwork) }"
+  sendCrumb (caseAlt 1) ; sendCrumb altRhs
+  eval "{" ; sendCrumb appArg ; apply $ anyCall (unfoldRemembered "origwork") ; eval "}"
 
-  eval "-- work 0     = (0, 1)"
-  eval "-- work (n+1) = (f (wrap work) (n+1), wrap (unwrap (f (wrap work))) (n+1) + wrap (unwrap (f (wrap work))) n)"
+  -- work 0     = (0, 1)
+  -- work (n+1) = (f (wrap work) (n+1), wrap (unwrap (f (wrap work))) (n+1) + wrap (unwrap (f (wrap work))) n)
 
   eval "any-bu (forward (ww-assumption-A [| wrap |] [| unwrap |] WWA ))"
 
-  eval "-- work 0     = (0, 1)"
-  eval "-- work (n+1) = (f (wrap work) (n+1), f (wrap work) (n+1) + f (wrap work) n)"
+  -- work 0     = (0, 1)
+  -- work (n+1) = (f (wrap work) (n+1), f (wrap work) (n+1) + f (wrap work) n)
 
-  eval "{ arg 3 ; arg 1 ; let-intro 'x }"
-  eval "{ arg 2 ; let-intro 'y }"
-  eval "innermost let-float"
-  eval "try (reorder-lets ['x,'y])"
-  eval "one-td (fold 'y)"
-  eval "let-tuple 'xy"
+  eval "{" ; setPath $ arg 3 ; setPath $ arg 1 ; apply $ letIntro "x" ; eval "}"
+  eval "{" ; setPath $ arg 2 ; apply $ letIntro "y" ; eval "}"
+  apply $ innermost letFloat
+  apply $ try (reorderLets ["x","y"])
+  apply $ oneTD (fold "y")
+  apply $ letTuple "xy"
 
-  eval "-- work 0     = (0, 1)"
-  eval "-- work (n+1) = let (x,y) = (f (wrap work) n, f (wrap work) (n+1)) in (y,x+y)"
+  -- work 0     = (0, 1)
+  -- work (n+1) = let (x,y) = (f (wrap work) n, f (wrap work) (n+1)) in (y,x+y)
 
-  eval "one-td (fold 'unwrap)"
+  apply . oneTD $ fold "unwrap"
 
-  eval "-- work 0     = (0, 1)"
-  eval "-- work (n+1) = let (x,y) = unwrap (f (wrap work)) n in (y,x+y)"
+  -- work 0     = (0, 1)
+  -- work (n+1) = let (x,y) = unwrap (f (wrap work)) n in (y,x+y)
 
-  eval "one-td (fold-remembered origwork)"
+  apply . oneTD $ foldRemembered "origwork"
 
-  eval "-- work 0     = (0, 1)"
-  eval "-- work (n+1) = let (x,y) = work n in (y,x+y)"
+  -- work 0     = (0, 1)
+  -- work (n+1) = let (x,y) = work n in (y,x+y)
 
   eval "}"
 
-  eval "{ def-rhs ; let-elim }"
+  eval "{" ; sendCrumb defRhs ; apply letElim ; eval "}"
 
-  eval "any-call (unfold 'wrap)"
+  apply . anyCall $ unfold ("wrap" :: Name)
 
