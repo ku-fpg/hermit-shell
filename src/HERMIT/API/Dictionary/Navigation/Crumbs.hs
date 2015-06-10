@@ -103,9 +103,9 @@ funDom = Crumb $ method "funDom" []
 funCod :: Crumb
 funCod = Crumb $ method "funCod" []
 
--- -- | Descend into the codomain of a function type.
--- forallBody :: Crumb
--- forallBody = Crumb $ method "forallBody" []
+-- | Descend into the codomain of a function type.
+forallTyBody :: Crumb
+forallTyBody = Crumb $ method "forallTyBody" []
 
 -- | Descend into the (n-1)th argument of a type constructor coercion.
 reflType :: Crumb
@@ -167,9 +167,9 @@ instType = Crumb $ method "instType" []
 lrCo :: Crumb
 lrCo = Crumb $ method "lrCo" []
 
--- -- | Descend into the clause of a quantified clause.
--- forallBody :: Crumb
--- forallBody = Crumb $ method "forallBody" []
+-- | Descend into the clause of a quantified clause.
+forallBody :: Crumb
+forallBody = Crumb $ method "forallBody" []
 
 -- | Descend into left-hand side of a conjunction.
 conjLhs :: Crumb

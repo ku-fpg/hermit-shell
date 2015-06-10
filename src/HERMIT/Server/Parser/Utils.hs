@@ -17,6 +17,7 @@ module HERMIT.Server.Parser.Utils
         ) where
 
 import           Control.Applicative
+import           Control.Monad (liftM)
 import           Data.Foldable (toList)
 
 import           Data.Aeson as Aeson
@@ -100,6 +101,10 @@ instance __OVERLAPPABLE__ External e => External [e] where
 instance __OVERLAPPING__ External String where
   parseExternal (String txt) = return $ unpack txt
   parseExternal _            = fail "parseExternal: String"
+
+instance External a => External (Maybe a) where
+  parseExternal Null = return Nothing
+  parseExternal x    = liftM Just $ parseExternal x
 
 -----------------------------------------------------------------
 instance External PrettyPrinter where

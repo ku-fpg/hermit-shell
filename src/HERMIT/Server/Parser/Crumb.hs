@@ -59,8 +59,8 @@ instance External Crumb where
         [ "Descend into the domain of a function type." ]
     , external "funCod" FunTy_CoDom
         [ "Descend into the codomain of a function type." ]
---     , external "forallBody" ForAllTy_Body
---         [ "Descend into the body of a forall type." ]
+    , external "forallTyBody" ForAllTy_Body
+        [ "Descend into the body of a forall type." ]
     , external "reflType" Refl_Type
         [ "Descend into the (n-1)th argument of a type constructor coercion." ]
     , external "coConArg" TyConAppCo_Arg
@@ -91,8 +91,8 @@ instance External Crumb where
         [ "Descend into the type within a coercion instantiation." ]
     , external "lrCo" LRCo_Co
         [ "Descend into the coercion within a left/right projection coercion." ]
---     , external "forallBody" Forall_Body
---         [ "Descend into the clause of a quantified clause." ]
+    , external "forallBody" Forall_Body
+        [ "Descend into the clause of a quantified clause." ]
     , external "conjLhs" Conj_Lhs
         [ "Descend into left-hand side of a conjunction." ]
     , external "conjRhs" Conj_Rhs

@@ -229,8 +229,24 @@ instance External (RewriteH LCore) where
       -- HERMIT.API.Dictionary.AlphaConversion
       external "alpha" (promoteCoreR alphaR :: RewriteH LCore)
         [ "Renames the bound variables at the current node."]
+    , external "alphaLam" (promoteExprR . alphaLamR :: Maybe String -> RewriteH LCore)
+        [ "Renames the bound variable in a Lambda expression.  Optionally accepts a new name to use." ]
+    ,  external "alphaCaseBinder" (promoteExprR . alphaCaseBinderR :: Maybe String -> RewriteH LCore)
+        [ "Renames the binder in a Case expression. Optionally accepts a new name to use." ]
+    ,  external "alphaAlt" (promoteAltR alphaAltR :: RewriteH LCore)
+        [ "Renames all binders in a Case alternative."]
+    ,  external "alphaAltWith" (promoteAltR . alphaAltWithR :: [String] -> RewriteH LCore)
+        [ "Renames all binders in a Case alternative using the user-provided list of new names."]
     , external "alphaCase" (promoteExprR alphaCaseR :: RewriteH LCore)
         [ "Renames all binders in a Case alternative."]
+    , external "alphaLetWith" (promoteExprR . alphaLetWithR :: [String] -> RewriteH LCore)
+        [ "Renames the bound variables in a Let expression using a list of suggested names."]
+    , external "alphaLet" (promoteExprR alphaLetR :: RewriteH LCore)
+        [ "Renames the bound variables in a Let expression."]
+    , external "alphaTopWith" (promoteProgR . alphaProgConsWithR :: [String] -> RewriteH LCore)
+        [ "Renames the bound identifiers in the top-level binding group at the head of the program using a list of suggested names."]
+    , external "alphaTop" (promoteProgR alphaProgConsR :: RewriteH LCore)
+        [ "Renames the bound identifiers in the top-level binding at the head of the program."]
     , external "alphaProg" (promoteProgR alphaProgR :: RewriteH LCore)
         [ "Rename all topLevel identifiers in the program."]
     ,  external "unshadow" (promoteCoreR unshadowR :: RewriteH LCore)

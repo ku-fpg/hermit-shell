@@ -4,6 +4,8 @@
 {-# LANGUAGE PolyKinds #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE TypeFamilies #-}
 module HERMIT.API.Types where
 
 import Control.Applicative
@@ -218,3 +220,27 @@ newtype RuleName = RuleName String
 method :: Text -> [Value] -> Value
 method nm params = object ["method" .= nm, "params" .= params]
 
+type family ReturnType i :: * where
+  ReturnType (a -> r) = ReturnType r
+  ReturnType r        = r
+
+-- Rewrites with optional name
+class RewriteWithName a where
+    rewriteWithName :: ReturnType a ~ Rewrite LCore => Text -> a
+
+instance RewriteWithName (Rewrite LCore) where
+  rewriteWithName x = Transform $ method x [toJSON (Nothing :: Maybe String)]
+
+instance (IsString a, a ~ String) => RewriteWithName (a -> Rewrite LCore) where
+  rewriteWithName x str = Transform $ method x [toJSON $ Just str]
+
+-- Rewrites with optional name list
+class RewriteWithNames a where
+    rewriteWithNames :: ReturnType a ~ Rewrite LCore => Text -> a
+
+instance RewriteWithNames (Rewrite LCore) where
+  rewriteWithNames x = Transform $ method x []
+
+instance (IsString a, a ~ String) => 
+         RewriteWithNames ([a] -> Rewrite LCore) where
+  rewriteWithNames x strs = Transform $ method (x `append` "With") [toJSON strs]
