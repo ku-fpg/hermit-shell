@@ -12,6 +12,7 @@ module HERMIT.API
         , PpType (..)
         , Rewrite
         , LCore
+        , Crumb
           -- Utilities
         , send
         ) where

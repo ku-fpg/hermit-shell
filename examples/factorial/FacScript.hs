@@ -1,11 +1,17 @@
+{-# LANGUAGE OverloadedStrings #-}
 import HERMIT.API
+
+import WWAssAScript
 
 script :: Shell ()
 script = do
-  eval "load-as-rewrite \"WWA\" \"WW-Ass-A.hss\""
-  eval "flatten-module"
-  eval "binding-of 'fac"
-  eval "ww-split [| wrap |] [| unwrap |] (ww-AssA-to-AssC WWA)"
-  eval "bash-extended-with [ case-elim-inline-scrutinee , inline [ 'unwrap, 'wrap, '*, '- ] ]"
+  query flattenModule
+  query $ bindingOf "fac"
+  apply $ wwSplit "wrap" "unwrap" (wwAssAToAssC wwa)
+  eval "bash-extended-with [ case-elim-inline-scrutinee, inline [ \"unwrap\", \"wrap\", \"*\", \"-\" ] ]"
+  eval "{"
+  eval "defRhs"
+  eval "letBody"
+  eval "alpha-lam 'n"
+  eval "}"
 
-  eval "{ [def-rhs, let-body] ; alpha-lam 'n } -- cosmetic"

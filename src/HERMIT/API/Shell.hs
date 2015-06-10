@@ -26,6 +26,10 @@ apply (Transform t) = Shell $ method "rewrite" [t]
 setPath :: Guts a => Transform a LocalPath -> Shell ()
 setPath (Transform t) = Shell $ method "setPath" [t]
 
+-- TODO: Make sure this is the right way to do it.
+sendCrumb :: Crumb -> Shell ()
+sendCrumb (Crumb c) = Shell $ method "setPath" [c]
+
 -- | backdoor into the old shell. This will be removed at some point.
 eval :: String -> Shell ()
 eval s = Shell $ method "eval" [toJSON s]
