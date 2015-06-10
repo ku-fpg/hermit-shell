@@ -45,10 +45,11 @@ library
                         wai,
                         wai-extra,
                         unix,
+                        unordered-containers,
                         vector,
                         -- needed by generated code
                         wreq,
-			-- until 7.10 only			
+                        -- until 7.10 only
                         marked-pretty
 
   default-language:     Haskell2010
@@ -101,9 +102,9 @@ library
                         HERMIT.Server.Parser.Utils
                         Paths_hermit_shell
   hs-source-dirs:       src
-  include-dirs:        include
-  includes:            overlap.h
-  install-includes:    overlap.h
+  include-dirs:         include
+  includes:             overlap.h
+  install-includes:     overlap.h
 
 executable hermit-shell
   ghc-options:          -Wall

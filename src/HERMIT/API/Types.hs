@@ -14,6 +14,7 @@ import Control.Monad
 import Data.Aeson
 import Data.Aeson.Types
 import Data.Maybe
+import Data.Monoid
 import Data.Text
 import Data.String
 import Data.Typeable
@@ -220,9 +221,15 @@ newtype RuleName = RuleName String
 method :: Text -> [Value] -> Value
 method nm params = object ["method" .= nm, "params" .= params]
 
+------------------------------------------------------------------------
+
 type family ReturnType i :: * where
   ReturnType (a -> r) = ReturnType r
   ReturnType r        = r
+
+------------------------------------------------------------------------
+
+
 
 -- Rewrites with optional name
 class RewriteWithName a where
@@ -241,6 +248,6 @@ class RewriteWithNames a where
 instance RewriteWithNames (Rewrite LCore) where
   rewriteWithNames x = Transform $ method x []
 
-instance (IsString a, a ~ String) => 
+instance (IsString a, a ~ String) =>
          RewriteWithNames ([a] -> Rewrite LCore) where
-  rewriteWithNames x strs = Transform $ method (x `append` "With") [toJSON strs]
+  rewriteWithNames x strs = Transform $ method (x <> "With") [toJSON strs]

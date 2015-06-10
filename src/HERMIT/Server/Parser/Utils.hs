@@ -4,6 +4,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE ViewPatterns #-}
 
 #include "overlap.h"
 __LANGUAGE_OVERLAPPING_INSTANCES__
@@ -24,6 +25,7 @@ import           Data.Aeson as Aeson
 import           Data.Aeson.Types (parseMaybe, Parser)
 import           Data.Text (Text, unpack, pack)
 
+import qualified Data.HashMap.Strict as HM
 import           Data.Typeable
 
 import           HERMIT.External (CmdTag(..))
@@ -105,6 +107,11 @@ instance __OVERLAPPING__ External String where
 instance External a => External (Maybe a) where
   parseExternal Null = return Nothing
   parseExternal x    = liftM Just $ parseExternal x
+
+instance (External a, External b) => External (Either a b) where
+  parseExternal (Object (HM.lookup "Left"  -> Just x)) = fmap Left  $ parseExternal x
+  parseExternal (Object (HM.lookup "Right" -> Just x)) = fmap Right $ parseExternal x
+  parseExternal _ = fail "parseExternal: Either"
 
 -----------------------------------------------------------------
 instance External PrettyPrinter where
