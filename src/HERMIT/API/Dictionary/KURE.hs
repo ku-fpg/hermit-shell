@@ -140,8 +140,8 @@ invert :: BiRewrite LCore -> BiRewrite LCore
 invert r = BiTransform $ method "invert" [toJSON r]
 
 -- | Apply a bidirectional rewrite forewards.
-forward :: BiRewrite LCore -> BiRewrite LCore
-forward r = BiTransform $ method "forward" [toJSON r]
+forward :: BiRewrite LCore -> Rewrite LCore
+forward r = Transform $ method "forward" [toJSON r]
 
 -- | Apply a bidirectional rewrite backwards.
 backward :: BiRewrite LCore -> BiRewrite LCore
