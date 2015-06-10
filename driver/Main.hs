@@ -1,26 +1,7 @@
-{-# LANGUAGE LambdaCase #-}
-module Main where
+module Main (main) where
 
-import HERMIT.Driver
-
+import HERMIT.GHCI.Driver (hermitShellDriver)
 import System.Environment
 
-import Data.List
-import Data.List.Split
-import Data.Version
-import Paths_hermit_shell as P
-
-hermitGHCIVersion :: String
-hermitGHCIVersion = "HERMIT-GHCi v" ++ showVersion P.version
-
-hermitGHCIUsage :: IO ()
-hermitGHCIUsage = mapM_ putStrLn [hermitGHCIVersion, "", replace "hermit" "hermit-shell" usageOutput]
-    where replace :: String -> String -> String -> String
-          replace old new = intercalate new . splitOn old
-
 main :: IO ()
-main = getArgs >>= \case
-    (file_nm:rest) -> do
-        putStrLn $ "[starting " ++ hermitGHCIVersion ++ " on " ++ file_nm ++ "]"
-        hermitDriver $ file_nm : "-opt=HERMIT.GHCI" : rest
-    [] -> hermitGHCIUsage
+main = getArgs >>= hermitShellDriver
