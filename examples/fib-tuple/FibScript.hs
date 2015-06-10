@@ -2,9 +2,9 @@ import HERMIT.API
 script :: Shell ()
 script = do
   eval "load-as-rewrite \"WWA\" \"WW-Ass-A.hss\""
-  eval "flatten-module"
+  apply flattenModule
 
-  eval "binding-of 'fib"
+  setPath $ bindingOf "fib"
 
   eval "{"
 

@@ -3,9 +3,6 @@ module MeanScript where
 
 import HERMIT.API
 
-import Data.Aeson
-
-
 script :: Shell ()
 script = do
   eval "{"
@@ -45,12 +42,12 @@ script = do
   -- XXX: Why are there square brackets here?
   eval "{ [def-rhs, lam-body]"
   eval $ "case-split-inline 'xs"
-  eval $ "any-call (unfold 'sum)"
-  eval $ "any-call (unfold 'length)"
+  apply . anyCall $ unfold ("sum" :: Name)
+  apply . anyCall $ unfold ("length" :: Name)
   apply simplify
-  eval "case-alt 1"
+  sendCrumb $ caseAlt 1
   apply $ alphaAlt ["y", "ys"]
-  eval "alt-rhs"
+  sendCrumb $ altRhs
 
   eval "{"
   setPath $ arg 3
@@ -69,7 +66,7 @@ script = do
   apply $ letTuple "sl"
 
   eval "{"
-  eval "case-expr"
+  sendCrumb caseExpr
   apply $ foldRemembered "sumlen"
   eval "}"
 
