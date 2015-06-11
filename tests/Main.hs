@@ -28,13 +28,11 @@ testArgs =
     , ("evaluation"    , "Eval.hs"   , "EvalScript.hs")
     , ("fib"           , "Fib.hs"    , "FibScript.hs")
     , ("fib-tuple"     , "Fib.hs"    , "FibScript.hs")
-    , ("flatten"       , "Flatten.hs", "Flatten.hs")
     , ("last"          , "Last.hs"   , "LastScript.hs")
     , ("last"          , "Last.hs"   , "NewLastScript.hs")
     , ("mean"          , "Mean.hs"   , "MeanScript.hs")
     , ("qsort"         , "QSort.hs"  , "QSortScript.hs")
     , ("reverse"       , "Reverse.hs", "ReverseScript.hs")
-    , ("new_reverse"   , "Reverse.hs", "ReverseScript.hs")
     ]
 
 mkHermitShellTest :: HermitTestArgs -> TestTree
