@@ -29,6 +29,7 @@ library
                         containers,
                         data-default-class,
                         directory,
+                        filepath,
                         haskeline,
                         hermit >= 0.4,
                         http-types,

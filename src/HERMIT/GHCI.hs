@@ -4,6 +4,7 @@ module HERMIT.GHCI (plugin) where
 import           Control.Concurrent
 import           Control.Concurrent.STM
 import           Control.Exception.Base
+import           Control.Monad.Compat (unless)
 import           Control.Monad.IO.Class
 import           Control.Monad.Remote.JSON
 import           Control.Monad.Trans.Except
@@ -13,6 +14,8 @@ import qualified Data.Aeson as Aeson
 import           Data.ByteString.Builder (lazyByteString)
 import           Data.Foldable.Compat (forM_)
 import           Data.Default.Class
+import           Data.List.Compat ((\\))
+import           Data.Maybe (maybeToList)
 
 import           HERMIT.GHC hiding ((<>), liftIO)
 import           HERMIT.Plugin.Builder
@@ -29,6 +32,7 @@ import qualified Network.Wai as Wai
 import           Network.Wai.Middleware.RequestLogger (logStdoutDev)
 
 import           System.Directory (getCurrentDirectory)
+import           System.FilePath (takeExtension)
 import           System.IO (hPutStrLn, hClose)
 import           System.IO.Temp
 import           System.Process
@@ -52,7 +56,20 @@ plugin = buildPlugin $ \ store passInfo ->
 
 -- | The meat of the plugin, which implements the actual Web API.
 server :: PassInfo -> [CommandLineOption] -> Kernel -> AST -> IO ()
-server passInfo _opts skernel initAST = do
+server passInfo opts skernel initAST = do
+    let mbOpt :: Maybe FilePath
+        mbOpt = case opts of
+                     (opt:_) -> if takeExtension opt == ".hs"
+                                   then Just opt
+                                   else Nothing
+                     _       -> Nothing
+
+    let otherOpts = opts \\ maybeToList mbOpt
+    unless (null otherOpts) $ do
+        putStr "Ignored command-line arguments: "
+        forM_ otherOpts putStr
+        putStrLn ""
+
     sync' <- newTVarIO def -- TODO: is this used anywhere?
 
     let -- Functions required by Scotty to run our custom WebM monad.
@@ -92,8 +109,9 @@ server passInfo _opts skernel initAST = do
 
     pwd <- getCurrentDirectory
     withTempFile pwd ".ghci-hermit" $ \fp h -> do
-        hPutStrLn h $ unlines hermitShellDotfile
+        hPutStrLn h $ hermitShellDotfile mbOpt
         hClose h
+
         callProcess "ghc" $ hermitShellFlags fp
 
         -- What and Why?
@@ -122,9 +140,9 @@ msgBuilder :: String -> Status -> Wai.Response
 msgBuilder msg s = Wai.responseBuilder s [("Content-Type","application/json")]
     . lazyByteString . Aeson.encode $ Msg msg
 
-hermitShellDotfile :: [String]
-hermitShellDotfile = [
-    "import HERMIT.API"
+hermitShellDotfile :: Maybe FilePath -> String
+hermitShellDotfile mbScript = unlines $
+  [ "import HERMIT.API"
   , "import Prelude hiding (log)"
   , ":set prompt \"HERMIT> \""
 
@@ -137,11 +155,13 @@ hermitShellDotfile = [
 --   , "send welcome" -- welcome message (interactive only)a
   , "send display" -- where am I (interactive only)
 --   , "setPath (rhsOf \"rev\")"
-  ]
+  ] ++ maybe []
+             (\script -> [":l " ++ script, "script"])
+             mbScript
 
 hermitShellFlags :: FilePath -> [String]
-hermitShellFlags dotfilePath = [
-    "--interactive"
+hermitShellFlags dotfilePath =
+  [ "--interactive"
   , "-ghci-script=" ++ dotfilePath
   , "-XOverloadedStrings"
   , "-interactive-print=HERMIT.GHCI.Printer.printForRepl"
