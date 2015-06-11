@@ -5,6 +5,7 @@ import           Control.Concurrent
 import           Control.Concurrent.STM
 import           Control.Exception.Base
 import           Control.Monad.IO.Class
+import           Control.Monad.Remote.JSON
 import           Control.Monad.Trans.Except
 import           Control.Monad.Trans.Reader
 
@@ -27,10 +28,12 @@ import           Network.HTTP.Types (Status, status200, status500)
 import qualified Network.Wai as Wai
 import           Network.Wai.Middleware.RequestLogger (logStdoutDev)
 
+import           System.Directory (getCurrentDirectory)
+import           System.IO (hPutStrLn, hClose)
+import           System.IO.Temp
 import           System.Process
 
 import           Web.Scotty.Trans
-import           Control.Monad.Remote.JSON
 
 -- import           System.Exit
 -- import           System.Posix.Signals
@@ -87,19 +90,22 @@ server passInfo _opts skernel initAST = do
         middleware logStdoutDev
         post "/" jsonRpc
 
-    writeFile ".ghci-hermit" $ unlines hermitShellDotfile
-    callProcess "ghc" hermitShellFlags
+    pwd <- getCurrentDirectory
+    withTempFile pwd ".ghci-hermit" $ \fp h -> do
+        hPutStrLn h $ unlines hermitShellDotfile
+        hClose h
+        callProcess "ghc" $ hermitShellFlags fp
 
-    -- What and Why?
-    print ("Killing server" :: String)
-    throwTo tid UserInterrupt
-    print ("Killed server" :: String)
+        -- What and Why?
+        print ("Killing server" :: String)
+        throwTo tid UserInterrupt
+        print ("Killed server" :: String)
 
-    print ("Last Call" :: String)
-    atomically (readTVar lastCall) >>= id       -- do last call
+        print ("Last Call" :: String)
+        atomically (readTVar lastCall) >>= id       -- do last call
 
-    print ("Last Called" :: String)
- --   raiseSignal sigTERM
+        print ("Last Called" :: String)
+     --   raiseSignal sigTERM
 
 -- | Turn WebAppException into a Response.
 handleError :: Kernel -> WebAppException -> IO Wai.Response
@@ -133,10 +139,10 @@ hermitShellDotfile = [
 --   , "setPath (rhsOf \"rev\")"
   ]
 
-hermitShellFlags :: [String]
-hermitShellFlags = [
+hermitShellFlags :: FilePath -> [String]
+hermitShellFlags dotfilePath = [
     "--interactive"
-  , "-ghci-script=.ghci-hermit"
+  , "-ghci-script=" ++ dotfilePath
   , "-XOverloadedStrings"
   , "-interactive-print=HERMIT.GHCI.Printer.printForRepl"
   ]
