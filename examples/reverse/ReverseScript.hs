@@ -9,12 +9,12 @@ script = do
   setPath $ bindingOf "rev"
   eval "ww-result-split-static-arg 1 [0] [| absH |] [| repH |] WWC"
   apply bash
-  eval "{"; setPath $ rhsOf "work"
-  apply $   alphaLam "ys"
-  sendCrumb lamBody
-  apply $   etaExpand "acc"
-  sendCrumb lamBody
-  eval "  bash-extended-with [push 'repH StrictRepH, forward ww-result-fusion, unfold-rules-unsafe [\"repH ++\", \"repH (:)\", \"repH []\"] ]"
-  eval "}"
-  apply $ oneTD (unfold ("absH" :: Name))
+  scope $ do
+    setPath $ rhsOf "work"
+    apply $   alphaLam (Just "ys")
+    sendCrumb lamBody
+    apply $   etaExpand "acc"
+    sendCrumb lamBody
+    eval "  bash-extended-with [push 'repH StrictRepH, forward ww-result-fusion, unfold-rules-unsafe [\"repH ++\", \"repH (:)\", \"repH []\"] ]"
+  apply . oneTD $ unfoldWith "absH"
 
