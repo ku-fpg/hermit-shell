@@ -49,7 +49,7 @@ plugin = buildPlugin $ \ store passInfo ->
 
 -- | The meat of the plugin, which implements the actual Web API.
 server :: PassInfo -> [CommandLineOption] -> Kernel -> AST -> IO ()
-server passInfo _opts skernel initAST = do
+server passInfo opts skernel initAST = do
     sync' <- newTVarIO def
 
     let -- Functions required by Scotty to run our custom WebM monad.
@@ -85,24 +85,8 @@ server passInfo _opts skernel initAST = do
         middleware logStdoutDev
         post "/" jsonRpc
 
-    writeFile ".ghci-hermit" $ unlines
-        ["import HERMIT.API"
-        ,"import Prelude hiding (log)"
-        ,":set prompt \"HERMIT> \""
-
-        -- To get around an issue where the '-interactive-print' option gets reset:
-        ,":def l \\s -> return $ \":load \" ++ s ++ \"\\n:set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
-        ,":def r \\s -> return $ \":reload \" ++ s ++ \"\\n:set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
---        ,"send welcome" -- welcome message (interactive only)a
-        ,"send display" -- where am I (interactive only)
---        ,"setPath (rhsOf \"rev\")"
-        ]
-    callProcess "ghc"
-        ["--interactive"
-        , "-ghci-script=.ghci-hermit"
-        ,"-XOverloadedStrings"
-        ,"-interactive-print=HERMIT.GHCI.Printer.printForRepl"
-        ]
+    writeFile ".ghci-hermit" $ unlines hermitShellDotfile
+    callProcess "ghc" hermitShellFlags
 
     -- What and Why?
     print ("Killing server" :: String)
@@ -124,6 +108,28 @@ handleError _ (WAEError str) = return $ msgBuilder str status500
 msgBuilder :: String -> Status -> Wai.Response
 msgBuilder msg s = Wai.responseBuilder s [("Content-Type","application/json")]
     . lazyByteString . Aeson.encode $ Msg msg
+
+hermitShellDotfile :: [String]
+hermitShellDotfile = [
+    "import HERMIT.API"
+  , "import Prelude hiding (log)"
+  , ":set prompt \"HERMIT> \""
+
+  -- To get around an issue where the '-interactive-print' option gets reset:
+  , ":def l \\s -> return $ \":load \" ++ s ++ \"\\n:set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
+  , ":def r \\s -> return $ \":reload \" ++ s ++ \"\\n:set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
+--   , "send welcome" -- welcome message (interactive only)a
+  , "send display" -- where am I (interactive only)
+--   , "setPath (rhsOf \"rev\")"
+  ]
+
+hermitShellFlags :: [String]
+hermitShellFlags = [
+    "--interactive"
+  , "-ghci-script=.ghci-hermit"
+  , "-XOverloadedStrings"
+  , "-interactive-print=HERMIT.GHCI.Printer.printForRepl"
+  ]
 
 -- fileContents :: String
 -- fileContents = unlines
