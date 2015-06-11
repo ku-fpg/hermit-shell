@@ -206,7 +206,7 @@ newtype PrettyPrinter = PrettyPrinter Value
 ------------------------------------------------------------------------
 
 newtype RuleName = RuleName String
-  deriving (ToJSON)
+  deriving (ToJSON, IsString)
 
 ------------------------------------------------------------------------
 

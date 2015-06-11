@@ -10,13 +10,13 @@ script = do
   eval "{"; sendCrumb defRhs
   apply  letSubst
   eval "  {"; sendCrumb letBody
-  apply $     alphaLam "e"
+  apply $     alphaLam (Just "e")
   sendCrumb   lamBody
-  apply $     unfold ("abs" :: Name)
+  apply $     unfoldWith "abs"
   eval "  }"
   eval "  {"; setPath $ rhsOf "work"
-  apply $     alphaLam "e" ; sendCrumb lamBody
-  apply $     unfold ("rep" :: Name)
+  apply $     alphaLam (Just "e") ; sendCrumb lamBody
+  apply $     unfoldWith "rep"
   apply $     bash
   sendCrumb lamBody; sendCrumb lamBody -- XXX: Is this right?
   eval "    {  consider case" ; sendCrumb (caseAlt 1) ; sendCrumb altRhs ; apply $ abstract "m"
