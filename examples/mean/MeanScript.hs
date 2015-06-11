@@ -5,32 +5,27 @@ import HERMIT.API
 
 script :: Shell ()
 script = do
-  eval "{"
-  setPath $ rhsOf "mean"
-  sendCrumb lamBody
+  scope $ do
+    setPath $ rhsOf "mean"
+    sendCrumb lamBody
 
-  eval "{"
-  setPath $ arg 2
-  apply $ letIntro "s"
-  eval "}"
+    scope $ do
+      setPath $ arg 2
+      apply $ letIntro "s"
 
-  eval "{"
-  setPath $ arg 3
-  apply $ letIntro "l"
-  eval "}"
+    scope $ do
+      setPath $ arg 3
+      apply $ letIntro "l"
 
-  apply $ innermost letFloat
-  apply . try $ reorderLets ["s", "l"]
-  apply $ letTuple "sl"
+    apply $ innermost letFloat
+    apply . try $ reorderLets ["s", "l"]
+    apply $ letTuple "sl"
 
-  eval "{"
-  sendCrumb caseExpr
-  apply $ abstract "xs"
-  sendCrumb appFun
-  apply $ letIntro "sumlength"
-  eval "}"
-
-  eval "}"
+    scope $ do
+      sendCrumb caseExpr
+      apply $ abstract "xs"
+      sendCrumb appFun
+      apply $ letIntro "sumlength"
 
 
   apply $ innermost letFloat
@@ -39,35 +34,31 @@ script = do
   setPath $ bindingOf "sumlength"
   query $ remember "sumlen"
 
-  eval "{" ; sendCrumb defRhs ; sendCrumb lamBody
-  eval $ "case-split-inline 'xs"
-  apply . anyCall $ unfoldWith "sum"
-  apply . anyCall $ unfoldWith "length"
-  apply simplify
-  sendCrumb $ caseAlt 1
-  apply $ alphaAltWith ["y", "ys"]
-  sendCrumb $ altRhs
+  scope $ do
+    sendCrumb defRhs ; sendCrumb lamBody
+    eval $ "case-split-inline 'xs"
+    apply . anyCall $ unfoldWith "sum"
+    apply . anyCall $ unfoldWith "length"
+    apply simplify
+    sendCrumb $ caseAlt 1
+    apply $ alphaAltWith ["y", "ys"]
+    sendCrumb $ altRhs
 
-  eval "{"
-  setPath $ arg 3
-  setPath $ arg 3
-  apply $ letIntro "l"
-  eval "}"
+    scope $ do
+      setPath $ arg 3
+      setPath $ arg 3
+      apply $ letIntro "l"
 
-  eval "{"
-  setPath $ arg 2
-  setPath $ arg 3
-  apply $ letIntro "s"
-  eval "}"
+    scope $ do
+      setPath $ arg 2
+      setPath $ arg 3
+      apply $ letIntro "s"
 
-  apply $ innermost letFloat
-  apply . try $ reorderLets ["s", "l"]
-  apply $ letTuple "sl"
+    apply $ innermost letFloat
+    apply . try $ reorderLets ["s", "l"]
+    apply $ letTuple "sl"
 
-  eval "{"
-  sendCrumb caseExpr
-  apply $ foldRemembered "sumlen"
-  eval "}"
-
-  eval "}"
+    scope $ do
+      sendCrumb caseExpr
+      apply $ foldRemembered "sumlen"
 

@@ -96,6 +96,7 @@ library
                         HERMIT.Server.Parser.Name
                         HERMIT.Server.Parser.QueryFun
                         HERMIT.Server.Parser.ShellEffect
+                        HERMIT.Server.Parser.KernelEffect
                         HERMIT.Server.Parser.String
                         HERMIT.Server.Parser.Transform
                         HERMIT.Server.Parser.Utils

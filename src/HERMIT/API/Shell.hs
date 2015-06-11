@@ -8,6 +8,7 @@ module HERMIT.API.Shell where
 import Data.Aeson
 
 import HERMIT.API.Types
+import HERMIT.API.Shell.Externals (beginScope, endScope)
 
 
 -- | redisplays current state.
@@ -38,6 +39,18 @@ sendCrumb (Crumb c) = Shell $ method "setPath" [c]
 -- | backdoor into the old shell. This will be removed at some point.
 eval :: String -> Shell ()
 eval s = Shell $ method "eval" [toJSON s]
+
+-- TODO: Add JSON wrapping to this
+kernelEffect :: KernelEffect -> Shell ()
+kernelEffect (KernelEffect e) = Shell $ toJSON e
+
+-- | Brackets the given argument with 'kernelEffect beginScope'
+--   and 'kernelEffect endScope'.
+scope :: Shell () -> Shell ()
+scope s = do
+  kernelEffect beginScope
+  s
+  kernelEffect endScope
 
 class Run a where
   run :: a -> Shell ()

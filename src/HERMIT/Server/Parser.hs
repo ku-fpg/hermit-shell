@@ -14,6 +14,7 @@ import           HERMIT.Context
 import           HERMIT.Kure hiding ((<$>),(<*>))
 import           HERMIT.Shell.Command
 import           HERMIT.Shell.Types hiding (clm)
+import           HERMIT.Shell.KernelEffect
 import           HERMIT.Core (Crumb)
 
 -- import           HERMIT.Context
@@ -30,6 +31,8 @@ import           HERMIT.Server.Parser.Crumb()
 
 import           Prelude.Compat
 
+import           Control.Applicative ((<|>))
+
 -- NOTES
 --  * exprToDyns has useful info about building types
 
@@ -39,8 +42,10 @@ parseCLT = parseMaybe parseTopLevel
 parseTopLevel :: (MonadIO m, Functor m)
               => Aeson.Value -> Parser (CLT m Aeson.Value)
 parseTopLevel v = fmap (const (toJSON ()))
-               <$> performTypedEffectH (show v)
-               <$> (parseExternal v :: Parser (TypedEffectH ()))
+               <$> (   (performTypedEffectH (show v)
+                          <$> (parseExternal v :: Parser (TypedEffectH ())))
+                   <|> (performKernelEffect (stubExprH "<hermit-shell>")
+                          <$> (parseExternal v :: Parser KernelEffect)))
 
 instance External (TypedEffectH ()) where
   parseExternals =
