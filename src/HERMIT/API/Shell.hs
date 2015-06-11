@@ -1,9 +1,14 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE CPP #-}
+#include "overlap.h"
+__LANGUAGE_OVERLAPPING_INSTANCES__
 module HERMIT.API.Shell where
 
 import Data.Aeson
 
 import HERMIT.API.Types
+
 
 -- | redisplays current state.
 display :: Shell ()
@@ -46,6 +51,6 @@ instance Guts a => Run (Transform a LocalPath) where
 instance Guts a => Run (Transform a a) where
   run = apply
  
-instance {-# OVERLAPPABLE #-} Guts a => Run (Transform a b) where
+instance __OVERLAPPABLE__ Guts a => Run (Transform a b) where
   run = query
 
