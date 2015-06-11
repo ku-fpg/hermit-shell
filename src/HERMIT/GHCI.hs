@@ -4,7 +4,7 @@ module HERMIT.GHCI (plugin) where
 import           Control.Concurrent
 import           Control.Concurrent.STM
 import           Control.Exception.Base
-import           Control.Monad.Compat (unless)
+import           Control.Monad.Compat
 import           Control.Monad.IO.Class
 import           Control.Monad.Remote.JSON
 import           Control.Monad.Trans.Except
@@ -12,9 +12,8 @@ import           Control.Monad.Trans.Reader
 
 import qualified Data.Aeson as Aeson
 import           Data.ByteString.Builder (lazyByteString)
-import           Data.Foldable.Compat (forM_)
 import           Data.Default.Class
-import           Data.List.Compat ((\\))
+import           Data.List.Compat
 import           Data.Maybe (maybeToList)
 
 import           HERMIT.GHC hiding ((<>), liftIO)
@@ -49,7 +48,7 @@ plugin = buildPlugin $ \ store passInfo ->
   if passNum passInfo == 0
   then \ o p ->
            do liftIO $ print ("Hey" :: String)
-              r <- hermitKernel store "front end" (server passInfo o) p
+              r <- hermitKernel store "front end" (server passInfo $ reverse o) p
               liftIO $ print ("Jude" :: String)
               return r
   else const return
@@ -57,17 +56,17 @@ plugin = buildPlugin $ \ store passInfo ->
 -- | The meat of the plugin, which implements the actual Web API.
 server :: PassInfo -> [CommandLineOption] -> Kernel -> AST -> IO ()
 server passInfo opts skernel initAST = do
-    let mbOpt :: Maybe FilePath
-        mbOpt = case opts of
-                     (opt:_) -> if takeExtension opt == ".hs"
-                                   then Just opt
-                                   else Nothing
-                     _       -> Nothing
+    let mbScript :: Maybe FilePath
+        mbScript = flip find opts $ (== ".hs") . takeExtension
 
-    let otherOpts = opts \\ maybeToList mbOpt
+        resume :: Bool
+        resume = "resume" `elem` opts
+
+        otherOpts :: [CommandLineOption]
+        otherOpts = filter (not . (`elem` "resume":maybeToList mbScript)) opts
     unless (null otherOpts) $ do
         putStr "Ignored command-line arguments: "
-        forM_ otherOpts putStr
+        forM_ otherOpts $ \opt -> putStr opt >> putChar ' '
         putStrLn ""
 
     sync' <- newTVarIO def -- TODO: is this used anywhere?
@@ -109,10 +108,15 @@ server passInfo opts skernel initAST = do
 
     pwd <- getCurrentDirectory
     withTempFile pwd ".ghci-hermit" $ \fp h -> do
-        hPutStrLn h $ hermitShellDotfile mbOpt
+        hPutStrLn h $ hermitShellDotfile mbScript
         hClose h
 
-        callProcess "ghc" $ hermitShellFlags fp
+        let ghci = (shell . unwords $ "ghci" : hermitShellFlags fp) {
+            std_in = if resume then CreatePipe else Inherit
+        }
+        (mbStdin, _, _, hGhci) <- createProcess ghci
+        when resume $ forM_ mbStdin (`hPutStrLn` ":resume")
+        _code <- waitForProcess hGhci
 
         -- What and Why?
         print ("Killing server" :: String)
