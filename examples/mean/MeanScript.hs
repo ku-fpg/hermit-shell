@@ -42,11 +42,11 @@ script = do
   -- XXX: Why are there square brackets here?
   eval "{ [def-rhs, lam-body]"
   eval $ "case-split-inline 'xs"
-  apply . anyCall $ unfold ("sum" :: Name)
-  apply . anyCall $ unfold ("length" :: Name)
+  apply . anyCall $ unfoldWith "sum"
+  apply . anyCall $ unfoldWith "length"
   apply simplify
   sendCrumb $ caseAlt 1
-  apply $ alphaAlt ["y", "ys"]
+  apply $ alphaAltWith ["y", "ys"]
   sendCrumb $ altRhs
 
   eval "{"
