@@ -1011,7 +1011,7 @@ instance External (TransformH LCore String) where
   parseExternals =
     [
 -- HERMIT.API.Dictionary.GHC
-      external "loadLemmaLibrary" (loadLemmaLibraryT :: HermitName -> Maybe HermitName -> TransformH LCore String)
+      external "loadLemmaLibrary" (loadLemmaLibraryT :: HermitName -> Maybe LemmaName -> TransformH LCore String)
         [ "Dynamically load a library of lemmas." ]
 
       -- HERMIT.API.Dictionary.KURE
@@ -1019,7 +1019,7 @@ instance External (TransformH LCore String) where
 --         [ "Apply a query at a focal point."] .+ Navigation .+ Deep
 --     , external "focus"      ((\p -> hfocusT (return p)) :: LocalPathH -> TransformH LCore String -> TransformH LCore String)
 --         [ "Apply a query at a focal point."] .+ Navigation .+ Deep
-      external "test"       (testQuery :: RewriteH LCore -> TransformH LCore String)
+    , external "test"       (testQuery :: RewriteH LCore -> TransformH LCore String)
         [ "Determine if a rewrite could be successfully applied." ]
 --     , external "extract"    (extractT :: TransformH LCoreTC String -> TransformH LCore String)
 --         [ "Extract a TransformLCoreString from a TransformLCoreTCString" ]
