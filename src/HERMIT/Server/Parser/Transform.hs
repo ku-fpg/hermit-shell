@@ -221,38 +221,53 @@ instance External (BiRewriteH LCore) where
 wwFac :: Maybe WWAssumption -> CoreString -> CoreString -> BiRewriteH CoreExpr
 wwFac mAss = parse2beforeBiR (wwFacBR mAss)
 
--------------------------------------------------------------------------------
-
 instance External (RewriteH LCore) where
   parseExternals =
     [
-      -- HERMIT.API.Dictionary.AlphaConversion
-      external "alpha" (promoteCoreR alphaR :: RewriteH LCore)
+-- HERMIT.API.Dictionary.AlphaConversion
+      external "alpha" 
+        (promoteCoreR alphaR :: RewriteH LCore)
         [ "Renames the bound variables at the current node."]
-    , external "alphaLam" (promoteExprR . alphaLamR :: Maybe String -> RewriteH LCore)
-        [ "Renames the bound variable in a Lambda expression.  Optionally accepts a new name to use." ]
-    ,  external "alphaCaseBinder" (promoteExprR . alphaCaseBinderR :: Maybe String -> RewriteH LCore)
-        [ "Renames the binder in a Case expression. Optionally accepts a new name to use." ]
-    ,  external "alphaAlt" (promoteAltR alphaAltR :: RewriteH LCore)
+
+    , external "alphaLam" 
+        (promoteExprR . alphaLamR :: Maybe String -> RewriteH LCore)
+        [ "Renames the bound variable in a Lambda expression.  Optionally " ++
+          "accepts a new name to use." ]
+
+    , external "alphaCaseBinder" 
+        (promoteExprR . alphaCaseBinderR :: Maybe String -> RewriteH LCore)
+        [ "Renames the binder in a Case expression. Optionally accepts a " ++
+          "new name to use." ]
+
+    , external "alphaAlt" 
+        (promoteAltR alphaAltR :: RewriteH LCore)
         [ "Renames all binders in a Case alternative."]
-    ,  external "alphaAltWith" (promoteAltR . alphaAltWithR :: [String] -> RewriteH LCore)
+
+    , external "alphaAltWith" (promoteAltR . alphaAltWithR :: [String] -> RewriteH LCore)
         [ "Renames all binders in a Case alternative using the user-provided list of new names."]
+
     , external "alphaCase" (promoteExprR alphaCaseR :: RewriteH LCore)
         [ "Renames all binders in a Case alternative."]
+
     , external "alphaLetWith" (promoteExprR . alphaLetWithR :: [String] -> RewriteH LCore)
         [ "Renames the bound variables in a Let expression using a list of suggested names."]
+
     , external "alphaLet" (promoteExprR alphaLetR :: RewriteH LCore)
         [ "Renames the bound variables in a Let expression."]
+
     , external "alphaTopWith" (promoteProgR . alphaProgConsWithR :: [String] -> RewriteH LCore)
         [ "Renames the bound identifiers in the top-level binding group at the head of the program using a list of suggested names."]
+
     , external "alphaTop" (promoteProgR alphaProgConsR :: RewriteH LCore)
         [ "Renames the bound identifiers in the top-level binding at the head of the program."]
+
     , external "alphaProg" (promoteProgR alphaProgR :: RewriteH LCore)
         [ "Rename all topLevel identifiers in the program."]
+
     ,  external "unshadow" (promoteCoreR unshadowR :: RewriteH LCore)
         [ "Rename local variables with manifestly unique names (x, x0, x1, ...)."]
 
-      -- HERMIT.API.Dictionary.Composite
+-- HERMIT.API.Dictionary.Composite
     , external "unfoldBasicCombinator" (promoteExprR unfoldBasicCombinatorR :: RewriteH LCore)
         [ "Unfold the current expression if it is one of the basic combinators:"
         , "($), (.), id, flip, const, fst, snd, curry, and uncurry." ]
@@ -296,8 +311,8 @@ instance External (RewriteH LCore) where
         [ "perform the static argument transformation on a recursive function." ]
     , external "staticArgTypes" (promoteDefR staticArgTypesR :: RewriteH LCore)
         [ "perform the static argument transformation on a recursive function, only transforming type arguments." ]
---     , external "staticArgPos" (promoteDefR . staticArgPosR :: [Int] -> RewriteH LCore)
---         [ "perform the static argument transformation on a recursive function, only transforming the arguments specified (by index)." ]
+    , external "staticArgPos" (promoteDefR . staticArgPosR :: [Int] -> RewriteH LCore)
+        [ "perform the static argument transformation on a recursive function, only transforming the arguments specified (by index)." ]
 
       -- HERMIT.API.Dictionary.GHC
     , external "deshadowProg" (promoteProgR deShadowProgR :: RewriteH LCore)
@@ -313,13 +328,13 @@ instance External (RewriteH LCore) where
     , external "proveByCases" (promoteClauseR . caseSplitOnR False . cmpHN2Var :: HermitName -> RewriteH LCore)
         [ "Case split on specified value quantifier." ]
 
-      -- HERMIT.API.Dictionary.Inline
---     , external "inline" (promoteExprR inlineR :: RewriteH LCore)
---         [ "(Var v) ==> <defn of v>" ].+ Eval .+ Deep
---     , external "inline" (promoteExprR . inlineMatchingPredR . mkOccPred :: OccurrenceName -> RewriteH LCore)
---         [ "Given a specific v, (Var v) ==> <defn of v>" ] .+ Eval .+ Deep
---     , external "inline" (promoteExprR . inlineNamesR :: [String] -> RewriteH LCore)
---         [ "If the current variable matches any of the given names, then inline it." ] .+ Eval .+ Deep
+-- HERMIT.API.Dictionary.Inline
+    , external "inline" (promoteExprR inlineR :: RewriteH LCore)
+        [ "(Var v) ==> <defn of v>" ].+ Eval .+ Deep
+    , external "inlineWith" (promoteExprR . inlineMatchingPredR . cmpHN2Var . parseName :: String -> RewriteH LCore)
+        [ "Given a specific v, (Var v) ==> <defn of v>" ] .+ Eval .+ Deep
+    , external "inlineAny" (promoteExprR . inlineNamesR :: [String] -> RewriteH LCore)
+        [ "If the current variable matches any of the given names, then inline it." ] .+ Eval .+ Deep
     , external "inlineCaseScrutinee" (promoteExprR inlineCaseScrutineeR :: RewriteH LCore)
         [ "if v is a case binder, replace (Var v) with the bound case scrutinee." ] .+ Eval .+ Deep
     , external "inlineCaseAlternative" (promoteExprR inlineCaseAlternativeR :: RewriteH LCore)
@@ -700,7 +715,7 @@ instance External (RewriteH LCore) where
         , "  <name>-assumption: unproven lemma for w/w assumption C."
         , "  <name>-fusion: assumed lemma for w/w fusion."
         ]
-
+    -- HERMIT.API.Dictionary.Unfold
     , external "betaReducePlus" (promoteExprR betaReducePlusR :: RewriteH LCore)
         [ "Perform one or more beta-reductions."]                               .+ Eval .+ Shallow
     , external "unfold" (promoteExprR unfoldR :: RewriteH LCore)
@@ -803,6 +818,8 @@ instance External (RewriteH LCore) where
     where
       mkWWAssC :: RewriteH LCore -> Maybe WWAssumption
       mkWWAssC r = Just (WWAssumption C (extractR r))
+
+-------------------------------------------------------------------------------
 
 instance External (RewriteH LCoreTC) where
   parseExternals =
@@ -993,18 +1010,16 @@ instance External (TransformH LCore ()) where
 instance External (TransformH LCore String) where
   parseExternals =
     [
-      -- HERMIT.API.Dictionary.GHC
---       external "loadLemmaLibrary" (flip loadLemmaLibraryT Nothing :: HermitName -> TransformH LCore String)
---         [ "Dynamically load a library of lemmas." ]
---     , external "loadLemmaLibrary" ((\nm -> loadLemmaLibraryT nm . Just) :: HermitName -> LemmaName -> TransformH LCore String)
---         [ "Dynamically load a specific lemma from a library of lemmas." ]
+-- HERMIT.API.Dictionary.GHC
+      external "loadLemmaLibrary" (loadLemmaLibraryT :: HermitName -> Maybe LemmaName -> TransformH LCore String)
+        [ "Dynamically load a library of lemmas." ]
 
       -- HERMIT.API.Dictionary.KURE
 --     , external "focus"      (hfocusT :: TransformH LCore LocalPathH -> TransformH LCore String -> TransformH LCore String)
 --         [ "Apply a query at a focal point."] .+ Navigation .+ Deep
 --     , external "focus"      ((\p -> hfocusT (return p)) :: LocalPathH -> TransformH LCore String -> TransformH LCore String)
 --         [ "Apply a query at a focal point."] .+ Navigation .+ Deep
-      external "test"       (testQuery :: RewriteH LCore -> TransformH LCore String)
+    , external "test"       (testQuery :: RewriteH LCore -> TransformH LCore String)
         [ "Determine if a rewrite could be successfully applied." ]
 --     , external "extract"    (extractT :: TransformH LCoreTC String -> TransformH LCore String)
 --         [ "Extract a TransformLCoreString from a TransformLCoreTCString" ]

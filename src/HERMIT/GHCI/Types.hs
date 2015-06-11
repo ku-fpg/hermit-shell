@@ -10,7 +10,7 @@ import           Control.Monad.Error.Class
 import           Control.Monad.Trans.Except
 import           Control.Monad.Reader
 
-import           Data.Default
+import           Data.Default.Class
 import qualified Data.Map as Map
 import           Data.Text.Lazy (Text)
 

@@ -2,23 +2,25 @@
 {-# LANGUAGE TypeFamilies #-}
 module HERMIT.API.Dictionary.Unfold where
 
+import Data.Aeson
+
 import HERMIT.API.Types
 
 -- | Perform one or more beta-reductions.
 betaReducePlus :: Rewrite LCore
 betaReducePlus = Transform $ method "betaReducePlus" []
 
--- | @unfold :: Rewrite LCore@
--- In application f x y z, unfold f.
---
--- @unfold :: Name -> Rewrite LCore@
--- Inline a definition, and apply the arguments; traditional unfold.
---
--- @unfold :: [Name] -> Rewrite LCore@
--- Unfold a definition if it is named in the list.
-unfold :: (ReturnType a ~ Rewrite LCore, RewriteWithOneOrMoreNames a)
-       => a
-unfold = rewriteWithOneOrMoreNames "unfold"
+-- | In application f x y z, unfold f.
+unfold :: Rewrite LCore
+unfold = Transform $ method "unfold" []
+
+-- | Inline a definition, and apply the arguments; traditional unfold.
+unfoldWith :: String -> Rewrite LCore
+unfoldWith str = Transform $ method "unfoldWith" [toJSON str]
+
+-- | Unfold a definition if it is named in the list.
+unfoldAny :: [String] -> Rewrite LCore
+unfoldAny strs = Transform $ method "unfoldAny" [toJSON strs]
 
 -- | Unfold a definition only if the function is fully applied.
 unfoldSaturated :: Rewrite LCore

@@ -22,7 +22,7 @@ import           Data.Aeson as Aeson
 import           Data.Either
 import qualified Data.Map as Map
 import           Data.Monoid
-import           Data.Text (Text)
+--import           Data.Text (Text)
 
 import           HERMIT.Dictionary
 -- import           HERMIT.External
@@ -170,11 +170,12 @@ initCommandLineState ast = do
   'performTypedEffect' takes the Plugin Reader Data, a mutable CommandLineState,
   and return a function from JSON list to JSON.
 -}
-performTypedEffect :: PluginReader
+performTypedEffect :: TVar (IO ())
+                   -> PluginReader
                    -> TMVar CommandLineState
                    -> [Aeson.Value]
                    -> IO Aeson.Value
-performTypedEffect plug ref [val] =
+performTypedEffect lastCall plug ref [val] =
   case parseCLT val of
     Nothing -> do
             print ("ParseCLT fail:" :: String, val)
@@ -193,14 +194,20 @@ performTypedEffect plug ref [val] =
         case r of
           Left (CLResume sast) -> do
              print ("resume" :: String, sast)
-             resumeK (pr_kernel plug) sast
-             return $ object [ "shutdown" .= ("resume" :: Text) ]
+             atomically $ writeTVar lastCall $  resumeK (pr_kernel plug) sast
+             return $ object [ "result" .= (), "output" .= es ]
+          Left CLAbort -> do
+             print ("abort" :: String)
+             atomically $ writeTVar lastCall $ abortK (pr_kernel plug) 
+             return $ object [ "result" .= (), "output" .= es ]
           Left (CLError e) -> do
              putStrLn e
              return Aeson.Null
-          Left _exc  -> return Aeson.Null
+          Left _exc  -> do
+                  print $ ("Left _exc : " :: String)
+                  return Aeson.Null
           Right val' -> return $ object [ "result" .= val', "output" .= es ]
-performTypedEffect _ _ _ =
+performTypedEffect _ _ _ _ =
     fail "performTypedEffect: typed effects are expected to be unary."
 
 

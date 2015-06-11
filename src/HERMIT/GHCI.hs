@@ -11,7 +11,7 @@ import           Control.Monad.Trans.Reader
 import qualified Data.Aeson as Aeson
 import           Data.ByteString.Builder (lazyByteString)
 import           Data.Foldable.Compat (forM_)
-import           Data.Default
+import           Data.Default.Class
 
 import           HERMIT.GHC hiding ((<>), liftIO)
 import           HERMIT.Plugin.Builder
@@ -49,8 +49,8 @@ plugin = buildPlugin $ \ store passInfo ->
 
 -- | The meat of the plugin, which implements the actual Web API.
 server :: PassInfo -> [CommandLineOption] -> Kernel -> AST -> IO ()
-server passInfo opts skernel initAST = do
-    sync' <- newTVarIO def
+server passInfo _opts skernel initAST = do
+    sync' <- newTVarIO def -- TODO: is this used anywhere?
 
     let -- Functions required by Scotty to run our custom WebM monad.
         response :: WebM a -> IO (Either WebAppException a)
@@ -69,8 +69,10 @@ server passInfo opts skernel initAST = do
 
     let pr = PluginReader skernel passInfo
 
+    lastCall <- newTVarIO (abortK (pr_kernel pr) :: IO ())
+
     let fns = router
-            [("send", performTypedEffect pr clsVar)
+            [("send", performTypedEffect lastCall pr clsVar)
             ]
 
     let jsonRpc :: ActionH ()
@@ -92,6 +94,11 @@ server passInfo opts skernel initAST = do
     print ("Killing server" :: String)
     throwTo tid UserInterrupt
     print ("Killed server" :: String)
+
+    print ("Last Call" :: String)
+    atomically (readTVar lastCall) >>= id       -- do last call
+
+    print ("Last Called" :: String)
  --   raiseSignal sigTERM
 
 -- | Turn WebAppException into a Response.
@@ -118,6 +125,9 @@ hermitShellDotfile = [
   -- To get around an issue where the '-interactive-print' option gets reset:
   , ":def l \\s -> return $ \":load \" ++ s ++ \"\\n:set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
   , ":def r \\s -> return $ \":reload \" ++ s ++ \"\\n:set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
+  , ":def hermit \\s -> return $ \":set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
+  , ":def resume \\s -> return $ \"resume\\n:quit\""
+  , ":def abort \\s -> return $ \"abort\\n:quit\""
 --   , "send welcome" -- welcome message (interactive only)a
   , "send display" -- where am I (interactive only)
 --   , "setPath (rhsOf \"rev\")"

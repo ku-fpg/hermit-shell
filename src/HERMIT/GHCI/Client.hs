@@ -12,8 +12,6 @@ import Network.Wreq
 import HERMIT.GHCI.JSON
 import HERMIT.API.Types
 
-import System.Exit
-
 --- Main call-HERMIT function
 
 session :: JSONRPC.Session
@@ -41,9 +39,5 @@ send (Shell g) = do
                            ]
                  putStrLn "\n[Done]\n"
                  return a
-         ShellResume -> exitSuccess
-         -- EvNote: do we want to use a specific int to distinguish aborts from
-         --         actual failures?
-         ShellAbort -> exitFailure
 send (Fail str) = fail str
 
