@@ -107,7 +107,7 @@ server passInfo opts skernel initAST = do
         post "/" jsonRpc
 
     pwd <- getCurrentDirectory
-    withTempFile pwd ".ghci-hermit" $ \fp h -> do
+    _code <- withTempFile pwd ".ghci-hermit" $ \fp h -> do
         hPutStrLn h $ hermitShellDotfile mbScript
         hClose h
 
@@ -116,18 +116,18 @@ server passInfo opts skernel initAST = do
         }
         (mbStdin, _, _, hGhci) <- createProcess ghci
         when resume $ forM_ mbStdin (`hPutStrLn` ":resume")
-        _code <- waitForProcess hGhci
+        waitForProcess hGhci
 
-        -- What and Why?
-        print ("Killing server" :: String)
-        throwTo tid UserInterrupt
-        print ("Killed server" :: String)
+    -- What and Why?
+    print ("Killing server" :: String)
+    throwTo tid UserInterrupt
+    print ("Killed server" :: String)
 
-        print ("Last Call" :: String)
-        atomically (readTVar lastCall) >>= id       -- do last call
+    print ("Last Call" :: String)
+    atomically (readTVar lastCall) >>= id       -- do last call
 
-        print ("Last Called" :: String)
-     --   raiseSignal sigTERM
+    print ("Last Called" :: String)
+ --   raiseSignal sigTERM
 
 -- | Turn WebAppException into a Response.
 handleError :: Kernel -> WebAppException -> IO Wai.Response
