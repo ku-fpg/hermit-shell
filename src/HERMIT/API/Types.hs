@@ -12,7 +12,6 @@ import Control.Monad
 import Data.Aeson
 import Data.Aeson.Types
 import Data.Maybe
-import Data.Monoid
 import Data.Text
 import Data.String
 import Data.Typeable

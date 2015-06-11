@@ -11,7 +11,7 @@ import           Control.Monad.Trans.Reader
 import qualified Data.Aeson as Aeson
 import           Data.ByteString.Builder (lazyByteString)
 import           Data.Foldable.Compat (forM_)
-import           Data.Default
+import           Data.Default.Class
 
 import           HERMIT.GHC hiding ((<>), liftIO)
 import           HERMIT.Plugin.Builder

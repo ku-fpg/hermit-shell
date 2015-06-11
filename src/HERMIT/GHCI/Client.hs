@@ -12,8 +12,6 @@ import Network.Wreq
 import HERMIT.GHCI.JSON
 import HERMIT.API.Types
 
-import System.Exit
-
 --- Main call-HERMIT function
 
 session :: JSONRPC.Session
