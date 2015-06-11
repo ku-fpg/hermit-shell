@@ -1,0 +1,15 @@
+flatten-module
+set-pp-type Show
+
+binding-of 'last
+fix-intro
+{ application-of 'fix
+  split-1-beta last [| wrap |] [| unwrap |]
+  -- prove the assumption
+  lhs (repeat (any-call (unfold ['., 'wrap, 'unwrap])))
+  both smash
+  end-proof
+
+  repeat (any-call (unfold ['g, 'wrap, 'unwrap, 'fix]))
+  bash
+}

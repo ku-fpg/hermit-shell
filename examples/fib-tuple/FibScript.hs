@@ -19,7 +19,7 @@ script = do
 
   -- work n = unwrap (f (wrap work)) n
 
-  apply $ anyCall (unfold ("unwrap" :: Name))
+  apply . anyCall $ unfoldWith "unwrap"
 
   -- work n = (f (wrap work) n, f (wrap work) (n+1))
 
@@ -28,8 +28,8 @@ script = do
   -- work 0     = (f (wrap work) 0, f (wrap work) 1)
   -- work (n+1) = (f (wrap work) (n+1), f (wrap work) (n+2))
 
-  eval "{" ; sendCrumb $ caseAlt 0 ; apply $ anyCall (unfold ("f" :: Name)) ; eval "}"
-  eval "{" ; sendCrumb (caseAlt 1) ; sendCrumb altRhs ; sendCrumb appArg ; apply $ anyCall (unfold ("f" :: Name)) ; eval "}"
+  eval "{" ; sendCrumb $ caseAlt 0 ; apply . anyCall $ unfoldWith "f" ; eval "}"
+  eval "{" ; sendCrumb (caseAlt 1) ; sendCrumb altRhs ; sendCrumb appArg ; apply . anyCall $ unfoldWith "f" ; eval "}"
   apply simplify
 
   -- work 0     = (0, 1)
@@ -70,5 +70,5 @@ script = do
 
   eval "{" ; sendCrumb defRhs ; apply letElim ; eval "}"
 
-  apply . anyCall $ unfold ("wrap" :: Name)
+  apply . anyCall $ unfoldWith "wrap"
 

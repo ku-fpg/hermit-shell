@@ -39,8 +39,7 @@ script = do
   setPath $ bindingOf "sumlength"
   query $ remember "sumlen"
 
-  -- XXX: Why are there square brackets here?
-  eval "{ [def-rhs, lam-body]"
+  eval "{" ; sendCrumb defRhs ; sendCrumb lamBody
   eval $ "case-split-inline 'xs"
   apply . anyCall $ unfoldWith "sum"
   apply . anyCall $ unfoldWith "length"
