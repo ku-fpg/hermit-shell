@@ -32,11 +32,11 @@ lintModule = Transform $ method "lintModule" []
 lint :: Transform LCoreTC String
 lint = Transform $ method "lint" []
 
--- -- | Dynamically load a library of lemmas.
--- loadLemmaLibrary :: Name -> Transform LCore String
+-- | Dynamically load a library of lemmas, optionally specifying a specific lemma.
+loadLemmaLibrary :: Name -> Maybe Name -> Transform LCore String
+loadLemmaLibrary nm lem = Transform $ method "loadLemmaLibrary" 
+    [toJSON nm, toJSON lem]
 
--- -- | Dynamically load a specific lemma from a library of lemmas.
--- loadLemmaLibrary :: Name -> Name -> Transform LCore String
 
 -- | Inject a dependency on the given module.
 injectDependency :: String -> Transform LCore ()

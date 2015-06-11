@@ -4,8 +4,6 @@
 {-# LANGUAGE PolyKinds #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE DeriveDataTypeable #-}
-{-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE TypeFamilies #-}
 module HERMIT.API.Types where
 
 import Control.Applicative
@@ -217,50 +215,3 @@ method :: Text -> [Value] -> Value
 method nm params = object ["method" .= nm, "params" .= params]
 
 ------------------------------------------------------------------------
-
-type family ReturnType i :: * where
-  ReturnType (a -> r) = ReturnType r
-  ReturnType r        = r
-
-------------------------------------------------------------------------
-
--- Rewrites with an optional string
-class ReturnType a ~ Rewrite LCore
-    => RewriteWithString a where
-  rewriteWithString :: Text -> a
-
-instance RewriteWithString (Rewrite LCore) where
-  rewriteWithString x = Transform $ method x [toJSON (Nothing :: Maybe String)]
-
-instance (IsString a, a ~ String) => RewriteWithString (a -> Rewrite LCore) where
-  rewriteWithString x str = Transform $ method x [toJSON $ Just str]
-
-------------------------------------------------------------------------
-
--- Rewrites with optional list of strings
-class ReturnType a ~ Rewrite LCore
-    => RewriteWithStrings a where
-  rewriteWithStrings :: Text -> a
-
-instance RewriteWithStrings (Rewrite LCore) where
-  rewriteWithStrings x = Transform $ method x []
-
-instance (IsString a, a ~ String) =>
-         RewriteWithStrings ([a] -> Rewrite LCore) where
-  rewriteWithStrings x strs = Transform $ method (x <> "With") [toJSON strs]
-
-------------------------------------------------------------------------
-
--- Rewrites with optional name (or list of names)
-class ReturnType a ~ Rewrite LCore
-    => RewriteWithOneOrMoreNames a where
-  rewriteWithOneOrMoreNames :: Text -> a
-
-instance RewriteWithOneOrMoreNames (Rewrite LCore) where
-  rewriteWithOneOrMoreNames x = Transform $ method x []
-
-instance RewriteWithOneOrMoreNames (Name -> Rewrite LCore) where
-  rewriteWithOneOrMoreNames x nm = Transform $ method (x <> "One") [toJSON nm]
-
-instance RewriteWithOneOrMoreNames ([Name] -> Rewrite LCore) where
-  rewriteWithOneOrMoreNames x nms = Transform $ method (x <> "Many") [toJSON nms]
