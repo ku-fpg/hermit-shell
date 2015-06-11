@@ -210,6 +210,11 @@ newtype RuleName = RuleName String
 
 ------------------------------------------------------------------------
 
+newtype ProofShellCommand = ProofShellCommand Value
+  deriving (ToJSON)
+
+------------------------------------------------------------------------
+
 method :: Text -> [Value] -> Value
 method nm params = object ["method" .= nm, "params" .= params]
 

@@ -27,7 +27,7 @@ script = do
     -- work 0     = (f (wrap work) 0, f (wrap work) 1)
     -- work (n+1) = (f (wrap work) (n+1), f (wrap work) (n+2))
 
-    scope $ do sendCrumb $ caseAlt 0 ; apply . anyCall $ unfoldWith "f"
+    scope $ do sendCrumb (caseAlt 0) ; apply . anyCall $ unfoldWith "f"
     scope $ do sendCrumb (caseAlt 1) ; sendCrumb altRhs ; sendCrumb appArg ; apply . anyCall $ unfoldWith "f"
     apply simplify
 

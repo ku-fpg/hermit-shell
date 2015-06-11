@@ -3,6 +3,7 @@ module HERMIT.API
           module Dictionary
         , module HERMIT.API.Shell
         , module HERMIT.API.Shell.Externals
+        , module HERMIT.API.Shell.Proof
           -- Types
         , Shell
         , QueryFun
@@ -42,6 +43,7 @@ import HERMIT.API.Dictionary.WorkerWrapper.FixResult as Dictionary
 import HERMIT.API.Dictionary.Reasoning               as Dictionary
 import HERMIT.API.Shell
 import HERMIT.API.Shell.Externals
+import HERMIT.API.Shell.Proof
 import HERMIT.API.Types
 
 import HERMIT.GHCI.Client

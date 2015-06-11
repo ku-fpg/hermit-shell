@@ -44,6 +44,13 @@ eval s = Shell $ method "eval" [toJSON s]
 kernelEffect :: KernelEffect -> Shell ()
 kernelEffect (KernelEffect e) = Shell $ toJSON e
 
+-- | Lift a normal command into a user proof command
+toProofCmd :: Transform LCoreTC () -> Shell ()
+toProofCmd (Transform t) = Shell $ method "UserProof" [toJSON t]
+
+proofCmd :: ProofShellCommand -> Shell ()
+proofCmd (ProofShellCommand c) = Shell c
+
 -- | Brackets the given argument with 'kernelEffect beginScope'
 --   and 'kernelEffect endScope'.
 scope :: Shell () -> Shell ()

@@ -15,6 +15,8 @@ import           HERMIT.Kure hiding ((<$>),(<*>))
 import           HERMIT.Shell.Command
 import           HERMIT.Shell.Types hiding (clm)
 import           HERMIT.Shell.KernelEffect
+import           HERMIT.Lemma
+import           HERMIT.Shell.Proof
 import           HERMIT.Core (Crumb)
 
 -- import           HERMIT.Context
@@ -27,7 +29,8 @@ import           HERMIT.Server.Parser.ShellEffect ()
 import           HERMIT.Server.Parser.String ()
 import           HERMIT.Server.Parser.Transform ()
 import           HERMIT.Server.Parser.Utils
-import           HERMIT.Server.Parser.Crumb()
+import           HERMIT.Server.Parser.Crumb ()
+import           HERMIT.Server.Parser.ProofShellCommand ()
 
 import           Prelude.Compat
 
@@ -45,7 +48,9 @@ parseTopLevel v = fmap (const (toJSON ()))
                <$> (   (performTypedEffectH (show v)
                           <$> (parseExternal v :: Parser (TypedEffectH ())))
                    <|> (performKernelEffect (stubExprH "<hermit-shell>")
-                          <$> (parseExternal v :: Parser KernelEffect)))
+                          <$> (parseExternal v :: Parser KernelEffect))
+                   <|> ((\c -> performProofShellCommand c (stubExprH "<hermit-shell>"))
+                          <$> (parseExternal v :: Parser ProofShellCommand)))
 
 instance External (TypedEffectH ()) where
   parseExternals =
@@ -62,7 +67,7 @@ instance External (TypedEffectH ()) where
         ["sets the path"]
     , external "setPath" ((SetPathH :: TransformH LCore LocalPathH -> TypedEffectH ()) . (\crumb -> transform (\ _hermitC _lcore -> return (singletonSnocPath crumb))) :: Crumb -> TypedEffectH ()) -- XXX: Is this how it should work?
         ["sets the path"]
-     , external "query"   (QueryH :: QueryFun -> TypedEffectH ())
+    , external "query"   (QueryH :: QueryFun -> TypedEffectH ())
         ["performs query"]
     , external "rewrite" (RewriteLCoreH :: RewriteH LCore -> TypedEffectH ())
        ["performs query"]

@@ -8,22 +8,21 @@ script = do
   eval "    binding-of 'qsort'"
   eval "    fix-intro"
   eval "    def-rhs"
-  eval "    split-1-beta qsort [|absR|] [|repR|] ; assume"
+  eval "    split-1-beta qsort [|absR|] [|repR|]" ; proofCmd assume
   eval "    rhs-of 'worker"
   eval "    repeat (any-call (unfold ['.,'fix,'g,'repR,'absR]))"
   eval "    simplify"
-  eval "    one-td (case-float-arg-lemma repHstrict) ; assume"
+  eval "    one-td (case-float-arg-lemma repHstrict)" ; -- proofCmd assume
   eval "    innermost let-float"
   eval "    any-td (unfold-rule \"repH ++\") ; assume"
-  eval "    any-call (unfold-rule repH-absH-fusion) ; assume"
+  eval "    any-call (unfold-rule repH-absH-fusion)" ; -- proofCmd assume
   eval "    unshadow"
   eval "    any-td (inline 'ds1)"
   eval "    simplify"
   eval "    alpha-let [worker]"
   eval "    repeat (any-call (unfold-rules [\"repH (:)\",\"repH []\"]))"
-  eval "    assume ; assume"
+--  proofCmd assume ; --proofCmd assume
   eval "}"
   eval "repeat (any-call (unfold ['.,'absR, 'absH]))"
   eval "innermost let-float"
   eval "bash"
-
