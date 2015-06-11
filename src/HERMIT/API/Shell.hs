@@ -33,3 +33,19 @@ sendCrumb (Crumb c) = Shell $ method "setPath" [c]
 -- | backdoor into the old shell. This will be removed at some point.
 eval :: String -> Shell ()
 eval s = Shell $ method "eval" [toJSON s]
+
+class Run a where
+  run :: a -> Shell ()
+ 
+instance Run Crumb where
+  run = sendCrumb
+ 
+instance Guts a => Run (Transform a LocalPath) where
+  run = setPath
+ 
+instance Guts a => Run (Transform a a) where
+  run = apply
+ 
+instance {-# OVERLAPPABLE #-} Guts a => Run (Transform a b) where
+  run = query
+
