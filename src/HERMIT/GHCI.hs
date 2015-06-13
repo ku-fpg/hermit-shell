@@ -4,14 +4,17 @@ module HERMIT.GHCI (plugin) where
 import           Control.Concurrent
 import           Control.Concurrent.STM
 import           Control.Exception.Base
+import           Control.Monad.Compat
 import           Control.Monad.IO.Class
+import           Control.Monad.Remote.JSON
 import           Control.Monad.Trans.Except
 import           Control.Monad.Trans.Reader
 
 import qualified Data.Aeson as Aeson
 import           Data.ByteString.Builder (lazyByteString)
-import           Data.Foldable.Compat (forM_)
 import           Data.Default.Class
+import           Data.List.Compat
+import           Data.Maybe (maybeToList)
 
 import           HERMIT.GHC hiding ((<>), liftIO)
 import           HERMIT.Plugin.Builder
@@ -27,10 +30,13 @@ import           Network.HTTP.Types (Status, status200, status500)
 import qualified Network.Wai as Wai
 import           Network.Wai.Middleware.RequestLogger (logStdoutDev)
 
+import           System.Directory (getCurrentDirectory)
+import           System.FilePath (takeExtension)
+import           System.IO (hPutStrLn, hClose)
+import           System.IO.Temp
 import           System.Process
 
 import           Web.Scotty.Trans
-import           Control.Monad.Remote.JSON
 
 -- import           System.Exit
 -- import           System.Posix.Signals
@@ -42,14 +48,27 @@ plugin = buildPlugin $ \ store passInfo ->
   if passNum passInfo == 0
   then \ o p ->
            do liftIO $ print ("Hey" :: String)
-              r <- hermitKernel store "front end" (server passInfo o) p
+              r <- hermitKernel store "front end" (server passInfo $ reverse o) p
               liftIO $ print ("Jude" :: String)
               return r
   else const return
 
 -- | The meat of the plugin, which implements the actual Web API.
 server :: PassInfo -> [CommandLineOption] -> Kernel -> AST -> IO ()
-server passInfo _opts skernel initAST = do
+server passInfo opts skernel initAST = do
+    let mbScript :: Maybe FilePath
+        mbScript = flip find opts $ (== ".hs") . takeExtension
+
+        resume :: Bool
+        resume = "resume" `elem` opts
+
+        otherOpts :: [CommandLineOption]
+        otherOpts = filter (not . (`elem` "resume":maybeToList mbScript)) opts
+    unless (null otherOpts) $ do
+        putStr "Ignored command-line arguments: "
+        forM_ otherOpts $ \opt -> putStr opt >> putChar ' '
+        putStrLn ""
+
     sync' <- newTVarIO def -- TODO: is this used anywhere?
 
     let -- Functions required by Scotty to run our custom WebM monad.
@@ -68,7 +87,7 @@ server passInfo _opts skernel initAST = do
     clsVar <- atomically $ newTMVar cls
 
     let pr = PluginReader skernel passInfo
-  
+
     lastCall <- newTVarIO (abortK (pr_kernel pr) :: IO ())
 
     let fns = router
@@ -87,27 +106,17 @@ server passInfo _opts skernel initAST = do
         middleware logStdoutDev
         post "/" jsonRpc
 
-    writeFile ".ghci-hermit" $ unlines
-        ["import HERMIT.API"
-        ,"import Prelude hiding (log)"
-        ,":set prompt \"HERMIT> \""
+    pwd <- getCurrentDirectory
+    _code <- withTempFile pwd ".ghci-hermit" $ \fp h -> do
+        hPutStrLn h $ hermitShellDotfile mbScript
+        hClose h
 
-        -- To get around an issue where the '-interactive-print' option gets reset:
-        ,":def l \\s -> return $ \":load \" ++ s ++ \"\\n:set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
-        ,":def r \\s -> return $ \":reload \" ++ s ++ \"\\n:set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
-        ,":def hermit \\s -> return $ \":set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
-        ,":def resume \\s -> return $ \"resume\\n:quit\""
-        ,":def abort \\s -> return $ \"abort\\n:quit\""
---        ,"send welcome" -- welcome message (interactive only)a
-        ,"send display" -- where am I (interactive only)
---        ,"setPath (rhsOf \"rev\")"
-        ]
-    callProcess "ghc"
-        ["--interactive"
-        , "-ghci-script=.ghci-hermit"
-        ,"-XOverloadedStrings"
-        ,"-interactive-print=HERMIT.GHCI.Printer.printForRepl"
-        ]
+        let ghci = (shell . unwords $ "ghci" : hermitShellFlags fp) {
+            std_in = if resume then CreatePipe else Inherit
+        }
+        (mbStdin, _, _, hGhci) <- createProcess ghci
+        when resume $ forM_ mbStdin (`hPutStrLn` ":resume")
+        waitForProcess hGhci
 
     -- What and Why?
     print ("Killing server" :: String)
@@ -116,8 +125,8 @@ server passInfo _opts skernel initAST = do
 
     print ("Last Call" :: String)
     atomically (readTVar lastCall) >>= id       -- do last call
-    
-    print ("Last Called" :: String)    
+
+    print ("Last Called" :: String)
  --   raiseSignal sigTERM
 
 -- | Turn WebAppException into a Response.
@@ -134,6 +143,33 @@ handleError _ (WAEError str) = return $ msgBuilder str status500
 msgBuilder :: String -> Status -> Wai.Response
 msgBuilder msg s = Wai.responseBuilder s [("Content-Type","application/json")]
     . lazyByteString . Aeson.encode $ Msg msg
+
+hermitShellDotfile :: Maybe FilePath -> String
+hermitShellDotfile mbScript = unlines $
+  [ "import HERMIT.API"
+  , "import Prelude hiding (log)"
+  , ":set prompt \"HERMIT> \""
+
+  -- To get around an issue where the '-interactive-print' option gets reset:
+  , ":def l \\s -> return $ \":load \" ++ s ++ \"\\n:set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
+  , ":def r \\s -> return $ \":reload \" ++ s ++ \"\\n:set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
+  , ":def hermit \\s -> return $ \":set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
+  , ":def resume \\s -> return $ \"resume\\n:quit\""
+  , ":def abort \\s -> return $ \"abort\\n:quit\""
+--   , "send welcome" -- welcome message (interactive only)a
+  , "send display" -- where am I (interactive only)
+--   , "setPath (rhsOf \"rev\")"
+  ] ++ maybe []
+             (\script -> [":l " ++ script, "script"])
+             mbScript
+
+hermitShellFlags :: FilePath -> [String]
+hermitShellFlags dotfilePath =
+  [ "--interactive"
+  , "-ghci-script=" ++ dotfilePath
+  , "-XOverloadedStrings"
+  , "-interactive-print=HERMIT.GHCI.Printer.printForRepl"
+  ]
 
 -- fileContents :: String
 -- fileContents = unlines

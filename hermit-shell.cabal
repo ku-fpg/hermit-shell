@@ -28,6 +28,8 @@ library
                         bytestring          >= 0.10.4,
                         containers,
                         data-default-class,
+                        directory,
+                        filepath,
                         haskeline,
                         hermit >= 0.4,
                         http-types,
@@ -37,7 +39,9 @@ library
                         process,
                         remote-json,
                         scotty              >= 0.10,
+                        split,
                         stm,
+                        temporary-rc,
                         text,
                         transformers        >= 0.2,
                         transformers-compat >= 0.4,
@@ -88,6 +92,7 @@ library
                         HERMIT.GHCI
                         HERMIT.GHCI.Actions
                         HERMIT.GHCI.Client
+                        HERMIT.GHCI.Driver
                         HERMIT.GHCI.JSON
                         HERMIT.GHCI.Printer
                         HERMIT.GHCI.Renderer
@@ -102,6 +107,7 @@ library
                         HERMIT.Server.Parser.Transform
                         HERMIT.Server.Parser.ProofShellCommand
                         HERMIT.Server.Parser.Utils
+  other-modules:        Paths_hermit_shell
   hs-source-dirs:       src
   include-dirs:         include
   includes:             overlap.h
@@ -110,11 +116,25 @@ library
 executable hermit-shell
   ghc-options:          -Wall
   main-is:              Main.hs
-  other-modules:        Paths_hermit_shell
   hs-source-dirs:       driver
   default-language:     Haskell2010
   build-depends:        base >= 4 && < 5,
-                        remote-json,
-                        hermit,
-                        hermit-shell,
-                        split
+                        hermit-shell
+
+test-suite hermit-shell-tests
+    type:              exitcode-stdio-1.0
+    build-depends:     base         >= 4.7 && < 5,
+                       filepath,
+                       hermit-shell,
+                       process,
+                       tasty,
+                       tasty-hunit
+
+    default-language:  Haskell2010
+    main-is:           Main.hs
+    hs-source-dirs:    tests
+    ghc-options:       -Wall
+
+source-repository head
+    type:              git
+    location:          https://github.com/ku-fpg/hermit-shell
