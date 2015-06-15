@@ -10,7 +10,7 @@ inline :: Rewrite LCore
 inline = Transform $ method "inline" []
 
 -- | Given a specific v, (Var v) ==> <defn of v>
-inlineWith :: String -> Rewrite LCore
+inlineWith :: Name -> Rewrite LCore
 inlineWith nm = Transform $ method "inlineWith" [toJSON nm] 
 
 -- | If the current variable matches any of the given names, then inline it.

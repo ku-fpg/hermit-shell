@@ -124,7 +124,7 @@ server passInfo opts skernel initAST = do
     print ("Killed server" :: String)
 
     print ("Last Call" :: String)
-    atomically (readTVar lastCall) >>= id       -- do last call
+    join (atomically (readTVar lastCall))      -- do last call
 
     print ("Last Called" :: String)
  --   raiseSignal sigTERM

@@ -31,6 +31,8 @@ send (Shell g) = do
        print g
        v <- JSONRPC.send session $ JSONRPC.method "send" [g]
        case fromJust $ parseMaybe parseJSON v of
+         ShellException msg -> 
+             error $ "server failure: " ++ show v ++ " : " ++ msg
          ShellFailure msg -> error $ "failed to parse result value: " ++ show v ++ " : " ++ msg
          ShellResult gss a -> do
                  sequence_ [ putStr txt

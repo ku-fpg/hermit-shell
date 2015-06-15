@@ -15,11 +15,8 @@ import           HERMIT.Kure hiding ((<$>),(<*>))
 import           HERMIT.Shell.Command
 import           HERMIT.Shell.Types hiding (clm)
 import           HERMIT.Shell.KernelEffect
-import           HERMIT.Lemma
 import           HERMIT.Shell.Proof
 import           HERMIT.Core (Crumb)
-
--- import           HERMIT.Context
 
 import           HERMIT.Server.Parser.KernelEffect ()
 import           HERMIT.Server.Parser.Name ()

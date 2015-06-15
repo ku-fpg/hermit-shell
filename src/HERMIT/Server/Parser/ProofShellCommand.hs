@@ -6,10 +6,6 @@ import HERMIT.Server.Parser.Utils
 import HERMIT.Server.Parser.Transform ()
 
 import HERMIT.Shell.Proof
-import HERMIT.Kure
-
-import Data.Aeson
-import Data.Aeson.Types
 
 instance External ProofShellCommand where
   parseExternals =

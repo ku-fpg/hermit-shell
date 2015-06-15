@@ -204,7 +204,7 @@ performTypedEffect lastCall plug ref [val] =
              putStrLn e
              return Aeson.Null
           Left _exc  -> do
-                  print $ ("Left _exc : " :: String)
+                  print ("Left _exc : " :: String)
                   return Aeson.Null
           Right val' -> return $ object [ "result" .= val', "output" .= es ]
 performTypedEffect _ _ _ _ =

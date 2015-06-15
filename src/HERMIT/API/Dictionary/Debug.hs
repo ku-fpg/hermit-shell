@@ -12,7 +12,9 @@ trace str = Transform $ method "trace" [toJSON str]
 observe :: String -> Rewrite LCoreTC
 observe str = Transform $ method "observe" [toJSON str]
 
--- | give a side-effect message if the rewrite fails, including the failing input
+{-| 
+  give a side-effect message if the rewrite fails, including the failing input
+-}
 observeFailure :: String -> Rewrite LCoreTC -> Rewrite LCoreTC
 observeFailure str r = Transform $ method "observeFailure" 
     [toJSON str, toJSON r]

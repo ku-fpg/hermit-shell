@@ -33,7 +33,7 @@ import           HERMIT.Dictionary.Navigation (Considerable(..))
 import           HERMIT.Dictionary.Rules (RuleName(..))
 import           HERMIT.PrettyPrinter.Common (PrettyPrinter)
 
-import           Debug.Trace
+--import           Debug.Trace
 
 alts :: [a -> Parser b] -> a -> Parser b
 alts as a = foldr (<|>) (fail "no match") $ map ($ a) as
@@ -81,6 +81,10 @@ infixl 3 .+
 
 (.+) :: b -> a -> b
 (.+) = const
+
+instance External Bool where
+  parseExternal (Bool b) = return b
+  parseExternal _        = fail "parseExternal: Bool"
 
 instance External Int where
   parseExternal (Number n) = return $ floor n

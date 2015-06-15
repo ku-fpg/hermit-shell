@@ -35,49 +35,41 @@ import           Text.PrettyPrint.MarkedHughesPJ (MDoc) -- TODO: until 7.10
 instance External (BiRewriteH LCore) where
   parseExternals =
     [
-      -- HERMIT.API.Dictionary.FixPoint
-      external "fixComputationRule" (promoteExprBiR fixComputationRuleBR :: BiRewriteH LCore)
+-- HERMIT.API.Dictionary.FixPoint
+      external "fixComputationRule" 
+        (promoteExprBiR fixComputationRuleBR :: BiRewriteH LCore)
         [ "Fixed-Point Computation Rule",
           "fix t f  <==>  f (fix t f)"
         ] .+ Context
-    , external "fixRollingRule" (promoteExprBiR fixRollingRuleBR :: BiRewriteH LCore)
+
+    , external "fixRollingRule" 
+        (promoteExprBiR fixRollingRuleBR :: BiRewriteH LCore)
         [ "Rolling Rule",
           "fix tyA (\\ a -> f (g a))  <==>  f (fix tyB (\\ b -> g (f b))"
         ] .+ Context
-    , external "fixFusionRule" ((\ f g h r1 r2 strictf -> promoteExprBiR
-                                                                (fixFusionRule (Just (r1,r2)) (Just strictf) f g h))
-                                                                :: CoreString -> CoreString -> CoreString
-                                                                    -> RewriteH LCore -> RewriteH LCore
-                                                                    -> RewriteH LCore -> BiRewriteH LCore)
+
+    , external "fixFusionRule" 
+        ((\ f g h r1 r2 strictf -> 
+            promoteExprBiR (fixFusionRule (Just (r1,r2)) (Just strictf) f g h))
+        :: CoreString -> CoreString -> CoreString -> RewriteH LCore 
+        -> RewriteH LCore -> RewriteH LCore -> BiRewriteH LCore)
         [ "FixedPoint Fusion Rule"
         , "Given f :: A -> B, g :: A -> A, h :: B -> B, and"
-        , "proofs that, for some x, (f (g a) ==> x) and (h (f a) ==> x) and that f is strict, then"
+        , "proofs that, for some x, (f (g a) ==> x) and (h (f a) ==> x) " ++
+          "and that f is strict, then"
         , "f (fix g) <==> fix h"
         ] .+ Context
-    , external "fixFusionRuleUnsafe" ((\ f g h r1 r2 -> promoteExprBiR (fixFusionRule (Just (r1,r2)) Nothing f g h))
-                                                            :: CoreString -> CoreString -> CoreString
-                                                                -> RewriteH LCore -> RewriteH LCore -> BiRewriteH LCore)
-        [ "(Unsafe) FixedPoint Fusion Rule"
-        , "Given f :: A -> B, g :: A -> A, h :: B -> B, and"
-        , "a proof that, for some x, (f (g a) ==> x) and (h (f a) ==> x), then"
-        , "f (fix g) <==> fix h"
-        , "Note that the precondition that f is strict is required to hold."
-        ] .+ Context .+ PreCondition
-    , external "fixFusionRuleUnsafe" ((\ f g h -> promoteExprBiR (fixFusionRule Nothing Nothing f g h))
-                                                        :: CoreString -> CoreString -> CoreString -> BiRewriteH LCore)
-        [ "(Very Unsafe) FixedPoint Fusion Rule"
-        , "Given f :: A -> B, g :: A -> A, h :: B -> B, then"
-        , "f (fix g) <==> fix h"
-        , "Note that the preconditions that f (g a) == h (f a) and that f is strict are required to hold."
-        ] .+ Context .+ PreCondition
 
-      -- HERMIT.API.Dictionary.KURE
-    , external ">>>"        ((>>>) :: BiRewriteH LCore -> BiRewriteH LCore -> BiRewriteH LCore)
+-- HERMIT.API.Dictionary.KURE
+    , external ">>>"        
+        ((>>>) :: BiRewriteH LCore -> BiRewriteH LCore -> BiRewriteH LCore)
         [ "Compose bidirectional rewrites, requiring both to succeed." ]
-    , external "invert"     (invertBiT :: BiRewriteH LCore -> BiRewriteH LCore)
+
+    , external "invert"     
+        (invertBiT :: BiRewriteH LCore -> BiRewriteH LCore)
         [ "Reverse a bidirectional rewrite." ]
 
-      -- ??
+-- ??
     , external "wwResultFactorisation" ((\ abs rep assC -> promoteExprBiR $ wwFac (mkWWAssC assC) abs rep)
                                           :: CoreString -> CoreString -> RewriteH LCore -> BiRewriteH LCore)
                 [ "Worker/Wrapper Factorisation (Result Variant)",
@@ -243,57 +235,90 @@ instance External (RewriteH LCore) where
         (promoteAltR alphaAltR :: RewriteH LCore)
         [ "Renames all binders in a Case alternative."]
 
-    , external "alphaAltWith" (promoteAltR . alphaAltWithR :: [String] -> RewriteH LCore)
-        [ "Renames all binders in a Case alternative using the user-provided list of new names."]
+    , external "alphaAltWith" 
+        (promoteAltR . alphaAltWithR :: [String] -> RewriteH LCore)
+        [ "Renames all binders in a Case alternative using the " ++ 
+          "user-provided list of new names."]
 
-    , external "alphaCase" (promoteExprR alphaCaseR :: RewriteH LCore)
+    , external "alphaCase" 
+        (promoteExprR alphaCaseR :: RewriteH LCore)
         [ "Renames all binders in a Case alternative."]
 
-    , external "alphaLetWith" (promoteExprR . alphaLetWithR :: [String] -> RewriteH LCore)
-        [ "Renames the bound variables in a Let expression using a list of suggested names."]
+    , external "alphaLetWith" 
+        (promoteExprR . alphaLetWithR :: [String] -> RewriteH LCore)
+        [ "Renames the bound variables in a Let expression using a list " ++
+          "of suggested names."]
 
-    , external "alphaLet" (promoteExprR alphaLetR :: RewriteH LCore)
+    , external "alphaLet" 
+        (promoteExprR alphaLetR :: RewriteH LCore)
         [ "Renames the bound variables in a Let expression."]
 
-    , external "alphaTopWith" (promoteProgR . alphaProgConsWithR :: [String] -> RewriteH LCore)
-        [ "Renames the bound identifiers in the top-level binding group at the head of the program using a list of suggested names."]
+    , external "alphaTopWith" 
+        (promoteProgR . alphaProgConsWithR :: [String] -> RewriteH LCore)
+        [ "Renames the bound identifiers in the top-level binding group " ++
+          "at the head of the program using a list of suggested names."]
 
-    , external "alphaTop" (promoteProgR alphaProgConsR :: RewriteH LCore)
-        [ "Renames the bound identifiers in the top-level binding at the head of the program."]
+    , external "alphaTop" 
+        (promoteProgR alphaProgConsR :: RewriteH LCore)
+        [ "Renames the bound identifiers in the top-level binding at the " ++
+          "head of the program."]
 
-    , external "alphaProg" (promoteProgR alphaProgR :: RewriteH LCore)
+    , external "alphaProg" 
+        (promoteProgR alphaProgR :: RewriteH LCore)
         [ "Rename all topLevel identifiers in the program."]
 
-    ,  external "unshadow" (promoteCoreR unshadowR :: RewriteH LCore)
-        [ "Rename local variables with manifestly unique names (x, x0, x1, ...)."]
+    ,  external "unshadow" 
+        (promoteCoreR unshadowR :: RewriteH LCore)
+        [ "Rename local variables with manifestly unique names " ++
+          "(x, x0, x1, ...)."]
 
 -- HERMIT.API.Dictionary.Composite
-    , external "unfoldBasicCombinator" (promoteExprR unfoldBasicCombinatorR :: RewriteH LCore)
+    , external "unfoldBasicCombinator" 
+        (promoteExprR unfoldBasicCombinatorR :: RewriteH LCore)
         [ "Unfold the current expression if it is one of the basic combinators:"
         , "($), (.), id, flip, const, fst, snd, curry, and uncurry." ]
-    , external "simplify" (simplifyR :: RewriteH LCore)
-        [ "innermost (unfoldBasicCombinator <+ betaReducePlus <+ safeLetSubst <+ caseReduce <+ letElim)" ]
-    , external "bash" (bashR :: RewriteH LCore)
+
+    , external "simplify" 
+        (simplifyR :: RewriteH LCore)
+        [ "innermost (unfoldBasicCombinator <+ betaReducePlus <+ " ++
+          "safeLetSubst <+ caseReduce <+ letElim)" ]
+
+    , external "bash" 
+        (bashR :: RewriteH LCore)
         bashHelp .+ Eval .+ Deep .+ Loop
-    , external "smash" (smashR :: RewriteH LCore)
+
+    , external "smash" 
+        (smashR :: RewriteH LCore)
         smashHelp .+ Eval .+ Deep .+ Loop .+ Experiment
-    , external "bashExtendedWith" (bashExtendedWithR :: [RewriteH LCore] -> RewriteH LCore)
+
+    , external "bashExtendedWith" 
+        (bashExtendedWithR :: [RewriteH LCore] -> RewriteH LCore)
         [ "Run \"bash\" extended with additional rewrites.",
-          "Note: be sure that the new rewrite either fails or makes progress, else this may loop."
+          "Note: be sure that the new rewrite either fails or makes " ++ 
+          "progress, else this may loop."
         ] .+ Eval .+ Deep .+ Loop
-    , external "smashExtendedWith" (smashExtendedWithR :: [RewriteH LCore] -> RewriteH LCore)
+
+    , external "smashExtendedWith" 
+        (smashExtendedWithR :: [RewriteH LCore] -> RewriteH LCore)
         [ "Run \"smash\" extended with additional rewrites.",
-          "Note: be sure that the new rewrite either fails or makes progress, else this may loop."
+          "Note: be sure that the new rewrite either fails or makes " ++
+          "progress, else this may loop."
         ] .+ Eval .+ Deep .+ Loop
-    , external "bashDebug" (bashDebugR :: RewriteH LCore)
-        [ "verbose bash - most useful with setAutoCorelint True" ] .+ Eval .+ Deep .+ Loop
 
-      -- HERMIT.API.Dictionary.FixPoint
-    , external "fixIntro" (promoteCoreR fixIntroR :: RewriteH LCore)
-        [ "rewrite a function binding into a nonRecursive binding using fix" ] .+ Introduce .+ Context
+    , external "bashDebug" 
+        (bashDebugR :: RewriteH LCore)
+        [ "verbose bash - most useful with setAutoCorelint True" 
+        ] .+ Eval .+ Deep .+ Loop
 
-      -- HERMIT.API.Dictionary.Fold
-    , external "fold" (promoteExprR . foldR :: HermitName -> RewriteH LCore)
+-- HERMIT.API.Dictionary.FixPoint
+    , external "fixIntro" 
+        (promoteCoreR fixIntroR :: RewriteH LCore)
+        [ "rewrite a function binding into a nonRecursive binding using fix" 
+        ] .+ Introduce .+ Context
+
+-- HERMIT.API.Dictionary.Fold
+    , external "fold" 
+        (promoteExprR . foldR :: HermitName -> RewriteH LCore)
         [ "fold a definition"
         , ""
         , "double :: Int -> Int"
@@ -304,106 +329,209 @@ instance External (RewriteH LCore) where
         , "double 5 + 6"
         , ""
         , "Note: due to associativity, if you wanted to fold 5 + 6 + 6, "
-        , "you first need to apply an associativity rewrite." ]  .+ Context .+ Deep
+        , "you first need to apply an associativity rewrite." 
+        ]  .+ Context .+ Deep
 
-      -- HERMIT.API.Dictionary.Function
-    , external "staticArg" (promoteDefR staticArgR :: RewriteH LCore)
-        [ "perform the static argument transformation on a recursive function." ]
-    , external "staticArgTypes" (promoteDefR staticArgTypesR :: RewriteH LCore)
-        [ "perform the static argument transformation on a recursive function, only transforming type arguments." ]
-    , external "staticArgPos" (promoteDefR . staticArgPosR :: [Int] -> RewriteH LCore)
-        [ "perform the static argument transformation on a recursive function, only transforming the arguments specified (by index)." ]
+-- HERMIT.API.Dictionary.Function
+    , external "staticArg" 
+        (promoteDefR staticArgR :: RewriteH LCore)
+        [ "perform the static argument transformation on a recursive function." 
+        ]
 
-      -- HERMIT.API.Dictionary.GHC
-    , external "deshadowProg" (promoteProgR deShadowProgR :: RewriteH LCore)
+    , external "staticArgTypes" 
+        (promoteDefR staticArgTypesR :: RewriteH LCore)
+        [ "perform the static argument transformation on a recursive " ++ 
+          "function, only transforming type arguments." ]
+
+    , external "staticArgPos" 
+        (promoteDefR . staticArgPosR :: [Int] -> RewriteH LCore)
+        [ "perform the static argument transformation on a recursive " ++ 
+          "function, only transforming the arguments specified (by index)." ]
+
+-- HERMIT.API.Dictionary.GHC
+    , external "deshadowProg" 
+        (promoteProgR deShadowProgR :: RewriteH LCore)
         [ "Deshadow a program." ] .+ Deep
-    , external "dezombify" (promoteExprR dezombifyR :: RewriteH LCore)
-        [ "Zap the occurrence information in the current identifer if it is a zombie."] .+ Shallow
-    , external "occurrenceAnalysis" (occurrenceAnalysisR :: RewriteH LCore)
-        [ "Perform dependency analysis on all subExpressions; simplifying and updating identifer info."] .+ Deep
 
-      -- HERMIT.API.Dictionary.Induction
-    , external "induction" (promoteClauseR . caseSplitOnR True . cmpHN2Var :: HermitName -> RewriteH LCore)
-        [ "Induct on specified value quantifier." ]
-    , external "proveByCases" (promoteClauseR . caseSplitOnR False . cmpHN2Var :: HermitName -> RewriteH LCore)
-        [ "Case split on specified value quantifier." ]
+    , external "dezombify" 
+        (promoteExprR dezombifyR :: RewriteH LCore)
+        [ "Zap the occurrence information in the current identifer if it " ++
+          "is a zombie."] .+ Shallow
+
+    , external "occurrenceAnalysis" 
+        (occurrenceAnalysisR :: RewriteH LCore)
+        [ "Perform dependency analysis on all subExpressions; simplifying " ++
+          "and updating identifer info."] .+ Deep
+
+-- HERMIT.API.Dictionary.Induction
+    , external "caseSplitOn" 
+        ((\ fl -> promoteClauseR . caseSplitOnR fl . cmpHN2Var) 
+         :: Bool -> HermitName -> RewriteH LCore)
+        [ "Case split or induct on specified value quantifier." ]
 
 -- HERMIT.API.Dictionary.Inline
-    , external "inline" (promoteExprR inlineR :: RewriteH LCore)
+    , external "inline" 
+        (promoteExprR inlineR :: RewriteH LCore)
         [ "(Var v) ==> <defn of v>" ].+ Eval .+ Deep
-    , external "inlineWith" (promoteExprR . inlineMatchingPredR . cmpHN2Var . parseName :: String -> RewriteH LCore)
-        [ "Given a specific v, (Var v) ==> <defn of v>" ] .+ Eval .+ Deep
-    , external "inlineAny" (promoteExprR . inlineNamesR :: [String] -> RewriteH LCore)
-        [ "If the current variable matches any of the given names, then inline it." ] .+ Eval .+ Deep
-    , external "inlineCaseScrutinee" (promoteExprR inlineCaseScrutineeR :: RewriteH LCore)
-        [ "if v is a case binder, replace (Var v) with the bound case scrutinee." ] .+ Eval .+ Deep
-    , external "inlineCaseAlternative" (promoteExprR inlineCaseAlternativeR :: RewriteH LCore)
-        [ "if v is a case binder, replace (Var v) with the bound caseAlternative pattern." ] .+ Eval .+ Deep
 
-      -- HERMIT.API.Dictionary.KURE
-    , external "id_"         (idR :: RewriteH LCore)
+    , external "inlineWith" 
+        (promoteExprR . inlineMatchingPredR . cmpHN2Var :: HermitName 
+                                                        -> RewriteH LCore)
+        [ "Given a specific v, (Var v) ==> <defn of v>" ] .+ Eval .+ Deep
+
+    , external "inlineAny" 
+        (promoteExprR . inlineNamesR :: [String] -> RewriteH LCore)
+        [ "If the current variable matches any of the given names, then " ++
+          "inline it." ] .+ Eval .+ Deep
+
+    , external "inlineCaseScrutinee" 
+        (promoteExprR inlineCaseScrutineeR :: RewriteH LCore)
+        [ "if v is a case binder, replace (Var v) with the bound case " ++
+          "scrutinee." ] .+ Eval .+ Deep
+
+    , external "inlineCaseAlternative" 
+        (promoteExprR inlineCaseAlternativeR :: RewriteH LCore)
+        [ "if v is a case binder, replace (Var v) with the bound " ++ 
+          "caseAlternative pattern." ] .+ Eval .+ Deep
+
+-- HERMIT.API.Dictionary.KURE
+    , external "idCore"         
+        (idR :: RewriteH LCore)
         [ "Perform an identity rewrite."] .+ Shallow
-    , external "fail_"       (fail :: String -> RewriteH LCore)
+
+    , external "fail_"       
+        (fail :: String -> RewriteH LCore)
         [ "A failing rewrite."]
-    , external "<+"         ((<+) :: RewriteH LCore -> RewriteH LCore -> RewriteH LCore)
-        [ "Perform the first rewrite, and then, if it fails, perform the second rewrite." ]
-    , external ">>>"        ((>>>) :: RewriteH LCore -> RewriteH LCore -> RewriteH LCore)
+
+    , external "<+"         
+        ((<+) :: RewriteH LCore -> RewriteH LCore -> RewriteH LCore)
+        [ "Perform the first rewrite, and then, if it fails, perform " ++
+          "the second rewrite." ]
+
+    , external ">>>"        
+        ((>>>) :: RewriteH LCore -> RewriteH LCore -> RewriteH LCore)
         [ "Compose rewrites, requiring both to succeed." ]
-    , external ">+>"        ((>+>) :: RewriteH LCore -> RewriteH LCore -> RewriteH LCore)
+
+    , external ">+>"        
+        ((>+>) :: RewriteH LCore -> RewriteH LCore -> RewriteH LCore)
         [ "Compose rewrites, allowing one to fail." ]
-    , external "try"        (tryR :: RewriteH LCore -> RewriteH LCore)
+
+    , external "try"        
+        (tryR :: RewriteH LCore -> RewriteH LCore)
         [ "Try a rewrite, and perform the identity if the rewrite fails." ]
-    , external "repeat"     (repeatR :: RewriteH LCore -> RewriteH LCore)
+
+    , external "repeat"     
+        (repeatR :: RewriteH LCore -> RewriteH LCore)
         [ "Repeat a rewrite until it would fail." ] .+ Loop
-    , external "replicate"  ((\ n -> andR . replicate n)  :: Int -> RewriteH LCore -> RewriteH LCore)
+
+    , external "replicate"  
+        ((\ n -> andR . replicate n) :: Int -> RewriteH LCore -> RewriteH LCore)
         [ "Repeat a rewrite n times." ]
-    , external "all"        (allR :: RewriteH LCore -> RewriteH LCore)
-        [ "Apply a rewrite to all children of the node, requiring success at every child." ] .+ Shallow
-    , external "any"        (anyR :: RewriteH LCore -> RewriteH LCore)
-        [ "Apply a rewrite to all children of the node, requiring success for at least one child." ] .+ Shallow
-    , external "one"        (oneR :: RewriteH LCore -> RewriteH LCore)
-        [ "Apply a rewrite to the first child of the node for which it can succeed." ] .+ Shallow
-    , external "allBU"     (allbuR :: RewriteH LCore -> RewriteH LCore)
-        [ "Promote a rewrite to operate over an entire tree in bottomUp order, requiring success at every node." ] .+ Deep
-    , external "allTD"     (alltdR :: RewriteH LCore -> RewriteH LCore)
-        [ "Promote a rewrite to operate over an entire tree in top-down order, requiring success at every node." ] .+ Deep
-    , external "allDU"     (allduR :: RewriteH LCore -> RewriteH LCore)
-        [ "Apply a rewrite twice, in a top-down and bottomUp way, using one single tree traversal,",
-          "succeeding if they all succeed."] .+ Deep
-    , external "anyBU"     (anybuR :: RewriteH LCore -> RewriteH LCore)
-        [ "Promote a rewrite to operate over an entire tree in bottomUp order, requiring success for at least one node." ] .+ Deep
-    , external "anyTD"     (anytdR :: RewriteH LCore -> RewriteH LCore)
-        [ "Promote a rewrite to operate over an entire tree in top-down order, requiring success for at least one node." ] .+ Deep
-    , external "anyDU"     (anyduR :: RewriteH LCore -> RewriteH LCore)
-        [ "Apply a rewrite twice, in a top-down and bottomUp way, using one single tree traversal,",
-          "succeeding if any succeed."] .+ Deep
-    , external "oneTD"     (onetdR :: RewriteH LCore -> RewriteH LCore)
-        [ "Apply a rewrite to the first node (in a top-down order) for which it can succeed." ] .+ Deep
-    , external "oneBU"     (onebuR :: RewriteH LCore -> RewriteH LCore)
-        [ "Apply a rewrite to the first node (in a bottomUp order) for which it can succeed." ] .+ Deep
-    , external "pruneTD"   (prunetdR :: RewriteH LCore -> RewriteH LCore)
-        [ "Attempt to apply a rewrite in a top-down manner, prunning at successful rewrites." ] .+ Deep
-    , external "innermost"  (innermostR :: RewriteH LCore -> RewriteH LCore)
-        [ "A fixedPoint traveral, starting with the innermost term." ] .+ Deep .+ Loop
---     , external "focus"      (hfocusR :: TransformH LCore LocalPathH -> RewriteH LCore -> RewriteH LCore)
---         [ "Apply a rewrite to a focal point."] .+ Navigation .+ Deep
---     , external "focus"      ((\p -> hfocusR (return p)) :: LocalPathH -> RewriteH LCore -> RewriteH LCore)
---         [ "Apply a rewrite to a focal point."] .+ Navigation .+ Deep
-    , external "when"       ((>>) :: TransformH LCore () -> RewriteH LCore -> RewriteH LCore)
+
+    , external "all"        
+        (allR :: RewriteH LCore -> RewriteH LCore)
+        [ "Apply a rewrite to all children of the node, requiring success " ++ 
+          "at every child." ] .+ Shallow
+
+    , external "any"        
+        (anyR :: RewriteH LCore -> RewriteH LCore)
+        [ "Apply a rewrite to all children of the node, requiring success " ++
+          "for at least one child." ] .+ Shallow
+
+    , external "one"        
+        (oneR :: RewriteH LCore -> RewriteH LCore)
+        [ "Apply a rewrite to the first child of the node for which it can " ++
+          "succeed." ] .+ Shallow
+
+    , external "allBU"     
+        (allbuR :: RewriteH LCore -> RewriteH LCore)
+        [ "Promote a rewrite to operate over an entire tree in bottomUp " ++
+          "order, requiring success at every node." ] .+ Deep
+
+    , external "allTD"     
+        (alltdR :: RewriteH LCore -> RewriteH LCore)
+        [ "Promote a rewrite to operate over an entire tree in top-down " ++
+          "order, requiring success at every node." ] .+ Deep
+
+    , external "allDU"     
+        (allduR :: RewriteH LCore -> RewriteH LCore)
+        [ "Apply a rewrite twice, in a top-down and bottomUp way, using " ++
+          "one single tree traversal,"
+        , "succeeding if they all succeed."] .+ Deep
+
+    , external "anyBU"     
+        (anybuR :: RewriteH LCore -> RewriteH LCore)
+        [ "Promote a rewrite to operate over an entire tree in bottomUp " ++
+          "order, requiring success for at least one node." ] .+ Deep
+
+    , external "anyTD"     
+        (anytdR :: RewriteH LCore -> RewriteH LCore)
+        [ "Promote a rewrite to operate over an entire tree in top-down " ++
+          "order, requiring success for at least one node." ] .+ Deep
+
+    , external "anyDU"     
+        (anyduR :: RewriteH LCore -> RewriteH LCore)
+        [ "Apply a rewrite twice, in a top-down and bottomUp way, using " ++
+          "one single tree traversal,"
+        , "succeeding if any succeed."] .+ Deep
+
+    , external "oneTD"     
+        (onetdR :: RewriteH LCore -> RewriteH LCore)
+        [ "Apply a rewrite to the first node (in a top-down order) for " ++
+          "which it can succeed." ] .+ Deep
+
+    , external "oneBU"     
+        (onebuR :: RewriteH LCore -> RewriteH LCore)
+        [ "Apply a rewrite to the first node (in a bottomUp order) for " ++
+          "which it can succeed." ] .+ Deep
+
+    , external "pruneTD"   
+        (prunetdR :: RewriteH LCore -> RewriteH LCore)
+        [ "Attempt to apply a rewrite in a top-down manner, prunning at " ++
+          "successful rewrites." ] .+ Deep
+
+    , external "innermost"  
+        (innermostR :: RewriteH LCore -> RewriteH LCore)
+        [ "A fixedPoint traveral, starting with the innermost term." 
+        ] .+ Deep .+ Loop
+
+    , external "focus"      
+        (hfocusR :: TransformH LCore LocalPathH -> RewriteH LCore 
+                 -> RewriteH LCore)
+        [ "Apply a rewrite to a focal point."] .+ Navigation .+ Deep
+
+    , external "when"       
+        ((>>) :: TransformH LCore () -> RewriteH LCore -> RewriteH LCore)
         [ "Apply a rewrite only if the check succeeds." ] .+ Predicate
-    , external "forward"    (forwardT :: BiRewriteH LCore -> RewriteH LCore)
+
+    , external "forward"    
+        (forwardT :: BiRewriteH LCore -> RewriteH LCore)
         [ "Apply a bidirectional rewrite forewards." ]
-    , external "backward"   (backwardT :: BiRewriteH LCore -> RewriteH LCore)
+
+    , external "backward"   
+        (backwardT :: BiRewriteH LCore -> RewriteH LCore)
         [ "Apply a bidirectional rewrite backwards." ]
-    , external "anyCall"   (const anyCallR_LCore :: Proxy LCore -> RewriteH LCore -> RewriteH LCore)
-        [ "anyCall (.. unfold command ..) applies an unfold command to all applications."
+
+    , external "anyCall"   
+        (const anyCallR_LCore :: Proxy LCore -> RewriteH LCore 
+                              -> RewriteH LCore)
+        [ "anyCall (.. unfold command ..) applies an unfold command to " ++
+          "all applications."
         , "Preference is given to applications with more arguments." ] .+ Deep
---     , external "extract"    (extractR :: RewriteH LCoreTC -> RewriteH LCore)
---         [ "Extract a RewriteCore from a RewriteCoreTC" ]
---    , external "atPath"     (flip hfocusT idR :: TransformH LCore LocalPathH -> TransformH LCore LCore)
---        [ "return the expression found at the given path" ]
---    , external "atPath"     (extractT . flip hfocusT projectT :: TransformH LCoreTC LocalPathH -> TransformH LCore LCore)
---        [ "return the expression found at the given path" ]
+
+    , external "extractR"    
+        (extractR :: RewriteH LCoreTC -> RewriteH LCore)
+        [ "Extract a RewriteCore from a RewriteCoreTC" ]
+
+    , external "atPath"     
+        (flip hfocusT idR :: TransformH LCore LocalPathH 
+                          -> TransformH LCore LCore)
+        [ "return the expression found at the given path" ]
+
+   , external "atPathProj"     
+       (extractT . flip hfocusT projectT :: TransformH LCoreTC LocalPathH 
+                                         -> TransformH LCore LCore)
+       [ "return the expression found at the given path" ]
 
       -- HERMIT.API.Dictionary.Local
     , external "betaReduce" (promoteExprR betaReduceR :: RewriteH LCore)
@@ -824,31 +952,51 @@ instance External (RewriteH LCore) where
 instance External (RewriteH LCoreTC) where
   parseExternals =
     [
-      -- HERMIT.API.Dictionary.Debug
-      external "trace" (traceR :: String -> RewriteH LCoreTC)
+-- HERMIT.API.Dictionary.Debug
+      external "trace" 
+        (traceR :: String -> RewriteH LCoreTC)
         [ "give a sideEffect message as output when processing this command" ]
-    , external "observe" (observeR :: String -> RewriteH LCoreTC)
-        [ "give a sideEffect message as output, and observe the value being processed" ]
-    , external "observeFailure" (observeFailureR :: String -> RewriteH LCoreTC -> RewriteH LCoreTC)
-        [ "give a sideEffect message if the rewrite fails, including the failing input" ]
-    , external "bracket" (bracketR :: String -> RewriteH LCoreTC -> RewriteH LCoreTC)
+
+    , external "observe" 
+        (observeR :: String -> RewriteH LCoreTC)
+        [ "give a sideEffect message as output, and observe the value " ++ 
+          "being processed" ]
+
+    , external "observeFailure" 
+        (observeFailureR :: String -> RewriteH LCoreTC -> RewriteH LCoreTC)
+        [ "give a sideEffect message if the rewrite fails, including the " ++
+          "failing input" ]
+
+    , external "bracket" 
+        (bracketR :: String -> RewriteH LCoreTC -> RewriteH LCoreTC)
         [ "if given rewrite succeeds, see its input and output" ]
 
-      -- HERMIT.API.Dictionary.KURE
-    , external "id"         (idR :: RewriteH LCoreTC)
+-- HERMIT.API.Dictionary.KURE
+    , external "idCoreTC"         
+        (idR :: RewriteH LCoreTC)
         [ "Perform an identity rewrite."] .+ Shallow
---     , external "focus"      ((\p -> hfocusR (return p)) :: LocalPathH -> RewriteH LCoreTC -> RewriteH LCoreTC)
---         [ "Apply a rewrite to a focal point."] .+ Navigation .+ Deep
---     , external "focus"      (hfocusR :: TransformH LCoreTC LocalPathH -> RewriteH LCoreTC -> RewriteH LCoreTC)
---         [ "Apply a rewrite to a focal point."] .+ Navigation .+ Deep
-    , external ">>>"        ((>>>) :: RewriteH LCoreTC -> RewriteH LCoreTC -> RewriteH LCoreTC)
+
+    , external ">>>"        
+        ((>>>) :: RewriteH LCoreTC -> RewriteH LCoreTC -> RewriteH LCoreTC)
         [ "Compose rewrites, requiring both to succeed." ]
-    , external "promote"    (promoteR :: RewriteH LCore -> RewriteH LCoreTC)
+
+    , external "focus"      
+        (hfocusR :: TransformH LCoreTC LocalPathH -> RewriteH LCoreTC 
+                 -> RewriteH LCoreTC)
+        [ "Apply a rewrite to a focal point."] .+ Navigation .+ Deep
+
+    , external "promote"    
+        (promoteR :: RewriteH LCore -> RewriteH LCoreTC)
         [ "Promote a RewriteCore to a RewriteCoreTC" ]
-    , external "between"    (betweenR :: Int -> Int -> RewriteH LCoreTC -> RewriteH LCoreTC)
+
+    , external "between"    
+        (betweenR :: Int -> Int -> RewriteH LCoreTC -> RewriteH LCoreTC)
         [ "between x y rr -> perform rr at least x times and at most y times." ]
---    , external "atPath"     (flip hfocusT idR :: TransformH LCoreTC LocalPathH -> TransformH LCoreTC LCoreTC)
---        [ "return the expression found at the given path" ]
+
+   , external "atPath"     
+       (flip hfocusT idR :: TransformH LCoreTC LocalPathH 
+                         -> TransformH LCoreTC LCoreTC)
+       [ "return the expression found at the given path" ]
 
     , external "unshadowQuantified" (promoteClauseR unshadowClauseR :: RewriteH LCoreTC)
         [ "Unshadow a quantified clause." ]
@@ -895,23 +1043,32 @@ instance External (TransformH LCoreTC LocalPathH) where
 instance External (TransformH LCoreTC String) where
   parseExternals =
     [
-      -- HERMIT.API.Dictionary.GHC
-      external "lintExpr" (promoteExprT lintExprT :: TransformH LCoreTC String)
+-- HERMIT.API.Dictionary.GHC
+      external "lintExpr" 
+        (promoteExprT lintExprT :: TransformH LCoreTC String)
         [ "Runs GHC's Core Lint, which typechecks the current expression."
-        , "Note: this can miss several things that a whole module core lint will find."
-        , "For instance, running this on the RHS of a binding, the type of the RHS will"
-        , "not be checked against the type of the binding. Running on the whole let expression"
+        , "Note: this can miss several things that a whole module core " ++
+          "lint will find."
+        , "For instance, running this on the RHS of a binding, the type of " ++
+          "the RHS will"
+        , "not be checked against the type of the binding. Running on the " ++
+          "whole let expression"
         , "will catch that however."] .+ Deep .+ Debug .+ Query
-    , external "lintModule" (promoteModGutsT lintModuleT :: TransformH LCoreTC String)
-        [ "Runs GHC's Core Lint, which typechecks the current module."] .+ Deep .+ Debug .+ Query
-    , external "lint" (promoteT lintClauseT :: TransformH LCoreTC String)
+
+    , external "lintModule" 
+        (promoteModGutsT lintModuleT :: TransformH LCoreTC String)
+        [ "Runs GHC's Core Lint, which typechecks the current module."
+        ] .+ Deep .+ Debug .+ Query
+
+    , external "lint" 
+        (promoteT lintClauseT :: TransformH LCoreTC String)
         [ "Lint check a clause." ]
 
-      -- HERMIT.API.Dictionary.KURE
--- --     , external "focus"      (hfocusT :: TransformH LCoreTC LocalPathH -> TransformH LCoreTC String -> TransformH LCoreTC String)
--- --         [ "Apply a query at a focal point."] .+ Navigation .+ Deep
--- --     , external "focus"      ((\p -> hfocusT (return p)) :: LocalPathH -> TransformH LCoreTC String -> TransformH LCoreTC String)
--- --         [ "Apply a query at a focal point."] .+ Navigation .+ Deep
+-- HERMIT.API.Dictionary.KURE
+    , external "focus"      
+        (hfocusT :: TransformH LCoreTC LocalPathH -> TransformH LCoreTC String 
+                 -> TransformH LCoreTC String)
+        [ "Apply a query at a focal point."] .+ Navigation .+ Deep
 
     , external "showRules" (rulesHelpListT :: TransformH LCoreTC String)
         [ "List all the rules in scope." ] .+ Query
@@ -924,19 +1081,29 @@ instance External (TransformH LCoreTC String) where
 instance External (TransformH LCore ()) where
   parseExternals =
     [
-      -- HERMIT.API.Dictionary.GHC
-      external "injectDependency" (promoteModGutsT . injectDependencyT . mkModuleName :: String -> TransformH LCore ())
+-- HERMIT.API.Dictionary.GHC
+      external "injectDependency" 
+        (promoteModGutsT . injectDependencyT . mkModuleName 
+         :: String -> TransformH LCore ())
         [ "Inject a dependency on the given module." ]
 
-      -- HERMIT.API.Dictionary.KURE
-    , external "<+"         ((<+) :: TransformH LCore () -> TransformH LCore () -> TransformH LCore ())
-        [ "Perform the first check, and then, if it fails, perform the second check." ]
-    , external "success"    (successT :: TransformH LCore ())
+-- HERMIT.API.Dictionary.KURE
+    , external "success"    
+        (successT :: TransformH LCore ())
         [ "An always succeeding translation." ]
-    , external "not_"        (notM :: TransformH LCore () -> TransformH LCore ())
-       [ "Cause a failing check to succeed, a succeeding check to fail."  ] .+ Predicate
 
-      -- HERMIT.API.Dictionary.New
+    , external "<+" 
+        ((<+) :: TransformH LCore () -> TransformH LCore () 
+              -> TransformH LCore ())
+        [ "Perform the first check, and then, if it fails, perform the " ++
+          "second check." ]
+
+    , external "not_"        
+       (notM :: TransformH LCore () -> TransformH LCore ())
+       [ "Cause a failing check to succeed, a succeeding check to fail."  
+       ] .+ Predicate
+
+-- HERMIT.API.Dictionary.New
     , external "var" (promoteExprT . isVar :: String -> TransformH LCore ())
                 [ "var '<v> returns successfully for variable v, and fails otherwise."
                 , "Useful in combination with \"when\", as in: when (var v) r"
@@ -1011,18 +1178,24 @@ instance External (TransformH LCore String) where
   parseExternals =
     [
 -- HERMIT.API.Dictionary.GHC
-      external "loadLemmaLibrary" (loadLemmaLibraryT :: HermitName -> Maybe LemmaName -> TransformH LCore String)
+      external "loadLemmaLibrary" 
+        (loadLemmaLibraryT :: HermitName -> Maybe LemmaName 
+                           -> TransformH LCore String)
         [ "Dynamically load a library of lemmas." ]
 
-      -- HERMIT.API.Dictionary.KURE
---     , external "focus"      (hfocusT :: TransformH LCore LocalPathH -> TransformH LCore String -> TransformH LCore String)
---         [ "Apply a query at a focal point."] .+ Navigation .+ Deep
---     , external "focus"      ((\p -> hfocusT (return p)) :: LocalPathH -> TransformH LCore String -> TransformH LCore String)
---         [ "Apply a query at a focal point."] .+ Navigation .+ Deep
-    , external "test"       (testQuery :: RewriteH LCore -> TransformH LCore String)
+-- HERMIT.API.Dictionary.KURE
+    , external "focus"      
+        (hfocusT :: TransformH LCore LocalPathH -> TransformH LCore String 
+                 -> TransformH LCore String)
+        [ "Apply a query at a focal point."] .+ Navigation .+ Deep
+
+    , external "test"       
+        (testQuery :: RewriteH LCore -> TransformH LCore String)
         [ "Determine if a rewrite could be successfully applied." ]
---     , external "extract"    (extractT :: TransformH LCoreTC String -> TransformH LCore String)
---         [ "Extract a TransformLCoreString from a TransformLCoreTCString" ]
+
+    , external "extractT"    
+        (extractT :: TransformH LCoreTC String -> TransformH LCore String)
+        [ "Extract a TransformLCoreString from a TransformLCoreTCString" ]
 
     , external "queryLemma" ((\ nm t -> getLemmaByNameT nm >>> arr lemmaC >>> extractT t) :: LemmaName -> TransformH LCore String -> TransformH LCore String)
         [ "Apply a transformation to a lemma, returning the result." ]
@@ -1064,7 +1237,7 @@ src/HERMIT/Server/Parser/Transform.hs:1028:10:
 
 instance External (PrettyH LCore) where
   parseExternals =
-    [ external "showLemma"((\pp n -> showLemmaT n pp) :: PrettyPrinter -> LemmaName -> PrettyH LCore)
+    [ external "showLemma" ((flip showLemmaT) :: PrettyPrinter -> LemmaName -> PrettyH LCore)
         [ "Display a lemma." ]
     ]
 

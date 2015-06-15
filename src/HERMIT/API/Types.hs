@@ -219,3 +219,12 @@ method :: Text -> [Value] -> Value
 method nm params = object ["method" .= nm, "params" .= params]
 
 ------------------------------------------------------------------------
+
+class ToJSON m => TransCat m where
+    transCat :: Value -> m
+
+instance TransCat (Transform a b) where
+    transCat = Transform
+
+instance TransCat (BiTransform a b) where
+    transCat = BiTransform 
