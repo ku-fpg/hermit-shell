@@ -9,7 +9,6 @@ import Data.Proxy
 import HERMIT.Kure (TransformH)
 
 import HERMIT.API.Types
-import HERMIT.Server.Parser.Utils
 
 -- | Perform an identity rewrite.
 idCore :: Rewrite LCore
@@ -31,12 +30,11 @@ fail_ str = Transform $ method "fail_" [toJSON str]
   Perform the first transformation, and then, if it fails, perform the 
   second transformation.
 -}
-(<+) :: External (TransformH a b) 
-     => Transform a b -> Transform a b -> Transform a b
+(<+) :: Transform a b -> Transform a b -> Transform a b
 x <+ y = Transform $ method "<+" [toJSON x, toJSON y]
 
 -- | Compose rewrites, requiring both to succeed.
-(>>>) :: (TransCat m, External m) => m -> m -> m
+(>>>) :: TransCat m => m -> m -> m
 x >>> y = transCat $ method ">>>" [toJSON x, toJSON y]
 
 -- | Compose rewrites, allowing one to fail.
@@ -140,13 +138,11 @@ innermost :: Rewrite LCore -> Rewrite LCore
 innermost r = Transform $ method "innermost" [toJSON r]
 
 -- | Apply a transformation to a focal point pointed to by a transformation.
-focus :: External (TransformH a b) 
-      => Transform a LocalPath -> Transform a b -> Transform a b
+focus :: Transform a LocalPath -> Transform a b -> Transform a b
 focus pth t = Transform $ method "focus" [toJSON pth, toJSON t]
 
 -- | Apply a transformation to a focal point pointed to by a path.
-focusWithPath :: External (TransformH a b)
-              => LocalPath -> Transform a b -> Transform a b
+focusWithPath :: LocalPath -> Transform a b -> Transform a b
 focusWithPath pth t = 
     Transform $ method "focus" [toJSON (Transform $ toJSON pth), toJSON t]
 
@@ -199,7 +195,7 @@ between :: Int -> Int -> Rewrite LCoreTC -> Rewrite LCoreTC
 between x y rr = Transform $ method "between" [toJSON x, toJSON y, toJSON rr]
 
 -- | return the expression found at the given path
-atPath :: External (RewriteH a) => Transform a LocalPath -> Rewrite a
+atPath :: Transform a LocalPath -> Rewrite a
 atPath pth = Transform $ method "atPath" [toJSON pth]
 
 -- | return the expression found at a projected, given path
