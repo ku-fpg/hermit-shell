@@ -2,15 +2,14 @@
 module WWAssAScript where
 
 import HERMIT.API
+import HERMIT.API.Dictionary.KURE
 
-wwa :: Shell ()
-wwa = do
+wwa :: Rewrite LCore
+wwa =
     -- absH (repH x)
-  eval "{" ; apply (unfoldWith "absH") ; eval "}"
-
+  unfoldWith "absH"
     -- repH x []
-  eval "{" ; apply (unfoldWith "repH") ; eval "}"
-
+  >>> unfoldWith "repH"
     -- x ++ []
-  eval "{" ; apply (unfoldRuleUnsafe "++ []") ; eval "}"
+  >>> unfoldRuleUnsafe "++ []"
 

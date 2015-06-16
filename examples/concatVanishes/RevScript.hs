@@ -1,6 +1,16 @@
 import HERMIT.API
+
+import ConcatVanishesScript
+import WWAssAScript
+
+wwc :: Rewrite LCore
+wwc = wwResultAssAToAssC wwa
+
+doTheWWSplit :: Shell ()
+doTheWWSplit = do
+  setPath $ bindingOf "rev"
+  apply $ wwResultSplitStaticArg 1 [0] "absH" "repH" wwc
+
 script :: Shell ()
-script = do
-  eval "define-script \"do-the-ww-split\" \"binding-of 'rev ; ww-result-split-static-arg 1 [0] [| absH |] [| repH |] WWC\""
-  eval "load-and-run \"ConcatVanishes.hss\""
+script = concatVanishes doTheWWSplit
 

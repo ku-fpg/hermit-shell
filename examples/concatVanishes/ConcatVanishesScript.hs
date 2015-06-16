@@ -1,26 +1,23 @@
 module ConcatVanishesScript where
 import HERMIT.API
+import HERMIT.API.Types
 
 import WWAssAScript
+import StrictRepHScript
 
 concatVanishes :: Shell () -> Shell ()
 concatVanishes doTheWWSplit = do
---  eval "load-as-rewrite \"WWA\" \"WW-Ass-A.hss\""
---   eval "define-rewrite \"WWC\" \"ww-result-AssA-to-AssC WWA\""
-  eval "load-as-rewrite \"StrictRepH\" \"StrictRepH.hss\""
-
---  eval "run-script \"do-the-ww-split\" -- ugly hack because we lack paramaterisable scripts"
-
   doTheWWSplit
 
-  eval "bash"
+  apply bash
 
-  eval "{ rhs-of 'work"
-  eval "  lam-body"
-  eval "  eta-expand 'acc"
-  eval "  lam-body"
-  eval "  bash-extended-with [ push 'repH StrictRepH, forward ww-result-fusion, unfold-rules-unsafe [\"repH ++\",\"repH (:)\",\"repH []\"] ]"
-  eval "  try (bash-extended-with [push-unsafe 'work])"
-  eval "}"
-  eval "one-td (unfold 'absH)"
+  scope $ do
+    setPath $ rhsOf "work"
+    sendCrumb lamBody
+    apply $ etaExpand "acc"
+    sendCrumb lamBody
+    apply $ bashExtendedWith [ push "repH" strictRepH, forward wwResultFusion, unfoldRulesUnsafe ["repH ++", "repH (:)", "repH []"] ]
+    apply . try $ bashExtendedWith [pushUnsafe "work"]
+
+  apply . oneTD $ unfoldWith "absH"
 
