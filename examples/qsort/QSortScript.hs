@@ -8,13 +8,13 @@ script = do
   eval "    binding-of 'qsort'"
   eval "    fix-intro"
   eval "    def-rhs"
-  eval "    split-1-beta qsort [|absR|] [|repR|]" ; proofCmd assume
+  eval "    split-1-beta \"qsort\" [|absR|] [|repR|] ; prove-lemma \"qsort-fusion\"" ; proofCmd assume -- XXX: This works...
   eval "    rhs-of 'worker"
   eval "    repeat (any-call (unfold ['.,'fix,'g,'repR,'absR]))"
   eval "    simplify"
   eval "    one-td (case-float-arg-lemma repHstrict)" ; -- proofCmd assume
   eval "    innermost let-float"
-  eval "    any-td (unfold-rule \"repH ++\") ; assume"
+  eval "    any-td (unfold-rule \"repH ++\")" ; -- proofCmd assume
   eval "    any-call (unfold-rule repH-absH-fusion)" ; -- proofCmd assume
   eval "    unshadow"
   eval "    any-td (inline 'ds1)"
@@ -26,3 +26,4 @@ script = do
   eval "repeat (any-call (unfold ['.,'absR, 'absH]))"
   eval "innermost let-float"
   eval "bash"
+

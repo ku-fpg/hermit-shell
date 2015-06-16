@@ -11,7 +11,7 @@ script = do
 
   scope $ do
     sendCrumb defRhs
-    apply  letSubst
+    apply letSubst
 
     scope $ do
       sendCrumb letBody
