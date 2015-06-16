@@ -1,20 +1,23 @@
 {-# LANGUAGE OverloadedStrings #-}
 import HERMIT.API
 
+import WWAssAScript
+import StrictRepHScript
+
+wwc :: Rewrite LCore
+wwc = wwResultAssAToAssC wwa
+
 script :: Shell ()
 script = do
-  eval "load-as-rewrite \"WWA\" \"WW-Ass-A.hss\""
-  eval "define-rewrite \"WWC\" \"ww-result-AssA-to-AssC WWA\""
-  eval "load-as-rewrite \"StrictRepH\" \"StrictRepH.hss\""
   setPath $ bindingOf "rev"
-  eval "ww-result-split-static-arg 1 [0] [| absH |] [| repH |] WWC"
+  apply $ wwResultSplitStaticArg 1 [0] "absH" "repH" wwc
   apply bash
   scope $ do
     setPath $ rhsOf "work"
-    apply $   alphaLam (Just "ys")
+    apply $ alphaLamWith "ys"
     sendCrumb lamBody
-    apply $   etaExpand "acc"
+    apply $ etaExpand "acc"
     sendCrumb lamBody
-    eval "  bash-extended-with [push 'repH StrictRepH, forward ww-result-fusion, unfold-rules-unsafe [\"repH ++\", \"repH (:)\", \"repH []\"] ]"
+    apply $ bashExtendedWith [ push "repH" strictRepH, forward wwResultFusion, unfoldRulesUnsafe ["repH ++", "repH (:)", "repH []"] ]
   apply . oneTD $ unfoldWith "absH"
 

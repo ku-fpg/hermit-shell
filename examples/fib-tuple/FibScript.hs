@@ -1,6 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 import HERMIT.API
 
+import WWAssAScript
+
 script :: Shell ()
 script = do
   eval "load-as-rewrite \"WWA\" \"WW-Ass-A.hss\""
@@ -10,6 +12,7 @@ script = do
 
   scope $ do
     eval "ww-split [| wrap |] [| unwrap |] (ww-AssA-to-AssC WWA)"
+--     apply $ wwSplitUnsafe " wrap " " unwrap " --(wwAssAToAssC wwa)
     setPath (bindingOf "work") ; query $ remember "origwork"
 
     -- work = unwrap (f (wrap work))
@@ -40,7 +43,7 @@ script = do
     -- work 0     = (0, 1)
     -- work (n+1) = (f (wrap work) (n+1), wrap (unwrap (f (wrap work))) (n+1) + wrap (unwrap (f (wrap work))) n)
 
-    eval "any-bu (forward (ww-assumption-A [| wrap |] [| unwrap |] WWA ))"
+    apply $ anyBU (forward (wwAssumptionA "wrap" "unwrap" wwa))
 
     -- work 0     = (0, 1)
     -- work (n+1) = (f (wrap work) (n+1), f (wrap work) (n+1) + f (wrap work) n)

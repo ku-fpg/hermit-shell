@@ -1,0 +1,12 @@
+import HERMIT.API
+import Prelude hiding (log)
+:set prompt "HERMIT> "
+:def l \s -> return $ ":load " ++ s ++ "\n:set -interactive-print=HERMIT.GHCI.Printer.printForRepl"
+:def r \s -> return $ ":reload " ++ s ++ "\n:set -interactive-print=HERMIT.GHCI.Printer.printForRepl"
+:def hermit \s -> return $ ":set -interactive-print=HERMIT.GHCI.Printer.printForRepl"
+:def resume \s -> return $ "resume\n:quit"
+:def abort \s -> return $ "abort\n:quit"
+send display
+:l FibScript.hs
+script
+
