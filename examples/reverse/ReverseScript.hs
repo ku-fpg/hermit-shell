@@ -21,3 +21,15 @@ script = do
     apply $ bashExtendedWith [ push "repH" strictRepH, forward wwResultFusion, unfoldRulesUnsafe ["repH ++", "repH (:)", "repH []"] ]
   apply . oneTD $ unfoldWith "absH"
 
+  -- Assume unproven lemmas (this is more explicit than having a '-safety=unsafe' flag):
+  unprovenAssume "++ []"
+  unprovenAssume "++ strict"
+  unprovenAssume "repH (:)"
+  unprovenAssume "repH ++"
+  unprovenAssume "repH []"
+
+unprovenAssume :: String -> Shell ()
+unprovenAssume lemmaName = do
+  eval $ "prove-lemma " ++ show lemmaName
+  proofCmd assume
+
