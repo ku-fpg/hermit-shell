@@ -1,7 +1,7 @@
 import HERMIT.API
 script :: Shell ()
 script = do
-  eval "flatten-module"
+  apply flattenModule
   eval "rule-to-lemma \"++ []\""
 
   -- module main:Main where
@@ -21,45 +21,45 @@ script = do
   -- Goal:
   -- forall *. (++) * = myAppend *
 
-  eval "assume -- proven appendFix"
+  proofCmd assume
 
   -- Goal:
   -- forall * xs. myAppend * xs ([] *) = xs
 
-  eval "induction 'xs"
+  apply $ induction "xs"
 
   -- Goal:
   -- forall *. myAppend * (undefined *) ([] *) = undefined *
 
-  eval "any-bu (unfold 'myAppend >>> undefined-expr)"
-  eval "any-bu (unfold 'myAppend >>> case-reduce)"
-  eval "simplify-lemma"
-  eval "forall-body ; consequent"
-  eval "one-td (lemma-forward ind-hyp-0)"
+  apply $ anyBU (unfoldWith "myAppend" >>> undefinedExpr)
+  apply $ anyBU (unfoldWith "myAppend" >>> caseReduce)
+  apply simplifyLemma
+  sendCrumb forallBody ; sendCrumb consequent
+  apply $ oneTD (lemmaForward "ind-hyp-0")
   eval "end-case"
 
   eval "rule-to-lemma \"myAppend-assoc\""
   eval "prove-lemma \"myAppend-assoc\""
-  eval "induction 'xs"
-  eval "{ forall-body"
-  eval "    { conj-lhs"
-  eval "      any-bu ((unfold 'myAppend) >>> undefined-case)"
-  eval "      reflexivity"
-  eval "    }"
-  eval "    conj-rhs"
-  eval "    { conj-lhs"
-  eval "      any-bu ((unfold 'myAppend) >>> case-reduce)"
-  eval "      reflexivity"
-  eval "    }"
-  eval "    { conj-rhs"
-  eval "      forall-body ; consequent"
-  eval "      any-bu (unfold 'myAppend)"
-  eval "      smash"
-  eval "      rhs (one-td (fold 'myAppend))"
-  eval "      one-td (lemma-forward ind-hyp-0)"
-  eval "      reflexivity"
-  eval "    }"
-  eval "}"
+  apply $ induction "xs"
+  scope $ do sendCrumb forallBody
+
+             scope $ do sendCrumb conjLhs
+                        apply $ anyBU ((unfoldWith "myAppend") >>> undefinedCase)
+                        apply reflexivity
+
+             sendCrumb conjRhs
+
+             scope $ do sendCrumb conjLhs
+                        apply $ anyBU ((unfoldWith "myAppend") >>> caseReduce)
+                        apply reflexivity
+
+             scope $ do sendCrumb conjRhs
+                        sendCrumb forallBody ; sendCrumb consequent
+                        apply $ anyBU (unfoldWith "myAppend")
+                        apply smash
+                        eval "rhs (one-td (fold 'myAppend))"
+                        apply (oneTD (lemmaForward "ind-hyp-0"))
+                        apply reflexivity
   eval "end-proof"
 
   eval "rule-to-lemma \"repH []\""
