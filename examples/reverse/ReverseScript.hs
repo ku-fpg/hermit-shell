@@ -21,7 +21,9 @@ script = do
     apply $ bashExtendedWith [ push "repH" strictRepH, forward wwResultFusion, unfoldRulesUnsafe ["repH ++", "repH (:)", "repH []"] ]
   apply . oneTD $ unfoldWith "absH"
 
-  -- Assume unproven lemmas (this is more explicit than having a '-safety=unsafe' flag):
+  -- Assume unproven lemmas (this is more explicit than having a
+  -- '-safety=unsafe' flag. Should we add the flag to avoid this or should it
+  -- remain explicit in the shell code?):
   unprovenAssume "++ []"
   unprovenAssume "++ strict"
   unprovenAssume "repH (:)"
