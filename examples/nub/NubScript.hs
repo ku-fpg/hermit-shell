@@ -9,19 +9,19 @@ script = do
   eval "fix-intro ; def-rhs"
   eval "split-2-beta nub [| absN |] [| repN |]" ; proofCmd assume
 
-  eval "-- this bit to essentially undo the fix-intro"
+  -- this bit to essentially undo the fix-intro
   eval "{ application-of 'repN ; app-arg ; let-intro 'nub ; one-td (unfold 'fix) ; simplify }"
   eval "innermost let-float"
   eval "alpha-let ['nub'] -- rename x to nub'"
 
-  eval "-- back to the derivation"
+  -- back to the derivation
   eval "binding-of 'worker"
   eval "one-td (unfold 'repN)"
   eval "remember origworker"
   eval "one-td (unfold 'filter)"
   eval "one-td (case-float-arg-lemma nubStrict)"
 
-  eval "-- prove strictness condition"
+  -- prove strictness condition
   eval "lhs unfold ; smash ; end-proof"
 
   eval "one-td (unfold 'nub')"
@@ -29,7 +29,7 @@ script = do
 
   eval "one-td (case-float-arg-lemma nubStrict)"
 
-  eval "-- prove strictness condition"
+  -- prove strictness condition
   eval "lhs unfold ; smash ; end-proof"
 
   eval "{ consider case ; consider case ; case-alt 1 ; alt-rhs"
