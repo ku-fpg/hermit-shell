@@ -41,7 +41,6 @@ import           HERMIT.PrettyPrinter.Common (PrettyOptions, DocH)
 -- import           HERMIT.Shell.Completion
 import           HERMIT.Shell.Externals
 import           HERMIT.Shell.Types hiding (clm)
-import           HERMIT.Shell.ScriptToRewrite (popScriptLine)
 import           HERMIT.Shell.Proof (forceProofs)
 
 -- import           HERMIT.GHCI.JSON
@@ -214,10 +213,7 @@ performTypedEffect _ _ _ _ =
     fail "performTypedEffect: typed effects are expected to be unary."
 
 initProofs :: MonadIO m => CLT m ()
-initProofs = do
-  tryM () forceProofs
-  getProofStackEmpty
-  return ()
+initProofs = tryM () forceProofs
 
 newRenderer :: (Handle -> PrettyOptions -> Either String DocH -> IO ()) -> CommandLineState -> CommandLineState
 newRenderer rndr cls = cls { cl_pstate = (cl_pstate cls) { ps_render = rndr } }
