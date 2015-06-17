@@ -1,0 +1,40 @@
+set-pp-type Show
+
+flatten-module
+
+binding-of 'nub
+fix-intro ; def-rhs
+split-2-beta nub [| absN |] [| repN |] ; assume
+
+-- this bit to essentially undo the fix-intro
+{ application-of 'repN ; app-arg ; let-intro 'nub ; one-td (unfold 'fix) ; simplify }
+innermost let-float
+alpha-let ['nub'] -- rename x to nub'
+
+-- back to the derivation
+binding-of 'worker
+one-td (unfold 'repN)
+remember origworker
+one-td (unfold 'filter)
+one-td (case-float-arg-lemma nubStrict)
+
+-- prove strictness condition
+lhs unfold ; smash ; end-proof
+
+one-td (unfold 'nub')
+simplify
+
+one-td (case-float-arg-lemma nubStrict)
+
+-- prove strictness condition
+lhs unfold ; smash ; end-proof
+
+{ consider case ; consider case ; case-alt 1 ; alt-rhs
+  unfold ; simplify
+  one-td (unfold-rule "filter-fusion") ; assume
+  simplify
+  one-td (unfold-rule "member-fusion") ; assume
+}
+nonrec-to-rec
+any-td (fold-remembered origworker)
+
