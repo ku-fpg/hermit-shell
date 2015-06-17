@@ -146,8 +146,8 @@ msgBuilder msg s = Wai.responseBuilder s [("Content-Type","application/json")]
 
 hermitShellDotfile :: Maybe FilePath -> String
 hermitShellDotfile mbScript = unlines $
-  [ "import HERMIT.API"
-  , "import Prelude hiding (log)"
+  [ ":m HERMIT.API" -- NOTE: All other modules intentionally unimported here
+  , "import Prelude hiding (log, repeat)"
   , ":set prompt \"HERMIT> \""
 
   -- To get around an issue where the '-interactive-print' option gets reset:

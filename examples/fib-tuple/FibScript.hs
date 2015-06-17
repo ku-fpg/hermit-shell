@@ -12,7 +12,7 @@ script = do
 
   scope $ do
     eval "ww-split [| wrap |] [| unwrap |] (ww-AssA-to-AssC WWA)"
---     apply $ wwSplitUnsafe " wrap " " unwrap " --(wwAssAToAssC wwa)
+--    apply $ wwSplitUnsafe " wrap " " unwrap " --(wwAssAToAssC wwa)
     setPath (bindingOf "work") ; query $ remember "origwork"
 
     -- work = unwrap (f (wrap work))

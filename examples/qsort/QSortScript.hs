@@ -1,29 +1,30 @@
 import HERMIT.API
+import Prelude hiding (repeat) -- TODO: Find a way to avoid this.
+
 script :: Shell ()
 script = do
-  eval "flatten-module"
-  eval "binding-of 'qsort"
-  eval "static-arg"
-  eval "{"
-  eval "    binding-of 'qsort'"
-  eval "    fix-intro"
-  eval "    def-rhs"
-  eval "    split-1-beta \"qsort\" [|absR|] [|repR|]" ; proofCmd assume -- XXX: This works...
-  eval "    rhs-of 'worker"
-  eval "    repeat (any-call (unfold ['.,'fix,'g,'repR,'absR]))"
-  eval "    simplify"
-  eval "    one-td (case-float-arg-lemma repHstrict)" ; proofCmd assume
-  eval "    innermost let-float"
-  eval "    any-td (unfold-rule \"repH ++\")" ; proofCmd assume
-  eval "    any-call (unfold-rule repH-absH-fusion)" ; proofCmd assume
-  eval "    unshadow"
-  eval "    any-td (inline 'ds1)"
-  eval "    simplify"
-  eval "    alpha-let [worker]"
-  eval "    repeat (any-call (unfold-rules [\"repH (:)\",\"repH []\"]))"
-  proofCmd assume ; proofCmd assume
-  eval "}"
-  eval "repeat (any-call (unfold ['.,'absR, 'absH]))"
-  eval "innermost let-float"
-  eval "bash"
+  apply flattenModule
+  setPath $ bindingOf "qsort"
+  apply staticArg
+  scope $ do
+    setPath $ bindingOf "qsort'"
+    apply fixIntro
+    sendCrumb defRhs
+    apply $ split1Beta "qsort" "absR" "repR" ; proofCmd assume
+    setPath $ rhsOf "worker"
+    apply $ repeat (anyCall (unfoldAny [".", "fix", "g", "repR", "absR"]))
+    apply simplify
+    apply $ oneTD (caseFloatArgLemma "repHstrict") ; proofCmd assume
+    apply $ innermost letFloat
+    apply $ anyTD (unfoldRule "repH ++") ; proofCmd assume
+    apply $ anyCall (unfoldRule "repH-absH-fusion") ; proofCmd assume
+    apply unshadow
+    apply $ anyTD (inlineWith "ds1")
+    apply simplify
+    apply $ alphaLetWith ["worker"]
+    apply $ repeat (anyCall (unfoldRules ["repH (:)", "repH []"]))
+    proofCmd assume ; proofCmd assume
+  apply $ repeat (anyCall (unfoldAny [".", "absR", "absH"]))
+  apply $ innermost letFloat
+  apply bash
 
