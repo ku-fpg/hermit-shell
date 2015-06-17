@@ -33,6 +33,7 @@ testArgs =
     , ("mean"          , "Mean.hs"   , "MeanScript.hs")
     , ("qsort"         , "QSort.hs"  , "QSortScript.hs")
     , ("reverse"       , "Reverse.hs", "ReverseScript.hs")
+    , ("nub"           , "Nub.hs"    , "NubScript.hs")
     ]
 
 mkHermitShellTest :: HermitTestArgs -> TestTree
