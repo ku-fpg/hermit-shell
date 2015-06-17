@@ -1,5 +1,6 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE FlexibleContexts #-}
 module HERMIT.GHCI.Actions
     ( initCommandLineState
     , performTypedEffect
@@ -40,6 +41,8 @@ import           HERMIT.PrettyPrinter.Common (PrettyOptions, DocH)
 -- import           HERMIT.Shell.Completion
 import           HERMIT.Shell.Externals
 import           HERMIT.Shell.Types hiding (clm)
+import           HERMIT.Shell.ScriptToRewrite (popScriptLine)
+import           HERMIT.Shell.Proof (forceProofs)
 
 -- import           HERMIT.GHCI.JSON
 import           HERMIT.GHCI.Renderer
@@ -187,7 +190,7 @@ performTypedEffect lastCall plug ref [val] =
         let orig_logger = ps_render $ cl_pstate cls0
         chan <- atomically newTChan
         let cls1 = newRenderer (webChannel chan) cls0
-        (r,cls2) <- runCLT plug cls1 m
+        (r,cls2) <- runCLT plug cls1 (initProofs *> m)
         atomically $ putTMVar ref $ newRenderer orig_logger cls2
         es <- liftIO (getUntilEmpty chan)
         -- split into messages, and AST(s)?
@@ -210,6 +213,11 @@ performTypedEffect lastCall plug ref [val] =
 performTypedEffect _ _ _ _ =
     fail "performTypedEffect: typed effects are expected to be unary."
 
+initProofs :: MonadIO m => CLT m ()
+initProofs = do
+  tryM () forceProofs
+  getProofStackEmpty
+  return ()
 
 newRenderer :: (Handle -> PrettyOptions -> Either String DocH -> IO ()) -> CommandLineState -> CommandLineState
 newRenderer rndr cls = cls { cl_pstate = (cl_pstate cls) { ps_render = rndr } }

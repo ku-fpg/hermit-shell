@@ -452,4 +452,3 @@ script = do
   eval "--             (:) x1 xs -> \\ x2 -> x xs ((:) * x1 x2)"
   eval "-- in \\ x0 -> x x0 ([] *)"
 
-
