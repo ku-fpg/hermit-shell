@@ -32,6 +32,7 @@ apply (Transform t) = Shell $ method "rewrite" [t]
 setPath :: Guts a => Transform a LocalPath -> Shell ()
 setPath (Transform t) = Shell $ method "setPath" [t]
 
+
 -- TODO: Make sure this is the right way to do it.
 sendCrumb :: Crumb -> Shell ()
 sendCrumb (Crumb c) = Shell $ method "setPath" [c]
@@ -53,6 +54,10 @@ toProofCmd (Transform t) = Shell $ toJSON t
 
 proofCmd :: ProofShellCommand -> Shell ()
 proofCmd (ProofShellCommand c) = Shell c
+
+-- XXX: Should this go in a different file?
+--rewriteCrumb :: Crumb -> Rewrite a
+--rewriteCrumb c = Transform $ method "crumb" [toJSON c]
 
 -- | Brackets the given argument with 'kernelEffect beginScope'
 --   and 'kernelEffect endScope'.
