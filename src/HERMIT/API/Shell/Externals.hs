@@ -70,8 +70,8 @@ diff :: AST -> AST -> QueryFun
 diff a b = QueryFun $ method "diff" [toJSON a, toJSON b]
 
 -- |  print diffs rather than full code after a rewrite
-setPpDiffOnly :: Bool -> ShellEffect
-setPpDiffOnly b = ShellEffect $ method "setPpDiffOnly" [toJSON $ show b]
+setPPDiffOnly :: Bool -> ShellEffect
+setPPDiffOnly b = ShellEffect $ method "setPPDiffOnly" [toJSON $ show b]
 
 -- | any rewrite failure causes compilation to abort
 setFailHard :: Bool -> ShellEffect
@@ -82,31 +82,31 @@ setAutoCorelint :: Bool -> ShellEffect
 setAutoCorelint b = ShellEffect $ method "setAutoCorelint" [toJSON $ show b]
 
 -- | set the pretty printer
---   use 'setPp ls' to list available pretty printers"
-setPp :: String -> ShellEffect
-setPp s = ShellEffect $ method "setPp" [toJSON s]
+--   use 'setPP ls' to list available pretty printers"
+setPP :: String -> ShellEffect
+setPP s = ShellEffect $ method "setPP" [toJSON s]
 
--- setPpRenderer
+-- setPPRenderer
 
 -- dump
 
 -- dump-lemma
 
 -- | set the width of the screen
-setPpWidth :: Int -> ShellEffect
-setPpWidth width = ShellEffect $ method "setPpWidth" [toJSON width]
+setPPWidth :: Int -> ShellEffect
+setPPWidth width = ShellEffect $ method "setPPWidth" [toJSON width]
 
 -- | set how to show expression-level types (Show|Abstact|Omit)
-setPpType :: PpType -> ShellEffect
-setPpType ppType = ShellEffect $ method "setPpType" [toJSON $ show ppType]
+setPPType :: PPType -> ShellEffect
+setPPType ppType = ShellEffect $ method "setPPType" [toJSON $ show ppType]
 
 -- | set how to show coercions (Show|Abstact|Omit)
-setPpCoercion :: PpType -> ShellEffect
-setPpCoercion ppType = ShellEffect $ method "setPpCoercion" [toJSON $ show ppType]
+setPPCoercion :: PPType -> ShellEffect
+setPPCoercion ppType = ShellEffect $ method "setPPCoercion" [toJSON $ show ppType]
 
 -- | set whether uniques are printed with variable names
-setPpUniques :: Bool -> ShellEffect
-setPpUniques b = ShellEffect $ method "setPpUniques" [toJSON $ show b]
+setPPUniques :: Bool -> ShellEffect
+setPPUniques b = ShellEffect $ method "setPPUniques" [toJSON $ show b]
 
 -- | push current lens onto a stack
 beginScope :: KernelEffect

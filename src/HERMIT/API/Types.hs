@@ -168,7 +168,7 @@ newtype Considerable = Considerable Value
 
 ------------------------------------------------------------------------
 
-data PpType = Show | Abstract | Omit
+data PPType = Show | Abstract | Omit
     deriving (Show, Read)
 
 ------------------------------------------------------------------------

@@ -10,7 +10,7 @@ module HERMIT.API
         , Name
         , LocalPath
         , AST
-        , PpType (..)
+        , PPType (..)
         , Rewrite
         , LCore
         , Crumb

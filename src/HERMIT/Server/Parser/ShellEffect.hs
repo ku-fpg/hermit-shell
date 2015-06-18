@@ -38,7 +38,7 @@ instance External ShellEffect where
         [ "step forward in the derivation" ]
     , external "tag"             (CLSModify . versionCmd . Tag)
         [ "name the current step in the derivation" ]
-    , external "setPpDiffOnly" (\ bStr -> CLSModify $
+    , external "setPPDiffOnly" (\ bStr -> CLSModify $
         case reads bStr of
             [(b,"")] -> modify (\st -> st { cl_diffonly = b }) >> showWindow Nothing
             _        -> fail "valid arguments are True and False" )
@@ -53,30 +53,30 @@ instance External ShellEffect where
             [(b,"")] -> modify $ flip setCoreLint b
             _        -> fail "valid arguments are True and False" )
         [ "run core lint type-checker after every rewrite, reverting on failure" ]
-    , external "setPp"          (\ name -> CLSModify $
+    , external "setPP"          (\ name -> CLSModify $
         case M.lookup name pp_dictionary of
             Nothing -> fail $ "List of Pretty Printers: " ++ intercalate ", " (M.keys pp_dictionary)
             Just pp -> do modify $ \ st -> setPrettyOpts (setPretty st pp) (cl_pretty_opts st) -- careful to preserve the current options
                           showWindow Nothing)
         [ "set the pretty printer"
-        , "use 'setPp ls' to list available pretty printers" ]
-    , external "setPpWidth" (\ w -> CLSModify $ do
+        , "use 'setPP ls' to list available pretty printers" ]
+    , external "setPPWidth" (\ w -> CLSModify $ do
             modify $ \ st -> setPrettyOpts st (updateWidthOption w (cl_pretty_opts st))
             showWindow Nothing)
         ["set the width of the screen"]
-    , external "setPpType" (\ str -> CLSModify $
+    , external "setPPType" (\ str -> CLSModify $
         case reads str :: [(ShowOption,String)] of
             [(opt,"")] -> do modify $ \ st -> setPrettyOpts st (updateTypeShowOption opt (cl_pretty_opts st))
                              showWindow Nothing
             _          -> fail "valid arguments are Show, Abstract, and Omit")
         ["set how to show expression-level types (Show|Abstact|Omit)"]
-    , external "setPpCoercion" (\ str -> CLSModify $
+    , external "setPPCoercion" (\ str -> CLSModify $
         case reads str :: [(ShowOption,String)] of
             [(opt,"")] -> do modify $ \ st -> setPrettyOpts st (updateCoShowOption opt (cl_pretty_opts st))
                              showWindow Nothing
             _          -> fail "valid arguments are Show, Abstract, and Omit")
         ["set how to show coercions (Show|Abstact|Omit)"]
-    , external "setPpUniques" (\ str -> CLSModify $
+    , external "setPPUniques" (\ str -> CLSModify $
         case reads str of
             [(b,"")] -> do modify $ \ st -> setPrettyOpts st ((cl_pretty_opts st) { po_showUniques = b })
                            showWindow Nothing
