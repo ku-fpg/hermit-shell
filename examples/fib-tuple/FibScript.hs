@@ -5,14 +5,12 @@ import WWAssAScript
 
 script :: Shell ()
 script = do
-  eval "load-as-rewrite \"WWA\" \"WW-Ass-A.hss\""
   apply flattenModule
 
   setPath $ bindingOf "fib"
 
   scope $ do
-    eval "ww-split [| wrap |] [| unwrap |] (ww-AssA-to-AssC WWA)"
---    apply $ wwSplitUnsafe " wrap " " unwrap " --(wwAssAToAssC wwa)
+    apply $ wwSplitUnsafe " wrap " " unwrap " --(wwAssAToAssC wwa)
     setPath (bindingOf "work") ; query $ remember "origwork"
 
     -- work = unwrap (f (wrap work))
