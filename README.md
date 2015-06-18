@@ -8,7 +8,8 @@ spawns GHCi in a separate process to communicate with it.
     cabal install
     hermit-shell SomeFile.hs
 
-Once started, the only command is currently ':send'
+Here is an example of how to use the `display` command and how set the current
+path to the `main` function, once the shell is started:
 
-    :send display
-    :send rhs-of 'main
+    send display
+    setPath (rhsOf "main")

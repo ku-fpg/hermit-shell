@@ -1,107 +1,104 @@
 import HERMIT.API
+
+import StrictRepHScript
+import WWAssAScript
+
 script :: Shell ()
 script = do
-  eval "load-as-rewrite \"WWA\" \"WW-Ass-A.hss\""
-  eval "define-rewrite \"WWC\" \"ww-result-AssA-to-AssC WWA\""
-  eval "load-as-rewrite \"StrictRepH\" \"StrictRepH.hss\""
+  -- module main:Main where
+  --   flatten :: forall a . Tree a -> [a]
+  --   $dShow :: Show [Char]
+  --   main :: IO ()
+  --   main :: IO ()
 
-  eval "-- module main:Main where"
-  eval "--   flatten :: forall a . Tree a -> [a]"
-  eval "--   $dShow :: Show [Char]"
-  eval "--   main :: IO ()"
-  eval "--   main :: IO ()"
+  setPath (bindingOf "flatten")
 
-  eval "binding-of 'flatten"
+  -- flatten = \\ * ds ->
+  --   case ds of wild *
+  --     Node l r -> (++) * (flatten * l) (flatten * r)
+  --     Leaf a -> (:) * a ([] *)
 
-  eval "-- flatten = \\ * ds ->"
-  eval "--   case ds of wild *"
-  eval "--     Node l r -> (++) * (flatten * l) (flatten * r)"
-  eval "--     Leaf a -> (:) * a ([] *)"
+  apply $ wwResultSplitStaticArg 1 [0] "absH" "repH" (wwResultAssAToAssC wwa)
 
-  eval "ww-result-split-static-arg 1 [0] [| absH |] [| repH |] WWC"
+  -- flatten = \\ * ds ->
+  --   (let f = \\ flatten' ds ->
+  --          case ds of wild *
+  --            Node l r -> (++) * (flatten' l) (flatten' r)
+  --            Leaf a -> (:) * a ([] *)
+  --        rec work = \\ x1 -> repH * (f (\\ x2 -> absH * (work x2)) x1)
+  --    in \\ x0 -> absH * (work x0)) ds
 
-  eval "-- flatten = \\ * ds ->"
-  eval "--   (let f = \\ flatten' ds ->"
-  eval "--          case ds of wild *"
-  eval "--            Node l r -> (++) * (flatten' l) (flatten' r)"
-  eval "--            Leaf a -> (:) * a ([] *)"
-  eval "--        rec work = \\ x1 -> repH * (f (\\ x2 -> absH * (work x2)) x1)"
-  eval "--    in \\ x0 -> absH * (work x0)) ds"
+  apply bash
+  scope $ do
+    -- flatten = \\ * ->
+    --   let rec work = \\ x1 ->
+    --             repH *
+    --                  (case x1 of wild *
+    --                     Node l r -> (++) * (absH * (work l)) (absH * (work r))
+    --                     Leaf a -> (:) * a ([] *))
+    --   in \\ x0 -> absH * (work x0)
 
-  eval "bash"
-  eval "{"
+    setPath (rhsOf "work")
 
-  eval "-- flatten = \\ * ->"
-  eval "--   let rec work = \\ x1 ->"
-  eval "--             repH *"
-  eval "--                  (case x1 of wild *"
-  eval "--                     Node l r -> (++) * (absH * (work l)) (absH * (work r))"
-  eval "--                     Leaf a -> (:) * a ([] *))"
-  eval "--   in \\ x0 -> absH * (work x0)"
+    -- \\ x1 ->
+    --   repH *
+    --        (case x1 of wild *
+    --           Node l r -> (++) * (absH * (work l)) (absH * (work r))
+    --           Leaf a -> (:) * a ([] *))
 
-  eval "rhs-of 'work"
+    apply $ alphaLamWith "tree"
 
-  eval "-- \\ x1 ->"
-  eval "--   repH *"
-  eval "--        (case x1 of wild *"
-  eval "--           Node l r -> (++) * (absH * (work l)) (absH * (work r))"
-  eval "--           Leaf a -> (:) * a ([] *))"
+    -- \\ tree ->
+    --   repH *
+    --        (case tree of wild *
+    --           Node l r -> (++) * (absH * (work l)) (absH * (work r))
+    --           Leaf a -> (:) * a ([] *))
 
-  eval "alpha-lam 'tree"
+    sendCrumb lamBody
 
-  eval "-- \\ tree ->"
-  eval "--   repH *"
-  eval "--        (case tree of wild *"
-  eval "--           Node l r -> (++) * (absH * (work l)) (absH * (work r))"
-  eval "--           Leaf a -> (:) * a ([] *))"
+    -- repH *
+    --      (case tree of wild *
+    --         Node l r -> (++) * (absH * (work l)) (absH * (work r))
+    --         Leaf a -> (:) * a ([] *))
 
-  eval "lam-body"
+    apply $ etaExpand "acc"
 
-  eval "-- repH *"
-  eval "--      (case tree of wild *"
-  eval "--         Node l r -> (++) * (absH * (work l)) (absH * (work r))"
-  eval "--         Leaf a -> (:) * a ([] *))"
+    -- \\ acc ->
+    --   repH *
+    --        (case tree of wild *
+    --           Node l r -> (++) * (absH * (work l)) (absH * (work r))
+    --           Leaf a -> (:) * a ([] *))
+    --        acc
 
-  eval "eta-expand 'acc"
+    sendCrumb lamBody
 
-  eval "-- \\ acc ->"
-  eval "--   repH *"
-  eval "--        (case tree of wild *"
-  eval "--           Node l r -> (++) * (absH * (work l)) (absH * (work r))"
-  eval "--           Leaf a -> (:) * a ([] *))"
-  eval "--        acc"
+    -- repH *
+    --      (case tree of wild *
+    --         Node l r -> (++) * (absH * (work l)) (absH * (work r))
+    --         Leaf a -> (:) * a ([] *))
+    --      acc
 
-  eval "lam-body"
+    apply $ bashExtendedWith [ push "repH" strictRepH, forward wwResultFusion, unfoldRulesUnsafe ["repH ++", "repH (:)", "repH []"] ]
 
-  eval "-- repH *"
-  eval "--      (case tree of wild *"
-  eval "--         Node l r -> (++) * (absH * (work l)) (absH * (work r))"
-  eval "--         Leaf a -> (:) * a ([] *))"
-  eval "--      acc"
+    -- case tree of wild *
+    --   Node l r -> work l (work r acc)
+    --   Leaf a -> (:) * a acc
 
-  eval "bash-extended-with [push 'repH StrictRepH,forward ww-result-fusion,unfold-rules-unsafe [\"repH ++\",\"repH (:)\",\"repH []\"]]"
+  -- flatten = \\ * ->
+  --   let rec work = \\ tree acc ->
+  --             case tree of wild *
+  --               Node l r -> work l (work r acc)
+  --               Leaf a -> (:) * a acc
+  --   in \\ x0 -> absH * (work x0)
 
-  eval "-- case tree of wild *"
-  eval "--   Node l r -> work l (work r acc)"
-  eval "--   Leaf a -> (:) * a acc"
+  apply $ oneTD (unfoldWith "absH")
 
-  eval " }"
-
-  eval "-- flatten = \\ * ->"
-  eval "--   let rec work = \\ tree acc ->"
-  eval "--             case tree of wild *"
-  eval "--               Node l r -> work l (work r acc)"
-  eval "--               Leaf a -> (:) * a acc"
-  eval "--   in \\ x0 -> absH * (work x0)"
-
-  eval "one-td (unfold 'absH)"
-
-  eval "-- flatten = \\ * ->"
-  eval "--   let rec work = \\ tree acc ->"
-  eval "--             case tree of wild *"
-  eval "--               Node l r -> work l (work r acc)"
-  eval "--               Leaf a -> (:) * a acc"
-  eval "--   in \\ x0 -> work x0 ([] *)"
+  -- flatten = \\ * ->
+  --   let rec work = \\ tree acc ->
+  --             case tree of wild *
+  --               Node l r -> work l (work r acc)
+  --               Leaf a -> (:) * a acc
+  --   in \\ x0 -> work x0 ([] *)
 
   -- Assuming unproven lemmas:
   unprovenAssume "++ []"
@@ -114,5 +111,4 @@ unprovenAssume :: String -> Shell ()
 unprovenAssume lemmaName = do
   eval $ "prove-lemma " ++ show lemmaName
   proofCmd assume
-
 
