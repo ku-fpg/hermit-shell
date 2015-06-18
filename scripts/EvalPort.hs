@@ -28,8 +28,9 @@ convert :: String -> String
 convert = unlines . map convertLine . lines
 
 convertLine :: String -> String
-convertLine ""   = ""
-convertLine line = "  eval " <> show line
+convertLine ""               = ""
+convertLine line@('-':'-':_) = "  " <> line  -- Don't add 'eval' to comments
+convertLine line             = "  eval " <> show line
 
 main :: IO ()
 main = do
