@@ -10,7 +10,7 @@ script = do
   setPath $ bindingOf "fib"
 
   scope $ do
-    apply $ wwSplitUnsafe " wrap " " unwrap " --(wwAssAToAssC wwa)
+    apply $ wwSplit "wrap" "unwrap" (wwAssAToAssC wwa)
     setPath (bindingOf "work") ; query $ remember "origwork"
 
     -- work = unwrap (f (wrap work))
