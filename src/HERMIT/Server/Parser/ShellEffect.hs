@@ -6,9 +6,11 @@ module HERMIT.Server.Parser.ShellEffect where
 import           HERMIT.Shell.ShellEffect
 import           HERMIT.Shell.Types
 import           HERMIT.Shell.Dictionary
+import           HERMIT.Shell.Proof
 import           HERMIT.PrettyPrinter.Common
 
 import           HERMIT.Server.Parser.Utils
+import           HERMIT.Server.Parser.Name ()
 
 import           Control.Monad.State (modify)
 import           HERMIT.Shell.Externals
@@ -82,5 +84,8 @@ instance External ShellEffect where
         ["set whether uniques are printed with variable names"]
     , external "stopScript" (CLSModify $ setRunningScript Nothing)
         [ "Stop running the current script." ]
+
+    , external "proveLemma" (\nm -> CLSModify $ interactiveProof nm >> showWindow Nothing)
+        [ "Proof a lemma interactively." ]
    ]
 

@@ -9,4 +9,5 @@ import           HERMIT.Server.Parser.Utils
 
 instance External CoreString where
   parseExternal (String txt) = return . CoreString . Text.unpack $ txt
-  parseExternal _            = fail "fail: RhsOfName"
+  parseExternal _            = fail "fail: CoreString"
+ 

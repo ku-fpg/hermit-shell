@@ -11,7 +11,7 @@ script = do
   --   main :: IO ()
   --   main :: IO ()
 
-  eval "prove-lemma \"++ []\""
+  shellEffect $ proveLemma "++ []"
 
   -- Goal:
   -- forall * xs. (++) * xs ([] *) = xs
@@ -39,7 +39,7 @@ script = do
   eval "end-case"
 
   eval "rule-to-lemma \"myAppend-assoc\""
-  eval "prove-lemma \"myAppend-assoc\""
+  shellEffect $ proveLemma "myAppend-assoc"
   apply $ induction "xs"
   scope $ do sendCrumb forallBody
 
@@ -71,7 +71,7 @@ script = do
   --   main :: IO ()
   --   main :: IO ()
 
-  eval "prove-lemma \"repH []\""
+  shellEffect $ proveLemma "repH []"
 
   -- Goal:
   -- forall *. repH * ([] *) = id *
@@ -116,7 +116,7 @@ script = do
   --   main :: IO ()
   --   main :: IO ()
 
-  eval "prove-lemma \"repH (:)\""
+  shellEffect $ proveLemma "repH (:)"
 
   -- Goal:
   -- forall * x xs. repH * ((:) * x xs) = (.) * * * ((:) * x) (repH * xs)
@@ -151,7 +151,7 @@ script = do
   --   main :: IO ()
   --   main :: IO ()
 
-  eval "prove-lemma \"repH ++\""
+  shellEffect $ proveLemma "repH ++"
 
   -- Goal:
   -- forall * xs ys. repH * ((++) * xs ys) = (.) * * * (repH * xs) (repH * ys)

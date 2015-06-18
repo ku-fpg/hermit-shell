@@ -1,4 +1,5 @@
 import HERMIT.API
+import HERMIT.API.Types
 
 import StrictRepHScript
 import WWAssAScript
@@ -107,8 +108,8 @@ script = do
   unprovenAssume "repH ++"
   unprovenAssume "repH []"
 
-unprovenAssume :: String -> Shell ()
+unprovenAssume :: LemmaName -> Shell ()
 unprovenAssume lemmaName = do
-  eval $ "prove-lemma " ++ show lemmaName
+  shellEffect $ proveLemma lemmaName
   proofCmd assume
 
