@@ -1,4 +1,7 @@
+import Prelude hiding (repeat)
+
 import HERMIT.API
+
 script :: Shell ()
 script = do
   apply flattenModule
@@ -177,10 +180,9 @@ script = do
   -- forall * xs ys. \\ x -> myAppend * (myAppend * xs ys) x = \\ x -> myAppend * xs (myAppend * ys x)
 
   eval "extensionality 'zs"
-  eval "simplify"
-  eval "{ forall-body"
-  eval "  lemma \"myAppend-assoc\""
-  eval "}"
+  apply simplify
+  scope $ do sendCrumb forallBody
+             apply $ lemma "myAppend-assoc"
   eval "end-proof"
 
   -- module main:Main where
@@ -190,14 +192,14 @@ script = do
   --   main :: IO ()
   --   main :: IO ()
 
-  eval "binding-of 'rev"
+  setPath $ bindingOf "rev"
 
   -- rev = \\ * ds ->
   --   case ds of wild *
   --     [] -> [] *
   --     (:) x xs -> (++) * (rev * xs) ((:) * x ([] *))
 
-  eval "fix-intro"
+  apply fixIntro
 
   -- rev = \\ * ->
   --   fix *
@@ -206,7 +208,7 @@ script = do
   --            [] -> [] *
   --            (:) x xs -> (++) * (rev xs) ((:) * x ([] *)))
 
-  eval "application-of 'fix"
+  setPath $ applicationOf "fix"
 
   -- fix *
   --     (\\ rev ds ->
@@ -214,7 +216,7 @@ script = do
   --          [] -> [] *
   --          (:) x xs -> (++) * (rev xs) ((:) * x ([] *)))
 
-  eval "split-1-beta rev [| absR |] [| repR |]"
+  apply $ split1Beta "rev" "absR" "repR"
 
   -- Goal:
   -- fix *
@@ -294,7 +296,7 @@ script = do
   --     worker = fix * g
   -- in absR * worker
 
-  eval "any-call (unfold ['absR,'repR])"
+  apply $ anyCall (unfoldAny ["absR","repR"])
 
   -- let g =
   --       (.) * * * (\\ eta -> (\\ f -> (.) * * * (repH *) f) eta)
@@ -307,7 +309,7 @@ script = do
   --     worker = fix * g
   -- in (\\ g -> (.) * * * (absH *) g) worker
 
-  eval "repeat (any-call (unfold '.)) ; smash"
+  apply $ repeat (anyCall (unfoldWith ".")) ; apply smash
 
   -- let worker =
   --       fix *
@@ -318,7 +320,7 @@ script = do
   --                      (:) x xs -> (++) * (absH * (x xs)) ((:) * x ([] *))))
   -- in \\ x -> absH * (worker x)
 
-  eval "one-td (case-float-arg-lemma repHstrict)"
+  apply $ oneTD (caseFloatArgLemma "repHstrict")
 
   -- Goal:
   -- forall *. repH * (undefined *) = undefined *
@@ -369,7 +371,7 @@ script = do
   --                (:) x xs -> (.) * * * (repH * (absH * (x xs))) (repH * ((:) * x ([] *))))
   -- in \\ x -> absH * (worker x)
 
-  eval "repeat (any-call (unfold '.))"
+  apply $ repeat (anyCall (unfoldWith "."))
 
   -- let worker =
   --       fix *
@@ -379,12 +381,12 @@ script = do
   --                (:) x xs -> \\ x -> repH * (absH * (x xs)) (repH * ((:) * x ([] *)) x))
   -- in \\ x -> absH * (worker x)
 
-  eval "one-td (unfold-rule repH-absH-fusion)"
+  apply $ oneTD (unfoldRule "repH-absH-fusion")
 
   -- Goal:
   -- forall * h. repH * (absH * h) = h
 
-  eval "assume -- proven repH-absH-fusion"
+  proofCmd assume -- proven repH-absH-fusion
 
   -- let worker =
   --       fix *
@@ -394,7 +396,7 @@ script = do
   --                (:) x xs -> \\ x -> x xs (repH * ((:) * x ([] *)) x))
   -- in \\ x -> absH * (worker x)
 
-  eval "one-td (lemma-forward \"repH (:)\")"
+  apply $ oneTD (lemmaForward "repH (:)")
 
   -- let worker =
   --       fix *
@@ -404,7 +406,7 @@ script = do
   --                (:) x xs -> \\ x -> x xs ((.) * * * ((:) * x) (repH * ([] *)) x))
   -- in \\ x -> absH * (worker x)
 
-  eval "any-td (lemma-forward \"repH []\")"
+  apply $ anyTD (lemmaForward "repH []")
 
   -- let worker =
   --       fix *
@@ -414,7 +416,7 @@ script = do
   --                (:) x xs -> \\ x -> x xs ((.) * * * ((:) * x) (id *) x))
   -- in \\ x -> absH * (worker x)
 
-  eval "any-call (unfold 'fix)"
+  apply $ anyCall (unfoldWith "fix")
 
   -- let worker =
   --       let rec x =
@@ -425,7 +427,7 @@ script = do
   --       in x
   -- in \\ x -> absH * (worker x)
 
-  eval "any-call (unfold 'absH)"
+  apply $ anyCall (unfoldWith "absH")
 
   -- let worker =
   --       let rec x =
@@ -436,7 +438,7 @@ script = do
   --       in x
   -- in \\ x -> worker x ([] *)
 
-  eval "bash"
+  apply bash
 
   -- let rec x = \\ x ->
   --           case x of wild *
@@ -444,7 +446,7 @@ script = do
   --             (:) x xs -> \\ x -> x xs ((:) * x x)
   -- in \\ x -> x x ([] *)
 
-  eval "unshadow"
+  apply unshadow
 
   -- let rec x = \\ x0 ->
   --           case x0 of wild *

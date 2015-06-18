@@ -1,20 +1,23 @@
--- NOTE: Not working
+import Prelude hiding (repeat)
+
 import HERMIT.API
+
 script :: Shell ()
 script = do
-  eval "flatten-module"
-  eval "set-pp-type Show"
+  apply flattenModule
+  shellEffect $ setPPType Show
 
-  eval "binding-of 'last"
-  eval "fix-intro"
-  eval "{ application-of 'fix"
-  eval "  split-1-beta last [| wrap |] [| unwrap |]"
-  eval "  -- prove the assumption"
-  eval "  lhs (repeat (any-call (unfold ['., 'wrap, 'unwrap])))"
-  eval "  both smash"
-  eval "  end-proof"
+  setPath $ bindingOf "last"
+  apply $ fixIntro
 
-  eval "  repeat (any-call (unfold ['g, 'wrap, 'unwrap, 'fix]))"
-  eval "  bash"
-  eval "}"
+  scope $ do setPath $ applicationOf "fix"
+             apply $ split1Beta "last" "wrap" "unwrap"
+
+               -- prove the assumption
+             eval "lhs (repeat (any-call (unfold ['., 'wrap, 'unwrap])))"
+             eval "both smash"
+             eval "end-proof"
+
+             apply $ repeat (anyCall (unfoldAny ["g", "wrap", "unwrap", "fix"]))
+             apply bash
 

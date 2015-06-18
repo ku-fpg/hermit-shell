@@ -1,43 +1,44 @@
 import HERMIT.API
+
 script :: Shell ()
 script = do
-  eval "set-pp-type Show"
+  shellEffect $ setPPType Show
 
-  eval "flatten-module"
+  apply flattenModule
 
-  eval "binding-of 'nub"
-  eval "fix-intro ; def-rhs"
-  eval "split-2-beta nub [| absN |] [| repN |]" ; proofCmd assume
+  setPath $ bindingOf "nub"
+  apply fixIntro ; sendCrumb defRhs
+  apply $ split2Beta "nub" "absN" "repN" ; proofCmd assume
 
   -- this bit to essentially undo the fix-intro
-  eval "{ application-of 'repN ; app-arg ; let-intro 'nub ; one-td (unfold 'fix) ; simplify }"
-  eval "innermost let-float"
-  eval "alpha-let ['nub'] -- rename x to nub'"
+  scope $ do setPath (applicationOf "repN") ; sendCrumb appArg ; apply (letIntro "nub") ; apply (oneTD (unfoldWith "fix")) ; apply simplify
+  apply $ innermost letFloat
+  apply $ alphaLetWith ["nub'"] -- rename x to nub'"
 
   -- back to the derivation
-  eval "binding-of 'worker"
-  eval "one-td (unfold 'repN)"
-  eval "remember origworker"
-  eval "one-td (unfold 'filter)"
-  eval "one-td (case-float-arg-lemma nubStrict)"
+  setPath $ bindingOf "worker"
+  apply $ oneTD (unfoldWith "repN")
+  query $ remember "origworker"
+  apply $ oneTD (unfoldWith "filter")
+  apply $ oneTD (caseFloatArgLemma "nubStrict")
 
   -- prove strictness condition
   eval "lhs unfold ; smash ; end-proof"
 
-  eval "one-td (unfold 'nub')"
-  eval "simplify"
+  apply $ oneTD (unfoldWith "nub'")
+  apply simplify
 
-  eval "one-td (case-float-arg-lemma nubStrict)"
+  apply $ oneTD (caseFloatArgLemma "nubStrict")
 
   -- prove strictness condition
   eval "lhs unfold ; smash ; end-proof"
 
-  eval "{ consider case ; consider case ; case-alt 1 ; alt-rhs"
-  eval "  unfold ; simplify"
-  eval "  one-td (unfold-rule \"filter-fusion\")" ; proofCmd assume
-  eval "  simplify"
-  eval "  one-td (unfold-rule \"member-fusion\")" ; proofCmd assume
-  eval "}"
-  eval "nonrec-to-rec"
-  eval "any-td (fold-remembered origworker)"
+  scope $ do eval "consider case ; consider case ; case-alt 1 ; alt-rhs"
+             apply unfold ; apply simplify
+             apply (oneTD (unfoldRule "filter-fusion")) ; proofCmd assume
+             apply simplify
+             apply (oneTD (unfoldRule "member-fusion")) ; proofCmd assume
+
+  apply nonrecToRec
+  apply $ anyTD (foldRemembered "origworker")
 
