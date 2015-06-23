@@ -66,24 +66,11 @@ scope s = do
 
 pathS :: [Crumb] -> Rewrite a -> Rewrite a
 pathS crumbs r
-  = id -- scopedR
-  . Transform
+  = Transform
   $ method "pathS"
            [ toJSON crumbs
            , toJSON r
            ]
-  where
-    beginScopeR :: Rewrite a
-    beginScopeR = Transform $ method "beginScope" []
-
-    endScopeR :: Rewrite a
-    endScopeR = Transform $ method "endScope" []
-
-    scopedR :: Rewrite a -> Rewrite a
-    scopedR r
-      =     beginScopeR
-        >>> r
-        >>> endScopeR
 
 class Run a where
   run :: a -> Shell ()
