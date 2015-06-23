@@ -954,6 +954,13 @@ instance External (RewriteH LCore) where
     , external "both" (promoteClauseR . bothR :: RewriteH LCore -> RewriteH LCore)
         [ "Apply a rewrite to both sides of an equality, succeeding if either succeed." ]
 
+    , external "extensionalityWith" (promoteR . extensionalityR . Just :: String -> RewriteH LCore)
+        [ "Given a name 'x, then"
+        , "f == g  ==>  forall x.  f x == g x" ]
+
+    , external "extensionality" (promoteR (extensionalityR Nothing) :: RewriteH LCore)
+        [ "f == g  ==>  forall x.  f x == g x" ]
+
     , external "pathS" (pathR :: [Crumb] -> RewriteH LCore -> RewriteH LCore)
         [ "Scope a rewrite with a list of Crumbs" ]
     ]

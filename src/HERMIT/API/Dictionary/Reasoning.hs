@@ -154,8 +154,14 @@ queryLemma nm t
 --showLemmas :: PrettyPrinter -> LemmaName -> Pretty LCore
 --showLemmas :: PrettyPrinter -> Pretty LCore
 
---extensionality :: String -> Rewrite LCore
---extensionality :: Rewrite LCore
+-- | Given a name 'x, then
+--   f == g  ==>  forall x.  f x == g x
+extensionalityWith :: String -> Rewrite LCore
+extensionalityWith nm = Transform $ method "extensionalityWith" [toJSON nm]
+
+-- | f == g  ==>  forall x.  f x == g x
+extensionality :: Rewrite LCore
+extensionality = Transform $ method "extensionality" []
 
 -- | Apply a transformation to the LHS of a quantified clause.
 lhsT :: Transform LCore String -> Transform LCore String
