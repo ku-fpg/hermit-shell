@@ -20,9 +20,11 @@ import           HERMIT.Lemma
 import           HERMIT.Name
 import           HERMIT.ParserCore
 import           HERMIT.PrettyPrinter.Common
+import           HERMIT.Core (Crumb)
 
 import           HERMIT.Server.Parser.Name ()
 import           HERMIT.Server.Parser.String ()
+import           HERMIT.Server.Parser.Crumb ()
 import           HERMIT.Server.Parser.Utils
 
 import           Prelude hiding (abs)
@@ -942,6 +944,9 @@ instance External (RewriteH LCore) where
         [ "Rewrite clause to true using given lemma." ]
     , external "lemmaUnsafe" (promoteClauseR . lemmaR UnsafeUsed :: LemmaName -> RewriteH LCore)
         [ "Rewrite clause to true using given lemma." ] .+ Unsafe
+--    , external "crumb" ((\crumb -> (_ignoreResult :: TransformH a b -> RewriteH a) $ transform (\ _hermitC _lcore -> return (singletonSnocPath crumb))) :: Crumb -> RewriteH LCore) -- TODO: Remove hole
+--        -- XXX: Is there a good way to avoid exposing this too much?
+--        [ "Internal crumb handling system" ]
     ]
     where
       mkWWAssC :: RewriteH LCore -> Maybe WWAssumption
