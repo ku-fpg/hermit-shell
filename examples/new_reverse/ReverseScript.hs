@@ -1,4 +1,4 @@
-import Prelude hiding (repeat)
+import Prelude hiding (repeat, replicate)
 
 import HERMIT.API
 
@@ -19,7 +19,7 @@ script = do
   -- Goal:
   -- forall * xs. (++) * xs ([] *) = xs
 
-  eval "lhs (one-td (unfold-rule appendFix))"
+  apply . lhsR . oneTD $ unfoldRule "appendFix"
 
   -- Goal:
   -- forall *. (++) * = myAppend *
@@ -39,7 +39,7 @@ script = do
   apply simplifyLemma
   sendCrumb forallBody ; sendCrumb consequent
   apply $ oneTD (lemmaForward "ind-hyp-0")
-  eval "end-case"
+  proofCmd endCase
 
   eval "rule-to-lemma \"myAppend-assoc\""
   shellEffect $ proveLemma "myAppend-assoc"
@@ -63,7 +63,7 @@ script = do
                         apply $ rhsR (oneTD (fold "myAppend"))
                         apply (oneTD (lemmaForward "ind-hyp-0"))
                         apply reflexivity
-  eval "end-proof"
+  proofCmd endProof
 
   eval "rule-to-lemma \"repH []\""
 
@@ -79,22 +79,22 @@ script = do
   -- Goal:
   -- forall *. repH * ([] *) = id *
 
-  eval "lhs unfold"
+  apply $ lhsR unfold
 
   -- Goal:
   -- forall *. (++) * ([] *) = id *
 
-  eval "extensionality"
+  apply extensionality
 
   -- Goal:
   -- forall * x. (++) * ([] *) x = id * x
 
-  eval "lhs (one-td (unfold-rule appendFix))"
+  apply . lhsR . oneTD $ unfoldRule "appendFix"
 
   -- Goal:
   -- forall * x. myAppend * ([] *) x = id * x
 
-  eval "lhs unfold"
+  apply $ lhsR unfold
 
   -- Goal:
   -- forall * x.
@@ -104,12 +104,12 @@ script = do
   -- =
   -- id * x
 
-  eval "both smash"
+  apply $ bothR smash
 
   -- Goal:
   -- forall * x. x = x
 
-  eval "end-proof -- proven \"repH []\""
+  proofCmd endProof -- proven "repH []"
   eval "rule-to-lemma \"repH (:)\""
 
   -- module main:Main where
@@ -124,12 +124,12 @@ script = do
   -- Goal:
   -- forall * x xs. repH * ((:) * x xs) = (.) * * * ((:) * x) (repH * xs)
 
-  eval "both (any-call (unfold 'repH))"
+  apply . bothR . anyCall $ unfoldWith "repH"
 
   -- Goal:
   -- forall * x xs. (++) * ((:) * x xs) = (.) * * * ((:) * x) ((++) * xs)
 
-  eval "both (any-call (unfold-rule appendFix))"
+  apply . bothR . anyCall $ unfoldRule "appendFix"
 
   -- Goal:
   -- forall * x xs. myAppend * ((:) * x xs) = (.) * * * ((:) * x) (myAppend * xs)
@@ -139,12 +139,12 @@ script = do
   -- Goal:
   -- forall * x xs. myAppend * ((:) * x xs) = \\ x -> (:) * x (myAppend * xs x)
 
-  eval "lhs (unfold >>> smash)"
+  apply . lhsR $ unfold >>> smash
 
   -- Goal:
   -- forall * x xs. \\ ys -> (:) * x (myAppend * xs ys) = \\ x -> (:) * x (myAppend * xs x)
 
-  eval "end-proof -- proven \"repH (:)\""
+  proofCmd endProof
   eval "rule-to-lemma \"repH ++\""
 
   -- module main:Main where
@@ -159,17 +159,17 @@ script = do
   -- Goal:
   -- forall * xs ys. repH * ((++) * xs ys) = (.) * * * (repH * xs) (repH * ys)
 
-  eval "both (any-call (unfold 'repH))"
+  apply . bothR . anyCall $ unfoldWith "repH"
 
   -- Goal:
   -- forall * xs ys. (++) * ((++) * xs ys) = (.) * * * ((++) * xs) ((++) * ys)
 
-  eval "both (any-call (unfold-rule appendFix))"
+  apply . bothR . anyCall $ unfoldRule "appendFix"
 
   -- Goal:
   -- forall * xs ys. myAppend * (myAppend * xs ys) = (.) * * * (myAppend * xs) (myAppend * ys)
 
-  eval "lhs (eta-expand 'x)"
+  apply . lhsR $ etaExpand "x"
 
   -- Goal:
   -- forall * xs ys. \\ x -> myAppend * (myAppend * xs ys) x = (.) * * * (myAppend * xs) (myAppend * ys)
@@ -179,11 +179,11 @@ script = do
   -- Goal:
   -- forall * xs ys. \\ x -> myAppend * (myAppend * xs ys) x = \\ x -> myAppend * xs (myAppend * ys x)
 
-  eval "extensionality 'zs"
+  apply $ extensionalityWith "zs"
   apply simplify
   scope $ do sendCrumb forallBody
              apply $ lemma "myAppend-assoc"
-  eval "end-proof"
+  proofCmd endProof
 
   -- module main:Main where
   --   absR :: forall a . ([a] -> H a) -> [a] -> [a]
@@ -233,7 +233,7 @@ script = do
   --          [] -> [] *
   --          (:) x xs -> (++) * (rev xs) ((:) * x ([] *)))
 
-  eval "both (unfold >>> smash)"
+  apply . bothR $ unfold >>> smash
 
   -- Goal:
   -- let rec x =
@@ -251,7 +251,7 @@ script = do
   --             (:) x xs -> (++) * (x xs) ((:) * x ([] *))
   -- in x
 
-  eval "lhs (replicate 5 ((one-td unfold) >+> smash))"
+  apply . lhsR $ replicate 5 ((oneTD unfold) >+> smash)
 
   -- Goal:
   -- let rec x = \\ x ->
@@ -268,7 +268,7 @@ script = do
   --             (:) x xs -> (++) * (x xs) ((:) * x ([] *))
   -- in x
 
-  eval "lhs (one-td (lemma-forward \"++ []\"))"
+  apply . lhsR . oneTD $ lemmaForward "++ []"
 
   -- Goal:
   -- let rec x = \\ x ->
@@ -283,7 +283,7 @@ script = do
   --             (:) x xs -> (++) * (x xs) ((:) * x ([] *))
   -- in x
 
-  eval "end-proof -- proven rev-assumption"
+  proofCmd endProof -- proven rev-assumption
 
   -- let g =
   --       (.) * * * (repR *)
@@ -325,17 +325,17 @@ script = do
   -- Goal:
   -- forall *. repH * (undefined *) = undefined *
 
-  eval "lhs unfold"
+  apply $ lhsR unfold
 
   -- Goal:
   -- forall *. (++) * (undefined *) = undefined *
 
-  eval "lhs (one-td (unfold-rule appendFix))"
+  apply . lhsR . oneTD $ unfoldRule "appendFix"
 
   -- Goal:
   -- forall *. myAppend * (undefined *) = undefined *
 
-  eval "lhs unfold"
+  apply $ lhsR unfold
 
   -- Goal:
   -- forall *.
@@ -346,12 +346,12 @@ script = do
   -- =
   -- undefined *
 
-  eval "both (innermost undefined-expr)"
+  apply . bothR $ innermost undefinedExpr
 
   -- Goal:
   -- forall *. undefined * = undefined *
 
-  eval "end-proof -- proven repHstrict"
+  proofCmd endProof -- proven repHstrict"
 
   -- let worker =
   --       fix *
@@ -361,7 +361,7 @@ script = do
   --                (:) x xs -> repH * ((++) * (absH * (x xs)) ((:) * x ([] *))))
   -- in \\ x -> absH * (worker x)
 
-  eval "one-td (lemma-forward \"repH ++\")"
+  apply . oneTD $ lemmaForward "repH ++"
 
   -- let worker =
   --       fix *
