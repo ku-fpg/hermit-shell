@@ -10,6 +10,7 @@ import Data.Aeson
 import HERMIT.API.Types
 import HERMIT.API.Shell.Externals (beginScope, endScope)
 
+import HERMIT.API.Dictionary.KURE ((>>>))
 
 -- | redisplays current state.
 display :: Shell ()
@@ -55,10 +56,6 @@ toProofCmd (Transform t) = Shell $ toJSON t
 proofCmd :: ProofShellCommand -> Shell ()
 proofCmd (ProofShellCommand c) = Shell c
 
--- XXX: Should this go in a different file?
---rewriteCrumb :: Crumb -> Rewrite a
---rewriteCrumb c = Transform $ method "crumb" [toJSON c]
-
 -- | Brackets the given argument with 'kernelEffect beginScope'
 --   and 'kernelEffect endScope'.
 scope :: Shell () -> Shell ()
@@ -66,6 +63,27 @@ scope s = do
   kernelEffect beginScope
   s
   kernelEffect endScope
+
+pathS :: [Crumb] -> Rewrite a -> Rewrite a
+pathS crumbs r
+  = id -- scopedR
+  . Transform
+  $ method "pathS"
+           [ toJSON crumbs
+           , toJSON r
+           ]
+  where
+    beginScopeR :: Rewrite a
+    beginScopeR = Transform $ method "beginScope" []
+
+    endScopeR :: Rewrite a
+    endScopeR = Transform $ method "endScope" []
+
+    scopedR :: Rewrite a -> Rewrite a
+    scopedR r
+      =     beginScopeR
+        >>> r
+        >>> endScopeR
 
 class Run a where
   run :: a -> Shell ()

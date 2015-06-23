@@ -953,6 +953,9 @@ instance External (RewriteH LCore) where
         [ "Apply a rewrite to the RHS of a quantified clause." ]
     , external "both" (promoteClauseR . bothR :: RewriteH LCore -> RewriteH LCore)
         [ "Apply a rewrite to both sides of an equality, succeeding if either succeed." ]
+
+    , external "pathS" (pathR :: [Crumb] -> RewriteH LCore -> RewriteH LCore)
+        [ "Scope a rewrite with a list of Crumbs" ]
     ]
     where
       mkWWAssC :: RewriteH LCore -> Maybe WWAssumption
