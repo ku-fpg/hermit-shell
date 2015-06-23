@@ -23,7 +23,7 @@ script = do
   apply $ oneTD (caseFloatArgLemma "nubStrict")
 
   -- prove strictness condition
-  apply $ lhs unfold ; apply smash ; proofCmd endProof
+  apply $ lhsR unfold ; apply smash ; proofCmd endProof
 
   apply $ oneTD (unfoldWith "nub'")
   apply simplify
@@ -31,7 +31,7 @@ script = do
   apply $ oneTD (caseFloatArgLemma "nubStrict")
 
   -- prove strictness condition
-  apply $ lhs unfold ; apply smash ; proofCmd endProof
+  apply $ lhsR unfold ; apply smash ; proofCmd endProof
 
   scope $ do eval "consider case ; consider case" ; sendCrumb (caseAlt 1) ; sendCrumb altRhs
              apply unfold ; apply simplify
