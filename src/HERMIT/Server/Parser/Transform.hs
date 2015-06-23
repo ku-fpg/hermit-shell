@@ -752,7 +752,7 @@ instance External (RewriteH LCore) where
     , external "foldAnyRemembered" (promoteExprR foldAnyRememberedR :: RewriteH LCore)
         [ "Attempt to fold any of the remembered definitions." ] .+ Context .+ Deep
 
-    , external "wwResultSplit" ((\ abs rep assC -> promoteDefR $ wwSplit (mkWWAssC assC) abs rep)
+    , external "wwResultSplit" ((\ abs rep assC -> promoteDefR $ wwResultSplit (mkWWAssC assC) abs rep)
                                   :: CoreString -> CoreString -> RewriteH LCore -> RewriteH LCore)
                 [ "Worker/Wrapper Split (Result Variant)",
                   "For any \"prog :: X -> A\", and given \"abs :: B -> A\" and \"rep :: A -> B\" as arguments,",
@@ -761,7 +761,7 @@ instance External (RewriteH LCore) where
                   "                          in let work = \\ x1 -> rep (f (\\ x2 -> abs (work x2)) x1)",
                   "                              in \\ x0 -> abs (work x0)"
                 ] .+ Introduce .+ Context
-    , external "wwResultSplitUnsafe" ((\ abs rep -> promoteDefR $ wwSplit Nothing abs rep)
+    , external "wwResultSplitUnsafe" ((\ abs rep -> promoteDefR $ wwResultSplit Nothing abs rep)
                                        :: CoreString -> CoreString -> RewriteH LCore)
                 [ "Unsafe Worker/Wrapper Split (Result Variant)",
                   "For any \"prog :: X -> A\", and given \"abs :: B -> A\" and \"rep :: A -> B\" as arguments, then",
