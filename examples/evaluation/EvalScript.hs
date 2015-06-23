@@ -26,8 +26,8 @@ script = do
       apply $ bash
       sendCrumb lamBody; sendCrumb lamBody -- XXX: Is this right?
       scope $ do
-        eval "consider case" ; sendCrumb (caseAlt 1) ; sendCrumb altRhs ; apply $ abstract "m"
-        eval "consider case" ; sendCrumb (caseAlt 1) ; sendCrumb altRhs ; apply $ abstract "n"
+        setPath (consider CaseOf) ; sendCrumb (caseAlt 1) ; sendCrumb altRhs ; apply $ abstract "m"
+        setPath (consider CaseOf) ; sendCrumb (caseAlt 1) ; sendCrumb altRhs ; apply $ abstract "n"
       apply $ anyBU (fold "rep")
       apply $ anyTD (forward wwResultFusion)
 
