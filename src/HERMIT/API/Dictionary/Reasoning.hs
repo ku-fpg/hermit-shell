@@ -165,11 +165,21 @@ lhsT t = Transform $ method "lhs" [toJSON t]
 lhsR :: Rewrite LCore -> Rewrite LCore
 lhsR r = Transform $ method "lhs" [toJSON r]
 
---rhs :: Transform LCore String -> Transform LCore String
---rhs :: Rewrite LCore -> Rewrite LCore
+-- | Apply a transformation to the RHS of a quantified clause.
+rhsT :: Transform LCore String -> Transform LCore String
+rhsT t = Transform $ method "rhs" [toJSON t]
 
---both :: Transform LCore String -> Transform LCore String
---both :: Rewrite LCore -> Rewrite LCore
+-- | Apply a rewrite to the RHS of a quantified clause.
+rhsR :: Rewrite LCore -> Rewrite LCore
+rhsR r = Transform $ method "rhs" [toJSON r]
+
+-- | Apply a transformation to both sides of a quantified clause.
+bothT :: Transform LCore String -> Transform LCore String
+bothT t = Transform $ method "both" [toJSON t]
+
+-- | Apply a rewrite to both sides of an equality, succeeding if either succeed.
+bothR :: Rewrite LCore -> Rewrite LCore
+bothR r = Transform $ method "both" [toJSON r]
 
 -- | Rewrite alpha-equivalence to true.
 reflexivity :: Rewrite LCore

@@ -949,6 +949,10 @@ instance External (RewriteH LCore) where
 --        [ "Internal crumb handling system" ]
     , external "lhs" (promoteClauseR . lhsR :: RewriteH LCore -> RewriteH LCore)
         [ "Apply a rewrite to the LHS of a quantified clause." ] 
+    , external "rhs" (promoteClauseR . rhsR :: RewriteH LCore -> RewriteH LCore)
+        [ "Apply a rewrite to the RHS of a quantified clause." ]
+    , external "both" (promoteClauseR . bothR :: RewriteH LCore -> RewriteH LCore)
+        [ "Apply a rewrite to both sides of an equality, succeeding if either succeed." ]
     ]
     where
       mkWWAssC :: RewriteH LCore -> Maybe WWAssumption
@@ -1212,6 +1216,10 @@ instance External (TransformH LCore String) where
 
     , external "lhs" (promoteClauseT . lhsT :: TransformH LCore String -> TransformH LCore String)
         [ "Apply a transformation to the LHS of a quantified clause." ]
+    , external "rhs" (promoteClauseT . rhsT :: TransformH LCore String -> TransformH LCore String)
+        [ "Apply a transformation to the RHS of a quantified clause." ]
+    , external "both" ((\t -> do (r,s) <- promoteClauseT (bothT t); return (unlines [r,s])) :: TransformH LCore String -> TransformH LCore String)
+        [ "Apply a transformation to both sides of a quantified clause." ]
     ]
 
 instance External (TransformH LCore DocH) where
