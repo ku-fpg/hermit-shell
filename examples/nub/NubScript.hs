@@ -13,7 +13,7 @@ script = do
   -- this bit to essentially undo the fix-intro
   scope $ do setPath (applicationOf "repN") ; sendCrumb appArg ; apply (letIntro "nub") ; apply (oneTD (unfoldWith "fix")) ; apply simplify
   apply $ innermost letFloat
-  apply $ alphaLetWith ["nub'"] -- rename x to nub'"
+  apply $ alphaLetWith ["nub'"] -- rename x to nub'
 
   -- back to the derivation
   setPath $ bindingOf "worker"

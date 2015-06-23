@@ -157,9 +157,11 @@ queryLemma nm t
 --extensionality :: String -> Rewrite LCore
 --extensionality :: Rewrite LCore
 
+-- | Apply a transformation to the LHS of a quantified clause.
 lhsT :: Transform LCore String -> Transform LCore String
 lhsT t = Transform $ method "lhs" [toJSON t]
 
+-- | Apply a rewrite to the LHS of a quantified clause.
 lhsR :: Rewrite LCore -> Rewrite LCore
 lhsR r = Transform $ method "lhs" [toJSON r]
 
