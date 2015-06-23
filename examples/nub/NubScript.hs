@@ -33,7 +33,7 @@ script = do
   -- prove strictness condition
   apply $ lhsR unfold ; apply smash ; proofCmd endProof
 
-  scope $ do eval "consider case ; consider case" ; sendCrumb (caseAlt 1) ; sendCrumb altRhs
+  scope $ do setPath (consider CaseOf) ; setPath (consider CaseOf) ; sendCrumb (caseAlt 1) ; sendCrumb altRhs
              apply unfold ; apply simplify
              apply (oneTD (unfoldRule "filter-fusion")) ; proofCmd assume
              apply simplify
