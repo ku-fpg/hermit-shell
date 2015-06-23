@@ -947,6 +947,8 @@ instance External (RewriteH LCore) where
 --    , external "crumb" ((\crumb -> (_ignoreResult :: TransformH a b -> RewriteH a) $ transform (\ _hermitC _lcore -> return (singletonSnocPath crumb))) :: Crumb -> RewriteH LCore) -- TODO: Remove hole
 --        -- XXX: Is there a good way to avoid exposing this too much?
 --        [ "Internal crumb handling system" ]
+    , external "lhs" (promoteClauseR . lhsR :: RewriteH LCore -> RewriteH LCore)
+        [ "Apply a rewrite to the LHS of a quantified clause." ] 
     ]
     where
       mkWWAssC :: RewriteH LCore -> Maybe WWAssumption
@@ -1204,6 +1206,9 @@ instance External (TransformH LCore String) where
 
     , external "queryLemma" ((\ nm t -> getLemmaByNameT nm >>> arr lemmaC >>> extractT t) :: LemmaName -> TransformH LCore String -> TransformH LCore String)
         [ "Apply a transformation to a lemma, returning the result." ]
+
+    , external "lhs" (promoteClauseT . lhsT :: TransformH LCore String -> TransformH LCore String)
+        [ "Apply a transformation to the LHS of a quantified clause." ]
     ]
 
 instance External (TransformH LCore DocH) where

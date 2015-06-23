@@ -157,8 +157,11 @@ queryLemma nm t
 --extensionality :: String -> Rewrite LCore
 --extensionality :: Rewrite LCore
 
---lhs :: Transform LCore String -> Transform LCore String
---lhs :: Rewrite LCore -> Rewrite LCore
+lhsT :: Transform LCore String -> Transform LCore String
+lhsT t = Transform $ method "lhs" [toJSON t]
+
+lhsR :: Rewrite LCore -> Rewrite LCore
+lhsR r = Transform $ method "lhs" [toJSON r]
 
 --rhs :: Transform LCore String -> Transform LCore String
 --rhs :: Rewrite LCore -> Rewrite LCore
