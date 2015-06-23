@@ -7,13 +7,20 @@ module HERMIT.API
           -- Types
         , Shell
         , QueryFun
+        , KernelEffect
+        , ShellEffect
         , Name
         , LocalPath
         , AST
         , PPType (..)
         , Rewrite
+        , BiRewrite
+        , Transform
+        , BiTransform
         , LCore
+        , LCoreTC
         , Crumb
+        , Considerable (..)
           -- Utilities
         , send
         ) where

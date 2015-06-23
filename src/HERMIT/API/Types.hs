@@ -4,6 +4,7 @@
 {-# LANGUAGE PolyKinds #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DeriveGeneric #-}
 module HERMIT.API.Types where
 
 import Control.Applicative
@@ -15,6 +16,7 @@ import Data.Maybe
 import Data.Text
 import Data.String
 import Data.Typeable
+import GHC.Generics
 
 import HERMIT.GHCI.JSON
 
@@ -163,8 +165,15 @@ newtype Crumb = Crumb Value
 
 ------------------------------------------------------------------------
 
-newtype Considerable = Considerable Value
-    deriving ToJSON
+-- | Language constructs that can be zoomed to.
+data Considerable
+  = Binding | Definition | CaseAlt | Variable | Literal
+  | Application | Lambda | LetExpr | CaseOf | Casty | Ticky
+  | TypeExpr | CoercionExpr
+    deriving (Show, Generic)
+
+instance ToJSON Considerable where
+  toJSON = genericToJSON defaultOptions
 
 ------------------------------------------------------------------------
 

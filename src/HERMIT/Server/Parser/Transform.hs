@@ -1027,6 +1027,9 @@ instance External (TransformH LCore LocalPathH) where
         [ "Descend to the end of a program." ]
 {-    , external "parentOf" (parentOfT :: TransformH LCore LocalPathH -> TransformH LCore LocalPathH)
         [ "Focus on the parent of another focal point." ]  -}
+
+    , external "consider" (considerConstructT :: Considerable -> TransformH LCore LocalPathH)
+            [ "consider <c> focuses on the first construct <c>.", recognizedConsiderables ]
     ]
 
 instance External (TransformH LCoreTC LocalPathH) where

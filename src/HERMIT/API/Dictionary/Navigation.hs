@@ -26,8 +26,8 @@ applicationOf :: Name -> Transform LCoreTC LocalPath
 applicationOf nm = Transform $ method "applicationOf" [toJSON nm]
 
 -- -- | consider <c> focuses on the first construct <c>.
--- consider :: Considerable -> Transform LCore LocalPath
--- consider c = Transform $ method "consider" [toJSON c]
+consider :: Considerable -> Transform LCore LocalPath
+consider c = Transform $ method "consider" [toJSON c]
 
 -- | arg n focuses on the (n-1)th argument of a nested application.
 arg :: Int -> Transform LCore LocalPath
