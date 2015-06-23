@@ -14,9 +14,10 @@ script = do
              apply $ split1Beta "last" "wrap" "unwrap"
 
                -- prove the assumption
-             eval "lhs (repeat (any-call (unfold ['., 'wrap, 'unwrap])))"
-             eval "both smash"
-             eval "end-proof"
+             apply $ lhsR (repeat (anyCall (unfoldAny [".", "wrap", "unwrap"])))
+
+             apply $ bothR smash
+             proofCmd endProof
 
              apply $ repeat (anyCall (unfoldAny ["g", "wrap", "unwrap", "fix"]))
              apply bash

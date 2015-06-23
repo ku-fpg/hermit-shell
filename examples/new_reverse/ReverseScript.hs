@@ -60,7 +60,7 @@ script = do
                         sendCrumb forallBody ; sendCrumb consequent
                         apply $ anyBU (unfoldWith "myAppend")
                         apply smash
-                        eval "rhs (one-td (fold 'myAppend))"
+                        apply $ rhsR (oneTD (fold "myAppend"))
                         apply (oneTD (lemmaForward "ind-hyp-0"))
                         apply reflexivity
   eval "end-proof"
@@ -134,7 +134,7 @@ script = do
   -- Goal:
   -- forall * x xs. myAppend * ((:) * x xs) = (.) * * * ((:) * x) (myAppend * xs)
 
-  eval "rhs unfold"
+  apply $ rhsR unfold
 
   -- Goal:
   -- forall * x xs. myAppend * ((:) * x xs) = \\ x -> (:) * x (myAppend * xs x)
@@ -174,7 +174,7 @@ script = do
   -- Goal:
   -- forall * xs ys. \\ x -> myAppend * (myAppend * xs ys) x = (.) * * * (myAppend * xs) (myAppend * ys)
 
-  eval "rhs unfold"
+  apply $ rhsR unfold
 
   -- Goal:
   -- forall * xs ys. \\ x -> myAppend * (myAppend * xs ys) x = \\ x -> myAppend * xs (myAppend * ys x)

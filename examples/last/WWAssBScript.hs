@@ -6,11 +6,13 @@ import HERMIT.API.Types
 wwb :: Rewrite LCore
 wwb =
   etaExpand "xs"
-  >>> rewriteCrumb lamBody
-  >>> unfoldWith "wrap"
-  >>> rewriteCrumb (caseAlt 1) >>> rewriteCrumb altRhs
-    >>> unfoldWith "unwrap"
-    >>> unfoldWith "f" >>> bash
-  >>> fold "f"
+  >>> pathS [lamBody]
+    ( unfoldWith "wrap"
+      >>> pathS [caseAlt 1, altRhs]
+                ( unfoldWith "unwrap"
+                  >>> unfoldWith "f" >>> bash
+                )
+      >>> fold "f"
+    )
   >>> etaReduce
 

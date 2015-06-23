@@ -1,12 +1,12 @@
 import HERMIT.API
 
+import WWAssBScript
+
 script :: Shell ()
 script = do
-  eval "load-as-rewrite \"WWB\" \"WW-Ass-B.hss\""
-  eval "define-rewrite \"WWC\" \"ww-AssB-to-AssC WWB\""
   apply flattenModule
   setPath $ bindingOf "last"
-  eval "ww-split-static-arg 1 [0] [| wrap |] [| unwrap |] WWC"
+  apply $ wwSplitStaticArg 1 [0] "wrap" "unwrap" (wwAssBToAssC wwb)
   apply $ bashExtendedWith [ inlineAny [ "f", "wrap", "unwrap" ] ]
   apply unshadow
 
