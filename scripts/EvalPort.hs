@@ -1,7 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
 
--- TODO: Make sure this works with multi-line curly brace blocks
-
 import System.Environment
 import Data.Monoid ((<>))
 
@@ -16,10 +14,11 @@ getFileName = do
         _          -> error $ "Wrong number of arguments. Expected 1, got "
                                ++ show (length args)
 
-preamble :: String
-preamble
+preamble :: String -> String
+preamble moduleName
     = unlines
-      [ "import HERMIT.API"
+      [ "module " ++ moduleName ++ " where"
+      , "import HERMIT.API"
       , "script :: Shell ()"
       , "script = do"
       ]
@@ -37,4 +36,6 @@ main = do
     fileName <- getFileName
     file <- readFile fileName
 
-    putStrLn (preamble <> convert file)
+    let moduleName = (takeWhile (/='.') fileName) ++ "Script"
+
+    putStrLn (preamble moduleName <> convert file)
