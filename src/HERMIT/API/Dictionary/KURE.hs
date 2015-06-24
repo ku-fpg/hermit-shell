@@ -165,7 +165,7 @@ forward r = Transform $ method "forward" [toJSON r]
 
 -- | Apply a bidirectional rewrite backwards.
 backward :: BiRewrite LCore -> Rewrite LCore
-backward r = BiTransform $ method "backward" [toJSON r]
+backward r = Transform $ method "backward" [toJSON r]
 
 -- | Determine if a rewrite could be successfully applied.
 test :: Rewrite LCore -> Rewrite LCore
