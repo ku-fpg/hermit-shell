@@ -88,7 +88,16 @@ setPP s = ShellEffect $ method "setPP" [toJSON s]
 
 -- setPPRenderer
 
--- dump
+-- | dump <filename> <pretty-printer> <renderer> <width>
+dump :: String -> PrettyPrinter -> String -> Int -> ShellEffect
+dump fp pp r w
+  = ShellEffect
+  $ method "dump"
+           [ toJSON fp
+           , toJSON pp
+           , toJSON r
+           , toJSON w
+           ]
 
 -- | Dump named lemma to a file.
 --   "dump-lemma <pretty-printer> <lemma-name> <filename> <renderer> <width>

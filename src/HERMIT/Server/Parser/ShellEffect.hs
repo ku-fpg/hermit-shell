@@ -87,5 +87,8 @@ instance External ShellEffect where
 
     , external "proveLemma" (\nm -> CLSModify $ interactiveProof nm >> showWindow Nothing)
         [ "Proof a lemma interactively." ]
+
+    , external "dump" (\fp pp r w -> CLSModify (dump fp pp r w))
+        [ "dump <filename> <pretty-printer> <renderer> <width>" ]
    ]
 

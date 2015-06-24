@@ -964,6 +964,10 @@ instance External (RewriteH LCore) where
 
     , external "pathS" (pathR :: [Crumb] -> RewriteH LCore -> RewriteH LCore)
         [ "Scope a rewrite with a list of Crumbs" ]
+
+    , external "unsafeReplace" (promoteExprR . unsafeReplaceR :: CoreString -> RewriteH LCore)
+        [ "replace the currently focused expression with a new expression"
+        , "DOES NOT ensure that free variables in the replacement expression are in scope" ]
     ]
     where
       mkWWAssC :: RewriteH LCore -> Maybe WWAssumption
