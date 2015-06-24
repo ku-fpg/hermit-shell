@@ -36,6 +36,7 @@ testArgs =
     , ("qsort"         , "QSort.hs"  , "QSortScript.hs")
     , ("reverse"       , "Reverse.hs", "ReverseScript.hs")
     , ("new_reverse"   , "Reverse.hs", "ReverseScript.hs")
+    , ("fix-fusion"    , "Fusion.hs" , "FusionScript.hs")
     ]
 
 mkHermitShellTest :: HermitTestArgs -> TestTree
