@@ -19,6 +19,7 @@ preamble moduleName
     = unlines
       [ "module " ++ moduleName ++ " where"
       , "import HERMIT.API"
+      , ""
       , "script :: Shell ()"
       , "script = do"
       ]
