@@ -3,66 +3,83 @@ import HERMIT.API
 
 script :: Shell ()
 script = do
-  eval "flatten-module"
+  apply flattenModule
 
   -- do the w/w split
-  eval "binding-of 'hanoi"
-  eval "{ ww-split-unsafe [| wrap |] [| unwrap |] }"
+  setPath $ bindingOf "hanoi"
+  scope . apply $ wwSplitUnsafe "wrap" "unwrap"
 
-  eval "{ binding-of 'work"
-  eval "  remember origwork"
+  scope $ do
+    setPath $ bindingOf "work"
+    query $ remember "origwork"
 
-  eval "  any-call (unfold 'unwrap)"
+    apply . anyCall $ unfoldWith "unwrap"
 
-  eval "  -- establish the zero base case"
-  eval "  [ def-rhs, lam-body, lam-body, lam-body, lam-body]"
-  eval "  case-split-inline 'n"
-  eval "  { case-alt 0 ; any-call (unfold 'f) ; simplify }"
+      -- establish the zero base case
+    mapM_ sendCrumb [defRhs, lamBody, lamBody, lamBody, lamBody]
+    eval "  case-split-inline 'n"
+    scope $ do sendCrumb (caseAlt 0)
+               apply . anyCall $ unfoldWith "f"
+               apply simplify
 
-  eval "  -- establish the one base case"
-  eval "  { [case-alt 1, alt-rhs] ; case-split-inline 'a"
-  eval "    { case-alt 0 ; any-call (unfold 'f) ; simplify"
-  eval "      any-call (unfold-remembered origwork)"
-  eval "      any-call (forward (ww-assumption-A-unsafe [| wrap |] [| unwrap |]))"
-  eval "      any-call (unfold 'f)"
-  eval "      simplify"
-  eval "      any-call (unfold-rule \"[] ++\")"
-  proofCmd assume
-  --      any-call (unfold-rule "++ []")
-  eval "    }"
-  eval "    { case-alt 1 ; any-call (unfold 'f) ; simplify"
+    scope $ do
+      -- establish the one base case
+      mapM_ sendCrumb [caseAlt 1, altRhs]
+      eval "case-split-inline 'a"
 
-  eval "      any-call (unfold-remembered origwork)"
-  eval "      any-call (forward (ww-assumption-A-unsafe [| wrap |] [| unwrap |]))"
-  eval "      any-call (unfold 'f)"
-  eval "      innermost let-subst ; simplify"
+      scope $ do
+        sendCrumb (caseAlt 0) ; apply . anyCall $ unfoldWith "f" ; apply simplify
+        mapM_ apply
+              [ anyCall (unfoldRemembered "origwork")
+              , anyCall (forward (wwAssumptionAUnsafe "wrap" "unwrap"))
+              , anyCall (unfoldWith "f")
+              ]
 
-  eval "      -- recursion decrements by two, so must do this again"
-  eval "      any-call (unfold-remembered origwork)"
-  eval "      any-call (forward (ww-assumption-A-unsafe [| wrap |] [| unwrap |]))"
+        apply simplify
+        apply . anyCall $ unfoldRule "[] ++"
+        proofCmd assume
+        --      any-call (unfold-rule "++ []")
+      scope $ do
+        sendCrumb $ caseAlt 1
+        apply . anyCall $ unfoldWith "f"
+        apply simplify
 
-  eval "      -- time to let intro"
-  eval "      -- need a \"occurance 'work\" like consider"
-  eval "      { alt-rhs"
-  eval "        { arg 5"
-  eval "          { arg 1"
-  eval "            { arg 1 ; let-intro 'u }"
-  eval "            { arg 2 ; arg 2 ; let-intro 'v }"
-  eval "          }"
-  eval "          { arg 2 ; arg 2 ; arg 1 ; let-intro 'w }"
-  eval "        }"
-  eval "        innermost let-float"
-  eval "        try (reorder-lets ['u,'v,'w])"
-  eval "        any-call (fold 'u)"
-  eval "        any-call (fold 'v)"
-  --        any-call (fold 'w)
-  eval "        let-tuple 'uvw"
-  eval "        any-call (fold 'unwrap)"
-  eval "        any-call (fold-remembered origwork)"
-  eval "      }"
-  eval "    }"
-  eval "  }"
-  eval "}"
+        apply . anyCall $ unfoldRemembered "origwork"
+        apply . anyCall . forward $ wwAssumptionAUnsafe "wrap" "unwrap"
+        apply . anyCall $ unfoldWith "f"
+        apply $ innermost letSubst
+        apply simplify
+
+              -- recursion decrements by two, so must do this again
+        apply . anyCall $ unfoldRemembered "origwork"
+        apply . anyCall . forward $ wwAssumptionAUnsafe "wrap" "unwrap"
+
+              -- time to let intro
+              -- need a "occurance 'work" like consider
+        scope $ do
+          sendCrumb altRhs
+          scope $ do
+            setPath $ arg 5
+            scope $ do
+              setPath $ arg 1
+              scope $ do
+                setPath (arg 1) ; apply (letIntro "u")
+              scope $ do
+                setPath (arg 2) ; setPath (arg 2)
+                apply $ letIntro "v"
+            scope $ do
+              setPath (arg 2)
+              setPath (arg 2)
+              setPath (arg 1)
+              apply $ letIntro "w"
+          apply $ innermost letFloat
+          apply . try $ reorderLets ["u", "v", "w"]
+          apply . anyCall $ fold "u"
+          apply . anyCall $ fold "v"
+          --        any-call (fold 'w)
+          apply $ letTuple "uvw"
+          apply . anyCall $ fold "unwrap"
+          apply . anyCall $ foldRemembered "origwork"
   --innermost let-elim
-  eval "innermost let-subst"
+  apply $ innermost letSubst
 
