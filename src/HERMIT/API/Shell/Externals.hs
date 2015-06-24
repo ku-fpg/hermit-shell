@@ -90,7 +90,18 @@ setPP s = ShellEffect $ method "setPP" [toJSON s]
 
 -- dump
 
--- dump-lemma
+-- | Dump named lemma to a file.
+--   "dump-lemma <pretty-printer> <lemma-name> <filename> <renderer> <width>
+dumpLemma :: PrettyPrinter -> LemmaName -> FilePath -> String -> Int -> Transform LCoreTC ()
+dumpLemma pp nm fp r w
+  = Transform
+  $ method "dumpLemma"
+           [ toJSON pp
+           , toJSON nm
+           , toJSON fp
+           , toJSON r
+           , toJSON w
+           ]
 
 -- | set the width of the screen
 setPPWidth :: Int -> ShellEffect

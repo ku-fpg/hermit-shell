@@ -20,6 +20,7 @@ import           HERMIT.Lemma
 import           HERMIT.Name
 import           HERMIT.ParserCore
 import           HERMIT.PrettyPrinter.Common
+import           HERMIT.Shell.ShellEffect
 import           HERMIT.Core (Crumb)
 
 import           HERMIT.Server.Parser.Name ()
@@ -1252,6 +1253,11 @@ instance External (TransformH LCoreTC ()) where
         [ "Compare the definitions of two in-scope identifiers for alpha equality."] .+ Query .+ Predicate
     , external "compareCoreAt" (compareCoreAtT ::  TransformH LCoreTC LocalPathH -> TransformH LCoreTC LocalPathH -> TransformH LCoreTC ())
         [ "Compare the core fragments at the end of the given paths for alpha-equality."] .+ Query .+ Predicate
+
+      -- HERMIT.API.SHell.Externals
+    , external "dumpLemma" ((\pp nm fp r w -> getLemmaByNameT nm >>> liftPrettyH (pOptions pp) (ppLemmaT pp nm) >>> dumpT fp pp r w) :: PrettyPrinter -> LemmaName -> FilePath -> String -> Int -> TransformH LCoreTC ())
+        [ "Dump named lemma to a file."
+        , "dumpLemma <pretty-printer> <lemma-name> <filename> <renderer> <width>" ]
     ]
 
 
