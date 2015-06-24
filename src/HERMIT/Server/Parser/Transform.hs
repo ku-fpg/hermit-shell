@@ -968,6 +968,9 @@ instance External (RewriteH LCore) where
     , external "unsafeReplace" (promoteExprR . unsafeReplaceR :: CoreString -> RewriteH LCore)
         [ "replace the currently focused expression with a new expression"
         , "DOES NOT ensure that free variables in the replacement expression are in scope" ]
+
+    , external "serialise" (serialise :: [RewriteH LCore] -> RewriteH LCore)
+        [ "Sequence Rewrites from left to right" ]
     ]
     where
       mkWWAssC :: RewriteH LCore -> Maybe WWAssumption
@@ -1026,6 +1029,9 @@ instance External (RewriteH LCoreTC) where
 
     , external "unshadowQuantified" (promoteClauseR unshadowClauseR :: RewriteH LCoreTC)
         [ "Unshadow a quantified clause." ]
+
+    , external "serialise" (serialise :: [RewriteH LCoreTC] -> RewriteH LCoreTC)
+        [ "Sequence Rewrites from left to right" ]
     ]
 
 -------------------------------------------------------------------------------

@@ -5,6 +5,7 @@ module HERMIT.API.Dictionary.KURE where
 
 import Data.Aeson
 import Data.Proxy
+import Data.Foldable (Foldable, toList)
 
 import HERMIT.Kure (TransformH)
 
@@ -201,3 +202,11 @@ atPath pth = Transform $ method "atPath" [toJSON pth]
 -- | return the expression found at a projected, given path
 atPathProj :: Transform LCoreTC LocalPath -> Rewrite LCore
 atPathProj pth = Transform $ method "atPathProj" [toJSON pth]
+
+-- XXX: Should this type be specialized to lists for clarity?
+-- NOTE: Due to the fact that `a` is universally quantified,
+--       this is difficult to keep the server-side implementation
+--       up to date.
+serialise :: Foldable f => f (Rewrite a) -> Rewrite a
+serialise rs = Transform $ method "serialise" [toJSON $ toList rs]
+
