@@ -3,9 +3,6 @@ module MeanScript where
 
 import HERMIT.API
 
---test :: Char
---test = ()
---
 script :: Shell ()
 script = do
   scope $ do
