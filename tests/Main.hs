@@ -37,6 +37,7 @@ testArgs =
     , ("reverse"       , "Reverse.hs", "ReverseScript.hs")
     , ("new_reverse"   , "Reverse.hs", "ReverseScript.hs")
     , ("fix-fusion"    , "Fusion.hs" , "FusionScript.hs")
+    , ("hanoi"         , "Hanoi.hs"  , "HanoiScript.hs")
     ]
 
 mkHermitShellTest :: HermitTestArgs -> TestTree

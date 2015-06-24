@@ -1,0 +1,61 @@
+flatten-module
+
+-- do the w/w split
+binding-of 'hanoi
+{ ww-split-unsafe [| wrap |] [| unwrap |] }
+
+{ binding-of 'work
+  remember origwork
+
+  any-call (unfold 'unwrap)
+
+  -- establish the zero base case
+  [ def-rhs, lam-body, lam-body, lam-body, lam-body]
+  case-split-inline 'n
+  { case-alt 0 ; any-call (unfold 'f) ; simplify }
+
+  -- establish the one base case
+  { [case-alt 1, alt-rhs] ; case-split-inline 'a
+    { case-alt 0 ; any-call (unfold 'f) ; simplify
+      any-call (unfold-remembered origwork)
+      any-call (forward (ww-assumption-A-unsafe [| wrap |] [| unwrap |]))
+      any-call (unfold 'f)
+      simplify
+      any-call (unfold-rule "[] ++")
+--      any-call (unfold-rule "++ []")
+    }
+    { case-alt 1 ; any-call (unfold 'f) ; simplify
+
+      any-call (unfold-remembered origwork)
+      any-call (forward (ww-assumption-A-unsafe [| wrap |] [| unwrap |]))
+      any-call (unfold 'f)
+      innermost let-subst ; simplify
+
+      -- recursion decrements by two, so must do this again
+      any-call (unfold-remembered origwork)
+      any-call (forward (ww-assumption-A-unsafe [| wrap |] [| unwrap |]))
+
+      -- time to let intro
+      -- need a "occurance 'work" like consider
+      { alt-rhs
+        { arg 5
+          { arg 1
+            { arg 1 ; let-intro 'u }
+            { arg 2 ; arg 2 ; let-intro 'v }
+          }
+          { arg 2 ; arg 2 ; arg 1 ; let-intro 'w }
+        }
+        innermost let-float
+        try (reorder-lets ['u,'v,'w])
+        any-call (fold 'u)
+        any-call (fold 'v)
+--        any-call (fold 'w)
+        let-tuple 'uvw
+        any-call (fold 'unwrap)
+        any-call (fold-remembered origwork)
+      }
+    }
+  }
+}
+--innermost let-elim
+innermost let-subst
