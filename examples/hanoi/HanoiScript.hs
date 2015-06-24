@@ -37,7 +37,8 @@ script = do
 
         apply simplify
         apply . anyCall $ unfoldRule "[] ++"
-        proofCmd assume
+        apply . anyCall $ unfoldRule "[] ++"
+        proofCmd assume -- TODO: Figure out what is being assumed here
         --      any-call (unfold-rule "++ []")
       scope $ do
         sendCrumb $ caseAlt 1

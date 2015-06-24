@@ -22,6 +22,7 @@ binding-of 'hanoi
       any-call (unfold 'f)
       simplify
       any-call (unfold-rule "[] ++")
+      stop-script
 --      any-call (unfold-rule "++ []")
     }
     { case-alt 1 ; any-call (unfold 'f) ; simplify
