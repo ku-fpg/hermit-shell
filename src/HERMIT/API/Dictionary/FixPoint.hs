@@ -32,9 +32,13 @@ fixFusionRule :: String -> String -> String
               -> Rewrite LCore -> Rewrite LCore
               -> Rewrite LCore -> BiRewrite LCore
 fixFusionRule f g h r1 r2 strictf = BiTransform $ method "fixFusionRule"
-    [ toJSON (Just (r1, r2))
-    , toJSON (Just strictf)
-    , toJSON f, toJSON g, toJSON h ]
+    [ toJSON f
+    , toJSON g
+    , toJSON h
+    , toJSON r1
+    , toJSON r2
+    , toJSON strictf
+    ]
 
 {-| 
   (Unsafe) Fixed-point Fusion Rule
