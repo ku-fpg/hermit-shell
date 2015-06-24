@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+module RevScript where
 import HERMIT.API
 import HERMIT.API.Types
 

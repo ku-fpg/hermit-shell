@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+module FibScript where
 import HERMIT.API
 
 import WWAssAScript

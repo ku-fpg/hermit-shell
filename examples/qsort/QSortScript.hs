@@ -1,3 +1,4 @@
+module QSortScript where
 import HERMIT.API
 import Prelude hiding (repeat) -- TODO: Find a way to avoid this.
 

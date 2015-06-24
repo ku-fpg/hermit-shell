@@ -1,3 +1,4 @@
+module LastScript where
 import HERMIT.API
 
 import WWAssBScript

@@ -1,3 +1,4 @@
+module FlattenScript where
 import HERMIT.API
 import HERMIT.API.Types
 

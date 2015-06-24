@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+module EvalScript where
 import HERMIT.API
 
 import WWAssAScript

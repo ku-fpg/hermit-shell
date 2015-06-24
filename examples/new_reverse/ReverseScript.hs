@@ -1,3 +1,4 @@
+module ReverseScript where
 import Prelude hiding (repeat, replicate)
 
 import HERMIT.API

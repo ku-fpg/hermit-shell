@@ -1,3 +1,4 @@
+module NewLastScript where
 import Prelude hiding (repeat)
 
 import HERMIT.API

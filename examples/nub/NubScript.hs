@@ -1,3 +1,4 @@
+module NubScript where
 import HERMIT.API
 
 script :: Shell ()

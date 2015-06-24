@@ -60,6 +60,17 @@ mkHermitShellTest (dir, hs, script) =
                                , "cd"
                                , pathp
                                , ";"
+
+                               -- TODO: This is a hack to get tests
+                               --       that fail to type-check, etc
+                               --       to actually fail. Replace it
+                               --       with something more robust.
+                               , "ghc"
+                               , "-fno-code"
+                               , "-XOverloadedStrings"
+                               , script
+                               , "&&"
+
                                , "cabal"
                                , sandboxCfgPath
                                , "exec"
