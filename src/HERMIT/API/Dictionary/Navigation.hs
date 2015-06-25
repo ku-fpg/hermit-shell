@@ -4,6 +4,7 @@ module HERMIT.API.Dictionary.Navigation where
 import Data.Aeson
 
 import HERMIT.API.Types
+import HERMIT.Dictionary.Navigation
 
 -- | Find the path to the RHS of the binding of the named variable.
 rhsOf :: Name -> Transform LCoreTC LocalPath

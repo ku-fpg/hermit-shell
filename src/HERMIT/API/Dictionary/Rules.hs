@@ -8,6 +8,7 @@ import Data.Aeson
 showRules :: Transform LCore String
 showRules = Transform $ method "showRules" []
 
+{-
 -- | Display details on the named rule.
 showRule :: PrettyPrinter -> RuleName -> Transform LCoreTC Doc
 showRule pp rule
@@ -15,6 +16,7 @@ showRule pp rule
                        [ toJSON pp
                        , toJSON rule
                        ]
+-}
 
 -- | Apply a named GHC rule right-to-left.
 foldRule :: RuleName -> Rewrite LCore
@@ -42,6 +44,7 @@ unfoldRulesUnsafe :: [RuleName] -> Rewrite LCore
 unfoldRulesUnsafe names
   = Transform $ method "unfoldRulesUnsafe" [ toJSON names ]
 
+{-
 -- | Create a lemma from a GHC RULE.
 ruleToLemma :: PrettyPrinter -> RuleName -> Transform LCore Doc
 ruleToLemma pp name
@@ -49,6 +52,7 @@ ruleToLemma pp name
                        [ toJSON pp
                        , toJSON name
                        ]
+-}
 
 -- | Run GHC's SpecConstr pass, which performs call pattern specialization.
 specConstr :: Rewrite LCore

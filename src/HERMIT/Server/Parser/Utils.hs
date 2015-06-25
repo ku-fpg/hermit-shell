@@ -6,7 +6,6 @@
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE ViewPatterns #-}
 {-# LANGUAGE StandaloneDeriving #-}
-{-# LANGUAGE DeriveGeneric #-}
 
 #include "overlap.h"
 __LANGUAGE_OVERLAPPING_INSTANCES__
@@ -24,17 +23,16 @@ import           Control.Monad (liftM)
 import           Data.Foldable (toList)
 
 import           Data.Aeson as Aeson
-import           Data.Aeson.Types (parseMaybe, Parser, defaultOptions)
+import           Data.Aeson.Types (parseMaybe, Parser)
 import           Data.Text (Text, unpack, pack)
 
 import qualified Data.HashMap.Strict as HM
 import           Data.Typeable
-import           GHC.Generics (Generic)
 
 import           HERMIT.External (CmdTag(..))
 import           HERMIT.Dictionary.Navigation (Considerable(..))
 import           HERMIT.Dictionary.Rules (RuleName(..))
-import           HERMIT.PrettyPrinter.Common (PrettyPrinter)
+import           HERMIT.Lemma
 
 --import           Debug.Trace
 
@@ -121,14 +119,9 @@ instance (External a, External b) => External (Either a b) where
   parseExternal _ = fail "parseExternal: Either"
 
 -----------------------------------------------------------------
-instance External PrettyPrinter where
-  parseExternal = undefined -- TODO: Implement
-
--- XXX: Should this go here?
-deriving instance Generic Considerable
-instance FromJSON Considerable where
-  parseJSON = genericParseJSON defaultOptions
-
 instance External Considerable where
   parseExternal = parseJSON 
+
+instance External Used where
+  parseExternal = parseJSON
 

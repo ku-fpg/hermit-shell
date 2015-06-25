@@ -10,8 +10,6 @@ import Data.Aeson
 import HERMIT.API.Types
 import HERMIT.API.Shell.Externals (beginScope, endScope)
 
-import HERMIT.API.Dictionary.KURE ((>>>))
-
 -- | redisplays current state.
 display :: Shell ()
 display = Shell $ method "display" []
