@@ -46,8 +46,10 @@ letsBody = Transform $ method "letsBody" []
 progEnd :: Transform LCore LocalPath
 progEnd = Transform $ method "progEnd" []
 
--- -- | Focus on the parent of another focal point.
--- parentOf :: Transform LCore LocalPath -> Transform LCore LocalPath
---
--- -- | Focus on the parent of another focal point.
--- parentOf :: Transform LCoreTC LocalPath -> Transform LCoreTC LocalPath
+-- | Focus on the parent of another focal point.
+parentOfCore :: Transform LCore LocalPath -> Transform LCore LocalPath
+parentOfCore t = Transform $ method "parentOfCore" [toJSON t]
+
+-- | Focus on the parent of another focal point.
+parentOfCoreTC :: Transform LCoreTC LocalPath -> Transform LCoreTC LocalPath
+parentOfCoreTC t = Transform $ method "parentOfCoreTC" [toJSON t]

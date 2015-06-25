@@ -731,100 +731,186 @@ instance External (RewriteH LCore) where
           "patterns to the case binder." ]
 
 -- HERMIT.API.Dictionary.Local.Cast
-    , external "castElim" (promoteExprR castElimR :: RewriteH LCore)
-        [ "castElimRefl <+ castElimSym" ] .+ Shallow -- don't include in "Bash", as sub-rewrites are tagged "Bash" already.
-    , external "castElimRefl" (promoteExprR castElimReflR :: RewriteH LCore)
+    , external "castElim" 
+        (promoteExprR castElimR :: RewriteH LCore)
+        [ "castElimRefl <+ castElimSym" ] .+ Shallow
+
+    , external "castElimRefl" 
+        (promoteExprR castElimReflR :: RewriteH LCore)
         [ "cast e co ==> e ; if co is a reflexive coercion" ] .+ Shallow
-    , external "castElimSym" (promoteExprR castElimSymR :: RewriteH LCore)
-        [ "removes pairs of symmetric casts" ]                .+ Shallow
-    , external "castElimSymPlus" (promoteExprR castElimSymPlusR :: RewriteH LCore)
-        [ "removes pairs of symmetric casts possibly separated by let or case forms" ] .+ Deep .+ TODO
-    , external "castFloatApp" (promoteExprR castFloatAppR :: RewriteH LCore)
+
+    , external "castElimSym" 
+        (promoteExprR castElimSymR :: RewriteH LCore)
+        [ "removes pairs of symmetric casts" ] .+ Shallow
+
+    , external "castElimSymPlus" 
+        (promoteExprR castElimSymPlusR :: RewriteH LCore)
+        [ "removes pairs of symmetric casts possibly separated by let " ++
+          "or case forms" ] .+ Deep .+ TODO
+
+    , external "castFloatApp" 
+        (promoteExprR castFloatAppR :: RewriteH LCore)
         [ "(cast e (c1 -> c2)) x ==> cast (e (cast x (sym c1))) c2" ] .+ Shallow
-    , external "castFloatLam" (promoteExprR castFloatLamR :: RewriteH LCore)
-        [ "\\ x::a -> cast x (a -> b) ==> cast (\\x::a -> x) ((a -> a) -> (a -> b))" ] .+ Shallow
-    , external "castElimUnsafe" (promoteExprR castElimUnsafeR :: RewriteH LCore)
-        [ "removes casts regardless of whether it is safe to do so" ] .+ Shallow .+ Experiment .+ Unsafe .+ TODO
 
-      -- HERMIT.API.Dictionary.Local.Let
-    , external "letSubst" (promoteExprR letSubstR :: RewriteH LCore)
+    , external "castFloatLam" 
+        (promoteExprR castFloatLamR :: RewriteH LCore)
+        [ "\\ x::a -> cast x (a -> b) ==> " ++
+          "cast (\\x::a -> x) ((a -> a) -> (a -> b))" ] .+ Shallow
+
+    , external "castElimUnsafe" 
+        (promoteExprR castElimUnsafeR :: RewriteH LCore)
+        [ "removes casts regardless of whether it is safe to do so" 
+        ] .+ Shallow .+ Experiment .+ Unsafe .+ TODO
+
+-- HERMIT.API.Dictionary.Local.Let
+    , external "letSubst" 
+        (promoteExprR letSubstR :: RewriteH LCore)
         [ "Let substitution: (let x = e1 in e2) ==> (e2[e1/x])"
-        , "x must not be free in e1." ]                                         .+ Deep .+ Eval
-    , external "letSubstSafe" (promoteExprR letSubstSafeR :: RewriteH LCore)
+        , "x must not be free in e1." ] .+ Deep .+ Eval
+
+    , external "letSubstSafe" 
+        (promoteExprR letSubstSafeR :: RewriteH LCore)
         [ "Safe let substitution"
-        , "let x = e1 in e2, safe to inline without duplicating work ==> e2[e1/x],"
-        , "x must not be free in e1." ]                                         .+ Deep .+ Eval
-    , external "letNonrecSubstSafe" (promoteExprR letNonRecSubstSafeR :: RewriteH LCore)
-        [ "As letSubstSafe, but does not try to convert a recursive let into a nonRecursive let first." ] .+ Deep .+ Eval
-    , external "letIntro" (promoteExprR . letIntroR :: String -> RewriteH LCore)
-        [ "e => (let v = e in v), name of v is provided" ]                      .+ Shallow .+ Introduce
-    , external "letIntroUnfolding" (promoteExprR . letIntroUnfoldingR :: HermitName -> RewriteH LCore)
+        , "let x = e1 in e2, safe to inline without duplicating work ==> " ++
+          "e2[e1/x],"
+        , "x must not be free in e1." ] .+ Deep .+ Eval
+
+    , external "letNonrecSubstSafe" 
+        (promoteExprR letNonRecSubstSafeR :: RewriteH LCore)
+        [ "As letSubstSafe, but does not try to convert a recursive let " ++
+          "into a nonRecursive let first." ] .+ Deep .+ Eval
+
+    , external "letIntro" 
+        (promoteExprR . letIntroR :: String -> RewriteH LCore)
+        [ "e => (let v = e in v), name of v is provided" 
+        ] .+ Shallow .+ Introduce
+
+    , external "letIntroUnfolding" 
+        (promoteExprR . letIntroUnfoldingR :: HermitName -> RewriteH LCore)
         [ "e => let f' = defn[f'/f] in e[f'/f], name of f is provided" ]
-    , external "letElim" (promoteExprR letElimR :: RewriteH LCore)
+
+    , external "letElim" 
+        (promoteExprR letElimR :: RewriteH LCore)
         [ "Remove an unused let binding."
-        , "(let v = e1 in e2) ==> e2, if v is not free in e1 or e2." ]          .+ Eval .+ Shallow
-    , external "letFloatApp" (promoteExprR letFloatAppR :: RewriteH LCore)
-        [ "(let v = ev in e) x ==> let v = ev in e x" ]                         .+ Commute .+ Shallow
-    , external "letFloatArg" (promoteExprR letFloatArgR :: RewriteH LCore)
-        [ "f (let v = ev in e) ==> let v = ev in f e" ]                         .+ Commute .+ Shallow
-    , external "letFloatLam" (promoteExprR letFloatLamR :: RewriteH LCore)
+        , "(let v = e1 in e2) ==> e2, if v is not free in e1 or e2." 
+        ] .+ Eval .+ Shallow
+
+    , external "letFloatApp" 
+        (promoteExprR letFloatAppR :: RewriteH LCore)
+        [ "(let v = ev in e) x ==> let v = ev in e x" ] .+ Commute .+ Shallow
+
+    , external "letFloatArg" 
+        (promoteExprR letFloatArgR :: RewriteH LCore)
+        [ "f (let v = ev in e) ==> let v = ev in f e" ] .+ Commute .+ Shallow
+
+    , external "letFloatLam" 
+        (promoteExprR letFloatLamR :: RewriteH LCore)
         [ "The Full Laziness Transformation"
-        , "(\\ v1 -> let v2 = e1 in e2)  ==>  let v2 = e1 in (\\ v1 -> e2), if v1 is not free in e2."
-        , "If v1 = v2 then v1 will be alphaRenamed." ]                         .+ Commute .+ Shallow
-    , external "letFloatLet" (promoteExprR letFloatLetR :: RewriteH LCore)
-        [ "let v = (let w = ew in ev) in e ==> let w = ew in let v = ev in e" ] .+ Commute .+ Shallow
-    , external "letFloatCase" (promoteExprR letFloatCaseR :: RewriteH LCore)
-        [ "case (let v = ev in e) of ... ==> let v = ev in case e of ..." ]     .+ Commute .+ Shallow .+ Eval
---     , external "letFloatCaseAlt" (promoteExprR (letFloatCaseAltR Nothing) :: RewriteH LCore)
---         [ "case s of { ... ; p -> let v = ev in e ; ... } "
---         , "==> let v = ev in case s of { ... ; p -> e ; ... } " ]               .+ Commute .+ Shallow .+ Eval
---     , external "letFloatCaseAlt" (promoteExprR . letFloatCaseAltR . Just :: Int -> RewriteH LCore)
---         [ "Float a let binding from specified alternative."
---         , "case s of { ... ; p -> let v = ev in e ; ... } "
---         , "==> let v = ev in case s of { ... ; p -> e ; ... } " ]               .+ Commute .+ Shallow .+ Eval
-    , external "letFloatCast" (promoteExprR letFloatCastR :: RewriteH LCore)
-        [ "cast (let bnds in e) co ==> let bnds in cast e co" ]                 .+ Commute .+ Shallow
-    , external "letFloatTop" (promoteProgR letFloatTopR :: RewriteH LCore)
-        [ "v = (let bds in e) : prog ==> bds : v = e : prog" ]                  .+ Commute .+ Shallow
-    , external "letFloat" (promoteProgR letFloatTopR <+ promoteExprR letFloatExprR :: RewriteH LCore)
-        [ "Float a Let whatever the context." ]                                 .+ Commute .+ Shallow  -- Don't include in bash, as each subRewrite is tagged "Bash" already.
-    , external "letToCase" (promoteExprR letToCaseR :: RewriteH LCore)
-        [ "let v = ev in e ==> case ev of v -> e" ]                             .+ Commute .+ Shallow .+ PreCondition
-    , external "letFloatIn" (promoteExprR letFloatInR >+> anybuR (promoteExprR letElimR) :: RewriteH LCore)
-        [ "FloatIn a let if possible." ]                                        .+ Commute .+ Shallow
-    , external "letFloatInApp" ((promoteExprR letFloatInAppR >+> anybuR (promoteExprR letElimR)) :: RewriteH LCore)
-        [ "let v = ev in f a ==> (let v = ev in f) (let v = ev in a)" ]         .+ Commute .+ Shallow
-    , external "letFloatInCase" ((promoteExprR letFloatInCaseR >+> anybuR (promoteExprR letElimR)) :: RewriteH LCore)
-        [ "let v = ev in case s of p -> e ==> case (let v = ev in s) of p -> let v = ev in e"
-        , "if v does not shadow a pattern binder in p" ]                        .+ Commute .+ Shallow
-    , external "letFloatInLam" ((promoteExprR letFloatInLamR >+> anybuR (promoteExprR letElimR)) :: RewriteH LCore)
+        , "(\\ v1 -> let v2 = e1 in e2)  ==>  let v2 = e1 in (\\ v1 -> e2), " ++
+          "if v1 is not free in e2."
+        , "If v1 = v2 then v1 will be alphaRenamed." ] .+ Commute .+ Shallow
+
+    , external "letFloatLet" 
+        (promoteExprR letFloatLetR :: RewriteH LCore)
+        [ "let v = (let w = ew in ev) in e ==> let w = ew in let v = ev in e" 
+        ] .+ Commute .+ Shallow
+
+    , external "letFloatCase" 
+        (promoteExprR letFloatCaseR :: RewriteH LCore)
+        [ "case (let v = ev in e) of ... ==> let v = ev in case e of ..." 
+        ] .+ Commute .+ Shallow .+ Eval
+
+    , external "letFloatCaseAlt" 
+        (promoteExprR . letFloatCaseAltR :: Maybe Int -> RewriteH LCore)
+        [ "case s of { ... ; p -> let v = ev in e ; ... } "
+        , "==> let v = ev in case s of { ... ; p -> e ; ... } " 
+        ] .+ Commute .+ Shallow .+ Eval
+
+    , external "letFloatCast" 
+        (promoteExprR letFloatCastR :: RewriteH LCore)
+        [ "cast (let bnds in e) co ==> let bnds in cast e co" 
+        ] .+ Commute .+ Shallow
+
+    , external "letFloatTop" 
+        (promoteProgR letFloatTopR :: RewriteH LCore)
+        [ "v = (let bds in e) : prog ==> bds : v = e : prog" 
+        ] .+ Commute .+ Shallow
+
+    , external "letFloat" 
+        (promoteProgR letFloatTopR <+ 
+         promoteExprR letFloatExprR :: RewriteH LCore)
+        [ "Float a Let whatever the context." ] .+ Commute .+ Shallow
+
+    , external "letToCase" 
+        (promoteExprR letToCaseR :: RewriteH LCore)
+        [ "let v = ev in e ==> case ev of v -> e" 
+        ] .+ Commute .+ Shallow .+ PreCondition
+
+    , external "letFloatIn" 
+        (promoteExprR letFloatInR >+> 
+         anybuR (promoteExprR letElimR) :: RewriteH LCore)
+        [ "FloatIn a let if possible." ] .+ Commute .+ Shallow
+
+    , external "letFloatInApp" 
+        ((promoteExprR letFloatInAppR >+> 
+          anybuR (promoteExprR letElimR)) :: RewriteH LCore)
+        [ "let v = ev in f a ==> (let v = ev in f) (let v = ev in a)" 
+        ] .+ Commute .+ Shallow
+
+    , external "letFloatInCase" 
+        ((promoteExprR letFloatInCaseR >+> 
+          anybuR (promoteExprR letElimR)) :: RewriteH LCore)
+        [ "let v = ev in case s of p -> e ==> " ++
+          "case (let v = ev in s) of p -> let v = ev in e"
+        , "if v does not shadow a pattern binder in p" ] .+ Commute .+ Shallow
+
+    , external "letFloatInLam" 
+        ((promoteExprR letFloatInLamR >+> 
+          anybuR (promoteExprR letElimR)) :: RewriteH LCore)
         [ "let v = ev in \\ x -> e ==> \\ x -> let v = ev in e"
-        , "if v does not shadow x" ]                                            .+ Commute .+ Shallow
-     , external "reorderLets" (promoteExprR . reorderNonRecLetsR :: [String] -> RewriteH LCore)
+        , "if v does not shadow x" ] .+ Commute .+ Shallow
+
+     , external "reorderLets" 
+         (promoteExprR . reorderNonRecLetsR :: [String] -> RewriteH LCore)
          [ "Reorder a sequence of nested nonRecursive let bindings."
-         , "The argument list should contain the letBound variables, in the desired order." ]
-    , external "letTuple" (promoteExprR . letTupleR :: String -> RewriteH LCore)
+         , "The argument list should contain the letBound variables, in " ++
+           "the desired order." ]
+
+    , external "letTuple" 
+        (promoteExprR . letTupleR :: String -> RewriteH LCore)
         [ "Combine nested nonRecursive lets into case of a tuple."
-        , "E.g. let {v1 = e1 ; v2 = e2 ; v3 = e3} in body ==> case (e1,e2,e3) of {(v1,v2,v3) -> body}" ] .+ Commute
-    , external "progBindElim" (promoteProgR progBindElimR :: RewriteH LCore)
-        [ "Remove unused topLevel binding(s)."
-        , "progBindNonrecElim <+ progBindRecElim" ]                       .+ Eval .+ Shallow
-    , external "progBindNonrecElim" (promoteProgR progBindNonRecElimR :: RewriteH LCore)
-        [ "Remove unused topLevel binding(s)."
-        , "v = e : prog ==> prog, if v is not free in prog and not exported." ] .+ Eval .+ Shallow
-    , external "progBindRecElim" (promoteProgR progBindRecElimR :: RewriteH LCore)
-        [ "Remove unused topLevel binding(s)."
-        , "v+ = e+ : prog ==> v* = e* : prog, where v* is a subset of v+ consisting"
-        , "of vs that are free in prog or e+, or exported." ]                   .+ Eval .+ Shallow
+        , "E.g. let {v1 = e1 ; v2 = e2 ; v3 = e3} in body ==> " ++
+          "case (e1,e2,e3) of {(v1,v2,v3) -> body}" ] .+ Commute
 
-      -- HERMIT.API.Dictionary.New
-    , external "nonrecIntro" ((\ s str -> promoteCoreR (nonRecIntro s str)) :: String -> CoreString -> RewriteH LCore)
-                [ "Introduce a new non-recursive binding.  Only works at Expression or Program nodes."
-                , "nonrec-into 'v [| e |]"
-                , "body ==> let v = e in body"
-                ] .+ Introduce .+ Shallow
+    , external "progBindElim" 
+        (promoteProgR progBindElimR :: RewriteH LCore)
+        [ "Remove unused topLevel binding(s)."
+        , "progBindNonrecElim <+ progBindRecElim" ] .+ Eval .+ Shallow
 
-      -- ???
+    , external "progBindNonrecElim" 
+        (promoteProgR progBindNonRecElimR :: RewriteH LCore)
+        [ "Remove unused topLevel binding(s)."
+        , "v = e : prog ==> prog, if v is not free in prog and not exported." 
+        ] .+ Eval .+ Shallow
+
+    , external "progBindRecElim" 
+        (promoteProgR progBindRecElimR :: RewriteH LCore)
+        [ "Remove unused topLevel binding(s)."
+        , "v+ = e+ : prog ==> v* = e* : prog, where v* is a subset of " ++
+          "v+ consisting"
+        , "of vs that are free in prog or e+, or exported." ] .+ Eval .+ Shallow
+
+-- HERMIT.API.Dictionary.New
+    , external "nonrecIntro" 
+        ((\ s str -> promoteCoreR (nonRecIntro s str)) 
+         :: String -> CoreString -> RewriteH LCore)
+        [ "Introduce a new non-recursive binding.  Only works at " ++
+          "Expression or Program nodes."
+        , "nonrec-into 'v [| e |]"
+        , "body ==> let v = e in body"
+        ] .+ Introduce .+ Shallow
+
+      -- HERMIT.API.Dictionary.Remembered
     , external "unfoldRemembered" (promoteExprR . unfoldRememberedR Obligation :: LemmaName -> RewriteH LCore)
         [ "Unfold a remembered definition." ] .+ Deep .+ Context
 
@@ -1122,40 +1208,67 @@ instance External (RewriteH LCoreTC) where
 instance External (TransformH LCore LocalPathH) where
   parseExternals =
     [
-      -- HERMIT.API.Dictionary.Navigation
---       external "consider" (considerConstructT :: Considerable -> TransformH LCore LocalPathH)
---         [ "consider <c> focuses on the first construct <c>.", recognizedConsiderables ]
-      external "arg" (promoteExprT . nthArgPath :: Int -> TransformH LCore LocalPathH)
-        [ "arg n focuses on the (n-1)th argument of a nested application." ]
-    , external "lamsBody" (promoteExprT lamsBodyT :: TransformH LCore LocalPathH)
-        [ "Descend into the body after a sequence of lambdas." ]
-    , external "letsBody" (promoteExprT letsBodyT :: TransformH LCore LocalPathH)
-        [ "Descend into the body after a sequence of let bindings." ]
-    , external "progEnd" (promoteModGutsT gutsProgEndT <+ promoteProgT progEndT :: TransformH LCore LocalPathH)
-        [ "Descend to the end of a program." ]
-{-    , external "parentOf" (parentOfT :: TransformH LCore LocalPathH -> TransformH LCore LocalPathH)
-        [ "Focus on the parent of another focal point." ]  -}
+-- HERMIT.API.Dictionary.Navigation
+      external "consider" 
+        (considerConstructT :: Considerable -> TransformH LCore LocalPathH)
+        [ "consider <c> focuses on the first construct <c>."
+        , recognizedConsiderables ]
 
-    , external "consider" (considerConstructT :: Considerable -> TransformH LCore LocalPathH)
-            [ "consider <c> focuses on the first construct <c>.", recognizedConsiderables ]
+    , external "arg" 
+        (promoteExprT . nthArgPath :: Int -> TransformH LCore LocalPathH)
+        [ "arg n focuses on the (n-1)th argument of a nested application." ]
+
+    , external "lamsBody" 
+        (promoteExprT lamsBodyT :: TransformH LCore LocalPathH)
+        [ "Descend into the body after a sequence of lambdas." ]
+
+    , external "letsBody" 
+        (promoteExprT letsBodyT :: TransformH LCore LocalPathH)
+        [ "Descend into the body after a sequence of let bindings." ]
+
+    , external "progEnd" 
+        (promoteModGutsT gutsProgEndT <+ 
+         promoteProgT progEndT :: TransformH LCore LocalPathH)
+        [ "Descend to the end of a program." ]
+
+    , external "parentOfCore" 
+        (parentOfT :: TransformH LCore LocalPathH 
+                   -> TransformH LCore LocalPathH)
+        [ "Focus on the parent of another focal point." ]
     ]
 
 instance External (TransformH LCoreTC LocalPathH) where
   parseExternals =
     [
-      -- HERMIT.API.Dictionary.Navigation
-      external "rhsOf" (rhsOfT . mkRhsOfPred :: RhsOfName -> TransformH LCoreTC LocalPathH)
+-- HERMIT.API.Dictionary.Navigation
+      external "rhsOf" 
+        (rhsOfT . mkRhsOfPred :: RhsOfName -> TransformH LCoreTC LocalPathH)
         [ "Find the path to the RHS of the binding of the named variable." ]
-    , external "bindingGroupOf" (bindingGroupOfT . cmpString2Var :: String -> TransformH LCoreTC LocalPathH)
+
+    , external "bindingGroupOf" 
+        (bindingGroupOfT . 
+         cmpString2Var :: String -> TransformH LCoreTC LocalPathH)
         [ "Find the path to the binding group of the named variable." ]
-    , external "bindingOf" (bindingOfT . mkBindingPred :: BindingName -> TransformH LCoreTC LocalPathH)
+
+    , external "bindingOf" 
+        (bindingOfT . 
+         mkBindingPred :: BindingName -> TransformH LCoreTC LocalPathH)
         [ "Find the path to the binding of the named variable." ]
-    , external "occurrenceOf" (occurrenceOfT . mkOccPred :: OccurrenceName -> TransformH LCoreTC LocalPathH)
+
+    , external "occurrenceOf" 
+        (occurrenceOfT . 
+         mkOccPred :: OccurrenceName -> TransformH LCoreTC LocalPathH)
         [ "Find the path to the first occurrence of the named variable." ]
-    , external "applicationOf" (applicationOfT . mkOccPred :: OccurrenceName -> TransformH LCoreTC LocalPathH)
+
+    , external "applicationOf" 
+        (applicationOfT . 
+         mkOccPred :: OccurrenceName -> TransformH LCoreTC LocalPathH)
         [ "Find the path to the first application of the named variable." ]
---     , external "parentOf" (parentOfT :: TransformH LCoreTC LocalPathH -> TransformH LCoreTC LocalPathH)
---         [ "Focus on the parent of another focal point." ]
+
+    , external "parentOfCoreTC" 
+        (parentOfT :: TransformH LCoreTC LocalPathH 
+                   -> TransformH LCoreTC LocalPathH)
+        [ "Focus on the parent of another focal point." ]
     ]
 
 instance External (TransformH LCoreTC String) where
@@ -1191,8 +1304,9 @@ instance External (TransformH LCoreTC String) where
     , external "showRules" (rulesHelpListT :: TransformH LCoreTC String)
         [ "List all the rules in scope." ] .+ Query
 
-      -- HERMIT.API.Dictionary.Query
-    , external "info" (promoteCoreTCT infoT :: TransformH LCoreTC String)
+-- HERMIT.API.Dictionary.Query
+    , external "info" 
+        (promoteCoreTCT infoT :: TransformH LCoreTC String)
         [ "Display information about the current node." ] .+ Query
     ]
 
@@ -1222,12 +1336,13 @@ instance External (TransformH LCore ()) where
        ] .+ Predicate
 
 -- HERMIT.API.Dictionary.New
-    , external "var" (promoteExprT . isVar :: String -> TransformH LCore ())
-                [ "var '<v> returns successfully for variable v, and fails otherwise."
-                , "Useful in combination with \"when\", as in: when (var v) r"
-                ] .+ Predicate
+    , external "var" 
+        (promoteExprT . isVar :: String -> TransformH LCore ())
+        [ "var '<v> returns successfully for variable v, and fails otherwise."
+        , "Useful in combination with \"when\", as in: when (var v) r"
+        ] .+ Predicate
 
-      -- ???
+      -- HERMIT.API.Dictionary.Remembered
     , external "remember" (promoteCoreT . rememberR :: LemmaName -> TransformH LCore ()) -- Done not smell right (return ()?)
         [ "Remember the current binding, allowing it to be folded/unfolded in the future." ] .+ Context
 
@@ -1345,13 +1460,20 @@ instance External (TransformH LCoreTC DocH) where
 instance External (TransformH LCoreTC ()) where
   parseExternals =
     [
-      -- HERMIT.API.Dictionary.Query
-      external "compareBoundIds" (compareBoundIds :: HermitName -> HermitName -> TransformH LCoreTC ())
-        [ "Compare the definitions of two in-scope identifiers for alpha equality."] .+ Query .+ Predicate
-    , external "compareCoreAt" (compareCoreAtT ::  TransformH LCoreTC LocalPathH -> TransformH LCoreTC LocalPathH -> TransformH LCoreTC ())
-        [ "Compare the core fragments at the end of the given paths for alpha-equality."] .+ Query .+ Predicate
+-- HERMIT.API.Dictionary.Query
+      external "compareBoundIds" 
+        (compareBoundIds :: HermitName -> HermitName -> TransformH LCoreTC ())
+        [ "Compare the definitions of two in-scope identifiers for alpha " ++
+          "equality."] .+ Query .+ Predicate
 
-      -- HERMIT.API.Shell.Externals
+    , external "compareCoreAt" 
+        (compareCoreAtT :: TransformH LCoreTC LocalPathH 
+                        -> TransformH LCoreTC LocalPathH 
+                        -> TransformH LCoreTC ())
+        [ "Compare the core fragments at the end of the given paths " ++
+          "for alpha-equality."] .+ Query .+ Predicate
+
+-- HERMIT.API.Shell.Externals
 {-
     , external "dumpLemma" ((\pp nm fp r w -> getLemmaByNameT nm >>> liftPrettyH (pOptions pp) (ppLemmaT pp nm) >>> dumpT fp pp r w) :: PrettyPrinter -> LemmaName -> FilePath -> String -> Int -> TransformH LCoreTC ())
         [ "Dump named lemma to a file."
