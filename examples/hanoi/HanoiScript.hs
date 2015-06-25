@@ -17,7 +17,7 @@ script = do
 
       -- establish the zero base case
     mapM_ sendCrumb [defRhs, lamBody, lamBody, lamBody, lamBody]
-    eval "  case-split-inline 'n"
+    apply $ caseSplitInline "n"
     scope $ do sendCrumb (caseAlt 0)
                apply . anyCall $ unfoldWith "f"
                apply simplify
@@ -25,7 +25,7 @@ script = do
     scope $ do
       -- establish the one base case
       mapM_ sendCrumb [caseAlt 1, altRhs]
-      eval "case-split-inline 'a"
+      apply $ caseSplitInline "a"
 
       scope $ do
         sendCrumb (caseAlt 0) ; apply . anyCall $ unfoldWith "f" ; apply simplify

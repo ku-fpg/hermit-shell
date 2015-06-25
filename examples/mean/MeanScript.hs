@@ -36,7 +36,8 @@ script = do
 
   scope $ do
     sendCrumb defRhs ; sendCrumb lamBody
-    eval $ "case-split-inline 'xs"
+--    eval $ "case-split-inline 'xs"
+    apply $ caseSplitInline "xs"
     apply . anyCall $ unfoldWith "sum"
     apply . anyCall $ unfoldWith "length"
     apply simplify
