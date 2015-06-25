@@ -15,14 +15,12 @@ import HERMIT.API.Types
 --- Main call-HERMIT function
 
 session :: JSONRPC.Session
-session = Session
-  { sync = \ v -> do
+session = defaultSession Weak (\ v -> do
           r <- asJSON =<< post "http://localhost:3000/" (toJSON v)
-          return $ r ^. responseBody
-  , async = \ v -> do
+          return $ r ^. responseBody)
+   (\ v -> do
           void $ post "http://localhost:3000/" (toJSON v)
-          return ()
-  }
+          return ())
 
 send :: Shell a -> IO a
 send (Return a) = return a
