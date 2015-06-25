@@ -6,7 +6,6 @@ import Control.Monad (void)
 import Data.Aeson
 import Data.Aeson.Types
 import Data.Maybe
-import Control.Monad.Remote.JSON (Session(..))
 import qualified Control.Monad.Remote.JSON as JSONRPC
 import Network.Wreq
 import HERMIT.GHCI.JSON
@@ -14,8 +13,8 @@ import HERMIT.API.Types
 
 --- Main call-HERMIT function
 
-session :: JSONRPC.Session
-session = defaultSession Weak (\ v -> do
+session :: IO JSONRPC.Session
+session = JSONRPC.defaultSession JSONRPC.Weak (\ v -> do
           r <- asJSON =<< post "http://localhost:3000/" (toJSON v)
           return $ r ^. responseBody)
    (\ v -> do
@@ -27,7 +26,8 @@ send (Return a) = return a
 send (Bind m k) = send m >>= send . k
 send (Shell g) = do
        print g
-       v <- JSONRPC.send session $ JSONRPC.method "send" [g]
+       ssn <- session
+       v <- JSONRPC.send ssn $ JSONRPC.method "send" [g]
        case fromJust $ parseMaybe parseJSON v of
          ShellException msg -> 
              error $ "server failure: " ++ show v ++ " : " ++ msg
