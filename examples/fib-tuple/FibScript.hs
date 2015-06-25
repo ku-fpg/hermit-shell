@@ -24,7 +24,7 @@ script = do
 
     -- work n = (f (wrap work) n, f (wrap work) (n+1))
 
-    sendCrumb lamBody ; eval "case-split-inline 'n"
+    sendCrumb lamBody ; apply $ caseSplitInline "n"
 
     -- work 0     = (f (wrap work) 0, f (wrap work) 1)
     -- work (n+1) = (f (wrap work) (n+1), f (wrap work) (n+2))

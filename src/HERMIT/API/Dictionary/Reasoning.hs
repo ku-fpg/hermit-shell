@@ -125,6 +125,16 @@ instLemma nm v cs
 instDictionaries :: Rewrite LCore
 instDictionaries = Transform $ method "instDictionaries" []
 
+-- | Weaken a lemma by abstracting an expression to a new quantifier.
+abstractForall :: String -> String -> Rewrite LCore
+abstractForall str cstr = Transform $ method "abstractForall"
+    [toJSON str, toJSON cstr]
+
+-- | Weaken a lemma by abstracting an expression to a new quantifier.
+abstractForallExtract :: String -> Rewrite LCore -> Rewrite LCore
+abstractForallExtract str cstr = Transform $ method "abstractForallExtract"
+    [toJSON str, toJSON cstr]
+
 -- | Copy a given lemma, with a new name.
 copyLemma :: LemmaName -> LemmaName -> Transform LCore ()
 copyLemma nm newName

@@ -1102,6 +1102,10 @@ instance External (RewriteH LCore) where
         , "body ==> let v = rhs in body" ] .+ Introduce .+ Shallow
     , external "instDictionaries" (promoteClauseR instantiateDictsR :: RewriteH LCore)
         [ "Instantiate all of the universally quantified dictionaries of the given lemma." ]
+    , external "abstractForall" ((\nm -> promoteClauseR . abstractClauseR nm . csInQBodyT) :: String -> CoreString -> RewriteH LCore)
+        [ "Weaken a lemma by abstracting an expression to a new quantifier." ]
+    , external "abstractForall" ((\nm rr -> promoteClauseR $ abstractClauseR nm $ extractT rr >>> setFailMsg "path must focus on an expression" projectT) :: String -> RewriteH LCore -> RewriteH LCore)
+        [ "Weaken a lemma by abstracting an expression to a new quantifier." ]
     , external "reflexivity" (promoteClauseR (forallR idR reflexivityR <+ reflexivityR) :: RewriteH LCore)
         [ "Rewrite alpha-equivalence to true." ]
     , external "simplifyLemma" (simplifyClauseR :: RewriteH LCore)
