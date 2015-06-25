@@ -13,7 +13,7 @@ import HERMIT.API.Types
 
 --- Main call-HERMIT function
 
-session :: IO JSONRPC.Session
+session :: JSONRPC.Session
 session = JSONRPC.defaultSession JSONRPC.Weak (\ v -> do
           r <- asJSON =<< post "http://localhost:3000/" (toJSON v)
           return $ r ^. responseBody)
@@ -26,8 +26,7 @@ send (Return a) = return a
 send (Bind m k) = send m >>= send . k
 send (Shell g) = do
        print g
-       ssn <- session
-       v <- JSONRPC.send ssn $ JSONRPC.method "send" [g]
+       v <- JSONRPC.send session $ JSONRPC.method "send" [g]
        case fromJust $ parseMaybe parseJSON v of
          ShellException msg -> 
              error $ "server failure: " ++ show v ++ " : " ++ msg
