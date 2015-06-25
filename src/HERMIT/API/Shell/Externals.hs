@@ -188,7 +188,10 @@ runScript script = ScriptEffect $ method "runScript" [toJSON script]
 displayScripts :: QueryFun
 displayScripts = QueryFun $ method "displayScripts" []
 
+-- TODO: Replace this implementation with something nicer.
+--       It does what it needs to do now, but it would be
+--       nice to avoid the error message it generates.
 -- | Stop running the current script.
-stopScript :: ShellEffect
-stopScript = ShellEffect $ method "stopScript" []
+stopScript :: Shell ()
+stopScript = Fail "<stopScript>"
 
