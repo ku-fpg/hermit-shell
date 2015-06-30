@@ -38,17 +38,15 @@ script = do
 
   eval "rule-to-lemma \"append-nil\""
 
-  shellEffect $ proveLemma "append-nil"
-  apply $ induction "xs"
+  proof "append-nil" $ do
+    apply $ induction "xs"
 
-  apply . pathS [forallBody]
-        $ serialise
-            [ pathS [conjLhs]                                  appendNilUndefined
-            , pathS [conjRhs, conjLhs]                         appendNilNil
+    apply . pathS [forallBody]
+          $ serialise
+              [ pathS [conjLhs]                                  appendNilUndefined
+              , pathS [conjRhs, conjLhs]                         appendNilNil
 
-            -- XXX: Is it ok that we don't need to do anything with the antecedent here?
-            , pathS [conjRhs, conjRhs, forallBody, consequent] appendNilCons
-            ]
-
-  proofCmd endProof
+              -- XXX: Is it ok that we don't need to do anything with the antecedent here?
+              , pathS [conjRhs, conjRhs, forallBody, consequent] appendNilCons
+              ]
 

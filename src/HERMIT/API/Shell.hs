@@ -9,6 +9,7 @@ import Data.Aeson
 
 import HERMIT.API.Types
 import HERMIT.API.Shell.Externals (beginScope, endScope)
+import HERMIT.API.Shell.Proof (proveLemma, endProof)
 
 -- | redisplays current state.
 display :: Shell ()
@@ -61,6 +62,13 @@ scope s = do
   kernelEffect beginScope
   s
   kernelEffect endScope
+
+-- TODO: See if we should implement a Proof monad and use it here.
+proof :: LemmaName -> Shell () -> Shell ()
+proof lemmaName p = do
+  shellEffect $ proveLemma lemmaName
+  p
+  proofCmd endProof
 
 pathS :: [Crumb] -> Rewrite a -> Rewrite a
 pathS crumbs r
