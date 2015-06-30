@@ -3,10 +3,10 @@
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
 GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
 module Main where
-  hanoi ∷ Nat → Peg → Peg → Peg → Moves
-  hanoi' ∷ Nat → Peg → Peg → Peg → [(Peg, Peg)]
-  unwrap ∷ (Nat → Peg → Peg → Peg → Moves) → Nat → Peg → Peg → Peg → (Moves, Moves, Moves)
   wrap ∷ (Nat → Peg → Peg → Peg → (Moves, Moves, Moves)) → Nat → Peg → Peg → Peg → Moves
+  unwrap ∷ (Nat → Peg → Peg → Peg → Moves) → Nat → Peg → Peg → Peg → (Moves, Moves, Moves)
+  hanoi' ∷ Nat → Peg → Peg → Peg → [(Peg, Peg)]
+  hanoi ∷ Nat → Peg → Peg → Peg → Moves
   $c== ∷ Peg → Peg → Bool
   $fEqPeg ∷ Eq Peg
   $c/= ∷ Peg → Peg → Bool
@@ -31,10 +31,10 @@ module Main where
 [1 of 1] Compiling HanoiScript      ( HanoiScript.hs, interpreted )
 Ok, modules loaded: HanoiScript.
 module Main where
-  hanoi ∷ Nat → Peg → Peg → Peg → Moves
-  hanoi' ∷ Nat → Peg → Peg → Peg → [(Peg, Peg)]
-  unwrap ∷ (Nat → Peg → Peg → Peg → Moves) → Nat → Peg → Peg → Peg → (Moves, Moves, Moves)
   wrap ∷ (Nat → Peg → Peg → Peg → (Moves, Moves, Moves)) → Nat → Peg → Peg → Peg → Moves
+  unwrap ∷ (Nat → Peg → Peg → Peg → Moves) → Nat → Peg → Peg → Peg → (Moves, Moves, Moves)
+  hanoi' ∷ Nat → Peg → Peg → Peg → [(Peg, Peg)]
+  hanoi ∷ Nat → Peg → Peg → Peg → Moves
   $c== ∷ Peg → Peg → Bool
   $fEqPeg ∷ Eq Peg
   $c/= ∷ Peg → Peg → Bool

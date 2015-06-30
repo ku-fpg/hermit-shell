@@ -21,9 +21,9 @@ HList.hs:30:11: Warning:
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
 GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
 module Main where
+  rev ∷ ∀ a . [a] → [a]
   absR ∷ ∀ a . ([a] → H a) → [a] → [a]
   repR ∷ ∀ a . ([a] → [a]) → [a] → H a
-  rev ∷ ∀ a . [a] → [a]
   main ∷ IO ()
   main ∷ IO ()
 [Done]
@@ -31,9 +31,9 @@ module Main where
 [1 of 1] Compiling ReverseScript    ( ReverseScript.hs, interpreted )
 Ok, modules loaded: ReverseScript.
 module Main where
+  rev ∷ ∀ a . [a] → [a]
   absR ∷ ∀ a . ([a] → H a) → [a] → [a]
   repR ∷ ∀ a . ([a] → [a]) → [a] → H a
-  rev ∷ ∀ a . [a] → [a]
   main ∷ IO ()
   main ∷ IO ()
 [Done]
@@ -122,9 +122,9 @@ Goal:
 
 Successfully proven: ++ []
 module Main where
+  rev ∷ ∀ a . [a] → [a]
   absR ∷ ∀ a . ([a] → H a) → [a] → [a]
   repR ∷ ∀ a . ([a] → [a]) → [a] → H a
-  rev ∷ ∀ a . [a] → [a]
   main ∷ IO ()
   main ∷ IO ()
 [Done]
@@ -421,9 +421,9 @@ Goal:
 
 Successfully proven: myAppend-assoc
 module Main where
+  rev ∷ ∀ a . [a] → [a]
   absR ∷ ∀ a . ([a] → H a) → [a] → [a]
   repR ∷ ∀ a . ([a] → [a]) → [a] → H a
-  rev ∷ ∀ a . [a] → [a]
   main ∷ IO ()
   main ∷ IO ()
 [Done]
@@ -463,9 +463,9 @@ Goal:
 
 Successfully proven: repH []
 module Main where
+  rev ∷ ∀ a . [a] → [a]
   absR ∷ ∀ a . ([a] → H a) → [a] → [a]
   repR ∷ ∀ a . ([a] → [a]) → [a] → H a
-  rev ∷ ∀ a . [a] → [a]
   main ∷ IO ()
   main ∷ IO ()
 [Done]
@@ -498,9 +498,9 @@ Goal:
 
 Successfully proven: repH (:)
 module Main where
+  rev ∷ ∀ a . [a] → [a]
   absR ∷ ∀ a . ([a] → H a) → [a] → [a]
   repR ∷ ∀ a . ([a] → [a]) → [a] → H a
-  rev ∷ ∀ a . [a] → [a]
   main ∷ IO ()
   main ∷ IO ()
 [Done]
@@ -572,9 +572,9 @@ Goal:
 
 Successfully proven: repH ++
 module Main where
+  rev ∷ ∀ a . [a] → [a]
   absR ∷ ∀ a . ([a] → H a) → [a] → [a]
   repR ∷ ∀ a . ([a] → [a]) → [a] → H a
-  rev ∷ ∀ a . [a] → [a]
   main ∷ IO ()
   main ∷ IO ()
 [Done]

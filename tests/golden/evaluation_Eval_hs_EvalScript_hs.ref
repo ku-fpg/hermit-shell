@@ -4,8 +4,8 @@
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
 GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
 module Main where
-  abs ∷ ((Int → Mint) → Mint → Mint) → Mint
   rep ∷ Mint → (Int → Mint) → Mint → Mint
+  abs ∷ ((Int → Mint) → Mint → Mint) → Mint
   $dShow ∷ Show (Maybe Int)
   eval ∷ Expr → Mint
   main ∷ IO ()
@@ -16,8 +16,8 @@ module Main where
 [2 of 2] Compiling EvalScript       ( EvalScript.hs, interpreted )
 Ok, modules loaded: EvalScript, WWAssAScript.
 module Main where
-  abs ∷ ((Int → Mint) → Mint → Mint) → Mint
   rep ∷ Mint → (Int → Mint) → Mint → Mint
+  abs ∷ ((Int → Mint) → Mint → Mint) → Mint
   $dShow ∷ Show (Maybe Int)
   eval ∷ Expr → Mint
   main ∷ IO ()

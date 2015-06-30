@@ -21,8 +21,8 @@ HList.hs:27:11: Warning:
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
 GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
 module Main where
-  absR ∷ ∀ a . ([a] → H a) → [a] → [a]
   qsort ∷ ∀ a . Ord a → [a] → [a]
+  absR ∷ ∀ a . ([a] → H a) → [a] → [a]
   repR ∷ ∀ a . ([a] → [a]) → [a] → H a
   $dShow ∷ Show [Integer]
   main ∷ IO ()
@@ -32,8 +32,8 @@ module Main where
 [1 of 1] Compiling QSortScript      ( QSortScript.hs, interpreted )
 Ok, modules loaded: QSortScript.
 module Main where
-  absR ∷ ∀ a . ([a] → H a) → [a] → [a]
   qsort ∷ ∀ a . Ord a → [a] → [a]
+  absR ∷ ∀ a . ([a] → H a) → [a] → [a]
   repR ∷ ∀ a . ([a] → [a]) → [a] → H a
   $dShow ∷ Show [Integer]
   main ∷ IO ()
