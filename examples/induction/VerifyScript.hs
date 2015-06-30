@@ -1,40 +1,37 @@
 module VerifyScript where
+
 import HERMIT.API
 
+import BaseCaseScript
+import InductiveStepScript
+
 script :: Shell ()
-script = do
-  --load "BaseCase" "BaseCase.her"
-  --load "InductiveStep" "InductiveStep.her"
-  eval "load-as-rewrite \"BaseCase\" \"BaseCase.her\""
-  eval "load-as-rewrite \"InductiveStep\" \"InductiveStep.her\""
+script =
+  scope $ do
+    setPath progEnd
+    eval "rule-to-lemma \"++ []\""
 
-  eval "{ prog-end"
-  eval "  rule-to-lemma \"++ []\""
-  --  verify-lemma "++ []" (inductive-proof 'xs [ '"[]" , ': ] [ BaseCase , InductiveStep ])
-  eval "  prove-lemma \"++ []\""
-  eval "  induction 'xs"
-  eval "  forall-body"
-  eval "     -- undefined case"
-  eval "  { conj-lhs"
-  eval "    BaseCase"
-  eval "  }"
+    proof "++ []" $ do
+      apply $ induction "xs"
+      apply
+        . pathS [forallBody]
+        $ serialise
+            [   -- undefined case
+              pathS [conjLhs] baseCase
 
-  eval "    -- nil case"
-  eval "  { [conj-rhs, conj-lhs]"
-  eval "    BaseCase"
-  eval "  }"
+                -- nil case
+            , pathS [conjRhs, conjLhs] baseCase
 
-  eval "    -- cons case"
-  eval "  { [conj-rhs, conj-rhs, forall-body, consequent]"
-  eval "    { eq-lhs"
-  eval "      InductiveStep"
-  eval "      { [app-arg]"
-  eval "        lemma-forward ind-hyp-0"
-  eval "      }"
-  eval "    }"
-  eval "    reflexivity"
-  eval "  }"
-  eval "  end-proof"
-  eval "}"
-
+                -- cons case
+            , pathS [conjRhs, conjRhs, forallBody, consequent]
+                $ serialise 
+                    [ pathS [eqLhs]
+                        $ serialise
+                            [ inductiveStep
+                            , pathS [appArg]
+                                $ lemmaForward "ind-hyp-0"
+                            ]
+                    , reflexivity
+                    ]
+            ]
 
