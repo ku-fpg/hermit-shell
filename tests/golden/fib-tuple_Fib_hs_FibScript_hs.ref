@@ -1,5 +1,3 @@
-[1 of 2] Compiling WWAssAScript     ( WWAssAScript.hs, nothing )
-[2 of 2] Compiling FibScript        ( FibScript.hs, nothing )
 [1 of 1] Compiling Main             ( Fib.hs, Fib.o )
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
 GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
@@ -353,7 +351,7 @@ fib =
   in λ n → fst ▲ ▲ (work n)
 [Done]
 
-HERMIT> 
+HERMIT>
 [Done]
 
 Leaving GHCi.

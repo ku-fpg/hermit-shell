@@ -10,7 +10,7 @@ dist/
 hermit-shell.wiki
 
 # Generated files
-.ghci-hermit
+*.ghci-hermit
 .cabal-sandbox
 cabal.sandbox.config
 tests/dump/*.dump

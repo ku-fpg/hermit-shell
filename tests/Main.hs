@@ -3,6 +3,7 @@ module Main (main) where
 import Control.Monad (unless)
 
 import System.Directory
+import System.Exit
 import System.FilePath
 import System.IO
 import System.Process
@@ -67,6 +68,9 @@ mkHermitShellTest (dir, hs, moduleName, script) =
     diff :: FilePath -> FilePath -> [String]
     diff ref new = ["diff", "-b", "-U 5", ref, new]
 
+    withPathpDir :: String -> String
+    withPathpDir cmd = unwords [ "(", "cd", pathp, ";", cmd, ")" ]
+
     hermitShellOutput :: IO ()
     hermitShellOutput = do
         sandboxCfgPath <- readProcess "cabal" [ "exec"
@@ -74,40 +78,48 @@ mkHermitShellTest (dir, hs, moduleName, script) =
                                               , rootDir </> "CabalSandboxConfig.hs"
                                               ] ""
 
-        let cmd :: String
-            cmd = unwords $    [ "("
-                               , "cd"
-                               , pathp
-                               , ";"
+        -- Runs GHC's typechecker over the script file to ensure it will actually
+        -- work when given to HERMIT-shell.
+        let typeCheck :: String
+            typeCheck = withPathpDir $ unwords
+                [ "ghc"
+                , "-fno-code"
+                , "-XOverloadedStrings"
+                , script
+                ]
 
-                               -- TODO: This is a hack to get tests
-                               --       that fail to type-check, etc
-                               --       to actually fail. Replace it
-                               --       with something more robust.
-                               , "ghc"
-                               , "-fno-code"
-                               , "-XOverloadedStrings"
-                               , script
-                               , "&&"
+            hermitShell :: String
+            hermitShell = withPathpDir $ unwords
+                [ "cabal"
+                , sandboxCfgPath
+                , "exec"
+                , "--"
+                , "hermit-shell"
+                , hs
+                , '+':moduleName
+                , script
+                , "resume"
+                ]
 
-                               , "cabal"
-                               , sandboxCfgPath
-                               , "exec"
-                               , "--"
-                               , "hermit-shell"
-                               , hs
-                               , '+':moduleName
-                               , script
-                               , "resume"
-                               , ")"
-                               ]
+        (_,Just _,Just stdErrH,rTypeCheck) <- createProcess (shell typeCheck) {
+            std_out = CreatePipe
+          , std_err = CreatePipe
+        }
+        code <- waitForProcess rTypeCheck
+
+        case code of
+             ExitSuccess   -> return ()
+             ExitFailure i -> do
+                 err <- hGetContents stdErrH
+                 putStrLn err
+                 error $ script ++ " failed to typecheck. Error code: " ++ show i
 
         -- Adding a &> dfile redirect in cmd causes the call to GHC to not block
         -- until the compiler is finished (on Linux, not OSX). So we do the Haskell
         -- equivalent here by opening our own file.
         fh <- openFile dfile WriteMode
-        -- putStrLn cmd
-        (_,_,_,rHermitShell) <- createProcess $ (shell cmd) {
+        -- putStrLn hermitShell
+        (_,_,_,rHermitShell) <- createProcess (shell hermitShell) {
             std_out = UseHandle fh
           , std_err = UseHandle fh
         }
@@ -117,8 +129,8 @@ mkHermitShellTest (dir, hs, moduleName, script) =
         goldenExists <- doesFileExist gfile
         unless goldenExists $ copyFile dfile gfile
 
---         putStrLn cmd
---         (_,_,_,rHermit) <- createProcess $ shell cmd
+--         putStrLn hermitShell
+--         (_,_,_,rHermit) <- createProcess $ shell hermitShell
 --         code <- waitForProcess rHermit
 --
 --         case code of

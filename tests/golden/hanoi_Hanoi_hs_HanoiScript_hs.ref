@@ -1,4 +1,3 @@
-[1 of 1] Compiling HanoiScript      ( HanoiScript.hs, nothing )
 [1 of 1] Compiling Main             ( Hanoi.hs, Hanoi.o )
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
 GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
@@ -1213,7 +1212,7 @@ hanoi =
   in wrap work
 [Done]
 
-HERMIT> 
+HERMIT>
 [Done]
 
 Leaving GHCi.

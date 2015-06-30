@@ -1,5 +1,3 @@
-[1 of 2] Compiling WWAssBScript     ( WWAssBScript.hs, nothing )
-[2 of 2] Compiling LastScript       ( LastScript.hs, nothing )
 [1 of 1] Compiling Main             ( Last.hs, Last.o )
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
 GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
@@ -65,7 +63,7 @@ last = λ △ →
          (:) a0 as → work a0 as
 [Done]
 
-HERMIT> 
+HERMIT>
 [Done]
 
 Leaving GHCi.

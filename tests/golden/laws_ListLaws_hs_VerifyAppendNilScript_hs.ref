@@ -1,3 +1,2 @@
-[1 of 1] Compiling VerifyAppendNilScript ( VerifyAppendNilScript.hs, nothing )
 
 VerifyAppendNilScript.hs:41:3: Not in scope: ‘proof’
