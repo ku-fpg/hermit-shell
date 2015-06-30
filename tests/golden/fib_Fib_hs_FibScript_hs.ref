@@ -1,0 +1,75 @@
+[1 of 1] Compiling FibScript        ( FibScript.hs, nothing )
+[1 of 1] Compiling Main             ( Fib.hs, Fib.o )
+Setting phasers to stun... (port 3000) (ctrl-c to quit)
+GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
+module Main where
+  fib ∷ Int → Int
+  main ∷ IO ()
+  main ∷ IO ()
+[Done]
+
+[1 of 1] Compiling FibScript        ( FibScript.hs, interpreted )
+Ok, modules loaded: FibScript.
+fib = λ ds →
+  case ds of wild ▲
+    I# ds →
+      case ds of ds ▲
+        _ →
+          (λ ds →
+             (+) ▲ $fNumInt (fib ((-) ▲ $fNumInt ds (I# 1)))
+                 (fib ((-) ▲ $fNumInt ds (I# 2)))) void#
+        0 → I# 1
+        1 → I# 1
+[Done]
+
+'"Object (fromList [(\"params\",Array (fromList [Object (fromList [(\"params\",Array (fromList [String \"orig-fib\"])),(\"method\",String \"remember\")])])),(\"method\",String \"query\")])" [correct]
+
+[Done]
+
+fib = λ ds →
+  case ds of wild ▲
+    I# ds →
+      case ds of ds ▲
+        _ →
+          (λ ds →
+             (+) ▲ $fNumInt
+                 (case (-) ▲ $fNumInt ds (I# 1) of wild ▲
+                    I# ds →
+                      case ds of ds ▲
+                        _ →
+                          (λ ds →
+                             (+) ▲ $fNumInt
+                                 (fib ((-) ▲ $fNumInt ((-) ▲ $fNumInt ds (I# 1))
+                                           (I# 1)))
+                                 (fib ((-) ▲ $fNumInt ((-) ▲ $fNumInt ds (I# 1))
+                                           (I# 2)))) void#
+                        0 → I# 1
+                        1 → I# 1)
+                 (case (-) ▲ $fNumInt ds (I# 2) of wild ▲
+                    I# ds →
+                      case ds of ds ▲
+                        _ →
+                          (λ ds →
+                             (+) ▲ $fNumInt
+                                 (fib ((-) ▲ $fNumInt ((-) ▲ $fNumInt ds (I# 2))
+                                           (I# 1)))
+                                 (fib ((-) ▲ $fNumInt ((-) ▲ $fNumInt ds (I# 2))
+                                           (I# 2)))) void#
+                        0 → I# 1
+                        1 → I# 1)) void#
+        0 → I# 1
+        1 → I# 1
+[Done]
+
+
+[Done]
+
+HERMIT> 
+[Done]
+
+Leaving GHCi.
+ghc: user interrupt
+Linking Fib ...
+[starting HERMIT-shell v0.1.0.0 on Fib.hs]
+[starting HERMIT v1.0.0.0 on Fib.hs]
+% ghc Fib.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:Main: -fplugin-opt=HERMIT.GHCI:Main:FibScript.hs -fplugin-opt=HERMIT.GHCI:Main:resume

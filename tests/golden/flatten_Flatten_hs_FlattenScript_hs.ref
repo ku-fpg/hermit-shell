@@ -1,0 +1,205 @@
+[1 of 3] Compiling WWAssAScript     ( WWAssAScript.hs, nothing )
+[2 of 3] Compiling StrictRepHScript ( StrictRepHScript.hs, nothing )
+[3 of 3] Compiling FlattenScript    ( FlattenScript.hs, nothing )
+[1 of 2] Compiling HList            ( HList.hs, HList.o )
+
+HList.hs:22:11: Warning:
+    Rule "repH ++" may never fire because ‘repH’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘repH’
+
+HList.hs:23:11: Warning:
+    Rule "repH []" may never fire because ‘repH’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘repH’
+
+HList.hs:24:11: Warning:
+    Rule "repH (:)" may never fire because ‘repH’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘repH’
+[2 of 2] Compiling Main             ( Flatten.hs, Flatten.o )
+Setting phasers to stun... (port 3000) (ctrl-c to quit)
+GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
+module Main where
+  flatten ∷ ∀ a . Tree a → [a]
+  $dShow ∷ Show [Char]
+  main ∷ IO ()
+  main ∷ IO ()
+[Done]
+
+[1 of 3] Compiling WWAssAScript     ( WWAssAScript.hs, interpreted )
+[2 of 3] Compiling StrictRepHScript ( StrictRepHScript.hs, interpreted )
+[3 of 3] Compiling FlattenScript    ( FlattenScript.hs, interpreted )
+Ok, modules loaded: FlattenScript, StrictRepHScript, WWAssAScript.
+flatten = λ △ ds →
+  case ds of wild ▲
+    Node l r → (++) ▲ (flatten ▲ l) (flatten ▲ r)
+    Leaf a → (:) ▲ a ([] ▲)
+[Done]
+
+flatten = λ △ ds →
+  (let f = λ flatten' ds →
+         case ds of wild ▲
+           Node l r → (++) ▲ (flatten' l) (flatten' r)
+           Leaf a → (:) ▲ a ([] ▲)
+       rec work = λ x1 → repH ▲ (f (λ x2 → absH ▲ (work x2)) x1)
+   in λ x0 → absH ▲ (work x0)) ds
+[Done]
+
+flatten = λ △ →
+  let rec work = λ x1 →
+            repH ▲
+                 (case x1 of wild ▲
+                    Node l r → (++) ▲ (absH ▲ (work l)) (absH ▲ (work r))
+                    Leaf a → (:) ▲ a ([] ▲))
+  in λ x0 → absH ▲ (work x0)
+[Done]
+
+flatten = λ △ →
+  let rec work = λ x1 →
+            repH ▲
+                 (case x1 of wild ▲
+                    Node l r → (++) ▲ (absH ▲ (work l)) (absH ▲ (work r))
+                    Leaf a → (:) ▲ a ([] ▲))
+  in λ x0 → absH ▲ (work x0)
+[Done]
+
+λ x1 →
+  repH ▲
+       (case x1 of wild ▲
+          Node l r → (++) ▲ (absH ▲ (work l)) (absH ▲ (work r))
+          Leaf a → (:) ▲ a ([] ▲))
+[Done]
+
+λ tree →
+  repH ▲
+       (case tree of wild ▲
+          Node l r → (++) ▲ (absH ▲ (work l)) (absH ▲ (work r))
+          Leaf a → (:) ▲ a ([] ▲))
+[Done]
+
+repH ▲
+     (case tree of wild ▲
+        Node l r → (++) ▲ (absH ▲ (work l)) (absH ▲ (work r))
+        Leaf a → (:) ▲ a ([] ▲))
+[Done]
+
+λ acc →
+  repH ▲
+       (case tree of wild ▲
+          Node l r → (++) ▲ (absH ▲ (work l)) (absH ▲ (work r))
+          Leaf a → (:) ▲ a ([] ▲))
+       acc
+[Done]
+
+repH ▲
+     (case tree of wild ▲
+        Node l r → (++) ▲ (absH ▲ (work l)) (absH ▲ (work r))
+        Leaf a → (:) ▲ a ([] ▲))
+     acc
+[Done]
+
+case tree of wild ▲
+  Node l r → work l (work r acc)
+  Leaf a → (:) ▲ a acc
+[Done]
+
+flatten = λ △ →
+  let rec work = λ tree acc →
+            case tree of wild ▲
+              Node l r → work l (work r acc)
+              Leaf a → (:) ▲ a acc
+  in λ x0 → absH ▲ (work x0)
+[Done]
+
+flatten = λ △ →
+  let rec work = λ tree acc →
+            case tree of wild ▲
+              Node l r → work l (work r acc)
+              Leaf a → (:) ▲ a acc
+  in λ x0 → work x0 ([] ▲)
+[Done]
+
+Goal:
+  ∀ △ xs. (++) ▲ xs ([] ▲) ≡ xs
+[Done]
+
+Successfully proven: ++ []
+flatten = λ △ →
+  let rec work = λ tree acc →
+            case tree of wild ▲
+              Node l r → work l (work r acc)
+              Leaf a → (:) ▲ a acc
+  in λ x0 → work x0 ([] ▲)
+[Done]
+
+Goal:
+  ∀ △. (++) ▲ (undefined ▲) ≡ undefined ▲
+[Done]
+
+Successfully proven: ++ strict
+flatten = λ △ →
+  let rec work = λ tree acc →
+            case tree of wild ▲
+              Node l r → work l (work r acc)
+              Leaf a → (:) ▲ a acc
+  in λ x0 → work x0 ([] ▲)
+[Done]
+
+Goal:
+  ∀ △ x xs. repH ▲ ((:) ▲ x xs) ≡ (.) ▲ ▲ ▲ ((:) ▲ x) (repH ▲ xs)
+[Done]
+
+Successfully proven: repH (:)
+flatten = λ △ →
+  let rec work = λ tree acc →
+            case tree of wild ▲
+              Node l r → work l (work r acc)
+              Leaf a → (:) ▲ a acc
+  in λ x0 → work x0 ([] ▲)
+[Done]
+
+Goal:
+  ∀ △ xs ys.
+  repH ▲ ((++) ▲ xs ys) ≡ (.) ▲ ▲ ▲ (repH ▲ xs) (repH ▲ ys)
+[Done]
+
+Successfully proven: repH ++
+flatten = λ △ →
+  let rec work = λ tree acc →
+            case tree of wild ▲
+              Node l r → work l (work r acc)
+              Leaf a → (:) ▲ a acc
+  in λ x0 → work x0 ([] ▲)
+[Done]
+
+Goal:
+  ∀ △. repH ▲ ([] ▲) ≡ id ▲
+[Done]
+
+Successfully proven: repH []
+flatten = λ △ →
+  let rec work = λ tree acc →
+            case tree of wild ▲
+              Node l r → work l (work r acc)
+              Leaf a → (:) ▲ a acc
+  in λ x0 → work x0 ([] ▲)
+[Done]
+
+HERMIT> Warning: Lemma ++ [] was assumed but not proven.
+++ []
+  ∀ △ xs. (++) ▲ xs ([] ▲) ≡ xsWarning: Lemma ++ strict was assumed but not proven.
+++ strict
+  ∀ △. (++) ▲ (undefined ▲) ≡ undefined ▲Warning: Lemma repH (:) was assumed but not proven.
+repH (:)
+  ∀ △ x xs. repH ▲ ((:) ▲ x xs) ≡ (.) ▲ ▲ ▲ ((:) ▲ x) (repH ▲ xs)Warning: Lemma repH ++ was assumed but not proven.
+repH ++
+  ∀ △ xs ys.
+  repH ▲ ((++) ▲ xs ys) ≡ (.) ▲ ▲ ▲ (repH ▲ xs) (repH ▲ ys)Warning: Lemma repH [] was assumed but not proven.
+repH []
+  ∀ △. repH ▲ ([] ▲) ≡ id ▲
+[Done]
+
+Leaving GHCi.
+ghc: user interrupt
+Linking Flatten ...
+[starting HERMIT-shell v0.1.0.0 on Flatten.hs]
+[starting HERMIT v1.0.0.0 on Flatten.hs]
+% ghc Flatten.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:Main: -fplugin-opt=HERMIT.GHCI:Main:FlattenScript.hs -fplugin-opt=HERMIT.GHCI:Main:resume

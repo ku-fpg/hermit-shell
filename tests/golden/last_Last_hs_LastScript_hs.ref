@@ -1,0 +1,76 @@
+[1 of 2] Compiling WWAssBScript     ( WWAssBScript.hs, nothing )
+[2 of 2] Compiling LastScript       ( LastScript.hs, nothing )
+[1 of 1] Compiling Main             ( Last.hs, Last.o )
+Setting phasers to stun... (port 3000) (ctrl-c to quit)
+GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
+module Main where
+  last ∷ ∀ a . [a] → a
+  unwrap ∷ ∀ a . ([a] → a) → a → [a] → a
+  wrap ∷ ∀ a . (a → [a] → a) → [a] → a
+  main ∷ IO ()
+  main ∷ IO ()
+[Done]
+
+[1 of 2] Compiling WWAssBScript     ( WWAssBScript.hs, interpreted )
+[2 of 2] Compiling LastScript       ( LastScript.hs, interpreted )
+Ok, modules loaded: LastScript, WWAssBScript.
+module Main where
+  last ∷ ∀ a . [a] → a
+  unwrap ∷ ∀ a . ([a] → a) → a → [a] → a
+  wrap ∷ ∀ a . (a → [a] → a) → [a] → a
+  main ∷ IO ()
+  main ∷ IO ()
+[Done]
+
+last = λ △ ds →
+  case ds of wild ▲
+    [] → undefined ▲
+    (:) a ds →
+      case ds of wild ▲
+        [] → a
+        (:) a as → last ▲ ((:) ▲ a as)
+[Done]
+
+last = λ △ ds →
+  (let f = λ last' ds →
+         case ds of wild ▲
+           [] → undefined ▲
+           (:) a ds →
+             case ds of wild ▲
+               [] → a
+               (:) a as → last' ((:) ▲ a as)
+       rec work = unwrap ▲ (f (wrap ▲ work))
+   in wrap ▲ work) ds
+[Done]
+
+last = λ △ →
+  let rec work = λ a as →
+            case as of wild ▲
+              [] → a
+              (:) a as → work a as
+  in λ ds →
+       case ds of wild ▲
+         [] → undefined ▲
+         (:) a as → work a as
+[Done]
+
+last = λ △ →
+  let rec work = λ a0 as →
+            case as of wild ▲
+              [] → a0
+              (:) a1 as0 → work a1 as0
+  in λ ds →
+       case ds of wild ▲
+         [] → undefined ▲
+         (:) a0 as → work a0 as
+[Done]
+
+HERMIT> 
+[Done]
+
+Leaving GHCi.
+ghc: user interrupt
+Linking Last ...
+[starting HERMIT-shell v0.1.0.0 on Last.hs]
+[starting HERMIT v1.0.0.0 on Last.hs]
+% ghc Last.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:Main: -fplugin-opt=HERMIT.GHCI:Main:LastScript.hs -fplugin-opt=HERMIT.GHCI:Main:resume

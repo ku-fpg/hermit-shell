@@ -1,0 +1,249 @@
+[1 of 1] Compiling NewLastScript    ( NewLastScript.hs, nothing )
+[1 of 1] Compiling Main             ( Last.hs, Last.o )
+Setting phasers to stun... (port 3000) (ctrl-c to quit)
+GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
+module Main where
+  last ∷ ∀ a . [a] → a
+  unwrap ∷ ∀ a . ([a] → a) → a → [a] → a
+  wrap ∷ ∀ a . (a → [a] → a) → [a] → a
+  main ∷ IO ()
+  main ∷ IO ()
+[Done]
+
+[1 of 1] Compiling NewLastScript    ( NewLastScript.hs, interpreted )
+Ok, modules loaded: NewLastScript.
+module Main where
+  last ∷ ∀ a . [a] → a
+  unwrap ∷ ∀ a . ([a] → a) → a → [a] → a
+  wrap ∷ ∀ a . (a → [a] → a) → [a] → a
+  main ∷ IO ()
+  main ∷ IO ()
+[Done]
+
+module Main where
+  last ∷ ∀ a . [a] → a
+  unwrap ∷ ∀ a . ([a] → a) → a → [a] → a
+  wrap ∷ ∀ a . (a → [a] → a) → [a] → a
+  main ∷ IO ()
+  main ∷ IO ()
+[Done]
+
+last ∷ ∀ a . [a] → a
+last = λ a ds →
+  case ds of wild a
+    [] → undefined a
+    (:) a ds →
+      case ds of wild a
+        [] → a
+        (:) a as → last a ((:) a a as)
+[Done]
+
+last ∷ ∀ a . [a] → a
+last = λ a →
+  fix ([a] → a)
+      (λ last ds →
+         case ds of wild a
+           [] → undefined a
+           (:) a ds →
+             case ds of wild a
+               [] → a
+               (:) a as → last ((:) a a as))
+[Done]
+
+last ∷ ∀ a . [a] → a
+last = λ a →
+  fix ([a] → a)
+      (λ last ds →
+         case ds of wild a
+           [] → undefined a
+           (:) a ds →
+             case ds of wild a
+               [] → a
+               (:) a as → last ((:) a a as))
+[Done]
+
+fix ([a] → a)
+    (λ last ds →
+       case ds of wild a
+         [] → undefined a
+         (:) a ds →
+           case ds of wild a
+             [] → a
+             (:) a as → last ((:) a a as))
+[Done]
+
+let g ∷ (a → [a] → a) → a → [a] → a
+    g =
+      (.) ([a] → a) (a → [a] → a) (a → [a] → a) (unwrap a)
+          ((.) ([a] → a) ([a] → a) (a → [a] → a)
+               (λ last ds →
+                  case ds of wild a
+                    [] → undefined a
+                    (:) a ds →
+                      case ds of wild a
+                        [] → a
+                        (:) a as → last ((:) a a as))
+               (wrap a))
+    worker ∷ a → [a] → a
+    worker = fix (a → [a] → a) g
+in wrap a worker
+[Done]
+
+Forcing obligation: last-assumption
+Goal:
+  fix ([a] → a)
+      ((.) (a → [a] → a) ([a] → a) ([a] → a) (wrap a)
+           ((.) ([a] → a) (a → [a] → a) ([a] → a) (unwrap a)
+                (λ last ds →
+                   case ds of wild a
+                     [] → undefined a
+                     (:) a ds →
+                       case ds of wild a
+                         [] → a
+                         (:) a as → last ((:) a a as))))
+  ≡
+  fix ([a] → a)
+      (λ last ds →
+         case ds of wild a
+           [] → undefined a
+           (:) a ds →
+             case ds of wild a
+               [] → a
+               (:) a as → last ((:) a a as))Goal:
+  fix ([a] → a)
+      (λ x ds →
+         case ds of wild a
+           [] → undefined a
+           (:) a as →
+             (λ x a as →
+                (λ last ds →
+                   case ds of wild a
+                     [] → undefined a
+                     (:) a ds →
+                       case ds of wild a
+                         [] → a
+                         (:) a as → last ((:) a a as)) x ((:) a a as)) x a as)
+  ≡
+  fix ([a] → a)
+      (λ last ds →
+         case ds of wild a
+           [] → undefined a
+           (:) a ds →
+             case ds of wild a
+               [] → a
+               (:) a as → last ((:) a a as))
+[Done]
+
+Goal:
+  fix ([a] → a)
+      (λ x ds →
+         case ds of wild a
+           [] → undefined a
+           (:) a as →
+             case as of wild a
+               [] → a
+               (:) a as → x ((:) a a as))
+  ≡
+  fix ([a] → a)
+      (λ last ds →
+         case ds of wild a
+           [] → undefined a
+           (:) a ds →
+             case ds of wild a
+               [] → a
+               (:) a as → last ((:) a a as))
+[Done]
+
+Successfully proven: last-assumption
+let g ∷ (a → [a] → a) → a → [a] → a
+    g =
+      (.) ([a] → a) (a → [a] → a) (a → [a] → a) (unwrap a)
+          ((.) ([a] → a) ([a] → a) (a → [a] → a)
+               (λ last ds →
+                  case ds of wild a
+                    [] → undefined a
+                    (:) a ds →
+                      case ds of wild a
+                        [] → a
+                        (:) a as → last ((:) a a as))
+               (wrap a))
+    worker ∷ a → [a] → a
+    worker = fix (a → [a] → a) g
+in wrap a worker
+[Done]
+
+let g ∷ (a → [a] → a) → a → [a] → a
+    g =
+      (.) ([a] → a) (a → [a] → a) (a → [a] → a)
+          (λ f a as → f ((:) a a as))
+          ((.) ([a] → a) ([a] → a) (a → [a] → a)
+               (λ last ds →
+                  case ds of wild a
+                    [] → undefined a
+                    (:) a ds →
+                      case ds of wild a
+                        [] → a
+                        (:) a as → last ((:) a a as))
+               (λ f ds →
+                  case ds of wild a
+                    [] → undefined a
+                    (:) a as → f a as))
+    worker ∷ a → [a] → a
+    worker =
+      let rec x ∷ a → [a] → a
+              x =
+                (.) ([a] → a) (a → [a] → a) (a → [a] → a)
+                    (λ f a as → f ((:) a a as))
+                    ((.) ([a] → a) ([a] → a) (a → [a] → a)
+                         (λ last ds →
+                            case ds of wild a
+                              [] → undefined a
+                              (:) a ds →
+                                case ds of wild a
+                                  [] → a
+                                  (:) a as → last ((:) a a as))
+                         (λ f ds →
+                            case ds of wild a
+                              [] → undefined a
+                              (:) a as → f a as))
+                    x
+      in x
+in λ ds →
+     case ds of wild a
+       [] → undefined a
+       (:) a as → worker a as
+[Done]
+
+let rec x ∷ a → [a] → a
+        x = λ a as →
+          case as of wild a
+            [] → a
+            (:) a as → x a as
+in λ ds →
+     case ds of wild a
+       [] → undefined a
+       (:) a as → x a as
+[Done]
+
+last ∷ ∀ a . [a] → a
+last = λ a →
+  let rec x ∷ a → [a] → a
+          x = λ a as →
+            case as of wild a
+              [] → a
+              (:) a as → x a as
+  in λ ds →
+       case ds of wild a
+         [] → undefined a
+         (:) a as → x a as
+[Done]
+
+HERMIT> 
+[Done]
+
+Leaving GHCi.
+ghc: user interrupt
+Linking Last ...
+[starting HERMIT-shell v0.1.0.0 on Last.hs]
+[starting HERMIT v1.0.0.0 on Last.hs]
+% ghc Last.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:Main: -fplugin-opt=HERMIT.GHCI:Main:NewLastScript.hs -fplugin-opt=HERMIT.GHCI:Main:resume

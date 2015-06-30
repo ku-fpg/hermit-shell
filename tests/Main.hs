@@ -1,11 +1,14 @@
 module Main (main) where
 
-import System.Exit
+import Control.Monad (unless)
+
+import System.Directory
 import System.FilePath
+import System.IO
 import System.Process
 
-import Test.Tasty
-import Test.Tasty.HUnit
+import Test.Tasty (TestTree, TestName, defaultMain, testGroup)
+import Test.Tasty.Golden (goldenVsFileDiff)
 
 main :: IO ()
 main = defaultMain hermitShellTests
@@ -14,9 +17,14 @@ hermitShellTests :: TestTree
 hermitShellTests = testGroup "HERMIT-shell tests" $ map mkHermitShellTest testArgs
 
 -- subdirectory names
-rootDir, examples :: FilePath
+golden, dump, rootDir, examples :: FilePath
+golden   = "golden"
+dump     = "dump"
 rootDir  = "tests"
 examples = "examples"
+
+fixName :: FilePath -> FilePath
+fixName = map (\c -> if c == '.' then '_' else c)
 
 type HermitTestArgs = (FilePath, FilePath, String, FilePath)
 
@@ -45,16 +53,22 @@ testArgs =
 
 mkHermitShellTest :: HermitTestArgs -> TestTree
 mkHermitShellTest (dir, hs, moduleName, script) =
-    testCase testName runHermitShell
+    goldenVsFileDiff testName diff gfile dfile hermitShellOutput
   where
     testName :: TestName
-    testName = "Running " ++ dir </> hs
+    testName = dir </> hs
 
-    pathp :: FilePath
+    fixed, gfile, dfile, pathp :: FilePath
+    fixed = fixName (concat [dir, "_", hs, "_", script])
+    gfile = rootDir  </> golden </> fixed <.> "ref"
+    dfile = rootDir  </> dump   </> fixed <.> "dump"
     pathp = examples </> dir
 
-    runHermitShell :: IO ()
-    runHermitShell = do
+    diff :: FilePath -> FilePath -> [String]
+    diff ref new = ["diff", "-b", "-U 5", ref, new]
+
+    hermitShellOutput :: IO ()
+    hermitShellOutput = do
         sandboxCfgPath <- readProcess "cabal" [ "exec"
                                               , "runhaskell"
                                               , rootDir </> "CabalSandboxConfig.hs"
@@ -88,10 +102,25 @@ mkHermitShellTest (dir, hs, moduleName, script) =
                                , ")"
                                ]
 
-        putStrLn cmd
-        (_,_,_,rHermit) <- createProcess $ shell cmd
-        code <- waitForProcess rHermit
+        -- Adding a &> dfile redirect in cmd causes the call to GHC to not block
+        -- until the compiler is finished (on Linux, not OSX). So we do the Haskell
+        -- equivalent here by opening our own file.
+        fh <- openFile dfile WriteMode
+        -- putStrLn cmd
+        (_,_,_,rHermitShell) <- createProcess $ (shell cmd) {
+            std_out = UseHandle fh
+          , std_err = UseHandle fh
+        }
+        _ <- waitForProcess rHermitShell
 
-        case code of
-            ExitSuccess   -> return ()
-            ExitFailure i -> assertFailure $ "HERMIT-shell exited with error " ++ show i
+        -- Ensure that the golden file exists prior to calling diff
+        goldenExists <- doesFileExist gfile
+        unless goldenExists $ copyFile dfile gfile
+
+--         putStrLn cmd
+--         (_,_,_,rHermit) <- createProcess $ shell cmd
+--         code <- waitForProcess rHermit
+--
+--         case code of
+--             ExitSuccess   -> return ()
+--             ExitFailure i -> assertFailure $ "HERMIT-shell exited with error " ++ show i

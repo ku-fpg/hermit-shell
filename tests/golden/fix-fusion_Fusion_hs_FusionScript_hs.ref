@@ -1,0 +1,45 @@
+[1 of 4] Compiling FStrictScript    ( FStrictScript.hs, nothing )
+[2 of 4] Compiling PreconditionRScript ( PreconditionRScript.hs, nothing )
+[3 of 4] Compiling PreconditionLScript ( PreconditionLScript.hs, nothing )
+[4 of 4] Compiling FusionScript     ( FusionScript.hs, nothing )
+[1 of 1] Compiling Main             ( Fusion.hs, Fusion.o )
+Setting phasers to stun... (port 3000) (ctrl-c to quit)
+GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
+module Main where
+  f ∷ A → B
+  g ∷ A → A
+  h ∷ B → B
+  prog ∷ B
+  main ∷ IO ()
+  main ∷ IO ()
+[Done]
+
+[1 of 4] Compiling FStrictScript    ( FStrictScript.hs, interpreted )
+[2 of 4] Compiling PreconditionRScript ( PreconditionRScript.hs, interpreted )
+[3 of 4] Compiling PreconditionLScript ( PreconditionLScript.hs, interpreted )
+[4 of 4] Compiling FusionScript     ( FusionScript.hs, interpreted )
+Ok, modules loaded: FusionScript, PreconditionLScript, PreconditionRScript, FStrictScript.
+prog = f (fix ▲ g)
+[Done]
+
+prog = f (fix ▲ g)
+[Done]
+
+f (fix ▲ g)
+[Done]
+
+fix ▲ h
+[Done]
+
+prog = fix ▲ h
+[Done]
+
+HERMIT> 
+[Done]
+
+Leaving GHCi.
+ghc: user interrupt
+Linking Fusion ...
+[starting HERMIT-shell v0.1.0.0 on Fusion.hs]
+[starting HERMIT v1.0.0.0 on Fusion.hs]
+% ghc Fusion.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:Main: -fplugin-opt=HERMIT.GHCI:Main:FusionScript.hs -fplugin-opt=HERMIT.GHCI:Main:resume

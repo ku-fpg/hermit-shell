@@ -13,3 +13,4 @@ hermit-shell.wiki
 .ghci-hermit
 .cabal-sandbox
 cabal.sandbox.config
+tests/dump/*.dump

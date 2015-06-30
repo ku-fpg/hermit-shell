@@ -1,0 +1,5 @@
+[1 of 3] Compiling InductiveStepScript ( InductiveStepScript.hs, nothing )
+[2 of 3] Compiling BaseCaseScript   ( BaseCaseScript.hs, nothing )
+[3 of 3] Compiling VerifyScript     ( VerifyScript.hs, nothing )
+
+VerifyScript.hs:14:5: Not in scope: ‘proof’
