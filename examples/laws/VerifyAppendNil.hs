@@ -38,16 +38,17 @@ script = do
 
   eval "rule-to-lemma \"append-nil\""
 
-  eval "prove-lemma \"append-nil\""
-  eval "induction 'xs"
-  eval "forall-body"
+  shellEffect $ proveLemma "append-nil"
+  apply $ induction "xs"
 
-  apply $ pathS [conjLhs] appendNilUndefined
-
-  apply $ pathS [conjRhs, conjLhs] appendNilNil
+  apply . pathS [forallBody]
+        $ serialise
+            [ pathS [conjLhs]                                  appendNilUndefined
+            , pathS [conjRhs, conjLhs]                         appendNilNil
 
             -- XXX: Is it ok that we don't need to do anything with the antecedent here?
-  apply $ pathS [conjRhs, conjRhs, forallBody, consequent] appendNilCons
+            , pathS [conjRhs, conjRhs, forallBody, consequent] appendNilCons
+            ]
 
   proofCmd endProof
 
