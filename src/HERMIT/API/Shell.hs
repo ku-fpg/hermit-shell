@@ -70,13 +70,20 @@ proof lemmaName p = do
   p
   proofCmd endProof
 
-pathS :: [Crumb] -> Rewrite a -> Rewrite a
-pathS crumbs r
+pathR :: [Crumb] -> Rewrite a -> Rewrite a
+pathR crumbs r
   = Transform
-  $ method "pathS"
+  $ method "pathR"
            [ toJSON crumbs
            , toJSON r
            ]
+
+-- TODO: See if this can implemented in terms of pathR
+pathS :: [Crumb] -> Shell () -> Shell ()
+pathS crumbs s =
+  scope $ do
+    mapM_ sendCrumb crumbs
+    s
 
 class Run a where
   run :: a -> Shell ()

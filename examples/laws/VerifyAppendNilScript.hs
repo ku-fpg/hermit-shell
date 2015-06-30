@@ -41,12 +41,10 @@ script = do
   proof "append-nil" $ do
     apply $ induction "xs"
 
-    apply . pathS [forallBody]
-          $ serialise
-              [ pathS [conjLhs]                                  appendNilUndefined
-              , pathS [conjRhs, conjLhs]                         appendNilNil
+    pathS [forallBody] $ do
+      apply $ pathR [conjLhs]                                  appendNilUndefined
+      apply $ pathR [conjRhs, conjLhs]                         appendNilNil
 
-              -- XXX: Is it ok that we don't need to do anything with the antecedent here?
-              , pathS [conjRhs, conjRhs, forallBody, consequent] appendNilCons
-              ]
+        -- XXX: Is it ok that we don't need to do anything with the antecedent here?
+      apply $ pathR [conjRhs, conjRhs, forallBody, consequent] appendNilCons
 

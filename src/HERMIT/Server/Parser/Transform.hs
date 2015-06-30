@@ -1133,7 +1133,7 @@ instance External (RewriteH LCore) where
     , external "extensionality" (promoteR (extensionalityR Nothing) :: RewriteH LCore)
         [ "f == g  ==>  forall x.  f x == g x" ]
 
-    , external "pathS" (pathR :: [Crumb] -> RewriteH LCore -> RewriteH LCore)
+    , external "pathR" (pathR :: [Crumb] -> RewriteH LCore -> RewriteH LCore)
         [ "Scope a rewrite with a list of Crumbs" ]
 
     , external "unsafeReplace" (promoteExprR . unsafeReplaceR :: CoreString -> RewriteH LCore)

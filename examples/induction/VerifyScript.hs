@@ -13,25 +13,17 @@ script =
 
     proof "++ []" $ do
       apply $ induction "xs"
-      apply
-        . pathS [forallBody]
-        $ serialise
-            [   -- undefined case
-              pathS [conjLhs] baseCase
+      pathS [forallBody] $ do
+           -- undefined case
+        apply $ pathR [conjLhs] baseCase
 
-                -- nil case
-            , pathS [conjRhs, conjLhs] baseCase
+          -- nil case
+        apply $ pathR [conjRhs, conjLhs] baseCase
 
-                -- cons case
-            , pathS [conjRhs, conjRhs, forallBody, consequent]
-                $ serialise 
-                    [ pathS [eqLhs]
-                        $ serialise
-                            [ inductiveStep
-                            , pathS [appArg]
-                                $ lemmaForward "ind-hyp-0"
-                            ]
-                    , reflexivity
-                    ]
-            ]
+          -- cons case
+        pathS [conjRhs, conjRhs, forallBody, consequent] $ do
+          pathS [eqLhs] $ do
+            apply inductiveStep
+            apply $ pathR [appArg] $ lemmaForward "ind-hyp-0"
+          apply reflexivity
 
