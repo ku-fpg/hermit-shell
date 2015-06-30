@@ -109,6 +109,7 @@ library
                         HERMIT.Server.Parser.ProofShellCommand
                         HERMIT.Server.Parser.Utils
   other-modules:        Paths_hermit_shell
+                        HERMIT.Debug
   hs-source-dirs:       src
   include-dirs:         include
   includes:             overlap.h

@@ -2,14 +2,15 @@
 module HERMIT.GHCI.Client where
 
 import Control.Lens ((^.))
-import Control.Monad (void)
+import Control.Monad (void, when)
 import Data.Aeson
 import Data.Aeson.Types
 import Data.Maybe
 import qualified Control.Monad.Remote.JSON as JSONRPC
 import Network.Wreq
-import HERMIT.GHCI.JSON
 import HERMIT.API.Types
+import HERMIT.Debug (debug)
+import HERMIT.GHCI.JSON
 
 --- Main call-HERMIT function
 
@@ -25,10 +26,10 @@ send :: Shell a -> IO a
 send (Return a) = return a
 send (Bind m k) = send m >>= send . k
 send (Shell g) = do
-       print g
+       when debug $ print g
        v <- JSONRPC.send session $ JSONRPC.method "send" [g]
        case fromJust $ parseMaybe parseJSON v of
-         ShellException msg -> 
+         ShellException msg ->
              error $ "server failure: " ++ show v ++ " : " ++ msg
          ShellFailure msg -> error $ "failed to parse result value: " ++ show v ++ " : " ++ msg
          ShellResult gss a -> do

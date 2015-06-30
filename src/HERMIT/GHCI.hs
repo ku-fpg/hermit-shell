@@ -17,11 +17,11 @@ import           Data.Default.Class
 import           Data.List.Compat
 import           Data.Maybe (maybeToList)
 
+import           HERMIT.Debug (debug)
 import           HERMIT.GHC hiding ((<>), liftIO)
+import           HERMIT.Kernel
 import           HERMIT.Plugin.Builder
 import           HERMIT.Plugin.Types
-
-import           HERMIT.Kernel
 
 import           HERMIT.GHCI.Actions
 import           HERMIT.GHCI.JSON
@@ -50,9 +50,9 @@ plugin :: Plugin
 plugin = buildPlugin $ \ store passInfo ->
   if passNum passInfo == 0
   then \ o p ->
-           do liftIO $ print ("Hey" :: String)
+           do when debug . liftIO $ print ("Hey" :: String)
               r <- hermitKernel store "front end" (server passInfo $ reverse o) p
-              liftIO $ print ("Jude" :: String)
+              when debug . liftIO $ print ("Jude" :: String)
               return r
   else const return
 
@@ -100,13 +100,13 @@ server passInfo opts skernel initAST = do
     let jsonRpc :: ActionH ()
         jsonRpc = do
                 d <- jsonData
-                liftIO $ print d
+                when debug . liftIO $ print d
                 r <- liftIO $ fns d
---                liftIO $ print r
+--                when debug . liftIO $ print r
                 forM_ r json
 
     tid <- forkIO $ scottyT 3000 runAction $ do
-        middleware logStdoutDev
+        when debug $ middleware logStdoutDev
         post "/" jsonRpc
 
     pwd <- getCurrentDirectory
@@ -122,14 +122,14 @@ server passInfo opts skernel initAST = do
         waitForProcess hGhci
 
     -- What and Why?
-    print ("Killing server" :: String)
+    when debug $ print ("Killing server" :: String)
     throwTo tid UserInterrupt
-    print ("Killed server" :: String)
+    when debug $ print ("Killed server" :: String)
 
-    print ("Last Call" :: String)
+    when debug $ print ("Last Call" :: String)
     join (atomically (readTVar lastCall))      -- do last call
 
-    print ("Last Called" :: String)
+    when debug $ print ("Last Called" :: String)
  --   raiseSignal sigTERM
 
 -- | Turn WebAppException into a Response.

@@ -25,6 +25,7 @@ import qualified Data.Map as Map
 import           Data.Monoid
 --import           Data.Text (Text)
 
+import           HERMIT.Debug (debug)
 import           HERMIT.Dictionary
 -- import           HERMIT.External
 import           HERMIT.Kernel
@@ -180,10 +181,10 @@ performTypedEffect :: TVar (IO ())
 performTypedEffect lastCall plug ref [val] =
   case parseCLT val of
     Nothing -> do
-            print ("ParseCLT fail:" :: String, val)
+            when debug $ print ("ParseCLT fail:" :: String, val)
             return Aeson.Null
     Just m -> do
-        print ("sending to internal shell" :: String)
+        when debug $ print ("sending to internal shell" :: String)
         cls0 <- atomically $ takeTMVar ref
         -- Now, add a command-specific logger
         let orig_logger = ps_render $ cl_pstate cls0
@@ -195,18 +196,18 @@ performTypedEffect lastCall plug ref [val] =
         -- split into messages, and AST(s)?
         case r of
           Left (CLResume sast) -> do
-             print ("resume" :: String, sast)
+             when debug $ print ("resume" :: String, sast)
              atomically $ writeTVar lastCall $  resumeK (pr_kernel plug) sast
              return $ object [ "result" .= (), "output" .= es ]
           Left CLAbort -> do
-             print ("abort" :: String)
-             atomically $ writeTVar lastCall $ abortK (pr_kernel plug) 
+             when debug $ print ("abort" :: String)
+             atomically $ writeTVar lastCall $ abortK (pr_kernel plug)
              return $ object [ "result" .= (), "output" .= es ]
           Left (CLError e) -> do
              putStrLn e
              return Aeson.Null
           Left _exc  -> do
-                  print ("Left _exc : " :: String)
+                  when debug $ print ("Left _exc : " :: String)
                   return Aeson.Null
           Right val' -> return $ object [ "result" .= val', "output" .= es ]
 performTypedEffect _ _ _ _ =
