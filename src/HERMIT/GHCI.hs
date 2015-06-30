@@ -1,3 +1,4 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 module HERMIT.GHCI (plugin) where
 
@@ -29,6 +30,8 @@ import           HERMIT.GHCI.Types
 import           Network.HTTP.Types (Status, status200, status500)
 import qualified Network.Wai as Wai
 import           Network.Wai.Middleware.RequestLogger (logStdoutDev)
+
+import           Prelude.Compat
 
 import           System.Directory (getCurrentDirectory)
 import           System.FilePath (takeExtension)
@@ -63,7 +66,7 @@ server passInfo opts skernel initAST = do
         resume = "resume" `elem` opts
 
         otherOpts :: [CommandLineOption]
-        otherOpts = filter (not . (`elem` "resume":maybeToList mbScript)) opts
+        otherOpts = filter (not . (`elem` ("resume":maybeToList mbScript))) opts
     unless (null otherOpts) $ do
         putStr "Ignored command-line arguments: "
         forM_ otherOpts $ \opt -> putStr opt >> putChar ' '
