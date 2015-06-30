@@ -1,0 +1,6 @@
+-- Base Case
+--
+-- [] ++ []  =>  []
+
+one-bu (unfold '++)
+smash
