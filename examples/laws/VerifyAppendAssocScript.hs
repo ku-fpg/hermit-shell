@@ -6,11 +6,6 @@ import HERMIT.API
 
 import VerifyNilAppendScript
 
-eqBoth :: Rewrite a -> Rewrite a
-eqBoth r
-  = pathR [eqLhs] r
-  >>> pathR [eqRhs] r
-
 appendAssoc :: Shell ()
 appendAssoc = do
   eval "rule-to-lemma \"append-assoc\""
@@ -24,7 +19,7 @@ appendAssoc = do
       -- undefined case
       pathS [conjLhs] $ do
         pathS [forallBody] $ do
-          apply . eqBoth . oneBU $ inlineWith "++"
+          apply . bothR . oneBU $ inlineWith "++"
           apply smash
           apply . pathR [eqRhs] . oneTD $ inlineWith "++"
           apply smash
