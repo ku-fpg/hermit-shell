@@ -1,4 +1,11 @@
-module VerifyAppendNilScript where
+module VerifyAppendNilScript (appendNil) where
+
+  --------------------------------------------
+  -- Verify append-nil
+  --
+  -- forall xs.  xs ++ [] = xs
+  --
+  --------------------------------------------
 
 import HERMIT.API
 import HERMIT.API.Types
@@ -21,21 +28,8 @@ appendNilCons
     , oneBU (lemmaForward "ind-hyp-0")
     ]
 
-script :: Shell ()
-script = do
-  --------------------------------------------
-  -- Verify append-nil
-  --
-  -- forall xs.  xs ++ [] = xs
-  --
-  --------------------------------------------
-
-  -- TODO: Figure out why `loadAndRun` isn't working and update comment.
-  -- To test this script:
-  --   prog-end
-  --   load-and-run "verify-append-nil.hec"
-  --   show-lemmas
-
+appendNil :: Shell ()
+appendNil = do
   eval "rule-to-lemma \"append-nil\""
 
   proof "append-nil" $ do
@@ -45,6 +39,7 @@ script = do
       apply $ pathR [conjLhs]                                  appendNilUndefined
       apply $ pathR [conjRhs, conjLhs]                         appendNilNil
 
-        -- XXX: Is it ok that we don't need to do anything with the antecedent here?
       apply $ pathR [conjRhs, conjRhs, forallBody, consequent] appendNilCons
 
+script :: Shell ()
+script = appendNil
