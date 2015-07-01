@@ -163,7 +163,9 @@ hermitShellDotfile mbScript = unlines $
   , "send display" -- where am I (interactive only)
 --   , "setPath (rhsOf \"rev\")"
   ] ++ maybe []
-             (\script -> [":l " ++ script, "script"])
+             (\script ->
+                let moduleName = takeWhile (/='.') script
+                in [":l " ++ script, moduleName ++ ".script"])
              mbScript
 
 hermitShellFlags :: FilePath -> [String]
