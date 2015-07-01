@@ -1,2 +1,185 @@
+[1 of 1] Compiling Main             ( Induction.hs, Induction.o )
 
-VerifyScript.hs:14:5: Not in scope: ‘proof’
+Induction.hs:5:11: Warning:
+    Rule "++ []" may never fire because ‘++’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘++’
+Setting phasers to stun... (port 3000) (ctrl-c to quit)
+GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
+module Main where
+  (++) ∷ ∀ a . [a] → [a] → [a]
+  $dShow ∷ Show [Bool]
+  main ∷ IO ()
+  main ∷ IO ()
+[Done]
+
+[1 of 3] Compiling InductiveStepScript ( InductiveStepScript.hs, interpreted )
+[2 of 3] Compiling BaseCaseScript   ( BaseCaseScript.hs, interpreted )
+[3 of 3] Compiling VerifyScript     ( VerifyScript.hs, interpreted )
+Ok, modules loaded: VerifyScript, BaseCaseScript, InductiveStepScript.
+module Main where
+  (++) ∷ ∀ a . [a] → [a] → [a]
+  $dShow ∷ Show [Bool]
+  main ∷ IO ()
+  main ∷ IO ()
+[Done]
+
+
+[Done]
+
+++ [] (Not Proven)
+  ∀ △ xs. (++) ▲ xs ([] ▲) ≡ xs
+[Done]
+
+Goal:
+  ∀ △ xs. (++) ▲ xs ([] ▲) ≡ xs
+[Done]
+
+Goal:
+  ∀ △.
+  ((++) ▲ (undefined ▲) ([] ▲) ≡ undefined ▲)
+  ∧
+  (((++) ▲ ([] ▲) ([] ▲) ≡ [] ▲)
+   ∧
+   (∀ a b.
+    ((++) ▲ b ([] ▲) ≡ b) ⇒ ((++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)))
+[Done]
+
+Goal:
+  ∀ △.
+  ((++) ▲ (undefined ▲) ([] ▲) ≡ undefined ▲)
+  ∧
+  (((++) ▲ ([] ▲) ([] ▲) ≡ [] ▲)
+   ∧
+   (∀ a b.
+    ((++) ▲ b ([] ▲) ≡ b) ⇒ ((++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)))
+[Done]
+
+Goal:
+  ((++) ▲ (undefined ▲) ([] ▲) ≡ undefined ▲)
+  ∧
+  (((++) ▲ ([] ▲) ([] ▲) ≡ [] ▲)
+   ∧
+   (∀ a b.
+    ((++) ▲ b ([] ▲) ≡ b) ⇒ ((++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)))
+[Done]
+
+Goal:
+  (true)
+  ∧
+  (((++) ▲ ([] ▲) ([] ▲) ≡ [] ▲)
+   ∧
+   (∀ a b.
+    ((++) ▲ b ([] ▲) ≡ b) ⇒ ((++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)))
+[Done]
+
+Goal:
+  (true)
+  ∧
+  ((true)
+   ∧
+   (∀ a b.
+    ((++) ▲ b ([] ▲) ≡ b) ⇒ ((++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)))
+[Done]
+
+Goal:
+  (true)
+  ∧
+  ((true)
+   ∧
+   (∀ a b.
+    ((++) ▲ b ([] ▲) ≡ b) ⇒ ((++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)))
+[Done]
+
+Goal:
+  (true)
+  ∧
+  (∀ a b.
+   ((++) ▲ b ([] ▲) ≡ b) ⇒ ((++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b))
+[Done]
+
+Goal:
+  ∀ a b.
+  ((++) ▲ b ([] ▲) ≡ b) ⇒ ((++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)
+[Done]
+
+Goal:
+  ((++) ▲ b ([] ▲) ≡ b) ⇒ ((++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  (++) ▲ b ([] ▲) ≡ b
+Goal:
+  (++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  (++) ▲ b ([] ▲) ≡ b
+Goal:
+  (++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  (++) ▲ b ([] ▲) ≡ b
+Goal:
+  (++) ▲ ((:) ▲ a b) ([] ▲)
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  (++) ▲ b ([] ▲) ≡ b
+Goal:
+  (:) ▲ a ((++) ▲ b ([] ▲))
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  (++) ▲ b ([] ▲) ≡ b
+Goal:
+  (:) ▲ a b
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  (++) ▲ b ([] ▲) ≡ b
+Goal:
+  (:) ▲ a b ≡ (:) ▲ a b
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  (++) ▲ b ([] ▲) ≡ b
+Goal:
+  true
+[Done]
+
+Goal:
+  (true) ∧ ((true) ∧ (∀ a b. ((++) ▲ b ([] ▲) ≡ b) ⇒ (true)))
+[Done]
+
+Goal:
+  ∀ △. (true) ∧ ((true) ∧ (∀ a b. ((++) ▲ b ([] ▲) ≡ b) ⇒ (true)))
+[Done]
+
+Successfully proven: ++ []
+
+[Done]
+
+module Main where
+  (++) ∷ ∀ a . [a] → [a] → [a]
+  $dShow ∷ Show [Bool]
+  main ∷ IO ()
+  main ∷ IO ()
+[Done]
+
+HERMIT> 
+[Done]
+
+Leaving GHCi.
+ghc: user interrupt
+Linking Induction ...
+[starting HERMIT-shell v0.1.0.0 on Induction.hs]
+[starting HERMIT v1.0.0.0 on Induction.hs]
+% ghc Induction.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:Main: -fplugin-opt=HERMIT.GHCI:Main:VerifyScript.hs -fplugin-opt=HERMIT.GHCI:Main:resume
