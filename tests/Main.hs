@@ -1,6 +1,8 @@
 module Main (main) where
 
-import Control.Monad (unless)
+import Control.Monad (unless, when)
+
+import Data.Foldable (forM_)
 
 import System.Directory
 import System.Exit
@@ -70,8 +72,23 @@ mkHermitShellTest (dir, hs, moduleName, script) =
     withPathpDir :: String -> String
     withPathpDir cmd = unwords [ "(", "cd", pathp, ";", cmd, ")" ]
 
+    -- For some incredibly bizarre reason, HERMIT's output can be have different
+    -- line orderings depending on if it's been run once before. As far as I can
+    -- tell, this is due to the presence of object (.o) and interface (.hi) files.
+    -- Wat.
+    --
+    -- Luckily, removing any object or interface before running HERMIT seems to
+    -- provide a guarantee that HERMIT's output will be the same on subsequent runs.
+    cleanObjectFiles :: IO ()
+    cleanObjectFiles = do
+        files <- getDirectoryContents pathp
+        forM_ files $ \file ->
+            when (takeExtension file `elem` [".o", ".hi"]) $
+               removeFile $ pathp </> file
+
     hermitShellOutput :: IO ()
     hermitShellOutput = do
+        cleanObjectFiles
         sandboxCfgPath <- readProcess "cabal" [ "exec"
                                               , "runhaskell"
                                               , rootDir </> "CabalSandboxConfig.hs"
@@ -127,11 +144,3 @@ mkHermitShellTest (dir, hs, moduleName, script) =
         -- Ensure that the golden file exists prior to calling diff
         goldenExists <- doesFileExist gfile
         unless goldenExists $ copyFile dfile gfile
-
---         putStrLn hermitShell
---         (_,_,_,rHermit) <- createProcess $ shell hermitShell
---         code <- waitForProcess rHermit
---
---         case code of
---             ExitSuccess   -> return ()
---             ExitFailure i -> assertFailure $ "HERMIT-shell exited with error " ++ show i
