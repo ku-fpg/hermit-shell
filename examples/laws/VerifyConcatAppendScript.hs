@@ -4,15 +4,15 @@ import HERMIT.API
 
 import VerifyAppendAssocScript
 
-concatAppendNilLeft :: Rewrite LCore
-concatAppendNilLeft
+nilLeft :: Rewrite LCore
+nilLeft
   = serialise
       [ anyCall (unfoldWith "++")
       , smash
       ]
 
-concatAppendNilRight :: Rewrite LCore
-concatAppendNilRight
+nilRight :: Rewrite LCore
+nilRight
   = serialise
       [ oneBU (unfoldWith "concat")
       , smash
@@ -20,8 +20,8 @@ concatAppendNilRight
       , smash
       ]
 
-concatConsLeft :: Rewrite LCore
-concatConsLeft
+consLeft :: Rewrite LCore
+consLeft
   = serialise
       [ anyCall (unfoldWith "++")
       , smash
@@ -30,8 +30,8 @@ concatConsLeft
       , oneBU (lemmaForward "ind-hyp-0")
       ]
 
-concatConsRight :: Rewrite LCore
-concatConsRight
+consRight :: Rewrite LCore
+consRight
   = serialise
       [ oneBU (unfoldWith "concat")
       , smash
@@ -50,20 +50,20 @@ concatAppend = do
     pathS [forallBody] $ do
         -- undefined case
       pathS [conjLhs] $ do
-        apply concatAppendNilRight
+        apply nilRight
         apply . oneTD $ unfoldWith "concat"
         apply smash
 
         -- nil case
       pathS [conjRhs, conjLhs] $ do
-        apply $ lhsR concatAppendNilLeft
-        apply $ rhsR concatAppendNilRight
+        apply $ lhsR nilLeft
+        apply $ rhsR nilRight
         apply reflexivity
 
         -- cons case
       pathS [conjRhs, conjRhs, forallBody, consequent] $ do
-        apply $ lhsR concatConsLeft
-        apply $ rhsR concatConsRight
+        apply $ lhsR consLeft
+        apply $ rhsR consRight
         apply reflexivity
 
 script :: Shell ()
