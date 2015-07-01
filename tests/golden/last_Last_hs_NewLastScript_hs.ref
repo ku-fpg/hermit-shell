@@ -3,8 +3,8 @@ Setting phasers to stun... (port 3000) (ctrl-c to quit)
 GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
 module Main where
   last ∷ ∀ a . [a] → a
-  unwrap ∷ ∀ a . ([a] → a) → a → [a] → a
   wrap ∷ ∀ a . (a → [a] → a) → [a] → a
+  unwrap ∷ ∀ a . ([a] → a) → a → [a] → a
   main ∷ IO ()
   main ∷ IO ()
 [Done]
@@ -13,16 +13,16 @@ module Main where
 Ok, modules loaded: NewLastScript.
 module Main where
   last ∷ ∀ a . [a] → a
-  unwrap ∷ ∀ a . ([a] → a) → a → [a] → a
   wrap ∷ ∀ a . (a → [a] → a) → [a] → a
+  unwrap ∷ ∀ a . ([a] → a) → a → [a] → a
   main ∷ IO ()
   main ∷ IO ()
 [Done]
 
 module Main where
   last ∷ ∀ a . [a] → a
-  unwrap ∷ ∀ a . ([a] → a) → a → [a] → a
   wrap ∷ ∀ a . (a → [a] → a) → [a] → a
+  unwrap ∷ ∀ a . ([a] → a) → a → [a] → a
   main ∷ IO ()
   main ∷ IO ()
 [Done]
@@ -237,7 +237,7 @@ last = λ a →
          (:) a as → x a as
 [Done]
 
-HERMIT>
+HERMIT> 
 [Done]
 
 Leaving GHCi.

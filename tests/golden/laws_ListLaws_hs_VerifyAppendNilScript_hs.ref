@@ -87,13 +87,13 @@ ListLaws.hs:35:12: Warning:
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
 GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
 module ListLaws where
-  (++) ∷ ∀ a . [a] → [a] → [a]
   mempt ∷ ∀ a . [a]
+  (++) ∷ ∀ a . [a] → [a] → [a]
   mappen ∷ ∀ a . [a] → [a] → [a]
   toList ∷ ∀ a . a → [a]
-  retur ∷ ∀ a . a → [a]
   concat ∷ ∀ a . [[a]] → [a]
   map ∷ ∀ a b . (a → b) → [a] → [b]
+  retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
 [Done]
 
@@ -169,13 +169,13 @@ Goal:
 
 Successfully proven: append-nil
 module ListLaws where
-  (++) ∷ ∀ a . [a] → [a] → [a]
   mempt ∷ ∀ a . [a]
+  (++) ∷ ∀ a . [a] → [a] → [a]
   mappen ∷ ∀ a . [a] → [a] → [a]
   toList ∷ ∀ a . a → [a]
-  retur ∷ ∀ a . a → [a]
   concat ∷ ∀ a . [[a]] → [a]
   map ∷ ∀ a b . (a → b) → [a] → [b]
+  retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
 [Done]
 
