@@ -187,8 +187,8 @@ newtype LemmaName = LemmaName String
 
 ------------------------------------------------------------------------
 
-newtype HermitName = HermitName Value
-  deriving (ToJSON)
+newtype HermitName = HermitName String
+  deriving (ToJSON, IsString)
 
 ------------------------------------------------------------------------
 
