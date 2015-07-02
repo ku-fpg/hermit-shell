@@ -18,9 +18,11 @@ import           HERMIT.Shell.KernelEffect
 import           HERMIT.Shell.Proof
 import           HERMIT.Core (Crumb)
 
+import           HERMIT.Server.Parser.BiRewrite ()
 import           HERMIT.Server.Parser.KernelEffect ()
 import           HERMIT.Server.Parser.Name ()
 import           HERMIT.Server.Parser.QueryFun ()
+import           HERMIT.Server.Parser.Rewrite ()
 import           HERMIT.Server.Parser.ScriptEffect ()
 import           HERMIT.Server.Parser.ShellEffect ()
 import           HERMIT.Server.Parser.String ()

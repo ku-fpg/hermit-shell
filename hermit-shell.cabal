@@ -77,15 +77,15 @@ library
                         HERMIT.API.Dictionary.Navigation.Crumbs
                         HERMIT.API.Dictionary.New
                         HERMIT.API.Dictionary.Query
+                        HERMIT.API.Dictionary.Reasoning
                         HERMIT.API.Dictionary.Remembered
                         HERMIT.API.Dictionary.Rules
                         HERMIT.API.Dictionary.Undefined
                         HERMIT.API.Dictionary.Unfold
+                        HERMIT.API.Dictionary.Unsafe
                         HERMIT.API.Dictionary.WorkerWrapper.Common
                         HERMIT.API.Dictionary.WorkerWrapper.Fix
                         HERMIT.API.Dictionary.WorkerWrapper.FixResult
-                        HERMIT.API.Dictionary.Reasoning
-                        HERMIT.API.Dictionary.Unsafe
                         HERMIT.API.Shell
                         HERMIT.API.Shell.Externals
                         HERMIT.API.Shell.Proof
@@ -99,14 +99,16 @@ library
                         HERMIT.GHCI.Renderer
                         HERMIT.GHCI.Types
                         HERMIT.Server.Parser
+                        HERMIT.Server.Parser.BiRewrite
                         HERMIT.Server.Parser.Crumb
-                        HERMIT.Server.Parser.Name
-                        HERMIT.Server.Parser.QueryFun
-                        HERMIT.Server.Parser.ShellEffect
                         HERMIT.Server.Parser.KernelEffect
+                        HERMIT.Server.Parser.Name
+                        HERMIT.Server.Parser.ProofShellCommand
+                        HERMIT.Server.Parser.QueryFun
+                        HERMIT.Server.Parser.Rewrite
+                        HERMIT.Server.Parser.ShellEffect
                         HERMIT.Server.Parser.String
                         HERMIT.Server.Parser.Transform
-                        HERMIT.Server.Parser.ProofShellCommand
                         HERMIT.Server.Parser.Utils
   other-modules:        Paths_hermit_shell
                         HERMIT.Debug

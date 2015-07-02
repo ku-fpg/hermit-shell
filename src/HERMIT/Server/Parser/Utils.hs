@@ -5,8 +5,8 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE ViewPatterns #-}
-{-# LANGUAGE StandaloneDeriving #-}
 
+-- TODO: Remove when only GHC 7.10 is supported
 #include "overlap.h"
 __LANGUAGE_OVERLAPPING_INSTANCES__
 
@@ -51,9 +51,6 @@ external nm f _ (Object o) = case parseMaybe p o of
 external nm _ _ _ = fail $ "no match for " ++ show nm
 
 class Typeable e => External e where
-  type R e :: *
-  type R e = e  -- default
-
   parseExternal :: Value -> Parser e
   parseExternal = alts parseExternals
 
@@ -68,8 +65,13 @@ class Typeable e => External e where
 
   {-# MINIMAL parseExternal | parseExternals #-}
 
+type family R e :: * where
+    R (a -> b) = R b
+    R e        = e
+
+-----------------------------------------------------------------
+
 instance (External a, External b) => External (a -> b) where
-  type R (a -> b) = R b
 --  typeString (Proxy :: Proxy (a -> b)) = typeString (Proxy :: Proxy a) ++ " -> " ++ typeString (Proxy :: Proxy b)
 
   parseExternal _ = error "can not parseExternal for function"
@@ -118,9 +120,8 @@ instance (External a, External b) => External (Either a b) where
   parseExternal (Object (HM.lookup "Right" -> Just x)) = fmap Right $ parseExternal x
   parseExternal _ = fail "parseExternal: Either"
 
------------------------------------------------------------------
 instance External Considerable where
-  parseExternal = parseJSON 
+  parseExternal = parseJSON
 
 instance External Used where
   parseExternal = parseJSON
