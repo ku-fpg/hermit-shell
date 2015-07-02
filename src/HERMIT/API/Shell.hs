@@ -10,6 +10,7 @@ import Data.Aeson
 import HERMIT.API.Types
 import HERMIT.API.Shell.Externals (beginScope, endScope)
 import HERMIT.API.Shell.Proof (proveLemma, endProof)
+import HERMIT.API.Dictionary.KURE (serialise)
 
 -- | redisplays current state.
 display :: Shell ()
@@ -78,6 +79,9 @@ pathR crumbs r
            , toJSON r
            ]
 
+pathRs :: [Crumb] -> [Rewrite a] -> Rewrite a
+pathRs crumbs = pathR crumbs . serialise
+
 -- TODO: See if this can implemented in terms of pathR
 pathS :: [Crumb] -> Shell () -> Shell ()
 pathS crumbs s =
@@ -87,16 +91,16 @@ pathS crumbs s =
 
 class Run a where
   run :: a -> Shell ()
- 
+
 instance Run Crumb where
   run = sendCrumb
- 
+
 instance Guts a => Run (Transform a LocalPath) where
   run = setPath
- 
+
 instance Guts a => Run (Transform a a) where
   run = apply
- 
+
 instance __OVERLAPPABLE__ Guts a => Run (Transform a b) where
   run = query
 
