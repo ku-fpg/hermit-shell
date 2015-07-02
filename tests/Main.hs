@@ -45,7 +45,21 @@ testArgs =
     , ("induction"     , "Induction.hs", "Main"    , "VerifyScript.hs")
     , ("last"          , "Last.hs"     , "Main"    , "LastScript.hs")
     , ("last"          , "Last.hs"     , "Main"    , "NewLastScript.hs")
+    , ("laws"          , "ListLaws.hs" , "ListLaws", "VerifyAppendAssocScript.hs")
     , ("laws"          , "ListLaws.hs" , "ListLaws", "VerifyAppendNilScript.hs")
+    , ("laws"          , "ListLaws.hs" , "ListLaws", "VerifyAppendNonemptyScript.hs")
+    , ("laws"          , "ListLaws.hs" , "ListLaws", "VerifyConcatAppendScript.hs")
+--    , ("laws"          , "ListLaws.hs" , "ListLaws", "VerifyConcatConcatScript.hs")
+--    , ("laws"          , "ListLaws.hs" , "ListLaws", "VerifyConcatNonemptyScript.hs")
+    , ("laws"          , "ListLaws.hs" , "ListLaws", "VerifyConcatOfToListScript.hs")
+    , ("laws"          , "ListLaws.hs" , "ListLaws", "VerifyConcatUnitScript.hs")
+    , ("laws"          , "ListLaws.hs" , "ListLaws", "VerifyListLeftUnitScript.hs")
+    , ("laws"          , "ListLaws.hs" , "ListLaws", "VerifyListMonadAssocScript.hs")
+    , ("laws"          , "ListLaws.hs" , "ListLaws", "VerifyMapAppendScript.hs")
+--    , ("laws"          , "ListLaws.hs" , "ListLaws", "VerifyMapComposeScript.hs")
+--    , ("laws"          , "ListLaws.hs" , "ListLaws", "VerifyMapConcatScript.hs")
+    , ("laws"          , "ListLaws.hs" , "ListLaws", "VerifyMapNonemptyScript.hs")
+--    , ("laws"          , "ListLaws.hs" , "ListLaws", "VerifyNilAppendScript.hs")
     , ("mean"          , "Mean.hs"     , "Main"    , "MeanScript.hs")
     , ("new_reverse"   , "Reverse.hs"  , "Main"    , "ReverseScript.hs")
     , ("nub"           , "Nub.hs"      , "Main"    , "NubScript.hs")
@@ -58,7 +72,7 @@ mkHermitShellTest (dir, hs, moduleName, script) =
     goldenVsFileDiff testName diff gfile dfile hermitShellOutput
   where
     testName :: TestName
-    testName = dir </> hs
+    testName = dir </> script
 
     fixed, gfile, dfile, pathp :: FilePath
     fixed = fixName (concat [dir, "_", hs, "_", script])

@@ -1,0 +1,904 @@
+[1 of 1] Compiling ListLaws         ( ListLaws.hs, ListLaws.o )
+
+ListLaws.hs:5:11: Warning:
+    Rule "left-unit" may never fire because ‘bind’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘bind’
+
+ListLaws.hs:7:11: Warning:
+    Rule "right-unit" may never fire because ‘bind’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘bind’
+
+ListLaws.hs:9:11: Warning:
+    Rule "monad-assoc" may never fire because ‘bind’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘bind’
+
+ListLaws.hs:10:11: Warning:
+    Rule "monoid-left" may never fire
+      because ‘mappen’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘mappen’
+
+ListLaws.hs:12:11: Warning:
+    Rule "monoid-right" may never fire
+      because ‘mappen’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘mappen’
+
+ListLaws.hs:14:11: Warning:
+    Rule "monoid-assoc" may never fire
+      because ‘mappen’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘mappen’
+
+ListLaws.hs:16:11: Warning:
+    Rule "nil-append" may never fire because ‘++’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘++’
+
+ListLaws.hs:17:11: Warning:
+    Rule "append-nil" may never fire because ‘++’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘++’
+
+ListLaws.hs:18:11: Warning:
+    Rule "append-nonempty" may never fire
+      because ‘GHC.Types.:’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘GHC.Types.:’
+
+ListLaws.hs:19:11: Warning:
+    Rule "append-assoc" may never fire because ‘++’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘++’
+
+ListLaws.hs:21:11: Warning:
+    Rule "concat-unit" may never fire
+      because ‘concat’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘concat’
+
+ListLaws.hs:22:11: Warning:
+    Rule "concat-of-toList" may never fire
+      because ‘concat’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘concat’
+
+ListLaws.hs:24:11: Warning:
+    Rule "map-nonempty" may never fire because ‘map’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘map’
+
+ListLaws.hs:29:12: Warning:
+    Rule "map-compose" may never fire because ‘map’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘map’
+
+ListLaws.hs:31:12: Warning:
+    Rule "map-append" may never fire because ‘map’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘map’
+
+ListLaws.hs:32:12: Warning:
+    Rule "map-concat" may never fire because ‘map’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘map’
+
+ListLaws.hs:33:12: Warning:
+    Rule "concat-concat" may never fire
+      because ‘concat’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘concat’
+
+ListLaws.hs:34:12: Warning:
+    Rule "concat-append" may never fire
+      because ‘concat’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘concat’
+
+ListLaws.hs:35:12: Warning:
+    Rule "concat-nonempty" may never fire
+      because ‘concat’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘concat’
+Setting phasers to stun... (port 3000) (ctrl-c to quit)
+GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
+module ListLaws where
+  mempt ∷ ∀ a . [a]
+  (++) ∷ ∀ a . [a] → [a] → [a]
+  mappen ∷ ∀ a . [a] → [a] → [a]
+  toList ∷ ∀ a . a → [a]
+  concat ∷ ∀ a . [[a]] → [a]
+  map ∷ ∀ a b . (a → b) → [a] → [b]
+  retur ∷ ∀ a . a → [a]
+  bind ∷ ∀ a b . [a] → (a → [b]) → [b]
+[Done]
+
+[1 of 5] Compiling VerifyMapNonemptyScript ( VerifyMapNonemptyScript.hs, interpreted )
+[2 of 5] Compiling VerifyAppendNonemptyScript ( VerifyAppendNonemptyScript.hs, interpreted )
+[3 of 5] Compiling VerifyConcatNonemptyScript ( VerifyConcatNonemptyScript.hs, interpreted )
+[4 of 5] Compiling VerifyMapAppendScript ( VerifyMapAppendScript.hs, interpreted )
+[5 of 5] Compiling VerifyMapConcatScript ( VerifyMapConcatScript.hs, interpreted )
+Ok, modules loaded: VerifyMapConcatScript, VerifyMapAppendScript, VerifyConcatNonemptyScript, VerifyAppendNonemptyScript, VerifyMapNonemptyScript.
+map-concat (Not Proven)
+  ∀ △ △ f xs.
+  map ▲ ▲ f (concat ▲ xs) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) xs)
+[Done]
+
+map-append (Not Proven)
+  ∀ △ △ f x y.
+  map ▲ ▲ f ((++) ▲ x y) ≡ (++) ▲ (map ▲ ▲ f x) (map ▲ ▲ f y)
+[Done]
+
+append-nonempty (Not Proven)
+  ∀ △ x1 xs ys. (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
+[Done]
+
+Goal:
+  ∀ △ x1 xs ys. (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
+[Done]
+
+Goal:
+  ∀ △ x1 xs ys. (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
+[Done]
+
+Goal:
+  (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
+[Done]
+
+Goal:
+  (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
+[Done]
+
+Goal:
+  (++) ▲ ((:) ▲ x1 xs) ys
+[Done]
+
+Goal:
+  case (:) ▲ x1 xs of wild ▲
+    [] → ys
+    (:) x xs → (:) ▲ x ((++) ▲ xs ys)
+[Done]
+
+Goal:
+  (:) ▲ x1 ((++) ▲ xs ys)
+  ≡
+  case (:) ▲ x1 xs of wild ▲
+    [] → ys
+    (:) x xs → (:) ▲ x ((++) ▲ xs ys)
+[Done]
+
+Goal:
+  true
+[Done]
+
+Goal:
+  ∀ △ x1 xs ys. true
+[Done]
+
+Successfully proven: append-nonempty
+module ListLaws where
+  mempt ∷ ∀ a . [a]
+  (++) ∷ ∀ a . [a] → [a] → [a]
+  mappen ∷ ∀ a . [a] → [a] → [a]
+  toList ∷ ∀ a . a → [a]
+  concat ∷ ∀ a . [[a]] → [a]
+  map ∷ ∀ a b . (a → b) → [a] → [b]
+  retur ∷ ∀ a . a → [a]
+  bind ∷ ∀ a b . [a] → (a → [b]) → [b]
+[Done]
+
+map-nonempty (Not Proven)
+  ∀ △ △ f a as. map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
+[Done]
+
+Goal:
+  ∀ △ △ f a as. map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
+[Done]
+
+Goal:
+  ∀ △ △ f a as. map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
+[Done]
+
+Goal:
+  map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
+[Done]
+
+Goal:
+  case (:) ▲ a as of wild ▲
+    [] → [] ▲
+    (:) a as → (:) ▲ (f a) (map ▲ ▲ f as)
+  ≡
+  (:) ▲ (f a) (map ▲ ▲ f as)
+[Done]
+
+Goal:
+  true
+[Done]
+
+Goal:
+  ∀ △ △ f a as. true
+[Done]
+
+Successfully proven: map-nonempty
+module ListLaws where
+  mempt ∷ ∀ a . [a]
+  (++) ∷ ∀ a . [a] → [a] → [a]
+  mappen ∷ ∀ a . [a] → [a] → [a]
+  toList ∷ ∀ a . a → [a]
+  concat ∷ ∀ a . [[a]] → [a]
+  map ∷ ∀ a b . (a → b) → [a] → [b]
+  retur ∷ ∀ a . a → [a]
+  bind ∷ ∀ a b . [a] → (a → [b]) → [b]
+[Done]
+
+Goal:
+  ∀ △ △ f x y.
+  map ▲ ▲ f ((++) ▲ x y) ≡ (++) ▲ (map ▲ ▲ f x) (map ▲ ▲ f y)
+[Done]
+
+Goal:
+  ∀ △ △ f y.
+  (map ▲ ▲ f ((++) ▲ (undefined ▲) y)
+   ≡
+   (++) ▲ (map ▲ ▲ f (undefined ▲)) (map ▲ ▲ f y))
+  ∧
+  ((map ▲ ▲ f ((++) ▲ ([] ▲) y)
+    ≡
+    (++) ▲ (map ▲ ▲ f ([] ▲)) (map ▲ ▲ f y))
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
+    ⇒
+    (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
+     ≡
+     (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
+[Done]
+
+Goal:
+  ∀ △ △ f y.
+  (map ▲ ▲ f ((++) ▲ (undefined ▲) y)
+   ≡
+   (++) ▲ (map ▲ ▲ f (undefined ▲)) (map ▲ ▲ f y))
+  ∧
+  ((map ▲ ▲ f ((++) ▲ ([] ▲) y)
+    ≡
+    (++) ▲ (map ▲ ▲ f ([] ▲)) (map ▲ ▲ f y))
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
+    ⇒
+    (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
+     ≡
+     (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
+[Done]
+
+Goal:
+  (map ▲ ▲ f ((++) ▲ (undefined ▲) y)
+   ≡
+   (++) ▲ (map ▲ ▲ f (undefined ▲)) (map ▲ ▲ f y))
+  ∧
+  ((map ▲ ▲ f ((++) ▲ ([] ▲) y)
+    ≡
+    (++) ▲ (map ▲ ▲ f ([] ▲)) (map ▲ ▲ f y))
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
+    ⇒
+    (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
+     ≡
+     (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
+[Done]
+
+Goal:
+  (map ▲ ▲ f ((++) ▲ (undefined ▲) y)
+   ≡
+   (++) ▲ (map ▲ ▲ f (undefined ▲)) (map ▲ ▲ f y))
+  ∧
+  ((map ▲ ▲ f ((++) ▲ ([] ▲) y)
+    ≡
+    (++) ▲ (map ▲ ▲ f ([] ▲)) (map ▲ ▲ f y))
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
+    ⇒
+    (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
+     ≡
+     (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
+[Done]
+
+Goal:
+  map ▲ ▲ f ((++) ▲ (undefined ▲) y)
+  ≡
+  (++) ▲ (map ▲ ▲ f (undefined ▲)) (map ▲ ▲ f y)
+[Done]
+
+Goal:
+  (λ △ △ ds ds →
+     case ds of wild ▲
+       [] → [] ▲
+       (:) a as → (:) ▲ (ds a) (map ▲ ▲ ds as)) ▲ ▲ f
+                                                ((++) ▲ (undefined ▲) y)
+  ≡
+  (++) ▲
+       ((λ △ △ ds ds →
+           case ds of wild ▲
+             [] → [] ▲
+             (:) a as → (:) ▲ (ds a) (map ▲ ▲ ds as)) ▲ ▲ f (undefined ▲))
+       ((λ △ △ ds ds →
+           case ds of wild ▲
+             [] → [] ▲
+             (:) a as → (:) ▲ (ds a) (map ▲ ▲ ds as)) ▲ ▲ f y)
+[Done]
+
+Goal:
+  (λ △ △ ds ds →
+     case ds of wild ▲
+       [] → [] ▲
+       (:) a as → (:) ▲ (ds a) (map ▲ ▲ ds as)) ▲ ▲ f
+                                                ((λ △ ds ys →
+                                                    case ds of wild ▲
+                                                      [] → ys
+                                                      (:) x xs →
+                                                        (:) ▲ x
+                                                            ((++) ▲ xs ys)) ▲
+                                                                            (undefined ▲)
+                                                                            y)
+  ≡
+  (λ △ ds ys →
+     case ds of wild ▲
+       [] → ys
+       (:) x xs → (:) ▲ x ((++) ▲ xs ys)) ▲
+                                          ((λ △ △ ds ds →
+                                              case ds of wild ▲
+                                                [] → [] ▲
+                                                (:) a as →
+                                                  (:) ▲ (ds a)
+                                                      (map ▲ ▲ ds as)) ▲ ▲ f
+                                                                       (undefined ▲))
+                                          ((λ △ △ ds ds →
+                                              case ds of wild ▲
+                                                [] → [] ▲
+                                                (:) a as →
+                                                  (:) ▲ (ds a)
+                                                      (map ▲ ▲ ds as)) ▲ ▲ f y)
+[Done]
+
+Goal:
+  true
+[Done]
+
+Goal:
+  (true)
+  ∧
+  ((map ▲ ▲ f ((++) ▲ ([] ▲) y)
+    ≡
+    (++) ▲ (map ▲ ▲ f ([] ▲)) (map ▲ ▲ f y))
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
+    ⇒
+    (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
+     ≡
+     (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
+[Done]
+
+Goal:
+  (true)
+  ∧
+  ((map ▲ ▲ f ((++) ▲ ([] ▲) y)
+    ≡
+    (++) ▲ (map ▲ ▲ f ([] ▲)) (map ▲ ▲ f y))
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
+    ⇒
+    (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
+     ≡
+     (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
+[Done]
+
+Goal:
+  (map ▲ ▲ f ((++) ▲ ([] ▲) y)
+   ≡
+   (++) ▲ (map ▲ ▲ f ([] ▲)) (map ▲ ▲ f y))
+  ∧
+  (∀ a b.
+   (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
+   ⇒
+   (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
+    ≡
+    (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y)))
+[Done]
+
+Goal:
+  map ▲ ▲ f ((++) ▲ ([] ▲) y)
+  ≡
+  (++) ▲ (map ▲ ▲ f ([] ▲)) (map ▲ ▲ f y)
+[Done]
+
+Goal:
+  map ▲ ▲ f y ≡ (++) ▲ (map ▲ ▲ f ([] ▲)) (map ▲ ▲ f y)
+[Done]
+
+Goal:
+  map ▲ ▲ f y ≡ map ▲ ▲ f y
+[Done]
+
+Goal:
+  true
+[Done]
+
+Goal:
+  (true)
+  ∧
+  ((true)
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
+    ⇒
+    (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
+     ≡
+     (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
+[Done]
+
+Goal:
+  (true)
+  ∧
+  ((true)
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
+    ⇒
+    (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
+     ≡
+     (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
+[Done]
+
+Goal:
+  (true)
+  ∧
+  (∀ a b.
+   (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
+   ⇒
+   (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
+    ≡
+    (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y)))
+[Done]
+
+Goal:
+  ∀ a b.
+  (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
+  ⇒
+  (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
+   ≡
+   (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))
+[Done]
+
+Goal:
+  (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
+  ⇒
+  (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
+   ≡
+   (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y)
+Goal:
+  map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
+  ≡
+  (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y)
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y)
+Goal:
+  (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y)
+  ≡
+  (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y)
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y)
+Goal:
+  true
+[Done]
+
+Goal:
+  (true)
+  ∧
+  ((true)
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
+    ⇒
+    (true)))
+[Done]
+
+Goal:
+  ∀ △ △ f y.
+  (true)
+  ∧
+  ((true)
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
+    ⇒
+    (true)))
+[Done]
+
+Successfully proven: map-append
+module ListLaws where
+  mempt ∷ ∀ a . [a]
+  (++) ∷ ∀ a . [a] → [a] → [a]
+  mappen ∷ ∀ a . [a] → [a] → [a]
+  toList ∷ ∀ a . a → [a]
+  concat ∷ ∀ a . [[a]] → [a]
+  map ∷ ∀ a b . (a → b) → [a] → [b]
+  retur ∷ ∀ a . a → [a]
+  bind ∷ ∀ a b . [a] → (a → [b]) → [b]
+[Done]
+
+concat-nonempty (Not Proven)
+  ∀ △ x xs. concat ▲ ((:) ▲ x xs) ≡ (++) ▲ x (concat ▲ xs)
+[Done]
+
+Goal:
+  ∀ △ x xs. concat ▲ ((:) ▲ x xs) ≡ (++) ▲ x (concat ▲ xs)
+[Done]
+
+Goal:
+  ∀ △ x xs. concat ▲ ((:) ▲ x xs) ≡ (++) ▲ x (concat ▲ xs)
+[Done]
+
+Goal:
+  concat ▲ ((:) ▲ x xs) ≡ (++) ▲ x (concat ▲ xs)
+[Done]
+
+Goal:
+  (++) ▲ x (concat ▲ xs) ≡ (++) ▲ x (concat ▲ xs)
+[Done]
+
+Goal:
+  ∀ △ x xs. (++) ▲ x (concat ▲ xs) ≡ (++) ▲ x (concat ▲ xs)
+[Done]
+
+Successfully proven: concat-nonempty
+module ListLaws where
+  mempt ∷ ∀ a . [a]
+  (++) ∷ ∀ a . [a] → [a] → [a]
+  mappen ∷ ∀ a . [a] → [a] → [a]
+  toList ∷ ∀ a . a → [a]
+  concat ∷ ∀ a . [[a]] → [a]
+  map ∷ ∀ a b . (a → b) → [a] → [b]
+  retur ∷ ∀ a . a → [a]
+  bind ∷ ∀ a b . [a] → (a → [b]) → [b]
+[Done]
+
+Goal:
+  ∀ △ △ f xs.
+  map ▲ ▲ f (concat ▲ xs) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) xs)
+[Done]
+
+Goal:
+  ∀ △ △ f.
+  (map ▲ ▲ f (concat ▲ (undefined ▲))
+   ≡
+   concat ▲ (map ▲ ▲ (map ▲ ▲ f) (undefined ▲)))
+  ∧
+  ((map ▲ ▲ f (concat ▲ ([] ▲))
+    ≡
+    concat ▲ (map ▲ ▲ (map ▲ ▲ f) ([] ▲)))
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
+    ⇒
+    (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
+     ≡
+     concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b)))))
+[Done]
+
+Goal:
+  ∀ △ △ f.
+  (map ▲ ▲ f (concat ▲ (undefined ▲))
+   ≡
+   concat ▲ (map ▲ ▲ (map ▲ ▲ f) (undefined ▲)))
+  ∧
+  ((map ▲ ▲ f (concat ▲ ([] ▲))
+    ≡
+    concat ▲ (map ▲ ▲ (map ▲ ▲ f) ([] ▲)))
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
+    ⇒
+    (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
+     ≡
+     concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b)))))
+[Done]
+
+Goal:
+  (map ▲ ▲ f (concat ▲ (undefined ▲))
+   ≡
+   concat ▲ (map ▲ ▲ (map ▲ ▲ f) (undefined ▲)))
+  ∧
+  ((map ▲ ▲ f (concat ▲ ([] ▲))
+    ≡
+    concat ▲ (map ▲ ▲ (map ▲ ▲ f) ([] ▲)))
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
+    ⇒
+    (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
+     ≡
+     concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b)))))
+[Done]
+
+Goal:
+  (map ▲ ▲ f (concat ▲ (undefined ▲))
+   ≡
+   concat ▲ (map ▲ ▲ (map ▲ ▲ f) (undefined ▲)))
+  ∧
+  ((map ▲ ▲ f (concat ▲ ([] ▲))
+    ≡
+    concat ▲ (map ▲ ▲ (map ▲ ▲ f) ([] ▲)))
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
+    ⇒
+    (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
+     ≡
+     concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b)))))
+[Done]
+
+Goal:
+  map ▲ ▲ f (concat ▲ (undefined ▲))
+  ≡
+  concat ▲ (map ▲ ▲ (map ▲ ▲ f) (undefined ▲))
+[Done]
+
+Goal:
+  (λ △ △ ds ds →
+     case ds of wild ▲
+       [] → [] ▲
+       (:) a as → (:) ▲ (ds a) (map ▲ ▲ ds as)) ▲ ▲ f
+                                                (concat ▲ (undefined ▲))
+  ≡
+  concat ▲
+         ((λ △ △ ds ds →
+             case ds of wild ▲
+               [] → [] ▲
+               (:) a as → (:) ▲ (ds a) (map ▲ ▲ ds as)) ▲ ▲
+                                                        ((λ △ △ ds ds →
+                                                            case ds of wild ▲
+                                                              [] → [] ▲
+                                                              (:) a as →
+                                                                (:) ▲ (ds a)
+                                                                    (map ▲ ▲ ds
+                                                                         as)) ▲
+                                                                              ▲
+                                                                              f)
+                                                        (undefined ▲))
+[Done]
+
+Goal:
+  (λ △ △ ds ds →
+     case ds of wild ▲
+       [] → [] ▲
+       (:) a as → (:) ▲ (ds a) (map ▲ ▲ ds as)) ▲ ▲ f
+                                                ((λ △ ds →
+                                                    case ds of wild ▲
+                                                      [] → [] ▲
+                                                      (:) x xs →
+                                                        (++) ▲ x
+                                                             (concat ▲ xs)) ▲
+                                                                            (undefined ▲))
+  ≡
+  (λ △ ds →
+     case ds of wild ▲
+       [] → [] ▲
+       (:) x xs → (++) ▲ x (concat ▲ xs)) ▲
+                                          ((λ △ △ ds ds →
+                                              case ds of wild ▲
+                                                [] → [] ▲
+                                                (:) a as →
+                                                  (:) ▲ (ds a)
+                                                      (map ▲ ▲ ds as)) ▲ ▲
+                                                                       ((λ △ △ ds ds →
+                                                                           case ds
+                                                                            of wild ▲
+                                                                             [] →
+                                                                               [] ▲
+                                                                             (:) a
+                                                                                 as →
+                                                                               (:) ▲
+                                                                                   (ds a)
+                                                                                   (map ▲
+                                                                                        ▲
+                                                                                        ds
+                                                                                        as)) ▲
+                                                                                             ▲
+                                                                                             f)
+                                                                       (undefined ▲))
+[Done]
+
+Goal:
+  true
+[Done]
+
+Goal:
+  (true)
+  ∧
+  ((map ▲ ▲ f (concat ▲ ([] ▲))
+    ≡
+    concat ▲ (map ▲ ▲ (map ▲ ▲ f) ([] ▲)))
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
+    ⇒
+    (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
+     ≡
+     concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b)))))
+[Done]
+
+Goal:
+  (true)
+  ∧
+  ((map ▲ ▲ f (concat ▲ ([] ▲))
+    ≡
+    concat ▲ (map ▲ ▲ (map ▲ ▲ f) ([] ▲)))
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
+    ⇒
+    (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
+     ≡
+     concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b)))))
+[Done]
+
+Goal:
+  (map ▲ ▲ f (concat ▲ ([] ▲))
+   ≡
+   concat ▲ (map ▲ ▲ (map ▲ ▲ f) ([] ▲)))
+  ∧
+  (∀ a b.
+   (map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
+   ⇒
+   (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
+    ≡
+    concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b))))
+[Done]
+
+Goal:
+  map ▲ ▲ f (concat ▲ ([] ▲)) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) ([] ▲))
+[Done]
+
+Goal:
+  [] ▲ ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) ([] ▲))
+[Done]
+
+Goal:
+  [] ▲ ≡ [] ▲
+[Done]
+
+Goal:
+  true
+[Done]
+
+Goal:
+  (true)
+  ∧
+  ((true)
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
+    ⇒
+    (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
+     ≡
+     concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b)))))
+[Done]
+
+Goal:
+  (true)
+  ∧
+  ((true)
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
+    ⇒
+    (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
+     ≡
+     concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b)))))
+[Done]
+
+Goal:
+  (true)
+  ∧
+  (∀ a b.
+   (map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
+   ⇒
+   (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
+    ≡
+    concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b))))
+[Done]
+
+Goal:
+  ∀ a b.
+  (map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
+  ⇒
+  (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
+   ≡
+   concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b)))
+[Done]
+
+Goal:
+  (map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
+  ⇒
+  (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
+   ≡
+   concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b)))
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b)
+Goal:
+  map ▲ ▲ f (concat ▲ ((:) ▲ a b))
+  ≡
+  concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b))
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b)
+Goal:
+  (++) ▲ (map ▲ ▲ f a) (concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
+  ≡
+  concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b))
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b)
+Goal:
+  (++) ▲ (map ▲ ▲ f a) (concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
+  ≡
+  (++) ▲ (map ▲ ▲ f a) (concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b)
+Goal:
+  true
+[Done]
+
+Goal:
+  (true)
+  ∧
+  ((true)
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
+    ⇒
+    (true)))
+[Done]
+
+Goal:
+  ∀ △ △ f.
+  (true)
+  ∧
+  ((true)
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
+    ⇒
+    (true)))
+[Done]
+
+Successfully proven: map-concat
+module ListLaws where
+  mempt ∷ ∀ a . [a]
+  (++) ∷ ∀ a . [a] → [a] → [a]
+  mappen ∷ ∀ a . [a] → [a] → [a]
+  toList ∷ ∀ a . a → [a]
+  concat ∷ ∀ a . [[a]] → [a]
+  map ∷ ∀ a b . (a → b) → [a] → [b]
+  retur ∷ ∀ a . a → [a]
+  bind ∷ ∀ a b . [a] → (a → [b]) → [b]
+[Done]
+
+HERMIT> 
+[Done]
+
+Leaving GHCi.
+ghc: user interrupt
+[starting HERMIT-shell v0.1.0.0 on ListLaws.hs]
+[starting HERMIT v1.0.0.0 on ListLaws.hs]
+% ghc ListLaws.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:ListLaws: -fplugin-opt=HERMIT.GHCI:ListLaws:VerifyMapConcatScript.hs -fplugin-opt=HERMIT.GHCI:ListLaws:resume

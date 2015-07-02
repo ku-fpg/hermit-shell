@@ -1,0 +1,343 @@
+[1 of 1] Compiling ListLaws         ( ListLaws.hs, ListLaws.o )
+
+ListLaws.hs:5:11: Warning:
+    Rule "left-unit" may never fire because ‘bind’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘bind’
+
+ListLaws.hs:7:11: Warning:
+    Rule "right-unit" may never fire because ‘bind’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘bind’
+
+ListLaws.hs:9:11: Warning:
+    Rule "monad-assoc" may never fire because ‘bind’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘bind’
+
+ListLaws.hs:10:11: Warning:
+    Rule "monoid-left" may never fire
+      because ‘mappen’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘mappen’
+
+ListLaws.hs:12:11: Warning:
+    Rule "monoid-right" may never fire
+      because ‘mappen’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘mappen’
+
+ListLaws.hs:14:11: Warning:
+    Rule "monoid-assoc" may never fire
+      because ‘mappen’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘mappen’
+
+ListLaws.hs:16:11: Warning:
+    Rule "nil-append" may never fire because ‘++’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘++’
+
+ListLaws.hs:17:11: Warning:
+    Rule "append-nil" may never fire because ‘++’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘++’
+
+ListLaws.hs:18:11: Warning:
+    Rule "append-nonempty" may never fire
+      because ‘GHC.Types.:’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘GHC.Types.:’
+
+ListLaws.hs:19:11: Warning:
+    Rule "append-assoc" may never fire because ‘++’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘++’
+
+ListLaws.hs:21:11: Warning:
+    Rule "concat-unit" may never fire
+      because ‘concat’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘concat’
+
+ListLaws.hs:22:11: Warning:
+    Rule "concat-of-toList" may never fire
+      because ‘concat’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘concat’
+
+ListLaws.hs:24:11: Warning:
+    Rule "map-nonempty" may never fire because ‘map’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘map’
+
+ListLaws.hs:29:12: Warning:
+    Rule "map-compose" may never fire because ‘map’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘map’
+
+ListLaws.hs:31:12: Warning:
+    Rule "map-append" may never fire because ‘map’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘map’
+
+ListLaws.hs:32:12: Warning:
+    Rule "map-concat" may never fire because ‘map’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘map’
+
+ListLaws.hs:33:12: Warning:
+    Rule "concat-concat" may never fire
+      because ‘concat’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘concat’
+
+ListLaws.hs:34:12: Warning:
+    Rule "concat-append" may never fire
+      because ‘concat’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘concat’
+
+ListLaws.hs:35:12: Warning:
+    Rule "concat-nonempty" may never fire
+      because ‘concat’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘concat’
+Setting phasers to stun... (port 3000) (ctrl-c to quit)
+GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
+module ListLaws where
+  mempt ∷ ∀ a . [a]
+  (++) ∷ ∀ a . [a] → [a] → [a]
+  mappen ∷ ∀ a . [a] → [a] → [a]
+  toList ∷ ∀ a . a → [a]
+  concat ∷ ∀ a . [[a]] → [a]
+  map ∷ ∀ a b . (a → b) → [a] → [b]
+  retur ∷ ∀ a . a → [a]
+  bind ∷ ∀ a b . [a] → (a → [b]) → [b]
+[Done]
+
+[1 of 3] Compiling VerifyAppendNilScript ( VerifyAppendNilScript.hs, interpreted )
+[2 of 3] Compiling VerifyConcatUnitScript ( VerifyConcatUnitScript.hs, interpreted )
+[3 of 3] Compiling VerifyListLeftUnitScript ( VerifyListLeftUnitScript.hs, interpreted )
+Ok, modules loaded: VerifyListLeftUnitScript, VerifyConcatUnitScript, VerifyAppendNilScript.
+left-unit (Not Proven)
+  ∀ △ △ x f. bind ▲ ▲ (retur ▲ x) f ≡ f x
+[Done]
+
+concat-unit (Not Proven)
+  ∀ △ x. concat ▲ ((:) ▲ x ([] ▲)) ≡ x
+[Done]
+
+append-nil (Not Proven)
+  ∀ △ xs. (++) ▲ xs ([] ▲) ≡ xs
+[Done]
+
+Goal:
+  ∀ △ xs. (++) ▲ xs ([] ▲) ≡ xs
+[Done]
+
+Goal:
+  ∀ △.
+  ((++) ▲ (undefined ▲) ([] ▲) ≡ undefined ▲)
+  ∧
+  (((++) ▲ ([] ▲) ([] ▲) ≡ [] ▲)
+   ∧
+   (∀ a b.
+    ((++) ▲ b ([] ▲) ≡ b) ⇒ ((++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)))
+[Done]
+
+Goal:
+  ∀ △.
+  ((++) ▲ (undefined ▲) ([] ▲) ≡ undefined ▲)
+  ∧
+  (((++) ▲ ([] ▲) ([] ▲) ≡ [] ▲)
+   ∧
+   (∀ a b.
+    ((++) ▲ b ([] ▲) ≡ b) ⇒ ((++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)))
+[Done]
+
+Goal:
+  ((++) ▲ (undefined ▲) ([] ▲) ≡ undefined ▲)
+  ∧
+  (((++) ▲ ([] ▲) ([] ▲) ≡ [] ▲)
+   ∧
+   (∀ a b.
+    ((++) ▲ b ([] ▲) ≡ b) ⇒ ((++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)))
+[Done]
+
+Goal:
+  (true)
+  ∧
+  (((++) ▲ ([] ▲) ([] ▲) ≡ [] ▲)
+   ∧
+   (∀ a b.
+    ((++) ▲ b ([] ▲) ≡ b) ⇒ ((++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)))
+[Done]
+
+Goal:
+  (true)
+  ∧
+  ((true)
+   ∧
+   (∀ a b.
+    ((++) ▲ b ([] ▲) ≡ b) ⇒ ((++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)))
+[Done]
+
+Goal:
+  (true)
+  ∧
+  ((true) ∧ (∀ a b. ((++) ▲ b ([] ▲) ≡ b) ⇒ ((:) ▲ a b ≡ (:) ▲ a b)))
+[Done]
+
+Goal:
+  ∀ △.
+  (true)
+  ∧
+  ((true) ∧ (∀ a b. ((++) ▲ b ([] ▲) ≡ b) ⇒ ((:) ▲ a b ≡ (:) ▲ a b)))
+[Done]
+
+Successfully proven: append-nil
+module ListLaws where
+  mempt ∷ ∀ a . [a]
+  (++) ∷ ∀ a . [a] → [a] → [a]
+  mappen ∷ ∀ a . [a] → [a] → [a]
+  toList ∷ ∀ a . a → [a]
+  concat ∷ ∀ a . [[a]] → [a]
+  map ∷ ∀ a b . (a → b) → [a] → [b]
+  retur ∷ ∀ a . a → [a]
+  bind ∷ ∀ a b . [a] → (a → [b]) → [b]
+[Done]
+
+Goal:
+  ∀ △ x. concat ▲ ((:) ▲ x ([] ▲)) ≡ x
+[Done]
+
+Goal:
+  ∀ △ x. concat ▲ ((:) ▲ x ([] ▲)) ≡ x
+[Done]
+
+Goal:
+  concat ▲ ((:) ▲ x ([] ▲)) ≡ x
+[Done]
+
+Goal:
+  (λ △ ds →
+     case ds of wild ▲
+       [] → [] ▲
+       (:) x xs → (++) ▲ x (concat ▲ xs)) ▲ ((:) ▲ x ([] ▲))
+  ≡
+  x
+[Done]
+
+Goal:
+  (++) ▲ x (concat ▲ ([] ▲)) ≡ x
+[Done]
+
+Goal:
+  (++) ▲ x
+       ((λ △ ds →
+           case ds of wild ▲
+             [] → [] ▲
+             (:) x xs → (++) ▲ x (concat ▲ xs)) ▲ ([] ▲))
+  ≡
+  x
+[Done]
+
+Goal:
+  (++) ▲ x ([] ▲) ≡ x
+[Done]
+
+Goal:
+  x ≡ x
+[Done]
+
+Goal:
+  ∀ △ x. x ≡ x
+[Done]
+
+Successfully proven: concat-unit
+module ListLaws where
+  mempt ∷ ∀ a . [a]
+  (++) ∷ ∀ a . [a] → [a] → [a]
+  mappen ∷ ∀ a . [a] → [a] → [a]
+  toList ∷ ∀ a . a → [a]
+  concat ∷ ∀ a . [[a]] → [a]
+  map ∷ ∀ a b . (a → b) → [a] → [b]
+  retur ∷ ∀ a . a → [a]
+  bind ∷ ∀ a b . [a] → (a → [b]) → [b]
+[Done]
+
+Goal:
+  ∀ △ △ x f. bind ▲ ▲ (retur ▲ x) f ≡ f x
+[Done]
+
+Goal:
+  ∀ △ △ x f.
+  (λ △ △ as k → concat ▲ (map ▲ ▲ k as)) ▲ ▲ (toList ▲ x) f ≡ f x
+[Done]
+
+Goal:
+  ∀ △ △ x f. concat ▲ (map ▲ ▲ f (toList ▲ x)) ≡ f x
+[Done]
+
+Goal:
+  ∀ △ △ x f.
+  concat ▲ (map ▲ ▲ f ((λ △ x → (:) ▲ x ([] ▲)) ▲ x)) ≡ f x
+[Done]
+
+Goal:
+  ∀ △ △ x f. concat ▲ (map ▲ ▲ f ((:) ▲ x ([] ▲))) ≡ f x
+[Done]
+
+Goal:
+  ∀ △ △ x f.
+  concat ▲
+         ((λ △ △ ds ds →
+             case ds of wild ▲
+               [] → [] ▲
+               (:) a as → (:) ▲ (ds a) (map ▲ ▲ ds as)) ▲ ▲ f ((:) ▲ x ([] ▲)))
+  ≡
+  f x
+[Done]
+
+Goal:
+  ∀ △ △ x f. concat ▲ ((:) ▲ (f x) (map ▲ ▲ f ([] ▲))) ≡ f x
+[Done]
+
+Goal:
+  ∀ △ △ x f.
+  concat ▲
+         ((:) ▲ (f x)
+              ((λ △ △ ds ds →
+                  case ds of wild ▲
+                    [] → [] ▲
+                    (:) a as → (:) ▲ (ds a) (map ▲ ▲ ds as)) ▲ ▲ f ([] ▲)))
+  ≡
+  f x
+[Done]
+
+Goal:
+  ∀ △ △ x f. concat ▲ ((:) ▲ (f x) ([] ▲)) ≡ f x
+[Done]
+
+Goal:
+  ∀ △ △ x f. concat ▲ ((:) ▲ (f x) ([] ▲)) ≡ f x
+[Done]
+
+Goal:
+  concat ▲ ((:) ▲ (f x) ([] ▲)) ≡ f x
+[Done]
+
+Goal:
+  f x ≡ f x
+[Done]
+
+Goal:
+  true
+[Done]
+
+Goal:
+  ∀ △ △ x f. true
+[Done]
+
+Successfully proven: left-unit
+module ListLaws where
+  mempt ∷ ∀ a . [a]
+  (++) ∷ ∀ a . [a] → [a] → [a]
+  mappen ∷ ∀ a . [a] → [a] → [a]
+  toList ∷ ∀ a . a → [a]
+  concat ∷ ∀ a . [[a]] → [a]
+  map ∷ ∀ a b . (a → b) → [a] → [b]
+  retur ∷ ∀ a . a → [a]
+  bind ∷ ∀ a b . [a] → (a → [b]) → [b]
+[Done]
+
+HERMIT> 
+[Done]
+
+Leaving GHCi.
+ghc: user interrupt
+[starting HERMIT-shell v0.1.0.0 on ListLaws.hs]
+[starting HERMIT v1.0.0.0 on ListLaws.hs]
+% ghc ListLaws.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:ListLaws: -fplugin-opt=HERMIT.GHCI:ListLaws:VerifyListLeftUnitScript.hs -fplugin-opt=HERMIT.GHCI:ListLaws:resume

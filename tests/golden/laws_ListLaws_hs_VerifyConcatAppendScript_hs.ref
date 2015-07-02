@@ -1,0 +1,819 @@
+[1 of 1] Compiling ListLaws         ( ListLaws.hs, ListLaws.o )
+
+ListLaws.hs:5:11: Warning:
+    Rule "left-unit" may never fire because ‘bind’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘bind’
+
+ListLaws.hs:7:11: Warning:
+    Rule "right-unit" may never fire because ‘bind’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘bind’
+
+ListLaws.hs:9:11: Warning:
+    Rule "monad-assoc" may never fire because ‘bind’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘bind’
+
+ListLaws.hs:10:11: Warning:
+    Rule "monoid-left" may never fire
+      because ‘mappen’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘mappen’
+
+ListLaws.hs:12:11: Warning:
+    Rule "monoid-right" may never fire
+      because ‘mappen’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘mappen’
+
+ListLaws.hs:14:11: Warning:
+    Rule "monoid-assoc" may never fire
+      because ‘mappen’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘mappen’
+
+ListLaws.hs:16:11: Warning:
+    Rule "nil-append" may never fire because ‘++’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘++’
+
+ListLaws.hs:17:11: Warning:
+    Rule "append-nil" may never fire because ‘++’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘++’
+
+ListLaws.hs:18:11: Warning:
+    Rule "append-nonempty" may never fire
+      because ‘GHC.Types.:’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘GHC.Types.:’
+
+ListLaws.hs:19:11: Warning:
+    Rule "append-assoc" may never fire because ‘++’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘++’
+
+ListLaws.hs:21:11: Warning:
+    Rule "concat-unit" may never fire
+      because ‘concat’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘concat’
+
+ListLaws.hs:22:11: Warning:
+    Rule "concat-of-toList" may never fire
+      because ‘concat’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘concat’
+
+ListLaws.hs:24:11: Warning:
+    Rule "map-nonempty" may never fire because ‘map’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘map’
+
+ListLaws.hs:29:12: Warning:
+    Rule "map-compose" may never fire because ‘map’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘map’
+
+ListLaws.hs:31:12: Warning:
+    Rule "map-append" may never fire because ‘map’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘map’
+
+ListLaws.hs:32:12: Warning:
+    Rule "map-concat" may never fire because ‘map’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘map’
+
+ListLaws.hs:33:12: Warning:
+    Rule "concat-concat" may never fire
+      because ‘concat’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘concat’
+
+ListLaws.hs:34:12: Warning:
+    Rule "concat-append" may never fire
+      because ‘concat’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘concat’
+
+ListLaws.hs:35:12: Warning:
+    Rule "concat-nonempty" may never fire
+      because ‘concat’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘concat’
+Setting phasers to stun... (port 3000) (ctrl-c to quit)
+GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
+module ListLaws where
+  mempt ∷ ∀ a . [a]
+  (++) ∷ ∀ a . [a] → [a] → [a]
+  mappen ∷ ∀ a . [a] → [a] → [a]
+  toList ∷ ∀ a . a → [a]
+  concat ∷ ∀ a . [[a]] → [a]
+  map ∷ ∀ a b . (a → b) → [a] → [b]
+  retur ∷ ∀ a . a → [a]
+  bind ∷ ∀ a b . [a] → (a → [b]) → [b]
+[Done]
+
+[1 of 3] Compiling VerifyNilAppendScript ( VerifyNilAppendScript.hs, interpreted )
+[2 of 3] Compiling VerifyAppendAssocScript ( VerifyAppendAssocScript.hs, interpreted )
+[3 of 3] Compiling VerifyConcatAppendScript ( VerifyConcatAppendScript.hs, interpreted )
+Ok, modules loaded: VerifyConcatAppendScript, VerifyAppendAssocScript, VerifyNilAppendScript.
+append-assoc (Not Proven)
+  ∀ △ x y z. (++) ▲ x ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ x y) z
+[Done]
+
+nil-append (Not Proven)
+  ∀ △ xs. (++) ▲ ([] ▲) xs ≡ xs
+[Done]
+
+Goal:
+  ∀ △ xs. (++) ▲ ([] ▲) xs ≡ xs
+[Done]
+
+Goal:
+  ∀ △ xs.
+  (λ △ ds ys →
+     case ds of wild ▲
+       [] → ys
+       (:) x xs → (:) ▲ x ((++) ▲ xs ys)) ▲ ([] ▲) xs
+  ≡
+  xs
+[Done]
+
+Goal:
+  true
+[Done]
+
+Successfully proven: nil-append
+module ListLaws where
+  mempt ∷ ∀ a . [a]
+  (++) ∷ ∀ a . [a] → [a] → [a]
+  mappen ∷ ∀ a . [a] → [a] → [a]
+  toList ∷ ∀ a . a → [a]
+  concat ∷ ∀ a . [[a]] → [a]
+  map ∷ ∀ a b . (a → b) → [a] → [b]
+  retur ∷ ∀ a . a → [a]
+  bind ∷ ∀ a b . [a] → (a → [b]) → [b]
+[Done]
+
+Goal:
+  ∀ △ x y z. (++) ▲ x ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ x y) z
+[Done]
+
+Goal:
+  ∀ △ y z.
+  ((++) ▲ (undefined ▲) ((++) ▲ y z)
+   ≡
+   (++) ▲ ((++) ▲ (undefined ▲) y) z)
+  ∧
+  (((++) ▲ ([] ▲) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ([] ▲) y) z)
+   ∧
+   (∀ a b.
+    ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z)
+    ⇒
+    ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
+     ≡
+     (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
+[Done]
+
+Goal:
+  ∀ △ y z.
+  ((++) ▲ (undefined ▲) ((++) ▲ y z)
+   ≡
+   (++) ▲ ((++) ▲ (undefined ▲) y) z)
+  ∧
+  (((++) ▲ ([] ▲) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ([] ▲) y) z)
+   ∧
+   (∀ a b.
+    ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z)
+    ⇒
+    ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
+     ≡
+     (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
+[Done]
+
+Goal:
+  ((++) ▲ (undefined ▲) ((++) ▲ y z)
+   ≡
+   (++) ▲ ((++) ▲ (undefined ▲) y) z)
+  ∧
+  (((++) ▲ ([] ▲) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ([] ▲) y) z)
+   ∧
+   (∀ a b.
+    ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z)
+    ⇒
+    ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
+     ≡
+     (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
+[Done]
+
+Goal:
+  ((++) ▲ (undefined ▲) ((++) ▲ y z)
+   ≡
+   (++) ▲ ((++) ▲ (undefined ▲) y) z)
+  ∧
+  (((++) ▲ ([] ▲) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ([] ▲) y) z)
+   ∧
+   (∀ a b.
+    ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z)
+    ⇒
+    ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
+     ≡
+     (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
+[Done]
+
+Goal:
+  (++) ▲ (undefined ▲) ((++) ▲ y z)
+  ≡
+  (++) ▲ ((++) ▲ (undefined ▲) y) z
+[Done]
+
+Goal:
+  (++) ▲ (undefined ▲) ((++) ▲ y z)
+  ≡
+  (++) ▲ ((++) ▲ (undefined ▲) y) z
+[Done]
+
+Goal:
+  (++) ▲ (undefined ▲) ((++) ▲ y z)
+  ≡
+  (++) ▲ ((++) ▲ (undefined ▲) y) z
+[Done]
+
+Goal:
+  (λ △ ds ys →
+     case ds of wild ▲
+       [] → ys
+       (:) x xs → (:) ▲ x ((++) ▲ xs ys)) ▲ (undefined ▲) ((++) ▲ y z)
+  ≡
+  (λ △ ds ys →
+     case ds of wild ▲
+       [] → ys
+       (:) x xs → (:) ▲ x ((++) ▲ xs ys)) ▲ ((++) ▲ (undefined ▲) y) z
+[Done]
+
+Goal:
+  undefined ▲
+  ≡
+  case (++) ▲ (undefined ▲) y of wild ▲
+    [] → z
+    (:) x xs → (:) ▲ x ((++) ▲ xs z)
+[Done]
+
+Goal:
+  undefined ▲
+  ≡
+  case (λ △ ds ys →
+          case ds of wild ▲
+            [] → ys
+            (:) x xs → (:) ▲ x ((++) ▲ xs ys)) ▲ (undefined ▲) y
+   of wild ▲
+    [] → z
+    (:) x xs → (:) ▲ x ((++) ▲ xs z)
+[Done]
+
+Goal:
+  true
+[Done]
+
+Goal:
+  true
+[Done]
+
+Goal:
+  (true)
+  ∧
+  (((++) ▲ ([] ▲) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ([] ▲) y) z)
+   ∧
+   (∀ a b.
+    ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z)
+    ⇒
+    ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
+     ≡
+     (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
+[Done]
+
+Goal:
+  (true)
+  ∧
+  (((++) ▲ ([] ▲) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ([] ▲) y) z)
+   ∧
+   (∀ a b.
+    ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z)
+    ⇒
+    ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
+     ≡
+     (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
+[Done]
+
+Goal:
+  ((++) ▲ ([] ▲) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ([] ▲) y) z)
+  ∧
+  (∀ a b.
+   ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z)
+   ⇒
+   ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
+    ≡
+    (++) ▲ ((++) ▲ ((:) ▲ a b) y) z))
+[Done]
+
+Goal:
+  (++) ▲ ([] ▲) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ([] ▲) y) z
+[Done]
+
+Goal:
+  (++) ▲ ([] ▲) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ([] ▲) y) z
+[Done]
+
+Goal:
+  (++) ▲ ([] ▲) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ([] ▲) y) z
+[Done]
+
+Goal:
+  (λ △ ds ys →
+     case ds of wild ▲
+       [] → ys
+       (:) x xs → (:) ▲ x ((++) ▲ xs ys)) ▲ ([] ▲) ((++) ▲ y z)
+  ≡
+  (++) ▲ ((++) ▲ ([] ▲) y) z
+[Done]
+
+Goal:
+  (++) ▲ y z ≡ (++) ▲ ((++) ▲ ([] ▲) y) z
+[Done]
+
+Goal:
+  (++) ▲ y z ≡ (++) ▲ y z
+[Done]
+
+Goal:
+  true
+[Done]
+
+Goal:
+  true
+[Done]
+
+Goal:
+  (true)
+  ∧
+  ((true)
+   ∧
+   (∀ a b.
+    ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z)
+    ⇒
+    ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
+     ≡
+     (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
+[Done]
+
+Goal:
+  (true)
+  ∧
+  ((true)
+   ∧
+   (∀ a b.
+    ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z)
+    ⇒
+    ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
+     ≡
+     (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
+[Done]
+
+Goal:
+  (true)
+  ∧
+  (∀ a b.
+   ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z)
+   ⇒
+   ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
+    ≡
+    (++) ▲ ((++) ▲ ((:) ▲ a b) y) z))
+[Done]
+
+Goal:
+  ∀ a b.
+  ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z)
+  ⇒
+  ((++) ▲ ((:) ▲ a b) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)
+[Done]
+
+Goal:
+  ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z)
+  ⇒
+  ((++) ▲ ((:) ▲ a b) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
+Goal:
+  (++) ▲ ((:) ▲ a b) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ((:) ▲ a b) y) z
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
+Goal:
+  (λ △ ds ys →
+     case ds of wild ▲
+       [] → ys
+       (:) x xs → (:) ▲ x ((++) ▲ xs ys)) ▲ ((:) ▲ a b) ((++) ▲ y z)
+  ≡
+  (++) ▲ ((++) ▲ ((:) ▲ a b) y) z
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
+Goal:
+  (:) ▲ a ((++) ▲ b ((++) ▲ y z)) ≡ (++) ▲ ((++) ▲ ((:) ▲ a b) y) z
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
+Goal:
+  (:) ▲ a ((++) ▲ ((++) ▲ b y) z) ≡ (++) ▲ ((++) ▲ ((:) ▲ a b) y) z
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
+Goal:
+  (:) ▲ a ((++) ▲ ((++) ▲ b y) z) ≡ (++) ▲ ((++) ▲ ((:) ▲ a b) y) z
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
+Goal:
+  (++) ▲ ((++) ▲ ((:) ▲ a b) y) z
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
+Goal:
+  (λ △ ds ys →
+     case ds of wild ▲
+       [] → ys
+       (:) x xs → (:) ▲ x ((++) ▲ xs ys)) ▲ ((++) ▲ ((:) ▲ a b) y) z
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
+Goal:
+  case (++) ▲ ((:) ▲ a b) y of wild ▲
+    [] → z
+    (:) x xs → (:) ▲ x ((++) ▲ xs z)
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
+Goal:
+  case (λ △ ds ys →
+          case ds of wild ▲
+            [] → ys
+            (:) x xs → (:) ▲ x ((++) ▲ xs ys)) ▲ ((:) ▲ a b) y
+   of wild ▲
+    [] → z
+    (:) x xs → (:) ▲ x ((++) ▲ xs z)
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
+Goal:
+  (:) ▲ a ((++) ▲ ((++) ▲ b y) z)
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
+Goal:
+  (:) ▲ a ((++) ▲ ((++) ▲ b y) z) ≡ (:) ▲ a ((++) ▲ ((++) ▲ b y) z)
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
+Goal:
+  true
+[Done]
+
+Goal:
+  (true)
+  ∧
+  ((true)
+   ∧
+   (∀ a b. ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z) ⇒ (true)))
+[Done]
+
+Goal:
+  ∀ △ y z.
+  (true)
+  ∧
+  ((true)
+   ∧
+   (∀ a b. ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z) ⇒ (true)))
+[Done]
+
+Goal:
+  true
+[Done]
+
+Successfully proven: append-assoc
+module ListLaws where
+  mempt ∷ ∀ a . [a]
+  (++) ∷ ∀ a . [a] → [a] → [a]
+  mappen ∷ ∀ a . [a] → [a] → [a]
+  toList ∷ ∀ a . a → [a]
+  concat ∷ ∀ a . [[a]] → [a]
+  map ∷ ∀ a b . (a → b) → [a] → [b]
+  retur ∷ ∀ a . a → [a]
+  bind ∷ ∀ a b . [a] → (a → [b]) → [b]
+[Done]
+
+concat-append (Not Proven)
+  ∀ △ x y. concat ▲ ((++) ▲ x y) ≡ (++) ▲ (concat ▲ x) (concat ▲ y)
+[Done]
+
+Goal:
+  ∀ △ x y. concat ▲ ((++) ▲ x y) ≡ (++) ▲ (concat ▲ x) (concat ▲ y)
+[Done]
+
+Goal:
+  ∀ △ y.
+  (concat ▲ ((++) ▲ (undefined ▲) y)
+   ≡
+   (++) ▲ (concat ▲ (undefined ▲)) (concat ▲ y))
+  ∧
+  ((concat ▲ ((++) ▲ ([] ▲) y)
+    ≡
+    (++) ▲ (concat ▲ ([] ▲)) (concat ▲ y))
+   ∧
+   (∀ a b.
+    (concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y))
+    ⇒
+    (concat ▲ ((++) ▲ ((:) ▲ a b) y)
+     ≡
+     (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y))))
+[Done]
+
+Goal:
+  ∀ △ y.
+  (concat ▲ ((++) ▲ (undefined ▲) y)
+   ≡
+   (++) ▲ (concat ▲ (undefined ▲)) (concat ▲ y))
+  ∧
+  ((concat ▲ ((++) ▲ ([] ▲) y)
+    ≡
+    (++) ▲ (concat ▲ ([] ▲)) (concat ▲ y))
+   ∧
+   (∀ a b.
+    (concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y))
+    ⇒
+    (concat ▲ ((++) ▲ ((:) ▲ a b) y)
+     ≡
+     (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y))))
+[Done]
+
+Goal:
+  (concat ▲ ((++) ▲ (undefined ▲) y)
+   ≡
+   (++) ▲ (concat ▲ (undefined ▲)) (concat ▲ y))
+  ∧
+  ((concat ▲ ((++) ▲ ([] ▲) y)
+    ≡
+    (++) ▲ (concat ▲ ([] ▲)) (concat ▲ y))
+   ∧
+   (∀ a b.
+    (concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y))
+    ⇒
+    (concat ▲ ((++) ▲ ((:) ▲ a b) y)
+     ≡
+     (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y))))
+[Done]
+
+Goal:
+  (concat ▲ ((++) ▲ (undefined ▲) y)
+   ≡
+   (++) ▲ (concat ▲ (undefined ▲)) (concat ▲ y))
+  ∧
+  ((concat ▲ ((++) ▲ ([] ▲) y)
+    ≡
+    (++) ▲ (concat ▲ ([] ▲)) (concat ▲ y))
+   ∧
+   (∀ a b.
+    (concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y))
+    ⇒
+    (concat ▲ ((++) ▲ ((:) ▲ a b) y)
+     ≡
+     (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y))))
+[Done]
+
+Goal:
+  concat ▲ ((++) ▲ (undefined ▲) y)
+  ≡
+  (++) ▲ (concat ▲ (undefined ▲)) (concat ▲ y)
+[Done]
+
+Goal:
+  undefined ▲
+  ≡
+  case concat ▲ (undefined ▲) of wild ▲
+    [] → concat ▲ y
+    (:) x xs → (:) ▲ x ((++) ▲ xs (concat ▲ y))
+[Done]
+
+Goal:
+  undefined ▲
+  ≡
+  case case undefined ▲ of wild ▲
+         [] → [] ▲
+         (:) x xs → (++) ▲ x (concat ▲ xs)
+   of wild ▲
+    [] → concat ▲ y
+    (:) x xs → (:) ▲ x ((++) ▲ xs (concat ▲ y))
+[Done]
+
+Goal:
+  true
+[Done]
+
+Goal:
+  (true)
+  ∧
+  ((concat ▲ ((++) ▲ ([] ▲) y)
+    ≡
+    (++) ▲ (concat ▲ ([] ▲)) (concat ▲ y))
+   ∧
+   (∀ a b.
+    (concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y))
+    ⇒
+    (concat ▲ ((++) ▲ ((:) ▲ a b) y)
+     ≡
+     (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y))))
+[Done]
+
+Goal:
+  (true)
+  ∧
+  ((concat ▲ ((++) ▲ ([] ▲) y)
+    ≡
+    (++) ▲ (concat ▲ ([] ▲)) (concat ▲ y))
+   ∧
+   (∀ a b.
+    (concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y))
+    ⇒
+    (concat ▲ ((++) ▲ ((:) ▲ a b) y)
+     ≡
+     (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y))))
+[Done]
+
+Goal:
+  (concat ▲ ((++) ▲ ([] ▲) y)
+   ≡
+   (++) ▲ (concat ▲ ([] ▲)) (concat ▲ y))
+  ∧
+  (∀ a b.
+   (concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y))
+   ⇒
+   (concat ▲ ((++) ▲ ((:) ▲ a b) y)
+    ≡
+    (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y)))
+[Done]
+
+Goal:
+  concat ▲ ((++) ▲ ([] ▲) y) ≡ (++) ▲ (concat ▲ ([] ▲)) (concat ▲ y)
+[Done]
+
+Goal:
+  concat ▲ y ≡ (++) ▲ (concat ▲ ([] ▲)) (concat ▲ y)
+[Done]
+
+Goal:
+  concat ▲ y ≡ concat ▲ y
+[Done]
+
+Goal:
+  true
+[Done]
+
+Goal:
+  (true)
+  ∧
+  ((true)
+   ∧
+   (∀ a b.
+    (concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y))
+    ⇒
+    (concat ▲ ((++) ▲ ((:) ▲ a b) y)
+     ≡
+     (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y))))
+[Done]
+
+Goal:
+  (true)
+  ∧
+  ((true)
+   ∧
+   (∀ a b.
+    (concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y))
+    ⇒
+    (concat ▲ ((++) ▲ ((:) ▲ a b) y)
+     ≡
+     (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y))))
+[Done]
+
+Goal:
+  (true)
+  ∧
+  (∀ a b.
+   (concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y))
+   ⇒
+   (concat ▲ ((++) ▲ ((:) ▲ a b) y)
+    ≡
+    (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y)))
+[Done]
+
+Goal:
+  ∀ a b.
+  (concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y))
+  ⇒
+  (concat ▲ ((++) ▲ ((:) ▲ a b) y)
+   ≡
+   (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y))
+[Done]
+
+Goal:
+  (concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y))
+  ⇒
+  (concat ▲ ((++) ▲ ((:) ▲ a b) y)
+   ≡
+   (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y))
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y)
+Goal:
+  concat ▲ ((++) ▲ ((:) ▲ a b) y)
+  ≡
+  (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y)
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y)
+Goal:
+  (++) ▲ a ((++) ▲ (concat ▲ b) (concat ▲ y))
+  ≡
+  (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y)
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y)
+Goal:
+  (++) ▲ a ((++) ▲ (concat ▲ b) (concat ▲ y))
+  ≡
+  (++) ▲ a ((++) ▲ (concat ▲ b) (concat ▲ y))
+[Done]
+
+Assumed lemmas: 
+ind-hyp-0 (Built In)
+  concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y)
+Goal:
+  true
+[Done]
+
+Goal:
+  (true)
+  ∧
+  ((true)
+   ∧
+   (∀ a b.
+    (concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y))
+    ⇒
+    (true)))
+[Done]
+
+Goal:
+  ∀ △ y.
+  (true)
+  ∧
+  ((true)
+   ∧
+   (∀ a b.
+    (concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y))
+    ⇒
+    (true)))
+[Done]
+
+Successfully proven: concat-append
+module ListLaws where
+  mempt ∷ ∀ a . [a]
+  (++) ∷ ∀ a . [a] → [a] → [a]
+  mappen ∷ ∀ a . [a] → [a] → [a]
+  toList ∷ ∀ a . a → [a]
+  concat ∷ ∀ a . [[a]] → [a]
+  map ∷ ∀ a b . (a → b) → [a] → [b]
+  retur ∷ ∀ a . a → [a]
+  bind ∷ ∀ a b . [a] → (a → [b]) → [b]
+[Done]
+
+HERMIT> 
+[Done]
+
+Leaving GHCi.
+ghc: user interrupt
+[starting HERMIT-shell v0.1.0.0 on ListLaws.hs]
+[starting HERMIT v1.0.0.0 on ListLaws.hs]
+% ghc ListLaws.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:ListLaws: -fplugin-opt=HERMIT.GHCI:ListLaws:VerifyConcatAppendScript.hs -fplugin-opt=HERMIT.GHCI:ListLaws:resume
