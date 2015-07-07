@@ -81,11 +81,12 @@ instance External (TypedEffectH ()) where
 
 instance External TypedEffectBox where
   parseExternals =
-    [ external "query'" 
+    [ external "query" 
         (fromBoxToBox :: QueryFunBox -> TypedEffectBox)
         [ "performs query" ]
-    , external "setPath'" 
-        (TypedEffectBox . SetPathH :: TransformH LCore LocalPathH -> TypedEffectBox)
+    , external "setPath" 
+        (TypedEffectBox . SetPathH :: TransformH LCore LocalPathH 
+                                   -> TypedEffectBox)
         ["sets the path"]
     ]
 

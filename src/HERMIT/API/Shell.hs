@@ -25,7 +25,7 @@ query :: Guts a => Transform a b -> Shell ()
 query (Transform t) = Shell $ method "query" [t]
 
 query' :: (Guts a, FromJSON b) => Transform a b -> Shell b
-query' (Transform t) = Shell $ method "query'" [t]
+query' (Transform t) = Shell $ method "query" [t]
 
 queryFun :: QueryFun -> Shell ()
 queryFun (QueryFun q) = Shell $ method "query" [q]
@@ -38,9 +38,6 @@ apply (Transform t) = Shell $ method "rewrite" [t]
 -- | set the local path, based on a transformation.
 setPath :: Guts a => Transform a LocalPath -> Shell ()
 setPath (Transform t) = Shell $ method "setPath" [t]
-
-setPath' :: Guts a => Transform a LocalPath -> Shell ()
-setPath' (Transform t) = Shell $ method "setPath'" [t]
 
 
 -- TODO: Make sure this is the right way to do it.
