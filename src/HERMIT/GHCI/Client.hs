@@ -46,7 +46,7 @@ send (Fail str) = fail str
 withStyle :: Maybe Style -> String -> IO ()
 withStyle Nothing    str = putStr str
 withStyle (Just sty) str = do
-  setSGR $ maybe [] (\x -> [x]) (styleSGR sty)
+  setSGR . maybeToList $ styleSGR sty
   putStr str
   setSGR [Reset]
 
