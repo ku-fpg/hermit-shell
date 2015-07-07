@@ -1,3 +1,4 @@
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
@@ -14,9 +15,9 @@ import           HERMIT.Server.Parser.Transform()
 import           Data.Aeson
 import           Control.Monad
 
-instance External QueryFun where
+instance External (QueryFun ()) where
   parseExternals =
-    [ fmap (QueryUnit :: TransformH LCore () -> QueryFun) . parseExternal
+    [ fmap (QueryUnit :: TransformH LCore () -> QueryFun ()) . parseExternal
     , external "log"             (Inquiry showDerivationTree)
         [ "go back in the derivation" ]
     , external "diff"            Diff

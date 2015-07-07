@@ -64,7 +64,7 @@ instance External (TypedEffectH ()) where
         ["sets the path"]
     , external "setPath" ((SetPathH :: TransformH LCore LocalPathH -> TypedEffectH ()) . (\crumb -> transform (\ _hermitC _lcore -> return (singletonSnocPath crumb))) :: Crumb -> TypedEffectH ()) -- XXX: Is this how it should work?
         ["sets the path"]
-    , external "query"   (QueryH :: QueryFun -> TypedEffectH ())
+    , external "query"   (QueryH :: QueryFun () -> TypedEffectH ())
         ["performs query"]
     , external "rewrite" (RewriteLCoreH :: RewriteH LCore -> TypedEffectH ())
        ["performs query"]
