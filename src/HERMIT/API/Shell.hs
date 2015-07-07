@@ -27,6 +27,9 @@ query (Transform t) = Shell $ method "query" [t]
 query' :: (Guts a, FromJSON b) => Transform a b -> Shell b
 query' (Transform t) = Shell $ method "query'" [t]
 
+queryFun :: QueryFun -> Shell ()
+queryFun (QueryFun q) = Shell $ method "query" [q]
+
 -- | promote a `Rewrite` to top-level, run it, and update global state with the result.
 --   (We share the same command name as is Isabelle)
 apply :: Guts a => Rewrite a -> Shell ()
@@ -97,6 +100,9 @@ pathS crumbs s =
 
 class Run a where
   run :: a -> Shell ()
+
+instance Run QueryFun where
+  run = queryFun
 
 instance Run Crumb where
   run = sendCrumb

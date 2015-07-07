@@ -12,6 +12,8 @@ import HERMIT.API.Types
 import HERMIT.Debug (debug)
 import HERMIT.GHCI.JSON
 
+import System.Console.ANSI
+
 --- Main call-HERMIT function
 
 session :: JSONRPC.Session
@@ -33,11 +35,30 @@ send (Shell g) = do
              error $ "server failure: " ++ show v ++ " : " ++ msg
          ShellFailure msg -> error $ "failed to parse result value: " ++ show v ++ " : " ++ msg
          ShellResult gss a -> do
-                 sequence_ [ putStr txt
+                 sequence_ [ withStyle sty txt
                            | gs <- gss
-                           , Glyph txt _ <- gs
+                           , Glyph txt sty <- gs
                            ]
                  putStrLn "\n[Done]\n"
                  return a
 send (Fail str) = fail str
+
+withStyle :: Maybe Style -> String -> IO ()
+withStyle Nothing    str = putStr str
+withStyle (Just sty) str = do
+  setSGR . maybeToList $ styleSGR sty
+  putStr str
+  setSGR [Reset]
+
+styleSGR :: Style -> Maybe SGR
+styleSGR KEYWORD  = Just $ simpleColor Blue
+styleSGR SYNTAX   = Just $ simpleColor Red
+styleSGR VAR      = Nothing
+styleSGR COERCION = Just $ simpleColor Yellow
+styleSGR TYPE     = Just $ simpleColor Green
+styleSGR LIT      = Just $ simpleColor Cyan
+styleSGR WARNING  = Just $ SetColor Background Vivid Yellow
+
+simpleColor :: Color -> SGR
+simpleColor = SetColor Foreground Vivid
 
