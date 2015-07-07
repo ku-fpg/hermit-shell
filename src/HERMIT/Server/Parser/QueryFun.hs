@@ -1,5 +1,6 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module HERMIT.Server.Parser.QueryFun where
@@ -25,6 +26,27 @@ instance External (QueryFun ()) where
     , external "displayScripts" displayScripts
         ["Display all loaded scripts."]
     ]
+
+instance External QueryFunBox where
+  parseExternals =
+    [ fmap (QueryFunBox . QueryUnit :: TransformH LCore () -> QueryFunBox) . 
+           parseExternal
+    , external "log"
+        (QueryFunBox $ Inquiry showDerivationTree)
+        [ "go back in the derivation" ]
+    , external "diff"            
+        (\ ast -> QueryFunBox . Diff ast)
+        [ "show diff of two ASTs" ]
+    , external "displayScripts" 
+        (QueryFunBox displayScripts)
+        ["Display all loaded scripts."]
+    , fmap (fromAToBox . QueryA :: TransformH LCore String -> QueryFunBox) . 
+           parseExternal
+    ]
+
+fromAToBox :: QueryFun a -> QueryFunBox
+fromAToBox x@QueryA{} = QueryFunBox x
+fromAToBox _ = error "fromAToBox"
 
 instance External AST where
   parseExternal (Number n) = return $ (integerToAST . fromInteger . floor) n

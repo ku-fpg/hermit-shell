@@ -33,6 +33,9 @@ import           Prelude.Compat
 
 import           Control.Applicative ((<|>))
 
+import Data.Typeable
+import Debug.Trace
+
 -- NOTES
 --  * exprToDyns has useful info about building types
 
@@ -41,13 +44,17 @@ parseCLT = parseMaybe parseTopLevel
 
 parseTopLevel :: (MonadIO m, Functor m)
               => Aeson.Value -> Parser (CLT m Aeson.Value)
-parseTopLevel v = fmap (const (toJSON ()))
-               <$> (   (performTypedEffectH (show v)
-                          <$> (parseExternal v :: Parser (TypedEffectH ())))
-                   <|> (performKernelEffect (stubExprH "<hermit-shell>")
-                          <$> (parseExternal v :: Parser KernelEffect))
-                   <|> ((\c -> performProofShellCommand c (stubExprH "<hermit-shell>"))
-                          <$> (parseExternal v :: Parser ProofShellCommand)))
+parseTopLevel v = 
+    (do v' <- parseExternal v :: Parser TypedEffectBox
+        trace "parsed fine" $ return ()
+        return $! performBoxedEffect (show v) v')
+    <|> (fmap toJSON
+       <$> ((performTypedEffectH (show v)
+               <$> (parseExternal v :: Parser (TypedEffectH ())))
+            <|> (performKernelEffect (stubExprH "<hermit-shell>")
+                   <$> (parseExternal v :: Parser KernelEffect))
+            <|> ((\c -> performProofShellCommand c (stubExprH "<hermit-shell>"))
+                   <$> (parseExternal v :: Parser ProofShellCommand))))
 
 instance External (TypedEffectH ()) where
   parseExternals =
@@ -72,3 +79,15 @@ instance External (TypedEffectH ()) where
        ["performs legacy shell"]
     ]
 
+instance External TypedEffectBox where
+  parseExternals =
+    [ external "query'" 
+        (fromBoxToBox :: QueryFunBox -> TypedEffectBox)
+        [ "performs query" ]
+    , external "setPath'" 
+        (TypedEffectBox . SetPathH :: TransformH LCore LocalPathH -> TypedEffectBox)
+        ["sets the path"]
+    ]
+
+fromBoxToBox :: QueryFunBox -> TypedEffectBox
+fromBoxToBox (QueryFunBox x) = TypedEffectBox $ QueryH x
