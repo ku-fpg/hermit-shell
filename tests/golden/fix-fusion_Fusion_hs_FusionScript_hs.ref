@@ -1,13 +1,13 @@
 [1 of 1] Compiling Main             ( Fusion.hs, Fusion.o )
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
 GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
-module Main where
-  h ∷ B → B
-  g ∷ A → A
-  f ∷ A → B
-  prog ∷ B
-  main ∷ IO ()
-  main ∷ IO ()
+[94mmodule[0m[94m [0m[94mMain [0m[94mwhere[0m[94m
+  [0m[mh[0m[m [0m[91m∷[0m[92m [0m[92mB[0m[92m [0m[91m→[0m[92m [0m[92mB[0m[92m
+  [0m[mg[0m[m [0m[91m∷[0m[92m [0m[92mA[0m[92m [0m[91m→[0m[92m [0m[92mA[0m[92m
+  [0m[mf[0m[m [0m[91m∷[0m[92m [0m[92mA[0m[92m [0m[91m→[0m[92m [0m[92mB[0m[92m
+  [0m[mprog[0m[m [0m[91m∷[0m[92m [0m[92mB[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m
 [Done]
 
 [1 of 4] Compiling FStrictScript    ( FStrictScript.hs, interpreted )
@@ -15,22 +15,22 @@ module Main where
 [3 of 4] Compiling PreconditionLScript ( PreconditionLScript.hs, interpreted )
 [4 of 4] Compiling FusionScript     ( FusionScript.hs, interpreted )
 Ok, modules loaded: FusionScript, PreconditionLScript, PreconditionRScript, FStrictScript.
-prog = f (fix ▲ g)
+[mprog[0m[m [0m[91m=[0m[91m [0m[mf[0m[m [0m[91m([0m[mfix[0m[m [0m[92m▲[0m[92m [0m[mg[0m[91m)[0m
 [Done]
 
-prog = f (fix ▲ g)
+[mprog[0m[m [0m[91m=[0m[91m [0m[mf[0m[m [0m[91m([0m[mfix[0m[m [0m[92m▲[0m[92m [0m[mg[0m[91m)[0m
 [Done]
 
-f (fix ▲ g)
+[mf[0m[m [0m[91m([0m[mfix[0m[m [0m[92m▲[0m[92m [0m[mg[0m[91m)[0m
 [Done]
 
-fix ▲ h
+[mfix[0m[m [0m[92m▲[0m[92m [0m[mh[0m
 [Done]
 
-prog = fix ▲ h
+[mprog[0m[m [0m[91m=[0m[91m [0m[mfix[0m[m [0m[92m▲[0m[92m [0m[mh[0m
 [Done]
 
-HERMIT>
+HERMIT> 
 [Done]
 
 Leaving GHCi.

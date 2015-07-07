@@ -1,260 +1,260 @@
 [1 of 1] Compiling Main             ( Mean.hs, Mean.o )
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
 GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
-module Main where
-  sum ∷ [Int] → Int
-  length ∷ [Int] → Int
-  mean ∷ [Int] → Int
-  main ∷ IO ()
-  main ∷ IO ()
+[94mmodule[0m[94m [0m[94mMain [0m[94mwhere[0m[94m
+  [0m[msum[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mInt[0m[92m
+  [0m[mlength[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mInt[0m[92m
+  [0m[mmean[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mInt[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m
 [Done]
 
 [1 of 1] Compiling MeanScript       ( MeanScript.hs, interpreted )
 Ok, modules loaded: MeanScript.
-module Main where
-  sum ∷ [Int] → Int
-  length ∷ [Int] → Int
-  mean ∷ [Int] → Int
-  main ∷ IO ()
-  main ∷ IO ()
+[94mmodule[0m[94m [0m[94mMain [0m[94mwhere[0m[94m
+  [0m[msum[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mInt[0m[92m
+  [0m[mlength[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mInt[0m[92m
+  [0m[mmean[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mInt[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m
 [Done]
 
-λ xs → div ▲ $fIntegralInt (sum xs) (length xs)
+[91mλ[0m[91m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[mdiv[0m[m [0m[92m▲[0m[92m [0m[m$fIntegralInt[0m[m [0m[91m([0m[msum[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mxs[0m[91m)[0m
 [Done]
 
-div ▲ $fIntegralInt (sum xs) (length xs)
+[mdiv[0m[m [0m[92m▲[0m[92m [0m[m$fIntegralInt[0m[m [0m[91m([0m[msum[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mxs[0m[91m)[0m
 [Done]
 
-div ▲ $fIntegralInt (sum xs) (length xs)
+[mdiv[0m[m [0m[92m▲[0m[92m [0m[m$fIntegralInt[0m[m [0m[91m([0m[msum[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mxs[0m[91m)[0m
 [Done]
 
-sum xs
+[msum[0m[m [0m[mxs[0m
 [Done]
 
-let s = sum xs in s
+[94mlet[0m[94m [0m[ms[0m[m [0m[91m=[0m[91m [0m[msum[0m[m [0m[mxs[0m[m [0m[94min[0m[94m [0m[ms[0m
 [Done]
 
-div ▲ $fIntegralInt (let s = sum xs in s) (length xs)
+[mdiv[0m[m [0m[92m▲[0m[92m [0m[m$fIntegralInt[0m[m [0m[91m([0m[94mlet[0m[94m [0m[ms[0m[m [0m[91m=[0m[91m [0m[msum[0m[m [0m[mxs[0m[m [0m[94min[0m[94m [0m[ms[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mxs[0m[91m)[0m
 [Done]
 
-div ▲ $fIntegralInt (let s = sum xs in s) (length xs)
+[mdiv[0m[m [0m[92m▲[0m[92m [0m[m$fIntegralInt[0m[m [0m[91m([0m[94mlet[0m[94m [0m[ms[0m[m [0m[91m=[0m[91m [0m[msum[0m[m [0m[mxs[0m[m [0m[94min[0m[94m [0m[ms[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mxs[0m[91m)[0m
 [Done]
 
-length xs
+[mlength[0m[m [0m[mxs[0m
 [Done]
 
-let l = length xs in l
+[94mlet[0m[94m [0m[ml[0m[m [0m[91m=[0m[91m [0m[mlength[0m[m [0m[mxs[0m[m [0m[94min[0m[94m [0m[ml[0m
 [Done]
 
-div ▲ $fIntegralInt (let s = sum xs in s) (let l = length xs in l)
+[mdiv[0m[m [0m[92m▲[0m[92m [0m[m$fIntegralInt[0m[m [0m[91m([0m[94mlet[0m[94m [0m[ms[0m[m [0m[91m=[0m[91m [0m[msum[0m[m [0m[mxs[0m[m [0m[94min[0m[94m [0m[ms[0m[91m)[0m[91m [0m[91m([0m[94mlet[0m[94m [0m[ml[0m[m [0m[91m=[0m[91m [0m[mlength[0m[m [0m[mxs[0m[m [0m[94min[0m[94m [0m[ml[0m[91m)[0m
 [Done]
 
-let l = length xs
-    s = sum xs
-in div ▲ $fIntegralInt s l
+[94mlet[0m[94m [0m[ml[0m[m [0m[91m=[0m[91m [0m[mlength[0m[m [0m[mxs[0m[m
+    [0m[ms[0m[m [0m[91m=[0m[91m [0m[msum[0m[m [0m[mxs[0m[m
+[0m[94min[0m[94m [0m[mdiv[0m[m [0m[92m▲[0m[92m [0m[m$fIntegralInt[0m[m [0m[ms[0m[m [0m[ml[0m
 [Done]
 
-let s = sum xs
-    l = length xs
-in div ▲ $fIntegralInt s l
+[94mlet[0m[94m [0m[ms[0m[m [0m[91m=[0m[91m [0m[msum[0m[m [0m[mxs[0m[m
+    [0m[ml[0m[m [0m[91m=[0m[91m [0m[mlength[0m[m [0m[mxs[0m[m
+[0m[94min[0m[94m [0m[mdiv[0m[m [0m[92m▲[0m[92m [0m[m$fIntegralInt[0m[m [0m[ms[0m[m [0m[ml[0m
 [Done]
 
-case (,) ▲ ▲ (sum xs) (length xs) of sl ▲
-  (,) s l → div ▲ $fIntegralInt s l
+[94mcase[0m[94m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[msum[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mxs[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[msl[0m[m [0m[92m▲[0m[92m
+  [0m[m(,)[0m[m [0m[ms[0m[m [0m[ml[0m[m [0m[91m→[0m[91m [0m[mdiv[0m[m [0m[92m▲[0m[92m [0m[m$fIntegralInt[0m[m [0m[ms[0m[m [0m[ml[0m
 [Done]
 
-case (,) ▲ ▲ (sum xs) (length xs) of sl ▲
-  (,) s l → div ▲ $fIntegralInt s l
+[94mcase[0m[94m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[msum[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mxs[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[msl[0m[m [0m[92m▲[0m[92m
+  [0m[m(,)[0m[m [0m[ms[0m[m [0m[ml[0m[m [0m[91m→[0m[91m [0m[mdiv[0m[m [0m[92m▲[0m[92m [0m[m$fIntegralInt[0m[m [0m[ms[0m[m [0m[ml[0m
 [Done]
 
-(,) ▲ ▲ (sum xs) (length xs)
+[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[msum[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mxs[0m[91m)[0m
 [Done]
 
-(λ xs → (,) ▲ ▲ (sum xs) (length xs)) xs
+[91m([0m[91mλ[0m[91m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[msum[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mxs[0m[91m)[0m[91m)[0m[91m [0m[mxs[0m
 [Done]
 
-λ xs → (,) ▲ ▲ (sum xs) (length xs)
+[91mλ[0m[91m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[msum[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mxs[0m[91m)[0m
 [Done]
 
-let sumlength = λ xs → (,) ▲ ▲ (sum xs) (length xs) in sumlength
+[94mlet[0m[94m [0m[msumlength[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[msum[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mxs[0m[91m)[0m[91m [0m[94min[0m[94m [0m[msumlength[0m
 [Done]
 
-case (let sumlength = λ xs → (,) ▲ ▲ (sum xs) (length xs)
-      in sumlength) xs
- of sl ▲
-  (,) s l → div ▲ $fIntegralInt s l
+[94mcase[0m[94m [0m[91m([0m[94mlet[0m[94m [0m[msumlength[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[msum[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mxs[0m[91m)[0m[91m
+      [0m[94min[0m[94m [0m[msumlength[0m[91m)[0m[91m [0m[mxs[0m[m
+ [0m[94mof[0m[94m [0m[msl[0m[m [0m[92m▲[0m[92m
+  [0m[m(,)[0m[m [0m[ms[0m[m [0m[ml[0m[m [0m[91m→[0m[91m [0m[mdiv[0m[m [0m[92m▲[0m[92m [0m[m$fIntegralInt[0m[m [0m[ms[0m[m [0m[ml[0m
 [Done]
 
-module Main where
-  sum ∷ [Int] → Int
-  length ∷ [Int] → Int
-  mean ∷ [Int] → Int
-  main ∷ IO ()
-  main ∷ IO ()
+[94mmodule[0m[94m [0m[94mMain [0m[94mwhere[0m[94m
+  [0m[msum[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mInt[0m[92m
+  [0m[mlength[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mInt[0m[92m
+  [0m[mmean[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mInt[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m
 [Done]
 
-module Main where
-  sum ∷ [Int] → Int
-  length ∷ [Int] → Int
-  sumlength ∷ [Int] → (Int, Int)
-  mean ∷ [Int] → Int
-  main ∷ IO ()
-  main ∷ IO ()
+[94mmodule[0m[94m [0m[94mMain [0m[94mwhere[0m[94m
+  [0m[msum[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mInt[0m[92m
+  [0m[mlength[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mInt[0m[92m
+  [0m[msumlength[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m([0m[92mInt[0m[92m,[0m[92m [0m[92mInt[0m[92m)[0m[92m
+  [0m[mmean[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mInt[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m
 [Done]
 
-sumlength = λ xs → (,) ▲ ▲ (sum xs) (length xs)
+[msumlength[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[msum[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mxs[0m[91m)[0m
 [Done]
 
-rec sumlength = λ xs → (,) ▲ ▲ (sum xs) (length xs)
+[94mrec[0m[94m [0m[msumlength[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[msum[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mxs[0m[91m)[0m
 [Done]
 
-sumlength = λ xs → (,) ▲ ▲ (sum xs) (length xs)
+[msumlength[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[msum[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mxs[0m[91m)[0m
 [Done]
 
 '"Object (fromList [(\"params\",Array (fromList [Object (fromList [(\"params\",Array (fromList [String \"sumlen\"])),(\"method\",String \"remember\")])])),(\"method\",String \"query\")])" [correct]
 
 [Done]
 
-sumlength = λ xs → (,) ▲ ▲ (sum xs) (length xs)
+[msumlength[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[msum[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mxs[0m[91m)[0m
 [Done]
 
-λ xs → (,) ▲ ▲ (sum xs) (length xs)
+[91mλ[0m[91m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[msum[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mxs[0m[91m)[0m
 [Done]
 
-(,) ▲ ▲ (sum xs) (length xs)
+[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[msum[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mxs[0m[91m)[0m
 [Done]
 
-case xs of w ▲
-  [] → (,) ▲ ▲ (sum ([] ▲)) (length ([] ▲))
-  (:) a b → (,) ▲ ▲ (sum ((:) ▲ a b)) (length ((:) ▲ a b))
+[94mcase[0m[94m [0m[mxs[0m[m [0m[94mof[0m[94m [0m[mw[0m[m [0m[92m▲[0m[92m
+  [0m[m[][0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[msum[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[91m
+  [0m[91m([0m[m:[0m[91m)[0m[91m [0m[ma[0m[m [0m[mb[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[msum[0m[m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m)[0m
 [Done]
 
-case xs of w ▲
-  [] →
-    (,) ▲ ▲
-        (case [] ▲ of wild ▲
-           [] → I# 0
-           (:) x xs → (+) ▲ $fNumInt x (sum xs))
-        (length ([] ▲))
-  (:) a b →
-    (,) ▲ ▲
-        (case (:) ▲ a b of wild ▲
-           [] → I# 0
-           (:) x xs → (+) ▲ $fNumInt x (sum xs))
-        (length ((:) ▲ a b))
+[94mcase[0m[94m [0m[mxs[0m[m [0m[94mof[0m[94m [0m[mw[0m[m [0m[92m▲[0m[92m
+  [0m[m[][0m[m [0m[91m→[0m[91m
+    [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m
+        [0m[91m([0m[94mcase[0m[94m [0m[m[][0m[m [0m[92m▲[0m[92m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+           [0m[m[][0m[m [0m[91m→[0m[91m [0m[mI#[0m[m [0m[m0
+           [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mx[0m[m [0m[91m([0m[msum[0m[m [0m[mxs[0m[91m)[0m[91m)[0m[91m
+        [0m[91m([0m[mlength[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[91m
+  [0m[91m([0m[m:[0m[91m)[0m[91m [0m[ma[0m[m [0m[mb[0m[m [0m[91m→[0m[91m
+    [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m
+        [0m[91m([0m[94mcase[0m[94m [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+           [0m[m[][0m[m [0m[91m→[0m[91m [0m[mI#[0m[m [0m[m0
+           [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mx[0m[m [0m[91m([0m[msum[0m[m [0m[mxs[0m[91m)[0m[91m)[0m[91m
+        [0m[91m([0m[mlength[0m[m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m)[0m
 [Done]
 
-case xs of w ▲
-  [] →
-    (,) ▲ ▲
-        (case [] ▲ of wild ▲
-           [] → I# 0
-           (:) x xs → (+) ▲ $fNumInt x (sum xs))
-        (case [] ▲ of wild ▲
-           [] → I# 0
-           (:) x xs → (+) ▲ $fNumInt (I# 1) (length xs))
-  (:) a b →
-    (,) ▲ ▲
-        (case (:) ▲ a b of wild ▲
-           [] → I# 0
-           (:) x xs → (+) ▲ $fNumInt x (sum xs))
-        (case (:) ▲ a b of wild ▲
-           [] → I# 0
-           (:) x xs → (+) ▲ $fNumInt (I# 1) (length xs))
+[94mcase[0m[94m [0m[mxs[0m[m [0m[94mof[0m[94m [0m[mw[0m[m [0m[92m▲[0m[92m
+  [0m[m[][0m[m [0m[91m→[0m[91m
+    [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m
+        [0m[91m([0m[94mcase[0m[94m [0m[m[][0m[m [0m[92m▲[0m[92m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+           [0m[m[][0m[m [0m[91m→[0m[91m [0m[mI#[0m[m [0m[m0
+           [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mx[0m[m [0m[91m([0m[msum[0m[m [0m[mxs[0m[91m)[0m[91m)[0m[91m
+        [0m[91m([0m[94mcase[0m[94m [0m[m[][0m[m [0m[92m▲[0m[92m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+           [0m[m[][0m[m [0m[91m→[0m[91m [0m[mI#[0m[m [0m[m0
+           [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[91m([0m[mI#[0m[m [0m[m1[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mxs[0m[91m)[0m[91m)[0m[91m
+  [0m[91m([0m[m:[0m[91m)[0m[91m [0m[ma[0m[m [0m[mb[0m[m [0m[91m→[0m[91m
+    [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m
+        [0m[91m([0m[94mcase[0m[94m [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+           [0m[m[][0m[m [0m[91m→[0m[91m [0m[mI#[0m[m [0m[m0
+           [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mx[0m[m [0m[91m([0m[msum[0m[m [0m[mxs[0m[91m)[0m[91m)[0m[91m
+        [0m[91m([0m[94mcase[0m[94m [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+           [0m[m[][0m[m [0m[91m→[0m[91m [0m[mI#[0m[m [0m[m0
+           [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[91m([0m[mI#[0m[m [0m[m1[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mxs[0m[91m)[0m[91m)[0m
 [Done]
 
-case xs of w ▲
-  [] → (,) ▲ ▲ (I# 0) (I# 0)
-  (:) a b →
-    (,) ▲ ▲ ((+) ▲ $fNumInt a (sum b))
-        ((+) ▲ $fNumInt (I# 1) (length b))
+[94mcase[0m[94m [0m[mxs[0m[m [0m[94mof[0m[94m [0m[mw[0m[m [0m[92m▲[0m[92m
+  [0m[m[][0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mI#[0m[m [0m[m0[0m[91m)[0m[91m [0m[91m([0m[mI#[0m[m [0m[m0[0m[91m)[0m[91m
+  [0m[91m([0m[m:[0m[91m)[0m[91m [0m[ma[0m[m [0m[mb[0m[m [0m[91m→[0m[91m
+    [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[ma[0m[m [0m[91m([0m[msum[0m[m [0m[mb[0m[91m)[0m[91m)[0m[91m
+        [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[91m([0m[mI#[0m[m [0m[m1[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mb[0m[91m)[0m[91m)[0m
 [Done]
 
-(:) a b →
-  (,) ▲ ▲ ((+) ▲ $fNumInt a (sum b))
-      ((+) ▲ $fNumInt (I# 1) (length b))
+[91m([0m[m:[0m[91m)[0m[91m [0m[ma[0m[m [0m[mb[0m[m [0m[91m→[0m[91m
+  [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[ma[0m[m [0m[91m([0m[msum[0m[m [0m[mb[0m[91m)[0m[91m)[0m[91m
+      [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[91m([0m[mI#[0m[m [0m[m1[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mb[0m[91m)[0m[91m)[0m
 [Done]
 
-(:) y ys →
-  (,) ▲ ▲ ((+) ▲ $fNumInt y (sum ys))
-      ((+) ▲ $fNumInt (I# 1) (length ys))
+[91m([0m[m:[0m[91m)[0m[91m [0m[my[0m[m [0m[mys[0m[m [0m[91m→[0m[91m
+  [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[my[0m[m [0m[91m([0m[msum[0m[m [0m[mys[0m[91m)[0m[91m)[0m[91m
+      [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[91m([0m[mI#[0m[m [0m[m1[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mys[0m[91m)[0m[91m)[0m
 [Done]
 
-(,) ▲ ▲ ((+) ▲ $fNumInt y (sum ys))
-    ((+) ▲ $fNumInt (I# 1) (length ys))
+[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[my[0m[m [0m[91m([0m[msum[0m[m [0m[mys[0m[91m)[0m[91m)[0m[91m
+    [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[91m([0m[mI#[0m[m [0m[m1[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mys[0m[91m)[0m[91m)[0m
 [Done]
 
-(,) ▲ ▲ ((+) ▲ $fNumInt y (sum ys))
-    ((+) ▲ $fNumInt (I# 1) (length ys))
+[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[my[0m[m [0m[91m([0m[msum[0m[m [0m[mys[0m[91m)[0m[91m)[0m[91m
+    [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[91m([0m[mI#[0m[m [0m[m1[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mys[0m[91m)[0m[91m)[0m
 [Done]
 
-(+) ▲ $fNumInt (I# 1) (length ys)
+[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[91m([0m[mI#[0m[m [0m[m1[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mys[0m[91m)[0m
 [Done]
 
-length ys
+[mlength[0m[m [0m[mys[0m
 [Done]
 
-let l = length ys in l
+[94mlet[0m[94m [0m[ml[0m[m [0m[91m=[0m[91m [0m[mlength[0m[m [0m[mys[0m[m [0m[94min[0m[94m [0m[ml[0m
 [Done]
 
-(,) ▲ ▲ ((+) ▲ $fNumInt y (sum ys))
-    ((+) ▲ $fNumInt (I# 1) (let l = length ys in l))
+[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[my[0m[m [0m[91m([0m[msum[0m[m [0m[mys[0m[91m)[0m[91m)[0m[91m
+    [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[91m([0m[mI#[0m[m [0m[m1[0m[91m)[0m[91m [0m[91m([0m[94mlet[0m[94m [0m[ml[0m[m [0m[91m=[0m[91m [0m[mlength[0m[m [0m[mys[0m[m [0m[94min[0m[94m [0m[ml[0m[91m)[0m[91m)[0m
 [Done]
 
-(,) ▲ ▲ ((+) ▲ $fNumInt y (sum ys))
-    ((+) ▲ $fNumInt (I# 1) (let l = length ys in l))
+[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[my[0m[m [0m[91m([0m[msum[0m[m [0m[mys[0m[91m)[0m[91m)[0m[91m
+    [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[91m([0m[mI#[0m[m [0m[m1[0m[91m)[0m[91m [0m[91m([0m[94mlet[0m[94m [0m[ml[0m[m [0m[91m=[0m[91m [0m[mlength[0m[m [0m[mys[0m[m [0m[94min[0m[94m [0m[ml[0m[91m)[0m[91m)[0m
 [Done]
 
-(+) ▲ $fNumInt y (sum ys)
+[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[my[0m[m [0m[91m([0m[msum[0m[m [0m[mys[0m[91m)[0m
 [Done]
 
-sum ys
+[msum[0m[m [0m[mys[0m
 [Done]
 
-let s = sum ys in s
+[94mlet[0m[94m [0m[ms[0m[m [0m[91m=[0m[91m [0m[msum[0m[m [0m[mys[0m[m [0m[94min[0m[94m [0m[ms[0m
 [Done]
 
-(,) ▲ ▲ ((+) ▲ $fNumInt y (let s = sum ys in s))
-    ((+) ▲ $fNumInt (I# 1) (let l = length ys in l))
+[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[my[0m[m [0m[91m([0m[94mlet[0m[94m [0m[ms[0m[m [0m[91m=[0m[91m [0m[msum[0m[m [0m[mys[0m[m [0m[94min[0m[94m [0m[ms[0m[91m)[0m[91m)[0m[91m
+    [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[91m([0m[mI#[0m[m [0m[m1[0m[91m)[0m[91m [0m[91m([0m[94mlet[0m[94m [0m[ml[0m[m [0m[91m=[0m[91m [0m[mlength[0m[m [0m[mys[0m[m [0m[94min[0m[94m [0m[ml[0m[91m)[0m[91m)[0m
 [Done]
 
-let l = length ys
-    s = sum ys
-in (,) ▲ ▲ ((+) ▲ $fNumInt y s) ((+) ▲ $fNumInt (I# 1) l)
+[94mlet[0m[94m [0m[ml[0m[m [0m[91m=[0m[91m [0m[mlength[0m[m [0m[mys[0m[m
+    [0m[ms[0m[m [0m[91m=[0m[91m [0m[msum[0m[m [0m[mys[0m[m
+[0m[94min[0m[94m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[my[0m[m [0m[ms[0m[91m)[0m[91m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[91m([0m[mI#[0m[m [0m[m1[0m[91m)[0m[91m [0m[ml[0m[91m)[0m
 [Done]
 
-let s = sum ys
-    l = length ys
-in (,) ▲ ▲ ((+) ▲ $fNumInt y s) ((+) ▲ $fNumInt (I# 1) l)
+[94mlet[0m[94m [0m[ms[0m[m [0m[91m=[0m[91m [0m[msum[0m[m [0m[mys[0m[m
+    [0m[ml[0m[m [0m[91m=[0m[91m [0m[mlength[0m[m [0m[mys[0m[m
+[0m[94min[0m[94m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[my[0m[m [0m[ms[0m[91m)[0m[91m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[91m([0m[mI#[0m[m [0m[m1[0m[91m)[0m[91m [0m[ml[0m[91m)[0m
 [Done]
 
-case (,) ▲ ▲ (sum ys) (length ys) of sl ▲
-  (,) s l → (,) ▲ ▲ ((+) ▲ $fNumInt y s) ((+) ▲ $fNumInt (I# 1) l)
+[94mcase[0m[94m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[msum[0m[m [0m[mys[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mys[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[msl[0m[m [0m[92m▲[0m[92m
+  [0m[m(,)[0m[m [0m[ms[0m[m [0m[ml[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[my[0m[m [0m[ms[0m[91m)[0m[91m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[91m([0m[mI#[0m[m [0m[m1[0m[91m)[0m[91m [0m[ml[0m[91m)[0m
 [Done]
 
-case (,) ▲ ▲ (sum ys) (length ys) of sl ▲
-  (,) s l → (,) ▲ ▲ ((+) ▲ $fNumInt y s) ((+) ▲ $fNumInt (I# 1) l)
+[94mcase[0m[94m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[msum[0m[m [0m[mys[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mys[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[msl[0m[m [0m[92m▲[0m[92m
+  [0m[m(,)[0m[m [0m[ms[0m[m [0m[ml[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[my[0m[m [0m[ms[0m[91m)[0m[91m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[91m([0m[mI#[0m[m [0m[m1[0m[91m)[0m[91m [0m[ml[0m[91m)[0m
 [Done]
 
-(,) ▲ ▲ (sum ys) (length ys)
+[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[msum[0m[m [0m[mys[0m[91m)[0m[91m [0m[91m([0m[mlength[0m[m [0m[mys[0m[91m)[0m
 [Done]
 
-sumlength ys
+[msumlength[0m[m [0m[mys[0m
 [Done]
 
-case sumlength ys of sl ▲
-  (,) s l → (,) ▲ ▲ ((+) ▲ $fNumInt y s) ((+) ▲ $fNumInt (I# 1) l)
+[94mcase[0m[94m [0m[msumlength[0m[m [0m[mys[0m[m [0m[94mof[0m[94m [0m[msl[0m[m [0m[92m▲[0m[92m
+  [0m[m(,)[0m[m [0m[ms[0m[m [0m[ml[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[my[0m[m [0m[ms[0m[91m)[0m[91m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[91m([0m[mI#[0m[m [0m[m1[0m[91m)[0m[91m [0m[ml[0m[91m)[0m
 [Done]
 
-sumlength = λ xs →
-  case xs of w ▲
-    [] → (,) ▲ ▲ (I# 0) (I# 0)
-    (:) y ys →
-      case sumlength ys of sl ▲
-        (,) s l → (,) ▲ ▲ ((+) ▲ $fNumInt y s) ((+) ▲ $fNumInt (I# 1) l)
+[msumlength[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mxs[0m[m [0m[91m→[0m[91m
+  [0m[94mcase[0m[94m [0m[mxs[0m[m [0m[94mof[0m[94m [0m[mw[0m[m [0m[92m▲[0m[92m
+    [0m[m[][0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mI#[0m[m [0m[m0[0m[91m)[0m[91m [0m[91m([0m[mI#[0m[m [0m[m0[0m[91m)[0m[91m
+    [0m[91m([0m[m:[0m[91m)[0m[91m [0m[my[0m[m [0m[mys[0m[m [0m[91m→[0m[91m
+      [0m[94mcase[0m[94m [0m[msumlength[0m[m [0m[mys[0m[m [0m[94mof[0m[94m [0m[msl[0m[m [0m[92m▲[0m[92m
+        [0m[m(,)[0m[m [0m[ms[0m[m [0m[ml[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[my[0m[m [0m[ms[0m[91m)[0m[91m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[91m([0m[mI#[0m[m [0m[m1[0m[91m)[0m[91m [0m[ml[0m[91m)[0m
 [Done]
 
-HERMIT>
+HERMIT> 
 [Done]
 
 Leaving GHCi.
