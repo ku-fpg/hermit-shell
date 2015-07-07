@@ -38,7 +38,7 @@ instance Repl ScriptEffect where
   printForRepl (ScriptEffect v) = printForRepl (Shell v :: Shell ())
 
 instance Repl QueryFun where
-  printForRepl (QueryFun v) = printForRepl (Shell v :: Shell ())
+  printForRepl = printForRepl . queryFun
 
 instance Repl Crumb where
   printForRepl = printForRepl . run
