@@ -50,6 +50,7 @@ library
                         unix,
                         unordered-containers,
                         vector,
+                        ansi-terminal,
                         -- needed by generated code
                         wreq,
                         -- until 7.10 only
