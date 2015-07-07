@@ -10,253 +10,253 @@ Nub.hs:27:11: Warning:
     Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘&&’
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
 GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
-module Main where
-  absN ∷ ([Int] → Set Int → [Int]) → [Int] → [Int]
-  filter ∷ ∀ a . (a → Bool) → [a] → [a]
-  repN ∷ ([Int] → [Int]) → [Int] → Set Int → [Int]
-  $dShow ∷ Show [Int]
-  nub ∷ [Int] → [Int]
-  main ∷ IO ()
-  main ∷ IO ()
+[94mmodule[0m[94m [0m[94mMain [0m[94mwhere[0m[94m
+  [0m[mabsN[0m[m [0m[91m∷[0m[92m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mSet[0m[92m [0m[92mInt[0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+  [0m[mfilter[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[92m [0m[91m.[0m[91m [0m[91m([0m[92ma[0m[92m [0m[91m→[0m[92m [0m[92mBool[0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m
+  [0m[mrepN[0m[m [0m[91m∷[0m[92m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mSet[0m[92m [0m[92mInt[0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+  [0m[m$dShow[0m[m [0m[91m∷[0m[92m [0m[92mShow[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+  [0m[mnub[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m
 [Done]
 
 [1 of 1] Compiling NubScript        ( NubScript.hs, interpreted )
 Ok, modules loaded: NubScript.
-module Main where
-  absN ∷ ([Int] → Set Int → [Int]) → [Int] → [Int]
-  filter ∷ ∀ a . (a → Bool) → [a] → [a]
-  repN ∷ ([Int] → [Int]) → [Int] → Set Int → [Int]
-  $dShow ∷ Show [Int]
-  nub ∷ [Int] → [Int]
-  main ∷ IO ()
-  main ∷ IO ()
+[94mmodule[0m[94m [0m[94mMain [0m[94mwhere[0m[94m
+  [0m[mabsN[0m[m [0m[91m∷[0m[92m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mSet[0m[92m [0m[92mInt[0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+  [0m[mfilter[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[92m [0m[91m.[0m[91m [0m[91m([0m[92ma[0m[92m [0m[91m→[0m[92m [0m[92mBool[0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m
+  [0m[mrepN[0m[m [0m[91m∷[0m[92m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mSet[0m[92m [0m[92mInt[0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+  [0m[m$dShow[0m[m [0m[91m∷[0m[92m [0m[92mShow[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+  [0m[mnub[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m
 [Done]
 
-module Main where
-  absN ∷ ([Int] → Set Int → [Int]) → [Int] → [Int]
-  filter ∷ ∀ a . (a → Bool) → [a] → [a]
-  repN ∷ ([Int] → [Int]) → [Int] → Set Int → [Int]
-  $dShow ∷ Show [Int]
-  nub ∷ [Int] → [Int]
-  main ∷ IO ()
-  main ∷ IO ()
+[94mmodule[0m[94m [0m[94mMain [0m[94mwhere[0m[94m
+  [0m[mabsN[0m[m [0m[91m∷[0m[92m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mSet[0m[92m [0m[92mInt[0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+  [0m[mfilter[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[92m [0m[91m.[0m[91m [0m[91m([0m[92ma[0m[92m [0m[91m→[0m[92m [0m[92mBool[0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m
+  [0m[mrepN[0m[m [0m[91m∷[0m[92m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mSet[0m[92m [0m[92mInt[0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+  [0m[m$dShow[0m[m [0m[91m∷[0m[92m [0m[92mShow[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+  [0m[mnub[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m
 [Done]
 
-nub ∷ [Int] → [Int]
-nub = λ ds →
-  case ds of wild [Int]
-    [] → [] Int
-    (:) x xs →
-      (:) Int x (nub (filter Int (λ ds → (/=) Int $fEqInt ds x) xs))
+[mnub[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+[0m[mnub[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m
+  [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+    [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92mInt[0m[92m
+    [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m
+      [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[mx[0m[m [0m[91m([0m[mnub[0m[m [0m[91m([0m[mfilter[0m[m [0m[92mInt[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m/=[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[m$fEqInt[0m[m [0m[mds[0m[m [0m[mx[0m[91m)[0m[91m [0m[mxs[0m[91m)[0m[91m)[0m
 [Done]
 
-nub ∷ [Int] → [Int]
-nub =
-  fix ([Int] → [Int])
-      (λ nub ds →
-         case ds of wild [Int]
-           [] → [] Int
-           (:) x xs →
-             (:) Int x (nub (filter Int (λ ds → (/=) Int $fEqInt ds x) xs)))
+[mnub[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+[0m[mnub[0m[m [0m[91m=[0m[91m
+  [0m[mfix[0m[m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m
+      [0m[91m([0m[91mλ[0m[91m [0m[mnub[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+         [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+           [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92mInt[0m[92m
+           [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m
+             [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[mx[0m[m [0m[91m([0m[mnub[0m[m [0m[91m([0m[mfilter[0m[m [0m[92mInt[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m/=[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[m$fEqInt[0m[m [0m[mds[0m[m [0m[mx[0m[91m)[0m[91m [0m[mxs[0m[91m)[0m[91m)[0m[91m)[0m
 [Done]
 
-fix ([Int] → [Int])
-    (λ nub ds →
-       case ds of wild [Int]
-         [] → [] Int
-         (:) x xs →
-           (:) Int x (nub (filter Int (λ ds → (/=) Int $fEqInt ds x) xs)))
+[mfix[0m[m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m
+    [0m[91m([0m[91mλ[0m[91m [0m[mnub[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+       [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+         [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92mInt[0m[92m
+         [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m
+           [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[mx[0m[m [0m[91m([0m[mnub[0m[m [0m[91m([0m[mfilter[0m[m [0m[92mInt[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m/=[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[m$fEqInt[0m[m [0m[mds[0m[m [0m[mx[0m[91m)[0m[91m [0m[mxs[0m[91m)[0m[91m)[0m[91m)[0m
 [Done]
 
-let worker ∷ [Int] → Set Int → [Int]
-    worker =
-      repN (fix ([Int] → [Int])
-                (λ nub ds →
-                   case ds of wild [Int]
-                     [] → [] Int
-                     (:) x xs →
-                       (:) Int x
-                           (nub (filter Int (λ ds → (/=) Int $fEqInt ds x)
-                                        xs))))
-in absN worker
+[94mlet[0m[94m [0m[mworker[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mSet[0m[92m [0m[92mInt[0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+    [0m[mworker[0m[m [0m[91m=[0m[91m
+      [0m[mrepN[0m[m [0m[91m([0m[mfix[0m[m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m
+                [0m[91m([0m[91mλ[0m[91m [0m[mnub[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+                   [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+                     [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92mInt[0m[92m
+                     [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m
+                       [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[mx[0m[m
+                           [0m[91m([0m[mnub[0m[m [0m[91m([0m[mfilter[0m[m [0m[92mInt[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m/=[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[m$fEqInt[0m[m [0m[mds[0m[m [0m[mx[0m[91m)[0m[91m
+                                        [0m[mxs[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m[91m
+[0m[94min[0m[94m [0m[mabsN[0m[m [0m[mworker[0m
 [Done]
 
 Forcing obligation: nub-assumption
 Goal:
-  fix ([Int] → [Int])
-      ((.) ([Int] → Set Int → [Int]) ([Int] → [Int]) ([Int] → [Int]) absN
-           ((.) ([Int] → [Int]) ([Int] → Set Int → [Int]) ([Int] → [Int]) repN
-                (λ nub ds →
-                   case ds of wild [Int]
-                     [] → [] Int
-                     (:) x xs →
-                       (:) Int x
-                           (nub (filter Int (λ ds → (/=) Int $fEqInt ds x)
-                                        xs)))))
-  ≡
-  fix ([Int] → [Int])
-      (λ nub ds →
-         case ds of wild [Int]
-           [] → [] Int
-           (:) x xs →
-             (:) Int x (nub (filter Int (λ ds → (/=) Int $fEqInt ds x) xs)))Successfully proven: nub-assumption
-let worker ∷ [Int] → Set Int → [Int]
-    worker =
-      repN (fix ([Int] → [Int])
-                (λ nub ds →
-                   case ds of wild [Int]
-                     [] → [] Int
-                     (:) x xs →
-                       (:) Int x
-                           (nub (filter Int (λ ds → (/=) Int $fEqInt ds x)
-                                        xs))))
-in absN worker
+  [mfix[0m[m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m
+      [0m[91m([0m[91m([0m[m.[0m[91m)[0m[91m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mSet[0m[92m [0m[92mInt[0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m [0m[mabsN[0m[m
+           [0m[91m([0m[91m([0m[m.[0m[91m)[0m[91m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mSet[0m[92m [0m[92mInt[0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m [0m[mrepN[0m[m
+                [0m[91m([0m[91mλ[0m[91m [0m[mnub[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+                   [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+                     [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92mInt[0m[92m
+                     [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m
+                       [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[mx[0m[m
+                           [0m[91m([0m[mnub[0m[m [0m[91m([0m[mfilter[0m[m [0m[92mInt[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m/=[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[m$fEqInt[0m[m [0m[mds[0m[m [0m[mx[0m[91m)[0m[91m
+                                        [0m[mxs[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m[91m
+  [0m[91m≡[0m[91m
+  [0m[mfix[0m[m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m
+      [0m[91m([0m[91mλ[0m[91m [0m[mnub[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+         [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+           [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92mInt[0m[92m
+           [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m
+             [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[mx[0m[m [0m[91m([0m[mnub[0m[m [0m[91m([0m[mfilter[0m[m [0m[92mInt[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m/=[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[m$fEqInt[0m[m [0m[mds[0m[m [0m[mx[0m[91m)[0m[91m [0m[mxs[0m[91m)[0m[91m)[0m[91m)[0mSuccessfully proven: nub-assumption
+[94mlet[0m[94m [0m[mworker[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mSet[0m[92m [0m[92mInt[0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+    [0m[mworker[0m[m [0m[91m=[0m[91m
+      [0m[mrepN[0m[m [0m[91m([0m[mfix[0m[m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m
+                [0m[91m([0m[91mλ[0m[91m [0m[mnub[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+                   [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+                     [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92mInt[0m[92m
+                     [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m
+                       [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[mx[0m[m
+                           [0m[91m([0m[mnub[0m[m [0m[91m([0m[mfilter[0m[m [0m[92mInt[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m/=[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[m$fEqInt[0m[m [0m[mds[0m[m [0m[mx[0m[91m)[0m[91m
+                                        [0m[mxs[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m[91m
+[0m[94min[0m[94m [0m[mabsN[0m[m [0m[mworker[0m
 [Done]
 
-let worker ∷ [Int] → Set Int → [Int]
-    worker =
-      repN (fix ([Int] → [Int])
-                (λ nub ds →
-                   case ds of wild [Int]
-                     [] → [] Int
-                     (:) x xs →
-                       (:) Int x
-                           (nub (filter Int (λ ds → (/=) Int $fEqInt ds x)
-                                        xs))))
-in absN worker
+[94mlet[0m[94m [0m[mworker[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mSet[0m[92m [0m[92mInt[0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+    [0m[mworker[0m[m [0m[91m=[0m[91m
+      [0m[mrepN[0m[m [0m[91m([0m[mfix[0m[m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m
+                [0m[91m([0m[91mλ[0m[91m [0m[mnub[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+                   [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+                     [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92mInt[0m[92m
+                     [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m
+                       [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[mx[0m[m
+                           [0m[91m([0m[mnub[0m[m [0m[91m([0m[mfilter[0m[m [0m[92mInt[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m/=[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[m$fEqInt[0m[m [0m[mds[0m[m [0m[mx[0m[91m)[0m[91m
+                                        [0m[mxs[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m[91m
+[0m[94min[0m[94m [0m[mabsN[0m[m [0m[mworker[0m
 [Done]
 
-repN (fix ([Int] → [Int])
-          (λ nub ds →
-             case ds of wild [Int]
-               [] → [] Int
-               (:) x xs →
-                 (:) Int x
-                     (nub (filter Int (λ ds → (/=) Int $fEqInt ds x) xs))))
+[mrepN[0m[m [0m[91m([0m[mfix[0m[m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m
+          [0m[91m([0m[91mλ[0m[91m [0m[mnub[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+             [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+               [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92mInt[0m[92m
+               [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m
+                 [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[mx[0m[m
+                     [0m[91m([0m[mnub[0m[m [0m[91m([0m[mfilter[0m[m [0m[92mInt[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m/=[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[m$fEqInt[0m[m [0m[mds[0m[m [0m[mx[0m[91m)[0m[91m [0m[mxs[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m
 [Done]
 
-fix ([Int] → [Int])
-    (λ nub ds →
-       case ds of wild [Int]
-         [] → [] Int
-         (:) x xs →
-           (:) Int x (nub (filter Int (λ ds → (/=) Int $fEqInt ds x) xs)))
+[mfix[0m[m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m
+    [0m[91m([0m[91mλ[0m[91m [0m[mnub[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+       [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+         [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92mInt[0m[92m
+         [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m
+           [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[mx[0m[m [0m[91m([0m[mnub[0m[m [0m[91m([0m[mfilter[0m[m [0m[92mInt[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m/=[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[m$fEqInt[0m[m [0m[mds[0m[m [0m[mx[0m[91m)[0m[91m [0m[mxs[0m[91m)[0m[91m)[0m[91m)[0m
 [Done]
 
-let nub ∷ [Int] → [Int]
-    nub =
-      fix ([Int] → [Int])
-          (λ nub ds →
-             case ds of wild [Int]
-               [] → [] Int
-               (:) x xs →
-                 (:) Int x (nub (filter Int (λ ds → (/=) Int $fEqInt ds x) xs)))
-in nub
+[94mlet[0m[94m [0m[mnub[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+    [0m[mnub[0m[m [0m[91m=[0m[91m
+      [0m[mfix[0m[m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m
+          [0m[91m([0m[91mλ[0m[91m [0m[mnub[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+             [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+               [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92mInt[0m[92m
+               [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m
+                 [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[mx[0m[m [0m[91m([0m[mnub[0m[m [0m[91m([0m[mfilter[0m[m [0m[92mInt[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m/=[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[m$fEqInt[0m[m [0m[mds[0m[m [0m[mx[0m[91m)[0m[91m [0m[mxs[0m[91m)[0m[91m)[0m[91m)[0m[91m
+[0m[94min[0m[94m [0m[mnub[0m
 [Done]
 
-let nub ∷ [Int] → [Int]
-    nub =
-      let rec x ∷ [Int] → [Int]
-              x =
-                (λ nub ds →
-                   case ds of wild [Int]
-                     [] → [] Int
-                     (:) x xs →
-                       (:) Int x
-                           (nub (filter Int (λ ds → (/=) Int $fEqInt ds x)
-                                        xs))) x
-      in x
-in nub
+[94mlet[0m[94m [0m[mnub[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+    [0m[mnub[0m[m [0m[91m=[0m[91m
+      [0m[94mlet[0m[94m [0m[94mrec[0m[94m [0m[mx[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+              [0m[mx[0m[m [0m[91m=[0m[91m
+                [0m[91m([0m[91mλ[0m[91m [0m[mnub[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+                   [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+                     [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92mInt[0m[92m
+                     [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m
+                       [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[mx[0m[m
+                           [0m[91m([0m[mnub[0m[m [0m[91m([0m[mfilter[0m[m [0m[92mInt[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m/=[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[m$fEqInt[0m[m [0m[mds[0m[m [0m[mx[0m[91m)[0m[91m
+                                        [0m[mxs[0m[91m)[0m[91m)[0m[91m)[0m[91m [0m[mx[0m[m
+      [0m[94min[0m[94m [0m[mx[0m[m
+[0m[94min[0m[94m [0m[mnub[0m
 [Done]
 
-let rec x ∷ [Int] → [Int]
-        x = λ ds →
-          case ds of wild [Int]
-            [] → [] Int
-            (:) x xs →
-              (:) Int x (x (filter Int (λ ds → (/=) Int $fEqInt ds x) xs))
-in x
+[94mlet[0m[94m [0m[94mrec[0m[94m [0m[mx[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+        [0m[mx[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m
+          [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+            [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92mInt[0m[92m
+            [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m
+              [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[mx[0m[m [0m[91m([0m[mx[0m[m [0m[91m([0m[mfilter[0m[m [0m[92mInt[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m/=[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[m$fEqInt[0m[m [0m[mds[0m[m [0m[mx[0m[91m)[0m[91m [0m[mxs[0m[91m)[0m[91m)[0m[91m
+[0m[94min[0m[94m [0m[mx[0m
 [Done]
 
-let worker ∷ [Int] → Set Int → [Int]
-    worker =
-      repN (let rec x ∷ [Int] → [Int]
-                    x = λ ds →
-                      case ds of wild [Int]
-                        [] → [] Int
-                        (:) x xs →
-                          (:) Int x
-                              (x (filter Int (λ ds → (/=) Int $fEqInt ds x) xs))
-            in x)
-in absN worker
+[94mlet[0m[94m [0m[mworker[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mSet[0m[92m [0m[92mInt[0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+    [0m[mworker[0m[m [0m[91m=[0m[91m
+      [0m[mrepN[0m[m [0m[91m([0m[94mlet[0m[94m [0m[94mrec[0m[94m [0m[mx[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+                    [0m[mx[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m
+                      [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+                        [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92mInt[0m[92m
+                        [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m
+                          [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[mx[0m[m
+                              [0m[91m([0m[mx[0m[m [0m[91m([0m[mfilter[0m[m [0m[92mInt[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m/=[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[m$fEqInt[0m[m [0m[mds[0m[m [0m[mx[0m[91m)[0m[91m [0m[mxs[0m[91m)[0m[91m)[0m[91m
+            [0m[94min[0m[94m [0m[mx[0m[91m)[0m[91m
+[0m[94min[0m[94m [0m[mabsN[0m[m [0m[mworker[0m
 [Done]
 
-let rec x ∷ [Int] → [Int]
-        x = λ ds →
-          case ds of wild [Int]
-            [] → [] Int
-            (:) x xs →
-              (:) Int x (x (filter Int (λ ds → (/=) Int $fEqInt ds x) xs))
-    worker ∷ [Int] → Set Int → [Int]
-    worker = repN x
-in absN worker
+[94mlet[0m[94m [0m[94mrec[0m[94m [0m[mx[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+        [0m[mx[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m
+          [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+            [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92mInt[0m[92m
+            [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m
+              [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[mx[0m[m [0m[91m([0m[mx[0m[m [0m[91m([0m[mfilter[0m[m [0m[92mInt[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m/=[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[m$fEqInt[0m[m [0m[mds[0m[m [0m[mx[0m[91m)[0m[91m [0m[mxs[0m[91m)[0m[91m)[0m[91m
+    [0m[mworker[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mSet[0m[92m [0m[92mInt[0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+    [0m[mworker[0m[m [0m[91m=[0m[91m [0m[mrepN[0m[m [0m[mx[0m[m
+[0m[94min[0m[94m [0m[mabsN[0m[m [0m[mworker[0m
 [Done]
 
-let rec nub' ∷ [Int] → [Int]
-        nub' = λ ds →
-          case ds of wild [Int]
-            [] → [] Int
-            (:) x xs →
-              (:) Int x (nub' (filter Int (λ ds → (/=) Int $fEqInt ds x) xs))
-    worker ∷ [Int] → Set Int → [Int]
-    worker = repN nub'
-in absN worker
+[94mlet[0m[94m [0m[94mrec[0m[94m [0m[mnub'[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+        [0m[mnub'[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m
+          [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+            [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92mInt[0m[92m
+            [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m
+              [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[mx[0m[m [0m[91m([0m[mnub'[0m[m [0m[91m([0m[mfilter[0m[m [0m[92mInt[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m/=[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[m$fEqInt[0m[m [0m[mds[0m[m [0m[mx[0m[91m)[0m[91m [0m[mxs[0m[91m)[0m[91m)[0m[91m
+    [0m[mworker[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mSet[0m[92m [0m[92mInt[0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+    [0m[mworker[0m[m [0m[91m=[0m[91m [0m[mrepN[0m[m [0m[mnub'[0m[m
+[0m[94min[0m[94m [0m[mabsN[0m[m [0m[mworker[0m
 [Done]
 
-worker ∷ [Int] → Set Int → [Int]
-worker = repN nub'
+[mworker[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mSet[0m[92m [0m[92mInt[0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+[0m[mworker[0m[m [0m[91m=[0m[91m [0m[mrepN[0m[m [0m[mnub'[0m
 [Done]
 
-worker ∷ [Int] → Set Int → [Int]
-worker = λ xs s →
-  nub' (filter Int (λ ds → notMember Int $fOrdInt ds s) xs)
+[mworker[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mSet[0m[92m [0m[92mInt[0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+[0m[mworker[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mxs[0m[m [0m[ms[0m[m [0m[91m→[0m[91m
+  [0m[mnub'[0m[m [0m[91m([0m[mfilter[0m[m [0m[92mInt[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[mnotMember[0m[m [0m[92mInt[0m[92m [0m[m$fOrdInt[0m[m [0m[mds[0m[m [0m[ms[0m[91m)[0m[91m [0m[mxs[0m[91m)[0m
 [Done]
 
 '"Object (fromList [(\"params\",Array (fromList [Object (fromList [(\"params\",Array (fromList [String \"origworker\"])),(\"method\",String \"remember\")])])),(\"method\",String \"query\")])" [correct]
 
 [Done]
 
-worker ∷ [Int] → Set Int → [Int]
-worker = λ xs s →
-  nub' (case xs of wild [Int]
-          [] → [] Int
-          (:) x xs →
-            case (λ ds → notMember Int $fOrdInt ds s) x of wild [Int]
-              False → filter Int (λ ds → notMember Int $fOrdInt ds s) xs
-              True →
-                (:) Int x (filter Int (λ ds → notMember Int $fOrdInt ds s) xs))
+[mworker[0m[m [0m[91m∷[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mSet[0m[92m [0m[92mInt[0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+[0m[mworker[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mxs[0m[m [0m[ms[0m[m [0m[91m→[0m[91m
+  [0m[mnub'[0m[m [0m[91m([0m[94mcase[0m[94m [0m[mxs[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+          [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92mInt[0m[92m
+          [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m
+            [0m[94mcase[0m[94m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[mnotMember[0m[m [0m[92mInt[0m[92m [0m[m$fOrdInt[0m[m [0m[mds[0m[m [0m[ms[0m[91m)[0m[91m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+              [0m[mFalse[0m[m [0m[91m→[0m[91m [0m[mfilter[0m[m [0m[92mInt[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[mnotMember[0m[m [0m[92mInt[0m[92m [0m[m$fOrdInt[0m[m [0m[mds[0m[m [0m[ms[0m[91m)[0m[91m [0m[mxs[0m[m
+              [0m[mTrue[0m[m [0m[91m→[0m[91m
+                [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[mx[0m[m [0m[91m([0m[mfilter[0m[m [0m[92mInt[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[mnotMember[0m[m [0m[92mInt[0m[92m [0m[m$fOrdInt[0m[m [0m[mds[0m[m [0m[ms[0m[91m)[0m[91m [0m[mxs[0m[91m)[0m[91m)[0m
 [Done]
 
 *** Exception: failed to parse result value: Null : Object not returned from Server
 HERMIT> Warning: Lemma nub-assumption was assumed but not proven.
 nub-assumption
-  fix ([Int] → [Int])
-      ((.) ([Int] → Set Int → [Int]) ([Int] → [Int]) ([Int] → [Int]) absN
-           ((.) ([Int] → [Int]) ([Int] → Set Int → [Int]) ([Int] → [Int]) repN
-                (λ nub ds →
-                   case ds of wild [Int]
-                     [] → [] Int
-                     (:) x xs →
-                       (:) Int x
-                           (nub (filter Int (λ ds → (/=) Int $fEqInt ds x)
-                                        xs)))))
-  ≡
-  fix ([Int] → [Int])
-      (λ nub ds →
-         case ds of wild [Int]
-           [] → [] Int
-           (:) x xs →
-             (:) Int x (nub (filter Int (λ ds → (/=) Int $fEqInt ds x) xs)))
+  [mfix[0m[m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m
+      [0m[91m([0m[91m([0m[m.[0m[91m)[0m[91m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mSet[0m[92m [0m[92mInt[0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m [0m[mabsN[0m[m
+           [0m[91m([0m[91m([0m[m.[0m[91m)[0m[91m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mSet[0m[92m [0m[92mInt[0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m [0m[mrepN[0m[m
+                [0m[91m([0m[91mλ[0m[91m [0m[mnub[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+                   [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+                     [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92mInt[0m[92m
+                     [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m
+                       [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[mx[0m[m
+                           [0m[91m([0m[mnub[0m[m [0m[91m([0m[mfilter[0m[m [0m[92mInt[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m/=[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[m$fEqInt[0m[m [0m[mds[0m[m [0m[mx[0m[91m)[0m[91m
+                                        [0m[mxs[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m[91m
+  [0m[91m≡[0m[91m
+  [0m[mfix[0m[m [0m[91m([0m[92m[[0m[92mInt[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92mInt[0m[92m][0m[91m)[0m[91m
+      [0m[91m([0m[91mλ[0m[91m [0m[mnub[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+         [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m[[0m[92mInt[0m[92m][0m[92m
+           [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92mInt[0m[92m
+           [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m
+             [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[mx[0m[m [0m[91m([0m[mnub[0m[m [0m[91m([0m[mfilter[0m[m [0m[92mInt[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m/=[0m[91m)[0m[91m [0m[92mInt[0m[92m [0m[m$fEqInt[0m[m [0m[mds[0m[m [0m[mx[0m[91m)[0m[91m [0m[mxs[0m[91m)[0m[91m)[0m[91m)[0m
 [Done]
 
 Leaving GHCi.

@@ -19,715 +19,715 @@ HList.hs:30:11: Warning:
 [2 of 2] Compiling Main             ( Reverse.hs, Reverse.o )
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
 GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
-module Main where
-  rev ∷ ∀ a . [a] → [a]
-  absR ∷ ∀ a . ([a] → H a) → [a] → [a]
-  repR ∷ ∀ a . ([a] → [a]) → [a] → H a
-  main ∷ IO ()
-  main ∷ IO ()
+[94mmodule[0m[94m [0m[94mMain [0m[94mwhere[0m[94m
+  [0m[mrev[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[92m [0m[91m.[0m[91m [0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m
+  [0m[mabsR[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[92m [0m[91m.[0m[91m [0m[91m([0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mH[0m[92m [0m[92ma[0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m
+  [0m[mrepR[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[92m [0m[91m.[0m[91m [0m[91m([0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mH[0m[92m [0m[92ma[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m
 [Done]
 
 [1 of 1] Compiling ReverseScript    ( ReverseScript.hs, interpreted )
 Ok, modules loaded: ReverseScript.
-module Main where
-  rev ∷ ∀ a . [a] → [a]
-  absR ∷ ∀ a . ([a] → H a) → [a] → [a]
-  repR ∷ ∀ a . ([a] → [a]) → [a] → H a
-  main ∷ IO ()
-  main ∷ IO ()
+[94mmodule[0m[94m [0m[94mMain [0m[94mwhere[0m[94m
+  [0m[mrev[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[92m [0m[91m.[0m[91m [0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m
+  [0m[mabsR[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[92m [0m[91m.[0m[91m [0m[91m([0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mH[0m[92m [0m[92ma[0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m
+  [0m[mrepR[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[92m [0m[91m.[0m[91m [0m[91m([0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mH[0m[92m [0m[92ma[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m
 [Done]
 
 ++ [] (Not Proven)
-  ∀ △ xs. (++) ▲ xs ([] ▲) ≡ xs
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mxs[0m[91m.[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mxs[0m
 [Done]
 
 Goal:
-  ∀ △ xs. (++) ▲ xs ([] ▲) ≡ xs
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mxs[0m[91m.[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mxs[0m
 [Done]
 
 Goal:
-  ∀ △ xs. myAppend ▲ xs ([] ▲) ≡ xs
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mxs[0m[91m.[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mxs[0m
 [Done]
 
 Forcing obligation: appendFix
 Goal:
-  ∀ △. (++) ▲ ≡ myAppend ▲Successfully proven: appendFix
+  [91m∀[0m[91m [0m[91m△[0m[91m.[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0mSuccessfully proven: appendFix
 Goal:
-  ∀ △ xs. myAppend ▲ xs ([] ▲) ≡ xs
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mxs[0m[91m.[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mxs[0m
 [Done]
 
 Goal:
-  ∀ △.
-  (myAppend ▲ (undefined ▲) ([] ▲) ≡ undefined ▲)
-  ∧
-  ((myAppend ▲ ([] ▲) ([] ▲) ≡ [] ▲)
-   ∧
-   (∀ a b.
-    (myAppend ▲ b ([] ▲) ≡ b)
-    ⇒
-    (myAppend ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)))
+  [91m∀[0m[91m [0m[91m△[0m[91m.[0m[91m
+  [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mundefined[0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mundefined[0m[m [0m[92m▲[0m[91m)
+  [0m[91m∧[0m[91m
+  [0m[91m([0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[m[][0m[m [0m[92m▲[0m[91m)
+   [0m[91m∧[0m[91m
+   [0m[91m([0m[91m∀[0m[91m [0m[ma[0m[m [0m[mb[0m[91m.[0m[91m
+    [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mb[0m[91m)
+    [0m[91m⇒[0m[91m
+    [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m)[0m[91m)[0m
 [Done]
 
 Goal:
-  ∀ △.
-  (undefined ▲ ≡ undefined ▲)
-  ∧
-  ((myAppend ▲ ([] ▲) ([] ▲) ≡ [] ▲)
-   ∧
-   (∀ a b.
-    (myAppend ▲ b ([] ▲) ≡ b)
-    ⇒
-    (myAppend ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)))
+  [91m∀[0m[91m [0m[91m△[0m[91m.[0m[91m
+  [0m[91m([0m[mundefined[0m[m [0m[92m▲[0m[92m [0m[91m≡[0m[91m [0m[mundefined[0m[m [0m[92m▲[0m[91m)
+  [0m[91m∧[0m[91m
+  [0m[91m([0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[m[][0m[m [0m[92m▲[0m[91m)
+   [0m[91m∧[0m[91m
+   [0m[91m([0m[91m∀[0m[91m [0m[ma[0m[m [0m[mb[0m[91m.[0m[91m
+    [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mb[0m[91m)
+    [0m[91m⇒[0m[91m
+    [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m)[0m[91m)[0m
 [Done]
 
 Goal:
-  ∀ △.
-  (undefined ▲ ≡ undefined ▲)
-  ∧
-  (([] ▲ ≡ [] ▲)
-   ∧
-   (∀ a b.
-    (myAppend ▲ b ([] ▲) ≡ b)
-    ⇒
-    ((:) ▲ a (myAppend ▲ b ([] ▲)) ≡ (:) ▲ a b)))
+  [91m∀[0m[91m [0m[91m△[0m[91m.[0m[91m
+  [0m[91m([0m[mundefined[0m[m [0m[92m▲[0m[92m [0m[91m≡[0m[91m [0m[mundefined[0m[m [0m[92m▲[0m[91m)
+  [0m[91m∧[0m[91m
+  [0m[91m([0m[91m([0m[m[][0m[m [0m[92m▲[0m[92m [0m[91m≡[0m[91m [0m[m[][0m[m [0m[92m▲[0m[91m)
+   [0m[91m∧[0m[91m
+   [0m[91m([0m[91m∀[0m[91m [0m[ma[0m[m [0m[mb[0m[91m.[0m[91m
+    [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mb[0m[91m)
+    [0m[91m⇒[0m[91m
+    [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m)[0m[91m)[0m
 [Done]
 
 Goal:
-  ∀ △ a b.
-  (myAppend ▲ b ([] ▲) ≡ b)
-  ⇒
-  ((:) ▲ a (myAppend ▲ b ([] ▲)) ≡ (:) ▲ a b)
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[ma[0m[m [0m[mb[0m[91m.[0m[91m
+  [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mb[0m[91m)
+  [0m[91m⇒[0m[91m
+  [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m
 [Done]
 
 Goal:
-  (myAppend ▲ b ([] ▲) ≡ b)
-  ⇒
-  ((:) ▲ a (myAppend ▲ b ([] ▲)) ≡ (:) ▲ a b)
+  [91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mb[0m[91m)
+  [0m[91m⇒[0m[91m
+  [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m
 [Done]
 
-Assumed lemmas:
+Assumed lemmas: 
 ind-hyp-0 (Built In)
-  myAppend ▲ b ([] ▲) ≡ b
+  [mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mb[0m[m
 Goal:
-  (:) ▲ a (myAppend ▲ b ([] ▲)) ≡ (:) ▲ a b
+  [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m
 [Done]
 
-Assumed lemmas:
+Assumed lemmas: 
 ind-hyp-0 (Built In)
-  myAppend ▲ b ([] ▲) ≡ b
+  [mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mb[0m[m
 Goal:
-  (:) ▲ a b ≡ (:) ▲ a b
+  [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[m [0m[91m≡[0m[91m [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m
 [Done]
 
 Successfully proven: ++ []
-module Main where
-  rev ∷ ∀ a . [a] → [a]
-  absR ∷ ∀ a . ([a] → H a) → [a] → [a]
-  repR ∷ ∀ a . ([a] → [a]) → [a] → H a
-  main ∷ IO ()
-  main ∷ IO ()
+[94mmodule[0m[94m [0m[94mMain [0m[94mwhere[0m[94m
+  [0m[mrev[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[92m [0m[91m.[0m[91m [0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m
+  [0m[mabsR[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[92m [0m[91m.[0m[91m [0m[91m([0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mH[0m[92m [0m[92ma[0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m
+  [0m[mrepR[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[92m [0m[91m.[0m[91m [0m[91m([0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mH[0m[92m [0m[92ma[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m
 [Done]
 
 myAppend-assoc (Not Proven)
-  ∀ △ xs ys zs.
-  myAppend ▲ (myAppend ▲ xs ys) zs ≡ myAppend ▲ xs (myAppend ▲ ys zs)
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mxs[0m[m [0m[mys[0m[m [0m[mzs[0m[91m.[0m[91m
+  [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m
 [Done]
 
 Goal:
-  ∀ △ xs ys zs.
-  myAppend ▲ (myAppend ▲ xs ys) zs ≡ myAppend ▲ xs (myAppend ▲ ys zs)
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mxs[0m[m [0m[mys[0m[m [0m[mzs[0m[91m.[0m[91m
+  [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m
 [Done]
 
 Goal:
-  ∀ △ ys zs.
-  (myAppend ▲ (myAppend ▲ (undefined ▲) ys) zs
-   ≡
-   myAppend ▲ (undefined ▲) (myAppend ▲ ys zs))
-  ∧
-  ((myAppend ▲ (myAppend ▲ ([] ▲) ys) zs
-    ≡
-    myAppend ▲ ([] ▲) (myAppend ▲ ys zs))
-   ∧
-   (∀ a b.
-    (myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs))
-    ⇒
-    (myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
-     ≡
-     myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs))))
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m.[0m[91m
+  [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mundefined[0m[m [0m[92m▲[0m[91m)[0m[91m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m
+   [0m[91m≡[0m[91m
+   [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mundefined[0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)
+  [0m[91m∧[0m[91m
+  [0m[91m([0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m
+    [0m[91m≡[0m[91m
+    [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)
+   [0m[91m∧[0m[91m
+   [0m[91m([0m[91m∀[0m[91m [0m[ma[0m[m [0m[mb[0m[91m.[0m[91m
+    [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)
+    [0m[91m⇒[0m[91m
+    [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m
+     [0m[91m≡[0m[91m
+     [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m
 [Done]
 
 Goal:
-  ∀ △ ys zs.
-  (myAppend ▲ (myAppend ▲ (undefined ▲) ys) zs
-   ≡
-   myAppend ▲ (undefined ▲) (myAppend ▲ ys zs))
-  ∧
-  ((myAppend ▲ (myAppend ▲ ([] ▲) ys) zs
-    ≡
-    myAppend ▲ ([] ▲) (myAppend ▲ ys zs))
-   ∧
-   (∀ a b.
-    (myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs))
-    ⇒
-    (myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
-     ≡
-     myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs))))
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m.[0m[91m
+  [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mundefined[0m[m [0m[92m▲[0m[91m)[0m[91m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m
+   [0m[91m≡[0m[91m
+   [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mundefined[0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)
+  [0m[91m∧[0m[91m
+  [0m[91m([0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m
+    [0m[91m≡[0m[91m
+    [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)
+   [0m[91m∧[0m[91m
+   [0m[91m([0m[91m∀[0m[91m [0m[ma[0m[m [0m[mb[0m[91m.[0m[91m
+    [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)
+    [0m[91m⇒[0m[91m
+    [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m
+     [0m[91m≡[0m[91m
+     [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m
 [Done]
 
 Goal:
-  (myAppend ▲ (myAppend ▲ (undefined ▲) ys) zs
-   ≡
-   myAppend ▲ (undefined ▲) (myAppend ▲ ys zs))
-  ∧
-  ((myAppend ▲ (myAppend ▲ ([] ▲) ys) zs
-    ≡
-    myAppend ▲ ([] ▲) (myAppend ▲ ys zs))
-   ∧
-   (∀ a b.
-    (myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs))
-    ⇒
-    (myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
-     ≡
-     myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs))))
+  [91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mundefined[0m[m [0m[92m▲[0m[91m)[0m[91m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m
+   [0m[91m≡[0m[91m
+   [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mundefined[0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)
+  [0m[91m∧[0m[91m
+  [0m[91m([0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m
+    [0m[91m≡[0m[91m
+    [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)
+   [0m[91m∧[0m[91m
+   [0m[91m([0m[91m∀[0m[91m [0m[ma[0m[m [0m[mb[0m[91m.[0m[91m
+    [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)
+    [0m[91m⇒[0m[91m
+    [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m
+     [0m[91m≡[0m[91m
+     [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m
 [Done]
 
 Goal:
-  (myAppend ▲ (myAppend ▲ (undefined ▲) ys) zs
-   ≡
-   myAppend ▲ (undefined ▲) (myAppend ▲ ys zs))
-  ∧
-  ((myAppend ▲ (myAppend ▲ ([] ▲) ys) zs
-    ≡
-    myAppend ▲ ([] ▲) (myAppend ▲ ys zs))
-   ∧
-   (∀ a b.
-    (myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs))
-    ⇒
-    (myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
-     ≡
-     myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs))))
+  [91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mundefined[0m[m [0m[92m▲[0m[91m)[0m[91m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m
+   [0m[91m≡[0m[91m
+   [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mundefined[0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)
+  [0m[91m∧[0m[91m
+  [0m[91m([0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m
+    [0m[91m≡[0m[91m
+    [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)
+   [0m[91m∧[0m[91m
+   [0m[91m([0m[91m∀[0m[91m [0m[ma[0m[m [0m[mb[0m[91m.[0m[91m
+    [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)
+    [0m[91m⇒[0m[91m
+    [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m
+     [0m[91m≡[0m[91m
+     [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m
 [Done]
 
 Goal:
-  myAppend ▲ (myAppend ▲ (undefined ▲) ys) zs
-  ≡
-  myAppend ▲ (undefined ▲) (myAppend ▲ ys zs)
+  [mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mundefined[0m[m [0m[92m▲[0m[91m)[0m[91m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m
+  [0m[91m≡[0m[91m
+  [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mundefined[0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m
 [Done]
 
 Goal:
-  undefined ▲ ≡ undefined ▲
+  [mundefined[0m[m [0m[92m▲[0m[92m [0m[91m≡[0m[91m [0m[mundefined[0m[m [0m[92m▲[0m
 [Done]
 
 Goal:
-  true
+  [91mtrue[0m
 [Done]
 
 Goal:
-  (true)
-  ∧
-  ((myAppend ▲ (myAppend ▲ ([] ▲) ys) zs
-    ≡
-    myAppend ▲ ([] ▲) (myAppend ▲ ys zs))
-   ∧
-   (∀ a b.
-    (myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs))
-    ⇒
-    (myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
-     ≡
-     myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs))))
+  [91m([0m[91mtrue[0m[91m)
+  [0m[91m∧[0m[91m
+  [0m[91m([0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m
+    [0m[91m≡[0m[91m
+    [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)
+   [0m[91m∧[0m[91m
+   [0m[91m([0m[91m∀[0m[91m [0m[ma[0m[m [0m[mb[0m[91m.[0m[91m
+    [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)
+    [0m[91m⇒[0m[91m
+    [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m
+     [0m[91m≡[0m[91m
+     [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m
 [Done]
 
 Goal:
-  (myAppend ▲ (myAppend ▲ ([] ▲) ys) zs
-   ≡
-   myAppend ▲ ([] ▲) (myAppend ▲ ys zs))
-  ∧
-  (∀ a b.
-   (myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs))
-   ⇒
-   (myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
-    ≡
-    myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs)))
+  [91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m
+   [0m[91m≡[0m[91m
+   [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)
+  [0m[91m∧[0m[91m
+  [0m[91m([0m[91m∀[0m[91m [0m[ma[0m[m [0m[mb[0m[91m.[0m[91m
+   [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)
+   [0m[91m⇒[0m[91m
+   [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m
+    [0m[91m≡[0m[91m
+    [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)[0m[91m)[0m
 [Done]
 
 Goal:
-  (myAppend ▲ (myAppend ▲ ([] ▲) ys) zs
-   ≡
-   myAppend ▲ ([] ▲) (myAppend ▲ ys zs))
-  ∧
-  (∀ a b.
-   (myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs))
-   ⇒
-   (myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
-    ≡
-    myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs)))
+  [91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m
+   [0m[91m≡[0m[91m
+   [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)
+  [0m[91m∧[0m[91m
+  [0m[91m([0m[91m∀[0m[91m [0m[ma[0m[m [0m[mb[0m[91m.[0m[91m
+   [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)
+   [0m[91m⇒[0m[91m
+   [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m
+    [0m[91m≡[0m[91m
+    [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)[0m[91m)[0m
 [Done]
 
 Goal:
-  myAppend ▲ (myAppend ▲ ([] ▲) ys) zs
-  ≡
-  myAppend ▲ ([] ▲) (myAppend ▲ ys zs)
+  [mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m
+  [0m[91m≡[0m[91m
+  [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m
 [Done]
 
 Goal:
-  myAppend ▲ ys zs ≡ myAppend ▲ ys zs
+  [mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m
 [Done]
 
 Goal:
-  true
+  [91mtrue[0m
 [Done]
 
 Goal:
-  (true)
-  ∧
-  (∀ a b.
-   (myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs))
-   ⇒
-   (myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
-    ≡
-    myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs)))
+  [91m([0m[91mtrue[0m[91m)
+  [0m[91m∧[0m[91m
+  [0m[91m([0m[91m∀[0m[91m [0m[ma[0m[m [0m[mb[0m[91m.[0m[91m
+   [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)
+   [0m[91m⇒[0m[91m
+   [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m
+    [0m[91m≡[0m[91m
+    [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)[0m[91m)[0m
 [Done]
 
 Goal:
-  (true)
-  ∧
-  (∀ a b.
-   (myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs))
-   ⇒
-   (myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
-    ≡
-    myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs)))
+  [91m([0m[91mtrue[0m[91m)
+  [0m[91m∧[0m[91m
+  [0m[91m([0m[91m∀[0m[91m [0m[ma[0m[m [0m[mb[0m[91m.[0m[91m
+   [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)
+   [0m[91m⇒[0m[91m
+   [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m
+    [0m[91m≡[0m[91m
+    [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)[0m[91m)[0m
 [Done]
 
 Goal:
-  ∀ a b.
-  (myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs))
-  ⇒
-  (myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
-   ≡
-   myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs))
+  [91m∀[0m[91m [0m[ma[0m[m [0m[mb[0m[91m.[0m[91m
+  [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)
+  [0m[91m⇒[0m[91m
+  [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m
+   [0m[91m≡[0m[91m
+   [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)[0m
 [Done]
 
 Goal:
-  (myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs))
-  ⇒
-  (myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
-   ≡
-   myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs))
+  [91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)
+  [0m[91m⇒[0m[91m
+  [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m
+   [0m[91m≡[0m[91m
+   [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)[0m
 [Done]
 
-Assumed lemmas:
+Assumed lemmas: 
 ind-hyp-0 (Built In)
-  myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs)
+  [mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m
 Goal:
-  myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
-  ≡
-  myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs)
+  [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m
+  [0m[91m≡[0m[91m
+  [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m
 [Done]
 
-Assumed lemmas:
+Assumed lemmas: 
 ind-hyp-0 (Built In)
-  myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs)
+  [mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m
 Goal:
-  (λ △ ds ys →
-     case ds of wild ▲
-       [] → ys
-       (:) x xs → (:) ▲ x (myAppend ▲ xs ys)) ▲
-                                              ((λ △ ds ys →
-                                                  case ds of wild ▲
-                                                    [] → ys
-                                                    (:) x xs →
-                                                      (:) ▲ x
-                                                          (myAppend ▲ xs ys)) ▲
-                                                                              ((:) ▲
-                                                                                   a
-                                                                                   b)
-                                                                              ys)
-                                              zs
-  ≡
-  (λ △ ds ys →
-     case ds of wild ▲
-       [] → ys
-       (:) x xs → (:) ▲ x (myAppend ▲ xs ys)) ▲ ((:) ▲ a b)
-                                              ((λ △ ds ys →
-                                                  case ds of wild ▲
-                                                    [] → ys
-                                                    (:) x xs →
-                                                      (:) ▲ x
-                                                          (myAppend ▲ xs ys)) ▲
-                                                                              ys
-                                                                              zs)
+  [0m[91m([0m[91mλ[0m[91m [0m[91m△[0m[92m [0m[mds[0m[m [0m[mys[0m[m [0m[91m→[0m[91m
+     [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+       [0m[m[][0m[m [0m[91m→[0m[91m [0m[mys[0m[m
+       [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m)[0m[91m)[0m[91m [0m[92m▲[0m[92m
+                                              [0m[91m([0m[91m([0m[91mλ[0m[91m [0m[91m△[0m[92m [0m[mds[0m[m [0m[mys[0m[m [0m[91m→[0m[91m
+                                                  [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+                                                    [0m[m[][0m[m [0m[91m→[0m[91m [0m[mys[0m[m
+                                                    [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m
+                                                      [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m
+                                                          [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m)[0m[91m)[0m[91m [0m[92m▲[0m[92m
+                                                                              [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m
+                                                                                   [0m[ma[0m[m
+                                                                                   [0m[mb[0m[91m)[0m[91m
+                                                                              [0m[mys[0m[91m)[0m[91m
+                                              [0m[mzs[0m[m
+  [0m[91m≡[0m[91m
+  [0m[91m([0m[91mλ[0m[91m [0m[91m△[0m[92m [0m[mds[0m[m [0m[mys[0m[m [0m[91m→[0m[91m
+     [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+       [0m[m[][0m[m [0m[91m→[0m[91m [0m[mys[0m[m
+       [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m)[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[mb[0m[91m)[0m[91m
+                                              [0m[91m([0m[91m([0m[91mλ[0m[91m [0m[91m△[0m[92m [0m[mds[0m[m [0m[mys[0m[m [0m[91m→[0m[91m
+                                                  [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+                                                    [0m[m[][0m[m [0m[91m→[0m[91m [0m[mys[0m[m
+                                                    [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m
+                                                      [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m
+                                                          [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m)[0m[91m)[0m[91m [0m[92m▲[0m[92m
+                                                                              [0m[mys[0m[m
+                                                                              [0m[mzs[0m[91m)[0m
 [Done]
 
-Assumed lemmas:
+Assumed lemmas: 
 ind-hyp-0 (Built In)
-  myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs)
+  [mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m
 Goal:
-  (:) ▲ a (myAppend ▲ (myAppend ▲ b ys) zs)
-  ≡
-  (:) ▲ a
-      (myAppend ▲ b
-                (case ys of wild ▲
-                   [] → zs
-                   (:) x xs → (:) ▲ x (myAppend ▲ xs zs)))
+  [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[91m)[0m[91m
+  [0m[91m≡[0m[91m
+  [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m
+      [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m
+                [0m[91m([0m[94mcase[0m[94m [0m[mys[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+                   [0m[m[][0m[m [0m[91m→[0m[91m [0m[mzs[0m[m
+                   [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[mzs[0m[91m)[0m[91m)[0m[91m)[0m
 [Done]
 
-Assumed lemmas:
+Assumed lemmas: 
 ind-hyp-0 (Built In)
-  myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs)
+  [mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m
 Goal:
-  (:) ▲ a (myAppend ▲ (myAppend ▲ b ys) zs)
-  ≡
-  (:) ▲ a (myAppend ▲ b (myAppend ▲ ys zs))
+  [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[91m)[0m[91m
+  [0m[91m≡[0m[91m
+  [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)[0m
 [Done]
 
-Assumed lemmas:
+Assumed lemmas: 
 ind-hyp-0 (Built In)
-  myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs)
+  [mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m
 Goal:
-  (:) ▲ a (myAppend ▲ b (myAppend ▲ ys zs))
-  ≡
-  (:) ▲ a (myAppend ▲ b (myAppend ▲ ys zs))
+  [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)[0m[91m
+  [0m[91m≡[0m[91m
+  [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)[0m
 [Done]
 
-Assumed lemmas:
+Assumed lemmas: 
 ind-hyp-0 (Built In)
-  myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs)
+  [mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m
 Goal:
-  true
+  [0m[91mtrue[0m
 [Done]
 
 Goal:
-  (true)
-  ∧
-  (∀ a b.
-   (myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs))
-   ⇒
-   (true))
+  [91m([0m[91mtrue[0m[91m)
+  [0m[91m∧[0m[91m
+  [0m[91m([0m[91m∀[0m[91m [0m[ma[0m[m [0m[mb[0m[91m.[0m[91m
+   [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)
+   [0m[91m⇒[0m[91m
+   [0m[91m([0m[91mtrue[0m[91m)[0m[91m)[0m
 [Done]
 
 Goal:
-  ∀ △ ys zs.
-  (true)
-  ∧
-  ((true)
-   ∧
-   (∀ a b.
-    (myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs))
-    ⇒
-    (true)))
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m.[0m[91m
+  [0m[91m([0m[91mtrue[0m[91m)
+  [0m[91m∧[0m[91m
+  [0m[91m([0m[91m([0m[91mtrue[0m[91m)
+   [0m[91m∧[0m[91m
+   [0m[91m([0m[91m∀[0m[91m [0m[ma[0m[m [0m[mb[0m[91m.[0m[91m
+    [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mb[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m[91m)
+    [0m[91m⇒[0m[91m
+    [0m[91m([0m[91mtrue[0m[91m)[0m[91m)[0m[91m)[0m
 [Done]
 
 Successfully proven: myAppend-assoc
-module Main where
-  rev ∷ ∀ a . [a] → [a]
-  absR ∷ ∀ a . ([a] → H a) → [a] → [a]
-  repR ∷ ∀ a . ([a] → [a]) → [a] → H a
-  main ∷ IO ()
-  main ∷ IO ()
+[94mmodule[0m[94m [0m[94mMain [0m[94mwhere[0m[94m
+  [0m[mrev[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[92m [0m[91m.[0m[91m [0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m
+  [0m[mabsR[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[92m [0m[91m.[0m[91m [0m[91m([0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mH[0m[92m [0m[92ma[0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m
+  [0m[mrepR[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[92m [0m[91m.[0m[91m [0m[91m([0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mH[0m[92m [0m[92ma[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m
 [Done]
 
 repH [] (Not Proven)
-  ∀ △. repH ▲ ([] ▲) ≡ id ▲
+  [91m∀[0m[91m [0m[91m△[0m[91m.[0m[91m [0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mid[0m[m [0m[92m▲[0m
 [Done]
 
 Goal:
-  ∀ △. repH ▲ ([] ▲) ≡ id ▲
+  [91m∀[0m[91m [0m[91m△[0m[91m.[0m[91m [0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mid[0m[m [0m[92m▲[0m
 [Done]
 
 Goal:
-  ∀ △. (++) ▲ ([] ▲) ≡ id ▲
+  [91m∀[0m[91m [0m[91m△[0m[91m.[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mid[0m[m [0m[92m▲[0m
 [Done]
 
 Goal:
-  ∀ △ x. (++) ▲ ([] ▲) x ≡ id ▲ x
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mx[0m[91m.[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[mx[0m[m [0m[91m≡[0m[91m [0m[mid[0m[m [0m[92m▲[0m[92m [0m[mx[0m
 [Done]
 
 Goal:
-  ∀ △ x. myAppend ▲ ([] ▲) x ≡ id ▲ x
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mx[0m[91m.[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[mx[0m[m [0m[91m≡[0m[91m [0m[mid[0m[m [0m[92m▲[0m[92m [0m[mx[0m
 [Done]
 
 Goal:
-  ∀ △ x.
-  case [] ▲ of wild ▲
-    [] → x
-    (:) x xs → (:) ▲ x (myAppend ▲ xs x)
-  ≡
-  id ▲ x
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mx[0m[91m.[0m[91m
+  [0m[94mcase[0m[94m [0m[m[][0m[m [0m[92m▲[0m[92m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+    [0m[m[][0m[m [0m[91m→[0m[91m [0m[mx[0m[m
+    [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[mx[0m[91m)[0m[91m
+  [0m[91m≡[0m[91m
+  [0m[mid[0m[m [0m[92m▲[0m[92m [0m[mx[0m
 [Done]
 
 Goal:
-  ∀ △ x. x ≡ x
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mx[0m[91m.[0m[91m [0m[mx[0m[m [0m[91m≡[0m[91m [0m[mx[0m
 [Done]
 
 Successfully proven: repH []
-module Main where
-  rev ∷ ∀ a . [a] → [a]
-  absR ∷ ∀ a . ([a] → H a) → [a] → [a]
-  repR ∷ ∀ a . ([a] → [a]) → [a] → H a
-  main ∷ IO ()
-  main ∷ IO ()
+[94mmodule[0m[94m [0m[94mMain [0m[94mwhere[0m[94m
+  [0m[mrev[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[92m [0m[91m.[0m[91m [0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m
+  [0m[mabsR[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[92m [0m[91m.[0m[91m [0m[91m([0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mH[0m[92m [0m[92ma[0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m
+  [0m[mrepR[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[92m [0m[91m.[0m[91m [0m[91m([0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mH[0m[92m [0m[92ma[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m
 [Done]
 
 repH (:) (Not Proven)
-  ∀ △ x xs. repH ▲ ((:) ▲ x xs) ≡ (.) ▲ ▲ ▲ ((:) ▲ x) (repH ▲ xs)
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mx[0m[m [0m[mxs[0m[91m.[0m[91m [0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[91m)[0m[91m [0m[91m([0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[91m)[0m
 [Done]
 
 Goal:
-  ∀ △ x xs. repH ▲ ((:) ▲ x xs) ≡ (.) ▲ ▲ ▲ ((:) ▲ x) (repH ▲ xs)
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mx[0m[m [0m[mxs[0m[91m.[0m[91m [0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[91m)[0m[91m [0m[91m([0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[91m)[0m
 [Done]
 
 Goal:
-  ∀ △ x xs. (++) ▲ ((:) ▲ x xs) ≡ (.) ▲ ▲ ▲ ((:) ▲ x) ((++) ▲ xs)
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mx[0m[m [0m[mxs[0m[91m.[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[91m)[0m[91m [0m[91m([0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mxs[0m[91m)[0m
 [Done]
 
 Goal:
-  ∀ △ x xs.
-  myAppend ▲ ((:) ▲ x xs) ≡ (.) ▲ ▲ ▲ ((:) ▲ x) (myAppend ▲ xs)
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mx[0m[m [0m[mxs[0m[91m.[0m[91m
+  [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[91m)[0m
 [Done]
 
 Goal:
-  ∀ △ x xs. myAppend ▲ ((:) ▲ x xs) ≡ λ x → (:) ▲ x (myAppend ▲ xs x)
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mx[0m[m [0m[mxs[0m[91m.[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[91mλ[0m[91m [0m[mx[0m[m [0m[91m→[0m[91m [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[mx[0m[91m)[0m
 [Done]
 
 Goal:
-  ∀ △ x xs.
-  λ ys → (:) ▲ x (myAppend ▲ xs ys) ≡ λ x → (:) ▲ x (myAppend ▲ xs x)
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mx[0m[m [0m[mxs[0m[91m.[0m[91m
+  [0m[91mλ[0m[91m [0m[mys[0m[m [0m[91m→[0m[91m [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[91mλ[0m[91m [0m[mx[0m[m [0m[91m→[0m[91m [0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[mx[0m[91m)[0m
 [Done]
 
 Successfully proven: repH (:)
-module Main where
-  rev ∷ ∀ a . [a] → [a]
-  absR ∷ ∀ a . ([a] → H a) → [a] → [a]
-  repR ∷ ∀ a . ([a] → [a]) → [a] → H a
-  main ∷ IO ()
-  main ∷ IO ()
+[94mmodule[0m[94m [0m[94mMain [0m[94mwhere[0m[94m
+  [0m[mrev[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[92m [0m[91m.[0m[91m [0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m
+  [0m[mabsR[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[92m [0m[91m.[0m[91m [0m[91m([0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mH[0m[92m [0m[92ma[0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m
+  [0m[mrepR[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[92m [0m[91m.[0m[91m [0m[91m([0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mH[0m[92m [0m[92ma[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m
 [Done]
 
 repH ++ (Not Proven)
-  ∀ △ xs ys.
-  repH ▲ ((++) ▲ xs ys) ≡ (.) ▲ ▲ ▲ (repH ▲ xs) (repH ▲ ys)
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m.[0m[91m
+  [0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[mys[0m[91m)[0m
 [Done]
 
 Goal:
-  ∀ △ xs ys.
-  repH ▲ ((++) ▲ xs ys) ≡ (.) ▲ ▲ ▲ (repH ▲ xs) (repH ▲ ys)
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m.[0m[91m
+  [0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[mys[0m[91m)[0m
 [Done]
 
 Goal:
-  ∀ △ xs ys.
-  (++) ▲ ((++) ▲ xs ys) ≡ (.) ▲ ▲ ▲ ((++) ▲ xs) ((++) ▲ ys)
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m.[0m[91m
+  [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mys[0m[91m)[0m
 [Done]
 
 Goal:
-  ∀ △ xs ys.
-  myAppend ▲ (myAppend ▲ xs ys)
-  ≡
-  (.) ▲ ▲ ▲ (myAppend ▲ xs) (myAppend ▲ ys)
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m.[0m[91m
+  [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m)[0m[91m
+  [0m[91m≡[0m[91m
+  [0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[91m)[0m
 [Done]
 
 Goal:
-  ∀ △ xs ys.
-  λ x → myAppend ▲ (myAppend ▲ xs ys) x
-  ≡
-  (.) ▲ ▲ ▲ (myAppend ▲ xs) (myAppend ▲ ys)
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m.[0m[91m
+  [0m[91mλ[0m[91m [0m[mx[0m[m [0m[91m→[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m)[0m[91m [0m[mx[0m[m
+  [0m[91m≡[0m[91m
+  [0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[91m)[0m
 [Done]
 
 Goal:
-  ∀ △ xs ys.
-  λ x → myAppend ▲ (myAppend ▲ xs ys) x
-  ≡
-  λ x → myAppend ▲ xs (myAppend ▲ ys x)
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m.[0m[91m
+  [0m[91mλ[0m[91m [0m[mx[0m[m [0m[91m→[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m)[0m[91m [0m[mx[0m[m
+  [0m[91m≡[0m[91m
+  [0m[91mλ[0m[91m [0m[mx[0m[m [0m[91m→[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mx[0m[91m)[0m
 [Done]
 
 Goal:
-  ∀ △ xs ys zs.
-  (λ x → myAppend ▲ (myAppend ▲ xs ys) x) zs
-  ≡
-  (λ x → myAppend ▲ xs (myAppend ▲ ys x)) zs
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mxs[0m[m [0m[mys[0m[m [0m[mzs[0m[91m.[0m[91m
+  [0m[91m([0m[91mλ[0m[91m [0m[mx[0m[m [0m[91m→[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m)[0m[91m [0m[mx[0m[91m)[0m[91m [0m[mzs[0m[m
+  [0m[91m≡[0m[91m
+  [0m[91m([0m[91mλ[0m[91m [0m[mx[0m[m [0m[91m→[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mx[0m[91m)[0m[91m)[0m[91m [0m[mzs[0m
 [Done]
 
 Goal:
-  ∀ △ xs ys zs.
-  myAppend ▲ (myAppend ▲ xs ys) zs ≡ myAppend ▲ xs (myAppend ▲ ys zs)
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mxs[0m[m [0m[mys[0m[m [0m[mzs[0m[91m.[0m[91m
+  [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m
 [Done]
 
 Goal:
-  ∀ △ xs ys zs.
-  myAppend ▲ (myAppend ▲ xs ys) zs ≡ myAppend ▲ xs (myAppend ▲ ys zs)
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mxs[0m[m [0m[mys[0m[m [0m[mzs[0m[91m.[0m[91m
+  [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m
 [Done]
 
 Goal:
-  myAppend ▲ (myAppend ▲ xs ys) zs ≡ myAppend ▲ xs (myAppend ▲ ys zs)
+  [mmyAppend[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m)[0m[91m [0m[mzs[0m[m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[91m([0m[mmyAppend[0m[m [0m[92m▲[0m[92m [0m[mys[0m[m [0m[mzs[0m[91m)[0m
 [Done]
 
 Goal:
-  true
+  [91mtrue[0m
 [Done]
 
 Goal:
-  ∀ △ xs ys zs. true
+  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mxs[0m[m [0m[mys[0m[m [0m[mzs[0m[91m.[0m[91m [0m[91mtrue[0m
 [Done]
 
 Successfully proven: repH ++
-module Main where
-  rev ∷ ∀ a . [a] → [a]
-  absR ∷ ∀ a . ([a] → H a) → [a] → [a]
-  repR ∷ ∀ a . ([a] → [a]) → [a] → H a
-  main ∷ IO ()
-  main ∷ IO ()
+[94mmodule[0m[94m [0m[94mMain [0m[94mwhere[0m[94m
+  [0m[mrev[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[92m [0m[91m.[0m[91m [0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m
+  [0m[mabsR[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[92m [0m[91m.[0m[91m [0m[91m([0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mH[0m[92m [0m[92ma[0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m
+  [0m[mrepR[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[92m [0m[91m.[0m[91m [0m[91m([0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[92m [0m[91m→[0m[92m [0m[92mH[0m[92m [0m[92ma[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m[92m
+  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m
 [Done]
 
-rev = λ △ ds →
-  case ds of wild ▲
-    [] → [] ▲
-    (:) x xs → (++) ▲ (rev ▲ xs) ((:) ▲ x ([] ▲))
+[mrev[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[91m△[0m[92m [0m[mds[0m[m [0m[91m→[0m[91m
+  [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+    [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
+    [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[mrev[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m
 [Done]
 
-rev = λ △ →
-  fix ▲
-      (λ rev ds →
-         case ds of wild ▲
-           [] → [] ▲
-           (:) x xs → (++) ▲ (rev xs) ((:) ▲ x ([] ▲)))
+[mrev[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[91m△[0m[92m [0m[91m→[0m[91m
+  [0m[mfix[0m[m [0m[92m▲[0m[92m
+      [0m[91m([0m[91mλ[0m[91m [0m[mrev[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+         [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+           [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
+           [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[mrev[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[91m)[0m
 [Done]
 
-fix ▲
-    (λ rev ds →
-       case ds of wild ▲
-         [] → [] ▲
-         (:) x xs → (++) ▲ (rev xs) ((:) ▲ x ([] ▲)))
+[mfix[0m[m [0m[92m▲[0m[92m
+    [0m[91m([0m[91mλ[0m[91m [0m[mrev[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+       [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+         [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
+         [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[mrev[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[91m)[0m
 [Done]
 
-let g =
-      (.) ▲ ▲ ▲ (repR ▲)
-          ((.) ▲ ▲ ▲
-               (λ rev ds →
-                  case ds of wild ▲
-                    [] → [] ▲
-                    (:) x xs → (++) ▲ (rev xs) ((:) ▲ x ([] ▲)))
-               (absR ▲))
-    worker = fix ▲ g
-in absR ▲ worker
+[94mlet[0m[94m [0m[mg[0m[m [0m[91m=[0m[91m
+      [0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mrepR[0m[m [0m[92m▲[0m[91m)[0m[91m
+          [0m[91m([0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m
+               [0m[91m([0m[91mλ[0m[91m [0m[mrev[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+                  [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+                    [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
+                    [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[mrev[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[91m)[0m[91m
+               [0m[91m([0m[mabsR[0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[91m
+    [0m[mworker[0m[m [0m[91m=[0m[91m [0m[mfix[0m[m [0m[92m▲[0m[92m [0m[mg[0m[m
+[0m[94min[0m[94m [0m[mabsR[0m[m [0m[92m▲[0m[92m [0m[mworker[0m
 [Done]
 
 Forcing obligation: rev-assumption
 Goal:
-  fix ▲
-      ((.) ▲ ▲ ▲ (absR ▲)
-           ((.) ▲ ▲ ▲ (repR ▲)
-                (λ rev ds →
-                   case ds of wild ▲
-                     [] → [] ▲
-                     (:) x xs → (++) ▲ (rev xs) ((:) ▲ x ([] ▲)))))
-  ≡
-  fix ▲
-      (λ rev ds →
-         case ds of wild ▲
-           [] → [] ▲
-           (:) x xs → (++) ▲ (rev xs) ((:) ▲ x ([] ▲)))Goal:
-  let rec x =
-            absR ▲
-                 (repR ▲
-                       (λ ds →
-                          case ds of wild ▲
-                            [] → [] ▲
-                            (:) x xs → (++) ▲ (x xs) ((:) ▲ x ([] ▲))))
-  in x
-  ≡
-  let rec x = λ ds →
-            case ds of wild ▲
-              [] → [] ▲
-              (:) x xs → (++) ▲ (x xs) ((:) ▲ x ([] ▲))
-  in x
+  [mfix[0m[m [0m[92m▲[0m[92m
+      [0m[91m([0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mabsR[0m[m [0m[92m▲[0m[91m)[0m[91m
+           [0m[91m([0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mrepR[0m[m [0m[92m▲[0m[91m)[0m[91m
+                [0m[91m([0m[91mλ[0m[91m [0m[mrev[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+                   [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+                     [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
+                     [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[mrev[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m[91m
+  [0m[91m≡[0m[91m
+  [0m[mfix[0m[m [0m[92m▲[0m[92m
+      [0m[91m([0m[91mλ[0m[91m [0m[mrev[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+         [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+           [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
+           [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[mrev[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[91m)[0mGoal:
+  [94mlet[0m[94m [0m[94mrec[0m[94m [0m[mx[0m[m [0m[91m=[0m[91m
+            [0m[mabsR[0m[m [0m[92m▲[0m[92m
+                 [0m[91m([0m[mrepR[0m[m [0m[92m▲[0m[92m
+                       [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m
+                          [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+                            [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
+                            [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[mx[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m[91m
+  [0m[94min[0m[94m [0m[mx[0m[m
+  [0m[91m≡[0m[91m
+  [0m[94mlet[0m[94m [0m[94mrec[0m[94m [0m[mx[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m
+            [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+              [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
+              [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[mx[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[91m
+  [0m[94min[0m[94m [0m[mx[0m
 [Done]
 
 Goal:
-  let rec x = λ x →
-            (++) ▲
-                 (case x of wild ▲
-                    [] → [] ▲
-                    (:) x xs → (++) ▲ (x xs) ((:) ▲ x ([] ▲)))
-                 ([] ▲)
-  in x
-  ≡
-  let rec x = λ ds →
-            case ds of wild ▲
-              [] → [] ▲
-              (:) x xs → (++) ▲ (x xs) ((:) ▲ x ([] ▲))
-  in x
+  [94mlet[0m[94m [0m[94mrec[0m[94m [0m[mx[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mx[0m[m [0m[91m→[0m[91m
+            [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m
+                 [0m[91m([0m[94mcase[0m[94m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+                    [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
+                    [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[mx[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[91m)[0m[91m
+                 [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m
+  [0m[94min[0m[94m [0m[mx[0m[m
+  [0m[91m≡[0m[91m
+  [0m[94mlet[0m[94m [0m[94mrec[0m[94m [0m[mx[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m
+            [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+              [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
+              [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[mx[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[91m
+  [0m[94min[0m[94m [0m[mx[0m
 [Done]
 
 Goal:
-  let rec x = λ x →
-            case x of wild ▲
-              [] → [] ▲
-              (:) x xs → (++) ▲ (x xs) ((:) ▲ x ([] ▲))
-  in x
-  ≡
-  let rec x = λ ds →
-            case ds of wild ▲
-              [] → [] ▲
-              (:) x xs → (++) ▲ (x xs) ((:) ▲ x ([] ▲))
-  in x
+  [94mlet[0m[94m [0m[94mrec[0m[94m [0m[mx[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mx[0m[m [0m[91m→[0m[91m
+            [0m[94mcase[0m[94m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+              [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
+              [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[mx[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[91m
+  [0m[94min[0m[94m [0m[mx[0m[m
+  [0m[91m≡[0m[91m
+  [0m[94mlet[0m[94m [0m[94mrec[0m[94m [0m[mx[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m
+            [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+              [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
+              [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[mx[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[91m
+  [0m[94min[0m[94m [0m[mx[0m
 [Done]
 
 Successfully proven: rev-assumption
-let g =
-      (.) ▲ ▲ ▲ (repR ▲)
-          ((.) ▲ ▲ ▲
-               (λ rev ds →
-                  case ds of wild ▲
-                    [] → [] ▲
-                    (:) x xs → (++) ▲ (rev xs) ((:) ▲ x ([] ▲)))
-               (absR ▲))
-    worker = fix ▲ g
-in absR ▲ worker
+[94mlet[0m[94m [0m[mg[0m[m [0m[91m=[0m[91m
+      [0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mrepR[0m[m [0m[92m▲[0m[91m)[0m[91m
+          [0m[91m([0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m
+               [0m[91m([0m[91mλ[0m[91m [0m[mrev[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+                  [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+                    [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
+                    [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[mrev[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[91m)[0m[91m
+               [0m[91m([0m[mabsR[0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[91m
+    [0m[mworker[0m[m [0m[91m=[0m[91m [0m[mfix[0m[m [0m[92m▲[0m[92m [0m[mg[0m[m
+[0m[94min[0m[94m [0m[mabsR[0m[m [0m[92m▲[0m[92m [0m[mworker[0m
 [Done]
 
-let g =
-      (.) ▲ ▲ ▲ (λ eta → (λ f → (.) ▲ ▲ ▲ (repH ▲) f) eta)
-          ((.) ▲ ▲ ▲
-               (λ rev ds →
-                  case ds of wild ▲
-                    [] → [] ▲
-                    (:) x xs → (++) ▲ (rev xs) ((:) ▲ x ([] ▲)))
-               (λ eta → (λ g → (.) ▲ ▲ ▲ (absH ▲) g) eta))
-    worker = fix ▲ g
-in (λ g → (.) ▲ ▲ ▲ (absH ▲) g) worker
+[94mlet[0m[94m [0m[mg[0m[m [0m[91m=[0m[91m
+      [0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[meta[0m[m [0m[91m→[0m[91m [0m[91m([0m[91mλ[0m[91m [0m[mf[0m[m [0m[91m→[0m[91m [0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mrepH[0m[m [0m[92m▲[0m[91m)[0m[91m [0m[mf[0m[91m)[0m[91m [0m[meta[0m[91m)[0m[91m
+          [0m[91m([0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m
+               [0m[91m([0m[91mλ[0m[91m [0m[mrev[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+                  [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+                    [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
+                    [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[mrev[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[91m)[0m[91m
+               [0m[91m([0m[91mλ[0m[91m [0m[meta[0m[m [0m[91m→[0m[91m [0m[91m([0m[91mλ[0m[91m [0m[mg[0m[m [0m[91m→[0m[91m [0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mabsH[0m[m [0m[92m▲[0m[91m)[0m[91m [0m[mg[0m[91m)[0m[91m [0m[meta[0m[91m)[0m[91m)[0m[91m
+    [0m[mworker[0m[m [0m[91m=[0m[91m [0m[mfix[0m[m [0m[92m▲[0m[92m [0m[mg[0m[m
+[0m[94min[0m[94m [0m[91m([0m[91mλ[0m[91m [0m[mg[0m[m [0m[91m→[0m[91m [0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mabsH[0m[m [0m[92m▲[0m[91m)[0m[91m [0m[mg[0m[91m)[0m[91m [0m[mworker[0m
 [Done]
 
-let g = λ x →
-      (λ eta → (λ f x → repH ▲ (f x)) eta) ((λ x →
-                                               (λ rev ds →
-                                                  case ds of wild ▲
-                                                    [] → [] ▲
-                                                    (:) x xs →
-                                                      (++) ▲ (rev xs)
-                                                           ((:) ▲ x
-                                                                ([] ▲))) ((λ eta →
-                                                                             (λ g x →
-                                                                                absH ▲
-                                                                                     (g x)) eta) x)) x)
-    worker = fix ▲ g
-in (λ g x → absH ▲ (g x)) worker
+[94mlet[0m[94m [0m[mg[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mx[0m[m [0m[91m→[0m[91m
+      [0m[91m([0m[91mλ[0m[91m [0m[meta[0m[m [0m[91m→[0m[91m [0m[91m([0m[91mλ[0m[91m [0m[mf[0m[m [0m[mx[0m[m [0m[91m→[0m[91m [0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mf[0m[m [0m[mx[0m[91m)[0m[91m)[0m[91m [0m[meta[0m[91m)[0m[91m [0m[91m([0m[91m([0m[91mλ[0m[91m [0m[mx[0m[m [0m[91m→[0m[91m
+                                               [0m[91m([0m[91mλ[0m[91m [0m[mrev[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+                                                  [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+                                                    [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
+                                                    [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m
+                                                      [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[mrev[0m[m [0m[mxs[0m[91m)[0m[91m
+                                                           [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m
+                                                                [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[91m)[0m[91m [0m[91m([0m[91m([0m[91mλ[0m[91m [0m[meta[0m[m [0m[91m→[0m[91m
+                                                                             [0m[91m([0m[91mλ[0m[91m [0m[mg[0m[m [0m[mx[0m[m [0m[91m→[0m[91m
+                                                                                [0m[mabsH[0m[m [0m[92m▲[0m[92m
+                                                                                     [0m[91m([0m[mg[0m[m [0m[mx[0m[91m)[0m[91m)[0m[91m [0m[meta[0m[91m)[0m[91m [0m[mx[0m[91m)[0m[91m)[0m[91m [0m[mx[0m[91m)[0m[91m
+    [0m[mworker[0m[m [0m[91m=[0m[91m [0m[mfix[0m[m [0m[92m▲[0m[92m [0m[mg[0m[m
+[0m[94min[0m[94m [0m[91m([0m[91mλ[0m[91m [0m[mg[0m[m [0m[mx[0m[m [0m[91m→[0m[91m [0m[mabsH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mg[0m[m [0m[mx[0m[91m)[0m[91m)[0m[91m [0m[mworker[0m
 [Done]
 
-λ x →
-  absH ▲
-       (fix ▲
-            (λ x x →
-               repH ▲
-                    (case x of wild ▲
-                       [] → [] ▲
-                       (:) x xs → (++) ▲ (absH ▲ (x xs)) ((:) ▲ x ([] ▲))))
-            x)
+[91mλ[0m[91m [0m[mx[0m[m [0m[91m→[0m[91m
+  [0m[mabsH[0m[m [0m[92m▲[0m[92m
+       [0m[91m([0m[mfix[0m[m [0m[92m▲[0m[92m
+            [0m[91m([0m[91mλ[0m[91m [0m[mx[0m[m [0m[mx[0m[m [0m[91m→[0m[91m
+               [0m[mrepH[0m[m [0m[92m▲[0m[92m
+                    [0m[91m([0m[94mcase[0m[94m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
+                       [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
+                       [0m[91m([0m[m:[0m[91m)[0m[91m [0m[mx[0m[m [0m[mxs[0m[m [0m[91m→[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[mabsH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mx[0m[m [0m[mxs[0m[91m)[0m[91m)[0m[91m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m[91m
+            [0m[mx[0m[91m)[0m
 [Done]
 
 *** Exception: failed to parse result value: Null : Object not returned from Server
 HERMIT> Warning: Lemma appendFix was assumed but not proven.
 appendFix
-  ∀ △. (++) ▲ ≡ myAppend ▲
+  [91m∀[0m[91m [0m[91m△[0m[91m.[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m≡[0m[91m [0m[mmyAppend[0m[m [0m[92m▲[0m
 [Done]
 
 Leaving GHCi.
