@@ -1,4 +1,4 @@
-module VerifyListMonadAssoc (listMonadAssoc) where
+module VerifyListMonadAssocScript (listMonadAssoc) where
 --------------------------------------------
 -- Verify monad-assoc (for List)
 --
