@@ -34,8 +34,12 @@ data Rune = Rune String | Markup Style | PathA (Path Crumb) | BndrA (Path Crumb)
 newtype Runes = Runes [ Rune ]
 
 instance RenderSpecial Runes where
-    renderSpecial sym = Runes [ Markup SYNTAX , Rune [ch] ]
+    renderSpecial sym        = Runes [ Markup style , Rune [ch] ]
         where Unicode ch = renderSpecial sym
+              style =
+                case sym of
+                  TypeSymbol -> TYPE
+                  _          -> SYNTAX
 
 instance Monoid Runes where
     mempty = Runes mempty
