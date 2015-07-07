@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module HERMIT.Server.Parser.ShellEffect where
@@ -18,7 +19,7 @@ import           HERMIT.Shell.Externals
 import qualified Data.Map as M
 import           Data.List (intercalate)
 
-instance External ShellEffect where
+instance External (ShellEffect ()) where
   parseExternals =
     [ external "resume"  Resume
         [ "stops HERMIT; resumes compile" ]
