@@ -21,6 +21,7 @@ Ok, modules loaded: FibScript.
         [0m[m1 [0m[91m→[0m[91m [0m[mI#[0m[m [0m[m1[0m
 [Done]
 
+parsed fine
 '"Object (fromList [(\"params\",Array (fromList [Object (fromList [(\"params\",Array (fromList [String \"orig-fib\"])),(\"method\",String \"remember\")])])),(\"method\",String \"query\")])" [correct]
 
 [Done]

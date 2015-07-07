@@ -59,6 +59,7 @@ Ok, modules loaded: FibScript, WWAssAScript.
 [mwork[0m[m [0m[91m=[0m[91m [0m[munwrap[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[91m)[0m
 [Done]
 
+parsed fine
 '"Object (fromList [(\"params\",Array (fromList [Object (fromList [(\"params\",Array (fromList [String \"origwork\"])),(\"method\",String \"remember\")])])),(\"method\",String \"query\")])" [correct]
 
 [Done]

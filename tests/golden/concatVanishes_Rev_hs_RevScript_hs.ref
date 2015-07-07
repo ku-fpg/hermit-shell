@@ -25,13 +25,13 @@ GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
 [3 of 4] Compiling ConcatVanishesScript ( ConcatVanishesScript.hs, interpreted )
 [4 of 4] Compiling RevScript        ( RevScript.hs, interpreted )
 Ok, modules loaded: RevScript, ConcatVanishesScript, WWAssAScript, StrictRepHScript.
-[mrev[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[91m△[0m[92m [0m[mds[0m[m [0m[91m→[0m[91m
+[mrev[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[92m△[0m[92m [0m[mds[0m[m [0m[91m→[0m[91m
   [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
     [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
     [0m[91m([0m[m:[0m[91m)[0m[91m [0m[my[0m[m [0m[mys[0m[m [0m[91m→[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[mrev[0m[m [0m[92m▲[0m[92m [0m[mys[0m[91m)[0m[91m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[my[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m
 [Done]
 
-[mrev[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[91m△[0m[92m [0m[mds[0m[m [0m[91m→[0m[91m
+[mrev[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[92m△[0m[92m [0m[mds[0m[m [0m[91m→[0m[91m
   [0m[91m([0m[94mlet[0m[94m [0m[mf[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mrev'[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
          [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
            [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
@@ -40,7 +40,7 @@ Ok, modules loaded: RevScript, ConcatVanishesScript, WWAssAScript, StrictRepHScr
    [0m[94min[0m[94m [0m[91mλ[0m[91m [0m[mx0[0m[m [0m[91m→[0m[91m [0m[mabsH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mwork[0m[m [0m[mx0[0m[91m)[0m[91m)[0m[91m [0m[mds[0m
 [Done]
 
-[mrev[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[91m△[0m[92m [0m[91m→[0m[91m
+[mrev[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[92m△[0m[92m [0m[91m→[0m[91m
   [0m[94mlet[0m[94m [0m[94mrec[0m[94m [0m[mwork[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[91m→[0m[91m
             [0m[mrepH[0m[m [0m[92m▲[0m[92m
                  [0m[91m([0m[94mcase[0m[94m [0m[mx1[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
@@ -49,7 +49,7 @@ Ok, modules loaded: RevScript, ConcatVanishesScript, WWAssAScript, StrictRepHScr
   [0m[94min[0m[94m [0m[91mλ[0m[91m [0m[mx0[0m[m [0m[91m→[0m[91m [0m[mabsH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mwork[0m[m [0m[mx0[0m[91m)[0m
 [Done]
 
-[mrev[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[91m△[0m[92m [0m[91m→[0m[91m
+[mrev[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[92m△[0m[92m [0m[91m→[0m[91m
   [0m[94mlet[0m[94m [0m[94mrec[0m[94m [0m[mwork[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[91m→[0m[91m
             [0m[mrepH[0m[m [0m[92m▲[0m[92m
                  [0m[91m([0m[94mcase[0m[94m [0m[mx1[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
@@ -96,7 +96,7 @@ Ok, modules loaded: RevScript, ConcatVanishesScript, WWAssAScript, StrictRepHScr
   [0m[91m([0m[m:[0m[91m)[0m[91m [0m[my[0m[m [0m[mys[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mys[0m[m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[my[0m[m [0m[macc[0m[91m)[0m
 [Done]
 
-[mrev[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[91m△[0m[92m [0m[91m→[0m[91m
+[mrev[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[92m△[0m[92m [0m[91m→[0m[91m
   [0m[94mlet[0m[94m [0m[94mrec[0m[94m [0m[mwork[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[macc[0m[m [0m[91m→[0m[91m
             [0m[94mcase[0m[94m [0m[mx1[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
               [0m[m[][0m[m [0m[91m→[0m[91m [0m[macc[0m[m
@@ -104,7 +104,7 @@ Ok, modules loaded: RevScript, ConcatVanishesScript, WWAssAScript, StrictRepHScr
   [0m[94min[0m[94m [0m[91mλ[0m[91m [0m[mx0[0m[m [0m[91m→[0m[91m [0m[mabsH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mwork[0m[m [0m[mx0[0m[91m)[0m
 [Done]
 
-[mrev[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[91m△[0m[92m [0m[91m→[0m[91m
+[mrev[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[92m△[0m[92m [0m[91m→[0m[91m
   [0m[94mlet[0m[94m [0m[94mrec[0m[94m [0m[mwork[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[macc[0m[m [0m[91m→[0m[91m
             [0m[94mcase[0m[94m [0m[mx1[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
               [0m[m[][0m[m [0m[91m→[0m[91m [0m[macc[0m[m
@@ -113,11 +113,11 @@ Ok, modules loaded: RevScript, ConcatVanishesScript, WWAssAScript, StrictRepHScr
 [Done]
 
 Goal:
-  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mxs[0m[91m.[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mxs[0m
+  [91m∀[0m[91m [0m[92m△[0m[92m [0m[mxs[0m[91m.[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mxs[0m
 [Done]
 
 Successfully proven: ++ []
-[mrev[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[91m△[0m[92m [0m[91m→[0m[91m
+[mrev[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[92m△[0m[92m [0m[91m→[0m[91m
   [0m[94mlet[0m[94m [0m[94mrec[0m[94m [0m[mwork[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[macc[0m[m [0m[91m→[0m[91m
             [0m[94mcase[0m[94m [0m[mx1[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
               [0m[m[][0m[m [0m[91m→[0m[91m [0m[macc[0m[m
@@ -126,11 +126,11 @@ Successfully proven: ++ []
 [Done]
 
 Goal:
-  [91m∀[0m[91m [0m[91m△[0m[91m.[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[mundefined[0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mundefined[0m[m [0m[92m▲[0m
+  [91m∀[0m[91m [0m[92m△[0m[91m.[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[mundefined[0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mundefined[0m[m [0m[92m▲[0m
 [Done]
 
 Successfully proven: ++ strict
-[mrev[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[91m△[0m[92m [0m[91m→[0m[91m
+[mrev[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[92m△[0m[92m [0m[91m→[0m[91m
   [0m[94mlet[0m[94m [0m[94mrec[0m[94m [0m[mwork[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[macc[0m[m [0m[91m→[0m[91m
             [0m[94mcase[0m[94m [0m[mx1[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
               [0m[m[][0m[m [0m[91m→[0m[91m [0m[macc[0m[m
@@ -139,11 +139,11 @@ Successfully proven: ++ strict
 [Done]
 
 Goal:
-  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mx[0m[m [0m[mxs[0m[91m.[0m[91m [0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[91m)[0m[91m [0m[91m([0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[91m)[0m
+  [91m∀[0m[91m [0m[92m△[0m[92m [0m[mx[0m[m [0m[mxs[0m[91m.[0m[91m [0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[91m)[0m[91m [0m[91m([0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[91m)[0m
 [Done]
 
 Successfully proven: repH (:)
-[mrev[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[91m△[0m[92m [0m[91m→[0m[91m
+[mrev[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[92m△[0m[92m [0m[91m→[0m[91m
   [0m[94mlet[0m[94m [0m[94mrec[0m[94m [0m[mwork[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[macc[0m[m [0m[91m→[0m[91m
             [0m[94mcase[0m[94m [0m[mx1[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
               [0m[m[][0m[m [0m[91m→[0m[91m [0m[macc[0m[m
@@ -152,12 +152,12 @@ Successfully proven: repH (:)
 [Done]
 
 Goal:
-  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m.[0m[91m
+  [91m∀[0m[91m [0m[92m△[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m.[0m[91m
   [0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[mys[0m[91m)[0m
 [Done]
 
 Successfully proven: repH ++
-[mrev[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[91m△[0m[92m [0m[91m→[0m[91m
+[mrev[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[92m△[0m[92m [0m[91m→[0m[91m
   [0m[94mlet[0m[94m [0m[94mrec[0m[94m [0m[mwork[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[macc[0m[m [0m[91m→[0m[91m
             [0m[94mcase[0m[94m [0m[mx1[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
               [0m[m[][0m[m [0m[91m→[0m[91m [0m[macc[0m[m
@@ -166,11 +166,11 @@ Successfully proven: repH ++
 [Done]
 
 Goal:
-  [91m∀[0m[91m [0m[91m△[0m[91m.[0m[91m [0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mid[0m[m [0m[92m▲[0m
+  [91m∀[0m[91m [0m[92m△[0m[91m.[0m[91m [0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mid[0m[m [0m[92m▲[0m
 [Done]
 
 Successfully proven: repH []
-[mrev[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[91m△[0m[92m [0m[91m→[0m[91m
+[mrev[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[92m△[0m[92m [0m[91m→[0m[91m
   [0m[94mlet[0m[94m [0m[94mrec[0m[94m [0m[mwork[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[macc[0m[m [0m[91m→[0m[91m
             [0m[94mcase[0m[94m [0m[mx1[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
               [0m[m[][0m[m [0m[91m→[0m[91m [0m[macc[0m[m
@@ -180,16 +180,16 @@ Successfully proven: repH []
 
 HERMIT> Warning: Lemma ++ [] was assumed but not proven.
 ++ []
-  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mxs[0m[91m.[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mxs[0mWarning: Lemma ++ strict was assumed but not proven.
+  [91m∀[0m[91m [0m[92m△[0m[92m [0m[mxs[0m[91m.[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mxs[0mWarning: Lemma ++ strict was assumed but not proven.
 ++ strict
-  [91m∀[0m[91m [0m[91m△[0m[91m.[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[mundefined[0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mundefined[0m[m [0m[92m▲[0mWarning: Lemma repH (:) was assumed but not proven.
+  [91m∀[0m[91m [0m[92m△[0m[91m.[0m[91m [0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[91m([0m[mundefined[0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mundefined[0m[m [0m[92m▲[0mWarning: Lemma repH (:) was assumed but not proven.
 repH (:)
-  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mx[0m[m [0m[mxs[0m[91m.[0m[91m [0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[91m)[0m[91m [0m[91m([0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[91m)[0mWarning: Lemma repH ++ was assumed but not proven.
+  [91m∀[0m[91m [0m[92m△[0m[92m [0m[mx[0m[m [0m[mxs[0m[91m.[0m[91m [0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[mxs[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mx[0m[91m)[0m[91m [0m[91m([0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[91m)[0mWarning: Lemma repH ++ was assumed but not proven.
 repH ++
-  [91m∀[0m[91m [0m[91m△[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m.[0m[91m
+  [91m∀[0m[91m [0m[92m△[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m.[0m[91m
   [0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m++[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[91m([0m[m.[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[91m)[0m[91m [0m[91m([0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[mys[0m[91m)[0mWarning: Lemma repH [] was assumed but not proven.
 repH []
-  [91m∀[0m[91m [0m[91m△[0m[91m.[0m[91m [0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mid[0m[m [0m[92m▲[0m
+  [91m∀[0m[91m [0m[92m△[0m[91m.[0m[91m [0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m≡[0m[91m [0m[mid[0m[m [0m[92m▲[0m
 [Done]
 
 Leaving GHCi.

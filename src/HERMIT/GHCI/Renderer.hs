@@ -38,8 +38,9 @@ instance RenderSpecial Runes where
         where Unicode ch = renderSpecial sym
               style =
                 case sym of
-                  TypeSymbol -> TYPE
-                  _          -> SYNTAX
+                  TypeSymbol     -> TYPE
+                  TypeBindSymbol -> TYPE
+                  _              -> SYNTAX
 
 instance Monoid Runes where
     mempty = Runes mempty
