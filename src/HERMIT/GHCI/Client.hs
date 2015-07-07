@@ -46,18 +46,20 @@ send (Fail str) = fail str
 withStyle :: Maybe Style -> String -> IO ()
 withStyle Nothing    str = putStr str
 withStyle (Just sty) str = do
-  setSGR . maybeToList $ styleSGR sty
+  setSGR $ styleSGR sty
   putStr str
   setSGR [Reset]
 
-styleSGR :: Style -> Maybe SGR
-styleSGR KEYWORD  = Just $ simpleColor Blue
-styleSGR SYNTAX   = Just $ simpleColor Red
-styleSGR VAR      = Nothing
-styleSGR COERCION = Just $ simpleColor Yellow
-styleSGR TYPE     = Just $ simpleColor Green
-styleSGR LIT      = Just $ simpleColor Cyan
-styleSGR WARNING  = Just $ SetColor Background Vivid Yellow
+styleSGR :: Style -> [SGR]
+styleSGR KEYWORD  = [simpleColor Blue]
+styleSGR SYNTAX   = [simpleColor Red]
+styleSGR VAR      = []
+styleSGR COERCION = [simpleColor Yellow]
+styleSGR TYPE     = [simpleColor Green]
+styleSGR LIT      = [simpleColor Cyan]
+styleSGR WARNING  = [SetColor Background Vivid Yellow
+                    ,SetColor Foreground Dull  Black
+                    ]
 
 simpleColor :: Color -> SGR
 simpleColor = SetColor Foreground Vivid
