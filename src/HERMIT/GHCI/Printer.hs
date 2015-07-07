@@ -12,6 +12,8 @@ module HERMIT.GHCI.Printer
 import HERMIT.API.Types
 import HERMIT.GHCI.Client
 
+import HERMIT.API.Shell
+
 import Control.Monad (unless)
 
 class Repl a where
@@ -38,9 +40,15 @@ instance Repl ScriptEffect where
 instance Repl QueryFun where
   printForRepl (QueryFun v) = printForRepl (Shell v :: Shell ())
 
-instance Repl (Transform a b) where
-  printForRepl (Transform v) = printForRepl (Shell v :: Shell ())
+instance Repl Crumb where
+  printForRepl = printForRepl . run
 
-instance Repl (BiTransform a b) where
-  printForRepl (BiTransform v) = printForRepl (Shell v :: Shell ())
+instance Guts a => Repl (Transform a LocalPath) where
+  printForRepl = printForRepl . run
+
+instance Guts a => Repl (Transform a a) where
+  printForRepl = printForRepl . run
+
+instance __OVERLAPPABLE__ Guts a => Repl (Transform a b) where
+  printForRepl = printForRepl . run
 
