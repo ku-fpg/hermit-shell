@@ -33,7 +33,8 @@ type HermitTestArgs = (FilePath, FilePath, String, FilePath)
 
 testArgs :: [HermitTestArgs]
 testArgs =
-    [ ("concatVanishes", "Flatten.hs"  , "Main"    , "FlattenScript.hs")
+    [ ("casereduce"    , "Main.hs"     , "Main"    , "CaseReduceScript.hs")
+    , ("concatVanishes", "Flatten.hs"  , "Main"    , "FlattenScript.hs")
     , ("concatVanishes", "QSort.hs"    , "Main"    , "QSortScript.hs")
     , ("concatVanishes", "Rev.hs"      , "Main"    , "RevScript.hs")
     , ("evaluation"    , "Eval.hs"     , "Main"    , "EvalScript.hs")
