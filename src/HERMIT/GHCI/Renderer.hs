@@ -58,7 +58,7 @@ mergeRunes (g:h:r) = case merge g h of
           merge r1         r2          = Right (r1,r2)
 
 instance RenderCode Runes where
-    rPutStr txt = Runes [ Rune txt ]
+    rPutStr txt = Runes [ Rune txt, Markup VAR ] -- Markup VAR resets the colors
     rDoHighlight _ [] = mempty
     rDoHighlight Nothing (BndrAttr p:_) = Runes [ BndrA $ snocPathToPath p ]
     rDoHighlight (Just (BndrAttr _)) _ = Runes [ EndBndrA ]

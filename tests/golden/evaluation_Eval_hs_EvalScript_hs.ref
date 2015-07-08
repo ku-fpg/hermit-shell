@@ -1,139 +1,139 @@
 [1 of 1] Compiling Main             ( Eval.hs, Eval.o )
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
 GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
-[94mmodule[0m[94m [0m[94mMain [0m[94mwhere[0m[94m
-  [0m[mrep[0m[m [0m[91m∷[0m[92m [0m[92mMint[0m[92m [0m[91m→[0m[92m [0m[91m([0m[92mInt[0m[92m [0m[91m→[0m[92m [0m[92mMint[0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92mMint[0m[92m [0m[91m→[0m[92m [0m[92mMint[0m[92m
-  [0m[mabs[0m[m [0m[91m∷[0m[92m [0m[91m([0m[91m([0m[92mInt[0m[92m [0m[91m→[0m[92m [0m[92mMint[0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92mMint[0m[92m [0m[91m→[0m[92m [0m[92mMint[0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92mMint[0m[92m
-  [0m[m$dShow[0m[m [0m[91m∷[0m[92m [0m[92mShow[0m[92m [0m[91m([0m[92mMaybe[0m[92m [0m[92mInt[0m[91m)[0m[91m
-  [0m[meval[0m[m [0m[91m∷[0m[92m [0m[92mExpr[0m[92m [0m[91m→[0m[92m [0m[92mMint[0m[92m
-  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m[92m
-  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m
+[94mmodule[0m[m [0m[mMain[0m[m [0m[94mwhere[0m[m
+[0m[m  [0m[mrep[0m[m [0m[91m∷[0m[92m [0m[92mMint[0m[m [0m[91m→[0m[92m [0m[91m([0m[92mInt[0m[m [0m[91m→[0m[92m [0m[92mMint[0m[91m)[0m[m [0m[91m→[0m[92m [0m[92mMint[0m[m [0m[91m→[0m[92m [0m[92mMint[0m[m
+[0m[m  [0m[mabs[0m[m [0m[91m∷[0m[92m [0m[91m([0m[91m([0m[92mInt[0m[m [0m[91m→[0m[92m [0m[92mMint[0m[91m)[0m[m [0m[91m→[0m[92m [0m[92mMint[0m[m [0m[91m→[0m[92m [0m[92mMint[0m[91m)[0m[m [0m[91m→[0m[92m [0m[92mMint[0m[m
+[0m[m  [0m[m$dShow[0m[m [0m[91m∷[0m[92m [0m[92mShow[0m[m [0m[91m([0m[92mMaybe[0m[m [0m[92mInt[0m[91m)[0m[m
+[0m[m  [0m[meval[0m[m [0m[91m∷[0m[92m [0m[92mExpr[0m[m [0m[91m→[0m[92m [0m[92mMint[0m[m
+[0m[m  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[m [0m[92m([0m[92m)[0m[m
+[0m[m  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[m [0m[92m([0m[92m)[0m
 [Done]
 
 [1 of 2] Compiling WWAssAScript     ( WWAssAScript.hs, interpreted )
 [2 of 2] Compiling EvalScript       ( EvalScript.hs, interpreted )
 Ok, modules loaded: EvalScript, WWAssAScript.
-[94mmodule[0m[94m [0m[94mMain [0m[94mwhere[0m[94m
-  [0m[mrep[0m[m [0m[91m∷[0m[92m [0m[92mMint[0m[92m [0m[91m→[0m[92m [0m[91m([0m[92mInt[0m[92m [0m[91m→[0m[92m [0m[92mMint[0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92mMint[0m[92m [0m[91m→[0m[92m [0m[92mMint[0m[92m
-  [0m[mabs[0m[m [0m[91m∷[0m[92m [0m[91m([0m[91m([0m[92mInt[0m[92m [0m[91m→[0m[92m [0m[92mMint[0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92mMint[0m[92m [0m[91m→[0m[92m [0m[92mMint[0m[91m)[0m[91m [0m[91m→[0m[92m [0m[92mMint[0m[92m
-  [0m[m$dShow[0m[m [0m[91m∷[0m[92m [0m[92mShow[0m[92m [0m[91m([0m[92mMaybe[0m[92m [0m[92mInt[0m[91m)[0m[91m
-  [0m[meval[0m[m [0m[91m∷[0m[92m [0m[92mExpr[0m[92m [0m[91m→[0m[92m [0m[92mMint[0m[92m
-  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m[92m
-  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[92m [0m[92m([0m[92m)[0m
+[94mmodule[0m[m [0m[mMain[0m[m [0m[94mwhere[0m[m
+[0m[m  [0m[mrep[0m[m [0m[91m∷[0m[92m [0m[92mMint[0m[m [0m[91m→[0m[92m [0m[91m([0m[92mInt[0m[m [0m[91m→[0m[92m [0m[92mMint[0m[91m)[0m[m [0m[91m→[0m[92m [0m[92mMint[0m[m [0m[91m→[0m[92m [0m[92mMint[0m[m
+[0m[m  [0m[mabs[0m[m [0m[91m∷[0m[92m [0m[91m([0m[91m([0m[92mInt[0m[m [0m[91m→[0m[92m [0m[92mMint[0m[91m)[0m[m [0m[91m→[0m[92m [0m[92mMint[0m[m [0m[91m→[0m[92m [0m[92mMint[0m[91m)[0m[m [0m[91m→[0m[92m [0m[92mMint[0m[m
+[0m[m  [0m[m$dShow[0m[m [0m[91m∷[0m[92m [0m[92mShow[0m[m [0m[91m([0m[92mMaybe[0m[m [0m[92mInt[0m[91m)[0m[m
+[0m[m  [0m[meval[0m[m [0m[91m∷[0m[92m [0m[92mExpr[0m[m [0m[91m→[0m[92m [0m[92mMint[0m[m
+[0m[m  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[m [0m[92m([0m[92m)[0m[m
+[0m[m  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[m [0m[92m([0m[92m)[0m
 [Done]
 
-[meval[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m
-  [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-    [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
-    [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-      [0m[94mcase[0m[94m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-        [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-        [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
-          [0m[94mcase[0m[94m [0m[meval[0m[m [0m[my[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-            [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-            [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m
-    [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-    [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-      [0m[94mcase[0m[94m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-        [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[meval[0m[m [0m[my[0m[m
-        [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m
+[meval[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m
+[0m[m  [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m    [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
+[0m[m    [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m      [0m[94mcase[0m[m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m        [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m        [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
+[0m[m          [0m[94mcase[0m[m [0m[meval[0m[m [0m[my[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m            [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m            [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[m
+[0m[m    [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m    [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m      [0m[94mcase[0m[m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m        [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[meval[0m[m [0m[my[0m[m
+[0m[m        [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m
 [Done]
 
-[meval[0m[m [0m[91m=[0m[91m
-  [0m[94mlet[0m[94m [0m[mf[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[meval[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-        [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-          [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
-          [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-            [0m[94mcase[0m[94m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-              [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-              [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
-                [0m[94mcase[0m[94m [0m[meval[0m[m [0m[my[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                  [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-                  [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m
-          [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-          [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-            [0m[94mcase[0m[94m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-              [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[meval[0m[m [0m[my[0m[m
-              [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
-      [0m[94mrec[0m[94m [0m[mwork[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[91m→[0m[91m [0m[mrep[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mx2[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx2[0m[91m)[0m[91m)[0m[91m [0m[mx1[0m[91m)[0m[91m
-  [0m[94min[0m[94m [0m[91mλ[0m[91m [0m[mx0[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx0[0m[91m)[0m
+[meval[0m[m [0m[91m=[0m[m
+[0m[m  [0m[94mlet[0m[m [0m[mf[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[meval[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+[0m[m        [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m          [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
+[0m[m          [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m            [0m[94mcase[0m[m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m              [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m              [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
+[0m[m                [0m[94mcase[0m[m [0m[meval[0m[m [0m[my[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                  [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m                  [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[m
+[0m[m          [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m          [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m            [0m[94mcase[0m[m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m              [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[meval[0m[m [0m[my[0m[m
+[0m[m              [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
+[0m[m      [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[91m→[0m[91m [0m[mrep[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mx2[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx2[0m[91m)[0m[91m)[0m[m [0m[mx1[0m[91m)[0m[m
+[0m[m  [0m[94min[0m[m [0m[91mλ[0m[91m [0m[mx0[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx0[0m[91m)[0m
 [Done]
 
-[meval[0m[m [0m[91m=[0m[91m
-  [0m[94mlet[0m[94m [0m[mf[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[meval[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-        [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-          [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
-          [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-            [0m[94mcase[0m[94m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-              [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-              [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
-                [0m[94mcase[0m[94m [0m[meval[0m[m [0m[my[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                  [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-                  [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m
-          [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-          [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-            [0m[94mcase[0m[94m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-              [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[meval[0m[m [0m[my[0m[m
-              [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
-      [0m[94mrec[0m[94m [0m[mwork[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[91m→[0m[91m [0m[mrep[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mx2[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx2[0m[91m)[0m[91m)[0m[91m [0m[mx1[0m[91m)[0m[91m
-  [0m[94min[0m[94m [0m[91mλ[0m[91m [0m[mx0[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx0[0m[91m)[0m
+[meval[0m[m [0m[91m=[0m[m
+[0m[m  [0m[94mlet[0m[m [0m[mf[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[meval[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+[0m[m        [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m          [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
+[0m[m          [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m            [0m[94mcase[0m[m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m              [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m              [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
+[0m[m                [0m[94mcase[0m[m [0m[meval[0m[m [0m[my[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                  [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m                  [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[m
+[0m[m          [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m          [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m            [0m[94mcase[0m[m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m              [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[meval[0m[m [0m[my[0m[m
+[0m[m              [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
+[0m[m      [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[91m→[0m[91m [0m[mrep[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mx2[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx2[0m[91m)[0m[91m)[0m[m [0m[mx1[0m[91m)[0m[m
+[0m[m  [0m[94min[0m[m [0m[91mλ[0m[91m [0m[mx0[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx0[0m[91m)[0m
 [Done]
 
-[94mlet[0m[94m [0m[mf[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[meval[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-      [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-        [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
-        [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-          [0m[94mcase[0m[94m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-            [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-            [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
-              [0m[94mcase[0m[94m [0m[meval[0m[m [0m[my[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-                [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m
-        [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-        [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-          [0m[94mcase[0m[94m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-            [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[meval[0m[m [0m[my[0m[m
-            [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
-    [0m[94mrec[0m[94m [0m[mwork[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[91m→[0m[91m [0m[mrep[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mx2[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx2[0m[91m)[0m[91m)[0m[91m [0m[mx1[0m[91m)[0m[91m
-[0m[94min[0m[94m [0m[91mλ[0m[91m [0m[mx0[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx0[0m[91m)[0m
+[94mlet[0m[m [0m[mf[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[meval[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+[0m[m      [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m        [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
+[0m[m        [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m          [0m[94mcase[0m[m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m            [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m            [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
+[0m[m              [0m[94mcase[0m[m [0m[meval[0m[m [0m[my[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m                [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[m
+[0m[m        [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m        [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m          [0m[94mcase[0m[m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m            [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[meval[0m[m [0m[my[0m[m
+[0m[m            [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
+[0m[m    [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[91m→[0m[91m [0m[mrep[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mx2[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx2[0m[91m)[0m[91m)[0m[m [0m[mx1[0m[91m)[0m[m
+[0m[m[0m[94min[0m[m [0m[91mλ[0m[91m [0m[mx0[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx0[0m[91m)[0m
 [Done]
 
-[94mlet[0m[94m [0m[94mrec[0m[94m [0m[mwork[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[91m→[0m[91m
-          [0m[mrep[0m[m [0m[91m([0m[91m([0m[91mλ[0m[91m [0m[meval[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-                  [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                    [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
-                    [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-                      [0m[94mcase[0m[94m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                        [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-                        [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
-                          [0m[94mcase[0m[94m [0m[meval[0m[m [0m[my[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                            [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-                            [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m
-                    [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-                    [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-                      [0m[94mcase[0m[94m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                        [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[meval[0m[m [0m[my[0m[m
-                        [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[91m)[0m[91m [0m[91m([0m[91mλ[0m[91m [0m[mx2[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx2[0m[91m)[0m[91m)[0m[91m [0m[mx1[0m[91m)[0m[91m
-[0m[94min[0m[94m [0m[91mλ[0m[91m [0m[mx0[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx0[0m[91m)[0m
+[94mlet[0m[m [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[91m→[0m[91m
+[0m[m          [0m[mrep[0m[m [0m[91m([0m[91m([0m[91mλ[0m[91m [0m[meval[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+[0m[m                  [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                    [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
+[0m[m                    [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m                      [0m[94mcase[0m[m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                        [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m                        [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
+[0m[m                          [0m[94mcase[0m[m [0m[meval[0m[m [0m[my[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                            [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m                            [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[m
+[0m[m                    [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m                    [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m                      [0m[94mcase[0m[m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                        [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[meval[0m[m [0m[my[0m[m
+[0m[m                        [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[91m)[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mx2[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx2[0m[91m)[0m[91m)[0m[m [0m[mx1[0m[91m)[0m[m
+[0m[m[0m[94min[0m[m [0m[91mλ[0m[91m [0m[mx0[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx0[0m[91m)[0m
 [Done]
 
-[94mlet[0m[94m [0m[94mrec[0m[94m [0m[mwork[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[91m→[0m[91m
-          [0m[mrep[0m[m [0m[91m([0m[91m([0m[91mλ[0m[91m [0m[meval[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-                  [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                    [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
-                    [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-                      [0m[94mcase[0m[94m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                        [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-                        [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
-                          [0m[94mcase[0m[94m [0m[meval[0m[m [0m[my[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                            [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-                            [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m
-                    [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-                    [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-                      [0m[94mcase[0m[94m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                        [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[meval[0m[m [0m[my[0m[m
-                        [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[91m)[0m[91m [0m[91m([0m[91mλ[0m[91m [0m[mx2[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx2[0m[91m)[0m[91m)[0m[91m [0m[mx1[0m[91m)[0m[91m
-[0m[94min[0m[94m [0m[91mλ[0m[91m [0m[mx0[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx0[0m[91m)[0m
+[94mlet[0m[m [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[91m→[0m[91m
+[0m[m          [0m[mrep[0m[m [0m[91m([0m[91m([0m[91mλ[0m[91m [0m[meval[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+[0m[m                  [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                    [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
+[0m[m                    [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m                      [0m[94mcase[0m[m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                        [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m                        [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
+[0m[m                          [0m[94mcase[0m[m [0m[meval[0m[m [0m[my[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                            [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m                            [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[m
+[0m[m                    [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m                    [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m                      [0m[94mcase[0m[m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                        [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[meval[0m[m [0m[my[0m[m
+[0m[m                        [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[91m)[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mx2[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx2[0m[91m)[0m[91m)[0m[m [0m[mx1[0m[91m)[0m[m
+[0m[m[0m[94min[0m[m [0m[91mλ[0m[91m [0m[mx0[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx0[0m[91m)[0m
 [Done]
 
 [91mλ[0m[91m [0m[mx0[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx0[0m[91m)[0m
@@ -145,292 +145,292 @@ Ok, modules loaded: EvalScript, WWAssAScript.
 [mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[me[0m[91m)[0m
 [Done]
 
-[mwork[0m[m [0m[me[0m[m [0m[91m([0m[mJust[0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m([0m[mNothing[0m[m [0m[92m▲[0m[91m)[0m
+[mwork[0m[m [0m[me[0m[m [0m[91m([0m[mJust[0m[m [0m[92m▲[0m[91m)[0m[m [0m[91m([0m[mNothing[0m[m [0m[92m▲[0m[91m)[0m
 [Done]
 
-[94mlet[0m[94m [0m[94mrec[0m[94m [0m[mwork[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[91m→[0m[91m
-          [0m[mrep[0m[m [0m[91m([0m[91m([0m[91mλ[0m[91m [0m[meval[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-                  [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                    [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
-                    [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-                      [0m[94mcase[0m[94m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                        [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-                        [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
-                          [0m[94mcase[0m[94m [0m[meval[0m[m [0m[my[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                            [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-                            [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m
-                    [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-                    [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-                      [0m[94mcase[0m[94m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                        [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[meval[0m[m [0m[my[0m[m
-                        [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[91m)[0m[91m [0m[91m([0m[91mλ[0m[91m [0m[mx2[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx2[0m[91m)[0m[91m)[0m[91m [0m[mx1[0m[91m)[0m[91m
-[0m[94min[0m[94m [0m[91mλ[0m[91m [0m[me[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[me[0m[m [0m[91m([0m[mJust[0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m([0m[mNothing[0m[m [0m[92m▲[0m[91m)[0m
+[94mlet[0m[m [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[91m→[0m[91m
+[0m[m          [0m[mrep[0m[m [0m[91m([0m[91m([0m[91mλ[0m[91m [0m[meval[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+[0m[m                  [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                    [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
+[0m[m                    [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m                      [0m[94mcase[0m[m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                        [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m                        [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
+[0m[m                          [0m[94mcase[0m[m [0m[meval[0m[m [0m[my[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                            [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m                            [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[m
+[0m[m                    [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m                    [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m                      [0m[94mcase[0m[m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                        [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[meval[0m[m [0m[my[0m[m
+[0m[m                        [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[91m)[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mx2[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx2[0m[91m)[0m[91m)[0m[m [0m[mx1[0m[91m)[0m[m
+[0m[m[0m[94min[0m[m [0m[91mλ[0m[91m [0m[me[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[me[0m[m [0m[91m([0m[mJust[0m[m [0m[92m▲[0m[91m)[0m[m [0m[91m([0m[mNothing[0m[m [0m[92m▲[0m[91m)[0m
 [Done]
 
-[94mlet[0m[94m [0m[94mrec[0m[94m [0m[mwork[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[91m→[0m[91m
-          [0m[mrep[0m[m [0m[91m([0m[91m([0m[91mλ[0m[91m [0m[meval[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-                  [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                    [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
-                    [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-                      [0m[94mcase[0m[94m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                        [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-                        [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
-                          [0m[94mcase[0m[94m [0m[meval[0m[m [0m[my[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                            [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-                            [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m
-                    [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-                    [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-                      [0m[94mcase[0m[94m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                        [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[meval[0m[m [0m[my[0m[m
-                        [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[91m)[0m[91m [0m[91m([0m[91mλ[0m[91m [0m[mx2[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx2[0m[91m)[0m[91m)[0m[91m [0m[mx1[0m[91m)[0m[91m
-[0m[94min[0m[94m [0m[91mλ[0m[91m [0m[me[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[me[0m[m [0m[91m([0m[mJust[0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m([0m[mNothing[0m[m [0m[92m▲[0m[91m)[0m
+[94mlet[0m[m [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[91m→[0m[91m
+[0m[m          [0m[mrep[0m[m [0m[91m([0m[91m([0m[91mλ[0m[91m [0m[meval[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+[0m[m                  [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                    [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
+[0m[m                    [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m                      [0m[94mcase[0m[m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                        [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m                        [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
+[0m[m                          [0m[94mcase[0m[m [0m[meval[0m[m [0m[my[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                            [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m                            [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[m
+[0m[m                    [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m                    [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m                      [0m[94mcase[0m[m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                        [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[meval[0m[m [0m[my[0m[m
+[0m[m                        [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[91m)[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mx2[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx2[0m[91m)[0m[91m)[0m[m [0m[mx1[0m[91m)[0m[m
+[0m[m[0m[94min[0m[m [0m[91mλ[0m[91m [0m[me[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[me[0m[m [0m[91m([0m[mJust[0m[m [0m[92m▲[0m[91m)[0m[m [0m[91m([0m[mNothing[0m[m [0m[92m▲[0m[91m)[0m
 [Done]
 
 [91mλ[0m[91m [0m[mx1[0m[m [0m[91m→[0m[91m
-  [0m[mrep[0m[m [0m[91m([0m[91m([0m[91mλ[0m[91m [0m[meval[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-          [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-            [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
-            [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-              [0m[94mcase[0m[94m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-                [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
-                  [0m[94mcase[0m[94m [0m[meval[0m[m [0m[my[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                    [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-                    [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m
-            [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-            [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-              [0m[94mcase[0m[94m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[meval[0m[m [0m[my[0m[m
-                [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[91m)[0m[91m [0m[91m([0m[91mλ[0m[91m [0m[mx2[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx2[0m[91m)[0m[91m)[0m[91m [0m[mx1[0m[91m)[0m
+[0m[m  [0m[mrep[0m[m [0m[91m([0m[91m([0m[91mλ[0m[91m [0m[meval[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+[0m[m          [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m            [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
+[0m[m            [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m              [0m[94mcase[0m[m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m                [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
+[0m[m                  [0m[94mcase[0m[m [0m[meval[0m[m [0m[my[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                    [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m                    [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[m
+[0m[m            [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m            [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m              [0m[94mcase[0m[m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[meval[0m[m [0m[my[0m[m
+[0m[m                [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[91m)[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mx2[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx2[0m[91m)[0m[91m)[0m[m [0m[mx1[0m[91m)[0m
 [Done]
 
 [91mλ[0m[91m [0m[me[0m[m [0m[91m→[0m[91m
-  [0m[mrep[0m[m [0m[91m([0m[91m([0m[91mλ[0m[91m [0m[meval[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-          [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-            [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
-            [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-              [0m[94mcase[0m[94m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-                [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
-                  [0m[94mcase[0m[94m [0m[meval[0m[m [0m[my[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                    [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-                    [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m
-            [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-            [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-              [0m[94mcase[0m[94m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[meval[0m[m [0m[my[0m[m
-                [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[91m)[0m[91m [0m[91m([0m[91mλ[0m[91m [0m[mx2[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx2[0m[91m)[0m[91m)[0m[91m [0m[me[0m[91m)[0m
+[0m[m  [0m[mrep[0m[m [0m[91m([0m[91m([0m[91mλ[0m[91m [0m[meval[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+[0m[m          [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m            [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
+[0m[m            [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m              [0m[94mcase[0m[m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m                [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
+[0m[m                  [0m[94mcase[0m[m [0m[meval[0m[m [0m[my[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                    [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m                    [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[m
+[0m[m            [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m            [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m              [0m[94mcase[0m[m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[meval[0m[m [0m[my[0m[m
+[0m[m                [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[91m)[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mx2[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx2[0m[91m)[0m[91m)[0m[m [0m[me[0m[91m)[0m
 [Done]
 
 [mrep[0m[m [0m[91m([0m[91m([0m[91mλ[0m[91m [0m[meval[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-        [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-          [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
-          [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-            [0m[94mcase[0m[94m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-              [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-              [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
-                [0m[94mcase[0m[94m [0m[meval[0m[m [0m[my[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                  [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-                  [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m
-          [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-          [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-            [0m[94mcase[0m[94m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-              [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[meval[0m[m [0m[my[0m[m
-              [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[91m)[0m[91m [0m[91m([0m[91mλ[0m[91m [0m[mx2[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx2[0m[91m)[0m[91m)[0m[91m [0m[me[0m[91m)[0m
+[0m[m        [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m          [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
+[0m[m          [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m            [0m[94mcase[0m[m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m              [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m              [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
+[0m[m                [0m[94mcase[0m[m [0m[meval[0m[m [0m[my[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                  [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m                  [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[m
+[0m[m          [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m          [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m            [0m[94mcase[0m[m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m              [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[meval[0m[m [0m[my[0m[m
+[0m[m              [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[91m)[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mx2[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx2[0m[91m)[0m[91m)[0m[m [0m[me[0m[91m)[0m
 [Done]
 
 [91mλ[0m[91m [0m[ms[0m[m [0m[mf[0m[m [0m[91m→[0m[91m
-  [0m[94mcase[0m[94m [0m[91m([0m[91mλ[0m[91m [0m[meval[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-          [0m[94mcase[0m[94m [0m[mds[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-            [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
-            [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-              [0m[94mcase[0m[94m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-                [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
-                  [0m[94mcase[0m[94m [0m[meval[0m[m [0m[my[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                    [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-                    [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m
-            [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
-            [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-              [0m[94mcase[0m[94m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-                [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[meval[0m[m [0m[my[0m[m
-                [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[91m)[0m[91m [0m[91m([0m[91mλ[0m[91m [0m[mx2[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx2[0m[91m)[0m[91m)[0m[91m [0m[me[0m[m
-   [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-    [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-    [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m
+[0m[m  [0m[94mcase[0m[m [0m[91m([0m[91mλ[0m[91m [0m[meval[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+[0m[m          [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m            [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[m
+[0m[m            [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m              [0m[94mcase[0m[m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m                [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
+[0m[m                  [0m[94mcase[0m[m [0m[meval[0m[m [0m[my[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                    [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m                    [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[m
+[0m[m            [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mNothing[0m[m [0m[92m▲[0m[92m
+[0m[m            [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m              [0m[94mcase[0m[m [0m[meval[0m[m [0m[mx[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m                [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[meval[0m[m [0m[my[0m[m
+[0m[m                [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mJust[0m[m [0m[92m▲[0m[92m [0m[mn[0m[91m)[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mx2[0m[m [0m[91m→[0m[91m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx2[0m[91m)[0m[91m)[0m[m [0m[me[0m[m
+[0m[m   [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m    [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m    [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m
 [Done]
 
 [91mλ[0m[91m [0m[ms[0m[m [0m[mf[0m[m [0m[91m→[0m[91m
-  [0m[94mcase[0m[94m [0m[me[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-    [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
-    [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-      [0m[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-        [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-        [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
-          [0m[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-            [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-            [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m
-    [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-    [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-      [0m[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-        [0m[mNothing[0m[m [0m[91m→[0m[91m
-          [0m[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-            [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-            [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
-        [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m
+[0m[m  [0m[94mcase[0m[m [0m[me[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m    [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
+[0m[m    [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m      [0m[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m        [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m        [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
+[0m[m          [0m[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m            [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m            [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[m
+[0m[m    [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m    [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m      [0m[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m        [0m[mNothing[0m[m [0m[91m→[0m[91m
+[0m[m          [0m[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m            [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m            [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
+[0m[m        [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m
 [Done]
 
 [91mλ[0m[91m [0m[mf[0m[m [0m[91m→[0m[91m
-  [0m[94mcase[0m[94m [0m[me[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-    [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
-    [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-      [0m[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-        [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-        [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
-          [0m[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-            [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-            [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m
-    [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-    [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-      [0m[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-        [0m[mNothing[0m[m [0m[91m→[0m[91m
-          [0m[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-            [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-            [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
-        [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m
+[0m[m  [0m[94mcase[0m[m [0m[me[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m    [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
+[0m[m    [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m      [0m[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m        [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m        [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
+[0m[m          [0m[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m            [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m            [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[m
+[0m[m    [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m    [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m      [0m[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m        [0m[mNothing[0m[m [0m[91m→[0m[91m
+[0m[m          [0m[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m            [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m            [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
+[0m[m        [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m
 [Done]
 
-[94mcase[0m[94m [0m[me[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-  [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
-  [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-    [0m[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-      [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-      [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
-        [0m[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-          [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-          [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m
-  [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-  [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-    [0m[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-      [0m[mNothing[0m[m [0m[91m→[0m[91m
-        [0m[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-          [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-          [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
-      [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m
+[94mcase[0m[m [0m[me[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m  [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
+[0m[m  [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m    [0m[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m      [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m      [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
+[0m[m        [0m[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m          [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m          [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[m
+[0m[m  [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m  [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m    [0m[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m      [0m[mNothing[0m[m [0m[91m→[0m[91m
+[0m[m        [0m[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m          [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m          [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
+[0m[m      [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m
 [Done]
 
-[94mcase[0m[94m [0m[me[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-  [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
-  [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-    [0m[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-      [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-      [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
-        [0m[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-          [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-          [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m
-  [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-  [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-    [0m[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-      [0m[mNothing[0m[m [0m[91m→[0m[91m
-        [0m[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-          [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-          [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
-      [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m
+[94mcase[0m[m [0m[me[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m  [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
+[0m[m  [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m    [0m[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m      [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m      [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
+[0m[m        [0m[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m          [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m          [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[m
+[0m[m  [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m  [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m    [0m[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m      [0m[mNothing[0m[m [0m[91m→[0m[91m
+[0m[m        [0m[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m          [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m          [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
+[0m[m      [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m
 [Done]
 
 parsed fine
-[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-  [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-  [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
-    [0m[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-      [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-      [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m
+[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m  [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m  [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
+[0m[m    [0m[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m      [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m      [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m
 [Done]
 
 [mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
-  [0m[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-    [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-    [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m
+[0m[m  [0m[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m    [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m    [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m
 [Done]
 
-[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-  [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-  [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m
+[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m  [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m  [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m
 [Done]
 
 [91m([0m[91mλ[0m[91m [0m[mm[0m[m [0m[91m→[0m[91m
-   [0m[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-     [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-     [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m)[0m[91m [0m[mm[0m
+[0m[m   [0m[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m     [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m     [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m [0m[mm[0m
 [Done]
 
-[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-  [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-  [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m
+[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m  [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m  [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m
 [Done]
 
-[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m
+[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m
 [Done]
 
-[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m
+[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m
 [Done]
 
-[91m([0m[91mλ[0m[91m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m)[0m[91m [0m[mn[0m
+[91m([0m[91mλ[0m[91m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m [0m[mn[0m
 [Done]
 
-[94mcase[0m[94m [0m[me[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-  [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
-  [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-    [0m[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-      [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-      [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
-        [0m[91m([0m[91mλ[0m[91m [0m[mm[0m[m [0m[91m→[0m[91m
-           [0m[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-             [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-             [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[91m([0m[91mλ[0m[91m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m)[0m[91m [0m[mn[0m[91m)[0m[91m [0m[mm[0m[m
-  [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-  [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-    [0m[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-      [0m[mNothing[0m[m [0m[91m→[0m[91m
-        [0m[94mcase[0m[94m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[91m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-          [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-          [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
-      [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m
+[94mcase[0m[m [0m[me[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m  [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
+[0m[m  [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m    [0m[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m      [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m      [0m[mJust[0m[m [0m[mm[0m[m [0m[91m→[0m[91m
+[0m[m        [0m[91m([0m[91mλ[0m[91m [0m[mm[0m[m [0m[91m→[0m[91m
+[0m[m           [0m[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m             [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m             [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[91m([0m[91mλ[0m[91m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m [0m[mn[0m[91m)[0m[m [0m[mm[0m[m
+[0m[m  [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m  [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m    [0m[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m      [0m[mNothing[0m[m [0m[91m→[0m[91m
+[0m[m        [0m[94mcase[0m[m [0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m          [0m[mNothing[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m          [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
+[0m[m      [0m[mJust[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m
 [Done]
 
-[94mcase[0m[94m [0m[me[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-  [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
-  [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
-    [0m[mrep[0m[m [0m[91m([0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[91m)[0m[91m
-        [0m[91m([0m[91mλ[0m[91m [0m[mm[0m[m [0m[91m→[0m[91m [0m[mrep[0m[m [0m[91m([0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[91m)[0m[91m [0m[91m([0m[91mλ[0m[91m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m)[0m[91m [0m[mf[0m[91m)[0m[91m [0m[mf[0m[m
-  [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-  [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m [0m[mrep[0m[m [0m[91m([0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[91m)[0m[91m [0m[ms[0m[m [0m[91m([0m[mrep[0m[m [0m[91m([0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[91m)[0m[91m [0m[ms[0m[m [0m[mf[0m[91m)[0m
+[94mcase[0m[m [0m[me[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m  [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
+[0m[m  [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m
+[0m[m    [0m[mrep[0m[m [0m[91m([0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[91m)[0m[m
+[0m[m        [0m[91m([0m[91mλ[0m[91m [0m[mm[0m[m [0m[91m→[0m[91m [0m[mrep[0m[m [0m[91m([0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[91m)[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m [0m[mf[0m[91m)[0m[m [0m[mf[0m[m
+[0m[m  [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m  [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m [0m[mrep[0m[m [0m[91m([0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[mx[0m[91m)[0m[91m)[0m[m [0m[ms[0m[m [0m[91m([0m[mrep[0m[m [0m[91m([0m[mabs[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[91m)[0m[91m)[0m[m [0m[ms[0m[m [0m[mf[0m[91m)[0m
 [Done]
 
-[94mcase[0m[94m [0m[me[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-  [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
-  [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mx[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mm[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[my[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m)[0m[91m [0m[mf[0m[91m)[0m[91m [0m[mf[0m[m
-  [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-  [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mx[0m[m [0m[ms[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[m [0m[ms[0m[m [0m[mf[0m[91m)[0m
+[94mcase[0m[m [0m[me[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m  [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
+[0m[m  [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mx[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mm[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[my[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m [0m[mf[0m[91m)[0m[m [0m[mf[0m[m
+[0m[m  [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m  [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mx[0m[m [0m[ms[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[m [0m[ms[0m[m [0m[mf[0m[91m)[0m
 [Done]
 
-[94mlet[0m[94m [0m[94mrec[0m[94m [0m[mwork[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[me[0m[m [0m[ms[0m[m [0m[mf[0m[m [0m[91m→[0m[91m
-          [0m[94mcase[0m[94m [0m[me[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-            [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
-            [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mx[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mm[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[my[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m)[0m[91m [0m[mf[0m[91m)[0m[91m [0m[mf[0m[m
-            [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-            [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mx[0m[m [0m[ms[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[m [0m[ms[0m[m [0m[mf[0m[91m)[0m[91m
-[0m[94min[0m[94m [0m[91mλ[0m[91m [0m[me[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[me[0m[m [0m[91m([0m[mJust[0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m([0m[mNothing[0m[m [0m[92m▲[0m[91m)[0m
+[94mlet[0m[m [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[me[0m[m [0m[ms[0m[m [0m[mf[0m[m [0m[91m→[0m[91m
+[0m[m          [0m[94mcase[0m[m [0m[me[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m            [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
+[0m[m            [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mx[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mm[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[my[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m [0m[mf[0m[91m)[0m[m [0m[mf[0m[m
+[0m[m            [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m            [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mx[0m[m [0m[ms[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[m [0m[ms[0m[m [0m[mf[0m[91m)[0m[m
+[0m[m[0m[94min[0m[m [0m[91mλ[0m[91m [0m[me[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[me[0m[m [0m[91m([0m[mJust[0m[m [0m[92m▲[0m[91m)[0m[m [0m[91m([0m[mNothing[0m[m [0m[92m▲[0m[91m)[0m
 [Done]
 
-[meval[0m[m [0m[91m=[0m[91m
-  [0m[94mlet[0m[94m [0m[94mrec[0m[94m [0m[mwork[0m[m [0m[91m=[0m[91m [0m[91mλ[0m[91m [0m[me[0m[m [0m[ms[0m[m [0m[mf[0m[m [0m[91m→[0m[91m
-            [0m[94mcase[0m[94m [0m[me[0m[m [0m[94mof[0m[94m [0m[mwild[0m[m [0m[92m▲[0m[92m
-              [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
-              [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mx[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mm[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[my[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[91m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m)[0m[91m [0m[mf[0m[91m)[0m[91m [0m[mf[0m[m
-              [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
-              [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mx[0m[m [0m[ms[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[m [0m[ms[0m[m [0m[mf[0m[91m)[0m[91m
-  [0m[94min[0m[94m [0m[91mλ[0m[91m [0m[me[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[me[0m[m [0m[91m([0m[mJust[0m[m [0m[92m▲[0m[91m)[0m[91m [0m[91m([0m[mNothing[0m[m [0m[92m▲[0m[91m)[0m
+[meval[0m[m [0m[91m=[0m[m
+[0m[m  [0m[94mlet[0m[m [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[me[0m[m [0m[ms[0m[m [0m[mf[0m[m [0m[91m→[0m[91m
+[0m[m            [0m[94mcase[0m[m [0m[me[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m              [0m[mVal[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[mn[0m[m
+[0m[m              [0m[mAdd[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mx[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mm[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[my[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mn[0m[m [0m[91m→[0m[91m [0m[ms[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$fNumInt[0m[m [0m[mm[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m [0m[mf[0m[91m)[0m[m [0m[mf[0m[m
+[0m[m              [0m[mThrow[0m[m [0m[91m→[0m[91m [0m[mf[0m[m
+[0m[m              [0m[mCatch[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mx[0m[m [0m[ms[0m[m [0m[91m([0m[mwork[0m[m [0m[my[0m[m [0m[ms[0m[m [0m[mf[0m[91m)[0m[m
+[0m[m  [0m[94min[0m[m [0m[91mλ[0m[91m [0m[me[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[me[0m[m [0m[91m([0m[mJust[0m[m [0m[92m▲[0m[91m)[0m[m [0m[91m([0m[mNothing[0m[m [0m[92m▲[0m[91m)[0m
 [Done]
 
 HERMIT> 
