@@ -11,7 +11,7 @@ oneSide
 
 concatNonempty :: Shell ()
 concatNonempty = do
-  eval "rule-to-lemma \"concat-nonempty\""
+  eval "rule-to-lemma concat-nonempty"
 
   proof "concat-nonempty" $ do
     pathS [forallBody] $ do

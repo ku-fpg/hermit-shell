@@ -38,7 +38,7 @@ consLeft
 
 mapAppend :: Shell ()
 mapAppend = do
-  eval "rule-to-lemma \"map-append\""
+  eval "rule-to-lemma map-append"
 
   appendNonempty
   mapNonempty

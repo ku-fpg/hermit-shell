@@ -43,7 +43,7 @@ concatConcat :: Shell ()
 concatConcat = do
   concatAppend
 
-  eval "rule-to-lemma \"concat-concat\""
+  eval "rule-to-lemma concat-concat"
 
   proof "concat-concat" $ do
     apply $ induction "x"

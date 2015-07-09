@@ -8,7 +8,7 @@ import VerifyNilAppendScript
 
 appendAssoc :: Shell ()
 appendAssoc = do
-  eval "rule-to-lemma \"append-assoc\""
+  eval "rule-to-lemma append-assoc"
 
   nilAppend
 

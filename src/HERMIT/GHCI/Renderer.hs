@@ -38,8 +38,9 @@ instance RenderSpecial Runes where
         where Unicode ch = renderSpecial sym
               style =
                 case sym of
-                  TypeSymbol -> TYPE
-                  _          -> SYNTAX
+                  TypeSymbol     -> TYPE
+                  TypeBindSymbol -> TYPE
+                  _              -> SYNTAX
 
 instance Monoid Runes where
     mempty = Runes mempty
@@ -57,7 +58,7 @@ mergeRunes (g:h:r) = case merge g h of
           merge r1         r2          = Right (r1,r2)
 
 instance RenderCode Runes where
-    rPutStr txt = Runes [ Rune txt ]
+    rPutStr txt = Runes [ Rune txt, Markup VAR ] -- Markup VAR resets the colors
     rDoHighlight _ [] = mempty
     rDoHighlight Nothing (BndrAttr p:_) = Runes [ BndrA $ snocPathToPath p ]
     rDoHighlight (Just (BndrAttr _)) _ = Runes [ EndBndrA ]

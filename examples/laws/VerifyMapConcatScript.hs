@@ -46,7 +46,7 @@ consRight
 
 mapConcat :: Shell ()
 mapConcat = do
-  eval "rule-to-lemma \"map-concat\""
+  eval "rule-to-lemma map-concat"
 
   mapAppend
   concatNonempty

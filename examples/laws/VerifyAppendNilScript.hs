@@ -30,7 +30,7 @@ appendNilCons
 
 appendNil :: Shell ()
 appendNil = do
-  eval "rule-to-lemma \"append-nil\""
+  eval "rule-to-lemma append-nil"
 
   proof "append-nil" $ do
     apply $ induction "xs"
