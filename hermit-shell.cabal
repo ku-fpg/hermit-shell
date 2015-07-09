@@ -28,7 +28,6 @@ library
                         bytestring          >= 0.10.4,
                         containers,
                         data-default-class,
-                        directory,
                         filepath,
                         haskeline,
                         hermit >= 0.4,
