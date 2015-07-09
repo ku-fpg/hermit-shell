@@ -6,7 +6,7 @@ import HERMIT.API
 
 concatUnit :: Shell ()
 concatUnit = do
-  eval "rule-to-lemma \"concat-unit\""
+  eval "rule-to-lemma concat-unit"
 
   appendNil
 

@@ -22,7 +22,7 @@ consCase
 
 concatOfToList :: Shell ()
 concatOfToList = do
-  eval "rule-to-lemma \"concat-of-toList\""
+  eval "rule-to-lemma concat-of-toList"
 
   proof "concat-of-toList" $ do
     apply $ induction "xs"

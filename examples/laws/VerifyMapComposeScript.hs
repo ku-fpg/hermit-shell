@@ -38,7 +38,7 @@ consRight
 
 mapCompose :: Shell ()
 mapCompose = do
-  eval "rule-to-lemma \"map-compose\""
+  eval "rule-to-lemma map-compose"
 
   proof "map-compose" $ do
     apply $ induction "xs"

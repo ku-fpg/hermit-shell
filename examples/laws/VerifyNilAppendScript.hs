@@ -7,7 +7,7 @@ import HERMIT.API.Types
 
 nilAppend :: Shell ()
 nilAppend = do
-  eval "rule-to-lemma \"nil-append\""
+  eval "rule-to-lemma nil-append"
 
   proof "nil-append" $ do
     apply . anyBU $ inlineWith "++"
