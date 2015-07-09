@@ -40,6 +40,7 @@ testArgs =
     , ("evaluation"    , "Eval.hs"     , "Main"     , "EvalScript.hs")
     , ("fib"           , "Fib.hs"      , "Main"     , "FibScript.hs")
     , ("fib-tuple"     , "Fib.hs"      , "Main"     , "FibScript.hs")
+    , ("fib-stream"    , "Fib.hs"      , "Main"     , "FibScript.hs")
     , ("fix-fusion"    , "Fusion.hs"   , "Main"     , "FusionScript.hs")
     , ("flatten"       , "Flatten.hs"  , "Main"     , "FlattenScript.hs")
     , ("hanoi"         , "Hanoi.hs"    , "Main"     , "HanoiScript.hs")

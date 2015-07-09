@@ -1,0 +1,52 @@
+[1 of 3] Compiling Nat              ( Nat.hs, Nat.o )
+[2 of 3] Compiling Stream           ( Stream.hs, Stream.o )
+[3 of 3] Compiling Main             ( Fib.hs, Fib.o )
+Setting phasers to stun... (port 3000) (ctrl-c to quit)
+GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
+[94mmodule[0m[m [0m[mMain[0m[m [0m[94mwhere[0m[m
+[0m[m  [0m[munwrap[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[m [0m[91m.[0m[m [0m[91m([0m[92mNat[0m[m [0m[91m→[0m[92m [0m[92ma[0m[91m)[0m[m [0m[91m→[0m[92m [0m[92mStream[0m[m [0m[92ma[0m[m
+[0m[m  [0m[mwrap[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[m [0m[91m.[0m[m [0m[92mStream[0m[m [0m[92ma[0m[m [0m[91m→[0m[92m [0m[92mNat[0m[m [0m[91m→[0m[92m [0m[92ma[0m[m
+[0m[m  [0m[mfib[0m[m [0m[91m∷[0m[92m [0m[92mNat[0m[m [0m[91m→[0m[92m [0m[92mNat[0m[m
+[0m[m  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[m [0m[92m([0m[92m)[0m[m
+[0m[m  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[m [0m[92m([0m[92m)[0m
+[Done]
+
+[1 of 1] Compiling FibScript        ( FibScript.hs, interpreted )
+Ok, modules loaded: FibScript.
+[94mmodule[0m[m [0m[mMain[0m[m [0m[94mwhere[0m[m
+[0m[m  [0m[munwrap[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[m [0m[91m.[0m[m [0m[91m([0m[92mNat[0m[m [0m[91m→[0m[92m [0m[92ma[0m[91m)[0m[m [0m[91m→[0m[92m [0m[92mStream[0m[m [0m[92ma[0m[m
+[0m[m  [0m[mwrap[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[m [0m[91m.[0m[m [0m[92mStream[0m[m [0m[92ma[0m[m [0m[91m→[0m[92m [0m[92mNat[0m[m [0m[91m→[0m[92m [0m[92ma[0m[m
+[0m[m  [0m[mfib[0m[m [0m[91m∷[0m[92m [0m[92mNat[0m[m [0m[91m→[0m[92m [0m[92mNat[0m[m
+[0m[m  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[m [0m[92m([0m[92m)[0m[m
+[0m[m  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[m [0m[92m([0m[92m)[0m
+[Done]
+
+[mfib[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m
+[0m[m  [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m    [0m[mZero[0m[m [0m[91m→[0m[91m [0m[mZero[0m[m
+[0m[m    [0m[mSucc[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+[0m[m      [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m        [0m[mZero[0m[m [0m[91m→[0m[91m [0m[mSucc[0m[m [0m[mZero[0m[m
+[0m[m        [0m[mSucc[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mfib[0m[m [0m[91m([0m[mSucc[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mfib[0m[m [0m[mn[0m[91m)[0m
+[Done]
+
+[mfib[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m
+[0m[m  [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m    [0m[mZero[0m[m [0m[91m→[0m[91m [0m[mZero[0m[m
+[0m[m    [0m[mSucc[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
+[0m[m      [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
+[0m[m        [0m[mZero[0m[m [0m[91m→[0m[91m [0m[mSucc[0m[m [0m[mZero[0m[m
+[0m[m        [0m[mSucc[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mfib[0m[m [0m[91m([0m[mSucc[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mfib[0m[m [0m[mn[0m[91m)[0m
+[Done]
+
+Rewrite failed:Nat lookup: Variable not in scope.
+*** Exception: failed to parse result value for rewrite (wwSplitUnsafe unwrap Nat wrap Nat): Null : Object not returned from Server
+HERMIT> 
+[Done]
+
+Leaving GHCi.
+ghc: user interrupt
+Linking Fib ...
+[starting HERMIT-shell v0.1.0.0 on Fib.hs]
+[starting HERMIT v1.0.0.0 on Fib.hs]
+% ghc Fib.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:Main: -fplugin-opt=HERMIT.GHCI:Main:FibScript.hs -fplugin-opt=HERMIT.GHCI:Main:resume

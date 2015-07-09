@@ -53,3 +53,21 @@ parentOfCore t = Transform $ method "parentOfCore" [toJSON t]
 -- | Focus on the parent of another focal point.
 parentOfCoreTC :: Transform LCoreTC LocalPath -> Transform LCoreTC LocalPath
 parentOfCoreTC t = Transform $ method "parentOfCoreTC" [toJSON t]
+
+-------------------------------------------------------------------------------
+
+cBind, cDef, cAlt, cVar, cLit, cApp, cLam, cLet, cCase,
+    cCast, cTick, cType, cCoerce :: Considerable
+cBind   = Binding
+cDef    = Definition
+cAlt    = CaseAlt
+cVar    = Variable
+cLit    = Literal
+cApp    = Application
+cLam    = Lambda
+cLet    = LetExpr
+cCase   = CaseOf
+cCast   = Casty
+cTick   = Ticky
+cType   = TypeExpr
+cCoerce = CoercionExpr
