@@ -330,7 +330,7 @@ Forcing obligation: qsort-assumption
 [0m[m[0m[94min[0m[m [0m[mx[0m
 [Done]
 
-*** Exception: failed to parse result value: Null : Object not returned from Server
+*** Exception: failed to parse result value for rewrite (oneTD caseFloatArgLemma repHstrict Obligation): Null : Object not returned from Server
 HERMIT> 
 [Done]
 
