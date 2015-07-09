@@ -14,6 +14,11 @@ import HERMIT.GHCI.JSON
 
 import System.Console.ANSI
 
+-- For better error messages
+import Data.Text (Text)
+import Text.Show.Text (fromText, toString)
+import Data.Vector (toList)
+
 --- Main call-HERMIT function
 
 session :: JSONRPC.Session
@@ -33,7 +38,9 @@ send (Shell g) = do
        case fromJust $ parseMaybe parseJSON v of
          ShellException msg ->
              error $ "server failure: " ++ show v ++ " : " ++ msg
-         ShellFailure msg -> error $ "failed to parse result value: " ++ show v ++ " : " ++ msg
+         ShellFailure msg -> 
+             error $ "failed to parse result value for " ++
+                     genMethodStr True g ++ ": " ++ show v ++ " : " ++ msg
          ShellResult gss a -> do
                  sequence_ [ withStyle sty txt
                            | gs <- gss
@@ -42,6 +49,21 @@ send (Shell g) = do
                  putStrLn "\n[Done]\n"
                  return a
 send (Fail str) = fail str
+
+genMethodStr :: Bool -> Value -> String
+genMethodStr fl (Object o) =
+    let mthd = fromJust $ parseMaybe (\ x -> x .: "method") o :: Text
+        prms = fromJust $ parseMaybe (\ x -> x .: "params") o :: [Value]
+        prms' = map (genMethodStr False) (reverse prms)
+        wrap :: String -> String
+        wrap str = if fl then " (" ++ str ++ ")" else " " ++ str in
+      (toString . fromText) mthd ++ wrap (unwords prms')
+genMethodStr _ (Array vec) =
+    show . map (genMethodStr False) $ toList vec
+genMethodStr _ (String str) = (toString . fromText) str
+genMethodStr _ (Number n) = show n
+genMethodStr _ (Bool b) = show b
+genMethodStr _ Null = ""
 
 withStyle :: Maybe Style -> String -> IO ()
 withStyle Nothing    str = putStr str
