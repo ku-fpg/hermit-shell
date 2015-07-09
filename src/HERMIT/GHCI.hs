@@ -33,10 +33,9 @@ import           Network.Wai.Middleware.RequestLogger (logStdoutDev)
 
 import           Prelude.Compat
 
-import           System.Directory (getCurrentDirectory)
 import           System.FilePath (takeExtension)
 import           System.IO (hPutStrLn, hClose)
-import           System.IO.Temp
+import           System.IO.Temp (withSystemTempFile)
 import           System.Process
 
 import           Web.Scotty.Trans
@@ -109,8 +108,7 @@ server passInfo opts skernel initAST = do
         when debug $ middleware logStdoutDev
         post "/" jsonRpc
 
-    pwd <- getCurrentDirectory
-    _code <- withTempFile pwd ".ghci-hermit" $ \fp h -> do
+    _code <- withSystemTempFile ".ghci-hermit" $ \fp h -> do
         hPutStrLn h $ hermitShellDotfile mbScript
         hClose h
 
