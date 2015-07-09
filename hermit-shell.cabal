@@ -43,7 +43,6 @@ library
                         stm,
                         temporary-rc,
                         text,
-                        text-show           >= 0.8,
                         transformers        >= 0.2,
                         transformers-compat >= 0.4,
                         wai,

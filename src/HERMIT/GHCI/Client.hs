@@ -15,8 +15,7 @@ import HERMIT.GHCI.JSON
 import System.Console.ANSI
 
 -- For better error messages
-import Data.Text (Text)
-import Text.Show.Text (fromText, toString)
+import Data.Text (Text, unpack)
 import Data.Vector (toList)
 
 --- Main call-HERMIT function
@@ -57,10 +56,10 @@ genMethodStr fl (Object o) =
         prms' = map (genMethodStr False) (reverse prms)
         wrap :: String -> String
         wrap str = if fl then " (" ++ str ++ ")" else " " ++ str in
-      (toString . fromText) mthd ++ wrap (unwords prms')
+      unpack mthd ++ wrap (unwords prms')
 genMethodStr _ (Array vec) =
     show . map (genMethodStr False) $ toList vec
-genMethodStr _ (String str) = (toString . fromText) str
+genMethodStr _ (String str) = unpack str
 genMethodStr _ (Number n) = show n
 genMethodStr _ (Bool b) = show b
 genMethodStr _ Null = ""

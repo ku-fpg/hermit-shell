@@ -222,4 +222,4 @@ instance TransCat (Transform a b) where
     transCat = Transform
 
 instance TransCat (BiTransform a b) where
-    transCat = BiTransform 
+    transCat = BiTransform
