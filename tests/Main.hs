@@ -1,8 +1,14 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module Main (main) where
 
 import Control.Monad (unless, when)
 
-import Data.Foldable (forM_)
+import Data.Char (isSpace)
+import Data.Foldable.Compat (forM_)
+import Data.List.Compat (isPrefixOf)
+import Data.Maybe (fromMaybe, listToMaybe)
+
+import Prelude.Compat
 
 import System.Directory
 import System.Exit
@@ -70,6 +76,21 @@ testArgs =
     , ("reverse"       , "Reverse.hs"  , "Main"     , "ReverseScript.hs")
     ]
 
+-- | Get the path to the sandbox database if any
+-- Taken from the hoogle-index package by Ben Gamari (BSD3)
+getSandboxPath :: IO (Maybe FilePath)
+getSandboxPath = do
+  dir <- getCurrentDirectory
+  let f = dir </> "cabal.sandbox.config"
+  ex <- doesFileExist f
+  if ex
+    then
+      (listToMaybe .
+       map (dropWhile isSpace . tail . dropWhile (/= ':')) .
+       filter (isPrefixOf "  prefix:") .
+       lines) <$> readFile f
+    else return Nothing
+
 mkHermitShellTest :: HermitTestArgs -> TestTree
 mkHermitShellTest (dir, hs, moduleName, script) =
     goldenVsFileDiff testName diff gfile dfile hermitShellOutput
@@ -106,10 +127,7 @@ mkHermitShellTest (dir, hs, moduleName, script) =
     hermitShellOutput :: IO ()
     hermitShellOutput = do
         cleanObjectFiles
-        sandboxCfgPath <- readProcess "cabal" [ "exec"
-                                              , "runhaskell"
-                                              , rootDir </> "CabalSandboxConfig.hs"
-                                              ] ""
+        sandboxCfgPath <- fromMaybe "" <$> getSandboxPath
 
         -- Runs GHC's typechecker over the script file to ensure it will actually
         -- work when given to HERMIT-shell.
