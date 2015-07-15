@@ -33,7 +33,6 @@ import           Prelude.Compat
 
 import           Control.Applicative ((<|>))
 
-import Data.Typeable
 import Debug.Trace
 
 -- NOTES
@@ -59,32 +58,25 @@ parseTopLevel v =
 instance External (TypedEffectH ()) where
   parseExternals =
     [ fmap ShellEffectH . parseExternal
---     , fmap RewriteLCoreH . parseExternal
     , fmap RewriteLCoreTCH . parseExternal
---     , fmap QueryH . parseExternal
---     , fmap SetPathH . (parseExternal :: Value -> Parser (TransformH LCoreTC LocalPathH))
---     , fmap SetPathH . (parseExternal :: Value -> Parser (TransformH LCore LocalPathH))
-    , external "setPath" (SetPathH :: TransformH LCoreTC LocalPathH -> TypedEffectH ())
+    , external' "setPath" (SetPathH :: TransformH LCoreTC LocalPathH -> TypedEffectH ())
         ["sets the path"]
-      -- XXX: Is this okay to do?
-    , external "setPath" (SetPathH :: TransformH LCore LocalPathH -> TypedEffectH ())
+    , external' "setPath" ((SetPathH :: TransformH LCore LocalPathH -> TypedEffectH ()) . (\crumb -> transform (\ _hermitC _lcore -> return (singletonSnocPath crumb))) :: Crumb -> TypedEffectH ())
         ["sets the path"]
-    , external "setPath" ((SetPathH :: TransformH LCore LocalPathH -> TypedEffectH ()) . (\crumb -> transform (\ _hermitC _lcore -> return (singletonSnocPath crumb))) :: Crumb -> TypedEffectH ()) -- XXX: Is this how it should work?
-        ["sets the path"]
-    , external "query"   (QueryH :: QueryFun () -> TypedEffectH ())
+    , external' "query"   (QueryH :: QueryFun () -> TypedEffectH ())
         ["performs query"]
-    , external "rewrite" (RewriteLCoreH :: RewriteH LCore -> TypedEffectH ())
+    , external' "rewrite" (RewriteLCoreH :: RewriteH LCore -> TypedEffectH ())
        ["performs query"]
-    , external "eval" (EvalH :: String -> TypedEffectH ())
+    , external' "eval" (EvalH :: String -> TypedEffectH ())
        ["performs legacy shell"]
     ]
 
 instance External TypedEffectBox where
   parseExternals =
-    [ external "query" 
+    [ external' "query"
         (fromBoxToBox :: QueryFunBox -> TypedEffectBox)
         [ "performs query" ]
-    , external "setPath" 
+    , external' "setPath"
         (TypedEffectBox . SetPathH :: TransformH LCore LocalPathH 
                                    -> TypedEffectBox)
         ["sets the path"]

@@ -13,6 +13,7 @@ __LANGUAGE_OVERLAPPING_INSTANCES__
 module HERMIT.Server.Parser.Utils
         ( External(parseExternal, parseExternals)
         , external
+        , external'
         , alts
         , CmdTag(..)
         , (.+)
@@ -41,14 +42,17 @@ alts as a = foldr (<|>) (fail "no match") $ map ($ a) as
 
 -----------------------------------------------
 
-external :: External a => Text -> a -> [String] -> Value -> Parser (R a)
+external :: External a => Text -> a -> Value -> Parser (R a)
 --external nm _ _ v | traceShow ("external"::String,nm,v) False = undefined
-external nm f _ (Object o) = case parseMaybe p o of
+external nm f (Object o) = case parseMaybe p o of
         Just (nm',args) | nm' == nm -> matchExternal f args
         _                           -> fail $ "no match for " ++ show nm
  where p o' = (,) <$> o' .: "method"
                   <*> o' .: "params"
-external nm _ _ _ = fail $ "no match for " ++ show nm
+external nm _ _ = fail $ "no match for " ++ show nm
+
+external' :: External a => Text -> a -> [String] -> Value -> Parser (R a)
+external' nm f _ o = external nm f o
 
 class Typeable e => External e where
   type R e :: *
