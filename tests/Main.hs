@@ -6,7 +6,7 @@ import Control.Monad (unless, when)
 import Data.Char (isSpace)
 import Data.Foldable.Compat (forM_)
 import Data.List.Compat (isPrefixOf)
-import Data.Maybe (fromMaybe, listToMaybe)
+import Data.Maybe (listToMaybe)
 
 import Prelude.Compat
 
@@ -85,10 +85,11 @@ getSandboxPath = do
   ex <- doesFileExist f
   if ex
     then
-      (listToMaybe .
-       map (dropWhile isSpace . tail . dropWhile (/= ':')) .
-       filter (isPrefixOf "  prefix:") .
-       lines) <$> readFile f
+      (listToMaybe
+       . map ((++ "cabal.sandbox.config") . dropFileName . dropWhile isSpace
+                                          . tail . dropWhile (/= ':'))
+       . filter (isPrefixOf "  prefix:")
+       . lines) <$> readFile f
     else return Nothing
 
 mkHermitShellTest :: HermitTestArgs -> TestTree
@@ -127,13 +128,17 @@ mkHermitShellTest (dir, hs, moduleName, script) =
     hermitShellOutput :: IO ()
     hermitShellOutput = do
         cleanObjectFiles
-        sandboxCfgPath <- fromMaybe "" <$> getSandboxPath
+        sandboxCfgPath <- maybe "" ("--sandbox-config-file=" ++) <$> getSandboxPath
 
         -- Runs GHC's typechecker over the script file to ensure it will actually
         -- work when given to HERMIT-shell.
         let typeCheck :: String
             typeCheck = withPathpDir $ unwords
-                [ "ghc"
+                [ "cabal"
+                , sandboxCfgPath
+                , "exec"
+                , "--"
+                , "ghc"
                 , "-fno-code"
                 , "-XOverloadedStrings"
                 , script
@@ -152,7 +157,7 @@ mkHermitShellTest (dir, hs, moduleName, script) =
                 , "resume"
                 ]
 
-        (_,Just _,Just stdErrH,rTypeCheck) <- createProcess (shell typeCheck) {
+        (_,_,Just stdErrH,rTypeCheck) <- createProcess (shell typeCheck) {
             std_out = CreatePipe
           , std_err = CreatePipe
         }

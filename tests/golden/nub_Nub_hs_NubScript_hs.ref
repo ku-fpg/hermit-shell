@@ -223,7 +223,7 @@ Forcing obligation: nub-assumption
 [Done]
 
 parsed fine
-'"Object (fromList [(\"params\",Array (fromList [Object (fromList [(\"params\",Array (fromList [String \"origworker\"])),(\"method\",String \"remember\")])])),(\"method\",String \"query\")])" [correct]
+'"Object (fromList [(\"params\",Array [Object (fromList [(\"params\",Array [String \"origworker\"]),(\"method\",String \"remember\")])]),(\"method\",String \"query\")])" [correct]
 
 [Done]
 

@@ -22,7 +22,7 @@ Ok, modules loaded: FibScript.
 [Done]
 
 parsed fine
-'"Object (fromList [(\"params\",Array (fromList [Object (fromList [(\"params\",Array (fromList [String \"orig-fib\"])),(\"method\",String \"remember\")])])),(\"method\",String \"query\")])" [correct]
+'"Object (fromList [(\"params\",Array [Object (fromList [(\"params\",Array [String \"orig-fib\"]),(\"method\",String \"remember\")])]),(\"method\",String \"query\")])" [correct]
 
 [Done]
 
