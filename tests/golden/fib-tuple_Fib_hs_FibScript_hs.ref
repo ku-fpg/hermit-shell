@@ -60,7 +60,17 @@ Ok, modules loaded: FibScript, WWAssAScript.
 [Done]
 
 parsed fine
-'"Object (fromList [(\"params\",Array [Object (fromList [(\"params\",Array [String \"origwork\"]),(\"method\",String \"remember\")])]),(\"method\",String \"query\")])" [correct]
+'"{
+    \"params\": [
+        {
+            \"params\": [
+                \"origwork\"
+            ],
+            \"method\": \"remember\"
+        }
+    ],
+    \"method\": \"query\"
+}" [correct]
 
 [Done]
 

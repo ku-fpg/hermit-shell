@@ -23,6 +23,7 @@ extra-source-files:  README.md, include/*.h
 library
   ghc-options:          -Wall
   build-depends:        aeson               >= 0.8   && < 0.10,
+                        aeson-pretty        >= 0.7.2,
                         base                >= 4     && < 5,
                         base-compat         >= 0.8.1 && < 1,
                         bytestring          >= 0.10.4,

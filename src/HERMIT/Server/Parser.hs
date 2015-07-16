@@ -8,7 +8,9 @@ module HERMIT.Server.Parser where
 import           Control.Monad.Reader
 
 import           Data.Aeson as Aeson
+import           Data.Aeson.Encode.Pretty (encodePretty)
 import           Data.Aeson.Types (parseMaybe, Parser)
+import           Data.ByteString.Lazy.Char8 (unpack)
 
 import           HERMIT.Context
 import           HERMIT.Kure hiding ((<$>),(<*>))
@@ -43,17 +45,24 @@ parseCLT = parseMaybe parseTopLevel
 
 parseTopLevel :: (MonadIO m, Functor m)
               => Aeson.Value -> Parser (CLT m Aeson.Value)
-parseTopLevel v = 
+parseTopLevel v =
     (do v' <- parseExternal v :: Parser TypedEffectBox
         trace "parsed fine" $ return ()
-        return $! performBoxedEffect (show v) v')
+        return $! performBoxedEffect (pprint v) v')
     <|> (fmap toJSON
-       <$> ((performTypedEffectH (show v)
+       <$> ((performTypedEffectH (pprint v)
                <$> (parseExternal v :: Parser (TypedEffectH ())))
             <|> (performKernelEffect (stubExprH "<hermit-shell>")
                    <$> (parseExternal v :: Parser KernelEffect))
             <|> ((\c -> performProofShellCommand c (stubExprH "<hermit-shell>"))
                    <$> (parseExternal v :: Parser ProofShellCommand))))
+  where
+    -- The Show instance for Value prints out Vector literals, which have
+    -- different output depending on which version of vector is being used.
+    -- This is inconvenient for diffing purposes, so we use a pretty-printer
+    -- to make the output more consistent.
+    pprint :: Aeson.Value -> String
+    pprint = unpack . encodePretty
 
 instance External (TypedEffectH ()) where
   parseExternals =
@@ -77,7 +86,7 @@ instance External TypedEffectBox where
         (fromBoxToBox :: QueryFunBox -> TypedEffectBox)
         [ "performs query" ]
     , external' "setPath"
-        (TypedEffectBox . SetPathH :: TransformH LCore LocalPathH 
+        (TypedEffectBox . SetPathH :: TransformH LCore LocalPathH
                                    -> TypedEffectBox)
         ["sets the path"]
     ]
