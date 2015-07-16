@@ -1,4 +1,5 @@
 boot::
+	cabal configure --enable-tests
 	cabal sandbox init 
 	cabal sandbox add-source ../hermit
 	cabal sandbox add-source ../kure
@@ -7,3 +8,6 @@ boot::
 
 hermit::
 	cabal install  --only-dependencies      --force-reinstalls 
+
+tests::
+	cabal test --show-details=streaming
