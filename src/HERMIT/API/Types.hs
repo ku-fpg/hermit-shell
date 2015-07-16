@@ -17,6 +17,7 @@ import Data.String
 import Data.Typeable
 
 import HERMIT.GHCI.JSON
+import           HERMIT.GHCI.Glyph
 
 import Data.Coerce
 
@@ -74,10 +75,10 @@ proxyToJSON Proxy = String $ pack $ show $ typeOf (undefined :: a)
 -- | The 'Response' of doing a 'Shell' effect.
 
 class FromJSON a => Response a where
-  showResponse :: a -> String
+  printResponse :: a -> IO ()
 
 instance Response () where
-  showResponse () = ""
+  printResponse () = return ()
 
 ------------------------------------------------------------------------
 
@@ -117,7 +118,17 @@ instance ToJSON LocalPath where
   toJSON = undefined
 
 instance Response LocalPath where
-  showResponse (LocalPath txt) = show txt
+  printResponse (LocalPath txt) = print txt
+
+------------------------------------------------------------------------
+
+instance Response Glyphs where
+  printResponse (Glyphs gs) = do
+         putStrLn "[Start Glyphs]"
+         sequence_ [ withStyle sty txt
+                   | Glyph txt sty <- gs
+                   ]
+         putStrLn "[End Glyphs]"          
 
 ------------------------------------------------------------------------
 

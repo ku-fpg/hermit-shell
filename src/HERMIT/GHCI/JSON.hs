@@ -23,6 +23,9 @@ import           System.Console.Haskeline.Completion (Completion(..))
 
 import           Web.Scotty (readEither)
 
+import           HERMIT.GHCI.Glyph
+
+
 type UserID = Integer
 
 -- | Msg
@@ -139,10 +142,6 @@ instance ToJSON CmdTag where
 instance FromJSON CmdTag where
     parseJSON = fromJSONString
 
--- | Style
-data Style = KEYWORD | SYNTAX | VAR | COERCION | TYPE | LIT | WARNING
-    deriving (Eq, Read, Show)
-
 instance ToJSON Style where
     toJSON = stringToJSON
 
@@ -159,13 +158,6 @@ fromJSONString (String s) =
         Right sty -> pure sty
 fromJSONString _ = mzero
 
--- | Glyph
-data Glyph = Glyph { gText :: String
-                   , gStyle :: Maybe Style
-                   } deriving Show
-
-showGlyph :: Glyph -> String
-showGlyph = gText
 
 instance ToJSON Glyph where
     toJSON g = object $ ("text" .= gText g) : fromMaybeAttr "style" (gStyle g)

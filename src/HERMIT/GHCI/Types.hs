@@ -18,6 +18,7 @@ import           HERMIT.Kernel
 import           HERMIT.Plugin.Types
 import           HERMIT.Shell.Types hiding (clm)
 import           HERMIT.GHCI.JSON
+import           HERMIT.GHCI.Glyph
 
 import           Prelude.Compat
 

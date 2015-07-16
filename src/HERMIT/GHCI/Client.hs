@@ -11,8 +11,8 @@ import Network.Wreq
 import HERMIT.API.Types
 import HERMIT.Debug (debug)
 import HERMIT.GHCI.JSON
+import HERMIT.GHCI.Glyph
 
-import System.Console.ANSI
 
 -- For better error messages
 import Data.Text (Text, unpack)
@@ -63,25 +63,4 @@ genMethodStr _ (String str) = unpack str
 genMethodStr _ (Number n) = show n
 genMethodStr _ (Bool b) = show b
 genMethodStr _ Null = ""
-
-withStyle :: Maybe Style -> String -> IO ()
-withStyle Nothing    str = putStr str
-withStyle (Just sty) str = do
-  setSGR $ styleSGR sty
-  putStr str
-  setSGR [Reset]
-
-styleSGR :: Style -> [SGR]
-styleSGR KEYWORD  = [simpleColor Blue]
-styleSGR SYNTAX   = [simpleColor Red]
-styleSGR VAR      = []
-styleSGR COERCION = [simpleColor Yellow]
-styleSGR TYPE     = [simpleColor Green]
-styleSGR LIT      = [simpleColor Cyan]
-styleSGR WARNING  = [SetColor Background Vivid Yellow
-                    ,SetColor Foreground Dull  Black
-                    ]
-
-simpleColor :: Color -> SGR
-simpleColor = SetColor Foreground Vivid
 

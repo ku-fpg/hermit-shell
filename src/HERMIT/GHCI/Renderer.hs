@@ -8,6 +8,7 @@ import HERMIT.Kure
 import HERMIT.PrettyPrinter.Common
 
 import HERMIT.GHCI.JSON
+import           HERMIT.GHCI.Glyph
 
 import Prelude.Compat
 

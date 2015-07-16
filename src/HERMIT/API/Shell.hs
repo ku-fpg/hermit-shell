@@ -12,8 +12,10 @@ import HERMIT.API.Shell.Externals (beginScope, endScope)
 import HERMIT.API.Shell.Proof (proveLemma, endProof)
 import HERMIT.API.Dictionary.KURE (serialise)
 
+import HERMIT.GHCI.Glyph        -- Feels wrong to pull this in here
+
 -- | redisplays current state.
-display :: Shell ()
+display :: Shell Glyphs
 display = Shell $ method "display" []
 
 -- | stops HERMIT; resumes compile.

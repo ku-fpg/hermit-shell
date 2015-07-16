@@ -25,8 +25,7 @@ instance __OVERLAPPABLE__ Show a => Repl a where
 instance __OVERLAPPING__ Response a => Repl (Shell a) where
   printForRepl sh = do
         r <- send sh
-        let txt = showResponse r
-        unless (null txt) $ putStrLn txt
+        printResponse r
 
 instance Repl KernelEffect where
   printForRepl (KernelEffect v) = printForRepl (Shell v :: Shell ())
