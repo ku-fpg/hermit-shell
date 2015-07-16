@@ -152,12 +152,12 @@ hermitShellDotfile mbScript = unlines $
   , ":set prompt \"HERMIT> \""
 
   -- To get around an issue where the '-interactive-print' option gets reset:
-  , ":def l \\s -> return $ \":load \" ++ s ++ \"\\n:set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
-  , ":def r \\s -> return $ \":reload \" ++ s ++ \"\\n:set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
-  , ":def hermit \\s -> return $ \":set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
-  , ":def resume \\s -> return $ \"resume\\n:quit\""
-  , ":def abort \\s -> return $ \"abort\\n:quit\""
-  , ":def doc \\s -> return $ \":!hoogle --info \" ++ show s ++ \" +hermit-shell\""
+  , ":def! l \\s -> return $ \":load \" ++ s ++ \"\\n:set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
+  , ":def! r \\s -> return $ \":reload \" ++ s ++ \"\\n:set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
+  , ":def! hermit \\s -> return $ \":set -interactive-print=HERMIT.GHCI.Printer.printForRepl\""
+  , ":def! resume \\s -> return $ \"resume\\n:quit\""
+  , ":def! abort \\s -> return $ \"abort\\n:quit\""
+  , ":def! doc \\s -> return $ \":!hoogle --info \" ++ show s ++ \" +hermit-shell\""
 --   , "send welcome" -- welcome message (interactive only)a
   , "send display" -- where am I (interactive only)
 --   , "setPath (rhsOf \"rev\")"
