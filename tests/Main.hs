@@ -112,14 +112,20 @@ mkHermitShellTest (dir, hs, moduleName, script) =
         pwd <- getCurrentDirectory
 
         let sandboxCfgPath :: FilePath
-            sandboxCfgPath = "--sandbox-config-file=" ++ pwd </> "cabal.sandbox.config"
+            sandboxCfgPath = pwd </> "cabal.sandbox.config"
 
-        -- Runs GHC's typechecker over the script file to ensure it will actually
-        -- work when given to HERMIT-shell.
+        sandboxExists <- doesFileExist sandboxCfgPath
+
+        let sandboxFlag :: FilePath
+            sandboxFlag | sandboxExists = "--sandbox-config-file=" ++ pwd
+                        | otherwise     = ""
+
+            -- Runs GHC's typechecker over the script file to ensure it will actually
+            -- work when given to HERMIT-shell.
             typeCheck :: String
             typeCheck = withPathpDir $ unwords
                 [ "cabal"
-                , sandboxCfgPath
+                , sandboxFlag
                 , "exec"
                 , "--"
                 , "ghc"
@@ -131,7 +137,7 @@ mkHermitShellTest (dir, hs, moduleName, script) =
             hermitShell :: String
             hermitShell = withPathpDir $ unwords
                 [ "cabal"
-                , sandboxCfgPath
+                , sandboxFlag
                 , "exec"
                 , "--"
                 , "hermit-shell"
