@@ -116,8 +116,8 @@ mkHermitShellTest (dir, hs, moduleName, script) =
 
         sandboxExists <- doesFileExist sandboxCfgPath
 
-        let sandboxFlag :: FilePath
-            sandboxFlag | sandboxExists = "--sandbox-config-file=" ++ pwd
+        let sandboxFlag :: String
+            sandboxFlag | sandboxExists = "--sandbox-config-file=" ++ sandboxCfgPath
                         | otherwise     = ""
 
             -- Runs GHC's typechecker over the script file to ensure it will actually
