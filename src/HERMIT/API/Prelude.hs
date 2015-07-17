@@ -9,6 +9,7 @@ import Prelude hiding
     , any
     , all
     , fail
+    , id
     , log
     , not
     , repeat

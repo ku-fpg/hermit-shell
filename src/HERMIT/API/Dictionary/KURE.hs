@@ -5,8 +5,8 @@
 {-# LANGUAGE ScopedTypeVariables #-}
 
 module HERMIT.API.Dictionary.KURE (
-      idCore
-    , IdCore
+      id
+    , Id
     , success
     , fail
     , (<+)
@@ -51,20 +51,28 @@ import Data.Proxy
 
 import HERMIT.API.Types
 
-import Prelude hiding (all, any, fail, not, repeat, replicate)
+import Prelude hiding
+    ( all
+    , any
+    , fail
+    , id
+    , not
+    , repeat
+    , replicate
+    )
 
 -- |
--- idCore :: Rewrite LCore
+-- id :: Rewrite LCore
 --   Perform an identity rewrite.
--- idCore :: Rewrite LCoreTC
+-- id :: Rewrite LCoreTC
 --   Perform an identity rewrite.
-idCore :: IdCore a => Rewrite a
-idCore = Transform $ method "idCore" []
+id :: Id a => Rewrite a
+id = Transform $ method "idCore" []
 
 -- | Class of types that can have an identity rewrite via 'idCore'.
-class IdCore a
-instance IdCore LCore
-instance IdCore LCoreTC
+class Id a
+instance Id LCore
+instance Id LCoreTC
 
 -- | An always succeeding translation.
 success :: Transform LCore ()
