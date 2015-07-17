@@ -9,7 +9,7 @@ mapNonempty = do
 
   proof "map-nonempty" $ do
     pathS [forallBody] $ do
-      apply . lhsR $ unfoldWith "map"
+      apply . lhs $ unfoldWith "map"
       apply smash
 
 script :: Shell ()

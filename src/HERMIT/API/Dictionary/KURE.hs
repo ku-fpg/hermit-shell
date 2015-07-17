@@ -1,6 +1,9 @@
 {-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE ScopedTypeVariables #-}
+
 module HERMIT.API.Dictionary.KURE (
       idCore
     , IdCore
@@ -39,7 +42,7 @@ module HERMIT.API.Dictionary.KURE (
     , extractT
     , between
     , atPath
-    , atPathProj
+    , AtPathArgs
     , serialise
     ) where
 
@@ -239,13 +242,23 @@ extractT t = Transform $ method "extractT" [toJSON t]
 between :: Int -> Int -> Rewrite LCoreTC -> Rewrite LCoreTC
 between x y rr = Transform $ method "between" [toJSON x, toJSON y, toJSON rr]
 
--- | return the expression found at the given path
-atPath :: Transform a LocalPath -> Rewrite a
-atPath pth = Transform $ method "atPath" [toJSON pth]
+-- |
+-- atPath :: Transform a LocalPath -> Rewrite a
+--   return the expression found at the given path
+-- atPath :: Transform LCoreTC LocalPath -> Rewrite LCore
+--   return the expression found at a projected, given path
+atPath :: AtPathArgs a b => Transform a LocalPath -> Rewrite b
+atPath = atPathRewrite
 
--- | return the expression found at a projected, given path
-atPathProj :: Transform LCoreTC LocalPath -> Rewrite LCore
-atPathProj pth = Transform $ method "atPathProj" [toJSON pth]
+-- | Class of types that can be used with 'atPath'.
+class AtPathArgs a b where
+    atPathRewrite :: Transform a LocalPath -> Rewrite b
+
+instance AtPathArgs a a where
+    atPathRewrite pth = Transform $ method "atPath" [toJSON pth]
+
+instance AtPathArgs LCoreTC LCore where
+    atPathRewrite pth = Transform $ method "atPathProj" [toJSON pth]
 
 serialise :: [Rewrite a] -> Rewrite a
 serialise rs = Transform $ method "serialise" [toJSON rs]

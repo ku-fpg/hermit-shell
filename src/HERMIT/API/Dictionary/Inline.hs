@@ -28,11 +28,9 @@ inlineWith = Transform . inlineMethod
 class ToJSON a => InlineArgs a where
     inlineMethod :: a -> Value
 
--- | Given a specific v, (Var v) ==> <defn of v>
 instance InlineArgs Name where
     inlineMethod nm = method "inlineWith" [toJSON nm]
 
--- | If the current variable matches any of the given names, then inline it.
 instance InlineArgs [String] where
     inlineMethod nms = method "inlineAny" [toJSON nms]
 

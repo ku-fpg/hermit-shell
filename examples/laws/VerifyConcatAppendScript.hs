@@ -57,14 +57,14 @@ concatAppend = do
 
         -- nil case
       pathS [conjRhs, conjLhs] $ do
-        apply $ lhsR nilLeft
-        apply $ rhsR nilRight
+        apply $ lhs nilLeft
+        apply $ rhs nilRight
         apply reflexivity
 
         -- cons case
       pathS [conjRhs, conjRhs, forallBody, consequent] $ do
-        apply $ lhsR consLeft
-        apply $ rhsR consRight
+        apply $ lhs consLeft
+        apply $ rhs consRight
         apply reflexivity
 
 script :: Shell ()

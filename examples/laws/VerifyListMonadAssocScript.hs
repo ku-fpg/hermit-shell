@@ -65,7 +65,7 @@ listMonadAssoc = do
 
   proof "monad-assoc" $ do
     pathS [forallBody] $ do
-      apply . lhsR $ assocLhs
+      apply . lhs $ assocLhs
 
       pathS [eqRhs] $ do
         apply . anyCall $ unfoldWith "bind"

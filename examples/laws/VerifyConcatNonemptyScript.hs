@@ -16,7 +16,7 @@ concatNonempty = do
 
   proof "concat-nonempty" $ do
     pathS [forallBody] $ do
-      apply . bothR $ oneSide
+      apply . both $ oneSide
 
 script :: Shell ()
 script = concatNonempty

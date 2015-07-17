@@ -1,9 +1,47 @@
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE OverloadedStrings #-}
-module HERMIT.API.Dictionary.Reasoning where
-
-import HERMIT.API.Types
+module HERMIT.API.Dictionary.Reasoning (
+      retraction
+    , retractionUnsafe
+    , unshadowQuantified
+    , mergeQuantifiers
+    , floatLeft
+    , floatRight
+    , conjunct
+    , disjunct
+    , imply
+    , lemmaBirewrite
+    , lemmaForward
+    , lemmaBackward
+    , lemmaConsequent
+    , lemmaConsequentBirewrite
+    , lemmaLhsIntro
+    , lemmaRhsIntro
+    , instLemma
+    , instDictionaries
+    , abstractForall
+    , AbstractForallArgs
+    , copyLemma
+    , modifyLemma
+    , queryLemma
+    , extensionalityWith
+    , extensionality
+    , lhs
+    , LHSArgs
+    , rhs
+    , RHSArgs
+    , both
+    , BothArgs
+    , reflexivity
+    , simplifyLemma
+    , splitAntecedent
+    , lemma
+    ) where
 
 import Data.Aeson
+
+import HERMIT.API.Types
 
 -- | Given f :: X -> Y and g :: Y -> X, and a proof that f (g y) ==> y, then
 --   f (g y) <==> y.
@@ -125,15 +163,24 @@ instLemma nm v cs
 instDictionaries :: Rewrite LCore
 instDictionaries = Transform $ method "instDictionaries" []
 
--- | Weaken a lemma by abstracting an expression to a new quantifier.
-abstractForall :: String -> String -> Rewrite LCore
-abstractForall str cstr = Transform $ method "abstractForall"
-    [toJSON str, toJSON cstr]
+-- |
+-- abstractForall :: String -> CoreString -> Rewrite LCore
+--   Weaken a lemma by abstracting an expression to a new quantifier.
+-- abstractForall :: String -> Rewrite LCore -> Rewrite LCore
+--   Weaken a lemma by abstracting an expression to a new quantifier.
+abstractForall :: AbstractForallArgs a => String -> a -> Rewrite LCore
+abstractForall str = Transform . abstractForallMethod str
 
--- | Weaken a lemma by abstracting an expression to a new quantifier.
-abstractForallExtract :: String -> Rewrite LCore -> Rewrite LCore
-abstractForallExtract str cstr = Transform $ method "abstractForallExtract"
-    [toJSON str, toJSON cstr]
+class AbstractForallArgs a where
+    abstractForallMethod :: String -> a -> Value
+
+instance AbstractForallArgs CoreString where
+    abstractForallMethod str cstr = method "abstractForall"
+        [toJSON str, toJSON cstr]
+
+instance AbstractForallArgs (Rewrite LCore) where
+    abstractForallMethod str cstr = method "abstractForallExtract"
+        [toJSON str, toJSON cstr]
 
 -- | Copy a given lemma, with a new name.
 copyLemma :: LemmaName -> LemmaName -> Transform LCore ()
@@ -173,29 +220,50 @@ extensionalityWith nm = Transform $ method "extensionalityWith" [toJSON nm]
 extensionality :: Rewrite LCore
 extensionality = Transform $ method "extensionality" []
 
--- | Apply a transformation to the LHS of a quantified clause.
-lhsT :: Transform LCore String -> Transform LCore String
-lhsT t = Transform $ method "lhs" [toJSON t]
+-- |
+-- lhs :: Transform LCore String -> Transform LCore String
+--   Apply a transformation to the LHS of a quantified clause.
+-- lhs :: Rewrite LCore -> Rewrite LCore
+--   Apply a rewrite to the LHS of a quantified clause.
+lhs :: LHSArgs a b => Transform a b -> Transform a b
+lhs = lhsTransform
 
--- | Apply a rewrite to the LHS of a quantified clause.
-lhsR :: Rewrite LCore -> Rewrite LCore
-lhsR r = Transform $ method "lhs" [toJSON r]
+class LHSArgs a b where
+    lhsTransform :: Transform a b -> Transform a b
+    lhsTransform t = Transform $ method "lhs" [toJSON t]
 
--- | Apply a transformation to the RHS of a quantified clause.
-rhsT :: Transform LCore String -> Transform LCore String
-rhsT t = Transform $ method "rhs" [toJSON t]
+instance LHSArgs LCore String
+instance LHSArgs LCore LCore
 
--- | Apply a rewrite to the RHS of a quantified clause.
-rhsR :: Rewrite LCore -> Rewrite LCore
-rhsR r = Transform $ method "rhs" [toJSON r]
+-- |
+-- rhs :: Transform LCore String -> Transform LCore String
+--   Apply a transformation to the RHS of a quantified clause.
+-- rhs :: Rewrite LCore -> Rewrite LCore
+--   Apply a rewrite to the RHS of a quantified clause.
+rhs :: RHSArgs a b => Transform a b -> Transform a b
+rhs = rhsTransform
 
--- | Apply a transformation to both sides of a quantified clause.
-bothT :: Transform LCore String -> Transform LCore String
-bothT t = Transform $ method "both" [toJSON t]
+class RHSArgs a b where
+    rhsTransform :: Transform a b -> Transform a b
+    rhsTransform t = Transform $ method "rhs" [toJSON t]
 
--- | Apply a rewrite to both sides of an equality, succeeding if either succeed.
-bothR :: Rewrite LCore -> Rewrite LCore
-bothR r = Transform $ method "both" [toJSON r]
+instance RHSArgs LCore String
+instance RHSArgs LCore LCore
+
+-- |
+-- both :: Transform LCore String -> Transform LCore String
+--   Apply a transformation to both sides of a quantified clause.
+-- both :: Rewrite LCore -> Rewrite LCore
+--   Apply a rewrite to both sides of an equality, succeeding if either succeed.
+both :: BothArgs a b => Transform a b -> Transform a b
+both = bothTransform
+
+class BothArgs a b where
+    bothTransform :: Transform a b -> Transform a b
+    bothTransform t = Transform $ method "both" [toJSON t]
+
+instance BothArgs LCore String
+instance BothArgs LCore LCore
 
 -- | Rewrite alpha-equivalence to true.
 reflexivity :: Rewrite LCore

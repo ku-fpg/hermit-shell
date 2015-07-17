@@ -14,7 +14,7 @@ script = do
     sendCrumb defRhs
     apply $ split1Beta "qsort" "absR" "repR" ; proofCmd assume
     setPath $ rhsOf "worker"
-    apply $ repeat (anyCall (unfoldAny [".", "fix", "g", "repR", "absR"]))
+    apply $ repeat (anyCall (unfoldWith [".", "fix", "g", "repR", "absR"]))
     apply simplify
     apply $ oneTD (caseFloatArgLemma "repHstrict") ; proofCmd assume
     apply $ innermost letFloat
@@ -26,7 +26,7 @@ script = do
     apply $ alphaLetWith ["worker"]
     apply $ repeat (anyCall (unfoldRules ["repH (:)", "repH []"]))
     proofCmd assume ; proofCmd assume
-  apply $ repeat (anyCall (unfoldAny [".", "absR", "absH"]))
+  apply $ repeat (anyCall (unfoldWith [".", "absR", "absH"]))
   apply $ innermost letFloat
   apply bash
 

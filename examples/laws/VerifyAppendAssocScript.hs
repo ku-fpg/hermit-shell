@@ -20,7 +20,7 @@ appendAssoc = do
       -- undefined case
       pathS [conjLhs] $ do
         pathS [forallBody] $ do
-          apply . bothR . oneBU $ inlineWith "++"
+          apply . both . oneBU $ inlineWith "++"
           apply smash
           apply . pathR [eqRhs] . oneTD $ inlineWith "++"
           apply smash

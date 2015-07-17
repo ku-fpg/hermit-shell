@@ -27,6 +27,6 @@ listLeftUnit = do
       apply smash
 
     pathS [forallBody] $ do
-      apply . lhsR $ lemmaForward "concat-unit"
+      apply . lhs $ lemmaForward "concat-unit"
       apply reflexivity
 

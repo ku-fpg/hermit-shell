@@ -148,6 +148,7 @@ msgBuilder msg s = Wai.responseBuilder s [("Content-Type","application/json")]
 hermitShellDotfile :: Maybe FilePath -> String
 hermitShellDotfile mbScript = unlines $
   [ "import Prelude ()"
+  , "import qualified Prelude as P"
   , "import HERMIT.API.Prelude" -- NOTE: All other modules intentionally unimported here
   , ":set prompt \"HERMIT> \""
 

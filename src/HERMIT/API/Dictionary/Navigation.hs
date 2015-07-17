@@ -1,5 +1,31 @@
 {-# LANGUAGE OverloadedStrings #-}
-module HERMIT.API.Dictionary.Navigation where
+module HERMIT.API.Dictionary.Navigation (
+      rhsOf
+    , bindingGroupOf
+    , bindingOf
+    , occurrenceOf
+    , applicationOf
+    , consider
+    , arg
+    , lamsBody
+    , letsBody
+    , progEnd
+    , parentOf
+    , ParentOfArgs
+    , cBind
+    , cDef
+    , cAlt
+    , cVar
+    , cLit
+    , cApp
+    , cLam
+    , cLet
+    , cCase
+    , cCast
+    , cTick
+    , cType
+    , cCoerce
+    ) where
 
 import Data.Aeson
 
@@ -46,13 +72,21 @@ letsBody = Transform $ method "letsBody" []
 progEnd :: Transform LCore LocalPath
 progEnd = Transform $ method "progEnd" []
 
--- | Focus on the parent of another focal point.
-parentOfCore :: Transform LCore LocalPath -> Transform LCore LocalPath
-parentOfCore t = Transform $ method "parentOfCore" [toJSON t]
+-- |
+-- parentOf :: Transform LCore LocalPath -> Transform LCore LocalPath
+--   Focus on the parent of another focal point.
+-- parentOf :: Transform LCoreTC LocalPath -> Transform LCoreTC
+--   Focus on the parent of another focal point.
+parentOf :: ParentOfArgs a => Transform a LocalPath -> Transform a LocalPath
+parentOf = parentOfTransform
 
--- | Focus on the parent of another focal point.
-parentOfCoreTC :: Transform LCoreTC LocalPath -> Transform LCoreTC LocalPath
-parentOfCoreTC t = Transform $ method "parentOfCoreTC" [toJSON t]
+-- | Class of types that can be used with 'parentOf'.
+class ParentOfArgs a where
+    parentOfTransform :: Transform a LocalPath -> Transform a LocalPath
+    parentOfTransform t = Transform $ method "parentOf" [toJSON t]
+
+instance ParentOfArgs LCore
+instance ParentOfArgs LCoreTC
 
 -------------------------------------------------------------------------------
 

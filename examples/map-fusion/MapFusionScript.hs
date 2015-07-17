@@ -11,32 +11,32 @@ script = do
 
   proof "map-fusion" $ do
     apply $ extensionalityWith "xs"
-    apply . lhsR $ unfoldWith "."
+    apply . lhs $ unfoldWith "."
 
     apply $ induction "xs"
 
     pathS [forallBody] $ do
         -- undefined case
       pathS [conjLhs, forallBody] $ do
-        apply . rhsR $ unfoldWith "map"
-        apply . rhsR $ undefinedCase
-        apply . lhsR $ anyBU (unfoldWith "map")
-        apply . lhsR $ oneTD bash
-        apply . lhsR $ oneTD undefinedCase
+        apply . rhs $ unfoldWith "map"
+        apply . rhs $ undefinedCase
+        apply . lhs $ anyBU (unfoldWith "map")
+        apply . lhs $ oneTD bash
+        apply . lhs $ oneTD undefinedCase
         apply reflexivity
 
         -- nil case
       pathS [conjRhs, conjLhs, forallBody] $ do
-        apply . bothR $ anyBU (unfoldWith "map" >>> caseReduce)
+        apply . both $ anyBU (unfoldWith "map" >>> caseReduce)
         apply reflexivity
 
         -- cons case
       pathS [conjRhs, conjRhs, forallBody, consequent] $ do
-        apply . bothR $ anyBU (unfoldWith "map" >>> caseReduce)
+        apply . both $ anyBU (unfoldWith "map" >>> caseReduce)
 
-        apply . rhsR . oneTD $ lemmaBackward "ind-hyp-0"
+        apply . rhs . oneTD $ lemmaBackward "ind-hyp-0"
 
-        apply . rhsR . oneTD $ unfoldWith "."
+        apply . rhs . oneTD $ unfoldWith "."
         apply reflexivity
 
       apply bash -- 'a => true' is true

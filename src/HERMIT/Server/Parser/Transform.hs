@@ -995,7 +995,7 @@ instance External (RewriteH LCore) where
         [ "Instantiate all of the universally quantified dictionaries of the given lemma." ]
     , external' "abstractForall" ((\nm -> promoteClauseR . abstractClauseR nm . csInQBodyT) :: String -> CoreString -> RewriteH LCore)
         [ "Weaken a lemma by abstracting an expression to a new quantifier." ]
-    , external' "abstractForall" ((\nm rr -> promoteClauseR $ abstractClauseR nm $ extractT rr >>> setFailMsg "path must focus on an expression" projectT) :: String -> RewriteH LCore -> RewriteH LCore)
+    , external' "abstractForallExtract" ((\nm rr -> promoteClauseR $ abstractClauseR nm $ extractT rr >>> setFailMsg "path must focus on an expression" projectT) :: String -> RewriteH LCore -> RewriteH LCore)
         [ "Weaken a lemma by abstracting an expression to a new quantifier." ]
     , external' "reflexivity" (promoteClauseR (forallR idR reflexivityR <+ reflexivityR) :: RewriteH LCore)
         [ "Rewrite alpha-equivalence to true." ]
@@ -1126,7 +1126,7 @@ instance External (TransformH LCore LocalPathH) where
          promoteProgT progEndT :: TransformH LCore LocalPathH)
         [ "Descend to the end of a program." ]
 
-    , external' "parentOfCore"
+    , external' "parentOf"
         (parentOfT :: TransformH LCore LocalPathH
                    -> TransformH LCore LocalPathH)
         [ "Focus on the parent of another focal point." ]
@@ -1160,7 +1160,7 @@ instance External (TransformH LCoreTC LocalPathH) where
          mkOccPred :: OccurrenceName -> TransformH LCoreTC LocalPathH)
         [ "Find the path to the first application of the named variable." ]
 
-    , external' "parentOfCoreTC"
+    , external' "parentOf"
         (parentOfT :: TransformH LCoreTC LocalPathH
                    -> TransformH LCoreTC LocalPathH)
         [ "Focus on the parent of another focal point." ]

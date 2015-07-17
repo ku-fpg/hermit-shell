@@ -20,7 +20,7 @@ script = do
   -- Goal:
   -- forall * xs. (++) * xs ([] *) = xs
 
-  apply . lhsR . oneTD $ unfoldRule "appendFix"
+  apply . lhs . oneTD $ unfoldRule "appendFix"
 
   -- Goal:
   -- forall *. (++) * = myAppend *
@@ -61,7 +61,7 @@ script = do
                         sendCrumb forallBody ; sendCrumb consequent
                         apply $ anyBU (unfoldWith "myAppend")
                         apply smash
-                        apply $ rhsR (oneTD (fold "myAppend"))
+                        apply $ rhs (oneTD (fold "myAppend"))
                         apply (oneTD (lemmaForward "ind-hyp-0"))
                         apply reflexivity
   proofCmd endProof
@@ -80,7 +80,7 @@ script = do
   -- Goal:
   -- forall *. repH * ([] *) = id *
 
-  apply $ lhsR unfold
+  apply $ lhs unfold
 
   -- Goal:
   -- forall *. (++) * ([] *) = id *
@@ -90,12 +90,12 @@ script = do
   -- Goal:
   -- forall * x. (++) * ([] *) x = id * x
 
-  apply . lhsR . oneTD $ unfoldRule "appendFix"
+  apply . lhs . oneTD $ unfoldRule "appendFix"
 
   -- Goal:
   -- forall * x. myAppend * ([] *) x = id * x
 
-  apply $ lhsR unfold
+  apply $ lhs unfold
 
   -- Goal:
   -- forall * x.
@@ -105,7 +105,7 @@ script = do
   -- =
   -- id * x
 
-  apply $ bothR smash
+  apply $ both smash
 
   -- Goal:
   -- forall * x. x = x
@@ -125,22 +125,22 @@ script = do
   -- Goal:
   -- forall * x xs. repH * ((:) * x xs) = (.) * * * ((:) * x) (repH * xs)
 
-  apply . bothR . anyCall $ unfoldWith "repH"
+  apply . both . anyCall $ unfoldWith "repH"
 
   -- Goal:
   -- forall * x xs. (++) * ((:) * x xs) = (.) * * * ((:) * x) ((++) * xs)
 
-  apply . bothR . anyCall $ unfoldRule "appendFix"
+  apply . both . anyCall $ unfoldRule "appendFix"
 
   -- Goal:
   -- forall * x xs. myAppend * ((:) * x xs) = (.) * * * ((:) * x) (myAppend * xs)
 
-  apply $ rhsR unfold
+  apply $ rhs unfold
 
   -- Goal:
   -- forall * x xs. myAppend * ((:) * x xs) = \\ x -> (:) * x (myAppend * xs x)
 
-  apply . lhsR $ unfold >>> smash
+  apply . lhs $ unfold >>> smash
 
   -- Goal:
   -- forall * x xs. \\ ys -> (:) * x (myAppend * xs ys) = \\ x -> (:) * x (myAppend * xs x)
@@ -160,22 +160,22 @@ script = do
   -- Goal:
   -- forall * xs ys. repH * ((++) * xs ys) = (.) * * * (repH * xs) (repH * ys)
 
-  apply . bothR . anyCall $ unfoldWith "repH"
+  apply . both . anyCall $ unfoldWith "repH"
 
   -- Goal:
   -- forall * xs ys. (++) * ((++) * xs ys) = (.) * * * ((++) * xs) ((++) * ys)
 
-  apply . bothR . anyCall $ unfoldRule "appendFix"
+  apply . both . anyCall $ unfoldRule "appendFix"
 
   -- Goal:
   -- forall * xs ys. myAppend * (myAppend * xs ys) = (.) * * * (myAppend * xs) (myAppend * ys)
 
-  apply . lhsR $ etaExpand "x"
+  apply . lhs $ etaExpand "x"
 
   -- Goal:
   -- forall * xs ys. \\ x -> myAppend * (myAppend * xs ys) x = (.) * * * (myAppend * xs) (myAppend * ys)
 
-  apply $ rhsR unfold
+  apply $ rhs unfold
 
   -- Goal:
   -- forall * xs ys. \\ x -> myAppend * (myAppend * xs ys) x = \\ x -> myAppend * xs (myAppend * ys x)
@@ -234,7 +234,7 @@ script = do
   --          [] -> [] *
   --          (:) x xs -> (++) * (rev xs) ((:) * x ([] *)))
 
-  apply . bothR $ unfold >>> smash
+  apply . both $ unfold >>> smash
 
   -- Goal:
   -- let rec x =
@@ -252,7 +252,7 @@ script = do
   --             (:) x xs -> (++) * (x xs) ((:) * x ([] *))
   -- in x
 
-  apply . lhsR $ replicate 5 ((oneTD unfold) >+> smash)
+  apply . lhs $ replicate 5 ((oneTD unfold) >+> smash)
 
   -- Goal:
   -- let rec x = \\ x ->
@@ -269,7 +269,7 @@ script = do
   --             (:) x xs -> (++) * (x xs) ((:) * x ([] *))
   -- in x
 
-  apply . lhsR . oneTD $ lemmaForward "++ []"
+  apply . lhs . oneTD $ lemmaForward "++ []"
 
   -- Goal:
   -- let rec x = \\ x ->
@@ -297,7 +297,7 @@ script = do
   --     worker = fix * g
   -- in absR * worker
 
-  apply $ anyCall (unfoldAny ["absR","repR"])
+  apply $ anyCall (unfoldWith ["absR","repR"])
 
   -- let g =
   --       (.) * * * (\\ eta -> (\\ f -> (.) * * * (repH *) f) eta)
@@ -326,17 +326,17 @@ script = do
   -- Goal:
   -- forall *. repH * (undefined *) = undefined *
 
-  apply $ lhsR unfold
+  apply $ lhs unfold
 
   -- Goal:
   -- forall *. (++) * (undefined *) = undefined *
 
-  apply . lhsR . oneTD $ unfoldRule "appendFix"
+  apply . lhs . oneTD $ unfoldRule "appendFix"
 
   -- Goal:
   -- forall *. myAppend * (undefined *) = undefined *
 
-  apply $ lhsR unfold
+  apply $ lhs unfold
 
   -- Goal:
   -- forall *.
@@ -347,7 +347,7 @@ script = do
   -- =
   -- undefined *
 
-  apply . bothR $ innermost undefinedExpr
+  apply . both $ innermost undefinedExpr
 
   -- Goal:
   -- forall *. undefined * = undefined *

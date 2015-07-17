@@ -17,16 +17,16 @@ imapAppend = do
     pathS [forallBody] $ do
         -- undefined case
       pathS [conjLhs] $ do
-        apply $ bothR unfold
-        apply . bothR $ oneTD unfold
-        apply $ bothR smash
+        apply $ both unfold
+        apply . both $ oneTD unfold
+        apply $ both smash
         apply reflexivity
 
         -- nil case
       pathS [conjRhs, conjLhs] $ do
-        apply $ bothR unfold
+        apply $ both unfold
         apply . oneTD $ unfold
-        apply $ bothR smash
+        apply $ both smash
         pathS [forallBody, eqRhs] $ do
           apply $ oneBU unfold
           apply smash
@@ -35,9 +35,9 @@ imapAppend = do
 
         -- cons case
       pathS [conjRhs, conjRhs, forallBody, consequent] $ do
-        apply $ bothR unfold
-        apply . bothR $ oneTD unfold
-        apply $ bothR smash
+        apply $ both unfold
+        apply . both $ oneTD unfold
+        apply $ both smash
         apply . oneTD $ lemmaForward "ind-hyp-0"
         apply reflexivity
       apply smash -- 'a => true' is true

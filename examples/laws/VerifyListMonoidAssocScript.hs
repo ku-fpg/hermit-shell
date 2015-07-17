@@ -27,8 +27,8 @@ listMonoidAssoc = do
   appendAssoc
 
   proof "monoid-assoc" $ do
-    apply . lhsR $ assocLeft
-    apply . rhsR $ assocRight
+    apply . lhs $ assocLeft
+    apply . rhs $ assocRight
 
 script :: Shell ()
 script = listMonoidAssoc
