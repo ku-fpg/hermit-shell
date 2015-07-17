@@ -1,7 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module WWAssAScript where
 
-import HERMIT.API
-import HERMIT.API.Types
+import HERMIT.API.Prelude
 
 wwa :: Rewrite LCore
 wwa =

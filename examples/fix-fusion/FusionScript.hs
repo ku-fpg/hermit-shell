@@ -1,5 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module FusionScript where
-import HERMIT.API
+
+import HERMIT.API.Prelude
 
 import PreconditionLScript
 import PreconditionRScript

@@ -1,6 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module VerifyMapNonemptyScript (mapNonempty) where
 
-import HERMIT.API
+import HERMIT.API.Prelude
 
 mapNonempty :: Shell ()
 mapNonempty = do

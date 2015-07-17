@@ -1,7 +1,7 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 module MeanScript where
 
-import HERMIT.API
+import HERMIT.API.Prelude
 
 script :: Shell ()
 script = do

@@ -1,7 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module ReverseScript where
-import Prelude hiding (repeat, replicate)
 
-import HERMIT.API
+import HERMIT.API.Prelude
 
 script :: Shell ()
 script = do

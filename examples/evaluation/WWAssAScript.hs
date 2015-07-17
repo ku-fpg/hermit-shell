@@ -1,8 +1,7 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 module WWAssAScript where
 
-import HERMIT.API
-import HERMIT.API.Types
+import HERMIT.API.Prelude
 
 -- Worker/Wrapper (Result Variant) Assumption A:  abs (rep a) <=> a
 

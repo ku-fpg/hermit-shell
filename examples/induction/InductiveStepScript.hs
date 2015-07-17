@@ -1,7 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module InductiveStepScript where
 
-import HERMIT.API
-import HERMIT.API.Types
+import HERMIT.API.Prelude
 
 inductiveStep :: Rewrite LCore
 inductiveStep

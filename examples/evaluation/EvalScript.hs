@@ -1,6 +1,7 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 module EvalScript where
-import HERMIT.API
+
+import HERMIT.API.Prelude
 
 import WWAssAScript
 

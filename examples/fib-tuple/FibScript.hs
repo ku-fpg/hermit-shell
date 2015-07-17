@@ -1,6 +1,7 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 module FibScript where
-import HERMIT.API
+
+import HERMIT.API.Prelude
 
 import WWAssAScript
 

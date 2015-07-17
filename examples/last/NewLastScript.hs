@@ -1,7 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module NewLastScript where
-import Prelude hiding (repeat)
 
-import HERMIT.API
+import HERMIT.API.Prelude
 
 script :: Shell ()
 script = do

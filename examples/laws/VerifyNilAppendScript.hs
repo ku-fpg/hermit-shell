@@ -1,9 +1,9 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module VerifyNilAppendScript
   (nilAppend)
   where
 
-import HERMIT.API
-import HERMIT.API.Types
+import HERMIT.API.Prelude
 
 nilAppend :: Shell ()
 nilAppend = do

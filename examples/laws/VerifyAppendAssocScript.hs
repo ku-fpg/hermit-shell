@@ -1,8 +1,9 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module VerifyAppendAssocScript
   (appendAssoc)
   where
 
-import HERMIT.API
+import HERMIT.API.Prelude
 
 import VerifyNilAppendScript
 

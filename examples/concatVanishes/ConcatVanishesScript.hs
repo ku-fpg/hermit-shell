@@ -1,6 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module ConcatVanishesScript where
-import HERMIT.API
-import HERMIT.API.Types
+
+import HERMIT.API.Prelude
 
 import WWAssAScript
 import StrictRepHScript

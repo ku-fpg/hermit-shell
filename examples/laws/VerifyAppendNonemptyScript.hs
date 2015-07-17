@@ -1,6 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module VerifyAppendNonemptyScript (appendNonempty) where
 
-import HERMIT.API
+import HERMIT.API.Prelude
 
 appendNonempty :: Shell ()
 appendNonempty = do

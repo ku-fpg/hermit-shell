@@ -1,6 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module VerifyScript where
 
-import HERMIT.API
+import HERMIT.API.Prelude
 
 import BaseCaseScript
 import InductiveStepScript

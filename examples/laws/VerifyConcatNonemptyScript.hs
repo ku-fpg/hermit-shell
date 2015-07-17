@@ -1,6 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module VerifyConcatNonemptyScript (concatNonempty) where
 
-import HERMIT.API
+import HERMIT.API.Prelude
 
 oneSide :: Rewrite LCore
 oneSide

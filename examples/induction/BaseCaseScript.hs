@@ -1,7 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module BaseCaseScript where
 
-import HERMIT.API
-import HERMIT.API.Types
+import HERMIT.API.Prelude
 
 baseCase :: Rewrite LCore
 baseCase

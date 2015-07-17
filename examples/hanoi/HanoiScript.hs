@@ -1,5 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module HanoiScript where
-import HERMIT.API
+
+import HERMIT.API.Prelude
 
 script :: Shell ()
 script = do

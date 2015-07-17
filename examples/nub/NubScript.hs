@@ -1,5 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module NubScript where
-import HERMIT.API
+
+import HERMIT.API.Prelude
 
 script :: Shell ()
 script = do

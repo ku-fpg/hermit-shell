@@ -1,7 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module VerifyConcatOfToListScript (concatOfToList) where
 
-import Prelude hiding (replicate)
-import HERMIT.API
+import HERMIT.API.Prelude
 
 nilCase :: Rewrite LCore
 nilCase

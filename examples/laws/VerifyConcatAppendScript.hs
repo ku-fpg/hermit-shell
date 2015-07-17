@@ -1,6 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module VerifyConcatAppendScript (concatAppend) where
 
-import HERMIT.API
+import HERMIT.API.Prelude
 
 import VerifyAppendAssocScript
 

@@ -1,7 +1,7 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 module ReverseScript where
-import HERMIT.API
-import HERMIT.API.Types
+
+import HERMIT.API.Prelude
 
 import WWAssAScript
 import StrictRepHScript

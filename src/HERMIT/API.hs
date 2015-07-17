@@ -10,6 +10,7 @@ module HERMIT.API
         , KernelEffect
         , ShellEffect
         , Name
+        , LemmaName
         , LocalPath
         , AST
         , PPType (..)

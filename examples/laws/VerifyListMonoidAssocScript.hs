@@ -1,8 +1,9 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module VerifyListMonoidAssocScript (listMonoidAssoc) where
 
 import VerifyAppendAssocScript
 
-import HERMIT.API
+import HERMIT.API.Prelude
 
 assocLeft :: Rewrite LCore
 assocLeft

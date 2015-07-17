@@ -1,8 +1,9 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module VerifyListLeftUnitScript (listLeftUnit) where
 
 import VerifyConcatUnitScript
 
-import HERMIT.API
+import HERMIT.API.Prelude
 
 import Control.Monad (replicateM_)
 
@@ -16,7 +17,7 @@ listLeftUnit = do
   concatUnit
 
   proof "left-unit" $ do
-    apply . anyBU $ inlineAny ["bind", "retur"]
+    apply . anyBU $ inlineWith ["bind", "retur"]
     apply smash
     apply . anyBU $ inlineWith "toList"
     apply smash

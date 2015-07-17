@@ -1,5 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module PreconditionRScript where
-import HERMIT.API
+
+import HERMIT.API.Prelude
 
 preconditionR :: Rewrite LCore
 preconditionR = do

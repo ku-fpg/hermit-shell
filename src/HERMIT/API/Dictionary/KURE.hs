@@ -1,31 +1,78 @@
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE ScopedTypeVariables #-}
-module HERMIT.API.Dictionary.KURE where
+module HERMIT.API.Dictionary.KURE (
+      idCore
+    , IdCore
+    , success
+    , fail
+    , (<+)
+    , (>>>)
+    , (>+>)
+    , try
+    , repeat
+    , replicate
+    , all
+    , any
+    , one
+    , allBU
+    , allTD
+    , allDU
+    , anyBU
+    , anyTD
+    , anyDU
+    , oneTD
+    , oneBU
+    , pruneTD
+    , innermost
+    , focus
+    , focusWithPath
+    , when
+    , not
+    , invert
+    , forward
+    , backward
+    , test
+    , anyCall
+    , promote
+    , extractR
+    , extractT
+    , between
+    , atPath
+    , atPathProj
+    , serialise
+    ) where
 
 import Data.Aeson
 import Data.Proxy
 
 import HERMIT.API.Types
 
--- | Perform an identity rewrite.
-idCore :: Rewrite LCore
+import Prelude hiding (all, any, fail, not, repeat, replicate)
+
+-- |
+-- idCore :: Rewrite LCore
+--   Perform an identity rewrite.
+-- idCore :: Rewrite LCoreTC
+--   Perform an identity rewrite.
+idCore :: IdCore a => Rewrite a
 idCore = Transform $ method "idCore" []
 
--- | Perform an identity rewrite.
-idCoreTC :: Rewrite LCoreTC
-idCoreTC = Transform $ method "idCoreTC" []
+-- | Class of types that can have an identity rewrite via 'idCore'.
+class IdCore a
+instance IdCore LCore
+instance IdCore LCoreTC
 
 -- | An always succeeding translation.
 success :: Transform LCore ()
 success = Transform $ method "success" []
 
 -- | A failing rewrite.
-fail_ :: String -> Rewrite LCore
-fail_ str = Transform $ method "fail_" [toJSON str]
+fail :: String -> Rewrite LCore
+fail str = Transform $ method "fail" [toJSON str]
 
-{-| 
-  Perform the first transformation, and then, if it fails, perform the 
+{-|
+  Perform the first transformation, and then, if it fails, perform the
   second transformation.
 -}
 (<+) :: Transform a b -> Transform a b -> Transform a b
@@ -51,14 +98,14 @@ repeat r = Transform $ method "repeat" [toJSON r]
 replicate :: Int -> Rewrite LCore -> Rewrite LCore
 replicate n r = Transform $ method "replicate" [toJSON n, toJSON r]
 
-{-| 
+{-|
   Apply a rewrite to all children of the node, requiring success at every child.
 -}
 all :: Rewrite LCore -> Rewrite LCore
 all r = Transform $ method "all" [toJSON r]
 
-{-| 
-  Apply a rewrite to all children of the node, requiring success for at least 
+{-|
+  Apply a rewrite to all children of the node, requiring success for at least
   one child.
 -}
 any :: Rewrite LCore -> Rewrite LCore
@@ -68,64 +115,64 @@ any r = Transform $ method "any" [toJSON r]
 one :: Rewrite LCore -> Rewrite LCore
 one r = Transform $ method "one" [toJSON r]
 
-{-| 
+{-|
   Promote a rewrite to operate over an entire tree in bottom-up order, requiring
   success at every node.
 -}
 allBU :: Rewrite LCore -> Rewrite LCore
 allBU r = Transform $ method "allBU" [toJSON r]
 
-{-| 
-  Promote a rewrite to operate over an entire tree in top-down order, requiring 
+{-|
+  Promote a rewrite to operate over an entire tree in top-down order, requiring
   success at every node.
 -}
 allTD :: Rewrite LCore -> Rewrite LCore
 allTD r = Transform $ method "allTD" [toJSON r]
 
-{-| 
-  Apply a rewrite twice, in a top-down and bottom-up way, using one single tree 
+{-|
+  Apply a rewrite twice, in a top-down and bottom-up way, using one single tree
   traversal, succeeding if they all succeed.
 -}
 allDU :: Rewrite LCore -> Rewrite LCore
 allDU r = Transform $ method "allDU" [toJSON r]
 
-{-| 
+{-|
   Promote a rewrite to operate over an entire tree in bottom-up order, requiring
   success for at least one node.
 -}
 anyBU :: Rewrite LCore -> Rewrite LCore
 anyBU r = Transform $ method "anyBU" [toJSON r]
 
-{-| 
-  Promote a rewrite to operate over an entire tree in top-down order, requiring 
+{-|
+  Promote a rewrite to operate over an entire tree in top-down order, requiring
   success for at least one node.
 -}
 anyTD :: Rewrite LCore -> Rewrite LCore
 anyTD r = Transform $ method "anyTD" [toJSON r]
 
-{-| 
-  Apply a rewrite twice, in a top-down and bottom-up way, using one single tree 
+{-|
+  Apply a rewrite twice, in a top-down and bottom-up way, using one single tree
   traversal, succeeding if any succeed.
 -}
 anyDU :: Rewrite LCore -> Rewrite LCore
 anyDU r = Transform $ method "anyDU" [toJSON r]
 
-{-| 
-  Apply a rewrite to the first node (in a top-down order) for which it can 
+{-|
+  Apply a rewrite to the first node (in a top-down order) for which it can
   succeed.
 -}
 oneTD :: Rewrite LCore -> Rewrite LCore
 oneTD r = Transform $ method "oneTD" [toJSON r]
 
-{-| 
-  Apply a rewrite to the first node (in a bottom-up order) for which it can 
+{-|
+  Apply a rewrite to the first node (in a bottom-up order) for which it can
   succeed.
 -}
 oneBU :: Rewrite LCore -> Rewrite LCore
 oneBU r = Transform $ method "oneBU" [toJSON r]
 
-{-| 
-  Attempt to apply a rewrite in a top-down manner, prunning at successful 
+{-|
+  Attempt to apply a rewrite in a top-down manner, prunning at successful
   rewrites.
 -}
 pruneTD :: Rewrite LCore -> Rewrite LCore
@@ -141,7 +188,7 @@ focus pth t = Transform $ method "focus" [toJSON pth, toJSON t]
 
 -- | Apply a transformation to a focal point pointed to by a path.
 focusWithPath :: LocalPath -> Transform a b -> Transform a b
-focusWithPath pth t = 
+focusWithPath pth t =
     Transform $ method "focus" [toJSON (Transform $ toJSON pth), toJSON t]
 
 -- | Apply a rewrite only if the check succeeds.
@@ -149,8 +196,8 @@ when :: Transform LCore () -> Rewrite LCore -> Rewrite LCore
 when a b = Transform $ method "when" [toJSON a, toJSON b]
 
 -- | Cause a failing check to succeed, a succeeding check to fail.
-not_ :: Transform LCore () -> Transform LCore ()
-not_ t = Transform $ method "not_" [toJSON t]
+not :: Transform LCore () -> Transform LCore ()
+not t = Transform $ method "not" [toJSON t]
 
 -- | Reverse a bidirectional rewrite.
 invert :: BiRewrite LCore -> BiRewrite LCore
@@ -168,12 +215,12 @@ backward r = Transform $ method "backward" [toJSON r]
 test :: Rewrite LCore -> Rewrite LCore
 test r = Transform $ method "test" [toJSON r]
 
-{-| 
-  @any-call (.. unfold command ..)@ applies an unfold command to all 
+{-|
+  @any-call (.. unfold command ..)@ applies an unfold command to all
   applications. Preference is given to applications with more arguments.
 -}
 anyCall :: forall g. Guts g => Rewrite g -> Rewrite g
-anyCall (Transform rr) = 
+anyCall (Transform rr) =
     Transform $ method "anyCall" [proxyToJSON (Proxy :: Proxy g) , rr]
 
 -- | Promote a RewriteCore to a RewriteCoreTC
@@ -186,7 +233,7 @@ extractR r = Transform $ method "extractR" [toJSON r]
 
 -- | Extract a Transform LCore String from a Transform LCoreTC String
 extractT :: Transform LCoreTC String -> Transform LCore String
-extractT t = Transform $ method "extractT" [toJSON t] 
+extractT t = Transform $ method "extractT" [toJSON t]
 
 -- | between x y rr -> perform rr at least x times and at most y times.
 between :: Int -> Int -> Rewrite LCoreTC -> Rewrite LCoreTC

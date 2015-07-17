@@ -1,8 +1,9 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module VerifyConcatUnitScript (concatUnit) where
 
 import VerifyAppendNilScript
 
-import HERMIT.API
+import HERMIT.API.Prelude
 
 concatUnit :: Shell ()
 concatUnit = do

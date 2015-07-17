@@ -1,6 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module FlattenScript where
-import HERMIT.API
-import HERMIT.API.Types
+
+import HERMIT.API.Prelude
 
 import StrictRepHScript
 import WWAssAScript

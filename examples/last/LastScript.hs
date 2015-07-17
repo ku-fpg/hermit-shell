@@ -1,5 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module LastScript where
-import HERMIT.API
+
+import HERMIT.API.Prelude
 
 import WWAssBScript
 
@@ -8,6 +10,6 @@ script = do
   apply flattenModule
   setPath $ bindingOf "last"
   apply $ wwSplitStaticArg 1 [0] "wrap" "unwrap" (wwAssBToAssC wwb)
-  apply $ bashExtendedWith [ inlineAny [ "f", "wrap", "unwrap" ] ]
+  apply $ bashExtendedWith [ inlineWith [ "f", "wrap", "unwrap" ] ]
   apply unshadow
 

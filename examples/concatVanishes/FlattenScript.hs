@@ -1,11 +1,9 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 module FlattenScript where
 
-import HERMIT.API
-import HERMIT.API.Types
+import HERMIT.API.Prelude
 
 import ConcatVanishesScript
-
 import WWAssAScript
 
 wwc :: Rewrite LCore

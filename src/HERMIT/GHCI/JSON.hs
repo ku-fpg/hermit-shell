@@ -23,8 +23,6 @@ import           System.Console.Haskeline.Completion (Completion(..))
 
 import           Web.Scotty (readEither)
 
-import           HERMIT.GHCI.Glyph
-
 
 type UserID = Integer
 
@@ -94,22 +92,6 @@ instance FromJSON Crumb where
             _ -> return $ read cstr
     parseJSON _          = mzero
 
--- | CommandResponse
-data CommandResponse = CommandResponse { crMsg :: Maybe String
-                                       , crGlyphs :: Maybe [Glyph]
-                                       , crAst :: AST
-                                       }
-
-fromMaybeAttr :: ToJSON a => T.Text -> Maybe a -> [Pair]
-fromMaybeAttr nm = maybe [] (\ a -> [nm .= a])
-
-instance ToJSON CommandResponse where
-    toJSON cr = object $ ("ast" .= crAst cr) : fromMaybeAttr "glyphs" (crGlyphs cr) ++ fromMaybeAttr "msg" (crMsg cr)
-
-instance FromJSON CommandResponse where
-    parseJSON (Object v) = CommandResponse <$> v .:? "msg" <*> v .:? "glyphs" <*> v .: "ast"
-    parseJSON _          = mzero
-
 -- | CommandList
 data CommandList = CommandList { clCmds :: [CommandInfo] }
 
@@ -142,12 +124,6 @@ instance ToJSON CmdTag where
 instance FromJSON CmdTag where
     parseJSON = fromJSONString
 
-instance ToJSON Style where
-    toJSON = stringToJSON
-
-instance FromJSON Style where
-    parseJSON = fromJSONString
-
 stringToJSON :: Show a => a -> Value
 stringToJSON = String . T.pack . show
 
@@ -157,15 +133,6 @@ fromJSONString (String s) =
         Left _msg -> mzero
         Right sty -> pure sty
 fromJSONString _ = mzero
-
-
-instance ToJSON Glyph where
-    toJSON g = object $ ("text" .= gText g) : fromMaybeAttr "style" (gStyle g)
-
-instance FromJSON Glyph where
-    parseJSON (Object v) = Glyph <$> v .: "text"
-                                 <*> v .:? "style"
-    parseJSON _          = mzero
 
 data History = History { hCmds :: [HCmd]
                        , hTags :: [HTag]
@@ -235,4 +202,5 @@ data HermitCommand :: * -> * -> * where
 --   ShellEffect :: ShellEffect ->
    Display    :: HermitCommand () ()
 
---
+fromMaybeAttr :: ToJSON a => T.Text -> Maybe a -> [Pair]
+fromMaybeAttr nm = maybe [] (\ a -> [nm .= a])

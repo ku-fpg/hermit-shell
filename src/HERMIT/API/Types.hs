@@ -9,17 +9,15 @@ module HERMIT.API.Types where
 import Control.Applicative
 import Control.Monad
 
+import Data.Coerce
+
 import Data.Aeson
 import Data.Aeson.Types
 import Data.Maybe
 import Data.Text
-import Data.String
 import Data.Typeable
 
-import HERMIT.GHCI.JSON
-import           HERMIT.GHCI.Glyph
-
-import Data.Coerce
+import HERMIT.GHCI.Glyph
 
 ------------------------------------------------------------------------
 
@@ -96,16 +94,7 @@ newtype BiTransform a b = BiTransform Value
 
 ------------------------------------------------------------------------
 
-newtype Name = Name String
-   deriving (Eq,Ord)
-
-instance Show Name where show (Name nm) = nm
-
-instance IsString Name where
-  fromString = Name
-
-instance ToJSON Name where
-  toJSON (Name nm) = toJSON nm
+type Name = String
 
 ------------------------------------------------------------------------
 
@@ -128,7 +117,7 @@ instance Response Glyphs where
          sequence_ [ withStyle sty txt
                    | Glyph txt sty <- gs
                    ]
---         putStrLn "[End Glyphs]"          
+--         putStrLn "[End Glyphs]"
 
 ------------------------------------------------------------------------
 
@@ -193,13 +182,11 @@ newtype CommandLineState = CommandLineState Value
 
 ------------------------------------------------------------------------
 
-newtype LemmaName = LemmaName String
-  deriving (ToJSON, IsString)
+type LemmaName = Name
 
 ------------------------------------------------------------------------
 
-newtype HermitName = HermitName String
-  deriving (ToJSON, IsString)
+type HermitName = Name
 
 ------------------------------------------------------------------------
 
@@ -211,8 +198,7 @@ newtype PrettyPrinter = PrettyPrinter Value
 
 ------------------------------------------------------------------------
 
-newtype RuleName = RuleName String
-  deriving (ToJSON, IsString)
+type RuleName = Name
 
 ------------------------------------------------------------------------
 

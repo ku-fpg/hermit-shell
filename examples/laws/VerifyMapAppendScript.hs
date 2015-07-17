@@ -1,9 +1,10 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module VerifyMapAppendScript (mapAppend) where
 
 import VerifyAppendNonemptyScript
 import VerifyMapNonemptyScript
 
-import HERMIT.API
+import HERMIT.API.Prelude
 
 nilLeft :: Rewrite LCore
 nilLeft

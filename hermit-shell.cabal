@@ -87,6 +87,7 @@ library
                         HERMIT.API.Dictionary.WorkerWrapper.FixResult
                         HERMIT.API.Dictionary.Reasoning
                         HERMIT.API.Dictionary.Unsafe
+                        HERMIT.API.Prelude
                         HERMIT.API.Shell
                         HERMIT.API.Shell.Externals
                         HERMIT.API.Shell.Proof

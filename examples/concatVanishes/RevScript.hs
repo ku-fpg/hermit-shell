@@ -1,7 +1,7 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 module RevScript where
-import HERMIT.API
-import HERMIT.API.Types
+
+import HERMIT.API.Prelude
 
 import ConcatVanishesScript
 import WWAssAScript

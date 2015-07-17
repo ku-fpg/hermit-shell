@@ -1,6 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module VerifyMapComposeScript (mapCompose) where
 
-import HERMIT.API
+import HERMIT.API.Prelude
 
 composeLeft :: Rewrite LCore
 composeLeft

@@ -130,7 +130,6 @@ mkHermitShellTest (dir, hs, moduleName, script) =
                 , "--"
                 , "ghc"
                 , "-fno-code"
-                , "-XOverloadedStrings"
                 , script
                 ]
 

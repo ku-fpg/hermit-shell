@@ -1,7 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module StrictRepHScript where
 
-import HERMIT.API
-import HERMIT.API.Types
+import HERMIT.API.Prelude
 
 strictRepH :: Rewrite LCore
 strictRepH =

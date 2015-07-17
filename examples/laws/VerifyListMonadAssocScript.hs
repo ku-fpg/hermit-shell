@@ -1,3 +1,4 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module VerifyListMonadAssocScript (listMonadAssoc) where
 --------------------------------------------
 -- Verify monad-assoc (for List)
@@ -34,7 +35,7 @@ module VerifyListMonadAssocScript (listMonadAssoc) where
 -- \x -> concat (concat x) == \x -> concat (map concat x)
 
 --------------------------------------------
-import HERMIT.API
+import HERMIT.API.Prelude
 
 import VerifyMapComposeScript
 import VerifyConcatNonemptyScript

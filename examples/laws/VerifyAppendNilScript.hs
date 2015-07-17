@@ -1,3 +1,4 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module VerifyAppendNilScript (appendNil) where
 
   --------------------------------------------
@@ -7,8 +8,7 @@ module VerifyAppendNilScript (appendNil) where
   --
   --------------------------------------------
 
-import HERMIT.API
-import HERMIT.API.Types
+import HERMIT.API.Prelude
 
 appendNilNil :: Rewrite LCore
 appendNilNil

@@ -1,5 +1,7 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 module FStrictScript where
-import HERMIT.API
+
+import HERMIT.API.Prelude
 
 fstrict :: Rewrite LCore
 fstrict = do
