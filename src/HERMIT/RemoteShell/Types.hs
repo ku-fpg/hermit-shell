@@ -4,6 +4,8 @@
 -- This types that are common to both the Server and GHCI.
 module HERMIT.RemoteShell.Types where
 
+import Control.Applicative
+
 import HERMIT.PrettyPrinter.Common
 
 import HERMIT.GHCI.JSON
@@ -25,6 +27,9 @@ newtype Document = Document DocH
 
 instance ToJSON Document where
   toJSON (Document doc) = toJSON doc
+
+instance FromJSON Document where
+  parseJSON doc = Document <$> parseJSON doc
 
 -- Extract the underlying DocH.        
 toDocH :: Document -> DocH

@@ -26,6 +26,7 @@ instance External (ShellEffect ()) where
     , external "abort"            Abort     -- UNIX Exit
     , external "continue"         Continue  -- Shell Exit, but not HERMIT
     , external "display" (CLSModify $ showWindowAlways Nothing)
+    , external "display$" (CLSModify $ showWindowAlways Nothing)
 --  , external "navigate" (CLSModify $ modify $ \ st -> st { cl_nav = True })
     , external "setWindow" (CLSModify $ setWindow >> showWindow Nothing)
     , external "back"            (CLSModify $ versionCmd Back)
