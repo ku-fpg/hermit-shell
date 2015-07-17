@@ -30,12 +30,18 @@ import           Text.PrettyPrint.MarkedHughesPJ as PP
 
 -- From package marked-pretty
 instance ToJSON mark => ToJSON (MDoc mark)
+instance FromJSON mark => FromJSON (MDoc mark)
 
 -- From package hermit
 instance ToJSON mark => ToJSON (TextDetails mark)
+instance FromJSON mark => FromJSON (TextDetails mark)
+
 instance ToJSON HermitMark
+instance FromJSON HermitMark
 instance ToJSON Attr
+instance FromJSON Attr
 instance ToJSON SyntaxForColor
+instance FromJSON SyntaxForColor
 
 instance ToJSON Crumb where
     -- cases where there are fields
@@ -64,4 +70,5 @@ instance FromJSON Crumb where
 -- From package kure
 instance ToJSON a => ToJSON (KURE.SnocPath a) where
   toJSON (KURE.SnocPath p) = toJSON p
-
+instance FromJSON a => FromJSON (KURE.SnocPath a) where
+  parseJSON a = KURE.SnocPath <$> parseJSON a
