@@ -25,16 +25,16 @@ instance External (ShellEffect ()) where
     [ external "resume"  Resume
     , external "abort"            Abort     -- UNIX Exit
     , external "continue"         Continue  -- Shell Exit, but not HERMIT
-    , external "display" (CLSModify $ showWindowAlways Nothing)
-    , external "display$" (CLSModify $ showWindowAlways Nothing)
+    , external "display" (CLSModify $ printWindowAlways Nothing)
+    , external "display$" (CLSModify $ printWindowAlways Nothing)
 --  , external "navigate" (CLSModify $ modify $ \ st -> st { cl_nav = True })
-    , external "setWindow" (CLSModify $ setWindow >> showWindow Nothing)
+    , external "setWindow" (CLSModify $ setWindow >> printWindow Nothing)
     , external "back"            (CLSModify $ versionCmd Back)
     , external "step"            (CLSModify $ versionCmd Step)
     , external "tag"             (CLSModify . versionCmd . Tag)
     , external "setPPDiffOnly" (\ bStr -> CLSModify $
         case reads bStr of
-            [(b,"")] -> modify (\st -> st { cl_diffonly = b }) >> showWindow Nothing
+            [(b,"")] -> modify (\st -> st { cl_diffonly = b }) >> printWindow Nothing
             _        -> fail "valid arguments are True and False" )
     , external "setFailHard"    (\ bStr -> CLSModify $
         case reads bStr of
@@ -48,28 +48,28 @@ instance External (ShellEffect ()) where
         case M.lookup name pp_dictionary of
             Nothing -> fail $ "List of Pretty Printers: " ++ intercalate ", " (M.keys pp_dictionary)
             Just pp -> do modify $ \ st -> setPrettyOpts (setPretty st pp) (cl_pretty_opts st) -- careful to preserve the current options
-                          showWindow Nothing)
+                          printWindow Nothing)
     , external "setPPWidth" (\ w -> CLSModify $ do
             modify $ \ st -> setPrettyOpts st (updateWidthOption w (cl_pretty_opts st))
-            showWindow Nothing)
+            printWindow Nothing)
     , external "setPPType" (\ str -> CLSModify $
         case reads str :: [(ShowOption,String)] of
             [(opt,"")] -> do modify $ \ st -> setPrettyOpts st (updateTypeShowOption opt (cl_pretty_opts st))
-                             showWindow Nothing
+                             printWindow Nothing
             _          -> fail "valid arguments are Show, Abstract, and Omit")
     , external "setPPCoercion" (\ str -> CLSModify $
         case reads str :: [(ShowOption,String)] of
             [(opt,"")] -> do modify $ \ st -> setPrettyOpts st (updateCoShowOption opt (cl_pretty_opts st))
-                             showWindow Nothing
+                             printWindow Nothing
             _          -> fail "valid arguments are Show, Abstract, and Omit")
     , external "setPPUniques" (\ str -> CLSModify $
         case reads str of
             [(b,"")] -> do modify $ \ st -> setPrettyOpts st ((cl_pretty_opts st) { po_showUniques = b })
-                           showWindow Nothing
+                           printWindow Nothing
             _        -> fail "valid arguments are True and False")
     , external "stopScript" (CLSModify $ setRunningScript Nothing)
 
-    , external "proveLemma" (\nm -> CLSModify $ interactiveProof nm >> showWindow Nothing)
+    , external "proveLemma" (\nm -> CLSModify $ interactiveProof nm >> printWindow Nothing)
 {-
     , external "dump" (\fp pp r w -> CLSModify (dump fp pp r w))
 -}
