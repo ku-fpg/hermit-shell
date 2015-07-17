@@ -68,27 +68,20 @@ instance External (TypedEffectH ()) where
   parseExternals =
     [ fmap ShellEffectH . parseExternal
     , fmap RewriteLCoreTCH . parseExternal
-    , external' "setPath" (SetPathH :: TransformH LCoreTC LocalPathH -> TypedEffectH ())
-        ["sets the path"]
-    , external' "setPath" ((SetPathH :: TransformH LCore LocalPathH -> TypedEffectH ()) . (\crumb -> transform (\ _hermitC _lcore -> return (singletonSnocPath crumb))) :: Crumb -> TypedEffectH ())
-        ["sets the path"]
-    , external' "query"   (QueryH :: QueryFun () -> TypedEffectH ())
-        ["performs query"]
-    , external' "rewrite" (RewriteLCoreH :: RewriteH LCore -> TypedEffectH ())
-       ["performs query"]
-    , external' "eval" (EvalH :: String -> TypedEffectH ())
-       ["performs legacy shell"]
+    , external "setPath" (SetPathH :: TransformH LCoreTC LocalPathH -> TypedEffectH ())
+    , external "setPath" ((SetPathH :: TransformH LCore LocalPathH -> TypedEffectH ()) . (\crumb -> transform (\ _hermitC _lcore -> return (singletonSnocPath crumb))) :: Crumb -> TypedEffectH ())
+    , external "query"   (QueryH :: QueryFun () -> TypedEffectH ())
+    , external "rewrite" (RewriteLCoreH :: RewriteH LCore -> TypedEffectH ())
+    , external "eval" (EvalH :: String -> TypedEffectH ())
     ]
 
 instance External TypedEffectBox where
   parseExternals =
-    [ external' "query"
+    [ external "query"
         (fromBoxToBox :: QueryFunBox -> TypedEffectBox)
-        [ "performs query" ]
-    , external' "setPath"
+    , external "setPath"
         (TypedEffectBox . SetPathH :: TransformH LCore LocalPathH
                                    -> TypedEffectBox)
-        ["sets the path"]
     ]
 
 fromBoxToBox :: QueryFunBox -> TypedEffectBox

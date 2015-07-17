@@ -13,7 +13,6 @@ __LANGUAGE_OVERLAPPING_INSTANCES__
 module HERMIT.Server.Parser.Utils
         ( External(parseExternal, parseExternals)
         , external
-        , external'
         , alts
         , CmdTag(..)
         , (.+)
@@ -50,9 +49,6 @@ external nm f (Object o) = case parseMaybe p o of
  where p o' = (,) <$> o' .: "method"
                   <*> o' .: "params"
 external nm _ _ = fail $ "no match for " ++ show nm
-
-external' :: External a => Text -> a -> [String] -> Value -> Parser (R a)
-external' nm f _ o = external nm f o
 
 class Typeable e => External e where
   type R e :: *
