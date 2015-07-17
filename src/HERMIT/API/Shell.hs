@@ -15,7 +15,7 @@ import HERMIT.API.Dictionary.KURE (serialise)
 import HERMIT.GHCI.Glyph        -- Feels wrong to pull this in here
 
 -- | redisplays current state.
-display :: Shell Glyphs
+display :: Shell ()
 display = Shell $ method "display" []
 
 -- | stops HERMIT; resumes compile.
