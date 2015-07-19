@@ -5,7 +5,10 @@
 
 module HERMIT.Server.Parser.ShellEffect where
 
+import           Control.Applicative
+
 import           Data.Aeson
+import           Data.Typeable (Proxy(..))
 
 import           HERMIT.Shell.ShellEffect
 import           HERMIT.Shell.Types
@@ -24,6 +27,13 @@ import           HERMIT.Shell.Externals
 
 import qualified Data.Map as M
 import           Data.List (intercalate)
+
+-- | 'parseExternalShellEffect' is the top-level parser 
+-- for Shell Effects, returning the universial return type.
+parseExternalShellEffect :: ExternalParser (ShellEffect Value)
+parseExternalShellEffect = 
+        parseToValue (Proxy :: Proxy (ShellEffect DocH))
+   <|>  parseToValue (Proxy :: Proxy (ShellEffect ()))
 
 instance External (ShellEffect DocH) where
   parseExternals = 

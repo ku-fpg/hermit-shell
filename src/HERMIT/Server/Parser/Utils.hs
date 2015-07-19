@@ -14,7 +14,10 @@ __LANGUAGE_OVERLAPPING_INSTANCES__
 
 module HERMIT.Server.Parser.Utils
         ( External(parsePrimitive, parseExternals)
+        , ExternalParser -- abstact
         , parseExternal
+        , runExternalParser
+        , parseToValue
         , external
         , alts
         , reply
@@ -44,16 +47,35 @@ import           HERMIT.Lemma
 newtype ExternalParser :: * -> * where
   ExternalParser     :: (Value -> Parser a) -> ExternalParser a
 
+runExternalParser :: ExternalParser a -> Value -> Parser a
+runExternalParser (ExternalParser f) v = f v
+
 instance Functor ExternalParser where
   fmap f (ExternalParser g) = ExternalParser (fmap f . g)
 
+instance Applicative ExternalParser where
+  pure = ExternalParser . const . pure
+  ExternalParser f <*> ExternalParser g = ExternalParser (\ v -> f v <*> g v)
+
+instance Alternative ExternalParser where
+  empty = ExternalParser (const $ fail "empty")
+  ExternalParser f <|> ExternalParser g = ExternalParser (\ v -> f v <|> g v)
+
+{-
 instance Monoid (ExternalParser a) where
-  mempty = ExternalParser (fail "mempty")
+  mempty = ExternalParser (const $ fail "mempty")
   mappend (ExternalParser f) (ExternalParser g) = ExternalParser $ \ v ->
           f v <|> g v
+-}
 
 alts :: [ExternalParser b] -> ExternalParser b
-alts = mconcat -- as a = foldr (<|>) (fail "no match") $ map ($ a) as
+alts = foldr (<|>) empty
+
+-- | 'parseToValue' is used to combine External instances into a single universal
+--   (Value) type.
+parseToValue :: forall f e . (Functor f, ToJSON e, External (f e))
+             => Proxy (f e) -> ExternalParser (f Value)
+parseToValue Proxy = fmap toJSON <$> (parseExternal :: ExternalParser (f e))
 
 -----------------------------------------------
 
