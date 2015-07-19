@@ -11,21 +11,21 @@ import           HERMIT.Lemma
 import           HERMIT.Server.Parser.Utils
 
 instance External HermitName where
-  parseExternal (String txt) = return . parseName $ Text.unpack txt
-  parseExternal _            = fail "fail: HermitName"
+  parsePrimitive (String txt) = return . parseName $ Text.unpack txt
+  parsePrimitive _            = fail "fail: HermitName"
 
 instance External RhsOfName where
-  parseExternal (String txt) = return . RhsOfName . parseName $ Text.unpack txt
-  parseExternal _            = fail "fail: RhsOfName"          
+  parsePrimitive (String txt) = return . RhsOfName . parseName $ Text.unpack txt
+  parsePrimitive _            = fail "fail: RhsOfName"          
 
 instance External BindingName where
-  parseExternal (String txt) = return . BindingName . parseName $ Text.unpack txt
-  parseExternal _            = fail "fail: BindingName"          
+  parsePrimitive (String txt) = return . BindingName . parseName $ Text.unpack txt
+  parsePrimitive _            = fail "fail: BindingName"          
 
 instance External LemmaName where
-  parseExternal (String txt) = return . LemmaName $ Text.unpack txt
-  parseExternal _            = fail "fail: LemmaName"
+  parsePrimitive (String txt) = return . LemmaName $ Text.unpack txt
+  parsePrimitive _            = fail "fail: LemmaName"
 
 instance External OccurrenceName where
-  parseExternal (String txt) = return . OccurrenceName . parseName $ Text.unpack txt
-  parseExternal _            = fail "fail: OccurrenceName"
+  parsePrimitive (String txt) = return . OccurrenceName . parseName $ Text.unpack txt
+  parsePrimitive _            = fail "fail: OccurrenceName"

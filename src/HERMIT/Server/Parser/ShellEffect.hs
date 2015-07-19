@@ -5,14 +5,19 @@
 
 module HERMIT.Server.Parser.ShellEffect where
 
+import           Data.Aeson
+
 import           HERMIT.Shell.ShellEffect
 import           HERMIT.Shell.Types
 import           HERMIT.Shell.Dictionary
 import           HERMIT.Shell.Proof
 import           HERMIT.PrettyPrinter.Common
 
+import           HERMIT.RemoteShell.Orphanage()
+
 import           HERMIT.Server.Parser.Utils
 import           HERMIT.Server.Parser.Name ()
+
 
 import           Control.Monad.State (modify)
 import           HERMIT.Shell.Externals
@@ -20,13 +25,18 @@ import           HERMIT.Shell.Externals
 import qualified Data.Map as M
 import           Data.List (intercalate)
 
+instance External (ShellEffect DocH) where
+  parseExternals = 
+    [ external "display$" (CLSModify showWindow)
+    ]
+
 instance External (ShellEffect ()) where
   parseExternals =
     [ external "resume"  Resume
     , external "abort"            Abort     -- UNIX Exit
     , external "continue"         Continue  -- Shell Exit, but not HERMIT
     , external "display" (CLSModify $ printWindowAlways Nothing)
-    , external "display$" (CLSModify $ printWindowAlways Nothing)
+--    , external "display$" (CLSModify $ showWindow)
 --  , external "navigate" (CLSModify $ modify $ \ st -> st { cl_nav = True })
     , external "setWindow" (CLSModify $ setWindow >> printWindow Nothing)
     , external "back"            (CLSModify $ versionCmd Back)

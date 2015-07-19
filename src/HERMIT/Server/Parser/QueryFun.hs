@@ -18,7 +18,7 @@ import           Control.Monad
 
 instance External (QueryFun ()) where
   parseExternals =
-    [ fmap (QueryUnit :: TransformH LCore () -> QueryFun ()) . parseExternal
+    [ fmap (QueryUnit :: TransformH LCore () -> QueryFun ()) parseExternal
     , external "log"             (Inquiry showDerivationTree)
     , external "diff"            Diff
     , external "displayScripts" displayScripts
@@ -26,7 +26,7 @@ instance External (QueryFun ()) where
 
 instance External QueryFunBox where
   parseExternals =
-    [ fmap (QueryFunBox . QueryUnit :: TransformH LCore () -> QueryFunBox) . 
+    [ fmap (QueryFunBox . QueryUnit :: TransformH LCore () -> QueryFunBox) 
            parseExternal
     , external "log"
         (QueryFunBox $ Inquiry showDerivationTree)
@@ -34,7 +34,7 @@ instance External QueryFunBox where
         (\ ast -> QueryFunBox . Diff ast)
     , external "displayScripts" 
         (QueryFunBox displayScripts)
-    , fmap (fromAToBox . QueryA :: TransformH LCore String -> QueryFunBox) . 
+    , fmap (fromAToBox . QueryA :: TransformH LCore String -> QueryFunBox) 
            parseExternal
     ]
 
@@ -43,9 +43,9 @@ fromAToBox x@QueryA{} = QueryFunBox x
 fromAToBox _ = error "fromAToBox"
 
 instance External AST where
-  parseExternal (Number n) = return $ (integerToAST . fromInteger . floor) n
+  parsePrimitive (Number n) = return $ (integerToAST . fromInteger . floor) n
     where
       integerToAST :: Int -> AST
       integerToAST = read . show
-  parseExternal _ = mzero
+  parsePrimitive _ = mzero
 

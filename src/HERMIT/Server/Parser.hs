@@ -45,17 +45,10 @@ parseCLT = parseMaybe parseTopLevel
 
 parseTopLevel :: (MonadIO m, Functor m)
               => Aeson.Value -> Parser (CLT m Aeson.Value)
-parseTopLevel v =
-    (do v' <- parseExternal v :: Parser TypedEffectBox
-        trace "parsed fine" $ return ()
-        return $! performBoxedEffect (pprint v) v')
-    <|> (fmap toJSON
-       <$> ((performTypedEffectH (pprint v)
-               <$> (parseExternal v :: Parser (TypedEffectH ())))
-            <|> (performKernelEffect (stubExprH "<hermit-shell>")
-                   <$> (parseExternal v :: Parser KernelEffect))
-            <|> ((\c -> performProofShellCommand c (stubExprH "<hermit-shell>"))
-                   <$> (parseExternal v :: Parser ProofShellCommand))))
+parseTopLevel v = 
+    fmap toJSON <$>
+    performTypedEffectH (pprint v)
+        <$> (parsePrimitive v :: Parser (TypedEffectH ()))
   where
     -- The Show instance for Value prints out Vector literals, which have
     -- different output depending on which version of vector is being used.
@@ -64,16 +57,18 @@ parseTopLevel v =
     pprint :: Aeson.Value -> String
     pprint = unpack . encodePretty
 
+
 instance External (TypedEffectH ()) where
   parseExternals =
-    [ fmap ShellEffectH . parseExternal
-    , fmap RewriteLCoreTCH . parseExternal
+    [ fmap ShellEffectH parseExternal 
+    , fmap RewriteLCoreTCH parseExternal
     , external "setPath" (SetPathH :: TransformH LCoreTC LocalPathH -> TypedEffectH ())
     , external "setPath" ((SetPathH :: TransformH LCore LocalPathH -> TypedEffectH ()) . (\crumb -> transform (\ _hermitC _lcore -> return (singletonSnocPath crumb))) :: Crumb -> TypedEffectH ())
     , external "query"   (QueryH :: QueryFun () -> TypedEffectH ())
     , external "rewrite" (RewriteLCoreH :: RewriteH LCore -> TypedEffectH ())
     , external "eval" (EvalH :: String -> TypedEffectH ())
     ]
+
 
 instance External TypedEffectBox where
   parseExternals =
