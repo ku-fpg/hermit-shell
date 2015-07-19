@@ -23,6 +23,12 @@ import qualified Language.KURE.Path as KURE
 import HERMIT.RemoteShell.Orphanage
 import HERMIT.GHCI.Glyph
 import HERMIT.API.Types
+
+import HERMIT.Plugin.Renderer
+
+import Data.Default.Class
+
+import System.IO (stdout)
         
 -- 'Document' is the client facing, pre-rendered, pretty output.
 newtype Document = Document DocH
@@ -37,6 +43,9 @@ instance FromJSON Document where
 instance Response Document where
   printResponse (Document doc) = do
           print "Start Document"
+          case lookup "unicode-terminal" shellRenderers of
+            Nothing -> print "No unicode-terminal"
+            Just f -> f stdout def (Right doc)
           print "<<DOCUMENT>>"
           print "End Document"
 
