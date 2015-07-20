@@ -67,7 +67,7 @@ import Prelude hiding
 -- id :: Rewrite LCoreTC
 --   Perform an identity rewrite.
 id :: Id a => Rewrite a
-id = Transform $ method "idCore" []
+id = Transform $ method "id" []
 
 -- | Class of types that can have an identity rewrite via 'idCore'.
 class Id a
