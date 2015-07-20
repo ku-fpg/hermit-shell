@@ -101,6 +101,8 @@ library
                         HERMIT.GHCI.Printer
                         HERMIT.GHCI.Renderer
                         HERMIT.GHCI.Types
+                        HERMIT.RemoteShell.Orphanage
+                        HERMIT.RemoteShell.Types
                         HERMIT.Server.Parser
                         HERMIT.Server.Parser.Crumb
                         HERMIT.Server.Parser.Name

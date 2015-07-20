@@ -9,13 +9,9 @@ import           HERMIT.Shell.Types
 
 instance External KernelEffect where
   parseExternals =
-    [ external' "up" (Direction U)
-        [ "move to the parent node" ]
-    , external' "top" (Direction T)
-        [ "move to root of current scope" ]
-    , external' "beginScope" BeginScope
-        ["push current lens onto a stack"]       -- tag as internal
-    , external' "endScope"    EndScope
-        ["pop a lens off a stack"]               -- tag as internal
+    [ external "up" (Direction U)
+    , external "top" (Direction T)
+    , external "beginScope" BeginScope
+    , external "endScope"    EndScope
     ]
 

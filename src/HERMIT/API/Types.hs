@@ -228,3 +228,20 @@ instance TransCat (Transform a b) where
 
 instance TransCat (BiTransform a b) where
     transCat = BiTransform
+
+------------------------------------------------------------------------
+
+{-
+-- The idea, for the shell, is we have one global TMVar that 
+-- contains all the client-side state.
+
+class ShellOptions = ShellOptions {
+    shellRenderOptions :: RenderOptions                         -- ^ The options for 'print'
+    shellRenderer      :: RenderOptions -> Document -> IO ()    -- ^ The shell 'print' function
+  }
+
+-- Should we use a lenses package here?
+setShellRenderOptions :: ..
+
+-}  
+

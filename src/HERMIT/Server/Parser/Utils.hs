@@ -6,21 +6,28 @@
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE ViewPatterns #-}
 {-# LANGUAGE StandaloneDeriving #-}
+{-# LANGUAGE GADTs #-}
+
 
 #include "overlap.h"
 __LANGUAGE_OVERLAPPING_INSTANCES__
 
 module HERMIT.Server.Parser.Utils
-        ( External(parseExternal, parseExternals)
+        ( External(parsePrimitive, parseExternals)
+        , ExternalParser -- abstact
+        , parseExternal
+        , runExternalParser
+        , parseToValue
         , external
-        , external'
         , alts
+        , reply
         , CmdTag(..)
         , (.+)
         ) where
 
 import           Control.Applicative
 import           Control.Monad (liftM)
+-- import           Data.Monoid
 import           Data.Foldable (toList)
 
 import           Data.Aeson as Aeson
@@ -37,32 +44,67 @@ import           HERMIT.Lemma
 
 --import           Debug.Trace
 
-alts :: [a -> Parser b] -> a -> Parser b
-alts as a = foldr (<|>) (fail "no match") $ map ($ a) as
+newtype ExternalParser :: * -> * where
+  ExternalParser     :: (Value -> Parser a) -> ExternalParser a
+
+runExternalParser :: ExternalParser a -> Value -> Parser a
+runExternalParser (ExternalParser f) v = f v
+
+instance Functor ExternalParser where
+  fmap f (ExternalParser g) = ExternalParser (fmap f . g)
+
+instance Applicative ExternalParser where
+  pure = ExternalParser . const . pure
+  ExternalParser f <*> ExternalParser g = ExternalParser (\ v -> f v <*> g v)
+
+instance Alternative ExternalParser where
+  empty = ExternalParser (const $ fail "empty")
+  ExternalParser f <|> ExternalParser g = ExternalParser (\ v -> f v <|> g v)
+
+{-
+instance Monoid (ExternalParser a) where
+  mempty = ExternalParser (const $ fail "mempty")
+  mappend (ExternalParser f) (ExternalParser g) = ExternalParser $ \ v ->
+          f v <|> g v
+-}
+
+alts :: [ExternalParser b] -> ExternalParser b
+alts = foldr (<|>) empty
+
+-- | 'parseToValue' is used to combine External instances into a single universal
+--   (Value) type.
+parseToValue :: forall f e . (Functor f, ToJSON e, External (f e))
+             => Proxy (f e) -> ExternalParser (f Value)
+parseToValue Proxy = fmap toJSON <$> (parseExternal :: ExternalParser (f e))
 
 -----------------------------------------------
 
-external :: External a => Text -> a -> Value -> Parser (R a)
---external nm _ _ v | traceShow ("external"::String,nm,v) False = undefined
-external nm f (Object o) = case parseMaybe p o of
-        Just (nm',args) | nm' == nm -> matchExternal f args
-        _                           -> fail $ "no match for " ++ show nm
- where p o' = (,) <$> o' .: "method"
-                  <*> o' .: "params"
-external nm _ _ = fail $ "no match for " ++ show nm
+external :: External a => Text -> a -> ExternalParser (R a)
+external nm f = ExternalParser $ \ v -> case v of
+        (Object o) -> case parseMaybe p o of
+                Just (nm',args) | nm' == nm -> matchExternal f args
+                _                           -> fail $ "no match for " ++ show nm
+        _ -> fail $ "no match for " ++ show nm
+   where p o' = (,) <$> o' .: "method"
+                    <*> o' .: "params"
 
-external' :: External a => Text -> a -> [String] -> Value -> Parser (R a)
-external' nm f _ o = external nm f o
+-- convert a parser to return a JSON Value
+reply :: (Functor f, ToJSON e) => ExternalParser (f e) -> ExternalParser (f Value)
+reply = fmap (fmap toJSON)
 
-class Typeable e => External e where
+parseExternal :: External e => ExternalParser e
+parseExternal = alts parseExternals
+
+class External e where
   type R e :: *
   type R e = e  -- default
 
-  parseExternal :: Value -> Parser e
-  parseExternal = alts parseExternals
+  parsePrimitive :: Value -> Parser e
+  parsePrimitive v = case alts parseExternals of
+                      ExternalParser f -> f v
 
-  parseExternals :: [Value -> Parser e]
-  parseExternals = [parseExternal]
+  parseExternals :: [ExternalParser e]
+  parseExternals = [ExternalParser parsePrimitive]
 
   matchExternal :: e -> [Value] -> Parser (R e)
 
@@ -70,15 +112,15 @@ class Typeable e => External e where
   matchExternal e [] = return e
   matchExternal _ _ = fail "wrong number of arguments"
 
-  {-# MINIMAL parseExternal | parseExternals #-}
+  {-# MINIMAL parsePrimitive | parseExternals #-}
 
 instance (External a, External b) => External (a -> b) where
   type R (a -> b) = R b
 --  typeString (Proxy :: Proxy (a -> b)) = typeString (Proxy :: Proxy a) ++ " -> " ++ typeString (Proxy :: Proxy b)
 
-  parseExternal _ = error "can not parseExternal for function"
+  parsePrimitive _ = error "can not parsePrimitive for function"
   matchExternal e (v:vs) = do
-          a <- parseExternal v
+          a <- parsePrimitive v
           matchExternal (e a) vs
   matchExternal _ [] = fail "wrong number of arguments"
 
@@ -88,44 +130,44 @@ infixl 3 .+
 (.+) = const
 
 instance External Bool where
-  parseExternal (Bool b) = return b
-  parseExternal _        = fail "parseExternal: Bool"
+  parsePrimitive (Bool b) = return b
+  parsePrimitive _        = fail "parseExternal: Bool"
 
 instance External Int where
-  parseExternal (Number n) = return $ floor n
-  parseExternal _          = fail "parseExternal: Int"
+  parsePrimitive (Number n) = return $ floor n
+  parsePrimitive _          = fail "parseExternal: Int"
 
 instance forall g . Typeable g => External (Proxy g) where
-  parseExternal (String txt) | txt ==  pack (show (typeOf (undefined :: g)))
+  parsePrimitive (String txt) | txt ==  pack (show (typeOf (undefined :: g)))
                              = return Proxy
-  parseExternal _            = fail $ "parseExternal: Proxy for " ++
+  parsePrimitive _            = fail $ "parseExternal: Proxy for " ++
                                       show (typeOf (undefined :: g))
 
 instance External RuleName where
-  parseExternal (String s) = return . RuleName $ unpack s
-  parseExternal x          = fail $ "parseExternal: RuleName -- " ++ show x
+  parsePrimitive (String s) = return . RuleName $ unpack s
+  parsePrimitive x          = fail $ "parseExternal: RuleName -- " ++ show x
 
 instance __OVERLAPPABLE__ External e => External [e] where
-  parseExternal (Array as) = mapM parseExternal $ toList as
-  parseExternal _          = fail "parseExternal: Array"
+  parsePrimitive (Array as) = mapM parsePrimitive $ toList as
+  parsePrimitive _          = fail "parseExternal: Array"
 
 instance __OVERLAPPING__ External String where
-  parseExternal (String txt) = return $ unpack txt
-  parseExternal _            = fail "parseExternal: String"
+  parsePrimitive (String txt) = return $ unpack txt
+  parsePrimitive _            = fail "parseExternal: String"
 
 instance External a => External (Maybe a) where
-  parseExternal Null = return Nothing
-  parseExternal x    = liftM Just $ parseExternal x
+  parsePrimitive Null = return Nothing
+  parsePrimitive x    = liftM Just $ parsePrimitive x
 
 instance (External a, External b) => External (Either a b) where
-  parseExternal (Object (HM.lookup "Left"  -> Just x)) = fmap Left  $ parseExternal x
-  parseExternal (Object (HM.lookup "Right" -> Just x)) = fmap Right $ parseExternal x
-  parseExternal _ = fail "parseExternal: Either"
+  parsePrimitive (Object (HM.lookup "Left"  -> Just x)) = fmap Left  $ parsePrimitive x
+  parsePrimitive (Object (HM.lookup "Right" -> Just x)) = fmap Right $ parsePrimitive x
+  parsePrimitive _ = fail "parseExternal: Either"
 
 -----------------------------------------------------------------
 instance External Considerable where
-  parseExternal = parseJSON 
+  parsePrimitive = parseJSON
 
 instance External Used where
-  parseExternal = parseJSON
+  parsePrimitive = parseJSON
 

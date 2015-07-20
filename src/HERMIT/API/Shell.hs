@@ -13,10 +13,15 @@ import HERMIT.API.Shell.Proof (proveLemma, endProof)
 import HERMIT.API.Dictionary.KURE (serialise)
 
 import HERMIT.GHCI.Glyph        -- Feels wrong to pull this in here
+import HERMIT.RemoteShell.Types
 
 -- | redisplays current state.
-display :: Shell Glyphs
+display :: Shell ()
 display = Shell $ method "display" []
+
+-- | Returns the current state.
+display' :: Shell Document
+display' = Shell $ method "display$" []
 
 -- | stops HERMIT; resumes compile.
 resume :: Shell ()

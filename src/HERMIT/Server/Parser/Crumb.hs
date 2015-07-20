@@ -9,205 +9,153 @@ instance External Crumb where
   parseExternals =
     [
 -- HERMIT.API.Navigation.Crumbs
-      external' "prog" 
+      external "prog"
         ModGuts_Prog
-        [ "Descend into the program within a module." ]
 
-    , external' "progHead" 
+    , external "progHead"
         ProgCons_Head
-        [ "Descend into the first binding group in a program." ]
 
-    , external' "progTail" 
+    , external "progTail"
         ProgCons_Tail
-        [ "Descend into the tail of the program." ]
 
-    , external' "nonrecRhs" 
+    , external "nonrecRhs"
         NonRec_RHS
-        [ "Descend into the right-hand side of a non-recursive binding." ]
 
-    , external' "recDef" 
+    , external "recDef"
         Rec_Def
-        [ "Descend into the (n-1)th definition in a recursive binding group." ]
 
-    , external' "defRhs" 
+    , external "defRhs"
         Def_RHS
-        [ "Descend into the right-hand side of a recursive definition." ]
 
-    , external' "appFun" 
+    , external "appFun"
         App_Fun
-        [ "Descend into the function in an application." ]
 
-    , external' "appArg" 
+    , external "appArg"
         App_Arg
-        [ "Descend into the argument in an application." ]
 
-    , external' "lamBody" 
+    , external "lamBody"
         Lam_Body
-        [ "Descend into the body of a lambda." ]
 
-    , external' "letBind" 
+    , external "letBind"
         Let_Bind
-        [ "Descend into the binding group of a let expression." ]
 
-    , external' "letBody" 
+    , external "letBody"
         Let_Body
-        [ "Descend into the body of a let expression." ]
 
-    , external' "caseExpr" 
+    , external "caseExpr"
         Case_Scrutinee
-        [ "Descend into the scrutinised expression in a case expression." ]
 
-    , external' "caseType" 
+    , external "caseType"
         Case_Type
-        [ "Descend into the type of a case expression." ]
 
-    , external' "caseAlt" 
+    , external "caseAlt"
         Case_Alt
-        [ "Descend into the (n-1)th alternative in a case expression." ]
 
-    , external' "castExpr" 
+    , external "castExpr"
         Cast_Expr
-        [ "Descend into the expression in a cast." ]
 
-    , external' "castCo" 
+    , external "castCo"
         Cast_Co
-        [ "Descend into the coercion in a cast." ]
 
-    , external' "tickExpr" 
+    , external "tickExpr"
         Tick_Expr
-        [ "Descend into the expression in a tick." ]
 
-    , external' "altRhs" 
+    , external "altRhs"
         Alt_RHS
-        [ "Descend into the right-hand side of a case alternative." ]
 
-    , external' "type_" 
+    , external "type_"
         Type_Type
-        [ "Descend into the type within a type expression." ]
 
-    , external' "coercion" 
+    , external "coercion"
         Co_Co
-        [ "Descend into the coercion within a coercion expression." ]
 
-    , external' "appTyFun" 
+    , external "appTyFun"
         AppTy_Fun
-        [ "Descend into the type function in a type application." ]
 
-    , external' "appTyArg" 
+    , external "appTyArg"
         AppTy_Fun
-        [ "Descend into the type argument in a type application." ]
 
-    , external' "tyConArg" 
+    , external "tyConArg"
         TyConApp_Arg
-        [ "Descend into the (n-1)th argument of a type constructor application."
-        ]
 
-    , external' "funDom" 
+    , external "funDom"
         FunTy_Dom
-        [ "Descend into the domain of a function type." ]
 
-    , external' "funCod" 
+    , external "funCod"
         FunTy_CoDom
-        [ "Descend into the codomain of a function type." ]
 
-    , external' "forallTyBody" 
+    , external "forallTyBody"
         ForAllTy_Body
-        [ "Descend into the body of a forall type." ]
 
-    , external' "reflType" 
+    , external "reflType"
         Refl_Type
-        [ "Descend into the (n-1)th argument of a type constructor coercion." ]
 
-    , external' "coConArg" 
+    , external "coConArg"
         TyConAppCo_Arg
-        [ "Descend into the function of a coercion application." ]
 
-    , external' "appCoFun" 
+    , external "appCoFun"
         AppCo_Fun
-        [ "Descend into the coercion function in a coercion application." ]
 
-    , external' "appCoArg" 
+    , external "appCoArg"
         AppCo_Arg
-        [ "Descend into the coercion argument in a coercion application." ]
 
-    , external' "coForallBody" 
+    , external "coForallBody"
         ForAllCo_Body
-        [ "Descend into the body of a forall coercion." ]
 
-    , external' "axiomInst" 
+    , external "axiomInst"
         AxiomInstCo_Arg
-        [ "Descend into the (n-1)th argument of a coercion axiom instantiation."
-        ]
 
-    , external' "unsafeLeft" 
+    , external "unsafeLeft"
         UnsafeCo_Left
-        [ "Descend into the left-hand type of an unsafe coercion." ]
 
-    , external' "unsafeRight" 
+    , external "unsafeRight"
         UnsafeCo_Right
-        [ "Descend into the right-hand type of an unsafe coercion." ]
 
-    , external' "symCo" 
+    , external "symCo"
         SymCo_Co
-        [ "Descend into the coercion within a symmetric coercion." ]
 
-    , external' "transLeft" 
+    , external "transLeft"
         TransCo_Left
-        [ "Descend into the left-hand type of a transitive coercion." ]
 
-    , external' "transRight" 
+    , external "transRight"
         TransCo_Right
-        [ "Descend into the right-hand type of a transitive coercion." ]
 
-    , external' "nthCo" 
+    , external "nthCo"
         NthCo_Co
-        [ "Descend into the coercion within an nth projection coercion." ]
 
-    , external' "instCo" 
+    , external "instCo"
         InstCo_Co
-        [ "Descend into the coercion within a coercion instantiation." ]
 
-    , external' "instType" 
+    , external "instType"
         InstCo_Type
-        [ "Descend into the type within a coercion instantiation." ]
 
-    , external' "lrCo" 
+    , external "lrCo"
         LRCo_Co
-        [ "Descend into the coercion within a left/right projection coercion." ]
 
-    , external' "forallBody" 
+    , external "forallBody"
         Forall_Body
-        [ "Descend into the clause of a quantified clause." ]
 
-    , external' "conjLhs" 
+    , external "conjLhs"
         Conj_Lhs
-        [ "Descend into left-hand side of a conjunction." ]
 
-    , external' "conjRhs" 
+    , external "conjRhs"
         Conj_Rhs
-        [ "Descend into right-hand side of a conjunction." ]
 
-    , external' "disjLhs" 
+    , external "disjLhs"
         Disj_Lhs
-        [ "Descend into left-hand side of a disjunction." ]
 
-    , external' "disjRhs" 
+    , external "disjRhs"
         Disj_Rhs
-        [ "Descend into right-hand side of a disjunction." ]
 
-    , external' "antecedent" 
+    , external "antecedent"
         Impl_Lhs
-        [ "Descend into antecedent of an implication." ]
 
-    , external' "consequent" 
+    , external "consequent"
         Impl_Rhs
-        [ "Descend into consequent of an implication." ]
 
-    , external' "eqLhs" 
+    , external "eqLhs"
         Eq_Lhs
-        [ "Descend into left-hand side of an equivalence." ]
 
-    , external' "eqRhs" 
+    , external "eqRhs"
         Eq_Rhs
-        [ "Descend into right-hand side of an equivalence." ]
     ]

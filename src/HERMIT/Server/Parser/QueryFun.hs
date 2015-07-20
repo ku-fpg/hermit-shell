@@ -18,29 +18,23 @@ import           Control.Monad
 
 instance External (QueryFun ()) where
   parseExternals =
-    [ fmap (QueryUnit :: TransformH LCore () -> QueryFun ()) . parseExternal
-    , external' "log"             (Inquiry showDerivationTree)
-        [ "go back in the derivation" ]
-    , external' "diff"            Diff
-        [ "show diff of two ASTs" ]
-    , external' "displayScripts" displayScripts
-        ["Display all loaded scripts."]
+    [ fmap (QueryUnit :: TransformH LCore () -> QueryFun ()) parseExternal
+    , external "log"             (Inquiry showDerivationTree)
+    , external "diff"            Diff
+    , external "displayScripts" displayScripts
     ]
 
 instance External QueryFunBox where
   parseExternals =
-    [ fmap (QueryFunBox . QueryUnit :: TransformH LCore () -> QueryFunBox) . 
+    [ fmap (QueryFunBox . QueryUnit :: TransformH LCore () -> QueryFunBox) 
            parseExternal
-    , external' "log"
+    , external "log"
         (QueryFunBox $ Inquiry showDerivationTree)
-        [ "go back in the derivation" ]
-    , external' "diff"            
+    , external "diff"            
         (\ ast -> QueryFunBox . Diff ast)
-        [ "show diff of two ASTs" ]
-    , external' "displayScripts" 
+    , external "displayScripts" 
         (QueryFunBox displayScripts)
-        ["Display all loaded scripts."]
-    , fmap (fromAToBox . QueryA :: TransformH LCore String -> QueryFunBox) . 
+    , fmap (fromAToBox . QueryA :: TransformH LCore String -> QueryFunBox) 
            parseExternal
     ]
 
@@ -49,9 +43,9 @@ fromAToBox x@QueryA{} = QueryFunBox x
 fromAToBox _ = error "fromAToBox"
 
 instance External AST where
-  parseExternal (Number n) = return $ (integerToAST . fromInteger . floor) n
+  parsePrimitive (Number n) = return $ (integerToAST . fromInteger . floor) n
     where
       integerToAST :: Int -> AST
       integerToAST = read . show
-  parseExternal _ = mzero
+  parsePrimitive _ = mzero
 
