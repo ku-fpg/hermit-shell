@@ -11,6 +11,7 @@ import           Data.Aeson as Aeson
 import           Data.Aeson.Encode.Pretty (encodePretty)
 import           Data.Aeson.Types (parseMaybe, Parser)
 import           Data.ByteString.Lazy.Char8 (unpack)
+import           Data.Typeable (Proxy(..))
 
 import           HERMIT.Context
 import           HERMIT.Kure hiding ((<$>),(<*>))
@@ -20,11 +21,12 @@ import           HERMIT.Shell.KernelEffect
 import           HERMIT.Shell.Proof
 import           HERMIT.Core (Crumb)
 
+
 import           HERMIT.Server.Parser.KernelEffect ()
 import           HERMIT.Server.Parser.Name ()
 import           HERMIT.Server.Parser.QueryFun ()
 import           HERMIT.Server.Parser.ScriptEffect ()
-import           HERMIT.Server.Parser.ShellEffect ()
+import           HERMIT.Server.Parser.ShellEffect (parseExternalShellEffect)
 import           HERMIT.Server.Parser.String ()
 import           HERMIT.Server.Parser.Transform ()
 import           HERMIT.Server.Parser.Utils
@@ -45,17 +47,8 @@ parseCLT = parseMaybe parseTopLevel
 
 parseTopLevel :: (MonadIO m, Functor m)
               => Aeson.Value -> Parser (CLT m Aeson.Value)
-parseTopLevel v =
-    (do v' <- parseExternal v :: Parser TypedEffectBox
-        trace "parsed fine" $ return ()
-        return $! performBoxedEffect (pprint v) v')
-    <|> (fmap toJSON
-       <$> ((performTypedEffectH (pprint v)
-               <$> (parseExternal v :: Parser (TypedEffectH ())))
-            <|> (performKernelEffect (stubExprH "<hermit-shell>")
-                   <$> (parseExternal v :: Parser KernelEffect))
-            <|> ((\c -> performProofShellCommand c (stubExprH "<hermit-shell>"))
-                   <$> (parseExternal v :: Parser ProofShellCommand))))
+parseTopLevel v = performTypedEffectH (pprint v) 
+              <$> runExternalParser parseExternalTypedEffectH v
   where
     -- The Show instance for Value prints out Vector literals, which have
     -- different output depending on which version of vector is being used.
@@ -64,16 +57,22 @@ parseTopLevel v =
     pprint :: Aeson.Value -> String
     pprint = unpack . encodePretty
 
+
+parseExternalTypedEffectH :: ExternalParser (TypedEffectH Value)
+parseExternalTypedEffectH = 
+       ShellEffectH <$> parseExternalShellEffect
+   <|> parseToValue (Proxy :: Proxy (TypedEffectH ())) 
+
 instance External (TypedEffectH ()) where
   parseExternals =
-    [ fmap ShellEffectH . parseExternal
-    , fmap RewriteLCoreTCH . parseExternal
+    [ fmap RewriteLCoreTCH parseExternal
     , external "setPath" (SetPathH :: TransformH LCoreTC LocalPathH -> TypedEffectH ())
     , external "setPath" ((SetPathH :: TransformH LCore LocalPathH -> TypedEffectH ()) . (\crumb -> transform (\ _hermitC _lcore -> return (singletonSnocPath crumb))) :: Crumb -> TypedEffectH ())
     , external "query"   (QueryH :: QueryFun () -> TypedEffectH ())
     , external "rewrite" (RewriteLCoreH :: RewriteH LCore -> TypedEffectH ())
     , external "eval" (EvalH :: String -> TypedEffectH ())
     ]
+
 
 instance External TypedEffectBox where
   parseExternals =
