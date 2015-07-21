@@ -18,7 +18,7 @@ minfree :: [Nat] -> Nat
 minfree xs = head ([0..] \\ xs)
 
 minfree' :: [Nat] -> Nat -> Nat
-minfree' xs b = const (head ([0..] \\ xs)) b
+minfree' xs b = head (const ([0..] \\ xs) b)
 
 minfreeFast :: [Nat] -> Nat
 minfreeFast xs = minfrom 0 (length xs, xs)
