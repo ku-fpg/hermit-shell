@@ -18,8 +18,6 @@ diffPartition :: Shell ()
 diffPartition = do
   mapM_ (query . modifyLemma "diff-partition")
         [ instDictionaries
-        , oneBU (unfoldWith "const")
-        , smash
         ]
 
   assumeLemma "diff-partition"
