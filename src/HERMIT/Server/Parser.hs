@@ -64,6 +64,7 @@ parseExternalTypedEffectH =
 instance External (TypedEffectH ()) where
   parseExternals =
     [ fmap RewriteLCoreTCH parseExternal
+    , external "setPath" (SetPathH :: TransformH LCore LocalPathH -> TypedEffectH ())
     , external "setPath" (SetPathH :: TransformH LCoreTC LocalPathH -> TypedEffectH ())
     , external "setPath" ((SetPathH :: TransformH LCore LocalPathH -> TypedEffectH ()) . (\crumb -> transform (\ _hermitC _lcore -> return (singletonSnocPath crumb))) :: Crumb -> TypedEffectH ())
     , external "query"   (QueryH :: QueryFun () -> TypedEffectH ())
@@ -74,16 +75,3 @@ instance External (TypedEffectH ()) where
     , external "beginScope" (KernelEffectH BeginScope)
     , external "endScope"    (KernelEffectH EndScope)
     ]
-
-
-instance External TypedEffectBox where
-  parseExternals =
-    [ external "query"
-        (fromBoxToBox :: QueryFunBox -> TypedEffectBox)
-    , external "setPath"
-        (TypedEffectBox . SetPathH :: TransformH LCore LocalPathH
-                                   -> TypedEffectBox)
-    ]
-
-fromBoxToBox :: QueryFunBox -> TypedEffectBox
-fromBoxToBox (QueryFunBox x) = TypedEffectBox $ QueryH x
