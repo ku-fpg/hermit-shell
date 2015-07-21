@@ -73,12 +73,12 @@ main = print (minfree (descFrom 1000))
 
 
 {-# RULES "diff-partition" [~]
-      forall (xs :: [Int]) (b :: Int).
-                   const ([0::Int ..] \\ xs) b
+      forall xs b.
+                   const ([0..] \\ xs) b
                     =
                    let (us,vs) = partition (< b) xs
                    in
-                   (([0..b-1] :: [Int]) \\ us) ++ ([b::Int ..] \\ vs)
+                   ([0..b-1] \\ us) ++ ([b..] \\ vs)
   #-}
 -- {-# RULES "diff-partition" [~]
 --       forall xs b.
