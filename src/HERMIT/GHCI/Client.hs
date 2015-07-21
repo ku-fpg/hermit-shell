@@ -21,7 +21,9 @@ import Data.Vector (toList)
 --- Main call-HERMIT function
 
 session :: JSONRPC.Session
-session = JSONRPC.defaultSession JSONRPC.Weak (\ v -> do
+session = id
+--        $ JSONRPC.traceSession "HERMIT-remote-json"
+        $ JSONRPC.defaultSession JSONRPC.Weak (\ v -> do
           r <- asJSON =<< post "http://localhost:3000/" (toJSON v)
           return $ r ^. responseBody)
    (\ v -> do
