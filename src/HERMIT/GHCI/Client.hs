@@ -55,6 +55,7 @@ genMethodStr fl (Object o) =
         prms = fromJust $ parseMaybe (\ x -> x .: "params") o :: [Value]
         prms' = map (genMethodStr False) (reverse prms)
         wrap :: String -> String
+        wrap "" = ""
         wrap str = if fl then " (" ++ str ++ ")" else " " ++ str in
       unpack mthd ++ wrap (unwords prms')
 genMethodStr _ (Array vec) =

@@ -21,8 +21,6 @@ import           HERMIT.Shell.KernelEffect
 import           HERMIT.Shell.Proof
 import           HERMIT.Core (Crumb)
 
-
-import           HERMIT.Server.Parser.KernelEffect ()
 import           HERMIT.Server.Parser.Name ()
 import           HERMIT.Server.Parser.QueryFun ()
 import           HERMIT.Server.Parser.ScriptEffect ()
@@ -71,6 +69,10 @@ instance External (TypedEffectH ()) where
     , external "query"   (QueryH :: QueryFun () -> TypedEffectH ())
     , external "rewrite" (RewriteLCoreH :: RewriteH LCore -> TypedEffectH ())
     , external "eval" (EvalH :: String -> TypedEffectH ())
+    , external "up" (KernelEffectH $ Direction U)
+    , external "top" (KernelEffectH $ Direction T)
+    , external "beginScope" (KernelEffectH BeginScope)
+    , external "endScope"    (KernelEffectH EndScope)
     ]
 
 
