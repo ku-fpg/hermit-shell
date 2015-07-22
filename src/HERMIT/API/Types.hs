@@ -125,7 +125,7 @@ instance Response LocalPath where
 instance Response Glyphs where
   printResponse (Glyphs gs) = do
 --         putStrLn "[Start Glyphs]"
-         sequence_ [ withStyle sty txt
+         sequence_ [ withNoStyle sty txt
                    | Glyph txt sty <- gs
                    ]
 --         putStrLn "[End Glyphs]"          

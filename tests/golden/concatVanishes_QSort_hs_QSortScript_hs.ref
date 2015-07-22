@@ -14,11 +14,11 @@ HList.hs:24:11: Warning:
 [2 of 2] Compiling Main             ( QSort.hs, QSort.o )
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
 GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
-[94mmodule[0m[m [0m[mMain[0m[m [0m[94mwhere[0m[m
-[0m[m  [0m[mqsort[0m[m [0m[91m∷[0m[92m [0m[91m∀[0m[91m [0m[92ma[0m[m [0m[91m.[0m[m [0m[92mOrd[0m[m [0m[92ma[0m[m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[m [0m[91m→[0m[92m [0m[92m[[0m[92ma[0m[92m][0m[m
-[0m[m  [0m[m$dShow[0m[m [0m[91m∷[0m[92m [0m[92mShow[0m[m [0m[92m[[0m[92mInteger[0m[92m][0m[m
-[0m[m  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[m [0m[92m([0m[92m)[0m[m
-[0m[m  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[m [0m[92m([0m[92m)[0m
+module Main where
+  qsort ∷ ∀ a . Ord a → [a] → [a]
+  $dShow ∷ Show [Integer]
+  main ∷ IO ()
+  main ∷ IO ()
 [Done]
 
 [1 of 4] Compiling StrictRepHScript ( StrictRepHScript.hs, interpreted )
@@ -26,320 +26,320 @@ GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
 [3 of 4] Compiling ConcatVanishesScript ( ConcatVanishesScript.hs, interpreted )
 [4 of 4] Compiling QSortScript      ( QSortScript.hs, interpreted )
 Ok, modules loaded: QSortScript, ConcatVanishesScript, WWAssAScript, StrictRepHScript.
-[mqsort[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[92m△[0m[92m [0m[m$dOrd[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-[0m[m  [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m    [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
-[0m[m    [0m[91m([0m[m:[0m[91m)[0m[m [0m[ma[0m[m [0m[mas[0m[m [0m[91m→[0m[91m
-[0m[m      [0m[94mlet[0m[m [0m[mds[0m[m [0m[91m=[0m[m
-[0m[m            [0m[94mlet[0m[m [0m[mds[0m[m [0m[91m=[0m[m [0m[mpartition[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m<[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$dOrd[0m[m [0m[mds[0m[m [0m[ma[0m[91m)[0m[m [0m[mas[0m[m
-[0m[m                [0m[mcs[0m[m [0m[91m=[0m[m
-[0m[m                  [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                    [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mcs[0m[m
-[0m[m                [0m[mbs[0m[m [0m[91m=[0m[m
-[0m[m                  [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                    [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mbs[0m[m
-[0m[m            [0m[94min[0m[m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[mbs[0m[m [0m[mcs[0m[m
-[0m[m      [0m[94min[0m[m [0m[91m([0m[m++[0m[91m)[0m[m [0m[92m▲[0m[92m
-[0m[m              [0m[91m([0m[mqsort[0m[m [0m[92m▲[0m[92m [0m[m$dOrd[0m[m
-[0m[m                     [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mds[0m[m [0m[92m▲[0m[92m
-[0m[m                        [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mbs[0m[91m)[0m[91m)[0m[m
-[0m[m              [0m[91m([0m[91m([0m[m++[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[m
-[0m[m                    [0m[91m([0m[mqsort[0m[m [0m[92m▲[0m[92m [0m[m$dOrd[0m[m
-[0m[m                           [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mds[0m[m [0m[92m▲[0m[92m
-[0m[m                              [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mcs[0m[91m)[0m[91m)[0m[91m)[0m
+qsort = λ △ $dOrd ds →
+  case ds of wild ▲
+    [] → [] ▲
+    (:) a as →
+      let ds =
+            let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                cs =
+                  case ds of wild ▲
+                    (,) bs cs → cs
+                bs =
+                  case ds of wild ▲
+                    (,) bs cs → bs
+            in (,) ▲ ▲ bs cs
+      in (++) ▲
+              (qsort ▲ $dOrd
+                     (case ds of ds ▲
+                        (,) bs cs → bs))
+              ((++) ▲ ((:) ▲ a ([] ▲))
+                    (qsort ▲ $dOrd
+                           (case ds of ds ▲
+                              (,) bs cs → cs)))
 [Done]
 
-[mqsort[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[92m△[0m[92m [0m[m$dOrd[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-[0m[m  [0m[91m([0m[94mlet[0m[m [0m[mf[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mqsort'[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-[0m[m         [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m           [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
-[0m[m           [0m[91m([0m[m:[0m[91m)[0m[m [0m[ma[0m[m [0m[mas[0m[m [0m[91m→[0m[91m
-[0m[m             [0m[94mlet[0m[m [0m[mds[0m[m [0m[91m=[0m[m
-[0m[m                   [0m[94mlet[0m[m [0m[mds[0m[m [0m[91m=[0m[m [0m[mpartition[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m<[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$dOrd[0m[m [0m[mds[0m[m [0m[ma[0m[91m)[0m[m [0m[mas[0m[m
-[0m[m                       [0m[mcs[0m[m [0m[91m=[0m[m
-[0m[m                         [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                           [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mcs[0m[m
-[0m[m                       [0m[mbs[0m[m [0m[91m=[0m[m
-[0m[m                         [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                           [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mbs[0m[m
-[0m[m                   [0m[94min[0m[m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[mbs[0m[m [0m[mcs[0m[m
-[0m[m             [0m[94min[0m[m [0m[91m([0m[m++[0m[91m)[0m[m [0m[92m▲[0m[92m
-[0m[m                     [0m[91m([0m[mqsort'[0m[m [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mds[0m[m [0m[92m▲[0m[92m
-[0m[m                                [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mbs[0m[91m)[0m[91m)[0m[m
-[0m[m                     [0m[91m([0m[91m([0m[m++[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[m
-[0m[m                           [0m[91m([0m[mqsort'[0m[m [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mds[0m[m [0m[92m▲[0m[92m
-[0m[m                                      [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mcs[0m[91m)[0m[91m)[0m[91m)[0m[m
-[0m[m       [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[91m→[0m[91m [0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mf[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mx2[0m[m [0m[91m→[0m[91m [0m[mabsH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mwork[0m[m [0m[mx2[0m[91m)[0m[91m)[0m[m [0m[mx1[0m[91m)[0m[m
-[0m[m   [0m[94min[0m[m [0m[91mλ[0m[91m [0m[mx0[0m[m [0m[91m→[0m[91m [0m[mabsH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mwork[0m[m [0m[mx0[0m[91m)[0m[91m)[0m[m [0m[mds[0m
+qsort = λ △ $dOrd ds →
+  (let f = λ qsort' ds →
+         case ds of wild ▲
+           [] → [] ▲
+           (:) a as →
+             let ds =
+                   let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                       cs =
+                         case ds of wild ▲
+                           (,) bs cs → cs
+                       bs =
+                         case ds of wild ▲
+                           (,) bs cs → bs
+                   in (,) ▲ ▲ bs cs
+             in (++) ▲
+                     (qsort' (case ds of ds ▲
+                                (,) bs cs → bs))
+                     ((++) ▲ ((:) ▲ a ([] ▲))
+                           (qsort' (case ds of ds ▲
+                                      (,) bs cs → cs)))
+       rec work = λ x1 → repH ▲ (f (λ x2 → absH ▲ (work x2)) x1)
+   in λ x0 → absH ▲ (work x0)) ds
 [Done]
 
-[mqsort[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[92m△[0m[92m [0m[m$dOrd[0m[m [0m[91m→[0m[91m
-[0m[m  [0m[94mlet[0m[m [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[91m→[0m[91m
-[0m[m            [0m[mrepH[0m[m [0m[92m▲[0m[92m
-[0m[m                 [0m[91m([0m[94mcase[0m[m [0m[mx1[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                    [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
-[0m[m                    [0m[91m([0m[m:[0m[91m)[0m[m [0m[ma[0m[m [0m[mas[0m[m [0m[91m→[0m[91m
-[0m[m                      [0m[94mlet[0m[m [0m[mds[0m[m [0m[91m=[0m[m [0m[mpartition[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m<[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$dOrd[0m[m [0m[mds[0m[m [0m[ma[0m[91m)[0m[m [0m[mas[0m[m
-[0m[m                      [0m[94min[0m[m [0m[91m([0m[m++[0m[91m)[0m[m [0m[92m▲[0m[92m
-[0m[m                              [0m[91m([0m[mabsH[0m[m [0m[92m▲[0m[92m
-[0m[m                                    [0m[91m([0m[mwork[0m[m [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                                             [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mbs[0m[91m)[0m[91m)[0m[91m)[0m[m
-[0m[m                              [0m[91m([0m[91m([0m[m++[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[m
-[0m[m                                    [0m[91m([0m[mabsH[0m[m [0m[92m▲[0m[92m
-[0m[m                                          [0m[91m([0m[mwork[0m[m [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                                                   [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mcs[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m[m
-[0m[m  [0m[94min[0m[m [0m[91mλ[0m[91m [0m[mx0[0m[m [0m[91m→[0m[91m [0m[mabsH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mwork[0m[m [0m[mx0[0m[91m)[0m
+qsort = λ △ $dOrd →
+  let rec work = λ x1 →
+            repH ▲
+                 (case x1 of wild ▲
+                    [] → [] ▲
+                    (:) a as →
+                      let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                      in (++) ▲
+                              (absH ▲
+                                    (work (case ds of wild ▲
+                                             (,) bs cs → bs)))
+                              ((++) ▲ ((:) ▲ a ([] ▲))
+                                    (absH ▲
+                                          (work (case ds of wild ▲
+                                                   (,) bs cs → cs)))))
+  in λ x0 → absH ▲ (work x0)
 [Done]
 
-[mqsort[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[92m△[0m[92m [0m[m$dOrd[0m[m [0m[91m→[0m[91m
-[0m[m  [0m[94mlet[0m[m [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[91m→[0m[91m
-[0m[m            [0m[mrepH[0m[m [0m[92m▲[0m[92m
-[0m[m                 [0m[91m([0m[94mcase[0m[m [0m[mx1[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                    [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
-[0m[m                    [0m[91m([0m[m:[0m[91m)[0m[m [0m[ma[0m[m [0m[mas[0m[m [0m[91m→[0m[91m
-[0m[m                      [0m[94mlet[0m[m [0m[mds[0m[m [0m[91m=[0m[m [0m[mpartition[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m<[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$dOrd[0m[m [0m[mds[0m[m [0m[ma[0m[91m)[0m[m [0m[mas[0m[m
-[0m[m                      [0m[94min[0m[m [0m[91m([0m[m++[0m[91m)[0m[m [0m[92m▲[0m[92m
-[0m[m                              [0m[91m([0m[mabsH[0m[m [0m[92m▲[0m[92m
-[0m[m                                    [0m[91m([0m[mwork[0m[m [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                                             [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mbs[0m[91m)[0m[91m)[0m[91m)[0m[m
-[0m[m                              [0m[91m([0m[91m([0m[m++[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[m
-[0m[m                                    [0m[91m([0m[mabsH[0m[m [0m[92m▲[0m[92m
-[0m[m                                          [0m[91m([0m[mwork[0m[m [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                                                   [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mcs[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m[m
-[0m[m  [0m[94min[0m[m [0m[91mλ[0m[91m [0m[mx0[0m[m [0m[91m→[0m[91m [0m[mabsH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mwork[0m[m [0m[mx0[0m[91m)[0m
+qsort = λ △ $dOrd →
+  let rec work = λ x1 →
+            repH ▲
+                 (case x1 of wild ▲
+                    [] → [] ▲
+                    (:) a as →
+                      let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                      in (++) ▲
+                              (absH ▲
+                                    (work (case ds of wild ▲
+                                             (,) bs cs → bs)))
+                              ((++) ▲ ((:) ▲ a ([] ▲))
+                                    (absH ▲
+                                          (work (case ds of wild ▲
+                                                   (,) bs cs → cs)))))
+  in λ x0 → absH ▲ (work x0)
 [Done]
 
-[91mλ[0m[91m [0m[mx1[0m[m [0m[91m→[0m[91m
-[0m[m  [0m[mrepH[0m[m [0m[92m▲[0m[92m
-[0m[m       [0m[91m([0m[94mcase[0m[m [0m[mx1[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m          [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
-[0m[m          [0m[91m([0m[m:[0m[91m)[0m[m [0m[ma[0m[m [0m[mas[0m[m [0m[91m→[0m[91m
-[0m[m            [0m[94mlet[0m[m [0m[mds[0m[m [0m[91m=[0m[m [0m[mpartition[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m<[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$dOrd[0m[m [0m[mds[0m[m [0m[ma[0m[91m)[0m[m [0m[mas[0m[m
-[0m[m            [0m[94min[0m[m [0m[91m([0m[m++[0m[91m)[0m[m [0m[92m▲[0m[92m
-[0m[m                    [0m[91m([0m[mabsH[0m[m [0m[92m▲[0m[92m
-[0m[m                          [0m[91m([0m[mwork[0m[m [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                                   [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mbs[0m[91m)[0m[91m)[0m[91m)[0m[m
-[0m[m                    [0m[91m([0m[91m([0m[m++[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[m
-[0m[m                          [0m[91m([0m[mabsH[0m[m [0m[92m▲[0m[92m
-[0m[m                                [0m[91m([0m[mwork[0m[m [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                                         [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mcs[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m
+λ x1 →
+  repH ▲
+       (case x1 of wild ▲
+          [] → [] ▲
+          (:) a as →
+            let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+            in (++) ▲
+                    (absH ▲
+                          (work (case ds of wild ▲
+                                   (,) bs cs → bs)))
+                    ((++) ▲ ((:) ▲ a ([] ▲))
+                          (absH ▲
+                                (work (case ds of wild ▲
+                                         (,) bs cs → cs)))))
 [Done]
 
-[mrepH[0m[m [0m[92m▲[0m[92m
-[0m[m     [0m[91m([0m[94mcase[0m[m [0m[mx1[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m        [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
-[0m[m        [0m[91m([0m[m:[0m[91m)[0m[m [0m[ma[0m[m [0m[mas[0m[m [0m[91m→[0m[91m
-[0m[m          [0m[94mlet[0m[m [0m[mds[0m[m [0m[91m=[0m[m [0m[mpartition[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m<[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$dOrd[0m[m [0m[mds[0m[m [0m[ma[0m[91m)[0m[m [0m[mas[0m[m
-[0m[m          [0m[94min[0m[m [0m[91m([0m[m++[0m[91m)[0m[m [0m[92m▲[0m[92m
-[0m[m                  [0m[91m([0m[mabsH[0m[m [0m[92m▲[0m[92m
-[0m[m                        [0m[91m([0m[mwork[0m[m [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                                 [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mbs[0m[91m)[0m[91m)[0m[91m)[0m[m
-[0m[m                  [0m[91m([0m[91m([0m[m++[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[m
-[0m[m                        [0m[91m([0m[mabsH[0m[m [0m[92m▲[0m[92m
-[0m[m                              [0m[91m([0m[mwork[0m[m [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                                       [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mcs[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m
+repH ▲
+     (case x1 of wild ▲
+        [] → [] ▲
+        (:) a as →
+          let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+          in (++) ▲
+                  (absH ▲
+                        (work (case ds of wild ▲
+                                 (,) bs cs → bs)))
+                  ((++) ▲ ((:) ▲ a ([] ▲))
+                        (absH ▲
+                              (work (case ds of wild ▲
+                                       (,) bs cs → cs)))))
 [Done]
 
-[91mλ[0m[91m [0m[macc[0m[m [0m[91m→[0m[91m
-[0m[m  [0m[mrepH[0m[m [0m[92m▲[0m[92m
-[0m[m       [0m[91m([0m[94mcase[0m[m [0m[mx1[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m          [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
-[0m[m          [0m[91m([0m[m:[0m[91m)[0m[m [0m[ma[0m[m [0m[mas[0m[m [0m[91m→[0m[91m
-[0m[m            [0m[94mlet[0m[m [0m[mds[0m[m [0m[91m=[0m[m [0m[mpartition[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m<[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$dOrd[0m[m [0m[mds[0m[m [0m[ma[0m[91m)[0m[m [0m[mas[0m[m
-[0m[m            [0m[94min[0m[m [0m[91m([0m[m++[0m[91m)[0m[m [0m[92m▲[0m[92m
-[0m[m                    [0m[91m([0m[mabsH[0m[m [0m[92m▲[0m[92m
-[0m[m                          [0m[91m([0m[mwork[0m[m [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                                   [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mbs[0m[91m)[0m[91m)[0m[91m)[0m[m
-[0m[m                    [0m[91m([0m[91m([0m[m++[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[m
-[0m[m                          [0m[91m([0m[mabsH[0m[m [0m[92m▲[0m[92m
-[0m[m                                [0m[91m([0m[mwork[0m[m [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                                         [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mcs[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m[m
-[0m[m       [0m[macc[0m
+λ acc →
+  repH ▲
+       (case x1 of wild ▲
+          [] → [] ▲
+          (:) a as →
+            let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+            in (++) ▲
+                    (absH ▲
+                          (work (case ds of wild ▲
+                                   (,) bs cs → bs)))
+                    ((++) ▲ ((:) ▲ a ([] ▲))
+                          (absH ▲
+                                (work (case ds of wild ▲
+                                         (,) bs cs → cs)))))
+       acc
 [Done]
 
-[mrepH[0m[m [0m[92m▲[0m[92m
-[0m[m     [0m[91m([0m[94mcase[0m[m [0m[mx1[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m        [0m[m[][0m[m [0m[91m→[0m[91m [0m[m[][0m[m [0m[92m▲[0m[92m
-[0m[m        [0m[91m([0m[m:[0m[91m)[0m[m [0m[ma[0m[m [0m[mas[0m[m [0m[91m→[0m[91m
-[0m[m          [0m[94mlet[0m[m [0m[mds[0m[m [0m[91m=[0m[m [0m[mpartition[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m<[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$dOrd[0m[m [0m[mds[0m[m [0m[ma[0m[91m)[0m[m [0m[mas[0m[m
-[0m[m          [0m[94min[0m[m [0m[91m([0m[m++[0m[91m)[0m[m [0m[92m▲[0m[92m
-[0m[m                  [0m[91m([0m[mabsH[0m[m [0m[92m▲[0m[92m
-[0m[m                        [0m[91m([0m[mwork[0m[m [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                                 [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mbs[0m[91m)[0m[91m)[0m[91m)[0m[m
-[0m[m                  [0m[91m([0m[91m([0m[m++[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[ma[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[91m)[0m[m
-[0m[m                        [0m[91m([0m[mabsH[0m[m [0m[92m▲[0m[92m
-[0m[m                              [0m[91m([0m[mwork[0m[m [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                                       [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mcs[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m[91m)[0m[m
-[0m[m     [0m[macc[0m
+repH ▲
+     (case x1 of wild ▲
+        [] → [] ▲
+        (:) a as →
+          let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+          in (++) ▲
+                  (absH ▲
+                        (work (case ds of wild ▲
+                                 (,) bs cs → bs)))
+                  ((++) ▲ ((:) ▲ a ([] ▲))
+                        (absH ▲
+                              (work (case ds of wild ▲
+                                       (,) bs cs → cs)))))
+     acc
 [Done]
 
-[94mcase[0m[m [0m[mx1[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m  [0m[m[][0m[m [0m[91m→[0m[91m [0m[macc[0m[m
-[0m[m  [0m[91m([0m[m:[0m[91m)[0m[m [0m[ma[0m[m [0m[mas[0m[m [0m[91m→[0m[91m
-[0m[m    [0m[94mlet[0m[m [0m[mds[0m[m [0m[91m=[0m[m [0m[mpartition[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m<[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$dOrd[0m[m [0m[mds[0m[m [0m[ma[0m[91m)[0m[m [0m[mas[0m[m
-[0m[m    [0m[94min[0m[m [0m[mwork[0m[m [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m               [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mbs[0m[91m)[0m[m
-[0m[m            [0m[91m([0m[91m([0m[m:[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[ma[0m[m
-[0m[m                 [0m[91m([0m[mwork[0m[m [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                          [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mcs[0m[91m)[0m[m
-[0m[m                       [0m[macc[0m[91m)[0m[91m)[0m
+case x1 of wild ▲
+  [] → acc
+  (:) a as →
+    let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+    in work (case ds of wild ▲
+               (,) bs cs → bs)
+            ((:) ▲ a
+                 (work (case ds of wild ▲
+                          (,) bs cs → cs)
+                       acc))
 [Done]
 
-[94mcase[0m[m [0m[mx1[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m  [0m[m[][0m[m [0m[91m→[0m[91m [0m[macc[0m[m
-[0m[m  [0m[91m([0m[m:[0m[91m)[0m[m [0m[ma[0m[m [0m[mas[0m[m [0m[91m→[0m[91m
-[0m[m    [0m[94mlet[0m[m [0m[mds[0m[m [0m[91m=[0m[m [0m[mpartition[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m<[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$dOrd[0m[m [0m[mds[0m[m [0m[ma[0m[91m)[0m[m [0m[mas[0m[m
-[0m[m    [0m[94min[0m[m [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m         [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m
-[0m[m           [0m[mwork[0m[m [0m[mbs[0m[m
-[0m[m                [0m[91m([0m[91m([0m[m:[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[ma[0m[m
-[0m[m                     [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                        [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mcs[0m[m [0m[macc[0m[91m)[0m[91m)[0m
+case x1 of wild ▲
+  [] → acc
+  (:) a as →
+    let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+    in case ds of wild ▲
+         (,) bs cs →
+           work bs
+                ((:) ▲ a
+                     (case ds of wild ▲
+                        (,) bs cs → work cs acc))
 [Done]
 
-[mqsort[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[92m△[0m[92m [0m[m$dOrd[0m[m [0m[91m→[0m[91m
-[0m[m  [0m[94mlet[0m[m [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[macc[0m[m [0m[91m→[0m[91m
-[0m[m            [0m[94mcase[0m[m [0m[mx1[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m              [0m[m[][0m[m [0m[91m→[0m[91m [0m[macc[0m[m
-[0m[m              [0m[91m([0m[m:[0m[91m)[0m[m [0m[ma[0m[m [0m[mas[0m[m [0m[91m→[0m[91m
-[0m[m                [0m[94mlet[0m[m [0m[mds[0m[m [0m[91m=[0m[m [0m[mpartition[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m<[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$dOrd[0m[m [0m[mds[0m[m [0m[ma[0m[91m)[0m[m [0m[mas[0m[m
-[0m[m                [0m[94min[0m[m [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                     [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m
-[0m[m                       [0m[mwork[0m[m [0m[mbs[0m[m
-[0m[m                            [0m[91m([0m[91m([0m[m:[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[ma[0m[m
-[0m[m                                 [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                                    [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mcs[0m[m [0m[macc[0m[91m)[0m[91m)[0m[m
-[0m[m  [0m[94min[0m[m [0m[91mλ[0m[91m [0m[mx0[0m[m [0m[91m→[0m[91m [0m[mabsH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mwork[0m[m [0m[mx0[0m[91m)[0m
+qsort = λ △ $dOrd →
+  let rec work = λ x1 acc →
+            case x1 of wild ▲
+              [] → acc
+              (:) a as →
+                let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                in case ds of wild ▲
+                     (,) bs cs →
+                       work bs
+                            ((:) ▲ a
+                                 (case ds of wild ▲
+                                    (,) bs cs → work cs acc))
+  in λ x0 → absH ▲ (work x0)
 [Done]
 
-[mqsort[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[92m△[0m[92m [0m[m$dOrd[0m[m [0m[91m→[0m[91m
-[0m[m  [0m[94mlet[0m[m [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[macc[0m[m [0m[91m→[0m[91m
-[0m[m            [0m[94mcase[0m[m [0m[mx1[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m              [0m[m[][0m[m [0m[91m→[0m[91m [0m[macc[0m[m
-[0m[m              [0m[91m([0m[m:[0m[91m)[0m[m [0m[ma[0m[m [0m[mas[0m[m [0m[91m→[0m[91m
-[0m[m                [0m[94mlet[0m[m [0m[mds[0m[m [0m[91m=[0m[m [0m[mpartition[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m<[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$dOrd[0m[m [0m[mds[0m[m [0m[ma[0m[91m)[0m[m [0m[mas[0m[m
-[0m[m                [0m[94min[0m[m [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                     [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m
-[0m[m                       [0m[mwork[0m[m [0m[mbs[0m[m
-[0m[m                            [0m[91m([0m[91m([0m[m:[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[ma[0m[m
-[0m[m                                 [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                                    [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mcs[0m[m [0m[macc[0m[91m)[0m[91m)[0m[m
-[0m[m  [0m[94min[0m[m [0m[91mλ[0m[91m [0m[mx0[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mx0[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m
+qsort = λ △ $dOrd →
+  let rec work = λ x1 acc →
+            case x1 of wild ▲
+              [] → acc
+              (:) a as →
+                let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                in case ds of wild ▲
+                     (,) bs cs →
+                       work bs
+                            ((:) ▲ a
+                                 (case ds of wild ▲
+                                    (,) bs cs → work cs acc))
+  in λ x0 → work x0 ([] ▲)
 [Done]
 
-[mGoal:[0m[m
-[0m[m  [0m[91m∀[0m[91m [0m[92m△[0m[92m [0m[mxs[0m[91m.[0m[m [0m[91m([0m[m++[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[m [0m[91m≡[0m[91m [0m[mxs[0m
+Goal:
+  ∀ △ xs. (++) ▲ xs ([] ▲) ≡ xs
 [Done]
 
 Successfully proven: ++ []
-[mqsort[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[92m△[0m[92m [0m[m$dOrd[0m[m [0m[91m→[0m[91m
-[0m[m  [0m[94mlet[0m[m [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[macc[0m[m [0m[91m→[0m[91m
-[0m[m            [0m[94mcase[0m[m [0m[mx1[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m              [0m[m[][0m[m [0m[91m→[0m[91m [0m[macc[0m[m
-[0m[m              [0m[91m([0m[m:[0m[91m)[0m[m [0m[ma[0m[m [0m[mas[0m[m [0m[91m→[0m[91m
-[0m[m                [0m[94mlet[0m[m [0m[mds[0m[m [0m[91m=[0m[m [0m[mpartition[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m<[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$dOrd[0m[m [0m[mds[0m[m [0m[ma[0m[91m)[0m[m [0m[mas[0m[m
-[0m[m                [0m[94min[0m[m [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                     [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m
-[0m[m                       [0m[mwork[0m[m [0m[mbs[0m[m
-[0m[m                            [0m[91m([0m[91m([0m[m:[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[ma[0m[m
-[0m[m                                 [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                                    [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mcs[0m[m [0m[macc[0m[91m)[0m[91m)[0m[m
-[0m[m  [0m[94min[0m[m [0m[91mλ[0m[91m [0m[mx0[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mx0[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m
+qsort = λ △ $dOrd →
+  let rec work = λ x1 acc →
+            case x1 of wild ▲
+              [] → acc
+              (:) a as →
+                let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                in case ds of wild ▲
+                     (,) bs cs →
+                       work bs
+                            ((:) ▲ a
+                                 (case ds of wild ▲
+                                    (,) bs cs → work cs acc))
+  in λ x0 → work x0 ([] ▲)
 [Done]
 
-[mGoal:[0m[m
-[0m[m  [0m[91m∀[0m[91m [0m[92m△[0m[91m.[0m[m [0m[91m([0m[m++[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mundefined[0m[m [0m[92m▲[0m[91m)[0m[m [0m[91m≡[0m[91m [0m[mundefined[0m[m [0m[92m▲[0m
+Goal:
+  ∀ △. (++) ▲ (undefined ▲) ≡ undefined ▲
 [Done]
 
 Successfully proven: ++ strict
-[mqsort[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[92m△[0m[92m [0m[m$dOrd[0m[m [0m[91m→[0m[91m
-[0m[m  [0m[94mlet[0m[m [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[macc[0m[m [0m[91m→[0m[91m
-[0m[m            [0m[94mcase[0m[m [0m[mx1[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m              [0m[m[][0m[m [0m[91m→[0m[91m [0m[macc[0m[m
-[0m[m              [0m[91m([0m[m:[0m[91m)[0m[m [0m[ma[0m[m [0m[mas[0m[m [0m[91m→[0m[91m
-[0m[m                [0m[94mlet[0m[m [0m[mds[0m[m [0m[91m=[0m[m [0m[mpartition[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m<[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$dOrd[0m[m [0m[mds[0m[m [0m[ma[0m[91m)[0m[m [0m[mas[0m[m
-[0m[m                [0m[94min[0m[m [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                     [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m
-[0m[m                       [0m[mwork[0m[m [0m[mbs[0m[m
-[0m[m                            [0m[91m([0m[91m([0m[m:[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[ma[0m[m
-[0m[m                                 [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                                    [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mcs[0m[m [0m[macc[0m[91m)[0m[91m)[0m[m
-[0m[m  [0m[94min[0m[m [0m[91mλ[0m[91m [0m[mx0[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mx0[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m
+qsort = λ △ $dOrd →
+  let rec work = λ x1 acc →
+            case x1 of wild ▲
+              [] → acc
+              (:) a as →
+                let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                in case ds of wild ▲
+                     (,) bs cs →
+                       work bs
+                            ((:) ▲ a
+                                 (case ds of wild ▲
+                                    (,) bs cs → work cs acc))
+  in λ x0 → work x0 ([] ▲)
 [Done]
 
-[mGoal:[0m[m
-[0m[m  [0m[91m∀[0m[91m [0m[92m△[0m[92m [0m[mx[0m[m [0m[mxs[0m[91m.[0m[m [0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[mxs[0m[91m)[0m[m [0m[91m≡[0m[91m [0m[91m([0m[m.[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[mx[0m[91m)[0m[m [0m[91m([0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[91m)[0m
+Goal:
+  ∀ △ x xs. repH ▲ ((:) ▲ x xs) ≡ (.) ▲ ▲ ▲ ((:) ▲ x) (repH ▲ xs)
 [Done]
 
 Successfully proven: repH (:)
-[mqsort[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[92m△[0m[92m [0m[m$dOrd[0m[m [0m[91m→[0m[91m
-[0m[m  [0m[94mlet[0m[m [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[macc[0m[m [0m[91m→[0m[91m
-[0m[m            [0m[94mcase[0m[m [0m[mx1[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m              [0m[m[][0m[m [0m[91m→[0m[91m [0m[macc[0m[m
-[0m[m              [0m[91m([0m[m:[0m[91m)[0m[m [0m[ma[0m[m [0m[mas[0m[m [0m[91m→[0m[91m
-[0m[m                [0m[94mlet[0m[m [0m[mds[0m[m [0m[91m=[0m[m [0m[mpartition[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m<[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$dOrd[0m[m [0m[mds[0m[m [0m[ma[0m[91m)[0m[m [0m[mas[0m[m
-[0m[m                [0m[94min[0m[m [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                     [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m
-[0m[m                       [0m[mwork[0m[m [0m[mbs[0m[m
-[0m[m                            [0m[91m([0m[91m([0m[m:[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[ma[0m[m
-[0m[m                                 [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                                    [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mcs[0m[m [0m[macc[0m[91m)[0m[91m)[0m[m
-[0m[m  [0m[94min[0m[m [0m[91mλ[0m[91m [0m[mx0[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mx0[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m
+qsort = λ △ $dOrd →
+  let rec work = λ x1 acc →
+            case x1 of wild ▲
+              [] → acc
+              (:) a as →
+                let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                in case ds of wild ▲
+                     (,) bs cs →
+                       work bs
+                            ((:) ▲ a
+                                 (case ds of wild ▲
+                                    (,) bs cs → work cs acc))
+  in λ x0 → work x0 ([] ▲)
 [Done]
 
-[mGoal:[0m[m
-[0m[m  [0m[91m∀[0m[91m [0m[92m△[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m.[0m[m
-[0m[m  [0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m++[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m)[0m[m [0m[91m≡[0m[91m [0m[91m([0m[m.[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[91m)[0m[m [0m[91m([0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[mys[0m[91m)[0m
+Goal:
+  ∀ △ xs ys.
+  repH ▲ ((++) ▲ xs ys) ≡ (.) ▲ ▲ ▲ (repH ▲ xs) (repH ▲ ys)
 [Done]
 
 Successfully proven: repH ++
-[mqsort[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[92m△[0m[92m [0m[m$dOrd[0m[m [0m[91m→[0m[91m
-[0m[m  [0m[94mlet[0m[m [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[macc[0m[m [0m[91m→[0m[91m
-[0m[m            [0m[94mcase[0m[m [0m[mx1[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m              [0m[m[][0m[m [0m[91m→[0m[91m [0m[macc[0m[m
-[0m[m              [0m[91m([0m[m:[0m[91m)[0m[m [0m[ma[0m[m [0m[mas[0m[m [0m[91m→[0m[91m
-[0m[m                [0m[94mlet[0m[m [0m[mds[0m[m [0m[91m=[0m[m [0m[mpartition[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m<[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$dOrd[0m[m [0m[mds[0m[m [0m[ma[0m[91m)[0m[m [0m[mas[0m[m
-[0m[m                [0m[94min[0m[m [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                     [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m
-[0m[m                       [0m[mwork[0m[m [0m[mbs[0m[m
-[0m[m                            [0m[91m([0m[91m([0m[m:[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[ma[0m[m
-[0m[m                                 [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                                    [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mcs[0m[m [0m[macc[0m[91m)[0m[91m)[0m[m
-[0m[m  [0m[94min[0m[m [0m[91mλ[0m[91m [0m[mx0[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mx0[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m
+qsort = λ △ $dOrd →
+  let rec work = λ x1 acc →
+            case x1 of wild ▲
+              [] → acc
+              (:) a as →
+                let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                in case ds of wild ▲
+                     (,) bs cs →
+                       work bs
+                            ((:) ▲ a
+                                 (case ds of wild ▲
+                                    (,) bs cs → work cs acc))
+  in λ x0 → work x0 ([] ▲)
 [Done]
 
-[mGoal:[0m[m
-[0m[m  [0m[91m∀[0m[91m [0m[92m△[0m[91m.[0m[m [0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[m [0m[91m≡[0m[91m [0m[mid[0m[m [0m[92m▲[0m
+Goal:
+  ∀ △. repH ▲ ([] ▲) ≡ id ▲
 [Done]
 
 Successfully proven: repH []
-[mqsort[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[92m△[0m[92m [0m[m$dOrd[0m[m [0m[91m→[0m[91m
-[0m[m  [0m[94mlet[0m[m [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mx1[0m[m [0m[macc[0m[m [0m[91m→[0m[91m
-[0m[m            [0m[94mcase[0m[m [0m[mx1[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m              [0m[m[][0m[m [0m[91m→[0m[91m [0m[macc[0m[m
-[0m[m              [0m[91m([0m[m:[0m[91m)[0m[m [0m[ma[0m[m [0m[mas[0m[m [0m[91m→[0m[91m
-[0m[m                [0m[94mlet[0m[m [0m[mds[0m[m [0m[91m=[0m[m [0m[mpartition[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[91m([0m[m<[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[m$dOrd[0m[m [0m[mds[0m[m [0m[ma[0m[91m)[0m[m [0m[mas[0m[m
-[0m[m                [0m[94min[0m[m [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                     [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m
-[0m[m                       [0m[mwork[0m[m [0m[mbs[0m[m
-[0m[m                            [0m[91m([0m[91m([0m[m:[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[ma[0m[m
-[0m[m                                 [0m[91m([0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m                                    [0m[m(,)[0m[m [0m[mbs[0m[m [0m[mcs[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mcs[0m[m [0m[macc[0m[91m)[0m[91m)[0m[m
-[0m[m  [0m[94min[0m[m [0m[91mλ[0m[91m [0m[mx0[0m[m [0m[91m→[0m[91m [0m[mwork[0m[m [0m[mx0[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m
+qsort = λ △ $dOrd →
+  let rec work = λ x1 acc →
+            case x1 of wild ▲
+              [] → acc
+              (:) a as →
+                let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                in case ds of wild ▲
+                     (,) bs cs →
+                       work bs
+                            ((:) ▲ a
+                                 (case ds of wild ▲
+                                    (,) bs cs → work cs acc))
+  in λ x0 → work x0 ([] ▲)
 [Done]
 
 HERMIT> Warning: Lemma ++ [] was assumed but not proven.
-[m++ [][0m[m
-[0m[m  [0m[91m∀[0m[91m [0m[92m△[0m[92m [0m[mxs[0m[91m.[0m[m [0m[91m([0m[m++[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[m [0m[91m≡[0m[91m [0m[mxs[0mWarning: Lemma ++ strict was assumed but not proven.
-[m++ strict[0m[m
-[0m[m  [0m[91m∀[0m[91m [0m[92m△[0m[91m.[0m[m [0m[91m([0m[m++[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[91m([0m[mundefined[0m[m [0m[92m▲[0m[91m)[0m[m [0m[91m≡[0m[91m [0m[mundefined[0m[m [0m[92m▲[0mWarning: Lemma repH (:) was assumed but not proven.
-[mrepH (:)[0m[m
-[0m[m  [0m[91m∀[0m[91m [0m[92m△[0m[92m [0m[mx[0m[m [0m[mxs[0m[91m.[0m[m [0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[mx[0m[m [0m[mxs[0m[91m)[0m[m [0m[91m≡[0m[91m [0m[91m([0m[m.[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m:[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[mx[0m[91m)[0m[m [0m[91m([0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[91m)[0mWarning: Lemma repH ++ was assumed but not proven.
-[mrepH ++[0m[m
-[0m[m  [0m[91m∀[0m[91m [0m[92m△[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m.[0m[m
-[0m[m  [0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[91m([0m[m++[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[m [0m[mys[0m[91m)[0m[m [0m[91m≡[0m[91m [0m[91m([0m[m.[0m[91m)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[mxs[0m[91m)[0m[m [0m[91m([0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[mys[0m[91m)[0mWarning: Lemma repH [] was assumed but not proven.
-[mrepH [][0m[m
-[0m[m  [0m[91m∀[0m[91m [0m[92m△[0m[91m.[0m[m [0m[mrepH[0m[m [0m[92m▲[0m[92m [0m[91m([0m[m[][0m[m [0m[92m▲[0m[91m)[0m[m [0m[91m≡[0m[91m [0m[mid[0m[m [0m[92m▲[0m
+++ []
+  ∀ △ xs. (++) ▲ xs ([] ▲) ≡ xsWarning: Lemma ++ strict was assumed but not proven.
+++ strict
+  ∀ △. (++) ▲ (undefined ▲) ≡ undefined ▲Warning: Lemma repH (:) was assumed but not proven.
+repH (:)
+  ∀ △ x xs. repH ▲ ((:) ▲ x xs) ≡ (.) ▲ ▲ ▲ ((:) ▲ x) (repH ▲ xs)Warning: Lemma repH ++ was assumed but not proven.
+repH ++
+  ∀ △ xs ys.
+  repH ▲ ((++) ▲ xs ys) ≡ (.) ▲ ▲ ▲ (repH ▲ xs) (repH ▲ ys)Warning: Lemma repH [] was assumed but not proven.
+repH []
+  ∀ △. repH ▲ ([] ▲) ≡ id ▲
 [Done]
 
 Leaving GHCi.

@@ -1,62 +1,62 @@
 [1 of 1] Compiling Main             ( Fib.hs, Fib.o )
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
 GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
-[94mmodule[0m[m [0m[mMain[0m[m [0m[94mwhere[0m[m
-[0m[m  [0m[munwrap[0m[m [0m[91m∷[0m[92m [0m[91m([0m[92mNat[0m[m [0m[91m→[0m[92m [0m[92mNat[0m[91m)[0m[m [0m[91m→[0m[92m [0m[92mNat[0m[m [0m[91m→[0m[92m [0m[92m([0m[92mNat[0m[92m,[0m[m [0m[92mNat[0m[92m)[0m[m
-[0m[m  [0m[mwrap[0m[m [0m[91m∷[0m[92m [0m[91m([0m[92mNat[0m[m [0m[91m→[0m[92m [0m[92m([0m[92mNat[0m[92m,[0m[m [0m[92mNat[0m[92m)[0m[91m)[0m[m [0m[91m→[0m[92m [0m[92mNat[0m[m [0m[91m→[0m[92m [0m[92mNat[0m[m
-[0m[m  [0m[91m([0m[m+[0m[91m)[0m[m [0m[91m∷[0m[92m [0m[92mNat[0m[m [0m[91m→[0m[92m [0m[92mNat[0m[m [0m[91m→[0m[92m [0m[92mNat[0m[m
-[0m[m  [0m[mfib[0m[m [0m[91m∷[0m[92m [0m[92mNat[0m[m [0m[91m→[0m[92m [0m[92mNat[0m[m
-[0m[m  [0m[mfromInt[0m[m [0m[91m∷[0m[92m [0m[92mInt[0m[m [0m[91m→[0m[92m [0m[92mNat[0m[m
-[0m[m  [0m[mtoInt[0m[m [0m[91m∷[0m[92m [0m[92mNat[0m[m [0m[91m→[0m[92m [0m[92mInt[0m[m
-[0m[m  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[m [0m[92m([0m[92m)[0m[m
-[0m[m  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[m [0m[92m([0m[92m)[0m
+module Main where
+  unwrap ∷ (Nat → Nat) → Nat → (Nat, Nat)
+  wrap ∷ (Nat → (Nat, Nat)) → Nat → Nat
+  (+) ∷ Nat → Nat → Nat
+  fib ∷ Nat → Nat
+  fromInt ∷ Int → Nat
+  toInt ∷ Nat → Int
+  main ∷ IO ()
+  main ∷ IO ()
 [Done]
 
 [1 of 2] Compiling WWAssAScript     ( WWAssAScript.hs, interpreted )
 [2 of 2] Compiling FibScript        ( FibScript.hs, interpreted )
 Ok, modules loaded: FibScript, WWAssAScript.
-[94mmodule[0m[m [0m[mMain[0m[m [0m[94mwhere[0m[m
-[0m[m  [0m[munwrap[0m[m [0m[91m∷[0m[92m [0m[91m([0m[92mNat[0m[m [0m[91m→[0m[92m [0m[92mNat[0m[91m)[0m[m [0m[91m→[0m[92m [0m[92mNat[0m[m [0m[91m→[0m[92m [0m[92m([0m[92mNat[0m[92m,[0m[m [0m[92mNat[0m[92m)[0m[m
-[0m[m  [0m[mwrap[0m[m [0m[91m∷[0m[92m [0m[91m([0m[92mNat[0m[m [0m[91m→[0m[92m [0m[92m([0m[92mNat[0m[92m,[0m[m [0m[92mNat[0m[92m)[0m[91m)[0m[m [0m[91m→[0m[92m [0m[92mNat[0m[m [0m[91m→[0m[92m [0m[92mNat[0m[m
-[0m[m  [0m[91m([0m[m+[0m[91m)[0m[m [0m[91m∷[0m[92m [0m[92mNat[0m[m [0m[91m→[0m[92m [0m[92mNat[0m[m [0m[91m→[0m[92m [0m[92mNat[0m[m
-[0m[m  [0m[mfib[0m[m [0m[91m∷[0m[92m [0m[92mNat[0m[m [0m[91m→[0m[92m [0m[92mNat[0m[m
-[0m[m  [0m[mfromInt[0m[m [0m[91m∷[0m[92m [0m[92mInt[0m[m [0m[91m→[0m[92m [0m[92mNat[0m[m
-[0m[m  [0m[mtoInt[0m[m [0m[91m∷[0m[92m [0m[92mNat[0m[m [0m[91m→[0m[92m [0m[92mInt[0m[m
-[0m[m  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[m [0m[92m([0m[92m)[0m[m
-[0m[m  [0m[mmain[0m[m [0m[91m∷[0m[92m [0m[92mIO[0m[m [0m[92m([0m[92m)[0m
+module Main where
+  unwrap ∷ (Nat → Nat) → Nat → (Nat, Nat)
+  wrap ∷ (Nat → (Nat, Nat)) → Nat → Nat
+  (+) ∷ Nat → Nat → Nat
+  fib ∷ Nat → Nat
+  fromInt ∷ Int → Nat
+  toInt ∷ Nat → Int
+  main ∷ IO ()
+  main ∷ IO ()
 [Done]
 
-[mfib[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m
-[0m[m  [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m    [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mZ[0m[m
-[0m[m    [0m[mS[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-[0m[m      [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m        [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mS[0m[m [0m[mZ[0m[m
-[0m[m        [0m[mS[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mfib[0m[m [0m[91m([0m[mS[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mfib[0m[m [0m[mn[0m[91m)[0m
+fib = λ ds →
+  case ds of wild ▲
+    Z → Z
+    S ds →
+      case ds of wild ▲
+        Z → S Z
+        S n → (+) (fib (S n)) (fib n)
 [Done]
 
-[mfib[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m
-[0m[m  [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m    [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mZ[0m[m
-[0m[m    [0m[mS[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-[0m[m      [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m        [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mS[0m[m [0m[mZ[0m[m
-[0m[m        [0m[mS[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mfib[0m[m [0m[91m([0m[mS[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mfib[0m[m [0m[mn[0m[91m)[0m
+fib = λ ds →
+  case ds of wild ▲
+    Z → Z
+    S ds →
+      case ds of wild ▲
+        Z → S Z
+        S n → (+) (fib (S n)) (fib n)
 [Done]
 
-[mfib[0m[m [0m[91m=[0m[m
-[0m[m  [0m[94mlet[0m[m [0m[mf[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mfib[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-[0m[m        [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m          [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mZ[0m[m
-[0m[m          [0m[mS[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-[0m[m            [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m              [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mS[0m[m [0m[mZ[0m[m
-[0m[m              [0m[mS[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mfib[0m[m [0m[91m([0m[mS[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mfib[0m[m [0m[mn[0m[91m)[0m[m
-[0m[m      [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[munwrap[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[91m)[0m[m
-[0m[m  [0m[94min[0m[m [0m[mwrap[0m[m [0m[mwork[0m
+fib =
+  let f = λ fib ds →
+        case ds of wild ▲
+          Z → Z
+          S ds →
+            case ds of wild ▲
+              Z → S Z
+              S n → (+) (fib (S n)) (fib n)
+      rec work = unwrap (f (wrap work))
+  in wrap work
 [Done]
 
-[mwork[0m[m [0m[91m=[0m[m [0m[munwrap[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[91m)[0m
+work = unwrap (f (wrap work))
 [Done]
 
 '"{
@@ -73,292 +73,292 @@ Ok, modules loaded: FibScript, WWAssAScript.
 
 [Done]
 
-[munwrap[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[91m)[0m
+unwrap (f (wrap work))
 [Done]
 
-[91mλ[0m[91m [0m[mn[0m[m [0m[91m→[0m[91m [0m[munwrap[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[91m)[0m[m [0m[mn[0m
+λ n → unwrap (f (wrap work)) n
 [Done]
 
-[91mλ[0m[91m [0m[mn[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[mn[0m[91m)[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[mn[0m[91m)[0m[91m)[0m
+λ n → (,) ▲ ▲ (f (wrap work) n) (f (wrap work) (S n))
 [Done]
 
-[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[mn[0m[91m)[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[mn[0m[91m)[0m[91m)[0m
+(,) ▲ ▲ (f (wrap work) n) (f (wrap work) (S n))
 [Done]
 
-[94mcase[0m[m [0m[mn[0m[m [0m[94mof[0m[m [0m[mw[0m[m [0m[92m▲[0m[92m
-[0m[m  [0m[mZ[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[mZ[0m[91m)[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[mZ[0m[91m)[0m[91m)[0m[m
-[0m[m  [0m[mS[0m[m [0m[ma[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[91m)[0m
+case n of w ▲
+  Z → (,) ▲ ▲ (f (wrap work) Z) (f (wrap work) (S Z))
+  S a → (,) ▲ ▲ (f (wrap work) (S a)) (f (wrap work) (S (S a)))
 [Done]
 
-[94mcase[0m[m [0m[mn[0m[m [0m[94mof[0m[m [0m[mw[0m[m [0m[92m▲[0m[92m
-[0m[m  [0m[mZ[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[mZ[0m[91m)[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[mZ[0m[91m)[0m[91m)[0m[m
-[0m[m  [0m[mS[0m[m [0m[ma[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[91m)[0m
+case n of w ▲
+  Z → (,) ▲ ▲ (f (wrap work) Z) (f (wrap work) (S Z))
+  S a → (,) ▲ ▲ (f (wrap work) (S a)) (f (wrap work) (S (S a)))
 [Done]
 
-[mZ[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[mZ[0m[91m)[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[mZ[0m[91m)[0m[91m)[0m
+Z → (,) ▲ ▲ (f (wrap work) Z) (f (wrap work) (S Z))
 [Done]
 
-[mZ[0m[m [0m[91m→[0m[91m
-[0m[m  [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m
-[0m[m      [0m[91m([0m[94mcase[0m[m [0m[mZ[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m         [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mZ[0m[m
-[0m[m         [0m[mS[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-[0m[m           [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m             [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mS[0m[m [0m[mZ[0m[m
-[0m[m             [0m[mS[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[91m([0m[mS[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m
-[0m[m      [0m[91m([0m[94mcase[0m[m [0m[mS[0m[m [0m[mZ[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m         [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mZ[0m[m
-[0m[m         [0m[mS[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-[0m[m           [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m             [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mS[0m[m [0m[mZ[0m[m
-[0m[m             [0m[mS[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[91m([0m[mS[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[mn[0m[91m)[0m[91m)[0m
+Z →
+  (,) ▲ ▲
+      (case Z of wild ▲
+         Z → Z
+         S ds →
+           case ds of wild ▲
+             Z → S Z
+             S n → (+) (wrap work (S n)) (wrap work n))
+      (case S Z of wild ▲
+         Z → Z
+         S ds →
+           case ds of wild ▲
+             Z → S Z
+             S n → (+) (wrap work (S n)) (wrap work n))
 [Done]
 
-[94mcase[0m[m [0m[mn[0m[m [0m[94mof[0m[m [0m[mw[0m[m [0m[92m▲[0m[92m
-[0m[m  [0m[mZ[0m[m [0m[91m→[0m[91m
-[0m[m    [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m
-[0m[m        [0m[91m([0m[94mcase[0m[m [0m[mZ[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m           [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mZ[0m[m
-[0m[m           [0m[mS[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-[0m[m             [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m               [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mS[0m[m [0m[mZ[0m[m
-[0m[m               [0m[mS[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[91m([0m[mS[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m
-[0m[m        [0m[91m([0m[94mcase[0m[m [0m[mS[0m[m [0m[mZ[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m           [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mZ[0m[m
-[0m[m           [0m[mS[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-[0m[m             [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m               [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mS[0m[m [0m[mZ[0m[m
-[0m[m               [0m[mS[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[91m([0m[mS[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m
-[0m[m  [0m[mS[0m[m [0m[ma[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[91m)[0m
+case n of w ▲
+  Z →
+    (,) ▲ ▲
+        (case Z of wild ▲
+           Z → Z
+           S ds →
+             case ds of wild ▲
+               Z → S Z
+               S n → (+) (wrap work (S n)) (wrap work n))
+        (case S Z of wild ▲
+           Z → Z
+           S ds →
+             case ds of wild ▲
+               Z → S Z
+               S n → (+) (wrap work (S n)) (wrap work n))
+  S a → (,) ▲ ▲ (f (wrap work) (S a)) (f (wrap work) (S (S a)))
 [Done]
 
-[94mcase[0m[m [0m[mn[0m[m [0m[94mof[0m[m [0m[mw[0m[m [0m[92m▲[0m[92m
-[0m[m  [0m[mZ[0m[m [0m[91m→[0m[91m
-[0m[m    [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m
-[0m[m        [0m[91m([0m[94mcase[0m[m [0m[mZ[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m           [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mZ[0m[m
-[0m[m           [0m[mS[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-[0m[m             [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m               [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mS[0m[m [0m[mZ[0m[m
-[0m[m               [0m[mS[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[91m([0m[mS[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m
-[0m[m        [0m[91m([0m[94mcase[0m[m [0m[mS[0m[m [0m[mZ[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m           [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mZ[0m[m
-[0m[m           [0m[mS[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-[0m[m             [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m               [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mS[0m[m [0m[mZ[0m[m
-[0m[m               [0m[mS[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[91m([0m[mS[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m
-[0m[m  [0m[mS[0m[m [0m[ma[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[91m)[0m
+case n of w ▲
+  Z →
+    (,) ▲ ▲
+        (case Z of wild ▲
+           Z → Z
+           S ds →
+             case ds of wild ▲
+               Z → S Z
+               S n → (+) (wrap work (S n)) (wrap work n))
+        (case S Z of wild ▲
+           Z → Z
+           S ds →
+             case ds of wild ▲
+               Z → S Z
+               S n → (+) (wrap work (S n)) (wrap work n))
+  S a → (,) ▲ ▲ (f (wrap work) (S a)) (f (wrap work) (S (S a)))
 [Done]
 
-[mS[0m[m [0m[ma[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[91m)[0m
+S a → (,) ▲ ▲ (f (wrap work) (S a)) (f (wrap work) (S (S a)))
 [Done]
 
-[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[91m)[0m
+(,) ▲ ▲ (f (wrap work) (S a)) (f (wrap work) (S (S a)))
 [Done]
 
-[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m
+f (wrap work) (S (S a))
 [Done]
 
-[94mcase[0m[m [0m[mS[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m  [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mZ[0m[m
-[0m[m  [0m[mS[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-[0m[m    [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m      [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mS[0m[m [0m[mZ[0m[m
-[0m[m      [0m[mS[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[91m([0m[mS[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[mn[0m[91m)[0m
+case S (S a) of wild ▲
+  Z → Z
+  S ds →
+    case ds of wild ▲
+      Z → S Z
+      S n → (+) (wrap work (S n)) (wrap work n)
 [Done]
 
-[94mcase[0m[m [0m[mn[0m[m [0m[94mof[0m[m [0m[mw[0m[m [0m[92m▲[0m[92m
-[0m[m  [0m[mZ[0m[m [0m[91m→[0m[91m
-[0m[m    [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m
-[0m[m        [0m[91m([0m[94mcase[0m[m [0m[mZ[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m           [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mZ[0m[m
-[0m[m           [0m[mS[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-[0m[m             [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m               [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mS[0m[m [0m[mZ[0m[m
-[0m[m               [0m[mS[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[91m([0m[mS[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m
-[0m[m        [0m[91m([0m[94mcase[0m[m [0m[mS[0m[m [0m[mZ[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m           [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mZ[0m[m
-[0m[m           [0m[mS[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-[0m[m             [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m               [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mS[0m[m [0m[mZ[0m[m
-[0m[m               [0m[mS[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[91m([0m[mS[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m
-[0m[m  [0m[mS[0m[m [0m[ma[0m[m [0m[91m→[0m[91m
-[0m[m    [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m
-[0m[m        [0m[91m([0m[94mcase[0m[m [0m[mS[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m           [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mZ[0m[m
-[0m[m           [0m[mS[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-[0m[m             [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m               [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mS[0m[m [0m[mZ[0m[m
-[0m[m               [0m[mS[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[91m([0m[mS[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[mn[0m[91m)[0m[91m)[0m
+case n of w ▲
+  Z →
+    (,) ▲ ▲
+        (case Z of wild ▲
+           Z → Z
+           S ds →
+             case ds of wild ▲
+               Z → S Z
+               S n → (+) (wrap work (S n)) (wrap work n))
+        (case S Z of wild ▲
+           Z → Z
+           S ds →
+             case ds of wild ▲
+               Z → S Z
+               S n → (+) (wrap work (S n)) (wrap work n))
+  S a →
+    (,) ▲ ▲ (f (wrap work) (S a))
+        (case S (S a) of wild ▲
+           Z → Z
+           S ds →
+             case ds of wild ▲
+               Z → S Z
+               S n → (+) (wrap work (S n)) (wrap work n))
 [Done]
 
-[94mcase[0m[m [0m[mn[0m[m [0m[94mof[0m[m [0m[mw[0m[m [0m[92m▲[0m[92m
-[0m[m  [0m[mZ[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[mZ[0m[m [0m[91m([0m[mS[0m[m [0m[mZ[0m[91m)[0m[m
-[0m[m  [0m[mS[0m[m [0m[ma[0m[m [0m[91m→[0m[91m
-[0m[m    [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[ma[0m[91m)[0m[91m)[0m
+case n of w ▲
+  Z → (,) ▲ ▲ Z (S Z)
+  S a →
+    (,) ▲ ▲ (f (wrap work) (S a)) ((+) (wrap work (S a)) (wrap work a))
 [Done]
 
-[mS[0m[m [0m[ma[0m[m [0m[91m→[0m[91m
-[0m[m  [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[ma[0m[91m)[0m[91m)[0m
+S a →
+  (,) ▲ ▲ (f (wrap work) (S a)) ((+) (wrap work (S a)) (wrap work a))
 [Done]
 
-[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[ma[0m[91m)[0m[91m)[0m
+(,) ▲ ▲ (f (wrap work) (S a)) ((+) (wrap work (S a)) (wrap work a))
 [Done]
 
-[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[ma[0m[91m)[0m[91m)[0m
+(,) ▲ ▲ (f (wrap work) (S a)) ((+) (wrap work (S a)) (wrap work a))
 [Done]
 
-[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[m [0m[ma[0m[91m)[0m
+(+) (wrap work (S a)) (wrap work a)
 [Done]
 
-[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[91m([0m[munwrap[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m
-[0m[m    [0m[91m([0m[mwrap[0m[m [0m[91m([0m[munwrap[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[91m)[0m[91m)[0m[m [0m[ma[0m[91m)[0m
+(+) (wrap (unwrap (f (wrap work))) (S a))
+    (wrap (unwrap (f (wrap work))) a)
 [Done]
 
-[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m
-[0m[m    [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mwrap[0m[m [0m[91m([0m[munwrap[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m
-[0m[m         [0m[91m([0m[mwrap[0m[m [0m[91m([0m[munwrap[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[91m)[0m[91m)[0m[m [0m[ma[0m[91m)[0m[91m)[0m
+(,) ▲ ▲ (f (wrap work) (S a))
+    ((+) (wrap (unwrap (f (wrap work))) (S a))
+         (wrap (unwrap (f (wrap work))) a))
 [Done]
 
-[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m
-[0m[m    [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[ma[0m[91m)[0m[91m)[0m
+(,) ▲ ▲ (f (wrap work) (S a))
+    ((+) (f (wrap work) (S a)) (f (wrap work) a))
 [Done]
 
-[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m
-[0m[m    [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[ma[0m[91m)[0m[91m)[0m
+(,) ▲ ▲ (f (wrap work) (S a))
+    ((+) (f (wrap work) (S a)) (f (wrap work) a))
 [Done]
 
-[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[ma[0m[91m)[0m
+(+) (f (wrap work) (S a)) (f (wrap work) a)
 [Done]
 
-[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[ma[0m
+f (wrap work) a
 [Done]
 
-[94mlet[0m[m [0m[mx[0m[m [0m[91m=[0m[m [0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[ma[0m[m [0m[94min[0m[m [0m[mx[0m
+let x = f (wrap work) a in x
 [Done]
 
-[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m
-[0m[m    [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m [0m[91m([0m[94mlet[0m[m [0m[mx[0m[m [0m[91m=[0m[m [0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[ma[0m[m [0m[94min[0m[m [0m[mx[0m[91m)[0m[91m)[0m
+(,) ▲ ▲ (f (wrap work) (S a))
+    ((+) (f (wrap work) (S a)) (let x = f (wrap work) a in x))
 [Done]
 
-[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m
-[0m[m    [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m [0m[91m([0m[94mlet[0m[m [0m[mx[0m[m [0m[91m=[0m[m [0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[ma[0m[m [0m[94min[0m[m [0m[mx[0m[91m)[0m[91m)[0m
+(,) ▲ ▲ (f (wrap work) (S a))
+    ((+) (f (wrap work) (S a)) (let x = f (wrap work) a in x))
 [Done]
 
-[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m
+f (wrap work) (S a)
 [Done]
 
-[94mlet[0m[m [0m[my[0m[m [0m[91m=[0m[m [0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[m [0m[94min[0m[m [0m[my[0m
+let y = f (wrap work) (S a) in y
 [Done]
 
-[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[94mlet[0m[m [0m[my[0m[m [0m[91m=[0m[m [0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[m [0m[94min[0m[m [0m[my[0m[91m)[0m[m
-[0m[m    [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m [0m[91m([0m[94mlet[0m[m [0m[mx[0m[m [0m[91m=[0m[m [0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[ma[0m[m [0m[94min[0m[m [0m[mx[0m[91m)[0m[91m)[0m
+(,) ▲ ▲ (let y = f (wrap work) (S a) in y)
+    ((+) (f (wrap work) (S a)) (let x = f (wrap work) a in x))
 [Done]
 
-[94mlet[0m[m [0m[mx[0m[m [0m[91m=[0m[m [0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[ma[0m[m
-[0m[m    [0m[my[0m[m [0m[91m=[0m[m [0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[m
-[0m[m[0m[94min[0m[m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[my[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m [0m[mx[0m[91m)[0m
+let x = f (wrap work) a
+    y = f (wrap work) (S a)
+in (,) ▲ ▲ y ((+) (f (wrap work) (S a)) x)
 [Done]
 
-[94mlet[0m[m [0m[mx[0m[m [0m[91m=[0m[m [0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[ma[0m[m
-[0m[m    [0m[my[0m[m [0m[91m=[0m[m [0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[m
-[0m[m[0m[94min[0m[m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[my[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m [0m[mx[0m[91m)[0m
+let x = f (wrap work) a
+    y = f (wrap work) (S a)
+in (,) ▲ ▲ y ((+) (f (wrap work) (S a)) x)
 [Done]
 
-[94mlet[0m[m [0m[mx[0m[m [0m[91m=[0m[m [0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[ma[0m[m
-[0m[m    [0m[my[0m[m [0m[91m=[0m[m [0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[m
-[0m[m[0m[94min[0m[m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[my[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[my[0m[m [0m[mx[0m[91m)[0m
+let x = f (wrap work) a
+    y = f (wrap work) (S a)
+in (,) ▲ ▲ y ((+) y x)
 [Done]
 
-[94mcase[0m[m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[ma[0m[91m)[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[m [0m[91m([0m[mS[0m[m [0m[ma[0m[91m)[0m[91m)[0m[m [0m[94mof[0m[m [0m[mxy[0m[m [0m[92m▲[0m[92m
-[0m[m  [0m[m(,)[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[my[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[my[0m[m [0m[mx[0m[91m)[0m
+case (,) ▲ ▲ (f (wrap work) a) (f (wrap work) (S a)) of xy ▲
+  (,) x y → (,) ▲ ▲ y ((+) y x)
 [Done]
 
-[94mcase[0m[m [0m[munwrap[0m[m [0m[91m([0m[mf[0m[m [0m[91m([0m[mwrap[0m[m [0m[mwork[0m[91m)[0m[91m)[0m[m [0m[ma[0m[m [0m[94mof[0m[m [0m[mxy[0m[m [0m[92m▲[0m[92m
-[0m[m  [0m[m(,)[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[my[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[my[0m[m [0m[mx[0m[91m)[0m
+case unwrap (f (wrap work)) a of xy ▲
+  (,) x y → (,) ▲ ▲ y ((+) y x)
 [Done]
 
-[94mcase[0m[m [0m[mwork[0m[m [0m[ma[0m[m [0m[94mof[0m[m [0m[mxy[0m[m [0m[92m▲[0m[92m
-[0m[m  [0m[m(,)[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[my[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[my[0m[m [0m[mx[0m[91m)[0m
+case work a of xy ▲
+  (,) x y → (,) ▲ ▲ y ((+) y x)
 [Done]
 
-[mfib[0m[m [0m[91m=[0m[m
-[0m[m  [0m[94mlet[0m[m [0m[mf[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mfib[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-[0m[m        [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m          [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mZ[0m[m
-[0m[m          [0m[mS[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-[0m[m            [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m              [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mS[0m[m [0m[mZ[0m[m
-[0m[m              [0m[mS[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mfib[0m[m [0m[91m([0m[mS[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mfib[0m[m [0m[mn[0m[91m)[0m[m
-[0m[m      [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mn[0m[m [0m[91m→[0m[91m
-[0m[m            [0m[94mcase[0m[m [0m[mn[0m[m [0m[94mof[0m[m [0m[mw[0m[m [0m[92m▲[0m[92m
-[0m[m              [0m[mZ[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[mZ[0m[m [0m[91m([0m[mS[0m[m [0m[mZ[0m[91m)[0m[m
-[0m[m              [0m[mS[0m[m [0m[ma[0m[m [0m[91m→[0m[91m
-[0m[m                [0m[94mcase[0m[m [0m[mwork[0m[m [0m[ma[0m[m [0m[94mof[0m[m [0m[mxy[0m[m [0m[92m▲[0m[92m
-[0m[m                  [0m[m(,)[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[my[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[my[0m[m [0m[mx[0m[91m)[0m[m
-[0m[m  [0m[94min[0m[m [0m[mwrap[0m[m [0m[mwork[0m
+fib =
+  let f = λ fib ds →
+        case ds of wild ▲
+          Z → Z
+          S ds →
+            case ds of wild ▲
+              Z → S Z
+              S n → (+) (fib (S n)) (fib n)
+      rec work = λ n →
+            case n of w ▲
+              Z → (,) ▲ ▲ Z (S Z)
+              S a →
+                case work a of xy ▲
+                  (,) x y → (,) ▲ ▲ y ((+) y x)
+  in wrap work
 [Done]
 
-[mfib[0m[m [0m[91m=[0m[m
-[0m[m  [0m[94mlet[0m[m [0m[mf[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mfib[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-[0m[m        [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m          [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mZ[0m[m
-[0m[m          [0m[mS[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-[0m[m            [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m              [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mS[0m[m [0m[mZ[0m[m
-[0m[m              [0m[mS[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mfib[0m[m [0m[91m([0m[mS[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mfib[0m[m [0m[mn[0m[91m)[0m[m
-[0m[m      [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mn[0m[m [0m[91m→[0m[91m
-[0m[m            [0m[94mcase[0m[m [0m[mn[0m[m [0m[94mof[0m[m [0m[mw[0m[m [0m[92m▲[0m[92m
-[0m[m              [0m[mZ[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[mZ[0m[m [0m[91m([0m[mS[0m[m [0m[mZ[0m[91m)[0m[m
-[0m[m              [0m[mS[0m[m [0m[ma[0m[m [0m[91m→[0m[91m
-[0m[m                [0m[94mcase[0m[m [0m[mwork[0m[m [0m[ma[0m[m [0m[94mof[0m[m [0m[mxy[0m[m [0m[92m▲[0m[92m
-[0m[m                  [0m[m(,)[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[my[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[my[0m[m [0m[mx[0m[91m)[0m[m
-[0m[m  [0m[94min[0m[m [0m[mwrap[0m[m [0m[mwork[0m
+fib =
+  let f = λ fib ds →
+        case ds of wild ▲
+          Z → Z
+          S ds →
+            case ds of wild ▲
+              Z → S Z
+              S n → (+) (fib (S n)) (fib n)
+      rec work = λ n →
+            case n of w ▲
+              Z → (,) ▲ ▲ Z (S Z)
+              S a →
+                case work a of xy ▲
+                  (,) x y → (,) ▲ ▲ y ((+) y x)
+  in wrap work
 [Done]
 
-[94mlet[0m[m [0m[mf[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mfib[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-[0m[m      [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m        [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mZ[0m[m
-[0m[m        [0m[mS[0m[m [0m[mds[0m[m [0m[91m→[0m[91m
-[0m[m          [0m[94mcase[0m[m [0m[mds[0m[m [0m[94mof[0m[m [0m[mwild[0m[m [0m[92m▲[0m[92m
-[0m[m            [0m[mZ[0m[m [0m[91m→[0m[91m [0m[mS[0m[m [0m[mZ[0m[m
-[0m[m            [0m[mS[0m[m [0m[mn[0m[m [0m[91m→[0m[91m [0m[91m([0m[m+[0m[91m)[0m[m [0m[91m([0m[mfib[0m[m [0m[91m([0m[mS[0m[m [0m[mn[0m[91m)[0m[91m)[0m[m [0m[91m([0m[mfib[0m[m [0m[mn[0m[91m)[0m[m
-[0m[m    [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mn[0m[m [0m[91m→[0m[91m
-[0m[m          [0m[94mcase[0m[m [0m[mn[0m[m [0m[94mof[0m[m [0m[mw[0m[m [0m[92m▲[0m[92m
-[0m[m            [0m[mZ[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[mZ[0m[m [0m[91m([0m[mS[0m[m [0m[mZ[0m[91m)[0m[m
-[0m[m            [0m[mS[0m[m [0m[ma[0m[m [0m[91m→[0m[91m
-[0m[m              [0m[94mcase[0m[m [0m[mwork[0m[m [0m[ma[0m[m [0m[94mof[0m[m [0m[mxy[0m[m [0m[92m▲[0m[92m
-[0m[m                [0m[m(,)[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[my[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[my[0m[m [0m[mx[0m[91m)[0m[m
-[0m[m[0m[94min[0m[m [0m[mwrap[0m[m [0m[mwork[0m
+let f = λ fib ds →
+      case ds of wild ▲
+        Z → Z
+        S ds →
+          case ds of wild ▲
+            Z → S Z
+            S n → (+) (fib (S n)) (fib n)
+    rec work = λ n →
+          case n of w ▲
+            Z → (,) ▲ ▲ Z (S Z)
+            S a →
+              case work a of xy ▲
+                (,) x y → (,) ▲ ▲ y ((+) y x)
+in wrap work
 [Done]
 
-[94mlet[0m[m [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mn[0m[m [0m[91m→[0m[91m
-[0m[m          [0m[94mcase[0m[m [0m[mn[0m[m [0m[94mof[0m[m [0m[mw[0m[m [0m[92m▲[0m[92m
-[0m[m            [0m[mZ[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[mZ[0m[m [0m[91m([0m[mS[0m[m [0m[mZ[0m[91m)[0m[m
-[0m[m            [0m[mS[0m[m [0m[ma[0m[m [0m[91m→[0m[91m
-[0m[m              [0m[94mcase[0m[m [0m[mwork[0m[m [0m[ma[0m[m [0m[94mof[0m[m [0m[mxy[0m[m [0m[92m▲[0m[92m
-[0m[m                [0m[m(,)[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[my[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[my[0m[m [0m[mx[0m[91m)[0m[m
-[0m[m[0m[94min[0m[m [0m[mwrap[0m[m [0m[mwork[0m
+let rec work = λ n →
+          case n of w ▲
+            Z → (,) ▲ ▲ Z (S Z)
+            S a →
+              case work a of xy ▲
+                (,) x y → (,) ▲ ▲ y ((+) y x)
+in wrap work
 [Done]
 
-[mfib[0m[m [0m[91m=[0m[m
-[0m[m  [0m[94mlet[0m[m [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mn[0m[m [0m[91m→[0m[91m
-[0m[m            [0m[94mcase[0m[m [0m[mn[0m[m [0m[94mof[0m[m [0m[mw[0m[m [0m[92m▲[0m[92m
-[0m[m              [0m[mZ[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[mZ[0m[m [0m[91m([0m[mS[0m[m [0m[mZ[0m[91m)[0m[m
-[0m[m              [0m[mS[0m[m [0m[ma[0m[m [0m[91m→[0m[91m
-[0m[m                [0m[94mcase[0m[m [0m[mwork[0m[m [0m[ma[0m[m [0m[94mof[0m[m [0m[mxy[0m[m [0m[92m▲[0m[92m
-[0m[m                  [0m[m(,)[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[my[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[my[0m[m [0m[mx[0m[91m)[0m[m
-[0m[m  [0m[94min[0m[m [0m[mwrap[0m[m [0m[mwork[0m
+fib =
+  let rec work = λ n →
+            case n of w ▲
+              Z → (,) ▲ ▲ Z (S Z)
+              S a →
+                case work a of xy ▲
+                  (,) x y → (,) ▲ ▲ y ((+) y x)
+  in wrap work
 [Done]
 
-[mfib[0m[m [0m[91m=[0m[m
-[0m[m  [0m[94mlet[0m[m [0m[94mrec[0m[m [0m[mwork[0m[m [0m[91m=[0m[m [0m[91mλ[0m[91m [0m[mn[0m[m [0m[91m→[0m[91m
-[0m[m            [0m[94mcase[0m[m [0m[mn[0m[m [0m[94mof[0m[m [0m[mw[0m[m [0m[92m▲[0m[92m
-[0m[m              [0m[mZ[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[mZ[0m[m [0m[91m([0m[mS[0m[m [0m[mZ[0m[91m)[0m[m
-[0m[m              [0m[mS[0m[m [0m[ma[0m[m [0m[91m→[0m[91m
-[0m[m                [0m[94mcase[0m[m [0m[mwork[0m[m [0m[ma[0m[m [0m[94mof[0m[m [0m[mxy[0m[m [0m[92m▲[0m[92m
-[0m[m                  [0m[m(,)[0m[m [0m[mx[0m[m [0m[my[0m[m [0m[91m→[0m[91m [0m[m(,)[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[my[0m[m [0m[91m([0m[91m([0m[m+[0m[91m)[0m[m [0m[my[0m[m [0m[mx[0m[91m)[0m[m
-[0m[m  [0m[94min[0m[m [0m[91mλ[0m[91m [0m[mn[0m[m [0m[91m→[0m[91m [0m[mfst[0m[m [0m[92m▲[0m[92m [0m[92m▲[0m[92m [0m[91m([0m[mwork[0m[m [0m[mn[0m[91m)[0m
+fib =
+  let rec work = λ n →
+            case n of w ▲
+              Z → (,) ▲ ▲ Z (S Z)
+              S a →
+                case work a of xy ▲
+                  (,) x y → (,) ▲ ▲ y ((+) y x)
+  in λ n → fst ▲ ▲ (work n)
 [Done]
 
 HERMIT> 

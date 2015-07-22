@@ -35,6 +35,9 @@ withStyle (Just sty) str = do
   putStr str
   setSGR [Reset]
 
+withNoStyle :: Maybe Style -> String -> IO ()
+withNoStyle _ str = putStr str
+
 styleSGR :: Style -> [SGR]
 styleSGR KEYWORD  = [simpleColor Blue]
 styleSGR SYNTAX   = [simpleColor Red]

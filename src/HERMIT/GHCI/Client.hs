@@ -45,7 +45,7 @@ send (Shell g) = do
              error $ "failed to parse result value for " ++
                      genMethodStr True g ++ ": " ++ show v ++ " : " ++ msg
          ShellResult gss a -> do
-                 sequence_ [ withStyle sty txt
+                 sequence_ [ withNoStyle sty txt
                            | gs <- gss
                            , Glyph txt sty <- gs
                            ]
