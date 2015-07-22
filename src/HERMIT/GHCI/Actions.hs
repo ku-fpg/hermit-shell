@@ -206,9 +206,8 @@ performTypedEffect lastCall plug ref [val] =
              when debug $ print ("abort" :: String)
              atomically $ writeTVar lastCall $ abortK (pr_kernel plug)
              return $ object [ "result" .= (), "output" .= es ]
-          Left (CLError e) -> do
-             putStrLn e
-             return Aeson.Null
+          Left (CLError e) ->
+             return $ object [ "exception" .= e ]
           Left _exc  -> do
                   when debug $ print ("Left _exc : " :: String)
                   return Aeson.Null
