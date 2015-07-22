@@ -57,3 +57,4 @@ import HERMIT.API.Types
 import HERMIT.GHCI.Client
 
 import HERMIT.Dictionary.Navigation (Considerable(..))
+import HERMIT.GHCI.Glyph()
