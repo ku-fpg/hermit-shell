@@ -6,6 +6,8 @@ GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
 module Main where
   unwrap ∷ ∀ a . (Nat → a) → Stream a
   wrap ∷ ∀ a . Stream a → Nat → a
+  unwrap' ∷ (Nat → Nat) → Stream Nat
+  wrap' ∷ Stream Nat → Nat → Nat
   fib ∷ Nat → Nat
   main ∷ IO ()
   main ∷ IO ()
@@ -16,6 +18,8 @@ Ok, modules loaded: FibScript.
 module Main where
   unwrap ∷ ∀ a . (Nat → a) → Stream a
   wrap ∷ ∀ a . Stream a → Nat → a
+  unwrap' ∷ (Nat → Nat) → Stream Nat
+  wrap' ∷ Stream Nat → Nat → Nat
   fib ∷ Nat → Nat
   main ∷ IO ()
   main ∷ IO ()
@@ -39,8 +43,135 @@ fib = λ ds →
         Succ n → (+) (fib (Succ n)) (fib n)
 [Done]
 
-Rewrite failed:Nat lookup: Variable not in scope.
-*** Exception: failed to parse result value for rewrite (wwSplitUnsafe unwrap Nat wrap Nat): Null : Object not returned from Server
+fib =
+  let f = λ fib ds →
+        case ds of wild ▲
+          Zero → Zero
+          Succ ds →
+            case ds of wild ▲
+              Zero → Succ Zero
+              Succ n → (+) (fib (Succ n)) (fib n)
+      rec work = unwrap' (f (wrap' work))
+  in wrap' work
+[Done]
+
+fib =
+  let f = λ fib ds →
+        case ds of wild ▲
+          Zero → Zero
+          Succ ds →
+            case ds of wild ▲
+              Zero → Succ Zero
+              Succ n → (+) (fib (Succ n)) (fib n)
+      rec work = unwrap' (f (wrap' work))
+  in wrap' work
+[Done]
+
+unwrap' (f (wrap' work))
+[Done]
+
+unwrap' (λ ds →
+           case ds of wild ▲
+             Zero → Zero
+             Succ ds →
+               case ds of wild ▲
+                 Zero → Succ Zero
+                 Succ n → (+) (wrap' work (Succ n)) (wrap' work n))
+[Done]
+
+unwrap' (λ ds →
+           case ds of wild ▲
+             Zero → Zero
+             Succ ds →
+               case ds of wild ▲
+                 Zero → Succ Zero
+                 Succ n → (+) (wrap' work (Succ n)) (wrap' work n))
+[Done]
+
+λ ds →
+  case ds of wild ▲
+    Zero → Zero
+    Succ ds →
+      case ds of wild ▲
+        Zero → Succ Zero
+        Succ n → (+) (wrap' work (Succ n)) (wrap' work n)
+[Done]
+
+λ m →
+  case m of wild ▲
+    Zero → Zero
+    Succ ds →
+      case ds of wild ▲
+        Zero → Succ Zero
+        Succ n → (+) (wrap' work (Succ n)) (wrap' work n)
+[Done]
+
+unwrap' (λ m →
+           case m of wild ▲
+             Zero → Zero
+             Succ ds →
+               case ds of wild ▲
+                 Zero → Succ Zero
+                 Succ n → (+) (wrap' work (Succ n)) (wrap' work n))
+[Done]
+
+fib =
+  let f = λ fib ds →
+        case ds of wild ▲
+          Zero → Zero
+          Succ ds →
+            case ds of wild ▲
+              Zero → Succ Zero
+              Succ n → (+) (fib (Succ n)) (fib n)
+      rec work =
+            unwrap' (λ m →
+                       case m of wild ▲
+                         Zero → Zero
+                         Succ ds →
+                           case ds of wild ▲
+                             Zero → Succ Zero
+                             Succ n → (+) (wrap' work (Succ n)) (wrap' work n))
+  in wrap' work
+[Done]
+
+fib =
+  let rec work =
+            unwrap' (λ m →
+                       case m of wild ▲
+                         Zero → Zero
+                         Succ ds →
+                           case ds of wild ▲
+                             Zero → Succ Zero
+                             Succ n → (+) (wrap' work (Succ n)) (wrap' work n))
+  in wrap' work
+[Done]
+
+fib =
+  let rec work =
+            unwrap' (λ m →
+                       case m of wild ▲
+                         Zero → Zero
+                         Succ ds →
+                           case ds of wild ▲
+                             Zero → Succ Zero
+                             Succ n →
+                               (+) (wrap ▲ work (Succ n)) (wrap ▲ work n))
+  in wrap ▲ work
+[Done]
+
+fib =
+  let rec work =
+            unwrap' (λ m →
+                       case m of wild ▲
+                         Zero → Zero
+                         Succ ds →
+                           case ds of wild ▲
+                             Zero → Succ Zero
+                             Succ n →
+                               (+) (wrap ▲ work (Succ n)) (wrap ▲ work n))
+  in wrap ▲ work
+[Done]
+
 HERMIT> 
 [Done]
 

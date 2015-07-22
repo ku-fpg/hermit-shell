@@ -9,11 +9,12 @@ script = do
   setPath $ bindingOf "fib"
 
   scope $ do
-    apply $ wwSplitUnsafe "wrap Nat" "unwrap Nat"
+    apply $ wwSplitUnsafe "wrap'" "unwrap'"
     scope $ do
       setPath $ rhsOf "work"
       apply . anyCall $ unfoldWith "f"
       scope $ do
         setPath $ consider cLam ; apply $ alphaLamWith "m"
     apply simplify
-    apply . anyCall $ unfoldWith "wrap"
+    apply . anyCall $ unfoldWith "wrap'"
+

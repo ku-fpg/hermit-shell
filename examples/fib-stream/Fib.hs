@@ -9,6 +9,12 @@ fib Zero             = Zero
 fib (Succ Zero)      = Succ Zero
 fib (Succ (Succ n))  = fib (Succ n) + fib n
 
+wrap' :: Stream Nat -> (Nat -> Nat)
+wrap' = wrap
+
+unwrap' :: (Nat -> Nat) -> Stream Nat
+unwrap' = unwrap
+
 wrap :: Stream a -> (Nat -> a)
 wrap s n = s !! n
 
