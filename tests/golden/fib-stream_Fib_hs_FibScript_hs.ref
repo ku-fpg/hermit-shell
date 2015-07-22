@@ -1,1 +1,52 @@
+[1 of 3] Compiling Nat              ( Nat.hs, Nat.o )
+[2 of 3] Compiling Stream           ( Stream.hs, Stream.o )
+[3 of 3] Compiling Main             ( Fib.hs, Fib.o )
+Setting phasers to stun... (port 3000) (ctrl-c to quit)
+GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
+module Main where
+  unwrap ∷ ∀ a . (Nat → a) → Stream a
+  wrap ∷ ∀ a . Stream a → Nat → a
+  fib ∷ Nat → Nat
+  main ∷ IO ()
+  main ∷ IO ()
+[Done]
 
+[1 of 1] Compiling FibScript        ( FibScript.hs, interpreted )
+Ok, modules loaded: FibScript.
+module Main where
+  unwrap ∷ ∀ a . (Nat → a) → Stream a
+  wrap ∷ ∀ a . Stream a → Nat → a
+  fib ∷ Nat → Nat
+  main ∷ IO ()
+  main ∷ IO ()
+[Done]
+
+fib = λ ds →
+  case ds of wild ▲
+    Zero → Zero
+    Succ ds →
+      case ds of wild ▲
+        Zero → Succ Zero
+        Succ n → (+) (fib (Succ n)) (fib n)
+[Done]
+
+fib = λ ds →
+  case ds of wild ▲
+    Zero → Zero
+    Succ ds →
+      case ds of wild ▲
+        Zero → Succ Zero
+        Succ n → (+) (fib (Succ n)) (fib n)
+[Done]
+
+Rewrite failed:Nat lookup: Variable not in scope.
+*** Exception: failed to parse result value for rewrite (wwSplitUnsafe unwrap Nat wrap Nat): Null : Object not returned from Server
+HERMIT> 
+[Done]
+
+Leaving GHCi.
+ghc: user interrupt
+Linking Fib ...
+[starting HERMIT-shell v0.1.0.0 on Fib.hs]
+[starting HERMIT v1.0.0.0 on Fib.hs]
+% ghc Fib.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:Main: -fplugin-opt=HERMIT.GHCI:Main:FibScript.hs -fplugin-opt=HERMIT.GHCI:Main:resume
