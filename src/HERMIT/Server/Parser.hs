@@ -64,6 +64,7 @@ parseExternalTypedEffectH =
 instance External (TypedEffectH ()) where
   parseExternals =
     [ fmap RewriteLCoreTCH parseExternal
+    , fmap ProofShellCommandH parseExternal
     , external "setPath" (SetPathH :: TransformH LCore LocalPathH -> TypedEffectH ())
     , external "setPath" (SetPathH :: TransformH LCoreTC LocalPathH -> TypedEffectH ())
     , external "setPath" ((SetPathH :: TransformH LCore LocalPathH -> TypedEffectH ()) . (\crumb -> transform (\ _hermitC _lcore -> return (singletonSnocPath crumb))) :: Crumb -> TypedEffectH ())
