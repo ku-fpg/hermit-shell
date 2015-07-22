@@ -21,6 +21,7 @@ import           HERMIT.Shell.Command
 import           HERMIT.Shell.Types hiding (clm)
 import           HERMIT.Shell.KernelEffect
 import           HERMIT.Shell.Proof
+import           HERMIT.GHCI.JSON
 import           HERMIT.Core (Crumb)
 
 import           HERMIT.Server.Parser.Name ()
@@ -51,12 +52,6 @@ parseTopLevel :: (MonadIO m, Functor m)
 parseTopLevel v = performTypedEffectH' 
               <$> runExternalParser parseExternalTypedEffectH v
   where
-    -- The Show instance for Value prints out Vector literals, which have
-    -- different output depending on which version of vector is being used.
-    -- This is inconvenient for diffing purposes, so we use a pretty-printer
-    -- to make the output more consistent.
-    pprint :: Aeson.Value -> String
-    pprint = unpack . encodePretty
 
     showEffectH :: TypedEffectH a -> String
     showEffectH (ShellEffectH          effect) = "ShellEffectH"
@@ -74,9 +69,9 @@ parseTopLevel v = performTypedEffectH'
     performTypedEffectH' e = do
             when debug $ do
               liftIO $ putStrLn $ "performTypedEffectH: " 
-              liftIO $ putStrLn $ pprint v
+              liftIO $ putStrLn $ pprintJSON v
               liftIO $ print $ showEffectH e
-            performTypedEffectH (pprint v) e
+            performTypedEffectH (pprintJSON v) e
             
             
 

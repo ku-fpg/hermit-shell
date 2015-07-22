@@ -25,9 +25,11 @@ import qualified Data.Map as Map
 import           Data.Monoid
 --import           Data.Text (Text)
 
+import           HERMIT.API.Types (ShellResult(..))
 import           HERMIT.Debug (debug)
 import           HERMIT.Dictionary
 -- import           HERMIT.External
+import           HERMIT.GHCI.JSON
 import           HERMIT.Kernel
 import           HERMIT.Kure
 
@@ -181,8 +183,9 @@ performTypedEffect :: TVar (IO ())
 performTypedEffect lastCall plug ref [val] =
   case parseCLT val of
     Nothing -> do
-            when debug $ print ("ParseCLT fail:" :: String, val)
-            return Aeson.Null
+            putStrLn ("Internal Error: Parser Failed" :: String)
+            putStrLn $ pprintJSON $ val
+            return $ toJSON $ (ShellFailure "internal error" :: ShellResult ())
     Just m -> do
         when debug $ print ("sending to internal shell" :: String)
         cls0 <- atomically $ takeTMVar ref

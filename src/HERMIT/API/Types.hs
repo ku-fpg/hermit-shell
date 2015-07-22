@@ -54,13 +54,20 @@ data ShellResult a
   | ShellException String   -- The remote HERMIT monad failed on the server with this
     deriving Show
 
--- TODO: add ShellException
 instance FromJSON a => FromJSON (ShellResult a) where
-  parseJSON (Object o) = ShellResult <$> o .: "output"
-                                     <*> o .: "result"
+  parseJSON (Object o) =   ShellResult <$> o .: "output"
+                                       <*> o .: "result"
+                      <|>  ShellFailure   <$> o .: "failure"          
+                      <|>  ShellException <$> o .: "exception"          
                       <|> return (ShellFailure "malformed Object returned from Server")
     where
   parseJSON _ = return (ShellFailure "Object not returned from Server")
+
+instance ToJSON a => ToJSON (ShellResult a) where
+  toJSON (ShellResult gss a) = object [ "result" .= a, "output" .= gss ]
+  toJSON (ShellFailure msg)  = object [ "failure" .= msg ]
+  toJSON (ShellException msg)  = object [ "exception" .= msg ]
+
 
 
 ------------------------------------------------------------------------

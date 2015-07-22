@@ -39,8 +39,10 @@ send (Shell g) = do
        when debug $ print g
        v <- JSONRPC.send session $ JSONRPC.method "send" [g]
        case fromJust $ parseMaybe parseJSON v of
+         -- Normal shell behavior; something like variable not found
          ShellException msg ->
              error $ "server failure: " ++ show v ++ " : " ++ msg
+         -- Internal Failure; bad news
          ShellFailure msg -> 
              error $ "failed to parse result value for " ++
                      genMethodStr True g ++ ": " ++ show v ++ " : " ++ msg

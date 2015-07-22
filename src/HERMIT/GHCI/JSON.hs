@@ -25,6 +25,8 @@ import           Web.Scotty (readEither)
 
 import           HERMIT.GHCI.Glyph
 
+import           Data.Aeson.Encode.Pretty (encodePretty)
+import           Data.ByteString.Lazy.Char8 (unpack)
 
 type UserID = Integer
 
@@ -212,3 +214,10 @@ data HermitCommand :: * -> * -> * where
    Display    :: HermitCommand () ()
 
 --
+
+-- The Show instance for Value prints out Vector literals, which have
+-- different output depending on which version of vector is being used.
+-- This is inconvenient for diffing purposes, so we use a pretty-printer
+-- to make the output more consistent.
+pprintJSON :: Value -> String
+pprintJSON = unpack . encodePretty
