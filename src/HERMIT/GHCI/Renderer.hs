@@ -15,6 +15,7 @@ import Prelude.Compat
 import System.IO
 
 webChannel :: TChan [Glyph] -> Handle -> PrettyOptions -> Either String DocH -> IO ()
+--webChannel chan _ _    x = print x
 webChannel chan _ _    (Left s)    = atomically $ writeTChan chan [Glyph s Nothing]
 webChannel chan _ opts (Right doc) = let Runes rs = renderCode opts doc
                                      in atomically $ writeTChan chan $ runesToGlyphs rs

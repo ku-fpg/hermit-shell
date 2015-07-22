@@ -1,6 +1,8 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE FlexibleContexts #-}
+{-# LANGUAGE GADTs #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module HERMIT.Server.Parser where
@@ -30,6 +32,7 @@ import           HERMIT.Server.Parser.Transform ()
 import           HERMIT.Server.Parser.Utils
 import           HERMIT.Server.Parser.Crumb ()
 import           HERMIT.Server.Parser.ProofShellCommand ()
+import           HERMIT.Debug
 
 import           Prelude.Compat
 
@@ -45,7 +48,7 @@ parseCLT = parseMaybe parseTopLevel
 
 parseTopLevel :: (MonadIO m, Functor m)
               => Aeson.Value -> Parser (CLT m Aeson.Value)
-parseTopLevel v = performTypedEffectH (pprint v) 
+parseTopLevel v = performTypedEffectH' 
               <$> runExternalParser parseExternalTypedEffectH v
   where
     -- The Show instance for Value prints out Vector literals, which have
@@ -54,6 +57,28 @@ parseTopLevel v = performTypedEffectH (pprint v)
     -- to make the output more consistent.
     pprint :: Aeson.Value -> String
     pprint = unpack . encodePretty
+
+    showEffectH :: TypedEffectH a -> String
+    showEffectH (ShellEffectH          effect) = "ShellEffectH"
+    showEffectH (RewriteLCoreH         rr    ) = "RewriteLCoreH"
+    showEffectH (RewriteLCoreTCH       rr    ) = "RewriteLCoreTCH"
+    showEffectH (SetPathH              tt    ) = "SetPathH"
+    showEffectH (QueryH                q     ) = "QueryH"
+    showEffectH (ProofShellCommandH    ps    ) = "ProofShellCommandH"
+    showEffectH (KernelEffectH         k     ) = "KernelEffectH"
+    showEffectH (EvalH                 e     ) = "EvalH"
+    showEffectH (FmapTypedEffectH f    e     ) = "FmapTypedEffectH: " ++ showEffectH e
+
+
+    performTypedEffectH' :: (MonadCatch m, CLMonad m) => TypedEffectH a -> m a
+    performTypedEffectH' e = do
+            when debug $ do
+              liftIO $ putStrLn $ "performTypedEffectH: " 
+              liftIO $ putStrLn $ pprint v
+              liftIO $ print $ showEffectH e
+            performTypedEffectH (pprint v) e
+            
+            
 
 
 parseExternalTypedEffectH :: ExternalParser (TypedEffectH Value)
