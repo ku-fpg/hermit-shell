@@ -1,1 +1,801 @@
+[1 of 2] Compiling HList            ( HList.hs, HList.o )
 
+HList.hs:22:11: Warning:
+    Rule "repH ++" may never fire because ‘repH’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘repH’
+
+HList.hs:23:11: Warning:
+    Rule "repH []" may never fire because ‘repH’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘repH’
+
+HList.hs:24:11: Warning:
+    Rule "repH (:)" may never fire because ‘repH’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘repH’
+
+HList.hs:27:11: Warning:
+    Rule "repH-absH-fusion" may never fire
+      because ‘repH’ might inline first
+    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘repH’
+[2 of 2] Compiling Main             ( QSort.hs, QSort.o )
+Setting phasers to stun... (port 3000) (ctrl-c to quit)
+GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
+module Main where
+  qsort ∷ ∀ a . Ord a → [a] → [a]
+  absR ∷ ∀ a . ([a] → H a) → [a] → [a]
+  repR ∷ ∀ a . ([a] → [a]) → [a] → H a
+  $dShow ∷ Show [Integer]
+  main ∷ IO ()
+  main ∷ IO ()
+[Done]
+
+[1 of 1] Compiling QSortScript      ( QSortScript.hs, interpreted )
+Ok, modules loaded: QSortScript.
+module Main where
+  qsort ∷ ∀ a . Ord a → [a] → [a]
+  absR ∷ ∀ a . ([a] → H a) → [a] → [a]
+  repR ∷ ∀ a . ([a] → [a]) → [a] → H a
+  $dShow ∷ Show [Integer]
+  main ∷ IO ()
+  main ∷ IO ()
+[Done]
+
+qsort = λ △ $dOrd ds →
+  case ds of wild ▲
+    [] → [] ▲
+    (:) a as →
+      let ds =
+            let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                cs =
+                  case ds of wild ▲
+                    (,) bs cs → cs
+                bs =
+                  case ds of wild ▲
+                    (,) bs cs → bs
+            in (,) ▲ ▲ bs cs
+      in (++) ▲
+              (qsort ▲ $dOrd
+                     (case ds of ds ▲
+                        (,) bs cs → bs))
+              ((++) ▲ ((:) ▲ a ([] ▲))
+                    (qsort ▲ $dOrd
+                           (case ds of ds ▲
+                              (,) bs cs → cs)))
+[Done]
+
+qsort = λ △ $dOrd ds →
+  let rec qsort' = λ ds →
+            case ds of wild ▲
+              [] → [] ▲
+              (:) a as →
+                let ds =
+                      let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                          cs =
+                            case ds of wild ▲
+                              (,) bs cs → cs
+                          bs =
+                            case ds of wild ▲
+                              (,) bs cs → bs
+                      in (,) ▲ ▲ bs cs
+                in (++) ▲
+                        (qsort' (case ds of ds ▲
+                                   (,) bs cs → bs))
+                        ((++) ▲ ((:) ▲ a ([] ▲))
+                              (qsort' (case ds of ds ▲
+                                         (,) bs cs → cs)))
+  in qsort' ds
+[Done]
+
+qsort = λ △ $dOrd ds →
+  let rec qsort' = λ ds →
+            case ds of wild ▲
+              [] → [] ▲
+              (:) a as →
+                let ds =
+                      let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                          cs =
+                            case ds of wild ▲
+                              (,) bs cs → cs
+                          bs =
+                            case ds of wild ▲
+                              (,) bs cs → bs
+                      in (,) ▲ ▲ bs cs
+                in (++) ▲
+                        (qsort' (case ds of ds ▲
+                                   (,) bs cs → bs))
+                        ((++) ▲ ((:) ▲ a ([] ▲))
+                              (qsort' (case ds of ds ▲
+                                         (,) bs cs → cs)))
+  in qsort' ds
+[Done]
+
+qsort' = λ ds →
+  case ds of wild ▲
+    [] → [] ▲
+    (:) a as →
+      let ds =
+            let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                cs =
+                  case ds of wild ▲
+                    (,) bs cs → cs
+                bs =
+                  case ds of wild ▲
+                    (,) bs cs → bs
+            in (,) ▲ ▲ bs cs
+      in (++) ▲
+              (qsort' (case ds of ds ▲
+                         (,) bs cs → bs))
+              ((++) ▲ ((:) ▲ a ([] ▲))
+                    (qsort' (case ds of ds ▲
+                               (,) bs cs → cs)))
+[Done]
+
+qsort' =
+  fix ▲
+      (λ qsort' ds →
+         case ds of wild ▲
+           [] → [] ▲
+           (:) a as →
+             let ds =
+                   let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                       cs =
+                         case ds of wild ▲
+                           (,) bs cs → cs
+                       bs =
+                         case ds of wild ▲
+                           (,) bs cs → bs
+                   in (,) ▲ ▲ bs cs
+             in (++) ▲
+                     (qsort' (case ds of ds ▲
+                                (,) bs cs → bs))
+                     ((++) ▲ ((:) ▲ a ([] ▲))
+                           (qsort' (case ds of ds ▲
+                                      (,) bs cs → cs))))
+[Done]
+
+fix ▲
+    (λ qsort' ds →
+       case ds of wild ▲
+         [] → [] ▲
+         (:) a as →
+           let ds =
+                 let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                     cs =
+                       case ds of wild ▲
+                         (,) bs cs → cs
+                     bs =
+                       case ds of wild ▲
+                         (,) bs cs → bs
+                 in (,) ▲ ▲ bs cs
+           in (++) ▲
+                   (qsort' (case ds of ds ▲
+                              (,) bs cs → bs))
+                   ((++) ▲ ((:) ▲ a ([] ▲))
+                         (qsort' (case ds of ds ▲
+                                    (,) bs cs → cs))))
+[Done]
+
+let g =
+      (.) ▲ ▲ ▲ (repR ▲)
+          ((.) ▲ ▲ ▲
+               (λ qsort' ds →
+                  case ds of wild ▲
+                    [] → [] ▲
+                    (:) a as →
+                      let ds =
+                            let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                                cs =
+                                  case ds of wild ▲
+                                    (,) bs cs → cs
+                                bs =
+                                  case ds of wild ▲
+                                    (,) bs cs → bs
+                            in (,) ▲ ▲ bs cs
+                      in (++) ▲
+                              (qsort' (case ds of ds ▲
+                                         (,) bs cs → bs))
+                              ((++) ▲ ((:) ▲ a ([] ▲))
+                                    (qsort' (case ds of ds ▲
+                                               (,) bs cs → cs))))
+               (absR ▲))
+    worker = fix ▲ g
+in absR ▲ worker
+[Done]
+
+Forcing obligation: qsort-assumption
+Goal:
+  fix ▲
+      ((.) ▲ ▲ ▲ (absR ▲)
+           ((.) ▲ ▲ ▲ (repR ▲)
+                (λ qsort' ds →
+                   case ds of wild ▲
+                     [] → [] ▲
+                     (:) a as →
+                       let ds =
+                             let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                                 cs =
+                                   case ds of wild ▲
+                                     (,) bs cs → cs
+                                 bs =
+                                   case ds of wild ▲
+                                     (,) bs cs → bs
+                             in (,) ▲ ▲ bs cs
+                       in (++) ▲
+                               (qsort' (case ds of ds ▲
+                                          (,) bs cs → bs))
+                               ((++) ▲ ((:) ▲ a ([] ▲))
+                                     (qsort' (case ds of ds ▲
+                                                (,) bs cs → cs))))))
+  ≡
+  fix ▲
+      (λ qsort' ds →
+         case ds of wild ▲
+           [] → [] ▲
+           (:) a as →
+             let ds =
+                   let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                       cs =
+                         case ds of wild ▲
+                           (,) bs cs → cs
+                       bs =
+                         case ds of wild ▲
+                           (,) bs cs → bs
+                   in (,) ▲ ▲ bs cs
+             in (++) ▲
+                     (qsort' (case ds of ds ▲
+                                (,) bs cs → bs))
+                     ((++) ▲ ((:) ▲ a ([] ▲))
+                           (qsort' (case ds of ds ▲
+                                      (,) bs cs → cs))))Successfully proven: qsort-assumption
+let g =
+      (.) ▲ ▲ ▲ (repR ▲)
+          ((.) ▲ ▲ ▲
+               (λ qsort' ds →
+                  case ds of wild ▲
+                    [] → [] ▲
+                    (:) a as →
+                      let ds =
+                            let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                                cs =
+                                  case ds of wild ▲
+                                    (,) bs cs → cs
+                                bs =
+                                  case ds of wild ▲
+                                    (,) bs cs → bs
+                            in (,) ▲ ▲ bs cs
+                      in (++) ▲
+                              (qsort' (case ds of ds ▲
+                                         (,) bs cs → bs))
+                              ((++) ▲ ((:) ▲ a ([] ▲))
+                                    (qsort' (case ds of ds ▲
+                                               (,) bs cs → cs))))
+               (absR ▲))
+    worker = fix ▲ g
+in absR ▲ worker
+[Done]
+
+fix ▲ g
+[Done]
+
+let rec x =
+          (λ f x → repH ▲ (f x)) ((λ qsort' ds →
+                                     case ds of wild ▲
+                                       [] → [] ▲
+                                       (:) a as →
+                                         let ds =
+                                               let ds =
+                                                     partition ▲
+                                                               (λ ds →
+                                                                  (<) ▲ $dOrd ds
+                                                                      a)
+                                                               as
+                                                   cs =
+                                                     case ds of wild ▲
+                                                       (,) bs cs → cs
+                                                   bs =
+                                                     case ds of wild ▲
+                                                       (,) bs cs → bs
+                                               in (,) ▲ ▲ bs cs
+                                         in (++) ▲
+                                                 (qsort' (case ds of ds ▲
+                                                            (,) bs cs → bs))
+                                                 ((++) ▲ ((:) ▲ a ([] ▲))
+                                                       (qsort' (case ds of ds ▲
+                                                                  (,) bs cs →
+                                                                    cs)))) ((λ g x →
+                                                                               absH ▲
+                                                                                    (g x)) x))
+in x
+[Done]
+
+let rec x = λ x →
+          repH ▲
+               (case x of wild ▲
+                  [] → [] ▲
+                  (:) a as →
+                    let ds =
+                          let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                          in (,) ▲ ▲
+                                 (case ds of wild ▲
+                                    (,) bs cs → bs)
+                                 (case ds of wild ▲
+                                    (,) bs cs → cs)
+                    in (++) ▲
+                            (absH ▲
+                                  (x (case ds of ds ▲
+                                        (,) bs cs → bs)))
+                            ((++) ▲ ((:) ▲ a ([] ▲))
+                                  (absH ▲
+                                        (x (case ds of ds ▲
+                                              (,) bs cs → cs)))))
+in x
+[Done]
+
+let rec x = λ x →
+          case x of wild ▲
+            [] → repH ▲ ([] ▲)
+            (:) a as →
+              repH ▲
+                   (let ds =
+                          let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                          in (,) ▲ ▲
+                                 (case ds of wild ▲
+                                    (,) bs cs → bs)
+                                 (case ds of wild ▲
+                                    (,) bs cs → cs)
+                    in (++) ▲
+                            (absH ▲
+                                  (x (case ds of ds ▲
+                                        (,) bs cs → bs)))
+                            ((++) ▲ ((:) ▲ a ([] ▲))
+                                  (absH ▲
+                                        (x (case ds of ds ▲
+                                              (,) bs cs → cs)))))
+in x
+[Done]
+
+Forcing obligation: repHstrict
+Goal:
+  ∀ △. repH ▲ (undefined ▲) ≡ undefined ▲Successfully proven: repHstrict
+let rec x = λ x →
+          case x of wild ▲
+            [] → repH ▲ ([] ▲)
+            (:) a as →
+              repH ▲
+                   (let ds =
+                          let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                          in (,) ▲ ▲
+                                 (case ds of wild ▲
+                                    (,) bs cs → bs)
+                                 (case ds of wild ▲
+                                    (,) bs cs → cs)
+                    in (++) ▲
+                            (absH ▲
+                                  (x (case ds of ds ▲
+                                        (,) bs cs → bs)))
+                            ((++) ▲ ((:) ▲ a ([] ▲))
+                                  (absH ▲
+                                        (x (case ds of ds ▲
+                                              (,) bs cs → cs)))))
+in x
+[Done]
+
+let rec x = λ x →
+          case x of wild ▲
+            [] → repH ▲ ([] ▲)
+            (:) a as →
+              let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                  ds =
+                    (,) ▲ ▲
+                        (case ds of wild ▲
+                           (,) bs cs → bs)
+                        (case ds of wild ▲
+                           (,) bs cs → cs)
+              in repH ▲
+                      ((++) ▲
+                            (absH ▲
+                                  (x (case ds of ds ▲
+                                        (,) bs cs → bs)))
+                            ((++) ▲ ((:) ▲ a ([] ▲))
+                                  (absH ▲
+                                        (x (case ds of ds ▲
+                                              (,) bs cs → cs)))))
+in x
+[Done]
+
+let rec x = λ x →
+          case x of wild ▲
+            [] → repH ▲ ([] ▲)
+            (:) a as →
+              let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                  ds =
+                    (,) ▲ ▲
+                        (case ds of wild ▲
+                           (,) bs cs → bs)
+                        (case ds of wild ▲
+                           (,) bs cs → cs)
+              in (.) ▲ ▲ ▲
+                     (repH ▲
+                           (absH ▲
+                                 (x (case ds of ds ▲
+                                       (,) bs cs → bs))))
+                     ((.) ▲ ▲ ▲ (repH ▲ ((:) ▲ a ([] ▲)))
+                          (repH ▲
+                                (absH ▲
+                                      (x (case ds of ds ▲
+                                            (,) bs cs → cs)))))
+in x
+[Done]
+
+Forcing obligation: repH ++
+Goal:
+  ∀ △ xs ys.
+  repH ▲ ((++) ▲ xs ys) ≡ (.) ▲ ▲ ▲ (repH ▲ xs) (repH ▲ ys)Successfully proven: repH ++
+let rec x = λ x →
+          case x of wild ▲
+            [] → repH ▲ ([] ▲)
+            (:) a as →
+              let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                  ds =
+                    (,) ▲ ▲
+                        (case ds of wild ▲
+                           (,) bs cs → bs)
+                        (case ds of wild ▲
+                           (,) bs cs → cs)
+              in (.) ▲ ▲ ▲
+                     (repH ▲
+                           (absH ▲
+                                 (x (case ds of ds ▲
+                                       (,) bs cs → bs))))
+                     ((.) ▲ ▲ ▲ (repH ▲ ((:) ▲ a ([] ▲)))
+                          (repH ▲
+                                (absH ▲
+                                      (x (case ds of ds ▲
+                                            (,) bs cs → cs)))))
+in x
+[Done]
+
+let rec x = λ x →
+          case x of wild ▲
+            [] → repH ▲ ([] ▲)
+            (:) a as →
+              let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                  ds =
+                    (,) ▲ ▲
+                        (case ds of wild ▲
+                           (,) bs cs → bs)
+                        (case ds of wild ▲
+                           (,) bs cs → cs)
+              in (.) ▲ ▲ ▲
+                     (x (case ds of ds ▲
+                           (,) bs cs → bs))
+                     ((.) ▲ ▲ ▲ (repH ▲ ((:) ▲ a ([] ▲)))
+                          (x (case ds of ds ▲
+                                (,) bs cs → cs)))
+in x
+[Done]
+
+Forcing obligation: repH-absH-fusion
+Goal:
+  ∀ △ h. repH ▲ (absH ▲ h) ≡ hSuccessfully proven: repH-absH-fusion
+let rec x = λ x →
+          case x of wild ▲
+            [] → repH ▲ ([] ▲)
+            (:) a as →
+              let ds = partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                  ds =
+                    (,) ▲ ▲
+                        (case ds of wild ▲
+                           (,) bs cs → bs)
+                        (case ds of wild ▲
+                           (,) bs cs → cs)
+              in (.) ▲ ▲ ▲
+                     (x (case ds of ds ▲
+                           (,) bs cs → bs))
+                     ((.) ▲ ▲ ▲ (repH ▲ ((:) ▲ a ([] ▲)))
+                          (x (case ds of ds ▲
+                                (,) bs cs → cs)))
+in x
+[Done]
+
+let rec x = λ x0 →
+          case x0 of wild ▲
+            [] → repH ▲ ([] ▲)
+            (:) a0 as →
+              let ds0 = partition ▲ (λ ds0 → (<) ▲ $dOrd ds0 a0) as
+                  ds1 =
+                    (,) ▲ ▲
+                        (case ds0 of wild0 ▲
+                           (,) bs cs → bs)
+                        (case ds0 of wild0 ▲
+                           (,) bs cs → cs)
+              in (.) ▲ ▲ ▲
+                     (x (case ds1 of ds2 ▲
+                           (,) bs cs → bs))
+                     ((.) ▲ ▲ ▲ (repH ▲ ((:) ▲ a0 ([] ▲)))
+                          (x (case ds1 of ds2 ▲
+                                (,) bs cs → cs)))
+in x
+[Done]
+
+let rec x = λ x0 →
+          case x0 of wild ▲
+            [] → repH ▲ ([] ▲)
+            (:) a0 as →
+              let ds0 = partition ▲ (λ ds0 → (<) ▲ $dOrd ds0 a0) as
+                  ds1 =
+                    (,) ▲ ▲
+                        (case ds0 of wild0 ▲
+                           (,) bs cs → bs)
+                        (case ds0 of wild0 ▲
+                           (,) bs cs → cs)
+              in (.) ▲ ▲ ▲
+                     (x (case (,) ▲ ▲
+                                  (case ds0 of wild0 ▲
+                                     (,) bs cs → bs)
+                                  (case ds0 of wild0 ▲
+                                     (,) bs cs → cs)
+                          of ds2 ▲
+                           (,) bs cs → bs))
+                     ((.) ▲ ▲ ▲ (repH ▲ ((:) ▲ a0 ([] ▲)))
+                          (x (case (,) ▲ ▲
+                                       (case ds0 of wild0 ▲
+                                          (,) bs cs → bs)
+                                       (case ds0 of wild0 ▲
+                                          (,) bs cs → cs)
+                               of ds2 ▲
+                                (,) bs cs → cs)))
+in x
+[Done]
+
+let rec x = λ x0 →
+          case x0 of wild ▲
+            [] → repH ▲ ([] ▲)
+            (:) a0 as →
+              let ds0 = partition ▲ (λ ds0 → (<) ▲ $dOrd ds0 a0) as
+              in (.) ▲ ▲ ▲
+                     (x (case ds0 of wild0 ▲
+                           (,) bs cs → bs))
+                     ((.) ▲ ▲ ▲ (repH ▲ ((:) ▲ a0 ([] ▲)))
+                          (x (case ds0 of wild0 ▲
+                                (,) bs cs → cs)))
+in x
+[Done]
+
+let rec worker = λ x0 →
+          case x0 of wild ▲
+            [] → repH ▲ ([] ▲)
+            (:) a0 as →
+              let ds0 = partition ▲ (λ ds0 → (<) ▲ $dOrd ds0 a0) as
+              in (.) ▲ ▲ ▲
+                     (worker (case ds0 of wild0 ▲
+                                (,) bs cs → bs))
+                     ((.) ▲ ▲ ▲ (repH ▲ ((:) ▲ a0 ([] ▲)))
+                          (worker (case ds0 of wild0 ▲
+                                     (,) bs cs → cs)))
+in worker
+[Done]
+
+let rec worker = λ x0 →
+          case x0 of wild ▲
+            [] → id ▲
+            (:) a0 as →
+              let ds0 = partition ▲ (λ ds0 → (<) ▲ $dOrd ds0 a0) as
+              in (.) ▲ ▲ ▲
+                     (worker (case ds0 of wild0 ▲
+                                (,) bs cs → bs))
+                     ((.) ▲ ▲ ▲ ((.) ▲ ▲ ▲ ((:) ▲ a0) (id ▲))
+                          (worker (case ds0 of wild0 ▲
+                                     (,) bs cs → cs)))
+in worker
+[Done]
+
+Forcing obligation: repH []
+Forcing obligation: repH (:)
+Goal:
+  ∀ △ x xs. repH ▲ ((:) ▲ x xs) ≡ (.) ▲ ▲ ▲ ((:) ▲ x) (repH ▲ xs)Successfully proven: repH (:)
+Goal:
+  ∀ △. repH ▲ ([] ▲) ≡ id ▲
+[Done]
+
+Successfully proven: repH []
+let rec worker = λ x0 →
+          case x0 of wild ▲
+            [] → id ▲
+            (:) a0 as →
+              let ds0 = partition ▲ (λ ds0 → (<) ▲ $dOrd ds0 a0) as
+              in (.) ▲ ▲ ▲
+                     (worker (case ds0 of wild0 ▲
+                                (,) bs cs → bs))
+                     ((.) ▲ ▲ ▲ ((.) ▲ ▲ ▲ ((:) ▲ a0) (id ▲))
+                          (worker (case ds0 of wild0 ▲
+                                     (,) bs cs → cs)))
+in worker
+[Done]
+
+qsort = λ △ $dOrd ds →
+  let rec qsort' =
+            let g =
+                  (.) ▲ ▲ ▲ (repR ▲)
+                      ((.) ▲ ▲ ▲
+                           (λ qsort' ds →
+                              case ds of wild ▲
+                                [] → [] ▲
+                                (:) a as →
+                                  let ds =
+                                        let ds =
+                                              partition ▲
+                                                        (λ ds →
+                                                           (<) ▲ $dOrd ds a)
+                                                        as
+                                            cs =
+                                              case ds of wild ▲
+                                                (,) bs cs → cs
+                                            bs =
+                                              case ds of wild ▲
+                                                (,) bs cs → bs
+                                        in (,) ▲ ▲ bs cs
+                                  in (++) ▲
+                                          (qsort' (case ds of ds ▲
+                                                     (,) bs cs → bs))
+                                          ((++) ▲ ((:) ▲ a ([] ▲))
+                                                (qsort' (case ds of ds ▲
+                                                           (,) bs cs → cs))))
+                           (absR ▲))
+                worker =
+                  let rec worker = λ x0 →
+                            case x0 of wild ▲
+                              [] → id ▲
+                              (:) a0 as →
+                                let ds0 =
+                                      partition ▲ (λ ds0 → (<) ▲ $dOrd ds0 a0)
+                                                as
+                                in (.) ▲ ▲ ▲
+                                       (worker (case ds0 of wild0 ▲
+                                                  (,) bs cs → bs))
+                                       ((.) ▲ ▲ ▲ ((.) ▲ ▲ ▲ ((:) ▲ a0) (id ▲))
+                                            (worker (case ds0 of wild0 ▲
+                                                       (,) bs cs → cs)))
+                  in worker
+            in absR ▲ worker
+  in qsort' ds
+[Done]
+
+qsort = λ △ $dOrd ds →
+  let rec qsort' =
+            let g = λ x →
+                  repR ▲
+                       ((λ x →
+                           (λ qsort' ds →
+                              case ds of wild ▲
+                                [] → [] ▲
+                                (:) a as →
+                                  let ds =
+                                        let ds =
+                                              partition ▲
+                                                        (λ ds →
+                                                           (<) ▲ $dOrd ds a)
+                                                        as
+                                            cs =
+                                              case ds of wild ▲
+                                                (,) bs cs → cs
+                                            bs =
+                                              case ds of wild ▲
+                                                (,) bs cs → bs
+                                        in (,) ▲ ▲ bs cs
+                                  in (++) ▲
+                                          (qsort' (case ds of ds ▲
+                                                     (,) bs cs → bs))
+                                          ((++) ▲ ((:) ▲ a ([] ▲))
+                                                (qsort' (case ds of ds ▲
+                                                           (,) bs cs →
+                                                             cs)))) ((λ eta →
+                                                                        (λ g x →
+                                                                           g x
+                                                                             ([] ▲)) eta) x)) x)
+                worker =
+                  let rec worker = λ x0 →
+                            case x0 of wild ▲
+                              [] → id ▲
+                              (:) a0 as →
+                                let ds0 =
+                                      partition ▲ (λ ds0 → (<) ▲ $dOrd ds0 a0)
+                                                as
+                                in λ x →
+                                     worker (case ds0 of wild0 ▲
+                                               (,) bs cs → bs)
+                                            ((λ x →
+                                                (:) ▲ a0
+                                                    (id ▲
+                                                        (worker (case ds0
+                                                                  of wild0 ▲
+                                                                   (,) bs cs →
+                                                                     cs)
+                                                                x))) x)
+                  in worker
+            in (λ g x → g x ([] ▲)) worker
+  in qsort' ds
+[Done]
+
+qsort = λ △ $dOrd →
+  let rec qsort' =
+            let g = λ x →
+                  repR ▲
+                       ((λ x →
+                           (λ qsort' ds →
+                              case ds of wild ▲
+                                [] → [] ▲
+                                (:) a as →
+                                  let ds =
+                                        partition ▲ (λ ds → (<) ▲ $dOrd ds a) as
+                                      cs =
+                                        case ds of wild ▲
+                                          (,) bs cs → cs
+                                      bs =
+                                        case ds of wild ▲
+                                          (,) bs cs → bs
+                                      ds = (,) ▲ ▲ bs cs
+                                  in (++) ▲
+                                          (qsort' (case ds of ds ▲
+                                                     (,) bs cs → bs))
+                                          ((++) ▲ ((:) ▲ a ([] ▲))
+                                                (qsort' (case ds of ds ▲
+                                                           (,) bs cs →
+                                                             cs)))) ((λ eta →
+                                                                        (λ g x →
+                                                                           g x
+                                                                             ([] ▲)) eta) x)) x)
+                rec worker = λ x0 →
+                      case x0 of wild ▲
+                        [] → id ▲
+                        (:) a0 as →
+                          let ds0 = partition ▲ (λ ds0 → (<) ▲ $dOrd ds0 a0) as
+                          in λ x →
+                               worker (case ds0 of wild0 ▲
+                                         (,) bs cs → bs)
+                                      ((λ x →
+                                          (:) ▲ a0
+                                              (id ▲
+                                                  (worker (case ds0 of wild0 ▲
+                                                             (,) bs cs → cs)
+                                                          x))) x)
+                worker = worker
+            in (λ g x → g x ([] ▲)) worker
+  in λ ds → qsort' ds
+[Done]
+
+qsort = λ △ $dOrd →
+  let rec worker = λ x0 →
+            case x0 of wild ▲
+              [] → id ▲
+              (:) a0 as →
+                let ds0 = partition ▲ (λ ds0 → (<) ▲ $dOrd ds0 a0) as
+                in λ x →
+                     worker (case ds0 of wild0 ▲
+                               (,) bs cs → bs)
+                            ((:) ▲ a0
+                                 (worker (case ds0 of wild0 ▲
+                                            (,) bs cs → cs)
+                                         x))
+  in λ x → worker x ([] ▲)
+[Done]
+
+HERMIT> Warning: Lemma repH (:) was assumed but not proven.
+repH (:)
+  ∀ △ x xs. repH ▲ ((:) ▲ x xs) ≡ (.) ▲ ▲ ▲ ((:) ▲ x) (repH ▲ xs)Warning: Lemma repH ++ was assumed but not proven.
+repH ++
+  ∀ △ xs ys.
+  repH ▲ ((++) ▲ xs ys) ≡ (.) ▲ ▲ ▲ (repH ▲ xs) (repH ▲ ys)Warning: Lemma repH [] was assumed but not proven.
+repH []
+  ∀ △. repH ▲ ([] ▲) ≡ id ▲Warning: Lemma repH-absH-fusion was assumed but not proven.
+repH-absH-fusion
+  ∀ △ h. repH ▲ (absH ▲ h) ≡ hWarning: Lemma repHstrict was assumed but not proven.
+repHstrict
+  ∀ △. repH ▲ (undefined ▲) ≡ undefined ▲
+[Done]
+
+Leaving GHCi.
+ghc: user interrupt
+Linking QSort ...
+[starting HERMIT-shell v0.1.0.0 on QSort.hs]
+[starting HERMIT v1.0.0.0 on QSort.hs]
+% ghc QSort.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:Main: -fplugin-opt=HERMIT.GHCI:Main:QSortScript.hs -fplugin-opt=HERMIT.GHCI:Main:resume
