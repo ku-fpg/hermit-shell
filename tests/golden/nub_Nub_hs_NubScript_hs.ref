@@ -222,7 +222,6 @@ Forcing obligation: nub-assumption
 [0m[m  [0m[mnub'[0m[m [0m[91m([0m[mfilter[0m[m [0m[92mInt[0m[m [0m[91m([0m[91mλ[0m[91m [0m[mds[0m[m [0m[91m→[0m[91m [0m[mnotMember[0m[m [0m[92mInt[0m[m [0m[m$fOrdInt[0m[m [0m[mds[0m[m [0m[ms[0m[91m)[0m[m [0m[mxs[0m[91m)[0m
 [Done]
 
-parsed fine
 '"{
     \"params\": [
         {
