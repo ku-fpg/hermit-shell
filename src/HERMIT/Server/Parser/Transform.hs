@@ -334,7 +334,7 @@ instance External (RewriteH LCore) where
         ((\ x -> promoteExprR . caseFloatArg x)
          :: Maybe CoreString -> Maybe (RewriteH LCore) -> RewriteH LCore)
 
-    , external "caseFloatArgUnsafe"
+    , external "caseFloatArgLemma"
         ((\ x -> promoteExprR . caseFloatArgLemmaR x)
           :: Used -> LemmaName -> RewriteH LCore)
 

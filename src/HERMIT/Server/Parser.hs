@@ -89,6 +89,7 @@ instance External (TypedEffectH ()) where
     , external "setPath" (SetPathH :: TransformH LCoreTC LocalPathH -> TypedEffectH ())
     , external "setPath" ((SetPathH :: TransformH LCore LocalPathH -> TypedEffectH ()) . (\crumb -> transform (\ _hermitC _lcore -> return (singletonSnocPath crumb))) :: Crumb -> TypedEffectH ())
     , external "query"   (QueryH :: QueryFun () -> TypedEffectH ())
+    , external "rewrite" (RewriteLCoreTCH :: RewriteH LCoreTC -> TypedEffectH ())
     , external "rewrite" (RewriteLCoreH :: RewriteH LCore -> TypedEffectH ())
     , external "eval" (EvalH :: String -> TypedEffectH ())
     , external "up" (KernelEffectH $ Direction U)
