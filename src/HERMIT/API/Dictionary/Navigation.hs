@@ -26,7 +26,7 @@ occurrenceOf nm = Transform $ method "occurenceOf" [toJSON nm]
 applicationOf :: Name -> Transform LCoreTC LocalPath
 applicationOf nm = Transform $ method "applicationOf" [toJSON nm]
 
--- -- | consider <c> focuses on the first construct <c>.
+-- | consider <c> focuses on the first construct <c>.
 consider :: Considerable -> Transform LCore LocalPath
 consider c = Transform $ method "consider" [toJSON c]
 
