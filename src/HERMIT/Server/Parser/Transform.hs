@@ -11,6 +11,7 @@ import           Control.Monad
 
 import           Data.Proxy
 
+import qualified HERMIT.API.Types as API (Name(..))
 import           HERMIT.Context
 import           HERMIT.Dictionary
 import           HERMIT.External (CoreString)
@@ -806,7 +807,7 @@ instance External (TransformH LCore String) where
     [
 -- HERMIT.API.Dictionary.GHC
       external "loadLemmaLibrary"
-        (loadLemmaLibraryT :: HermitName -> Maybe LemmaName
+        (loadLemmaLibraryT :: HermitName -> Maybe LemmaName 
                            -> TransformH LCore String)
 
 -- HERMIT.API.Dictionary.KURE

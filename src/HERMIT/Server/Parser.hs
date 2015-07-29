@@ -80,6 +80,7 @@ parseExternalTypedEffectH :: ExternalParser (TypedEffectH Value)
 parseExternalTypedEffectH = 
        ShellEffectH <$> parseExternalShellEffect
    <|> parseToValue (Proxy :: Proxy (TypedEffectH ())) 
+   <|> parseToValue (Proxy :: Proxy (TypedEffectH String))
 
 instance External (TypedEffectH ()) where
   parseExternals =
@@ -96,4 +97,10 @@ instance External (TypedEffectH ()) where
     , external "top" (KernelEffectH $ Direction T)
     , external "beginScope" (KernelEffectH BeginScope)
     , external "endScope"    (KernelEffectH EndScope)
+    ]
+
+instance External (TypedEffectH String) where
+  parseExternals =
+    [ external "query" 
+        (QueryH . QueryString :: TransformH LCore String -> TypedEffectH String)
     ]
