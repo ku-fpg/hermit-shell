@@ -4,6 +4,8 @@
 {-# LANGUAGE PolyKinds #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE TypeSynonymInstances #-}
+{-# LANGUAGE FlexibleInstances #-}
 module HERMIT.API.Types where
 
 import Control.Applicative
@@ -57,8 +59,8 @@ data ShellResult a
 instance FromJSON a => FromJSON (ShellResult a) where
   parseJSON (Object o) =   ShellResult <$> o .: "output"
                                        <*> o .: "result"
-                      <|>  ShellFailure   <$> o .: "failure"          
-                      <|>  ShellException <$> o .: "exception"          
+                      <|>  ShellFailure   <$> o .: "failure"
+                      <|>  ShellException <$> o .: "exception"
                       <|> return (ShellFailure "malformed Object returned from Server")
     where
   parseJSON _ = return (ShellFailure "Object not returned from Server")
@@ -86,6 +88,9 @@ class FromJSON a => Response a where
 
 instance Response () where
   printResponse () = return ()
+
+instance Response String where
+  printResponse = print
 
 ------------------------------------------------------------------------
 

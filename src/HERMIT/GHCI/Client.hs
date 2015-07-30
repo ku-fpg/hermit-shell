@@ -43,7 +43,7 @@ send (Shell g) = do
          ShellException msg ->
              error $ "server failure: " ++ show v ++ " : " ++ msg
          -- Internal Failure; bad news
-         ShellFailure msg -> 
+         ShellFailure msg ->
              error $ "failed to parse result value for " ++
                      genMethodStr True g ++ ": " ++ show v ++ " : " ++ msg
          ShellResult gss a -> do
