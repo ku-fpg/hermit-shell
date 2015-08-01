@@ -1,5 +1,6 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE GADTs #-}
 module HERMIT.GHCI (plugin) where
 
 import           Control.Concurrent
@@ -8,6 +9,7 @@ import           Control.Exception.Base
 import           Control.Monad.Compat
 import           Control.Monad.IO.Class
 import           Control.Monad.Remote.JSON
+import           Control.Monad.Remote.JSON.Router (router, Call(..), methodNotFound, TransportAPI(..))
 import           Control.Monad.Trans.Except
 import           Control.Monad.Trans.Reader
 
@@ -92,15 +94,18 @@ server passInfo opts skernel initAST = do
 
     lastCall <- newTVarIO (abortK (pr_kernel pr) :: IO ())
 
-    let fns = router
-            [("send", performTypedEffect lastCall pr clsVar)
-            ]
+    let fns :: TransportAPI a -> IO a
+        fns = router sequence $ \ call -> case call of
+            Method "send" (List args) _ -> performTypedEffect lastCall pr clsVar args
+            _ -> methodNotFound
+--            [("send", performTypedEffect lastCall pr clsVar)
+--            ]
 
     let jsonRpc :: ActionH ()
         jsonRpc = do
                 d <- jsonData
                 when debug . liftIO $ print d
-                r <- liftIO $ fns d
+                r <- liftIO $ fns $ Send $ d
 --                when debug . liftIO $ print r
                 forM_ r json
 

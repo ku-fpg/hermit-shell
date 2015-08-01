@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE GADTs #-}
 module HERMIT.GHCI.Client where
 
 import Control.Lens ((^.))
@@ -7,6 +8,8 @@ import Data.Aeson
 import Data.Aeson.Types
 import Data.Maybe
 import qualified Control.Monad.Remote.JSON as JSONRPC
+import Control.Monad.Remote.JSON.Debug
+import Control.Monad.Remote.JSON.Types (SessionAPI(..), Args(..))
 import Network.Wreq
 import HERMIT.API.Types
 import HERMIT.Debug (debug)
@@ -21,23 +24,26 @@ import Data.Vector (toList)
 --- Main call-HERMIT function
 
 session :: JSONRPC.Session
-session = id
+session = JSONRPC.session
         $ (if debug 
-           then JSONRPC.traceSession "HERMIT-remote-json"
+           then traceSessionAPI "HERMIT-remote-json"
            else id)
-        $ JSONRPC.defaultSession JSONRPC.Weak (\ v -> do
+        $ sendr
+ where
+        sendr :: SessionAPI a -> IO a
+        sendr (Sync v) =  do
           r <- asJSON =<< post "http://localhost:3000/" (toJSON v)
-          return $ r ^. responseBody)
-   (\ v -> do
+          return $ r ^. responseBody
+        sendr (Async v) = do
           void $ post "http://localhost:3000/" (toJSON v)
-          return ())
+
 
 send :: Shell a -> IO a
 send (Return a) = return a
 send (Bind m k) = send m >>= send . k
 send (Shell g) = do
        when debug $ print g
-       v <- JSONRPC.send session $ JSONRPC.method "send" [g]
+       v <- JSONRPC.send session $ JSONRPC.method "send" $ List [g]
        case fromJust $ parseMaybe parseJSON v of
          -- Normal shell behavior; something like variable not found
          ShellException msg ->

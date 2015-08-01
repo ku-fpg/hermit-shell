@@ -37,7 +37,7 @@ library
                         lens,
                         mtl,
                         process,
-                        remote-json,
+                        remote-json         >= 0.2 && < 0.3,
                         scotty              >= 0.10,
                         split,
                         stm,
