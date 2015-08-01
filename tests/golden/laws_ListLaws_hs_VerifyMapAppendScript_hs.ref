@@ -85,7 +85,7 @@ ListLaws.hs:35:12: Warning:
       because ‘concat’ might inline first
     Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘concat’
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
-GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
+GHCi, version 7.10.2: http://www.haskell.org/ghc/  :? for help
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]

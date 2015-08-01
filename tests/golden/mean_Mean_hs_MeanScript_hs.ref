@@ -1,6 +1,6 @@
 [1 of 1] Compiling Main             ( Mean.hs, Mean.o )
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
-GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
+GHCi, version 7.10.2: http://www.haskell.org/ghc/  :? for help
 module Main where
   sum ∷ [Int] → Int
   length ∷ [Int] → Int

@@ -4,7 +4,7 @@ Induction.hs:5:11: Warning:
     Rule "++ []" may never fire because ‘++’ might inline first
     Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘++’
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
-GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
+GHCi, version 7.10.2: http://www.haskell.org/ghc/  :? for help
 module Main where
   (++) ∷ ∀ a . [a] → [a] → [a]
   $dShow ∷ Show [Bool]

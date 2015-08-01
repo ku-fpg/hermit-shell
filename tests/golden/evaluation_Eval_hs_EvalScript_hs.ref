@@ -1,6 +1,6 @@
 [1 of 1] Compiling Main             ( Eval.hs, Eval.o )
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
-GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
+GHCi, version 7.10.2: http://www.haskell.org/ghc/  :? for help
 module Main where
   rep ∷ Mint → (Int → Mint) → Mint → Mint
   abs ∷ ((Int → Mint) → Mint → Mint) → Mint

@@ -18,7 +18,7 @@ HList.hs:30:11: Warning:
     Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘repH’
 [2 of 2] Compiling Main             ( Reverse.hs, Reverse.o )
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
-GHCi, version 7.10.1: http://www.haskell.org/ghc/  :? for help
+GHCi, version 7.10.2: http://www.haskell.org/ghc/  :? for help
 module Main where
   rev ∷ ∀ a . [a] → [a]
   absR ∷ ∀ a . ([a] → H a) → [a] → [a]
