@@ -87,7 +87,7 @@ mkHermitShellTest (dir, hs, moduleName, script) =
     pathp = examples </> dir
 
     diff :: FilePath -> FilePath -> [String]
-    diff ref new = ["diff", "-b", "-U 5", ref, new]
+    diff ref new = ["diff", "-b", "-U 5", "-IGHCi, version", ref, new]
 
     withPathpDir :: String -> String
     withPathpDir cmd = unwords [ "(", "cd", pathp, ";", cmd, ")" ]
