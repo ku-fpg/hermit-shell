@@ -1230,4 +1230,4 @@ ghc: user interrupt
 Linking Hanoi ...
 [starting HERMIT-shell v0.1.0.0 on Hanoi.hs]
 [starting HERMIT v1.0.0.0 on Hanoi.hs]
-% ghc Hanoi.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:Main: -fplugin-opt=HERMIT.GHCI:Main:HanoiScript.hs -fplugin-opt=HERMIT.GHCI:Main:resume
+% ghc Hanoi.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:Main: -fplugin-opt=HERMIT.GHCI:Main:HanoiScript.hs -fplugin-opt=HERMIT.GHCI:Main:resume -w

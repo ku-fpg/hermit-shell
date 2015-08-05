@@ -145,6 +145,7 @@ mkHermitShellTest (dir, hs, moduleName, script) =
                 , '+':moduleName
                 , script
                 , "resume"
+                , "-- -w" -- Disable warnings
                 ]
 
         (_,_,Just stdErrH,rTypeCheck) <- createProcess (shell typeCheck) {

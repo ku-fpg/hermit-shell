@@ -1,8 +1,4 @@
 [1 of 1] Compiling MapFusion        ( MapFusion.hs, MapFusion.o )
-
-MapFusion.hs:5:11: Warning:
-    Rule "map-fusion" may never fire because ‘.’ might inline first
-    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘.’
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
 GHCi, version 7.10.2: http://www.haskell.org/ghc/  :? for help
 module MapFusion where map ∷ ∀ a b . (a → b) → [a] → [b]
@@ -337,4 +333,4 @@ Leaving GHCi.
 ghc: user interrupt
 [starting HERMIT-shell v0.1.0.0 on MapFusion.hs]
 [starting HERMIT v1.0.0.0 on MapFusion.hs]
-% ghc MapFusion.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:MapFusion: -fplugin-opt=HERMIT.GHCI:MapFusion:MapFusionScript.hs -fplugin-opt=HERMIT.GHCI:MapFusion:resume
+% ghc MapFusion.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:MapFusion: -fplugin-opt=HERMIT.GHCI:MapFusion:MapFusionScript.hs -fplugin-opt=HERMIT.GHCI:MapFusion:resume -w

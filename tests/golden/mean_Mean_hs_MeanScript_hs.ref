@@ -272,4 +272,4 @@ ghc: user interrupt
 Linking Mean ...
 [starting HERMIT-shell v0.1.0.0 on Mean.hs]
 [starting HERMIT v1.0.0.0 on Mean.hs]
-% ghc Mean.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:Main: -fplugin-opt=HERMIT.GHCI:Main:MeanScript.hs -fplugin-opt=HERMIT.GHCI:Main:resume
+% ghc Mean.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:Main: -fplugin-opt=HERMIT.GHCI:Main:MeanScript.hs -fplugin-opt=HERMIT.GHCI:Main:resume -w

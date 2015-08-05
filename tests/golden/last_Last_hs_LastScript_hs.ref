@@ -71,4 +71,4 @@ ghc: user interrupt
 Linking Last ...
 [starting HERMIT-shell v0.1.0.0 on Last.hs]
 [starting HERMIT v1.0.0.0 on Last.hs]
-% ghc Last.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:Main: -fplugin-opt=HERMIT.GHCI:Main:LastScript.hs -fplugin-opt=HERMIT.GHCI:Main:resume
+% ghc Last.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:Main: -fplugin-opt=HERMIT.GHCI:Main:LastScript.hs -fplugin-opt=HERMIT.GHCI:Main:resume -w

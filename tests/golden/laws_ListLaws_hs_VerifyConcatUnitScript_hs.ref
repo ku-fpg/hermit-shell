@@ -1,89 +1,4 @@
 [1 of 1] Compiling ListLaws         ( ListLaws.hs, ListLaws.o )
-
-ListLaws.hs:5:11: Warning:
-    Rule "left-unit" may never fire because ‘bind’ might inline first
-    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘bind’
-
-ListLaws.hs:7:11: Warning:
-    Rule "right-unit" may never fire because ‘bind’ might inline first
-    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘bind’
-
-ListLaws.hs:9:11: Warning:
-    Rule "monad-assoc" may never fire because ‘bind’ might inline first
-    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘bind’
-
-ListLaws.hs:10:11: Warning:
-    Rule "monoid-left" may never fire
-      because ‘mappen’ might inline first
-    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘mappen’
-
-ListLaws.hs:12:11: Warning:
-    Rule "monoid-right" may never fire
-      because ‘mappen’ might inline first
-    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘mappen’
-
-ListLaws.hs:14:11: Warning:
-    Rule "monoid-assoc" may never fire
-      because ‘mappen’ might inline first
-    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘mappen’
-
-ListLaws.hs:16:11: Warning:
-    Rule "nil-append" may never fire because ‘++’ might inline first
-    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘++’
-
-ListLaws.hs:17:11: Warning:
-    Rule "append-nil" may never fire because ‘++’ might inline first
-    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘++’
-
-ListLaws.hs:18:11: Warning:
-    Rule "append-nonempty" may never fire
-      because ‘GHC.Types.:’ might inline first
-    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘GHC.Types.:’
-
-ListLaws.hs:19:11: Warning:
-    Rule "append-assoc" may never fire because ‘++’ might inline first
-    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘++’
-
-ListLaws.hs:21:11: Warning:
-    Rule "concat-unit" may never fire
-      because ‘concat’ might inline first
-    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘concat’
-
-ListLaws.hs:22:11: Warning:
-    Rule "concat-of-toList" may never fire
-      because ‘concat’ might inline first
-    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘concat’
-
-ListLaws.hs:24:11: Warning:
-    Rule "map-nonempty" may never fire because ‘map’ might inline first
-    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘map’
-
-ListLaws.hs:29:12: Warning:
-    Rule "map-compose" may never fire because ‘map’ might inline first
-    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘map’
-
-ListLaws.hs:31:12: Warning:
-    Rule "map-append" may never fire because ‘map’ might inline first
-    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘map’
-
-ListLaws.hs:32:12: Warning:
-    Rule "map-concat" may never fire because ‘map’ might inline first
-    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘map’
-
-ListLaws.hs:33:12: Warning:
-    Rule "concat-concat" may never fire
-      because ‘concat’ might inline first
-    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘concat’
-
-ListLaws.hs:34:12: Warning:
-    Rule "concat-append" may never fire
-      because ‘concat’ might inline first
-    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘concat’
-
-ListLaws.hs:35:12: Warning:
-    Rule "concat-nonempty" may never fire
-      because ‘concat’ might inline first
-    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘concat’
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
 GHCi, version 7.10.2: http://www.haskell.org/ghc/  :? for help
 module ListLaws where
@@ -250,4 +165,4 @@ Leaving GHCi.
 ghc: user interrupt
 [starting HERMIT-shell v0.1.0.0 on ListLaws.hs]
 [starting HERMIT v1.0.0.0 on ListLaws.hs]
-% ghc ListLaws.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:ListLaws: -fplugin-opt=HERMIT.GHCI:ListLaws:VerifyConcatUnitScript.hs -fplugin-opt=HERMIT.GHCI:ListLaws:resume
+% ghc ListLaws.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:ListLaws: -fplugin-opt=HERMIT.GHCI:ListLaws:VerifyConcatUnitScript.hs -fplugin-opt=HERMIT.GHCI:ListLaws:resume -w

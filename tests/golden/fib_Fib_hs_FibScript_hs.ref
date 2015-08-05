@@ -81,4 +81,4 @@ ghc: user interrupt
 Linking Fib ...
 [starting HERMIT-shell v0.1.0.0 on Fib.hs]
 [starting HERMIT v1.0.0.0 on Fib.hs]
-% ghc Fib.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:Main: -fplugin-opt=HERMIT.GHCI:Main:FibScript.hs -fplugin-opt=HERMIT.GHCI:Main:resume
+% ghc Fib.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:Main: -fplugin-opt=HERMIT.GHCI:Main:FibScript.hs -fplugin-opt=HERMIT.GHCI:Main:resume -w

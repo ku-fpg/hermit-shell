@@ -1,13 +1,4 @@
 [1 of 1] Compiling Main             ( Nub.hs, Nub.o )
-
-Nub.hs:26:11: Warning:
-    Rule "filter-fusion" may never fire
-      because ‘filter’ might inline first
-    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘filter’
-
-Nub.hs:27:11: Warning:
-    Rule "member-fusion" may never fire because ‘&&’ might inline first
-    Probable fix: add an INLINE[n] or NOINLINE[n] pragma on ‘&&’
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
 GHCi, version 7.10.2: http://www.haskell.org/ghc/  :? for help
 module Main where
@@ -522,4 +513,4 @@ ghc: user interrupt
 Linking Nub ...
 [starting HERMIT-shell v0.1.0.0 on Nub.hs]
 [starting HERMIT v1.0.0.0 on Nub.hs]
-% ghc Nub.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:Main: -fplugin-opt=HERMIT.GHCI:Main:NubScript.hs -fplugin-opt=HERMIT.GHCI:Main:resume
+% ghc Nub.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:Main: -fplugin-opt=HERMIT.GHCI:Main:NubScript.hs -fplugin-opt=HERMIT.GHCI:Main:resume -w
