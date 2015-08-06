@@ -30,7 +30,7 @@ instance __OVERLAPPING__ Response a => Repl (Shell a) where
 instance Repl KernelEffect where
   printForRepl (KernelEffect v) = printForRepl (Shell v :: Shell ())
 
-instance Repl ShellEffect where
+instance Repl (ShellEffect ()) where
   printForRepl (ShellEffect v) = printForRepl (Shell v :: Shell ())
 
 instance Repl ScriptEffect where
@@ -48,6 +48,7 @@ instance Guts a => Repl (Transform a LocalPath) where
 instance Guts a => Repl (Transform a a) where
   printForRepl = printForRepl . run
 
+{-
 instance __OVERLAPPABLE__ Guts a => Repl (Transform a b) where
   printForRepl = printForRepl . run
-
+-}

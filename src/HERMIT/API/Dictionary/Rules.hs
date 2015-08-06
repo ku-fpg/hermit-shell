@@ -4,19 +4,20 @@ module HERMIT.API.Dictionary.Rules where
 import HERMIT.API.Types
 import Data.Aeson
 
+import HERMIT.PrettyPrinter()
+import HERMIT.PrettyPrinter.Common
+
 -- | List all the rules in scope.
 showRules :: Transform LCore String
 showRules = Transform $ method "showRules" []
 
-{-
 -- | Display details on the named rule.
-showRule :: PrettyPrinter -> RuleName -> Transform LCoreTC Doc
+showRule :: PrettyPrinter -> RuleName -> Transform LCoreTC DocH
 showRule pp rule
   = Transform $ method "showRule"
                        [ toJSON pp
                        , toJSON rule
                        ]
--}
 
 -- | Apply a named GHC rule right-to-left.
 foldRule :: RuleName -> Rewrite LCore

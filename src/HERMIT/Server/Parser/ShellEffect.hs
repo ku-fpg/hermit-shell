@@ -10,10 +10,12 @@ import           Control.Applicative
 import           Data.Aeson
 import           Data.Typeable (Proxy(..))
 
+import           HERMIT.Plugin.Types
 import           HERMIT.Shell.ShellEffect
 import           HERMIT.Shell.Types
 import           HERMIT.Shell.Dictionary
 import           HERMIT.Shell.Proof
+import           HERMIT.PrettyPrinter()
 import           HERMIT.PrettyPrinter.Common
 
 import           HERMIT.RemoteShell.Orphanage()
@@ -22,7 +24,7 @@ import           HERMIT.Server.Parser.Utils
 import           HERMIT.Server.Parser.Name ()
 
 
-import           Control.Monad.State (modify)
+import           Control.Monad.State (modify, gets)
 import           HERMIT.Shell.Externals
 
 import qualified Data.Map as M
@@ -34,6 +36,7 @@ parseExternalShellEffect :: ExternalParser (ShellEffect Value)
 parseExternalShellEffect = 
         parseToValue (Proxy :: Proxy (ShellEffect DocH))
    <|>  parseToValue (Proxy :: Proxy (ShellEffect ()))
+   <|>  parseToValue (Proxy :: Proxy (ShellEffect PrettyPrinter))
 
 instance External (ShellEffect DocH) where
   parseExternals = 
@@ -94,4 +97,8 @@ instance External (ShellEffect ()) where
     , external "dump" (\fp pp r w -> CLSModify (dump fp pp r w))
 -}
    ]
+
+instance External (ShellEffect PrettyPrinter) where
+  parseExternals =
+    [ external "getPP"          (CLSModify $ gets (ps_pretty . cl_pstate)) ]
 

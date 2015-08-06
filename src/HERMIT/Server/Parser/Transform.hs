@@ -20,6 +20,7 @@ import           HERMIT.Kure
 import           HERMIT.Lemma
 import           HERMIT.Name
 import           HERMIT.ParserCore
+import           HERMIT.PrettyPrinter.Common
 import           HERMIT.Core (Crumb)
 
 import           HERMIT.Server.Parser.Name ()
@@ -836,13 +837,12 @@ instance External (TransformH LCore DocH) where
     ]
 -}
 
-{-
+
 instance External (TransformH LCoreTC DocH) where
   parseExternals =
-    [ external' "showRule" (ruleHelpT :: PrettyPrinter -> RuleName -> TransformH LCoreTC DocH)
-        [ "Display details on the named rule." ] .+ Query
+    [ external "showRule"
+        (ruleHelpT :: PrettyPrinter -> RuleName -> TransformH LCoreTC DocH)
     ]
--}
 
 instance External (TransformH LCoreTC ()) where
   parseExternals =

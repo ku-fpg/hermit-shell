@@ -41,6 +41,8 @@ import           HERMIT.External (CmdTag(..))
 import           HERMIT.Dictionary.Navigation (Considerable(..))
 import           HERMIT.Dictionary.Rules (RuleName(..))
 import           HERMIT.Lemma
+import           HERMIT.PrettyPrinter()
+import           HERMIT.PrettyPrinter.Common
 
 --import           Debug.Trace
 
@@ -169,5 +171,8 @@ instance External Considerable where
   parsePrimitive = parseJSON 
 
 instance External Used where
+  parsePrimitive = parseJSON
+
+instance External PrettyPrinter where
   parsePrimitive = parseJSON
 

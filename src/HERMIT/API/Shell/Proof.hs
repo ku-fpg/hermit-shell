@@ -6,7 +6,7 @@ import HERMIT.API.Types
 import Data.Aeson
 
 -- | Proof a lemma interactively.
-proveLemma :: LemmaName -> ShellEffect
+proveLemma :: LemmaName -> ShellEffect ()
 proveLemma nm = ShellEffect $ method "proveLemma" [toJSON nm]
 
 -- | check for alpha-equality, marking the lemma as proven

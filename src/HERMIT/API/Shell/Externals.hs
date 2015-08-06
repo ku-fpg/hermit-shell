@@ -2,6 +2,8 @@
 module HERMIT.API.Shell.Externals where
 
 import           HERMIT.API.Types
+import           HERMIT.PrettyPrinter()
+import           HERMIT.PrettyPrinter.Common
 
 import           Data.Aeson
 
@@ -10,11 +12,11 @@ import           Data.Aeson
 --resume = ShellEffect $ method
 
 -- | hard UNIX-style exit; does not return to GHC; does not save
-abort :: ShellEffect
+abort :: ShellEffect ()
 abort = ShellEffect $ method "abort" []
 
 -- | exits shell; resumes HERMIT
-continue :: ShellEffect
+continue :: ShellEffect ()
 continue = ShellEffect $ method "continue" []
 
 -- | garbage-collect all ASTs except for the initial and current AST
@@ -36,7 +38,7 @@ up = KernelEffect $ method "up" []
 --commandLine = ShellEffect $ method "commandLine" []
 
 -- | fix the window to the current focus
-setWindow :: ShellEffect
+setWindow :: ShellEffect ()
 setWindow = ShellEffect $ method "setWindow" []
 
 -- | move to root of current scope
@@ -48,11 +50,11 @@ log :: QueryFun
 log = QueryFun $ method "log" []
 
 -- | go back in the derivation
-back :: ShellEffect
+back :: ShellEffect ()
 back = ShellEffect $ method "back" []
 
 -- | step forward in the derivation
-step :: ShellEffect
+step :: ShellEffect ()
 step = ShellEffect $ method "step" []
 
 -- | goto a specific step in the derivation
@@ -62,7 +64,7 @@ step = ShellEffect $ method "step" []
 --goto :: String -> ShellEffect
 
 -- | name the current step in the derivation
-tag :: String -> ShellEffect
+tag :: String -> ShellEffect ()
 tag name = ShellEffect $ method "tag" [toJSON name]
 
 -- | show diff of two ASTs
@@ -70,26 +72,29 @@ diff :: AST -> AST -> QueryFun
 diff a b = QueryFun $ method "diff" [toJSON a, toJSON b]
 
 -- |  print diffs rather than full code after a rewrite
-setPPDiffOnly :: Bool -> ShellEffect
+setPPDiffOnly :: Bool -> ShellEffect ()
 setPPDiffOnly b = ShellEffect $ method "setPPDiffOnly" [toJSON $ show b]
 
 -- | any rewrite failure causes compilation to abort
-setFailHard :: Bool -> ShellEffect
+setFailHard :: Bool -> ShellEffect ()
 setFailHard b = ShellEffect $ method "setFailHard" [toJSON $ show b]
 
 -- | run core lint type-checker after every rewrite, reverting on failure
-setAutoCorelint :: Bool -> ShellEffect
+setAutoCorelint :: Bool -> ShellEffect ()
 setAutoCorelint b = ShellEffect $ method "setAutoCorelint" [toJSON $ show b]
 
 -- | set the pretty printer
 --   use 'setPP ls' to list available pretty printers"
-setPP :: String -> ShellEffect
+setPP :: String -> ShellEffect ()
 setPP s = ShellEffect $ method "setPP" [toJSON s]
+
+getPP :: ShellEffect PrettyPrinter
+getPP = ShellEffect $ method "getPP" []
 
 -- setPPRenderer
 
 -- | dump <filename> <pretty-printer> <renderer> <width>
-dump :: String -> PrettyPrinter -> String -> Int -> ShellEffect
+dump :: String -> PrettyPrinter -> String -> Int -> ShellEffect ()
 dump fp pp r w
   = ShellEffect
   $ method "dump"
@@ -113,19 +118,19 @@ dumpLemma pp nm fp r w
            ]
 
 -- | set the width of the screen
-setPPWidth :: Int -> ShellEffect
+setPPWidth :: Int -> ShellEffect ()
 setPPWidth width = ShellEffect $ method "setPPWidth" [toJSON width]
 
 -- | set how to show expression-level types (Show|Abstact|Omit)
-setPPType :: PPType -> ShellEffect
+setPPType :: PPType -> ShellEffect ()
 setPPType ppType = ShellEffect $ method "setPPType" [toJSON $ show ppType]
 
 -- | set how to show coercions (Show|Abstact|Omit)
-setPPCoercion :: PPType -> ShellEffect
+setPPCoercion :: PPType -> ShellEffect ()
 setPPCoercion ppType = ShellEffect $ method "setPPCoercion" [toJSON $ show ppType]
 
 -- | set whether uniques are printed with variable names
-setPPUniques :: Bool -> ShellEffect
+setPPUniques :: Bool -> ShellEffect ()
 setPPUniques b = ShellEffect $ method "setPPUniques" [toJSON $ show b]
 
 -- | push current lens onto a stack

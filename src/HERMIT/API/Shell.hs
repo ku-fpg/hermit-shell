@@ -28,11 +28,8 @@ resume :: Shell ()
 resume = Shell $ method "resume" []
 
 -- | promote a `Transform` to top-level, run it, and print the result.
-query :: Guts a => Transform a b -> Shell ()
+query :: (Guts a, FromJSON b) => Transform a b -> Shell b
 query (Transform t) = Shell $ method "query" [t]
-
-query' :: (Guts a, FromJSON b) => Transform a b -> Shell b
-query' (Transform t) = Shell $ method "query" [t]
 
 queryFun :: QueryFun -> Shell ()
 queryFun (QueryFun q) = Shell $ method "query" [q]
@@ -59,7 +56,7 @@ eval s = Shell $ method "eval" [toJSON s]
 kernelEffect :: KernelEffect -> Shell ()
 kernelEffect (KernelEffect e) = Shell $ toJSON e
 
-shellEffect :: ShellEffect -> Shell ()
+shellEffect :: FromJSON a => ShellEffect a -> Shell a
 shellEffect (ShellEffect e) = Shell $ toJSON e
 
 -- | Lift a normal command into a user proof command
@@ -117,6 +114,7 @@ instance Guts a => Run (Transform a LocalPath) where
 instance Guts a => Run (Transform a a) where
   run = apply
 
+{-
 instance __OVERLAPPABLE__ Guts a => Run (Transform a b) where
   run = query
-
+-}

@@ -17,6 +17,7 @@ import           Data.Typeable (Proxy(..))
 
 import           HERMIT.Context
 import           HERMIT.Kure hiding ((<$>),(<*>))
+import           HERMIT.PrettyPrinter.Common
 import           HERMIT.Shell.Command
 import           HERMIT.Shell.Types hiding (clm)
 import           HERMIT.Shell.KernelEffect
@@ -103,4 +104,12 @@ instance External (TypedEffectH String) where
   parseExternals =
     [ external "query" 
         (QueryH . QueryString :: TransformH LCore String -> TypedEffectH String)
+    , external "query"
+        (QueryH . QueryString :: TransformH LCoreTC String -> TypedEffectH String)
+    ]
+
+instance External (TypedEffectH DocH) where
+  parseExternals =
+    [ external "query"
+        (QueryH . QueryDocH :: TransformH LCoreTC DocH -> TypedEffectH DocH)
     ]

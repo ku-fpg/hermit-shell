@@ -24,24 +24,6 @@ instance External (QueryFun ()) where
     , external "displayScripts" displayScripts
     ]
 
-instance External QueryFunBox where
-  parseExternals =
-    [ fmap (QueryFunBox . QueryUnit :: TransformH LCore () -> QueryFunBox) 
-           parseExternal
-    , external "log"
-        (QueryFunBox $ Inquiry showDerivationTree)
-    , external "diff"            
-        (\ ast -> QueryFunBox . Diff ast)
-    , external "displayScripts" 
-        (QueryFunBox displayScripts)
-    , fmap (fromAToBox . QueryA :: TransformH LCore String -> QueryFunBox) 
-           parseExternal
-    ]
-
-fromAToBox :: QueryFun a -> QueryFunBox
-fromAToBox x@QueryA{} = QueryFunBox x
-fromAToBox _ = error "fromAToBox"
-
 instance External AST where
   parsePrimitive (Number n) = return $ (integerToAST . fromInteger . floor) n
     where

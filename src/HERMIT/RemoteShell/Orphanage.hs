@@ -43,6 +43,7 @@ instance FromJSON Attr
 instance ToJSON SyntaxForColor
 instance FromJSON SyntaxForColor
 
+{-
 instance ToJSON Crumb where
     -- cases where there are fields
     toJSON (Rec_Def i)         = object [ "crumb" .= ("Rec_Def" :: String)         , "n" .= i ]
@@ -66,6 +67,7 @@ instance FromJSON Crumb where
             "AxiomInstCo_Arg" -> AxiomInstCo_Arg <$> v .: "n"
             _ -> return $ read cstr
     parseJSON _          = mzero
+-}
 
 -- From package kure
 instance ToJSON a => ToJSON (KURE.SnocPath a) where

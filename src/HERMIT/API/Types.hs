@@ -13,6 +13,7 @@ import Control.Monad
 
 import Data.Aeson
 import Data.Aeson.Types
+import Data.Default.Class
 import Data.Maybe
 import Data.Text
 import Data.String
@@ -20,6 +21,9 @@ import Data.Typeable
 
 import HERMIT.GHCI.JSON
 import           HERMIT.GHCI.Glyph
+import HERMIT.PrettyPrinter()
+import HERMIT.PrettyPrinter.Common
+import HERMIT.RemoteShell.Orphanage
 
 import Data.Coerce
 
@@ -92,6 +96,11 @@ instance Response () where
 instance Response String where
   printResponse = print
 
+instance Response DocH where
+  printResponse doc =
+      let (ASCII x) = renderCode def doc in
+        print x
+
 ------------------------------------------------------------------------
 
 type Rewrite a = Transform a a
@@ -160,7 +169,7 @@ newtype KernelEffect = KernelEffect Value
 
 ------------------------------------------------------------------------
 
-newtype ShellEffect = ShellEffect Value
+newtype ShellEffect a = ShellEffect Value
 
 ------------------------------------------------------------------------
 
@@ -212,14 +221,6 @@ newtype LemmaName = LemmaName String
 
 newtype HermitName = HermitName String
   deriving (ToJSON, IsString)
-
-------------------------------------------------------------------------
-
-newtype Doc           = Doc Value
-  deriving (ToJSON)
-
-newtype PrettyPrinter = PrettyPrinter Value
-  deriving (ToJSON)
 
 ------------------------------------------------------------------------
 
