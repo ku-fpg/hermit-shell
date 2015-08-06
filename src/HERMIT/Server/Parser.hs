@@ -111,5 +111,7 @@ instance External (TypedEffectH String) where
 instance External (TypedEffectH DocH) where
   parseExternals =
     [ external "query"
+        (QueryH . QueryDocH :: TransformH LCore DocH -> TypedEffectH DocH)
+    , external "query"
         (QueryH . QueryDocH :: TransformH LCoreTC DocH -> TypedEffectH DocH)
     ]

@@ -45,15 +45,13 @@ unfoldRulesUnsafe :: [RuleName] -> Rewrite LCore
 unfoldRulesUnsafe names
   = Transform $ method "unfoldRulesUnsafe" [ toJSON names ]
 
-{-
 -- | Create a lemma from a GHC RULE.
-ruleToLemma :: PrettyPrinter -> RuleName -> Transform LCore Doc
+ruleToLemma :: PrettyPrinter -> RuleName -> Transform LCore DocH
 ruleToLemma pp name
   = Transform $ method "ruleToLemma"
                        [ toJSON pp
                        , toJSON name
                        ]
--}
 
 -- | Run GHC's SpecConstr pass, which performs call pattern specialization.
 specConstr :: Rewrite LCore

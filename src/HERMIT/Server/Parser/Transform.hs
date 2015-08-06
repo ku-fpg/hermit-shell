@@ -10,6 +10,7 @@ import           Control.Arrow
 import           Control.Monad
 
 import           Data.Proxy
+import           Data.String
 
 import qualified HERMIT.API.Types as API (Name(..))
 import           HERMIT.Context
@@ -829,13 +830,11 @@ instance External (TransformH LCore String) where
     , external "both" ((\t -> do (r,s) <- promoteClauseT (bothT t); return (unlines [r,s])) :: TransformH LCore String -> TransformH LCore String)
     ]
 
-{-
 instance External (TransformH LCore DocH) where
   parseExternals =
-    [ external' "ruleToLemma" ((\pp nm -> ruleToLemmaT nm >> liftPrettyH (pOptions pp) (showLemmaT (fromString (show nm)) pp)) :: PrettyPrinter -> RuleName -> TransformH LCore DocH)
-        [ "Create a lemma from a GHC RULE." ]
+    [ external "ruleToLemma"
+        ((\pp nm -> ruleToLemmaT nm >> liftPrettyH (pOptions pp) (showLemmaT (fromString (show nm)) pp)) :: PrettyPrinter -> RuleName -> TransformH LCore DocH)
     ]
--}
 
 
 instance External (TransformH LCoreTC DocH) where
