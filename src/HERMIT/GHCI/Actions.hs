@@ -182,11 +182,12 @@ performTypedEffect :: TVar (IO ())
                    -> IO Aeson.Value
 performTypedEffect lastCall plug ref [val] =
   case parseCLT val of
-    Nothing -> do
+    Left err -> do
             putStrLn ("Internal Error: Parser Failed" :: String)
             putStrLn $ pprintJSON $ val
-            return $ toJSON $ (ShellFailure "internal error" :: ShellResult ())
-    Just m -> do
+            return $ toJSON $ 
+              (ShellFailure ("Parse error: " ++ err) :: ShellResult ())
+    Right m -> do
         when debug $ print ("sending to internal shell" :: String)
         cls0 <- atomically $ takeTMVar ref
         -- Now, add a command-specific logger

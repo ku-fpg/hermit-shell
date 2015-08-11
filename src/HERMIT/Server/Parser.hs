@@ -11,7 +11,7 @@ import           Control.Monad.Reader
 
 import           Data.Aeson as Aeson
 import           Data.Aeson.Encode.Pretty (encodePretty)
-import           Data.Aeson.Types (parseMaybe, Parser)
+import           Data.Aeson.Types (parseEither, Parser)
 import           Data.ByteString.Lazy.Char8 (unpack)
 import           Data.Typeable (Proxy(..))
 
@@ -45,8 +45,9 @@ import Debug.Trace
 -- NOTES
 --  * exprToDyns has useful info about building types
 
-parseCLT :: (MonadIO m, Functor m) => Aeson.Value -> Maybe (CLT m Aeson.Value)
-parseCLT = parseMaybe parseTopLevel
+parseCLT :: (MonadIO m, Functor m) => Aeson.Value 
+         -> Either String (CLT m Aeson.Value)
+parseCLT = parseEither parseTopLevel
 
 parseTopLevel :: (MonadIO m, Functor m)
               => Aeson.Value -> Parser (CLT m Aeson.Value)
@@ -82,6 +83,7 @@ parseExternalTypedEffectH =
        ShellEffectH <$> parseExternalShellEffect
    <|> parseToValue (Proxy :: Proxy (TypedEffectH ())) 
    <|> parseToValue (Proxy :: Proxy (TypedEffectH String))
+   <|> parseToValue (Proxy :: Proxy (TypedEffectH DocH))
 
 instance External (TypedEffectH ()) where
   parseExternals =

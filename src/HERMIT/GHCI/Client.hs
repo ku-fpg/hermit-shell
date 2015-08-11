@@ -63,13 +63,15 @@ send (Fail str) = fail str
 
 genMethodStr :: Bool -> Value -> String
 genMethodStr fl (Object o) =
-    let mthd = fromJust $ parseMaybe (\ x -> x .: "method") o :: Text
-        prms = fromJust $ parseMaybe (\ x -> x .: "params") o :: [Value]
-        prms' = map (genMethodStr False) (reverse prms)
-        wrap :: String -> String
-        wrap "" = ""
-        wrap str = if fl then " (" ++ str ++ ")" else " " ++ str in
-      unpack mthd ++ wrap (unwords prms')
+  case parseMaybe (\ x -> x .: "method") o :: Maybe Text of
+    Nothing -> "(Object { " ++ show o ++ "})"
+    Just mthd ->
+        let prms = fromJust $ parseMaybe (\ x -> x .: "params") o :: [Value]
+            prms' = map (genMethodStr False) (reverse prms)
+            wrap :: String -> String
+            wrap "" = ""
+            wrap str = if fl then " (" ++ str ++ ")" else " " ++ str in
+          unpack mthd ++ wrap (unwords prms')
 genMethodStr _ (Array vec) =
     show . map (genMethodStr False) $ toList vec
 genMethodStr _ (String str) = unpack str
