@@ -1,4 +1,3 @@
-{-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
@@ -9,18 +8,18 @@
 
 module HERMIT.RemoteShell.Orphanage where
 
-import HERMIT.PrettyPrinter.Common
-
-import           Control.Applicative
-import           Control.Monad
-
 import           Data.Aeson
-import           Data.Aeson.Types
-import           Data.Coerce
-
-import           GHC.Generics
 
 import           HERMIT.Core (Crumb(..))
+import           HERMIT.Lemma (Used(..))
+import           HERMIT.Dictionary.Navigation (Considerable(..))
+import           HERMIT.PrettyPrinter.Common (HermitMark(..), Attr(..)
+                                             ,SyntaxForColor(..), ShowOption(..)
+                                             ,PrettyOptions(..)
+                                             ,PrettyPrinter(..))
+import qualified HERMIT.PrettyPrinter.AST as AST
+import qualified HERMIT.PrettyPrinter.Clean as Clean
+import qualified HERMIT.PrettyPrinter.GHC as GHC
 
 import qualified Language.KURE.Path as KURE
 
@@ -43,31 +42,36 @@ instance FromJSON Attr
 instance ToJSON SyntaxForColor
 instance FromJSON SyntaxForColor
 
-{-
-instance ToJSON Crumb where
-    -- cases where there are fields
-    toJSON (Rec_Def i)         = object [ "crumb" .= ("Rec_Def" :: String)         , "n" .= i ]
-    toJSON (Case_Alt i)        = object [ "crumb" .= ("Case_Alt" :: String)        , "n" .= i ]
-    toJSON (Alt_Var i)         = object [ "crumb" .= ("Alt_Var" :: String)         , "n" .= i ]
-    toJSON (TyConApp_Arg i)    = object [ "crumb" .= ("TyConApp_Arg" :: String)    , "n" .= i ]
-    toJSON (TyConAppCo_Arg i)  = object [ "crumb" .= ("TyConAppCo_Arg" :: String)  , "n" .= i ]
-    toJSON (AxiomInstCo_Arg i) = object [ "crumb" .= ("AxiomInstCo_Arg" :: String) , "n" .= i ]
-    -- catch all for nullary constructors
-    toJSON cr = object [ "crumb" .= show cr ]
+instance ToJSON Crumb
+instance FromJSON Crumb
 
-instance FromJSON Crumb where
-    parseJSON (Object v) = do
-        cstr :: String <- v .: "crumb"
-        case cstr of
-            "Rec_Def"         -> Rec_Def         <$> v .: "n"
-            "Case_Alt"        -> Case_Alt        <$> v .: "n"
-            "Alt_Var"         -> Alt_Var         <$> v .: "n"
-            "TyConApp_Arg"    -> TyConApp_Arg    <$> v .: "n"
-            "TyConAppCo_Arg"  -> TyConAppCo_Arg  <$> v .: "n"
-            "AxiomInstCo_Arg" -> AxiomInstCo_Arg <$> v .: "n"
-            _ -> return $ read cstr
-    parseJSON _          = mzero
--}
+instance ToJSON Used
+instance FromJSON Used
+
+instance ToJSON Considerable
+instance FromJSON Considerable
+
+instance ToJSON ShowOption
+instance FromJSON ShowOption
+instance ToJSON PrettyOptions
+instance FromJSON PrettyOptions
+
+instance ToJSON PrettyPrinter where
+    toJSON (PP _ _ opts tag) = object ["opts" .= opts, "tag" .= tag]
+
+instance FromJSON PrettyPrinter where
+    parseJSON (Object v) =
+      do opts <- v .: "opts"
+         tag <- v .: "tag"
+         case tag of
+           "ast"   -> return $! PP AST.ppForallQuantification AST.ppCoreTC 
+                                   opts tag
+           "clean" -> return $! PP Clean.ppForallQuantification Clean.ppCoreTC 
+                                   opts tag
+           "ghc"   -> return $! PP GHC.ppForallQuantification GHC.ppCoreTC 
+                                   opts tag
+           _       -> fail "parseJSON:  Unrecognized PrettyPrinter tag."
+    parseJSON _ =     fail "parseJSON:  Cannot parse PrettyPrinter object."
 
 -- From package kure
 instance ToJSON a => ToJSON (KURE.SnocPath a) where

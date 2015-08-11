@@ -41,8 +41,9 @@ import           HERMIT.External (CmdTag(..))
 import           HERMIT.Dictionary.Navigation (Considerable(..))
 import           HERMIT.Dictionary.Rules (RuleName(..))
 import           HERMIT.Lemma
-import           HERMIT.PrettyPrinter()
 import           HERMIT.PrettyPrinter.Common
+
+import           HERMIT.RemoteShell.Orphanage
 
 --import           Debug.Trace
 

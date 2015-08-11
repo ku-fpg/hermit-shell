@@ -20,8 +20,7 @@ import Data.String
 import Data.Typeable
 
 import HERMIT.GHCI.JSON
-import           HERMIT.GHCI.Glyph
-import HERMIT.PrettyPrinter()
+import HERMIT.GHCI.Glyph
 import HERMIT.PrettyPrinter.Common
 import HERMIT.RemoteShell.Orphanage
 

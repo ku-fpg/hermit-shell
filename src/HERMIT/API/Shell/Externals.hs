@@ -2,7 +2,6 @@
 module HERMIT.API.Shell.Externals where
 
 import           HERMIT.API.Types
-import           HERMIT.PrettyPrinter()
 import           HERMIT.PrettyPrinter.Common
 
 import           Data.Aeson

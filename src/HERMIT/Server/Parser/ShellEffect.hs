@@ -15,7 +15,6 @@ import           HERMIT.Shell.ShellEffect
 import           HERMIT.Shell.Types
 import           HERMIT.Shell.Dictionary
 import           HERMIT.Shell.Proof
-import           HERMIT.PrettyPrinter()
 import           HERMIT.PrettyPrinter.Common
 
 import           HERMIT.RemoteShell.Orphanage()

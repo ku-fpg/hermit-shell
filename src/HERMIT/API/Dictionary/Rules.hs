@@ -4,7 +4,6 @@ module HERMIT.API.Dictionary.Rules where
 import HERMIT.API.Types
 import Data.Aeson
 
-import HERMIT.PrettyPrinter()
 import HERMIT.PrettyPrinter.Common
 
 -- | List all the rules in scope.
