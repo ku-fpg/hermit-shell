@@ -167,8 +167,10 @@ hermitShellDotfile quietMode mbScript = unlines $
   , ":def! resume \\s -> return $ \"resume\\n:quit\""
   , ":def! abort \\s -> return $ \"abort\\n:quit\""
   , ":def! doc \\s -> return $ \":!hoogle --info \" ++ show s ++ \" +hermit-shell\""
+  , ":def! quiet \\s -> return $ \"let quietMode' = quietMode\\ninstance ShellSettings where quietMode = not quietMode'\""
 --   , "send welcome" -- welcome message (interactive only)a
   , ":set -XMultiParamTypeClasses"
+  , ":unset +m"
   , shellSettingsInstance
   , "send display" -- where am I (interactive only)
 --   , "setPath (rhsOf \"rev\")"
