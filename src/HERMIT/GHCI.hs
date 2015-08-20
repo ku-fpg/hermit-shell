@@ -70,7 +70,7 @@ server passInfo opts skernel initAST = do
         quietMode = "--quiet" `elem` opts
 
         otherOpts :: [CommandLineOption]
-        otherOpts = filter (not . (`elem` ("resume":maybeToList mbScript))) opts
+        otherOpts = filter (not . (`elem` ("--quiet":"resume":maybeToList mbScript))) opts
     unless (null otherOpts) $ do
         putStr "Ignored command-line arguments: "
         forM_ otherOpts $ \opt -> putStr opt >> putChar ' '
