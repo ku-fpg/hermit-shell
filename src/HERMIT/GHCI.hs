@@ -179,7 +179,11 @@ hermitShellDotfile quietMode mbScript = unlines $
                    -- For some reason, the instance disappears after :l, so we
                    -- remake it:
                    , shellSettingsInstance
+                   , ""
                    , moduleName' ++ ".script"
+                   -- And we reset quiet mode to False for normal REPL
+                   -- operation:
+                   , "instance ShellSettings where quietMode = False"
                    ])
              mbScript
   where
