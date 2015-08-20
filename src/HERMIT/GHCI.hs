@@ -66,6 +66,9 @@ server passInfo opts skernel initAST = do
         resume :: Bool
         resume = "resume" `elem` opts
 
+        quietMode :: Bool
+        quietMode = "--quiet" `elem` opts
+
         otherOpts :: [CommandLineOption]
         otherOpts = filter (not . (`elem` ("resume":maybeToList mbScript))) opts
     unless (null otherOpts) $ do
@@ -114,7 +117,7 @@ server passInfo opts skernel initAST = do
         post "/" jsonRpc
 
     _code <- withSystemTempFile ".ghci-hermit" $ \fp h -> do
-        hPutStrLn h $ hermitShellDotfile mbScript
+        hPutStrLn h $ hermitShellDotfile quietMode mbScript
         hClose h
 
         let ghci = (shell . unwords $ "ghci" : hermitShellFlags fp) {
@@ -150,9 +153,10 @@ msgBuilder :: String -> Status -> Wai.Response
 msgBuilder msg s = Wai.responseBuilder s [("Content-Type","application/json")]
     . lazyByteString . Aeson.encode $ Msg msg
 
-hermitShellDotfile :: Maybe FilePath -> String
-hermitShellDotfile mbScript = unlines $
+hermitShellDotfile :: Bool -> Maybe FilePath -> String
+hermitShellDotfile quietMode mbScript = unlines $
   [ ":m HERMIT.API" -- NOTE: All other modules intentionally unimported here
+  , ":m +HERMIT.API.Types"
   , "import Prelude hiding (log, repeat)"
   , ":set prompt \"HERMIT> \""
 
@@ -164,13 +168,23 @@ hermitShellDotfile mbScript = unlines $
   , ":def! abort \\s -> return $ \"abort\\n:quit\""
   , ":def! doc \\s -> return $ \":!hoogle --info \" ++ show s ++ \" +hermit-shell\""
 --   , "send welcome" -- welcome message (interactive only)a
+  , ":set -XMultiParamTypeClasses"
+  , shellSettingsInstance
   , "send display" -- where am I (interactive only)
 --   , "setPath (rhsOf \"rev\")"
   ] ++ maybe []
              (\script ->
                 let moduleName' = takeWhile (/='.') script
-                in [":l " ++ script, moduleName' ++ ".script"])
+                in [":l " ++ script
+                   -- For some reason, the instance disappears after :l, so we
+                   -- remake it:
+                   , shellSettingsInstance
+                   , moduleName' ++ ".script"
+                   ])
              mbScript
+  where
+    shellSettingsInstance
+      = "instance ShellSettings where quietMode = " ++ show quietMode ++ "\n"
 
 hermitShellFlags :: FilePath -> [String]
 hermitShellFlags dotfilePath =

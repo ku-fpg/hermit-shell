@@ -38,7 +38,7 @@ session = JSONRPC.session
           void $ post "http://localhost:3000/" (toJSON v)
 
 
-send :: Shell a -> IO a
+send :: ShellSettings => Shell a -> IO a
 send (Return a) = return a
 send (Bind m k) = send m >>= send . k
 send (Shell g) = do
@@ -52,7 +52,9 @@ send (Shell g) = do
          ShellFailure msg ->
              error $ "failed to parse result value for " ++
                      genMethodStr True g ++ ": " ++ show v ++ " : " ++ msg
-         ShellResult gss a -> do
+         ShellResult gss a
+          | quietMode -> return a
+          | otherwise -> do
                  sequence_ [ withNoStyle sty txt
                            | gs <- gss
                            , Glyph txt sty <- gs

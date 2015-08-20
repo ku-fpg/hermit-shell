@@ -6,6 +6,8 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE TypeSynonymInstances #-}
 {-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+
 module HERMIT.API.Types where
 
 import Control.Applicative
@@ -89,14 +91,21 @@ proxyToJSON Proxy = String $ pack $ show $ typeOf (undefined :: a)
 class FromJSON a => Response a where
   printResponse :: a -> IO ()
 
+class ShellSettings where
+  quietMode :: Bool
+
 instance Response () where
   printResponse () = return ()
 
-instance Response String where
-  printResponse = print
+instance ShellSettings => Response String where
+  printResponse str
+    | quietMode = return ()
+    | otherwise = print str
 
-instance Response DocH where
-  printResponse doc =
+instance ShellSettings => Response DocH where
+  printResponse doc
+    | quietMode = return ()
+    | otherwise =
       let (ASCII x) = renderCode def doc in
         print x
 
