@@ -181,11 +181,11 @@ hermitShellDotfile quietMode mbScript = unlines $
                    , shellSettingsInstance
                    , ""
                    , moduleName' ++ ".script"
-                   -- And we reset quiet mode to False for normal REPL
-                   -- operation:
-                   , "instance ShellSettings where quietMode = False"
                    ])
              mbScript
+    ++ [ -- Make it so that --quiet doesn't affect interactive REPL output.
+       "instance ShellSettings where quietMode = False"
+       ]
   where
     shellSettingsInstance
       = "instance ShellSettings where quietMode = " ++ show quietMode ++ "\n"
