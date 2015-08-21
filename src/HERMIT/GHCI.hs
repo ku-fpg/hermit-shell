@@ -157,6 +157,7 @@ hermitShellDotfile :: Bool -> Maybe FilePath -> String
 hermitShellDotfile quietMode mbScript = unlines $
   [ ":m HERMIT.API" -- NOTE: All other modules intentionally unimported here
   , ":m +HERMIT.API.Types"
+  , "import Data.IORef (writeIORef, modifyIORef)"
   , "import Prelude hiding (log, repeat)"
   , ":set prompt \"HERMIT> \""
 
@@ -167,30 +168,20 @@ hermitShellDotfile quietMode mbScript = unlines $
   , ":def! resume \\s -> return $ \"resume\\n:quit\""
   , ":def! abort \\s -> return $ \"abort\\n:quit\""
   , ":def! doc \\s -> return $ \":!hoogle --info \" ++ show s ++ \" +hermit-shell\""
-  , ":def! quiet \\s -> return $ \"let quietMode' = quietMode\\ninstance ShellSettings where quietMode = not quietMode'\""
+  , ":def! quiet \\s -> return $ \"modifyIORef quietModeM not\""
 --   , "send welcome" -- welcome message (interactive only)a
-  , ":set -XMultiParamTypeClasses"
-  , ":unset +m"
-  , shellSettingsInstance
+  , "writeIORef quietModeM " ++ show quietMode
   , "send display" -- where am I (interactive only)
 --   , "setPath (rhsOf \"rev\")"
   ] ++ maybe []
              (\script ->
                 let moduleName' = takeWhile (/='.') script
                 in [":l " ++ script
-                   -- For some reason, the instance disappears after :l, so we
-                   -- remake it:
-                   , shellSettingsInstance
-                   , ""
                    , moduleName' ++ ".script"
                    ])
              mbScript
-    ++ [ -- Make it so that --quiet doesn't affect interactive REPL output.
-       "instance ShellSettings where quietMode = False"
-       ]
-  where
-    shellSettingsInstance
-      = "instance ShellSettings where quietMode = " ++ show quietMode ++ "\n"
+         -- More obvious default interactive REPL behavior:
+    ++ [ "writeIORef quietModeM False" ]
 
 hermitShellFlags :: FilePath -> [String]
 hermitShellFlags dotfilePath =

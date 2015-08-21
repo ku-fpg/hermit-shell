@@ -22,30 +22,30 @@ class Repl a where
 instance __OVERLAPPABLE__ Show a => Repl a where
   printForRepl = print
 
-instance __OVERLAPPING__ (ShellSettings, Response a) => Repl (Shell a) where
+instance __OVERLAPPING__ (Response a) => Repl (Shell a) where
   printForRepl sh = do
         r <- send sh
         printResponse r
 
-instance ShellSettings => Repl KernelEffect where
+instance Repl KernelEffect where
   printForRepl (KernelEffect v) = printForRepl (Shell v :: Shell ())
 
-instance ShellSettings => Repl (ShellEffect ()) where
+instance Repl (ShellEffect ()) where
   printForRepl (ShellEffect v) = printForRepl (Shell v :: Shell ())
 
-instance ShellSettings => Repl ScriptEffect where
+instance Repl ScriptEffect where
   printForRepl (ScriptEffect v) = printForRepl (Shell v :: Shell ())
 
-instance ShellSettings => Repl QueryFun where
+instance Repl QueryFun where
   printForRepl = printForRepl . queryFun
 
-instance ShellSettings => Repl Crumb where
+instance Repl Crumb where
   printForRepl = printForRepl . run
 
-instance (Guts a, ShellSettings) => Repl (Transform a LocalPath) where
+instance (Guts a) => Repl (Transform a LocalPath) where
   printForRepl = printForRepl . run
 
-instance (Guts a, ShellSettings) => Repl (Transform a a) where
+instance (Guts a) => Repl (Transform a a) where
   printForRepl = printForRepl . run
 
 {-
