@@ -6,6 +6,8 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE TypeSynonymInstances #-}
 {-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+
 module HERMIT.API.Types where
 
 import Control.Applicative
@@ -25,6 +27,8 @@ import HERMIT.PrettyPrinter.Common
 import HERMIT.RemoteShell.Orphanage
 
 import Data.Coerce
+import Data.IORef
+import System.IO.Unsafe (unsafePerformIO)
 
 ------------------------------------------------------------------------
 
@@ -89,15 +93,27 @@ proxyToJSON Proxy = String $ pack $ show $ typeOf (undefined :: a)
 class FromJSON a => Response a where
   printResponse :: a -> IO ()
 
+quietModeM :: IORef Bool
+quietModeM = unsafePerformIO (newIORef False)
+{-# NOINLINE quietModeM #-}
+
 instance Response () where
   printResponse () = return ()
 
 instance Response String where
-  printResponse = print
+  printResponse str = do
+    quietMode <- readIORef quietModeM
+    if quietMode
+      then return ()
+      else print str
 
 instance Response DocH where
-  printResponse doc =
-      let (ASCII x) = renderCode def doc in
+  printResponse doc = do
+    quietMode <- readIORef quietModeM
+    if quietMode
+      then return ()
+      else
+        let (ASCII x) = renderCode def doc in
         print x
 
 ------------------------------------------------------------------------

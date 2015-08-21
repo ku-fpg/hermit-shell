@@ -16,6 +16,8 @@ import HERMIT.Debug (debug)
 import HERMIT.GHCI.JSON
 import HERMIT.GHCI.Glyph
 
+import Data.IORef (readIORef)
+
 
 -- For better error messages
 import Data.Text (Text, unpack)
@@ -53,6 +55,10 @@ send (Shell g) = do
              error $ "failed to parse result value for " ++
                      genMethodStr True g ++ ": " ++ show v ++ " : " ++ msg
          ShellResult gss a -> do
+          quietMode <- readIORef quietModeM
+          if quietMode
+            then return a
+            else do
                  sequence_ [ withNoStyle sty txt
                            | gs <- gss
                            , Glyph txt sty <- gs

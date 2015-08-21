@@ -66,8 +66,11 @@ server passInfo opts skernel initAST = do
         resume :: Bool
         resume = "resume" `elem` opts
 
+        quietMode :: Bool
+        quietMode = "--quiet" `elem` opts
+
         otherOpts :: [CommandLineOption]
-        otherOpts = filter (not . (`elem` ("resume":maybeToList mbScript))) opts
+        otherOpts = filter (not . (`elem` ("--quiet":"resume":maybeToList mbScript))) opts
     unless (null otherOpts) $ do
         putStr "Ignored command-line arguments: "
         forM_ otherOpts $ \opt -> putStr opt >> putChar ' '
@@ -114,7 +117,7 @@ server passInfo opts skernel initAST = do
         post "/" jsonRpc
 
     _code <- withSystemTempFile ".ghci-hermit" $ \fp h -> do
-        hPutStrLn h $ hermitShellDotfile mbScript
+        hPutStrLn h $ hermitShellDotfile quietMode mbScript
         hClose h
 
         let ghci = (shell . unwords $ "ghci" : hermitShellFlags fp) {
@@ -150,9 +153,11 @@ msgBuilder :: String -> Status -> Wai.Response
 msgBuilder msg s = Wai.responseBuilder s [("Content-Type","application/json")]
     . lazyByteString . Aeson.encode $ Msg msg
 
-hermitShellDotfile :: Maybe FilePath -> String
-hermitShellDotfile mbScript = unlines $
+hermitShellDotfile :: Bool -> Maybe FilePath -> String
+hermitShellDotfile quietMode mbScript = unlines $
   [ ":m HERMIT.API" -- NOTE: All other modules intentionally unimported here
+  , ":m +HERMIT.API.Types"
+  , "import Data.IORef (writeIORef, modifyIORef)"
   , "import Prelude hiding (log, repeat)"
   , ":set prompt \"HERMIT> \""
 
@@ -163,14 +168,20 @@ hermitShellDotfile mbScript = unlines $
   , ":def! resume \\s -> return $ \"resume\\n:quit\""
   , ":def! abort \\s -> return $ \"abort\\n:quit\""
   , ":def! doc \\s -> return $ \":!hoogle --info \" ++ show s ++ \" +hermit-shell\""
+  , ":def! quiet \\s -> return $ \"modifyIORef quietModeM not\""
 --   , "send welcome" -- welcome message (interactive only)a
+  , "writeIORef quietModeM " ++ show quietMode
   , "send display" -- where am I (interactive only)
 --   , "setPath (rhsOf \"rev\")"
   ] ++ maybe []
              (\script ->
                 let moduleName' = takeWhile (/='.') script
-                in [":l " ++ script, moduleName' ++ ".script"])
+                in [":l " ++ script
+                   , moduleName' ++ ".script"
+                   ])
              mbScript
+         -- More obvious default interactive REPL behavior:
+    ++ [ "writeIORef quietModeM False" ]
 
 hermitShellFlags :: FilePath -> [String]
 hermitShellFlags dotfilePath =

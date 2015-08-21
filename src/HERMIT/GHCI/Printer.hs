@@ -22,7 +22,7 @@ class Repl a where
 instance __OVERLAPPABLE__ Show a => Repl a where
   printForRepl = print
 
-instance __OVERLAPPING__ Response a => Repl (Shell a) where
+instance __OVERLAPPING__ (Response a) => Repl (Shell a) where
   printForRepl sh = do
         r <- send sh
         printResponse r
@@ -42,10 +42,10 @@ instance Repl QueryFun where
 instance Repl Crumb where
   printForRepl = printForRepl . run
 
-instance Guts a => Repl (Transform a LocalPath) where
+instance (Guts a) => Repl (Transform a LocalPath) where
   printForRepl = printForRepl . run
 
-instance Guts a => Repl (Transform a a) where
+instance (Guts a) => Repl (Transform a a) where
   printForRepl = printForRepl . run
 
 {-
