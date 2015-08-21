@@ -6,7 +6,6 @@
 {-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE TypeSynonymInstances #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE MultiParamTypeClasses #-}
 
 module HERMIT.API.Types where
 
@@ -103,17 +102,13 @@ instance Response () where
 instance Response String where
   printResponse str = do
     quietMode <- readIORef quietModeM
-    if quietMode
-      then return ()
-      else print str
+    when quietMode $ print str
 
 instance Response DocH where
   printResponse doc = do
     quietMode <- readIORef quietModeM
-    if quietMode
-      then return ()
-      else
-        let (ASCII x) = renderCode def doc in
+    when quietMode $
+      let (ASCII x) = renderCode def doc in
         print x
 
 ------------------------------------------------------------------------
