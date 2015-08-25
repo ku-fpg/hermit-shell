@@ -1,78 +1,31 @@
 {-# LANGUAGE NoImplicitPrelude #-}
-module HERMIT.GHCI.Renderer (webChannel) where
+{-# OPTIONS_GHC -fno-warn-orphans #-}
+module HERMIT.GHCI.Renderer where
 
 import Control.Concurrent.STM
 
 import HERMIT.Core
 import HERMIT.Kure
 import HERMIT.PrettyPrinter.Common
+import HERMIT.PrettyPrinter.Glyphs
 
-import HERMIT.GHCI.JSON
-import           HERMIT.GHCI.Glyph
+import HERMIT.API.Types
+import HERMIT.GHCI.Types
 
 import Prelude.Compat
 
+import Data.Aeson
+    
+import System.Console.ANSI
 import System.IO
 
+instance Response Glyphs where
+  printResponse (Glyphs gs) = do
+         sequence_ [ withNoStyle sty txt
+                   | Glyph txt sty <- gs
+                   ]
+
 webChannel :: TChan [Glyph] -> Handle -> PrettyOptions -> Either String DocH -> IO ()
---webChannel chan _ _    x = print x
 webChannel chan _ _    (Left s)    = atomically $ writeTChan chan [Glyph s Nothing]
-webChannel chan _ opts (Right doc) = let Runes rs = renderCode opts doc
-                                     in atomically $ writeTChan chan $ runesToGlyphs rs
-
-runesToGlyphs :: [Rune] -> [Glyph]
-runesToGlyphs = go [] Nothing Nothing
-    where go :: Path Crumb -> Maybe Style -> Maybe (Path Crumb) -> [Rune] -> [Glyph]
-          go _ _ _ [] = []
-          go p s bp (Rune str:r) = Glyph str s : go p s bp r
-          go p _ bp (Markup s:r) = go p (Just s) bp r
-          go _ s bp (PathA p :r) = go p s bp r
-          go p s _  (BndrA bp:r) = go p s (Just bp) r
-          go p s _  (EndBndrA:r) = go p s Nothing r
-
--- | Runes are precursors to Glyphs
-data Rune = Rune String | Markup Style | PathA (Path Crumb) | BndrA (Path Crumb) | EndBndrA
-
-newtype Runes = Runes [ Rune ]
-
-instance RenderSpecial Runes where
-    renderSpecial sym        = Runes [ Markup style , Rune [ch] ]
-        where Unicode ch = renderSpecial sym
-              style =
-                case sym of
-                  TypeSymbol     -> TYPE
-                  TypeBindSymbol -> TYPE
-                  _              -> SYNTAX
-
-instance Monoid Runes where
-    mempty = Runes mempty
-    mappend (Runes rs1) (Runes rs2) = Runes $ mergeRunes $ rs1 ++ rs2
-
-mergeRunes :: [Rune] -> [Rune]
-mergeRunes [] = []
-mergeRunes [r] = [r]
-mergeRunes (g:h:r) = case merge g h of
-                        Left g' -> mergeRunes (g':r)
-                        Right (g',h') -> g' : mergeRunes (h':r)
-    where merge (Rune s1)  (Rune s2)   = Left $ Rune (s1 ++ s2)
-          merge (Markup _) (Markup s2) = Left $ Markup s2
-          merge (PathA _)  (PathA p2)  = Left $ PathA p2
-          merge r1         r2          = Right (r1,r2)
-
-instance RenderCode Runes where
-    rPutStr txt = Runes [ Rune txt, Markup VAR ] -- Markup VAR resets the colors
-    rDoHighlight _ [] = mempty
-    rDoHighlight Nothing (BndrAttr p:_) = Runes [ BndrA $ snocPathToPath p ]
-    rDoHighlight (Just (BndrAttr _)) _ = Runes [ EndBndrA ]
-    rDoHighlight _ (PathAttr p:_) = Runes [ PathA $ snocPathToPath p ]
-    rDoHighlight _ (Color col:_) =
-        Runes $ case col of
-                    KeywordColor  -> [ Markup KEYWORD ]
-                    SyntaxColor   -> [ Markup SYNTAX ]
-                    IdColor       -> [ Markup VAR ]
-                    CoercionColor -> [ Markup COERCION ]
-                    TypeColor     -> [ Markup TYPE ]
-                    LitColor      -> [ Markup LIT ]
-                    WarningColor  -> [ Markup WARNING ]
-    rDoHighlight o (_:rest) = rDoHighlight o rest
-
+webChannel chan _ opts (Right doc) = let Glyphs gs = renderCode opts doc
+                                     in atomically $ writeTChan chan gs

@@ -1,17 +1,18 @@
-{-# LANGUAGE OverloadedStrings #-}
+        {-# LANGUAGE OverloadedStrings #-}
 module HERMIT.API.Dictionary.Rules where
 
 import HERMIT.API.Types
 import Data.Aeson
 
 import HERMIT.PrettyPrinter.Common
+import HERMIT.PrettyPrinter.Glyphs
 
 -- | List all the rules in scope.
 showRules :: Transform LCore String
 showRules = Transform $ method "showRules" []
 
 -- | Display details on the named rule.
-showRule :: PrettyPrinter -> RuleName -> Transform LCoreTC DocH
+showRule :: PrettyPrinter -> RuleName -> Transform LCoreTC Glyphs
 showRule pp rule
   = Transform $ method "showRule"
                        [ toJSON pp
@@ -45,7 +46,7 @@ unfoldRulesUnsafe names
   = Transform $ method "unfoldRulesUnsafe" [ toJSON names ]
 
 -- | Create a lemma from a GHC RULE.
-ruleToLemma :: PrettyPrinter -> RuleName -> Transform LCore DocH
+ruleToLemma :: PrettyPrinter -> RuleName -> Transform LCore Glyphs
 ruleToLemma pp name
   = Transform $ method "ruleToLemma"
                        [ toJSON pp

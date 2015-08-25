@@ -1,4 +1,4 @@
-{-# LANGUAGE FlexibleInstances #-}
+        {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE DeriveDataTypeable #-} -- TODO: until 7.10-only
 {-# LANGUAGE StandaloneDeriving #-} -- TODO: until 7.10-only
@@ -22,6 +22,7 @@ import           HERMIT.Lemma
 import           HERMIT.Name
 import           HERMIT.ParserCore
 import           HERMIT.PrettyPrinter.Common
+import           HERMIT.PrettyPrinter.Glyphs
 import           HERMIT.Core (Crumb)
 
 import           HERMIT.Server.Parser.Name ()
@@ -830,17 +831,17 @@ instance External (TransformH LCore String) where
     , external "both" ((\t -> do (r,s) <- promoteClauseT (bothT t); return (unlines [r,s])) :: TransformH LCore String -> TransformH LCore String)
     ]
 
-instance External (TransformH LCore DocH) where
+instance External (TransformH LCore Glyphs) where
   parseExternals =
     [ external "ruleToLemma"
-        ((\pp nm -> ruleToLemmaT nm >> liftPrettyH (pOptions pp) (showLemmaT (fromString (show nm)) pp)) :: PrettyPrinter -> RuleName -> TransformH LCore DocH)
+        (lemmaHelpT :: PrettyPrinter -> RuleName -> TransformH LCore Glyphs)
     ]
 
 
-instance External (TransformH LCoreTC DocH) where
+instance External (TransformH LCoreTC Glyphs) where
   parseExternals =
     [ external "showRule"
-        (ruleHelpT :: PrettyPrinter -> RuleName -> TransformH LCoreTC DocH)
+        (ruleHelpT :: PrettyPrinter -> RuleName -> TransformH LCoreTC Glyphs)
     ]
 
 instance External (TransformH LCoreTC ()) where

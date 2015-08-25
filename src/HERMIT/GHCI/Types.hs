@@ -1,9 +1,11 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TupleSections #-}
 module HERMIT.GHCI.Types where
 
+import           Control.Applicative
 import           Control.Concurrent.MVar
 import           Control.Concurrent.STM
 import           Control.Monad.Error.Class
@@ -16,13 +18,18 @@ import           Data.Text.Lazy (Text)
 
 import           HERMIT.Kernel
 import           HERMIT.Plugin.Types
+import           HERMIT.PrettyPrinter.Common
+import           HERMIT.PrettyPrinter.Glyphs
 import           HERMIT.Shell.Types hiding (clm)
 import           HERMIT.GHCI.JSON
-import           HERMIT.GHCI.Glyph
+
+import           HERMIT.RemoteShell.Orphanage()
 
 import           Prelude.Compat
 
 import           Web.Scotty.Trans
+
+import           Data.Aeson
 
 -- | A note about the design here:
 --
@@ -90,3 +97,37 @@ clm u f m = lift $ do
 -- Do something to the web application state.
 webm :: MonadTrans t => WebM a -> t WebM a
 webm = lift
+
+-- | CommandResponse
+data CommandResponse = CommandResponse { crMsg :: Maybe String
+                                       , crGlyphs :: Maybe Glyphs
+                                       , crAst :: AST
+                                       }
+
+instance ToJSON CommandResponse where
+    toJSON cr = object $ ("ast" .= crAst cr) : fromMaybeAttr "glyphs" (crGlyphs cr) ++ fromMaybeAttr "msg" (crMsg cr)
+
+instance FromJSON CommandResponse where
+    parseJSON (Object v) = CommandResponse <$> v .:? "msg" <*> v .:? "glyphs" <*> v .: "ast"
+    parseJSON _          = mzero
+
+-- | ShellResult
+data ShellResult a
+  = ShellResult [Glyphs] a -- When was said, what was returned
+  | ShellFailure String     -- something went wrong
+  | ShellException String   -- The remote HERMIT monad failed on the server with this
+    deriving Show
+
+instance FromJSON a => FromJSON (ShellResult a) where
+  parseJSON (Object o) =   ShellResult <$> o .: "output"
+                                       <*> o .: "result"
+                      <|>  ShellFailure   <$> o .: "failure"
+                      <|>  ShellException <$> o .: "exception"
+                      <|> return (ShellFailure "malformed Object returned from Server")
+    where
+  parseJSON _ = return (ShellFailure "Object not returned from Server")
+
+instance ToJSON a => ToJSON (ShellResult a) where
+  toJSON (ShellResult gss a) = object [ "result" .= a, "output" .= gss ]
+  toJSON (ShellFailure msg)  = object [ "failure" .= msg ]
+  toJSON (ShellException msg)  = object [ "exception" .= msg ]

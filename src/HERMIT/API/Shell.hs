@@ -12,7 +12,6 @@ import HERMIT.API.Shell.Externals (beginScope, endScope)
 import HERMIT.API.Shell.Proof (proveLemma, endProof)
 import HERMIT.API.Dictionary.KURE (serialise)
 
-import HERMIT.GHCI.Glyph        -- Feels wrong to pull this in here
 import HERMIT.RemoteShell.Types
 
 -- | redisplays current state.

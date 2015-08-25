@@ -13,7 +13,6 @@ import           Data.Aeson.Types
 import qualified Data.Text as T
 import qualified Data.Text.Lazy as TL
 
-import           HERMIT.Core (Crumb(..))
 import           HERMIT.External
 import           HERMIT.Kernel (AST)
 
@@ -22,8 +21,6 @@ import           Prelude.Compat
 import           System.Console.Haskeline.Completion (Completion(..))
 
 import           Web.Scotty (readEither)
-
-import           HERMIT.GHCI.Glyph
 
 import           Data.Aeson.Encode.Pretty (encodePretty)
 import           Data.ByteString.Lazy.Char8 (unpack)
@@ -71,22 +68,8 @@ instance ToJSON AST where
 instance FromJSON AST where
     parseJSON j = toEnum <$> parseJSON j
 
-
--- | CommandResponse
-data CommandResponse = CommandResponse { crMsg :: Maybe String
-                                       , crGlyphs :: Maybe [Glyph]
-                                       , crAst :: AST
-                                       }
-
 fromMaybeAttr :: ToJSON a => T.Text -> Maybe a -> [Pair]
 fromMaybeAttr nm = maybe [] (\ a -> [nm .= a])
-
-instance ToJSON CommandResponse where
-    toJSON cr = object $ ("ast" .= crAst cr) : fromMaybeAttr "glyphs" (crGlyphs cr) ++ fromMaybeAttr "msg" (crMsg cr)
-
-instance FromJSON CommandResponse where
-    parseJSON (Object v) = CommandResponse <$> v .:? "msg" <*> v .:? "glyphs" <*> v .: "ast"
-    parseJSON _          = mzero
 
 -- | CommandList
 data CommandList = CommandList { clCmds :: [CommandInfo] }
@@ -120,12 +103,6 @@ instance ToJSON CmdTag where
 instance FromJSON CmdTag where
     parseJSON = fromJSONString
 
-instance ToJSON Style where
-    toJSON = stringToJSON
-
-instance FromJSON Style where
-    parseJSON = fromJSONString
-
 stringToJSON :: Show a => a -> Value
 stringToJSON = String . T.pack . show
 
@@ -135,15 +112,6 @@ fromJSONString (String s) =
         Left _msg -> mzero
         Right sty -> pure sty
 fromJSONString _ = mzero
-
-
-instance ToJSON Glyph where
-    toJSON g = object $ ("text" .= gText g) : fromMaybeAttr "style" (gStyle g)
-
-instance FromJSON Glyph where
-    parseJSON (Object v) = Glyph <$> v .: "text"
-                                 <*> v .:? "style"
-    parseJSON _          = mzero
 
 data History = History { hCmds :: [HCmd]
                        , hTags :: [HTag]
@@ -173,47 +141,6 @@ instance FromJSON HTag where
     parseJSON (Object v) = HTag <$> v .: "tag" <*> v .: "ast"
     parseJSON _          = mzero
 
-data Complete = Complete { cpUser :: UserID
-                         , cpCmd :: String
-                         }
-
-instance ToJSON Complete where
-    toJSON c = object [ "user" .= cpUser c , "cmd" .= cpCmd c ]
-
-instance FromJSON Complete where
-    parseJSON (Object v) = Complete <$> v .: "user" <*> v .: "cmd"
-    parseJSON _          = mzero
-
-data Completions = Completions { cCompletions :: [Completion] }
-
-instance ToJSON Completions where
-    toJSON (Completions cs) = object [ "completions" .= cs ]
-
-instance FromJSON Completions where
-    parseJSON (Object v) = Completions <$> v .: "cs"
-    parseJSON _          = mzero
-
-instance ToJSON Completion where
-    toJSON c = object [ "replacement" .= replacement c , "display" .= display c , "isFinished" .= isFinished c ]
-
-instance FromJSON Completion where
-    parseJSON (Object v) = Completion <$> v .: "replacement" <*> v .: "display" <*> v .: "isFinished"
-    parseJSON _          = mzero
-
-data Transport :: (* -> *) -> * where
-  Transport :: (ToJSON (f a), ToJSON a) => f a -> Transport f
-
-instance ToJSON (Transport f) where
-  toJSON (Transport f) = toJSON f
-
-
-data HermitCommand :: * -> * -> * where
-   BetaReduce :: HermitCommand () ()
---   AnyTD      :: HermitCommand () -> HermitCommand ()
---   ShellEffect :: ShellEffect ->
-   Display    :: HermitCommand () ()
-
---
 
 -- The Show instance for Value prints out Vector literals, which have
 -- different output depending on which version of vector is being used.

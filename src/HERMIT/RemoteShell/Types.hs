@@ -10,7 +10,6 @@ import Control.Applicative
 import HERMIT.PrettyPrinter.Common
 
 import HERMIT.GHCI.JSON
-import           HERMIT.GHCI.Glyph
 
 import Data.Aeson
 import Data.Aeson.Types
@@ -21,7 +20,6 @@ import GHC.Generics
 import Text.PrettyPrint.MarkedHughesPJ as PP
 import qualified Language.KURE.Path as KURE
 import HERMIT.RemoteShell.Orphanage
-import HERMIT.GHCI.Glyph
 import HERMIT.API.Types
 
 import HERMIT.Plugin.Renderer

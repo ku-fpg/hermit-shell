@@ -8,9 +8,12 @@
 
 module HERMIT.RemoteShell.Orphanage where
 
+import           Control.Monad
+
 import           Data.Aeson
 
 import           HERMIT.Core (Crumb(..))
+import           HERMIT.GHCI.JSON
 import           HERMIT.Lemma (Used(..))
 import           HERMIT.Dictionary.Navigation (Considerable(..))
 import           HERMIT.PrettyPrinter.Common (HermitMark(..), Attr(..)
@@ -20,6 +23,7 @@ import           HERMIT.PrettyPrinter.Common (HermitMark(..), Attr(..)
 import qualified HERMIT.PrettyPrinter.AST as AST
 import qualified HERMIT.PrettyPrinter.Clean as Clean
 import qualified HERMIT.PrettyPrinter.GHC as GHC
+import HERMIT.PrettyPrinter.Glyphs
 
 import qualified Language.KURE.Path as KURE
 
@@ -72,6 +76,17 @@ instance FromJSON PrettyPrinter where
                                    opts tag
            _       -> fail "parseJSON:  Unrecognized PrettyPrinter tag."
     parseJSON _ =     fail "parseJSON:  Cannot parse PrettyPrinter object."
+
+instance ToJSON Glyph where
+    toJSON g = object $ ("text" .= gText g) : fromMaybeAttr "style" (gStyle g)
+
+instance FromJSON Glyph where
+    parseJSON (Object v) = Glyph <$> v .: "text"
+                                 <*> v .:? "style"
+    parseJSON _          = mzero
+
+instance ToJSON Glyphs
+instance FromJSON Glyphs
 
 -- From package kure
 instance ToJSON a => ToJSON (KURE.SnocPath a) where

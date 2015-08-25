@@ -20,7 +20,6 @@ import Data.String
 import Data.Typeable
 
 import HERMIT.GHCI.JSON
-import HERMIT.GHCI.Glyph
 import HERMIT.PrettyPrinter.Common
 import HERMIT.RemoteShell.Orphanage
 
@@ -45,36 +44,6 @@ instance Monad Shell where
   return = Return
   (>>=)  = Bind
 
-toShell   :: Shell a -> Maybe Value
-toShell (Shell v) = Just v
-toShell _         = Nothing
-
-fromShell :: Shell a -> Value -> ShellResult a
-fromShell (Shell {}) v = fromJust $ parseMaybe parseJSON v
-fromShell _ _          = ShellFailure "fromShell"
-
-data ShellResult a
-  = ShellResult [[Glyph]] a -- When was said, what was returned
-  | ShellFailure String     -- something went wrong
-  | ShellException String   -- The remote HERMIT monad failed on the server with this
-    deriving Show
-
-instance FromJSON a => FromJSON (ShellResult a) where
-  parseJSON (Object o) =   ShellResult <$> o .: "output"
-                                       <*> o .: "result"
-                      <|>  ShellFailure   <$> o .: "failure"
-                      <|>  ShellException <$> o .: "exception"
-                      <|> return (ShellFailure "malformed Object returned from Server")
-    where
-  parseJSON _ = return (ShellFailure "Object not returned from Server")
-
-instance ToJSON a => ToJSON (ShellResult a) where
-  toJSON (ShellResult gss a) = object [ "result" .= a, "output" .= gss ]
-  toJSON (ShellFailure msg)  = object [ "failure" .= msg ]
-  toJSON (ShellException msg)  = object [ "exception" .= msg ]
-
-
-
 ------------------------------------------------------------------------
 
 -- | The 'Guts' of GHC, is anything we can rewrite and transform.
@@ -94,11 +63,6 @@ instance Response () where
 
 instance Response String where
   printResponse = print
-
-instance Response DocH where
-  printResponse doc =
-      let (ASCII x) = renderCode def doc in
-        print x
 
 ------------------------------------------------------------------------
 
@@ -139,16 +103,6 @@ instance ToJSON LocalPath where
 
 instance Response LocalPath where
   printResponse (LocalPath txt) = print txt
-
-------------------------------------------------------------------------
-
-instance Response Glyphs where
-  printResponse (Glyphs gs) = do
---         putStrLn "[Start Glyphs]"
-         sequence_ [ withNoStyle sty txt
-                   | Glyph txt sty <- gs
-                   ]
---         putStrLn "[End Glyphs]"          
 
 ------------------------------------------------------------------------
 

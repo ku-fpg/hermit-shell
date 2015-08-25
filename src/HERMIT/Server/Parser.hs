@@ -18,6 +18,7 @@ import           Data.Typeable (Proxy(..))
 import           HERMIT.Context
 import           HERMIT.Kure hiding ((<$>),(<*>))
 import           HERMIT.PrettyPrinter.Common
+import           HERMIT.PrettyPrinter.Glyphs
 import           HERMIT.Shell.Command
 import           HERMIT.Shell.Types hiding (clm)
 import           HERMIT.Shell.KernelEffect
@@ -83,7 +84,7 @@ parseExternalTypedEffectH =
        ShellEffectH <$> parseExternalShellEffect
    <|> parseToValue (Proxy :: Proxy (TypedEffectH ())) 
    <|> parseToValue (Proxy :: Proxy (TypedEffectH String))
-   <|> parseToValue (Proxy :: Proxy (TypedEffectH DocH))
+   <|> parseToValue (Proxy :: Proxy (TypedEffectH Glyphs))
 
 instance External (TypedEffectH ()) where
   parseExternals =
@@ -110,10 +111,10 @@ instance External (TypedEffectH String) where
         (QueryH . QueryString :: TransformH LCoreTC String -> TypedEffectH String)
     ]
 
-instance External (TypedEffectH DocH) where
+instance External (TypedEffectH Glyphs) where
   parseExternals =
     [ external "query"
-        (QueryH . QueryDocH :: TransformH LCore DocH -> TypedEffectH DocH)
+        (QueryH . QueryGlyphs :: TransformH LCore Glyphs -> TypedEffectH Glyphs)
     , external "query"
-        (QueryH . QueryDocH :: TransformH LCoreTC DocH -> TypedEffectH DocH)
+        (QueryH . QueryGlyphs :: TransformH LCoreTC Glyphs -> TypedEffectH Glyphs)
     ]

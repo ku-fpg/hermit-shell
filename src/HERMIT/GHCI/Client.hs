@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings #-}
+        {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE GADTs #-}
 module HERMIT.GHCI.Client where
 
@@ -11,10 +11,12 @@ import qualified Control.Monad.Remote.JSON as JSONRPC
 import Control.Monad.Remote.JSON.Debug
 import Control.Monad.Remote.JSON.Types (SessionAPI(..), Args(..))
 import Network.Wreq
+
 import HERMIT.API.Types
+import HERMIT.GHCI.Types
 import HERMIT.Debug (debug)
 import HERMIT.GHCI.JSON
-import HERMIT.GHCI.Glyph
+import HERMIT.GHCI.Renderer
 
 
 -- For better error messages
@@ -52,13 +54,9 @@ send (Shell g) = do
          ShellFailure msg ->
              error $ "failed to parse result value for " ++
                      genMethodStr True g ++ ": " ++ show v ++ " : " ++ msg
-         ShellResult gss a -> do
-                 sequence_ [ withNoStyle sty txt
-                           | gs <- gss
-                           , Glyph txt sty <- gs
-                           ]
-                 putStrLn "\n[Done]\n"
-                 return a
+         ShellResult gss a -> do mapM printResponse gss
+                                 putStrLn "\n[Done]\n"
+                                 return a
 send (Fail str) = fail str
 
 genMethodStr :: Bool -> Value -> String

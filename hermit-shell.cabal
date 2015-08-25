@@ -95,7 +95,6 @@ library
                         HERMIT.GHCI.Actions
                         HERMIT.GHCI.Client
                         HERMIT.GHCI.Driver
-                        HERMIT.GHCI.Glyph
                         HERMIT.GHCI.JSON
                         HERMIT.GHCI.Printer
                         HERMIT.GHCI.Renderer
