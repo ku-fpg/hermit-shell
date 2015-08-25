@@ -67,7 +67,7 @@ server passInfo opts skernel initAST = do
         resume = "resume" `elem` opts
 
         otherOpts :: [CommandLineOption]
-        otherOpts = filter (not . (`elem` ("resume":maybeToList mbScript))) opts
+        otherOpts = filter (not . (`elem` ("--quiet":"resume":maybeToList mbScript))) opts
     unless (null otherOpts) $ do
         putStr "Ignored command-line arguments: "
         forM_ otherOpts $ \opt -> putStr opt >> putChar ' '
@@ -153,6 +153,8 @@ msgBuilder msg s = Wai.responseBuilder s [("Content-Type","application/json")]
 hermitShellDotfile :: Maybe FilePath -> String
 hermitShellDotfile mbScript = unlines $
   [ ":m HERMIT.API" -- NOTE: All other modules intentionally unimported here
+  , ":m +HERMIT.API.Types"
+  , "import Data.IORef (writeIORef, modifyIORef)"
   , "import Prelude hiding (log, repeat)"
   , ":set prompt \"HERMIT> \""
 
@@ -163,13 +165,14 @@ hermitShellDotfile mbScript = unlines $
   , ":def! resume \\s -> return $ \"resume\\n:quit\""
   , ":def! abort \\s -> return $ \"abort\\n:quit\""
   , ":def! doc \\s -> return $ \":!hoogle --info \" ++ show s ++ \" +hermit-shell\""
---   , "send welcome" -- welcome message (interactive only)a
   , "send display" -- where am I (interactive only)
 --   , "setPath (rhsOf \"rev\")"
   ] ++ maybe []
              (\script ->
                 let moduleName' = takeWhile (/='.') script
-                in [":l " ++ script, moduleName' ++ ".script"])
+                in [":l " ++ script
+                   , moduleName' ++ ".script"
+                   ])
              mbScript
 
 hermitShellFlags :: FilePath -> [String]

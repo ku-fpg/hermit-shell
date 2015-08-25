@@ -14,7 +14,7 @@ import HERMIT.GHCI.Client
 
 import HERMIT.API.Shell
 
-import Control.Monad (unless)
+import Control.Monad (void)
 
 class Repl a where
   printForRepl :: a -> IO ()
@@ -22,10 +22,8 @@ class Repl a where
 instance __OVERLAPPABLE__ Show a => Repl a where
   printForRepl = print
 
-instance __OVERLAPPING__ Response a => Repl (Shell a) where
-  printForRepl sh = do
-        r <- send sh
-        printResponse r
+instance __OVERLAPPING__ (Response a) => Repl (Shell a) where
+  printForRepl sh = void $ send sh
 
 instance Repl KernelEffect where
   printForRepl (KernelEffect v) = printForRepl (Shell v :: Shell ())
@@ -42,13 +40,8 @@ instance Repl QueryFun where
 instance Repl Crumb where
   printForRepl = printForRepl . run
 
-instance Guts a => Repl (Transform a LocalPath) where
+instance (Guts a) => Repl (Transform a LocalPath) where
   printForRepl = printForRepl . run
 
-instance Guts a => Repl (Transform a a) where
+instance (Guts a) => Repl (Transform a a) where
   printForRepl = printForRepl . run
-
-{-
-instance __OVERLAPPABLE__ Guts a => Repl (Transform a b) where
-  printForRepl = printForRepl . run
--}

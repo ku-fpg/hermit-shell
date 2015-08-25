@@ -1,4 +1,4 @@
-        {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE FlexibleContexts #-}
 module HERMIT.GHCI.Actions

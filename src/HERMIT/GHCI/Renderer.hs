@@ -20,10 +20,11 @@ import System.Console.ANSI
 import System.IO
 
 instance Response Glyphs where
-  printResponse (Glyphs gs) = do
-         sequence_ [ withNoStyle sty txt
-                   | Glyph txt sty <- gs
-                   ]
+  printResponse (Glyphs gs) =
+         do sequence_ [ withStyle sty txt
+                      | Glyph txt sty <- gs
+                      ]
+            putStr "\n"
 
 webChannel :: TChan [Glyph] -> Handle -> PrettyOptions -> Either String DocH -> IO ()
 webChannel chan _ _    (Left s)    = atomically $ writeTChan chan [Glyph s Nothing]

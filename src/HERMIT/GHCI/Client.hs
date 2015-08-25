@@ -18,6 +18,8 @@ import HERMIT.Debug (debug)
 import HERMIT.GHCI.JSON
 import HERMIT.GHCI.Renderer
 
+import Data.IORef (readIORef)
+
 
 -- For better error messages
 import Data.Text (Text, unpack)
@@ -54,9 +56,9 @@ send (Shell g) = do
          ShellFailure msg ->
              error $ "failed to parse result value for " ++
                      genMethodStr True g ++ ": " ++ show v ++ " : " ++ msg
-         ShellResult gss a -> do mapM printResponse gss
-                                 putStrLn "\n[Done]\n"
-                                 return a
+         ShellResult gss a -> 
+             do mapM printResponse gss
+                return a
 send (Fail str) = fail str
 
 genMethodStr :: Bool -> Value -> String
