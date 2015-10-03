@@ -83,6 +83,7 @@ mkHermitShellTest (dir, hs, moduleName, script) =
     fixed, gfile, dfile, pathp :: FilePath
     fixed = fixName (concat [dir, "_", hs, "_", script])
     gfile = rootDir  </> golden </> fixed <.> "ref"
+    rfile = rootDir  </> dump   </> fixed <.> "raw"
     dfile = rootDir  </> dump   </> fixed <.> "dump"
     pathp = examples </> dir
 
@@ -148,6 +149,15 @@ mkHermitShellTest (dir, hs, moduleName, script) =
                 , "-- -w" -- Disable warnings
                 ]
 
+            stripANSI :: String
+            stripANSI = withPathpDir $ unwords
+                [ "perl"
+                , "-pe"
+                , "'s/\\e\\[?.*?[\\@-~]//g'"
+                ]
+
+
+
         (_,_,Just stdErrH,rTypeCheck) <- createProcess (shell typeCheck) {
             std_out = CreatePipe
           , std_err = CreatePipe
@@ -164,7 +174,7 @@ mkHermitShellTest (dir, hs, moduleName, script) =
         -- Adding a &> dfile redirect in cmd causes the call to GHC to not block
         -- until the compiler is finished (on Linux, not OSX). So we do the Haskell
         -- equivalent here by opening our own file.
-        fh <- openFile dfile WriteMode
+        fh <- openFile rfile WriteMode
         -- putStrLn hermitShell
         (_,_,_,rHermitShell) <- createProcess (shell hermitShell) {
             std_out = UseHandle fh
@@ -172,6 +182,18 @@ mkHermitShellTest (dir, hs, moduleName, script) =
         }
         _ <- waitForProcess rHermitShell
 
+        -- strip out the ANSI (color) escapes
+	-- we use perl -pe 's/\e\[?.*?[\@-~]//g', from 
+	--  http://unix.stackexchange.com/questions/4527/program-that-passes-stdin-to-stdout-with-color-codes-stripped
+	
+        fh1 <- openFile rfile ReadMode
+        fh2 <- openFile dfile WriteMode
+        (_,_,_,rStripANSI) <- createProcess (shell stripANSI) {
+            std_in = UseHandle fh1
+           , std_out = UseHandle fh2
+        }
+        _ <- waitForProcess rStripANSI
+				     
         -- Ensure that the golden file exists prior to calling diff
         goldenExists <- doesFileExist gfile
         unless goldenExists $ copyFile dfile gfile
