@@ -11,8 +11,6 @@ module Main where
   fib ∷ Nat → Nat
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 [1 of 1] Compiling FibScript        ( FibScript.hs, interpreted )
 Ok, modules loaded: FibScript.
 module Main where
@@ -23,8 +21,6 @@ module Main where
   fib ∷ Nat → Nat
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 fib = λ ds →
   case ds of wild ▲
     Zero → Zero
@@ -32,8 +28,6 @@ fib = λ ds →
       case ds of wild ▲
         Zero → Succ Zero
         Succ n → (+) (fib (Succ n)) (fib n)
-[Done]
-
 fib = λ ds →
   case ds of wild ▲
     Zero → Zero
@@ -41,8 +35,6 @@ fib = λ ds →
       case ds of wild ▲
         Zero → Succ Zero
         Succ n → (+) (fib (Succ n)) (fib n)
-[Done]
-
 fib =
   let f = λ fib ds →
         case ds of wild ▲
@@ -53,8 +45,6 @@ fib =
               Succ n → (+) (fib (Succ n)) (fib n)
       rec work = unwrap' (f (wrap' work))
   in wrap' work
-[Done]
-
 fib =
   let f = λ fib ds →
         case ds of wild ▲
@@ -65,11 +55,7 @@ fib =
               Succ n → (+) (fib (Succ n)) (fib n)
       rec work = unwrap' (f (wrap' work))
   in wrap' work
-[Done]
-
 unwrap' (f (wrap' work))
-[Done]
-
 unwrap' (λ ds →
            case ds of wild ▲
              Zero → Zero
@@ -77,8 +63,6 @@ unwrap' (λ ds →
                case ds of wild ▲
                  Zero → Succ Zero
                  Succ n → (+) (wrap' work (Succ n)) (wrap' work n))
-[Done]
-
 unwrap' (λ ds →
            case ds of wild ▲
              Zero → Zero
@@ -86,8 +70,6 @@ unwrap' (λ ds →
                case ds of wild ▲
                  Zero → Succ Zero
                  Succ n → (+) (wrap' work (Succ n)) (wrap' work n))
-[Done]
-
 λ ds →
   case ds of wild ▲
     Zero → Zero
@@ -95,8 +77,6 @@ unwrap' (λ ds →
       case ds of wild ▲
         Zero → Succ Zero
         Succ n → (+) (wrap' work (Succ n)) (wrap' work n)
-[Done]
-
 λ m →
   case m of wild ▲
     Zero → Zero
@@ -104,8 +84,6 @@ unwrap' (λ ds →
       case ds of wild ▲
         Zero → Succ Zero
         Succ n → (+) (wrap' work (Succ n)) (wrap' work n)
-[Done]
-
 unwrap' (λ m →
            case m of wild ▲
              Zero → Zero
@@ -113,8 +91,6 @@ unwrap' (λ m →
                case ds of wild ▲
                  Zero → Succ Zero
                  Succ n → (+) (wrap' work (Succ n)) (wrap' work n))
-[Done]
-
 fib =
   let f = λ fib ds →
         case ds of wild ▲
@@ -132,8 +108,6 @@ fib =
                              Zero → Succ Zero
                              Succ n → (+) (wrap' work (Succ n)) (wrap' work n))
   in wrap' work
-[Done]
-
 fib =
   let rec work =
             unwrap' (λ m →
@@ -144,8 +118,6 @@ fib =
                              Zero → Succ Zero
                              Succ n → (+) (wrap' work (Succ n)) (wrap' work n))
   in wrap' work
-[Done]
-
 fib =
   let rec work =
             unwrap' (λ m →
@@ -157,8 +129,6 @@ fib =
                              Succ n →
                                (+) (wrap ▲ work (Succ n)) (wrap ▲ work n))
   in wrap ▲ work
-[Done]
-
 fib =
   let rec work =
             unwrap' (λ m →
@@ -170,12 +140,7 @@ fib =
                              Succ n →
                                (+) (wrap ▲ work (Succ n)) (wrap ▲ work n))
   in wrap ▲ work
-[Done]
-
-HERMIT> 
-[Done]
-
-Leaving GHCi.
+HERMIT> Leaving GHCi.
 ghc: user interrupt
 Linking Fib ...
 [starting HERMIT-shell v0.1.0.0 on Fib.hs]

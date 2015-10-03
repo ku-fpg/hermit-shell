@@ -10,43 +10,29 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
 [1 of 1] Compiling VerifyMapNonemptyScript ( VerifyMapNonemptyScript.hs, interpreted )
 Ok, modules loaded: VerifyMapNonemptyScript.
 map-nonempty (Not Proven)
   ∀ △ △ f a as. map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
-[Done]
-
 Goal:
   ∀ △ △ f a as. map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
-[Done]
-
 Goal:
   ∀ △ △ f a as. map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
-[Done]
-
 Goal:
-  map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
-[Done]
-
+  ∀ △ f a as. map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
 Goal:
+  ∀ △ f a as.
   case (:) ▲ a as of wild ▲
     [] → [] ▲
     (:) a as → (:) ▲ (f a) (map ▲ ▲ f as)
   ≡
   (:) ▲ (f a) (map ▲ ▲ f as)
-[Done]
-
 Goal:
   true
-[Done]
-
 Goal:
-  ∀ △ △ f a as. true
-[Done]
-
+  ∀ △. true
 Successfully proven: map-nonempty
+
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]
@@ -56,12 +42,7 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
-HERMIT> 
-[Done]
-
-Leaving GHCi.
+HERMIT> Leaving GHCi.
 ghc: user interrupt
 [starting HERMIT-shell v0.1.0.0 on ListLaws.hs]
 [starting HERMIT v1.0.0.0 on ListLaws.hs]

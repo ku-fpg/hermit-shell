@@ -10,8 +10,6 @@ module Main where
   toInt ∷ Nat → Int
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 [1 of 2] Compiling WWAssAScript     ( WWAssAScript.hs, interpreted )
 [2 of 2] Compiling FibScript        ( FibScript.hs, interpreted )
 Ok, modules loaded: FibScript, WWAssAScript.
@@ -24,8 +22,6 @@ module Main where
   toInt ∷ Nat → Int
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 fib = λ ds →
   case ds of wild ▲
     Z → Z
@@ -33,8 +29,6 @@ fib = λ ds →
       case ds of wild ▲
         Z → S Z
         S n → (+) (fib (S n)) (fib n)
-[Done]
-
 fib = λ ds →
   case ds of wild ▲
     Z → Z
@@ -42,8 +36,6 @@ fib = λ ds →
       case ds of wild ▲
         Z → S Z
         S n → (+) (fib (S n)) (fib n)
-[Done]
-
 fib =
   let f = λ fib ds →
         case ds of wild ▲
@@ -54,11 +46,7 @@ fib =
               S n → (+) (fib (S n)) (fib n)
       rec work = unwrap (f (wrap work))
   in wrap work
-[Done]
-
 work = unwrap (f (wrap work))
-[Done]
-
 '"{
     \"params\": [
         {
@@ -71,33 +59,17 @@ work = unwrap (f (wrap work))
     \"method\": \"query\"
 }" [correct]
 
-[Done]
-
 unwrap (f (wrap work))
-[Done]
-
 λ n → unwrap (f (wrap work)) n
-[Done]
-
 λ n → (,) ▲ ▲ (f (wrap work) n) (f (wrap work) (S n))
-[Done]
-
 (,) ▲ ▲ (f (wrap work) n) (f (wrap work) (S n))
-[Done]
-
 case n of w ▲
   Z → (,) ▲ ▲ (f (wrap work) Z) (f (wrap work) (S Z))
   S a → (,) ▲ ▲ (f (wrap work) (S a)) (f (wrap work) (S (S a)))
-[Done]
-
 case n of w ▲
   Z → (,) ▲ ▲ (f (wrap work) Z) (f (wrap work) (S Z))
   S a → (,) ▲ ▲ (f (wrap work) (S a)) (f (wrap work) (S (S a)))
-[Done]
-
 Z → (,) ▲ ▲ (f (wrap work) Z) (f (wrap work) (S Z))
-[Done]
-
 Z →
   (,) ▲ ▲
       (case Z of wild ▲
@@ -112,8 +84,6 @@ Z →
            case ds of wild ▲
              Z → S Z
              S n → (+) (wrap work (S n)) (wrap work n))
-[Done]
-
 case n of w ▲
   Z →
     (,) ▲ ▲
@@ -130,8 +100,6 @@ case n of w ▲
                Z → S Z
                S n → (+) (wrap work (S n)) (wrap work n))
   S a → (,) ▲ ▲ (f (wrap work) (S a)) (f (wrap work) (S (S a)))
-[Done]
-
 case n of w ▲
   Z →
     (,) ▲ ▲
@@ -148,25 +116,15 @@ case n of w ▲
                Z → S Z
                S n → (+) (wrap work (S n)) (wrap work n))
   S a → (,) ▲ ▲ (f (wrap work) (S a)) (f (wrap work) (S (S a)))
-[Done]
-
 S a → (,) ▲ ▲ (f (wrap work) (S a)) (f (wrap work) (S (S a)))
-[Done]
-
 (,) ▲ ▲ (f (wrap work) (S a)) (f (wrap work) (S (S a)))
-[Done]
-
 f (wrap work) (S (S a))
-[Done]
-
 case S (S a) of wild ▲
   Z → Z
   S ds →
     case ds of wild ▲
       Z → S Z
       S n → (+) (wrap work (S n)) (wrap work n)
-[Done]
-
 case n of w ▲
   Z →
     (,) ▲ ▲
@@ -190,98 +148,50 @@ case n of w ▲
              case ds of wild ▲
                Z → S Z
                S n → (+) (wrap work (S n)) (wrap work n))
-[Done]
-
 case n of w ▲
   Z → (,) ▲ ▲ Z (S Z)
   S a →
     (,) ▲ ▲ (f (wrap work) (S a)) ((+) (wrap work (S a)) (wrap work a))
-[Done]
-
 S a →
   (,) ▲ ▲ (f (wrap work) (S a)) ((+) (wrap work (S a)) (wrap work a))
-[Done]
-
 (,) ▲ ▲ (f (wrap work) (S a)) ((+) (wrap work (S a)) (wrap work a))
-[Done]
-
 (,) ▲ ▲ (f (wrap work) (S a)) ((+) (wrap work (S a)) (wrap work a))
-[Done]
-
 (+) (wrap work (S a)) (wrap work a)
-[Done]
-
 (+) (wrap (unwrap (f (wrap work))) (S a))
     (wrap (unwrap (f (wrap work))) a)
-[Done]
-
 (,) ▲ ▲ (f (wrap work) (S a))
     ((+) (wrap (unwrap (f (wrap work))) (S a))
          (wrap (unwrap (f (wrap work))) a))
-[Done]
-
 (,) ▲ ▲ (f (wrap work) (S a))
     ((+) (f (wrap work) (S a)) (f (wrap work) a))
-[Done]
-
 (,) ▲ ▲ (f (wrap work) (S a))
     ((+) (f (wrap work) (S a)) (f (wrap work) a))
-[Done]
-
 (+) (f (wrap work) (S a)) (f (wrap work) a)
-[Done]
-
 f (wrap work) a
-[Done]
-
 let x = f (wrap work) a in x
-[Done]
-
 (,) ▲ ▲ (f (wrap work) (S a))
     ((+) (f (wrap work) (S a)) (let x = f (wrap work) a in x))
-[Done]
-
 (,) ▲ ▲ (f (wrap work) (S a))
     ((+) (f (wrap work) (S a)) (let x = f (wrap work) a in x))
-[Done]
-
 f (wrap work) (S a)
-[Done]
-
 let y = f (wrap work) (S a) in y
-[Done]
-
 (,) ▲ ▲ (let y = f (wrap work) (S a) in y)
     ((+) (f (wrap work) (S a)) (let x = f (wrap work) a in x))
-[Done]
-
 let x = f (wrap work) a
     y = f (wrap work) (S a)
 in (,) ▲ ▲ y ((+) (f (wrap work) (S a)) x)
-[Done]
-
 let x = f (wrap work) a
     y = f (wrap work) (S a)
 in (,) ▲ ▲ y ((+) (f (wrap work) (S a)) x)
-[Done]
-
 let x = f (wrap work) a
     y = f (wrap work) (S a)
 in (,) ▲ ▲ y ((+) y x)
-[Done]
-
 case (,) ▲ ▲ (f (wrap work) a) (f (wrap work) (S a)) of xy ▲
   (,) x y → (,) ▲ ▲ y ((+) y x)
-[Done]
-
 case unwrap (f (wrap work)) a of xy ▲
   (,) x y → (,) ▲ ▲ y ((+) y x)
-[Done]
-
 case work a of xy ▲
   (,) x y → (,) ▲ ▲ y ((+) y x)
-[Done]
-
 fib =
   let f = λ fib ds →
         case ds of wild ▲
@@ -297,8 +207,6 @@ fib =
                 case work a of xy ▲
                   (,) x y → (,) ▲ ▲ y ((+) y x)
   in wrap work
-[Done]
-
 fib =
   let f = λ fib ds →
         case ds of wild ▲
@@ -314,8 +222,6 @@ fib =
                 case work a of xy ▲
                   (,) x y → (,) ▲ ▲ y ((+) y x)
   in wrap work
-[Done]
-
 let f = λ fib ds →
       case ds of wild ▲
         Z → Z
@@ -330,8 +236,6 @@ let f = λ fib ds →
               case work a of xy ▲
                 (,) x y → (,) ▲ ▲ y ((+) y x)
 in wrap work
-[Done]
-
 let rec work = λ n →
           case n of w ▲
             Z → (,) ▲ ▲ Z (S Z)
@@ -339,8 +243,6 @@ let rec work = λ n →
               case work a of xy ▲
                 (,) x y → (,) ▲ ▲ y ((+) y x)
 in wrap work
-[Done]
-
 fib =
   let rec work = λ n →
             case n of w ▲
@@ -349,8 +251,6 @@ fib =
                 case work a of xy ▲
                   (,) x y → (,) ▲ ▲ y ((+) y x)
   in wrap work
-[Done]
-
 fib =
   let rec work = λ n →
             case n of w ▲
@@ -359,12 +259,7 @@ fib =
                 case work a of xy ▲
                   (,) x y → (,) ▲ ▲ y ((+) y x)
   in λ n → fst ▲ ▲ (work n)
-[Done]
-
-HERMIT> 
-[Done]
-
-Leaving GHCi.
+HERMIT> Leaving GHCi.
 ghc: user interrupt
 Linking Fib ...
 [starting HERMIT-shell v0.1.0.0 on Fib.hs]

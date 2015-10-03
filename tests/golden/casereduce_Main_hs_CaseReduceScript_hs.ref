@@ -6,8 +6,6 @@ module Main where
   foo ∷ String
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 [1 of 1] Compiling CaseReduceScript ( CaseReduceScript.hs, interpreted )
 Ok, modules loaded: CaseReduceScript.
 module Main where
@@ -15,35 +13,22 @@ module Main where
   foo ∷ String
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 case bar of wild ▲
   Bar x f → show ▲ $fShowInt x
   Baz s → s
-[Done]
-
 case Bar (I# 5) (F# (__float 2.1)) of wild ▲
   Bar x f →
     show ▲ (D:Show ▲ showSignedInt $fShowInt_$cshow shows_$cshowList1)
          x
   Baz s → s
-[Done]
-
 show ▲ (D:Show ▲ showSignedInt $fShowInt_$cshow shows_$cshowList1)
      (I# 5)
-[Done]
-
 module Main where
   bar ∷ Foo
   foo ∷ String
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
-HERMIT> 
-[Done]
-
-Leaving GHCi.
+HERMIT> Leaving GHCi.
 ghc: user interrupt
 Linking Main ...
 [starting HERMIT-shell v0.1.0.0 on Main.hs]

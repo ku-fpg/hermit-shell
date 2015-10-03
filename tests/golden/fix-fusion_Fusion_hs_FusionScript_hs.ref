@@ -8,32 +8,17 @@ module Main where
   prog ∷ B
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 [1 of 4] Compiling FStrictScript    ( FStrictScript.hs, interpreted )
 [2 of 4] Compiling PreconditionRScript ( PreconditionRScript.hs, interpreted )
 [3 of 4] Compiling PreconditionLScript ( PreconditionLScript.hs, interpreted )
 [4 of 4] Compiling FusionScript     ( FusionScript.hs, interpreted )
 Ok, modules loaded: FusionScript, PreconditionLScript, PreconditionRScript, FStrictScript.
 prog = f (fix ▲ g)
-[Done]
-
 prog = f (fix ▲ g)
-[Done]
-
 f (fix ▲ g)
-[Done]
-
 fix ▲ h
-[Done]
-
 prog = fix ▲ h
-[Done]
-
-HERMIT> 
-[Done]
-
-Leaving GHCi.
+HERMIT> Leaving GHCi.
 ghc: user interrupt
 Linking Fusion ...
 [starting HERMIT-shell v0.1.0.0 on Fusion.hs]

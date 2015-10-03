@@ -7,8 +7,6 @@ module Main where
   unwrap ∷ ∀ a . ([a] → a) → a → [a] → a
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 [1 of 1] Compiling NewLastScript    ( NewLastScript.hs, interpreted )
 Ok, modules loaded: NewLastScript.
 module Main where
@@ -17,16 +15,12 @@ module Main where
   unwrap ∷ ∀ a . ([a] → a) → a → [a] → a
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 module Main where
   last ∷ ∀ a . [a] → a
   wrap ∷ ∀ a . (a → [a] → a) → [a] → a
   unwrap ∷ ∀ a . ([a] → a) → a → [a] → a
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 last ∷ ∀ a . [a] → a
 last = λ a ds →
   case ds of wild a
@@ -35,8 +29,6 @@ last = λ a ds →
       case ds of wild a
         [] → a
         (:) a as → last a ((:) a a as)
-[Done]
-
 last ∷ ∀ a . [a] → a
 last = λ a →
   fix ([a] → a)
@@ -47,8 +39,6 @@ last = λ a →
              case ds of wild a
                [] → a
                (:) a as → last ((:) a a as))
-[Done]
-
 last ∷ ∀ a . [a] → a
 last = λ a →
   fix ([a] → a)
@@ -59,8 +49,6 @@ last = λ a →
              case ds of wild a
                [] → a
                (:) a as → last ((:) a a as))
-[Done]
-
 fix ([a] → a)
     (λ last ds →
        case ds of wild a
@@ -69,8 +57,6 @@ fix ([a] → a)
            case ds of wild a
              [] → a
              (:) a as → last ((:) a a as))
-[Done]
-
 let g ∷ (a → [a] → a) → a → [a] → a
     g =
       (.) ([a] → a) (a → [a] → a) (a → [a] → a) (unwrap a)
@@ -86,9 +72,8 @@ let g ∷ (a → [a] → a) → a → [a] → a
     worker ∷ a → [a] → a
     worker = fix (a → [a] → a) g
 in wrap a worker
-[Done]
-
 Forcing obligation: last-assumption
+
 Goal:
   fix ([a] → a)
       ((.) (a → [a] → a) ([a] → a) ([a] → a) (wrap a)
@@ -108,7 +93,8 @@ Goal:
            (:) a ds →
              case ds of wild a
                [] → a
-               (:) a as → last ((:) a a as))Goal:
+               (:) a as → last ((:) a a as))
+Goal:
   fix ([a] → a)
       (λ x ds →
          case ds of wild a
@@ -131,8 +117,6 @@ Goal:
              case ds of wild a
                [] → a
                (:) a as → last ((:) a a as))
-[Done]
-
 Goal:
   fix ([a] → a)
       (λ x ds →
@@ -151,9 +135,8 @@ Goal:
              case ds of wild a
                [] → a
                (:) a as → last ((:) a a as))
-[Done]
-
 Successfully proven: last-assumption
+
 let g ∷ (a → [a] → a) → a → [a] → a
     g =
       (.) ([a] → a) (a → [a] → a) (a → [a] → a) (unwrap a)
@@ -169,8 +152,6 @@ let g ∷ (a → [a] → a) → a → [a] → a
     worker ∷ a → [a] → a
     worker = fix (a → [a] → a) g
 in wrap a worker
-[Done]
-
 let g ∷ (a → [a] → a) → a → [a] → a
     g =
       (.) ([a] → a) (a → [a] → a) (a → [a] → a)
@@ -211,8 +192,6 @@ in λ ds →
      case ds of wild a
        [] → undefined a
        (:) a as → worker a as
-[Done]
-
 let rec x ∷ a → [a] → a
         x = λ a as →
           case as of wild a
@@ -222,8 +201,6 @@ in λ ds →
      case ds of wild a
        [] → undefined a
        (:) a as → x a as
-[Done]
-
 last ∷ ∀ a . [a] → a
 last = λ a →
   let rec x ∷ a → [a] → a
@@ -235,12 +212,7 @@ last = λ a →
        case ds of wild a
          [] → undefined a
          (:) a as → x a as
-[Done]
-
-HERMIT> 
-[Done]
-
-Leaving GHCi.
+HERMIT> Leaving GHCi.
 ghc: user interrupt
 Linking Last ...
 [starting HERMIT-shell v0.1.0.0 on Last.hs]

@@ -9,8 +9,6 @@ module Main where
   $dShow ∷ Show [Integer]
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 [1 of 1] Compiling QSortScript      ( QSortScript.hs, interpreted )
 Ok, modules loaded: QSortScript.
 module Main where
@@ -20,8 +18,6 @@ module Main where
   $dShow ∷ Show [Integer]
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 qsort = λ △ $dOrd ds →
   case ds of wild ▲
     [] → [] ▲
@@ -43,8 +39,6 @@ qsort = λ △ $dOrd ds →
                     (qsort ▲ $dOrd
                            (case ds of ds ▲
                               (,) bs cs → cs)))
-[Done]
-
 qsort = λ △ $dOrd ds →
   let rec qsort' = λ ds →
             case ds of wild ▲
@@ -66,8 +60,6 @@ qsort = λ △ $dOrd ds →
                               (qsort' (case ds of ds ▲
                                          (,) bs cs → cs)))
   in qsort' ds
-[Done]
-
 qsort = λ △ $dOrd ds →
   let rec qsort' = λ ds →
             case ds of wild ▲
@@ -89,8 +81,6 @@ qsort = λ △ $dOrd ds →
                               (qsort' (case ds of ds ▲
                                          (,) bs cs → cs)))
   in qsort' ds
-[Done]
-
 qsort' = λ ds →
   case ds of wild ▲
     [] → [] ▲
@@ -110,8 +100,6 @@ qsort' = λ ds →
               ((++) ▲ ((:) ▲ a ([] ▲))
                     (qsort' (case ds of ds ▲
                                (,) bs cs → cs)))
-[Done]
-
 qsort' =
   fix ▲
       (λ qsort' ds →
@@ -133,8 +121,6 @@ qsort' =
                      ((++) ▲ ((:) ▲ a ([] ▲))
                            (qsort' (case ds of ds ▲
                                       (,) bs cs → cs))))
-[Done]
-
 fix ▲
     (λ qsort' ds →
        case ds of wild ▲
@@ -155,8 +141,6 @@ fix ▲
                    ((++) ▲ ((:) ▲ a ([] ▲))
                          (qsort' (case ds of ds ▲
                                     (,) bs cs → cs))))
-[Done]
-
 let g =
       (.) ▲ ▲ ▲ (repR ▲)
           ((.) ▲ ▲ ▲
@@ -182,9 +166,8 @@ let g =
                (absR ▲))
     worker = fix ▲ g
 in absR ▲ worker
-[Done]
-
 Forcing obligation: qsort-assumption
+
 Goal:
   fix ▲
       ((.) ▲ ▲ ▲ (absR ▲)
@@ -228,7 +211,9 @@ Goal:
                                 (,) bs cs → bs))
                      ((++) ▲ ((:) ▲ a ([] ▲))
                            (qsort' (case ds of ds ▲
-                                      (,) bs cs → cs))))Successfully proven: qsort-assumption
+                                      (,) bs cs → cs))))
+Successfully proven: qsort-assumption
+
 let g =
       (.) ▲ ▲ ▲ (repR ▲)
           ((.) ▲ ▲ ▲
@@ -254,11 +239,7 @@ let g =
                (absR ▲))
     worker = fix ▲ g
 in absR ▲ worker
-[Done]
-
 fix ▲ g
-[Done]
-
 let rec x =
           (λ f x → repH ▲ (f x)) ((λ qsort' ds →
                                      case ds of wild ▲
@@ -288,8 +269,6 @@ let rec x =
                                                                                absH ▲
                                                                                     (g x)) x))
 in x
-[Done]
-
 let rec x = λ x →
           repH ▲
                (case x of wild ▲
@@ -311,8 +290,6 @@ let rec x = λ x →
                                         (x (case ds of ds ▲
                                               (,) bs cs → cs)))))
 in x
-[Done]
-
 let rec x = λ x →
           case x of wild ▲
             [] → repH ▲ ([] ▲)
@@ -334,11 +311,12 @@ let rec x = λ x →
                                         (x (case ds of ds ▲
                                               (,) bs cs → cs)))))
 in x
-[Done]
-
 Forcing obligation: repHstrict
+
 Goal:
-  ∀ △. repH ▲ (undefined ▲) ≡ undefined ▲Successfully proven: repHstrict
+  ∀ △. repH ▲ (undefined ▲) ≡ undefined ▲
+Successfully proven: repHstrict
+
 let rec x = λ x →
           case x of wild ▲
             [] → repH ▲ ([] ▲)
@@ -360,8 +338,6 @@ let rec x = λ x →
                                         (x (case ds of ds ▲
                                               (,) bs cs → cs)))))
 in x
-[Done]
-
 let rec x = λ x →
           case x of wild ▲
             [] → repH ▲ ([] ▲)
@@ -383,8 +359,6 @@ let rec x = λ x →
                                         (x (case ds of ds ▲
                                               (,) bs cs → cs)))))
 in x
-[Done]
-
 let rec x = λ x →
           case x of wild ▲
             [] → repH ▲ ([] ▲)
@@ -407,12 +381,13 @@ let rec x = λ x →
                                       (x (case ds of ds ▲
                                             (,) bs cs → cs)))))
 in x
-[Done]
-
 Forcing obligation: repH ++
+
 Goal:
   ∀ △ xs ys.
-  repH ▲ ((++) ▲ xs ys) ≡ (.) ▲ ▲ ▲ (repH ▲ xs) (repH ▲ ys)Successfully proven: repH ++
+  repH ▲ ((++) ▲ xs ys) ≡ (.) ▲ ▲ ▲ (repH ▲ xs) (repH ▲ ys)
+Successfully proven: repH ++
+
 let rec x = λ x →
           case x of wild ▲
             [] → repH ▲ ([] ▲)
@@ -435,8 +410,6 @@ let rec x = λ x →
                                       (x (case ds of ds ▲
                                             (,) bs cs → cs)))))
 in x
-[Done]
-
 let rec x = λ x →
           case x of wild ▲
             [] → repH ▲ ([] ▲)
@@ -455,11 +428,12 @@ let rec x = λ x →
                           (x (case ds of ds ▲
                                 (,) bs cs → cs)))
 in x
-[Done]
-
 Forcing obligation: repH-absH-fusion
+
 Goal:
-  ∀ △ h. repH ▲ (absH ▲ h) ≡ hSuccessfully proven: repH-absH-fusion
+  ∀ △ h. repH ▲ (absH ▲ h) ≡ h
+Successfully proven: repH-absH-fusion
+
 let rec x = λ x →
           case x of wild ▲
             [] → repH ▲ ([] ▲)
@@ -478,8 +452,6 @@ let rec x = λ x →
                           (x (case ds of ds ▲
                                 (,) bs cs → cs)))
 in x
-[Done]
-
 let rec x = λ x0 →
           case x0 of wild ▲
             [] → repH ▲ ([] ▲)
@@ -498,8 +470,6 @@ let rec x = λ x0 →
                           (x (case ds1 of ds2 ▲
                                 (,) bs cs → cs)))
 in x
-[Done]
-
 let rec x = λ x0 →
           case x0 of wild ▲
             [] → repH ▲ ([] ▲)
@@ -528,8 +498,6 @@ let rec x = λ x0 →
                                of ds2 ▲
                                 (,) bs cs → cs)))
 in x
-[Done]
-
 let rec x = λ x0 →
           case x0 of wild ▲
             [] → repH ▲ ([] ▲)
@@ -542,8 +510,6 @@ let rec x = λ x0 →
                           (x (case ds0 of wild0 ▲
                                 (,) bs cs → cs)))
 in x
-[Done]
-
 let rec worker = λ x0 →
           case x0 of wild ▲
             [] → repH ▲ ([] ▲)
@@ -556,8 +522,6 @@ let rec worker = λ x0 →
                           (worker (case ds0 of wild0 ▲
                                      (,) bs cs → cs)))
 in worker
-[Done]
-
 let rec worker = λ x0 →
           case x0 of wild ▲
             [] → id ▲
@@ -570,17 +534,18 @@ let rec worker = λ x0 →
                           (worker (case ds0 of wild0 ▲
                                      (,) bs cs → cs)))
 in worker
-[Done]
-
 Forcing obligation: repH []
+
 Forcing obligation: repH (:)
+
 Goal:
-  ∀ △ x xs. repH ▲ ((:) ▲ x xs) ≡ (.) ▲ ▲ ▲ ((:) ▲ x) (repH ▲ xs)Successfully proven: repH (:)
+  ∀ △ x xs. repH ▲ ((:) ▲ x xs) ≡ (.) ▲ ▲ ▲ ((:) ▲ x) (repH ▲ xs)
+Successfully proven: repH (:)
+
 Goal:
   ∀ △. repH ▲ ([] ▲) ≡ id ▲
-[Done]
-
 Successfully proven: repH []
+
 let rec worker = λ x0 →
           case x0 of wild ▲
             [] → id ▲
@@ -593,8 +558,6 @@ let rec worker = λ x0 →
                           (worker (case ds0 of wild0 ▲
                                      (,) bs cs → cs)))
 in worker
-[Done]
-
 qsort = λ △ $dOrd ds →
   let rec qsort' =
             let g =
@@ -641,8 +604,6 @@ qsort = λ △ $dOrd ds →
                   in worker
             in absR ▲ worker
   in qsort' ds
-[Done]
-
 qsort = λ △ $dOrd ds →
   let rec qsort' =
             let g = λ x →
@@ -697,8 +658,6 @@ qsort = λ △ $dOrd ds →
                   in worker
             in (λ g x → g x ([] ▲)) worker
   in qsort' ds
-[Done]
-
 qsort = λ △ $dOrd →
   let rec qsort' =
             let g = λ x →
@@ -744,8 +703,6 @@ qsort = λ △ $dOrd →
                 worker = worker
             in (λ g x → g x ([] ▲)) worker
   in λ ds → qsort' ds
-[Done]
-
 qsort = λ △ $dOrd →
   let rec worker = λ x0 →
             case x0 of wild ▲
@@ -760,22 +717,27 @@ qsort = λ △ $dOrd →
                                             (,) bs cs → cs)
                                          x))
   in λ x → worker x ([] ▲)
-[Done]
-
 HERMIT> Warning: Lemma repH (:) was assumed but not proven.
+
 repH (:)
-  ∀ △ x xs. repH ▲ ((:) ▲ x xs) ≡ (.) ▲ ▲ ▲ ((:) ▲ x) (repH ▲ xs)Warning: Lemma repH ++ was assumed but not proven.
+  ∀ △ x xs. repH ▲ ((:) ▲ x xs) ≡ (.) ▲ ▲ ▲ ((:) ▲ x) (repH ▲ xs)
+Warning: Lemma repH ++ was assumed but not proven.
+
 repH ++
   ∀ △ xs ys.
-  repH ▲ ((++) ▲ xs ys) ≡ (.) ▲ ▲ ▲ (repH ▲ xs) (repH ▲ ys)Warning: Lemma repH [] was assumed but not proven.
+  repH ▲ ((++) ▲ xs ys) ≡ (.) ▲ ▲ ▲ (repH ▲ xs) (repH ▲ ys)
+Warning: Lemma repH [] was assumed but not proven.
+
 repH []
-  ∀ △. repH ▲ ([] ▲) ≡ id ▲Warning: Lemma repH-absH-fusion was assumed but not proven.
+  ∀ △. repH ▲ ([] ▲) ≡ id ▲
+Warning: Lemma repH-absH-fusion was assumed but not proven.
+
 repH-absH-fusion
-  ∀ △ h. repH ▲ (absH ▲ h) ≡ hWarning: Lemma repHstrict was assumed but not proven.
+  ∀ △ h. repH ▲ (absH ▲ h) ≡ h
+Warning: Lemma repHstrict was assumed but not proven.
+
 repHstrict
   ∀ △. repH ▲ (undefined ▲) ≡ undefined ▲
-[Done]
-
 Leaving GHCi.
 ghc: user interrupt
 Linking QSort ...

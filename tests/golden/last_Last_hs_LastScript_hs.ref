@@ -7,8 +7,6 @@ module Main where
   unwrap ∷ ∀ a . ([a] → a) → a → [a] → a
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 [1 of 2] Compiling WWAssBScript     ( WWAssBScript.hs, interpreted )
 [2 of 2] Compiling LastScript       ( LastScript.hs, interpreted )
 Ok, modules loaded: LastScript, WWAssBScript.
@@ -18,8 +16,6 @@ module Main where
   unwrap ∷ ∀ a . ([a] → a) → a → [a] → a
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 last = λ △ ds →
   case ds of wild ▲
     [] → undefined ▲
@@ -27,8 +23,6 @@ last = λ △ ds →
       case ds of wild ▲
         [] → a
         (:) a as → last ▲ ((:) ▲ a as)
-[Done]
-
 last = λ △ ds →
   (let f = λ last' ds →
          case ds of wild ▲
@@ -39,8 +33,6 @@ last = λ △ ds →
                (:) a as → last' ((:) ▲ a as)
        rec work = unwrap ▲ (f (wrap ▲ work))
    in wrap ▲ work) ds
-[Done]
-
 last = λ △ →
   let rec work = λ a as →
             case as of wild ▲
@@ -50,8 +42,6 @@ last = λ △ →
        case ds of wild ▲
          [] → undefined ▲
          (:) a as → work a as
-[Done]
-
 last = λ △ →
   let rec work = λ a0 as →
             case as of wild ▲
@@ -61,12 +51,7 @@ last = λ △ →
        case ds of wild ▲
          [] → undefined ▲
          (:) a0 as → work a0 as
-[Done]
-
-HERMIT> 
-[Done]
-
-Leaving GHCi.
+HERMIT> Leaving GHCi.
 ghc: user interrupt
 Linking Last ...
 [starting HERMIT-shell v0.1.0.0 on Last.hs]

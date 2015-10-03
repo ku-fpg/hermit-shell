@@ -7,8 +7,6 @@ module Main where
   mean ∷ [Int] → Int
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 [1 of 1] Compiling MeanScript       ( MeanScript.hs, interpreted )
 Ok, modules loaded: MeanScript.
 module Main where
@@ -17,82 +15,40 @@ module Main where
   mean ∷ [Int] → Int
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 λ xs → div ▲ $fIntegralInt (sum xs) (length xs)
-[Done]
-
 div ▲ $fIntegralInt (sum xs) (length xs)
-[Done]
-
 div ▲ $fIntegralInt (sum xs) (length xs)
-[Done]
-
 sum xs
-[Done]
-
 let s = sum xs in s
-[Done]
-
 div ▲ $fIntegralInt (let s = sum xs in s) (length xs)
-[Done]
-
 div ▲ $fIntegralInt (let s = sum xs in s) (length xs)
-[Done]
-
 length xs
-[Done]
-
 let l = length xs in l
-[Done]
-
 div ▲ $fIntegralInt (let s = sum xs in s) (let l = length xs in l)
-[Done]
-
 let l = length xs
     s = sum xs
 in div ▲ $fIntegralInt s l
-[Done]
-
 let s = sum xs
     l = length xs
 in div ▲ $fIntegralInt s l
-[Done]
-
 case (,) ▲ ▲ (sum xs) (length xs) of sl ▲
   (,) s l → div ▲ $fIntegralInt s l
-[Done]
-
 case (,) ▲ ▲ (sum xs) (length xs) of sl ▲
   (,) s l → div ▲ $fIntegralInt s l
-[Done]
-
 (,) ▲ ▲ (sum xs) (length xs)
-[Done]
-
 (λ xs → (,) ▲ ▲ (sum xs) (length xs)) xs
-[Done]
-
 λ xs → (,) ▲ ▲ (sum xs) (length xs)
-[Done]
-
 let sumlength = λ xs → (,) ▲ ▲ (sum xs) (length xs) in sumlength
-[Done]
-
 case (let sumlength = λ xs → (,) ▲ ▲ (sum xs) (length xs)
       in sumlength) xs
  of sl ▲
   (,) s l → div ▲ $fIntegralInt s l
-[Done]
-
 module Main where
   sum ∷ [Int] → Int
   length ∷ [Int] → Int
   mean ∷ [Int] → Int
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 module Main where
   sum ∷ [Int] → Int
   length ∷ [Int] → Int
@@ -100,17 +56,9 @@ module Main where
   mean ∷ [Int] → Int
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 sumlength = λ xs → (,) ▲ ▲ (sum xs) (length xs)
-[Done]
-
 rec sumlength = λ xs → (,) ▲ ▲ (sum xs) (length xs)
-[Done]
-
 sumlength = λ xs → (,) ▲ ▲ (sum xs) (length xs)
-[Done]
-
 '"{
     \"params\": [
         {
@@ -123,22 +71,12 @@ sumlength = λ xs → (,) ▲ ▲ (sum xs) (length xs)
     \"method\": \"query\"
 }" [correct]
 
-[Done]
-
 sumlength = λ xs → (,) ▲ ▲ (sum xs) (length xs)
-[Done]
-
 λ xs → (,) ▲ ▲ (sum xs) (length xs)
-[Done]
-
 (,) ▲ ▲ (sum xs) (length xs)
-[Done]
-
 case xs of w ▲
   [] → (,) ▲ ▲ (sum ([] ▲)) (length ([] ▲))
   (:) a b → (,) ▲ ▲ (sum ((:) ▲ a b)) (length ((:) ▲ a b))
-[Done]
-
 case xs of w ▲
   [] →
     (,) ▲ ▲
@@ -152,8 +90,6 @@ case xs of w ▲
            [] → I# 0
            (:) x xs → (+) ▲ $fNumInt x (sum xs))
         (length ((:) ▲ a b))
-[Done]
-
 case xs of w ▲
   [] →
     (,) ▲ ▲
@@ -171,103 +107,54 @@ case xs of w ▲
         (case (:) ▲ a b of wild ▲
            [] → I# 0
            (:) x xs → (+) ▲ $fNumInt (I# 1) (length xs))
-[Done]
-
 case xs of w ▲
   [] → (,) ▲ ▲ (I# 0) (I# 0)
   (:) a b →
     (,) ▲ ▲ ((+) ▲ $fNumInt a (sum b))
         ((+) ▲ $fNumInt (I# 1) (length b))
-[Done]
-
 (:) a b →
   (,) ▲ ▲ ((+) ▲ $fNumInt a (sum b))
       ((+) ▲ $fNumInt (I# 1) (length b))
-[Done]
-
 (:) y ys →
   (,) ▲ ▲ ((+) ▲ $fNumInt y (sum ys))
       ((+) ▲ $fNumInt (I# 1) (length ys))
-[Done]
-
 (,) ▲ ▲ ((+) ▲ $fNumInt y (sum ys))
     ((+) ▲ $fNumInt (I# 1) (length ys))
-[Done]
-
 (,) ▲ ▲ ((+) ▲ $fNumInt y (sum ys))
     ((+) ▲ $fNumInt (I# 1) (length ys))
-[Done]
-
 (+) ▲ $fNumInt (I# 1) (length ys)
-[Done]
-
 length ys
-[Done]
-
 let l = length ys in l
-[Done]
-
 (,) ▲ ▲ ((+) ▲ $fNumInt y (sum ys))
     ((+) ▲ $fNumInt (I# 1) (let l = length ys in l))
-[Done]
-
 (,) ▲ ▲ ((+) ▲ $fNumInt y (sum ys))
     ((+) ▲ $fNumInt (I# 1) (let l = length ys in l))
-[Done]
-
 (+) ▲ $fNumInt y (sum ys)
-[Done]
-
 sum ys
-[Done]
-
 let s = sum ys in s
-[Done]
-
 (,) ▲ ▲ ((+) ▲ $fNumInt y (let s = sum ys in s))
     ((+) ▲ $fNumInt (I# 1) (let l = length ys in l))
-[Done]
-
 let l = length ys
     s = sum ys
 in (,) ▲ ▲ ((+) ▲ $fNumInt y s) ((+) ▲ $fNumInt (I# 1) l)
-[Done]
-
 let s = sum ys
     l = length ys
 in (,) ▲ ▲ ((+) ▲ $fNumInt y s) ((+) ▲ $fNumInt (I# 1) l)
-[Done]
-
 case (,) ▲ ▲ (sum ys) (length ys) of sl ▲
   (,) s l → (,) ▲ ▲ ((+) ▲ $fNumInt y s) ((+) ▲ $fNumInt (I# 1) l)
-[Done]
-
 case (,) ▲ ▲ (sum ys) (length ys) of sl ▲
   (,) s l → (,) ▲ ▲ ((+) ▲ $fNumInt y s) ((+) ▲ $fNumInt (I# 1) l)
-[Done]
-
 (,) ▲ ▲ (sum ys) (length ys)
-[Done]
-
 sumlength ys
-[Done]
-
 case sumlength ys of sl ▲
   (,) s l → (,) ▲ ▲ ((+) ▲ $fNumInt y s) ((+) ▲ $fNumInt (I# 1) l)
-[Done]
-
 sumlength = λ xs →
   case xs of w ▲
     [] → (,) ▲ ▲ (I# 0) (I# 0)
     (:) y ys →
       case sumlength ys of sl ▲
         (,) s l → (,) ▲ ▲ ((+) ▲ $fNumInt y s) ((+) ▲ $fNumInt (I# 1) l)
-[Done]
-
-HERMIT> 
-[Done]
-
-Leaving GHCi.
+HERMIT> Leaving GHCi.
 ghc: user interrupt
 Linking Mean ...
 [starting HERMIT-shell v0.1.0.0 on Mean.hs]

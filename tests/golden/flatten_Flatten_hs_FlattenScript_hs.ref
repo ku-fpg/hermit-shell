@@ -7,8 +7,6 @@ module Main where
   $dShow ∷ Show [Char]
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 [1 of 3] Compiling WWAssAScript     ( WWAssAScript.hs, interpreted )
 [2 of 3] Compiling StrictRepHScript ( StrictRepHScript.hs, interpreted )
 [3 of 3] Compiling FlattenScript    ( FlattenScript.hs, interpreted )
@@ -17,8 +15,6 @@ flatten = λ △ ds →
   case ds of wild ▲
     Node l r → (++) ▲ (flatten ▲ l) (flatten ▲ r)
     Leaf a → (:) ▲ a ([] ▲)
-[Done]
-
 flatten = λ △ ds →
   (let f = λ flatten' ds →
          case ds of wild ▲
@@ -26,8 +22,6 @@ flatten = λ △ ds →
            Leaf a → (:) ▲ a ([] ▲)
        rec work = λ x1 → repH ▲ (f (λ x2 → absH ▲ (work x2)) x1)
    in λ x0 → absH ▲ (work x0)) ds
-[Done]
-
 flatten = λ △ →
   let rec work = λ x1 →
             repH ▲
@@ -35,8 +29,6 @@ flatten = λ △ →
                     Node l r → (++) ▲ (absH ▲ (work l)) (absH ▲ (work r))
                     Leaf a → (:) ▲ a ([] ▲))
   in λ x0 → absH ▲ (work x0)
-[Done]
-
 flatten = λ △ →
   let rec work = λ x1 →
             repH ▲
@@ -44,144 +36,118 @@ flatten = λ △ →
                     Node l r → (++) ▲ (absH ▲ (work l)) (absH ▲ (work r))
                     Leaf a → (:) ▲ a ([] ▲))
   in λ x0 → absH ▲ (work x0)
-[Done]
-
 λ x1 →
   repH ▲
        (case x1 of wild ▲
           Node l r → (++) ▲ (absH ▲ (work l)) (absH ▲ (work r))
           Leaf a → (:) ▲ a ([] ▲))
-[Done]
-
 λ tree →
   repH ▲
        (case tree of wild ▲
           Node l r → (++) ▲ (absH ▲ (work l)) (absH ▲ (work r))
           Leaf a → (:) ▲ a ([] ▲))
-[Done]
-
 repH ▲
      (case tree of wild ▲
         Node l r → (++) ▲ (absH ▲ (work l)) (absH ▲ (work r))
         Leaf a → (:) ▲ a ([] ▲))
-[Done]
-
 λ acc →
   repH ▲
        (case tree of wild ▲
           Node l r → (++) ▲ (absH ▲ (work l)) (absH ▲ (work r))
           Leaf a → (:) ▲ a ([] ▲))
        acc
-[Done]
-
 repH ▲
      (case tree of wild ▲
         Node l r → (++) ▲ (absH ▲ (work l)) (absH ▲ (work r))
         Leaf a → (:) ▲ a ([] ▲))
      acc
-[Done]
-
 case tree of wild ▲
   Node l r → work l (work r acc)
   Leaf a → (:) ▲ a acc
-[Done]
-
 flatten = λ △ →
   let rec work = λ tree acc →
             case tree of wild ▲
               Node l r → work l (work r acc)
               Leaf a → (:) ▲ a acc
   in λ x0 → absH ▲ (work x0)
-[Done]
-
 flatten = λ △ →
   let rec work = λ tree acc →
             case tree of wild ▲
               Node l r → work l (work r acc)
               Leaf a → (:) ▲ a acc
   in λ x0 → work x0 ([] ▲)
-[Done]
-
 Goal:
   ∀ △ xs. (++) ▲ xs ([] ▲) ≡ xs
-[Done]
-
 Successfully proven: ++ []
+
 flatten = λ △ →
   let rec work = λ tree acc →
             case tree of wild ▲
               Node l r → work l (work r acc)
               Leaf a → (:) ▲ a acc
   in λ x0 → work x0 ([] ▲)
-[Done]
-
 Goal:
   ∀ △. (++) ▲ (undefined ▲) ≡ undefined ▲
-[Done]
-
 Successfully proven: ++ strict
+
 flatten = λ △ →
   let rec work = λ tree acc →
             case tree of wild ▲
               Node l r → work l (work r acc)
               Leaf a → (:) ▲ a acc
   in λ x0 → work x0 ([] ▲)
-[Done]
-
 Goal:
   ∀ △ x xs. repH ▲ ((:) ▲ x xs) ≡ (.) ▲ ▲ ▲ ((:) ▲ x) (repH ▲ xs)
-[Done]
-
 Successfully proven: repH (:)
+
 flatten = λ △ →
   let rec work = λ tree acc →
             case tree of wild ▲
               Node l r → work l (work r acc)
               Leaf a → (:) ▲ a acc
   in λ x0 → work x0 ([] ▲)
-[Done]
-
 Goal:
   ∀ △ xs ys.
   repH ▲ ((++) ▲ xs ys) ≡ (.) ▲ ▲ ▲ (repH ▲ xs) (repH ▲ ys)
-[Done]
-
 Successfully proven: repH ++
+
 flatten = λ △ →
   let rec work = λ tree acc →
             case tree of wild ▲
               Node l r → work l (work r acc)
               Leaf a → (:) ▲ a acc
   in λ x0 → work x0 ([] ▲)
-[Done]
-
 Goal:
   ∀ △. repH ▲ ([] ▲) ≡ id ▲
-[Done]
-
 Successfully proven: repH []
+
 flatten = λ △ →
   let rec work = λ tree acc →
             case tree of wild ▲
               Node l r → work l (work r acc)
               Leaf a → (:) ▲ a acc
   in λ x0 → work x0 ([] ▲)
-[Done]
-
 HERMIT> Warning: Lemma ++ [] was assumed but not proven.
+
 ++ []
-  ∀ △ xs. (++) ▲ xs ([] ▲) ≡ xsWarning: Lemma ++ strict was assumed but not proven.
+  ∀ △ xs. (++) ▲ xs ([] ▲) ≡ xs
+Warning: Lemma ++ strict was assumed but not proven.
+
 ++ strict
-  ∀ △. (++) ▲ (undefined ▲) ≡ undefined ▲Warning: Lemma repH (:) was assumed but not proven.
+  ∀ △. (++) ▲ (undefined ▲) ≡ undefined ▲
+Warning: Lemma repH (:) was assumed but not proven.
+
 repH (:)
-  ∀ △ x xs. repH ▲ ((:) ▲ x xs) ≡ (.) ▲ ▲ ▲ ((:) ▲ x) (repH ▲ xs)Warning: Lemma repH ++ was assumed but not proven.
+  ∀ △ x xs. repH ▲ ((:) ▲ x xs) ≡ (.) ▲ ▲ ▲ ((:) ▲ x) (repH ▲ xs)
+Warning: Lemma repH ++ was assumed but not proven.
+
 repH ++
   ∀ △ xs ys.
-  repH ▲ ((++) ▲ xs ys) ≡ (.) ▲ ▲ ▲ (repH ▲ xs) (repH ▲ ys)Warning: Lemma repH [] was assumed but not proven.
+  repH ▲ ((++) ▲ xs ys) ≡ (.) ▲ ▲ ▲ (repH ▲ xs) (repH ▲ ys)
+Warning: Lemma repH [] was assumed but not proven.
+
 repH []
   ∀ △. repH ▲ ([] ▲) ≡ id ▲
-[Done]
-
 Leaving GHCi.
 ghc: user interrupt
 Linking Flatten ...

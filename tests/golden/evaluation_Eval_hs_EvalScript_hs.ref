@@ -8,8 +8,6 @@ module Main where
   eval ∷ Expr → Mint
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 [1 of 2] Compiling WWAssAScript     ( WWAssAScript.hs, interpreted )
 [2 of 2] Compiling EvalScript       ( EvalScript.hs, interpreted )
 Ok, modules loaded: EvalScript, WWAssAScript.
@@ -20,8 +18,6 @@ module Main where
   eval ∷ Expr → Mint
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 eval = λ ds →
   case ds of wild ▲
     Val n → Just ▲ n
@@ -37,8 +33,6 @@ eval = λ ds →
       case eval x of wild ▲
         Nothing → eval y
         Just n → Just ▲ n
-[Done]
-
 eval =
   let f = λ eval ds →
         case ds of wild ▲
@@ -57,8 +51,6 @@ eval =
               Just n → Just ▲ n
       rec work = λ x1 → rep (f (λ x2 → abs (work x2)) x1)
   in λ x0 → abs (work x0)
-[Done]
-
 eval =
   let f = λ eval ds →
         case ds of wild ▲
@@ -77,8 +69,6 @@ eval =
               Just n → Just ▲ n
       rec work = λ x1 → rep (f (λ x2 → abs (work x2)) x1)
   in λ x0 → abs (work x0)
-[Done]
-
 let f = λ eval ds →
       case ds of wild ▲
         Val n → Just ▲ n
@@ -96,8 +86,6 @@ let f = λ eval ds →
             Just n → Just ▲ n
     rec work = λ x1 → rep (f (λ x2 → abs (work x2)) x1)
 in λ x0 → abs (work x0)
-[Done]
-
 let rec work = λ x1 →
           rep ((λ eval ds →
                   case ds of wild ▲
@@ -115,8 +103,6 @@ let rec work = λ x1 →
                         Nothing → eval y
                         Just n → Just ▲ n) (λ x2 → abs (work x2)) x1)
 in λ x0 → abs (work x0)
-[Done]
-
 let rec work = λ x1 →
           rep ((λ eval ds →
                   case ds of wild ▲
@@ -134,20 +120,10 @@ let rec work = λ x1 →
                         Nothing → eval y
                         Just n → Just ▲ n) (λ x2 → abs (work x2)) x1)
 in λ x0 → abs (work x0)
-[Done]
-
 λ x0 → abs (work x0)
-[Done]
-
 λ e → abs (work e)
-[Done]
-
 abs (work e)
-[Done]
-
 work e (Just ▲) (Nothing ▲)
-[Done]
-
 let rec work = λ x1 →
           rep ((λ eval ds →
                   case ds of wild ▲
@@ -165,8 +141,6 @@ let rec work = λ x1 →
                         Nothing → eval y
                         Just n → Just ▲ n) (λ x2 → abs (work x2)) x1)
 in λ e → work e (Just ▲) (Nothing ▲)
-[Done]
-
 let rec work = λ x1 →
           rep ((λ eval ds →
                   case ds of wild ▲
@@ -184,8 +158,6 @@ let rec work = λ x1 →
                         Nothing → eval y
                         Just n → Just ▲ n) (λ x2 → abs (work x2)) x1)
 in λ e → work e (Just ▲) (Nothing ▲)
-[Done]
-
 λ x1 →
   rep ((λ eval ds →
           case ds of wild ▲
@@ -202,8 +174,6 @@ in λ e → work e (Just ▲) (Nothing ▲)
               case eval x of wild ▲
                 Nothing → eval y
                 Just n → Just ▲ n) (λ x2 → abs (work x2)) x1)
-[Done]
-
 λ e →
   rep ((λ eval ds →
           case ds of wild ▲
@@ -220,8 +190,6 @@ in λ e → work e (Just ▲) (Nothing ▲)
               case eval x of wild ▲
                 Nothing → eval y
                 Just n → Just ▲ n) (λ x2 → abs (work x2)) e)
-[Done]
-
 rep ((λ eval ds →
         case ds of wild ▲
           Val n → Just ▲ n
@@ -237,8 +205,6 @@ rep ((λ eval ds →
             case eval x of wild ▲
               Nothing → eval y
               Just n → Just ▲ n) (λ x2 → abs (work x2)) e)
-[Done]
-
 λ s f →
   case (λ eval ds →
           case ds of wild ▲
@@ -258,8 +224,6 @@ rep ((λ eval ds →
    of wild ▲
     Nothing → f
     Just n → s n
-[Done]
-
 λ s f →
   case e of wild ▲
     Val n → s n
@@ -278,8 +242,6 @@ rep ((λ eval ds →
             Nothing → f
             Just n → s n
         Just n → s n
-[Done]
-
 λ f →
   case e of wild ▲
     Val n → s n
@@ -298,8 +260,6 @@ rep ((λ eval ds →
             Nothing → f
             Just n → s n
         Just n → s n
-[Done]
-
 case e of wild ▲
   Val n → s n
   Add x y →
@@ -317,8 +277,6 @@ case e of wild ▲
           Nothing → f
           Just n → s n
       Just n → s n
-[Done]
-
 case e of wild ▲
   Val n → s n
   Add x y →
@@ -336,47 +294,29 @@ case e of wild ▲
           Nothing → f
           Just n → s n
       Just n → s n
-[Done]
-
 case abs (work x) of wild ▲
   Nothing → f
   Just m →
     case abs (work y) of wild ▲
       Nothing → f
       Just n → s ((+) ▲ $fNumInt m n)
-[Done]
-
 Just m →
   case abs (work y) of wild ▲
     Nothing → f
     Just n → s ((+) ▲ $fNumInt m n)
-[Done]
-
 case abs (work y) of wild ▲
   Nothing → f
   Just n → s ((+) ▲ $fNumInt m n)
-[Done]
-
 (λ m →
    case abs (work y) of wild ▲
      Nothing → f
      Just n → s ((+) ▲ $fNumInt m n)) m
-[Done]
-
 case abs (work y) of wild ▲
   Nothing → f
   Just n → s ((+) ▲ $fNumInt m n)
-[Done]
-
 Just n → s ((+) ▲ $fNumInt m n)
-[Done]
-
 s ((+) ▲ $fNumInt m n)
-[Done]
-
 (λ n → s ((+) ▲ $fNumInt m n)) n
-[Done]
-
 case e of wild ▲
   Val n → s n
   Add x y →
@@ -395,8 +335,6 @@ case e of wild ▲
           Nothing → f
           Just n → s n
       Just n → s n
-[Done]
-
 case e of wild ▲
   Val n → s n
   Add x y →
@@ -404,15 +342,11 @@ case e of wild ▲
         (λ m → rep (abs (work y)) (λ n → s ((+) ▲ $fNumInt m n)) f) f
   Throw → f
   Catch x y → rep (abs (work x)) s (rep (abs (work y)) s f)
-[Done]
-
 case e of wild ▲
   Val n → s n
   Add x y → work x (λ m → work y (λ n → s ((+) ▲ $fNumInt m n)) f) f
   Throw → f
   Catch x y → work x s (work y s f)
-[Done]
-
 let rec work = λ e s f →
           case e of wild ▲
             Val n → s n
@@ -420,8 +354,6 @@ let rec work = λ e s f →
             Throw → f
             Catch x y → work x s (work y s f)
 in λ e → work e (Just ▲) (Nothing ▲)
-[Done]
-
 eval =
   let rec work = λ e s f →
             case e of wild ▲
@@ -430,12 +362,7 @@ eval =
               Throw → f
               Catch x y → work x s (work y s f)
   in λ e → work e (Just ▲) (Nothing ▲)
-[Done]
-
-HERMIT> 
-[Done]
-
-Leaving GHCi.
+HERMIT> Leaving GHCi.
 ghc: user interrupt
 Linking Eval ...
 [starting HERMIT-shell v0.1.0.0 on Eval.hs]

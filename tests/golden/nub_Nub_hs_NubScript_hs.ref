@@ -9,8 +9,6 @@ module Main where
   nub ∷ [Int] → [Int]
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 [1 of 1] Compiling NubScript        ( NubScript.hs, interpreted )
 Ok, modules loaded: NubScript.
 module Main where
@@ -21,8 +19,6 @@ module Main where
   nub ∷ [Int] → [Int]
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 module Main where
   absN ∷ ([Int] → Set Int → [Int]) → [Int] → [Int]
   filter ∷ ∀ a . (a → Bool) → [a] → [a]
@@ -31,16 +27,12 @@ module Main where
   nub ∷ [Int] → [Int]
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 nub ∷ [Int] → [Int]
 nub = λ ds →
   case ds of wild [Int]
     [] → [] Int
     (:) x xs →
       (:) Int x (nub (filter Int (λ ds → (/=) Int $fEqInt ds x) xs))
-[Done]
-
 nub ∷ [Int] → [Int]
 nub =
   fix ([Int] → [Int])
@@ -49,16 +41,12 @@ nub =
            [] → [] Int
            (:) x xs →
              (:) Int x (nub (filter Int (λ ds → (/=) Int $fEqInt ds x) xs)))
-[Done]
-
 fix ([Int] → [Int])
     (λ nub ds →
        case ds of wild [Int]
          [] → [] Int
          (:) x xs →
            (:) Int x (nub (filter Int (λ ds → (/=) Int $fEqInt ds x) xs)))
-[Done]
-
 let worker ∷ [Int] → Set Int → [Int]
     worker =
       repN (fix ([Int] → [Int])
@@ -70,9 +58,8 @@ let worker ∷ [Int] → Set Int → [Int]
                            (nub (filter Int (λ ds → (/=) Int $fEqInt ds x)
                                         xs))))
 in absN worker
-[Done]
-
 Forcing obligation: nub-assumption
+
 Goal:
   fix ([Int] → [Int])
       ((.) ([Int] → Set Int → [Int]) ([Int] → [Int]) ([Int] → [Int]) absN
@@ -90,19 +77,8 @@ Goal:
          case ds of wild [Int]
            [] → [] Int
            (:) x xs →
-             (:) Int x (nub (filter Int (λ ds → (/=) Int $fEqInt ds x) xs)))Successfully proven: nub-assumption
-let worker ∷ [Int] → Set Int → [Int]
-    worker =
-      repN (fix ([Int] → [Int])
-                (λ nub ds →
-                   case ds of wild [Int]
-                     [] → [] Int
-                     (:) x xs →
-                       (:) Int x
-                           (nub (filter Int (λ ds → (/=) Int $fEqInt ds x)
-                                        xs))))
-in absN worker
-[Done]
+             (:) Int x (nub (filter Int (λ ds → (/=) Int $fEqInt ds x) xs)))
+Successfully proven: nub-assumption
 
 let worker ∷ [Int] → Set Int → [Int]
     worker =
@@ -115,8 +91,17 @@ let worker ∷ [Int] → Set Int → [Int]
                            (nub (filter Int (λ ds → (/=) Int $fEqInt ds x)
                                         xs))))
 in absN worker
-[Done]
-
+let worker ∷ [Int] → Set Int → [Int]
+    worker =
+      repN (fix ([Int] → [Int])
+                (λ nub ds →
+                   case ds of wild [Int]
+                     [] → [] Int
+                     (:) x xs →
+                       (:) Int x
+                           (nub (filter Int (λ ds → (/=) Int $fEqInt ds x)
+                                        xs))))
+in absN worker
 repN (fix ([Int] → [Int])
           (λ nub ds →
              case ds of wild [Int]
@@ -124,16 +109,12 @@ repN (fix ([Int] → [Int])
                (:) x xs →
                  (:) Int x
                      (nub (filter Int (λ ds → (/=) Int $fEqInt ds x) xs))))
-[Done]
-
 fix ([Int] → [Int])
     (λ nub ds →
        case ds of wild [Int]
          [] → [] Int
          (:) x xs →
            (:) Int x (nub (filter Int (λ ds → (/=) Int $fEqInt ds x) xs)))
-[Done]
-
 let nub ∷ [Int] → [Int]
     nub =
       fix ([Int] → [Int])
@@ -143,8 +124,6 @@ let nub ∷ [Int] → [Int]
                (:) x xs →
                  (:) Int x (nub (filter Int (λ ds → (/=) Int $fEqInt ds x) xs)))
 in nub
-[Done]
-
 let nub ∷ [Int] → [Int]
     nub =
       let rec x ∷ [Int] → [Int]
@@ -158,8 +137,6 @@ let nub ∷ [Int] → [Int]
                                         xs))) x
       in x
 in nub
-[Done]
-
 let rec x ∷ [Int] → [Int]
         x = λ ds →
           case ds of wild [Int]
@@ -167,8 +144,6 @@ let rec x ∷ [Int] → [Int]
             (:) x xs →
               (:) Int x (x (filter Int (λ ds → (/=) Int $fEqInt ds x) xs))
 in x
-[Done]
-
 let worker ∷ [Int] → Set Int → [Int]
     worker =
       repN (let rec x ∷ [Int] → [Int]
@@ -180,8 +155,6 @@ let worker ∷ [Int] → Set Int → [Int]
                               (x (filter Int (λ ds → (/=) Int $fEqInt ds x) xs))
             in x)
 in absN worker
-[Done]
-
 let rec x ∷ [Int] → [Int]
         x = λ ds →
           case ds of wild [Int]
@@ -191,8 +164,6 @@ let rec x ∷ [Int] → [Int]
     worker ∷ [Int] → Set Int → [Int]
     worker = repN x
 in absN worker
-[Done]
-
 let rec nub' ∷ [Int] → [Int]
         nub' = λ ds →
           case ds of wild [Int]
@@ -202,17 +173,11 @@ let rec nub' ∷ [Int] → [Int]
     worker ∷ [Int] → Set Int → [Int]
     worker = repN nub'
 in absN worker
-[Done]
-
 worker ∷ [Int] → Set Int → [Int]
 worker = repN nub'
-[Done]
-
 worker ∷ [Int] → Set Int → [Int]
 worker = λ xs s →
   nub' (filter Int (λ ds → notMember Int $fOrdInt ds s) xs)
-[Done]
-
 '"{
     \"params\": [
         {
@@ -225,8 +190,6 @@ worker = λ xs s →
     \"method\": \"query\"
 }" [correct]
 
-[Done]
-
 worker ∷ [Int] → Set Int → [Int]
 worker = λ xs s →
   nub' (case xs of wild [Int]
@@ -236,8 +199,6 @@ worker = λ xs s →
               False → filter Int (λ ds → notMember Int $fOrdInt ds s) xs
               True →
                 (:) Int x (filter Int (λ ds → notMember Int $fOrdInt ds s) xs))
-[Done]
-
 worker ∷ [Int] → Set Int → [Int]
 worker = λ xs s →
   case xs of wild [Int]
@@ -247,24 +208,21 @@ worker = λ xs s →
               False → filter Int (λ ds → notMember Int $fOrdInt ds s) xs
               True →
                 (:) Int x (filter Int (λ ds → notMember Int $fOrdInt ds s) xs))
-[Done]
-
 Forcing obligation: nubStrict
+
 Goal:
-  nub' (undefined [Int]) ≡ undefined [Int]Goal:
+  nub' (undefined [Int]) ≡ undefined [Int]
+Goal:
   case undefined [Int] of wild [Int]
     [] → [] Int
     (:) x xs →
       (:) Int x (nub' (filter Int (λ ds → (/=) Int $fEqInt ds x) xs))
   ≡
   undefined [Int]
-[Done]
-
 Goal:
   true
-[Done]
-
 Successfully proven: nubStrict
+
 worker ∷ [Int] → Set Int → [Int]
 worker = λ xs s →
   case xs of wild [Int]
@@ -274,8 +232,6 @@ worker = λ xs s →
               False → filter Int (λ ds → notMember Int $fOrdInt ds s) xs
               True →
                 (:) Int x (filter Int (λ ds → notMember Int $fOrdInt ds s) xs))
-[Done]
-
 worker ∷ [Int] → Set Int → [Int]
 worker = λ xs s →
   case xs of wild [Int]
@@ -289,8 +245,6 @@ worker = λ xs s →
               False → filter Int (λ ds → notMember Int $fOrdInt ds s) xs
               True →
                 (:) Int x (filter Int (λ ds → notMember Int $fOrdInt ds s) xs))
-[Done]
-
 worker ∷ [Int] → Set Int → [Int]
 worker = λ xs s →
   case xs of wild [Int]
@@ -300,8 +254,6 @@ worker = λ xs s →
               False → filter Int (λ ds → notMember Int $fOrdInt ds s) xs
               True →
                 (:) Int x (filter Int (λ ds → notMember Int $fOrdInt ds s) xs))
-[Done]
-
 worker ∷ [Int] → Set Int → [Int]
 worker = λ xs s →
   case xs of wild [Int]
@@ -312,35 +264,20 @@ worker = λ xs s →
         True →
           nub' ((:) Int x
                     (filter Int (λ ds → notMember Int $fOrdInt ds s) xs))
-[Done]
-
 Forcing obligation: nubStrict
+
 Goal:
-  nub' (undefined [Int]) ≡ undefined [Int]Goal:
+  nub' (undefined [Int]) ≡ undefined [Int]
+Goal:
   case undefined [Int] of wild [Int]
     [] → [] Int
     (:) x xs →
       (:) Int x (nub' (filter Int (λ ds → (/=) Int $fEqInt ds x) xs))
   ≡
   undefined [Int]
-[Done]
-
 Goal:
   true
-[Done]
-
 Successfully proven: nubStrict
-worker ∷ [Int] → Set Int → [Int]
-worker = λ xs s →
-  case xs of wild [Int]
-    [] → [] Int
-    (:) x xs →
-      case notMember Int $fOrdInt x s of wild [Int]
-        False → nub' (filter Int (λ ds → notMember Int $fOrdInt ds s) xs)
-        True →
-          nub' ((:) Int x
-                    (filter Int (λ ds → notMember Int $fOrdInt ds s) xs))
-[Done]
 
 worker ∷ [Int] → Set Int → [Int]
 worker = λ xs s →
@@ -352,8 +289,16 @@ worker = λ xs s →
         True →
           nub' ((:) Int x
                     (filter Int (λ ds → notMember Int $fOrdInt ds s) xs))
-[Done]
-
+worker ∷ [Int] → Set Int → [Int]
+worker = λ xs s →
+  case xs of wild [Int]
+    [] → [] Int
+    (:) x xs →
+      case notMember Int $fOrdInt x s of wild [Int]
+        False → nub' (filter Int (λ ds → notMember Int $fOrdInt ds s) xs)
+        True →
+          nub' ((:) Int x
+                    (filter Int (λ ds → notMember Int $fOrdInt ds s) xs))
 case xs of wild [Int]
   [] → [] Int
   (:) x xs →
@@ -362,81 +307,65 @@ case xs of wild [Int]
       True →
         nub' ((:) Int x
                   (filter Int (λ ds → notMember Int $fOrdInt ds s) xs))
-[Done]
-
 case notMember Int $fOrdInt x s of wild [Int]
   False → nub' (filter Int (λ ds → notMember Int $fOrdInt ds s) xs)
   True →
     nub' ((:) Int x
               (filter Int (λ ds → notMember Int $fOrdInt ds s) xs))
-[Done]
-
 True →
   nub' ((:) Int x
             (filter Int (λ ds → notMember Int $fOrdInt ds s) xs))
-[Done]
-
 nub' ((:) Int x
           (filter Int (λ ds → notMember Int $fOrdInt ds s) xs))
-[Done]
-
 case (:) Int x (filter Int (λ ds → notMember Int $fOrdInt ds s) xs)
  of wild [Int]
   [] → [] Int
   (:) x xs →
     (:) Int x (nub' (filter Int (λ ds → (/=) Int $fEqInt ds x) xs))
-[Done]
-
 (:) Int x
     (nub' (filter Int (λ ds → (/=) Int $fEqInt ds x)
                   (filter Int (λ ds → notMember Int $fOrdInt ds s) xs)))
-[Done]
-
 (:) Int x
     (nub' (filter Int
                   (λ y →
                      (&&) ((λ ds → (/=) Int $fEqInt ds x) y)
                           ((λ ds → notMember Int $fOrdInt ds s) y))
                   xs))
-[Done]
-
 Forcing obligation: filter-fusion
+
 Goal:
   ∀ a p q ys.
-  filter a p (filter a q ys) ≡ filter a (λ y → (&&) (p y) (q y)) ysSuccessfully proven: filter-fusion
+  filter a p (filter a q ys) ≡ filter a (λ y → (&&) (p y) (q y)) ys
+Successfully proven: filter-fusion
+
 (:) Int x
     (nub' (filter Int
                   (λ y →
                      (&&) ((λ ds → (/=) Int $fEqInt ds x) y)
                           ((λ ds → notMember Int $fOrdInt ds s) y))
                   xs))
-[Done]
-
 (:) Int x
     (nub' (filter Int
                   (λ y →
                      (&&) ((/=) Int $fEqInt y x) (notMember Int $fOrdInt y s))
                   xs))
-[Done]
-
 (:) Int x
     (nub' (filter Int
                   (λ y → notMember Int $fOrdInt y (insert Int $fOrdInt x s))
                   xs))
-[Done]
-
 Forcing obligation: member-fusion
+
 Goal:
   ∀ a $dEq $dOrd y x s.
   (&&) ((/=) a $dEq y x) (notMember a $dOrd y s)
   ≡
-  notMember a $dOrd y (insert a $dOrd x s)Successfully proven: member-fusion
+  notMember a $dOrd y (insert a $dOrd x s)
+Successfully proven: member-fusion
+
 (:) Int x
     (nub' (filter Int
                   (λ y → notMember Int $fOrdInt y (insert Int $fOrdInt x s))
                   xs))
-[Done]
-
 worker ∷ [Int] → Set Int → [Int]
 worker = λ xs s →
   case xs of wild [Int]
@@ -451,8 +380,6 @@ worker = λ xs s →
                                notMember Int $fOrdInt y
                                          (insert Int $fOrdInt x s))
                             xs))
-[Done]
-
 rec worker ∷ [Int] → Set Int → [Int]
     worker = λ xs s →
       case xs of wild [Int]
@@ -467,8 +394,6 @@ rec worker ∷ [Int] → Set Int → [Int]
                                    notMember Int $fOrdInt y
                                              (insert Int $fOrdInt x s))
                                 xs))
-[Done]
-
 rec worker ∷ [Int] → Set Int → [Int]
     worker = λ xs s →
       case xs of wild [Int]
@@ -477,17 +402,20 @@ rec worker ∷ [Int] → Set Int → [Int]
           case notMember Int $fOrdInt x s of wild [Int]
             False → worker xs s
             True → (:) Int x (worker xs (insert Int $fOrdInt x s))
-[Done]
-
 HERMIT> Warning: Lemma filter-fusion was assumed but not proven.
+
 filter-fusion
   ∀ a p q ys.
-  filter a p (filter a q ys) ≡ filter a (λ y → (&&) (p y) (q y)) ysWarning: Lemma member-fusion was assumed but not proven.
+  filter a p (filter a q ys) ≡ filter a (λ y → (&&) (p y) (q y)) ys
+Warning: Lemma member-fusion was assumed but not proven.
+
 member-fusion
   ∀ a $dEq $dOrd y x s.
   (&&) ((/=) a $dEq y x) (notMember a $dOrd y s)
   ≡
-  notMember a $dOrd y (insert a $dOrd x s)Warning: Lemma nub-assumption was assumed but not proven.
+  notMember a $dOrd y (insert a $dOrd x s)
+Warning: Lemma nub-assumption was assumed but not proven.
+
 nub-assumption
   fix ([Int] → [Int])
       ((.) ([Int] → Set Int → [Int]) ([Int] → [Int]) ([Int] → [Int]) absN
@@ -506,8 +434,6 @@ nub-assumption
            [] → [] Int
            (:) x xs →
              (:) Int x (nub (filter Int (λ ds → (/=) Int $fEqInt ds x) xs)))
-[Done]
-
 Leaving GHCi.
 ghc: user interrupt
 Linking Nub ...
