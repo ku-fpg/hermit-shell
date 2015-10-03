@@ -14,6 +14,7 @@ import           Data.Aeson
 
 import           HERMIT.Core (Crumb(..))
 import           HERMIT.GHCI.JSON
+import           HERMIT.Kure  hiding ((<$>),(<*>))
 import           HERMIT.Lemma (Used(..))
 import           HERMIT.Dictionary.Navigation (Considerable(..))
 import           HERMIT.PrettyPrinter.Common (HermitMark(..), Attr(..)
@@ -61,18 +62,18 @@ instance ToJSON PrettyOptions
 instance FromJSON PrettyOptions
 
 instance ToJSON PrettyPrinter where
-    toJSON (PP _ _ opts tag) = object ["opts" .= opts, "tag" .= tag]
+    toJSON (PP _ opts tag) = object ["opts" .= opts, "tag" .= tag]
 
 instance FromJSON PrettyPrinter where
     parseJSON (Object v) =
       do opts <- v .: "opts"
          tag <- v .: "tag"
          case tag of
-           "ast"   -> return $! PP AST.ppForallQuantification AST.ppCoreTC 
+           "ast"   -> return $! PP (promoteT AST.ppCoreTC)
                                    opts tag
-           "clean" -> return $! PP Clean.ppForallQuantification Clean.ppCoreTC 
+           "clean" -> return $! PP (promoteT Clean.ppCoreTC)
                                    opts tag
-           "ghc"   -> return $! PP GHC.ppForallQuantification GHC.ppCoreTC 
+           "ghc"   -> return $! PP (promoteT GHC.ppCoreTC)
                                    opts tag
            _       -> fail "parseJSON:  Unrecognized PrettyPrinter tag."
     parseJSON _ =     fail "parseJSON:  Cannot parse PrettyPrinter object."
