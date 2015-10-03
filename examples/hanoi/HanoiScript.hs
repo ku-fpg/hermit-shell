@@ -39,8 +39,10 @@ script = do
         apply . anyCall $ unfoldRule "[] ++"
         --      any-call (unfold-rule "++ []")
         apply . anyCall $ unfoldRule "[] ++"
-        apply reflexivity
+        -- TODO: (AJG) should reflexivity look through forall's?
+        apply (anyTD reflexivity)
         proofCmd endProof
+
       scope $ do
         sendCrumb $ caseAlt 1
         apply . anyCall $ unfoldWith "f"
@@ -84,4 +86,3 @@ script = do
           apply . anyCall $ foldRemembered "origwork"
   --innermost let-elim
   apply $ innermost letSubst
-

@@ -25,8 +25,6 @@ module Main where
   fromInt ∷ Int → Nat
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 [1 of 1] Compiling HanoiScript      ( HanoiScript.hs, interpreted )
 Ok, modules loaded: HanoiScript.
 module Main where
@@ -53,24 +51,18 @@ module Main where
   fromInt ∷ Int → Nat
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 hanoi = λ ds ds ds ds →
   case ds of wild ▲
     Z → [] ▲
     S n →
       (++) ▲ (hanoi n ds ds ds)
            ((++) ▲ ((:) ▲ ((,) ▲ ▲ ds ds) ([] ▲)) (hanoi n ds ds ds))
-[Done]
-
 hanoi = λ ds ds ds ds →
   case ds of wild ▲
     Z → [] ▲
     S n →
       (++) ▲ (hanoi n ds ds ds)
            ((++) ▲ ((:) ▲ ((,) ▲ ▲ ds ds) ([] ▲)) (hanoi n ds ds ds))
-[Done]
-
 hanoi =
   let f = λ hanoi ds ds ds ds →
         case ds of wild ▲
@@ -80,8 +72,6 @@ hanoi =
                  ((++) ▲ ((:) ▲ ((,) ▲ ▲ ds ds) ([] ▲)) (hanoi n ds ds ds))
       rec work = unwrap (f (wrap work))
   in wrap work
-[Done]
-
 hanoi =
   let f = λ hanoi ds ds ds ds →
         case ds of wild ▲
@@ -91,8 +81,6 @@ hanoi =
                  ((++) ▲ ((:) ▲ ((,) ▲ ▲ ds ds) ([] ▲)) (hanoi n ds ds ds))
       rec work = unwrap (f (wrap work))
   in wrap work
-[Done]
-
 hanoi =
   let f = λ hanoi ds ds ds ds →
         case ds of wild ▲
@@ -102,11 +90,7 @@ hanoi =
                  ((++) ▲ ((:) ▲ ((,) ▲ ▲ ds ds) ([] ▲)) (hanoi n ds ds ds))
       rec work = unwrap (f (wrap work))
   in wrap work
-[Done]
-
 work = unwrap (f (wrap work))
-[Done]
-
 '"{
     \"params\": [
         {
@@ -119,37 +103,23 @@ work = unwrap (f (wrap work))
     \"method\": \"query\"
 }" [correct]
 
-[Done]
-
 work = λ n d b c →
   (,,) ▲ ▲ ▲ (f (wrap work) n d b c) (f (wrap work) n b c d)
        (f (wrap work) n c d b)
-[Done]
-
 λ n d b c →
   (,,) ▲ ▲ ▲ (f (wrap work) n d b c) (f (wrap work) n b c d)
        (f (wrap work) n c d b)
-[Done]
-
 λ d b c →
   (,,) ▲ ▲ ▲ (f (wrap work) n d b c) (f (wrap work) n b c d)
        (f (wrap work) n c d b)
-[Done]
-
 λ b c →
   (,,) ▲ ▲ ▲ (f (wrap work) n d b c) (f (wrap work) n b c d)
        (f (wrap work) n c d b)
-[Done]
-
 λ c →
   (,,) ▲ ▲ ▲ (f (wrap work) n d b c) (f (wrap work) n b c d)
        (f (wrap work) n c d b)
-[Done]
-
 (,,) ▲ ▲ ▲ (f (wrap work) n d b c) (f (wrap work) n b c d)
      (f (wrap work) n c d b)
-[Done]
-
 case n of w ▲
   Z →
     (,,) ▲ ▲ ▲ (f (wrap work) Z d b c) (f (wrap work) Z b c d)
@@ -157,8 +127,6 @@ case n of w ▲
   S a →
     (,,) ▲ ▲ ▲ (f (wrap work) (S a) d b c) (f (wrap work) (S a) b c d)
          (f (wrap work) (S a) c d b)
-[Done]
-
 case n of w ▲
   Z →
     (,,) ▲ ▲ ▲ (f (wrap work) Z d b c) (f (wrap work) Z b c d)
@@ -166,13 +134,9 @@ case n of w ▲
   S a →
     (,,) ▲ ▲ ▲ (f (wrap work) (S a) d b c) (f (wrap work) (S a) b c d)
          (f (wrap work) (S a) c d b)
-[Done]
-
 Z →
   (,,) ▲ ▲ ▲ (f (wrap work) Z d b c) (f (wrap work) Z b c d)
        (f (wrap work) Z c d b)
-[Done]
-
 Z →
   (,,) ▲ ▲ ▲
        (case Z of wild ▲
@@ -190,34 +154,22 @@ Z →
           S n →
             (++) ▲ (wrap work n c b d)
                  ((++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲)) (wrap work n b d c)))
-[Done]
-
 Z → (,,) ▲ ▲ ▲ ([] ▲) ([] ▲) ([] ▲)
-[Done]
-
 case n of w ▲
   Z → (,,) ▲ ▲ ▲ ([] ▲) ([] ▲) ([] ▲)
   S a →
     (,,) ▲ ▲ ▲ (f (wrap work) (S a) d b c) (f (wrap work) (S a) b c d)
          (f (wrap work) (S a) c d b)
-[Done]
-
 case n of w ▲
   Z → (,,) ▲ ▲ ▲ ([] ▲) ([] ▲) ([] ▲)
   S a →
     (,,) ▲ ▲ ▲ (f (wrap work) (S a) d b c) (f (wrap work) (S a) b c d)
          (f (wrap work) (S a) c d b)
-[Done]
-
 S a →
   (,,) ▲ ▲ ▲ (f (wrap work) (S a) d b c) (f (wrap work) (S a) b c d)
        (f (wrap work) (S a) c d b)
-[Done]
-
 (,,) ▲ ▲ ▲ (f (wrap work) (S a) d b c) (f (wrap work) (S a) b c d)
      (f (wrap work) (S a) c d b)
-[Done]
-
 case a of w ▲
   Z →
     (,,) ▲ ▲ ▲ (f (wrap work) (S Z) d b c) (f (wrap work) (S Z) b c d)
@@ -225,8 +177,6 @@ case a of w ▲
   S a →
     (,,) ▲ ▲ ▲ (f (wrap work) (S (S a)) d b c)
          (f (wrap work) (S (S a)) b c d) (f (wrap work) (S (S a)) c d b)
-[Done]
-
 case a of w ▲
   Z →
     (,,) ▲ ▲ ▲ (f (wrap work) (S Z) d b c) (f (wrap work) (S Z) b c d)
@@ -234,13 +184,9 @@ case a of w ▲
   S a →
     (,,) ▲ ▲ ▲ (f (wrap work) (S (S a)) d b c)
          (f (wrap work) (S (S a)) b c d) (f (wrap work) (S (S a)) c d b)
-[Done]
-
 Z →
   (,,) ▲ ▲ ▲ (f (wrap work) (S Z) d b c) (f (wrap work) (S Z) b c d)
        (f (wrap work) (S Z) c d b)
-[Done]
-
 Z →
   (,,) ▲ ▲ ▲
        (case S Z of wild ▲
@@ -258,8 +204,6 @@ Z →
           S n →
             (++) ▲ (wrap work n c b d)
                  ((++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲)) (wrap work n b d c)))
-[Done]
-
 Z →
   (,,) ▲ ▲ ▲
        ((++) ▲ (wrap work Z d c b)
@@ -268,8 +212,6 @@ Z →
              ((++) ▲ ((:) ▲ ((,) ▲ ▲ b c) ([] ▲)) (wrap work Z d c b)))
        ((++) ▲ (wrap work Z c b d)
              ((++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲)) (wrap work Z b d c)))
-[Done]
-
 Z →
   (,,) ▲ ▲ ▲
        ((++) ▲ (wrap (unwrap (f (wrap work))) Z d c b)
@@ -281,8 +223,6 @@ Z →
        ((++) ▲ (wrap (unwrap (f (wrap work))) Z c b d)
              ((++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲))
                    (wrap (unwrap (f (wrap work))) Z b d c)))
-[Done]
-
 Z →
   (,,) ▲ ▲ ▲
        ((++) ▲ (f (wrap work) Z d c b)
@@ -291,8 +231,6 @@ Z →
              ((++) ▲ ((:) ▲ ((,) ▲ ▲ b c) ([] ▲)) (f (wrap work) Z d c b)))
        ((++) ▲ (f (wrap work) Z c b d)
              ((++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲)) (f (wrap work) Z b d c)))
-[Done]
-
 Z →
   (,,) ▲ ▲ ▲
        ((++) ▲
@@ -337,38 +275,29 @@ Z →
                         (++) ▲ (wrap work n b c d)
                              ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲))
                                    (wrap work n c d b)))))
-[Done]
-
 Z →
   (,,) ▲ ▲ ▲
        ((++) ▲ ([] ▲) ((++) ▲ ((:) ▲ ((,) ▲ ▲ d b) ([] ▲)) ([] ▲)))
        ((++) ▲ ([] ▲) ((++) ▲ ((:) ▲ ((,) ▲ ▲ b c) ([] ▲)) ([] ▲)))
        ((++) ▲ ([] ▲) ((++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲)) ([] ▲)))
-[Done]
-
 Z →
   (,,) ▲ ▲ ▲ ((++) ▲ ((:) ▲ ((,) ▲ ▲ d b) ([] ▲)) ([] ▲))
        ((++) ▲ ((:) ▲ ((,) ▲ ▲ b c) ([] ▲)) ([] ▲))
        ((++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲)) ([] ▲))
-[Done]
-
 Forcing obligation: [] ++
-Goal:
-  ∀ △ l. (++) ▲ ([] ▲) l ≡ lGoal:
-  ∀ △ l. l ≡ l
-[Done]
 
+Goal:
+  ∀ △ l. (++) ▲ ([] ▲) l ≡ l
+Goal:
+  ∀ △ l. l ≡ l
 Goal:
   ∀ △ l. true
-[Done]
-
 Successfully proven: [] ++
+
 Z →
   (,,) ▲ ▲ ▲ ((++) ▲ ((:) ▲ ((,) ▲ ▲ d b) ([] ▲)) ([] ▲))
        ((++) ▲ ((:) ▲ ((,) ▲ ▲ b c) ([] ▲)) ([] ▲))
        ((++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲)) ([] ▲))
-[Done]
-
 case a of w ▲
   Z →
     (,,) ▲ ▲ ▲ ((++) ▲ ((:) ▲ ((,) ▲ ▲ d b) ([] ▲)) ([] ▲))
@@ -377,8 +306,6 @@ case a of w ▲
   S a →
     (,,) ▲ ▲ ▲ (f (wrap work) (S (S a)) d b c)
          (f (wrap work) (S (S a)) b c d) (f (wrap work) (S (S a)) c d b)
-[Done]
-
 case a of w ▲
   Z →
     (,,) ▲ ▲ ▲ ((++) ▲ ((:) ▲ ((,) ▲ ▲ d b) ([] ▲)) ([] ▲))
@@ -387,13 +314,9 @@ case a of w ▲
   S a →
     (,,) ▲ ▲ ▲ (f (wrap work) (S (S a)) d b c)
          (f (wrap work) (S (S a)) b c d) (f (wrap work) (S (S a)) c d b)
-[Done]
-
 S a →
   (,,) ▲ ▲ ▲ (f (wrap work) (S (S a)) d b c)
        (f (wrap work) (S (S a)) b c d) (f (wrap work) (S (S a)) c d b)
-[Done]
-
 S a →
   (,,) ▲ ▲ ▲
        (case S (S a) of wild ▲
@@ -411,8 +334,6 @@ S a →
           S n →
             (++) ▲ (wrap work n c b d)
                  ((++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲)) (wrap work n b d c)))
-[Done]
-
 S a →
   (,,) ▲ ▲ ▲
        (let n = S a
@@ -424,8 +345,6 @@ S a →
        (let n = S a
         in (++) ▲ (wrap work n c b d)
                 ((++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲)) (wrap work n b d c)))
-[Done]
-
 S a →
   (,,) ▲ ▲ ▲
        (let n = S a
@@ -440,8 +359,6 @@ S a →
         in (++) ▲ (wrap (unwrap (f (wrap work))) n c b d)
                 ((++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲))
                       (wrap (unwrap (f (wrap work))) n b d c)))
-[Done]
-
 S a →
   (,,) ▲ ▲ ▲
        (let n = S a
@@ -453,8 +370,6 @@ S a →
        (let n = S a
         in (++) ▲ (f (wrap work) n c b d)
                 ((++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲)) (f (wrap work) n b d c)))
-[Done]
-
 S a →
   (,,) ▲ ▲ ▲
        (let n = S a
@@ -502,8 +417,6 @@ S a →
                            (++) ▲ (wrap work n b c d)
                                 ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲))
                                       (wrap work n c d b)))))
-[Done]
-
 S a →
   (,,) ▲ ▲ ▲
        ((++) ▲
@@ -548,8 +461,6 @@ S a →
                         (++) ▲ (wrap work n b c d)
                              ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲))
                                    (wrap work n c d b)))))
-[Done]
-
 S a →
   (,,) ▲ ▲ ▲
        ((++) ▲
@@ -573,8 +484,6 @@ S a →
                    ((++) ▲ (wrap work a b c d)
                          ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲))
                                (wrap work a c d b)))))
-[Done]
-
 S a →
   (,,) ▲ ▲ ▲
        ((++) ▲
@@ -601,8 +510,6 @@ S a →
                    ((++) ▲ (wrap (unwrap (f (wrap work))) a b c d)
                          ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲))
                                (wrap (unwrap (f (wrap work))) a c d b)))))
-[Done]
-
 S a →
   (,,) ▲ ▲ ▲
        ((++) ▲
@@ -629,8 +536,6 @@ S a →
                    ((++) ▲ (f (wrap work) a b c d)
                          ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲))
                                (f (wrap work) a c d b)))))
-[Done]
-
 S a →
   (,,) ▲ ▲ ▲
        ((++) ▲
@@ -657,8 +562,6 @@ S a →
                    ((++) ▲ (f (wrap work) a b c d)
                          ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲))
                                (f (wrap work) a c d b)))))
-[Done]
-
 (,,) ▲ ▲ ▲
      ((++) ▲
            ((++) ▲ (f (wrap work) a d b c)
@@ -681,8 +584,6 @@ S a →
                  ((++) ▲ (f (wrap work) a b c d)
                        ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲))
                              (f (wrap work) a c d b)))))
-[Done]
-
 (,,) ▲ ▲ ▲
      ((++) ▲
            ((++) ▲ (f (wrap work) a d b c)
@@ -705,60 +606,34 @@ S a →
                  ((++) ▲ (f (wrap work) a b c d)
                        ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲))
                              (f (wrap work) a c d b)))))
-[Done]
-
 (++) ▲
      ((++) ▲ (f (wrap work) a c d b)
            ((++) ▲ ((:) ▲ ((,) ▲ ▲ c b) ([] ▲)) (f (wrap work) a d b c)))
      ((++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲))
            ((++) ▲ (f (wrap work) a b c d)
                  ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲)) (f (wrap work) a c d b))))
-[Done]
-
 (++) ▲
      ((++) ▲ (f (wrap work) a c d b)
            ((++) ▲ ((:) ▲ ((,) ▲ ▲ c b) ([] ▲)) (f (wrap work) a d b c)))
      ((++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲))
            ((++) ▲ (f (wrap work) a b c d)
                  ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲)) (f (wrap work) a c d b))))
-[Done]
-
 (++) ▲ (f (wrap work) a c d b)
      ((++) ▲ ((:) ▲ ((,) ▲ ▲ c b) ([] ▲)) (f (wrap work) a d b c))
-[Done]
-
 (++) ▲ (f (wrap work) a c d b)
      ((++) ▲ ((:) ▲ ((,) ▲ ▲ c b) ([] ▲)) (f (wrap work) a d b c))
-[Done]
-
 f (wrap work) a c d b
-[Done]
-
 let u = f (wrap work) a c d b in u
-[Done]
-
 (++) ▲ (let u = f (wrap work) a c d b in u)
      ((++) ▲ ((:) ▲ ((,) ▲ ▲ c b) ([] ▲)) (f (wrap work) a d b c))
-[Done]
-
 (++) ▲ (let u = f (wrap work) a c d b in u)
      ((++) ▲ ((:) ▲ ((,) ▲ ▲ c b) ([] ▲)) (f (wrap work) a d b c))
-[Done]
-
 (++) ▲ ((:) ▲ ((,) ▲ ▲ c b) ([] ▲)) (f (wrap work) a d b c)
-[Done]
-
 f (wrap work) a d b c
-[Done]
-
 let v = f (wrap work) a d b c in v
-[Done]
-
 (++) ▲ (let u = f (wrap work) a c d b in u)
      ((++) ▲ ((:) ▲ ((,) ▲ ▲ c b) ([] ▲))
            (let v = f (wrap work) a d b c in v))
-[Done]
-
 (++) ▲
      ((++) ▲ (let u = f (wrap work) a c d b in u)
            ((++) ▲ ((:) ▲ ((,) ▲ ▲ c b) ([] ▲))
@@ -766,8 +641,6 @@ let v = f (wrap work) a d b c in v
      ((++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲))
            ((++) ▲ (f (wrap work) a b c d)
                  ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲)) (f (wrap work) a c d b))))
-[Done]
-
 (++) ▲
      ((++) ▲ (let u = f (wrap work) a c d b in u)
            ((++) ▲ ((:) ▲ ((,) ▲ ▲ c b) ([] ▲))
@@ -775,23 +648,13 @@ let v = f (wrap work) a d b c in v
      ((++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲))
            ((++) ▲ (f (wrap work) a b c d)
                  ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲)) (f (wrap work) a c d b))))
-[Done]
-
 (++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲))
      ((++) ▲ (f (wrap work) a b c d)
            ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲)) (f (wrap work) a c d b)))
-[Done]
-
 (++) ▲ (f (wrap work) a b c d)
      ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲)) (f (wrap work) a c d b))
-[Done]
-
 f (wrap work) a b c d
-[Done]
-
 let w = f (wrap work) a b c d in w
-[Done]
-
 (++) ▲
      ((++) ▲ (let u = f (wrap work) a c d b in u)
            ((++) ▲ ((:) ▲ ((,) ▲ ▲ c b) ([] ▲))
@@ -799,8 +662,6 @@ let w = f (wrap work) a b c d in w
      ((++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲))
            ((++) ▲ (let w = f (wrap work) a b c d in w)
                  ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲)) (f (wrap work) a c d b))))
-[Done]
-
 (,,) ▲ ▲ ▲
      ((++) ▲
            ((++) ▲ (f (wrap work) a d b c)
@@ -824,8 +685,6 @@ let w = f (wrap work) a b c d in w
                  ((++) ▲ (let w = f (wrap work) a b c d in w)
                        ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲))
                              (f (wrap work) a c d b)))))
-[Done]
-
 let w = f (wrap work) a b c d
     v = f (wrap work) a d b c
     u = f (wrap work) a c d b
@@ -851,8 +710,6 @@ in (,,) ▲ ▲ ▲
                     ((++) ▲ w
                           ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲))
                                 (f (wrap work) a c d b)))))
-[Done]
-
 let u = f (wrap work) a c d b
     v = f (wrap work) a d b c
     w = f (wrap work) a b c d
@@ -878,8 +735,6 @@ in (,,) ▲ ▲ ▲
                     ((++) ▲ w
                           ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲))
                                 (f (wrap work) a c d b)))))
-[Done]
-
 let u = f (wrap work) a c d b
     v = f (wrap work) a d b c
     w = f (wrap work) a b c d
@@ -902,8 +757,6 @@ in (,,) ▲ ▲ ▲
         ((++) ▲ ((++) ▲ u ((++) ▲ ((:) ▲ ((,) ▲ ▲ c b) ([] ▲)) v))
               ((++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲))
                     ((++) ▲ w ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲)) u))))
-[Done]
-
 let u = f (wrap work) a c d b
     v = f (wrap work) a d b c
     w = f (wrap work) a b c d
@@ -924,8 +777,6 @@ in (,,) ▲ ▲ ▲
         ((++) ▲ ((++) ▲ u ((++) ▲ ((:) ▲ ((,) ▲ ▲ c b) ([] ▲)) v))
               ((++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲))
                     ((++) ▲ w ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲)) u))))
-[Done]
-
 case (,,) ▲ ▲ ▲ (f (wrap work) a c d b) (f (wrap work) a d b c)
           (f (wrap work) a b c d)
  of uvw ▲
@@ -947,8 +798,6 @@ case (,,) ▲ ▲ ▲ (f (wrap work) a c d b) (f (wrap work) a d b c)
          ((++) ▲ ((++) ▲ u ((++) ▲ ((:) ▲ ((,) ▲ ▲ c b) ([] ▲)) v))
                ((++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲))
                      ((++) ▲ w ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲)) u))))
-[Done]
-
 case unwrap (f (wrap work)) a c d b of uvw ▲
   (,,) u v w →
     (,,) ▲ ▲ ▲
@@ -968,8 +817,6 @@ case unwrap (f (wrap work)) a c d b of uvw ▲
          ((++) ▲ ((++) ▲ u ((++) ▲ ((:) ▲ ((,) ▲ ▲ c b) ([] ▲)) v))
                ((++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲))
                      ((++) ▲ w ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲)) u))))
-[Done]
-
 case work a c d b of uvw ▲
   (,,) u v w →
     (,,) ▲ ▲ ▲
@@ -989,8 +836,6 @@ case work a c d b of uvw ▲
          ((++) ▲ ((++) ▲ u ((++) ▲ ((:) ▲ ((,) ▲ ▲ c b) ([] ▲)) v))
                ((++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲))
                      ((++) ▲ w ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲)) u))))
-[Done]
-
 S a →
   case work a c d b of uvw ▲
     (,,) u v w →
@@ -1011,8 +856,6 @@ S a →
            ((++) ▲ ((++) ▲ u ((++) ▲ ((:) ▲ ((,) ▲ ▲ c b) ([] ▲)) v))
                  ((++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲))
                        ((++) ▲ w ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲)) u))))
-[Done]
-
 case a of w ▲
   Z →
     (,,) ▲ ▲ ▲ ((++) ▲ ((:) ▲ ((,) ▲ ▲ d b) ([] ▲)) ([] ▲))
@@ -1038,8 +881,6 @@ case a of w ▲
              ((++) ▲ ((++) ▲ u ((++) ▲ ((:) ▲ ((,) ▲ ▲ c b) ([] ▲)) v))
                    ((++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲))
                          ((++) ▲ w ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲)) u))))
-[Done]
-
 case n of w ▲
   Z → (,,) ▲ ▲ ▲ ([] ▲) ([] ▲) ([] ▲)
   S a →
@@ -1070,8 +911,6 @@ case n of w ▲
                        ((++) ▲ ((:) ▲ ((,) ▲ ▲ c d) ([] ▲))
                              ((++) ▲ w
                                    ((++) ▲ ((:) ▲ ((,) ▲ ▲ b d) ([] ▲)) u))))
-[Done]
-
 hanoi =
   let f = λ hanoi ds ds ds ds →
         case ds of wild ▲
@@ -1123,8 +962,6 @@ hanoi =
                                                           ([] ▲))
                                                      u))))
   in wrap work
-[Done]
-
 hanoi =
   let rec work = λ n d b c →
             case n of w ▲
@@ -1220,12 +1057,7 @@ hanoi =
                                                           ([] ▲))
                                                      u))))
   in wrap work
-[Done]
-
-HERMIT> 
-[Done]
-
-Leaving GHCi.
+HERMIT> Leaving GHCi.
 ghc: user interrupt
 Linking Hanoi ...
 [starting HERMIT-shell v0.1.0.0 on Hanoi.hs]
