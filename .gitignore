@@ -16,3 +16,5 @@ cabal.sandbox.config
 tests/dump/*.dump
 tests/dump/*.raw
 tags
+.\#*
+\#*
