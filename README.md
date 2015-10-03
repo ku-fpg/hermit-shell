@@ -25,3 +25,15 @@ bash% cabal test --show-details=streaming
 (Note that this runs the *installed* version, not the locally built version.)
 
 To remaster any test, just remove the golden, and re-rerun.
+
+### Runing Examples
+
+    % cabal exec bash
+    % cd examples/hanoi/
+    % hermit-shell Hanoi.hs 
+    [...]
+    HERMIT> :l HanoiScript
+    [...]
+    HERMIT> script
+    
+    
