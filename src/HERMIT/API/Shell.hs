@@ -44,6 +44,7 @@ setPath (Transform t) = Shell $ method "setPath" [t]
 
 
 -- TODO: Make sure this is the right way to do it.
+-- TODO: this is *not* composable.
 sendCrumb :: Crumb -> Shell ()
 sendCrumb (Crumb c) = Shell $ method "setPath" [c]
 

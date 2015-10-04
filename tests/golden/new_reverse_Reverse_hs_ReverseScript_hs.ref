@@ -8,9 +8,11 @@ module Main where
   repR ∷ ∀ a . ([a] → [a]) → [a] → H a
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 [1 of 1] Compiling ReverseScript    ( ReverseScript.hs, interpreted )
+
+ReverseScript.hs:66:1: Warning: Tab character
+
+ReverseScript.hs:67:1: Warning: Tab character
 Ok, modules loaded: ReverseScript.
 module Main where
   rev ∷ ∀ a . [a] → [a]
@@ -18,27 +20,20 @@ module Main where
   repR ∷ ∀ a . ([a] → [a]) → [a] → H a
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 ++ [] (Not Proven)
   ∀ △ xs. (++) ▲ xs ([] ▲) ≡ xs
-[Done]
-
 Goal:
   ∀ △ xs. (++) ▲ xs ([] ▲) ≡ xs
-[Done]
-
 Goal:
   ∀ △ xs. myAppend ▲ xs ([] ▲) ≡ xs
-[Done]
-
 Forcing obligation: appendFix
+
 Goal:
-  ∀ △. (++) ▲ ≡ myAppend ▲Successfully proven: appendFix
+  ∀ △. (++) ▲ ≡ myAppend ▲
+Successfully proven: appendFix
+
 Goal:
   ∀ △ xs. myAppend ▲ xs ([] ▲) ≡ xs
-[Done]
-
 Goal:
   ∀ △.
   (myAppend ▲ (undefined ▲) ([] ▲) ≡ undefined ▲)
@@ -49,8 +44,6 @@ Goal:
     (myAppend ▲ b ([] ▲) ≡ b)
     ⇒
     (myAppend ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)))
-[Done]
-
 Goal:
   ∀ △.
   (undefined ▲ ≡ undefined ▲)
@@ -61,8 +54,6 @@ Goal:
     (myAppend ▲ b ([] ▲) ≡ b)
     ⇒
     (myAppend ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)))
-[Done]
-
 Goal:
   ∀ △.
   (undefined ▲ ≡ undefined ▲)
@@ -73,54 +64,49 @@ Goal:
     (myAppend ▲ b ([] ▲) ≡ b)
     ⇒
     ((:) ▲ a (myAppend ▲ b ([] ▲)) ≡ (:) ▲ a b)))
-[Done]
-
 Goal:
   ∀ △ a b.
   (myAppend ▲ b ([] ▲) ≡ b)
   ⇒
   ((:) ▲ a (myAppend ▲ b ([] ▲)) ≡ (:) ▲ a b)
-[Done]
-
+Goal:
+  ∀ a b.
+  (myAppend ▲ b ([] ▲) ≡ b)
+  ⇒
+  ((:) ▲ a (myAppend ▲ b ([] ▲)) ≡ (:) ▲ a b)
+Goal:
+  ∀ b.
+  (myAppend ▲ b ([] ▲) ≡ b)
+  ⇒
+  ((:) ▲ a (myAppend ▲ b ([] ▲)) ≡ (:) ▲ a b)
 Goal:
   (myAppend ▲ b ([] ▲) ≡ b)
   ⇒
   ((:) ▲ a (myAppend ▲ b ([] ▲)) ≡ (:) ▲ a b)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   myAppend ▲ b ([] ▲) ≡ b
 Goal:
   (:) ▲ a (myAppend ▲ b ([] ▲)) ≡ (:) ▲ a b
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   myAppend ▲ b ([] ▲) ≡ b
 Goal:
   (:) ▲ a b ≡ (:) ▲ a b
-[Done]
-
 Successfully proven: ++ []
+
 module Main where
   rev ∷ ∀ a . [a] → [a]
   absR ∷ ∀ a . ([a] → H a) → [a] → [a]
   repR ∷ ∀ a . ([a] → [a]) → [a] → H a
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 myAppend-assoc (Not Proven)
   ∀ △ xs ys zs.
   myAppend ▲ (myAppend ▲ xs ys) zs ≡ myAppend ▲ xs (myAppend ▲ ys zs)
-[Done]
-
 Goal:
   ∀ △ xs ys zs.
   myAppend ▲ (myAppend ▲ xs ys) zs ≡ myAppend ▲ xs (myAppend ▲ ys zs)
-[Done]
-
 Goal:
   ∀ △ ys zs.
   (myAppend ▲ (myAppend ▲ (undefined ▲) ys) zs
@@ -137,8 +123,6 @@ Goal:
     (myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
      ≡
      myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs))))
-[Done]
-
 Goal:
   ∀ △ ys zs.
   (myAppend ▲ (myAppend ▲ (undefined ▲) ys) zs
@@ -155,8 +139,38 @@ Goal:
     (myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
      ≡
      myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs))))
-[Done]
-
+Goal:
+  ∀ ys zs.
+  (myAppend ▲ (myAppend ▲ (undefined ▲) ys) zs
+   ≡
+   myAppend ▲ (undefined ▲) (myAppend ▲ ys zs))
+  ∧
+  ((myAppend ▲ (myAppend ▲ ([] ▲) ys) zs
+    ≡
+    myAppend ▲ ([] ▲) (myAppend ▲ ys zs))
+   ∧
+   (∀ a b.
+    (myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs))
+    ⇒
+    (myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
+     ≡
+     myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs))))
+Goal:
+  ∀ zs.
+  (myAppend ▲ (myAppend ▲ (undefined ▲) ys) zs
+   ≡
+   myAppend ▲ (undefined ▲) (myAppend ▲ ys zs))
+  ∧
+  ((myAppend ▲ (myAppend ▲ ([] ▲) ys) zs
+    ≡
+    myAppend ▲ ([] ▲) (myAppend ▲ ys zs))
+   ∧
+   (∀ a b.
+    (myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs))
+    ⇒
+    (myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
+     ≡
+     myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs))))
 Goal:
   (myAppend ▲ (myAppend ▲ (undefined ▲) ys) zs
    ≡
@@ -172,8 +186,6 @@ Goal:
     (myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
      ≡
      myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs))))
-[Done]
-
 Goal:
   (myAppend ▲ (myAppend ▲ (undefined ▲) ys) zs
    ≡
@@ -189,22 +201,14 @@ Goal:
     (myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
      ≡
      myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs))))
-[Done]
-
 Goal:
   myAppend ▲ (myAppend ▲ (undefined ▲) ys) zs
   ≡
   myAppend ▲ (undefined ▲) (myAppend ▲ ys zs)
-[Done]
-
 Goal:
   undefined ▲ ≡ undefined ▲
-[Done]
-
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -218,8 +222,6 @@ Goal:
     (myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
      ≡
      myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs))))
-[Done]
-
 Goal:
   (myAppend ▲ (myAppend ▲ ([] ▲) ys) zs
    ≡
@@ -231,8 +233,6 @@ Goal:
    (myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
     ≡
     myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs)))
-[Done]
-
 Goal:
   (myAppend ▲ (myAppend ▲ ([] ▲) ys) zs
    ≡
@@ -244,22 +244,14 @@ Goal:
    (myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
     ≡
     myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs)))
-[Done]
-
 Goal:
   myAppend ▲ (myAppend ▲ ([] ▲) ys) zs
   ≡
   myAppend ▲ ([] ▲) (myAppend ▲ ys zs)
-[Done]
-
 Goal:
   myAppend ▲ ys zs ≡ myAppend ▲ ys zs
-[Done]
-
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -269,8 +261,6 @@ Goal:
    (myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
     ≡
     myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs)))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -280,8 +270,6 @@ Goal:
    (myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
     ≡
     myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs)))
-[Done]
-
 Goal:
   ∀ a b.
   (myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs))
@@ -289,16 +277,19 @@ Goal:
   (myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
    ≡
    myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs))
-[Done]
-
+Goal:
+  ∀ b.
+  (myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs))
+  ⇒
+  (myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
+   ≡
+   myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs))
 Goal:
   (myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs))
   ⇒
   (myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
    ≡
    myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs))
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs)
@@ -306,8 +297,6 @@ Goal:
   myAppend ▲ (myAppend ▲ ((:) ▲ a b) ys) zs
   ≡
   myAppend ▲ ((:) ▲ a b) (myAppend ▲ ys zs)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs)
@@ -340,8 +329,6 @@ Goal:
                                                           (myAppend ▲ xs ys)) ▲
                                                                               ys
                                                                               zs)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs)
@@ -353,8 +340,6 @@ Goal:
                 (case ys of wild ▲
                    [] → zs
                    (:) x xs → (:) ▲ x (myAppend ▲ xs zs)))
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs)
@@ -362,8 +347,6 @@ Goal:
   (:) ▲ a (myAppend ▲ (myAppend ▲ b ys) zs)
   ≡
   (:) ▲ a (myAppend ▲ b (myAppend ▲ ys zs))
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs)
@@ -371,15 +354,11 @@ Goal:
   (:) ▲ a (myAppend ▲ b (myAppend ▲ ys zs))
   ≡
   (:) ▲ a (myAppend ▲ b (myAppend ▲ ys zs))
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs)
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -387,8 +366,6 @@ Goal:
    (myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs))
    ⇒
    (true))
-[Done]
-
 Goal:
   ∀ △ ys zs.
   (true)
@@ -399,37 +376,24 @@ Goal:
     (myAppend ▲ (myAppend ▲ b ys) zs ≡ myAppend ▲ b (myAppend ▲ ys zs))
     ⇒
     (true)))
-[Done]
-
 Successfully proven: myAppend-assoc
+
 module Main where
   rev ∷ ∀ a . [a] → [a]
   absR ∷ ∀ a . ([a] → H a) → [a] → [a]
   repR ∷ ∀ a . ([a] → [a]) → [a] → H a
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 repH [] (Not Proven)
   ∀ △. repH ▲ ([] ▲) ≡ id ▲
-[Done]
-
 Goal:
   ∀ △. repH ▲ ([] ▲) ≡ id ▲
-[Done]
-
 Goal:
   ∀ △. (++) ▲ ([] ▲) ≡ id ▲
-[Done]
-
 Goal:
   ∀ △ x. (++) ▲ ([] ▲) x ≡ id ▲ x
-[Done]
-
 Goal:
   ∀ △ x. myAppend ▲ ([] ▲) x ≡ id ▲ x
-[Done]
-
 Goal:
   ∀ △ x.
   case [] ▲ of wild ▲
@@ -437,151 +401,103 @@ Goal:
     (:) x xs → (:) ▲ x (myAppend ▲ xs x)
   ≡
   id ▲ x
-[Done]
-
 Goal:
   ∀ △ x. x ≡ x
-[Done]
-
 Successfully proven: repH []
+
 module Main where
   rev ∷ ∀ a . [a] → [a]
   absR ∷ ∀ a . ([a] → H a) → [a] → [a]
   repR ∷ ∀ a . ([a] → [a]) → [a] → H a
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 repH (:) (Not Proven)
   ∀ △ x xs. repH ▲ ((:) ▲ x xs) ≡ (.) ▲ ▲ ▲ ((:) ▲ x) (repH ▲ xs)
-[Done]
-
 Goal:
   ∀ △ x xs. repH ▲ ((:) ▲ x xs) ≡ (.) ▲ ▲ ▲ ((:) ▲ x) (repH ▲ xs)
-[Done]
-
 Goal:
   ∀ △ x xs. (++) ▲ ((:) ▲ x xs) ≡ (.) ▲ ▲ ▲ ((:) ▲ x) ((++) ▲ xs)
-[Done]
-
 Goal:
   ∀ △ x xs.
   myAppend ▲ ((:) ▲ x xs) ≡ (.) ▲ ▲ ▲ ((:) ▲ x) (myAppend ▲ xs)
-[Done]
-
 Goal:
   ∀ △ x xs. myAppend ▲ ((:) ▲ x xs) ≡ λ x → (:) ▲ x (myAppend ▲ xs x)
-[Done]
-
 Goal:
   ∀ △ x xs.
   λ ys → (:) ▲ x (myAppend ▲ xs ys) ≡ λ x → (:) ▲ x (myAppend ▲ xs x)
-[Done]
-
 Successfully proven: repH (:)
+
 module Main where
   rev ∷ ∀ a . [a] → [a]
   absR ∷ ∀ a . ([a] → H a) → [a] → [a]
   repR ∷ ∀ a . ([a] → [a]) → [a] → H a
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 repH ++ (Not Proven)
   ∀ △ xs ys.
   repH ▲ ((++) ▲ xs ys) ≡ (.) ▲ ▲ ▲ (repH ▲ xs) (repH ▲ ys)
-[Done]
-
 Goal:
   ∀ △ xs ys.
   repH ▲ ((++) ▲ xs ys) ≡ (.) ▲ ▲ ▲ (repH ▲ xs) (repH ▲ ys)
-[Done]
-
 Goal:
   ∀ △ xs ys.
   (++) ▲ ((++) ▲ xs ys) ≡ (.) ▲ ▲ ▲ ((++) ▲ xs) ((++) ▲ ys)
-[Done]
-
 Goal:
   ∀ △ xs ys.
   myAppend ▲ (myAppend ▲ xs ys)
   ≡
   (.) ▲ ▲ ▲ (myAppend ▲ xs) (myAppend ▲ ys)
-[Done]
-
 Goal:
   ∀ △ xs ys.
   λ x → myAppend ▲ (myAppend ▲ xs ys) x
   ≡
   (.) ▲ ▲ ▲ (myAppend ▲ xs) (myAppend ▲ ys)
-[Done]
-
 Goal:
   ∀ △ xs ys.
   λ x → myAppend ▲ (myAppend ▲ xs ys) x
   ≡
   λ x → myAppend ▲ xs (myAppend ▲ ys x)
-[Done]
-
 Goal:
   ∀ △ xs ys zs.
   (λ x → myAppend ▲ (myAppend ▲ xs ys) x) zs
   ≡
   (λ x → myAppend ▲ xs (myAppend ▲ ys x)) zs
-[Done]
-
 Goal:
   ∀ △ xs ys zs.
   myAppend ▲ (myAppend ▲ xs ys) zs ≡ myAppend ▲ xs (myAppend ▲ ys zs)
-[Done]
-
 Goal:
   ∀ △ xs ys zs.
   myAppend ▲ (myAppend ▲ xs ys) zs ≡ myAppend ▲ xs (myAppend ▲ ys zs)
-[Done]
-
 Goal:
+  ∀ xs ys zs.
   myAppend ▲ (myAppend ▲ xs ys) zs ≡ myAppend ▲ xs (myAppend ▲ ys zs)
-[Done]
-
 Goal:
   true
-[Done]
-
 Goal:
-  ∀ △ xs ys zs. true
-[Done]
-
+  ∀ △. true
 Successfully proven: repH ++
+
 module Main where
   rev ∷ ∀ a . [a] → [a]
   absR ∷ ∀ a . ([a] → H a) → [a] → [a]
   repR ∷ ∀ a . ([a] → [a]) → [a] → H a
   main ∷ IO ()
   main ∷ IO ()
-[Done]
-
 rev = λ △ ds →
   case ds of wild ▲
     [] → [] ▲
     (:) x xs → (++) ▲ (rev ▲ xs) ((:) ▲ x ([] ▲))
-[Done]
-
 rev = λ △ →
   fix ▲
       (λ rev ds →
          case ds of wild ▲
            [] → [] ▲
            (:) x xs → (++) ▲ (rev xs) ((:) ▲ x ([] ▲)))
-[Done]
-
 fix ▲
     (λ rev ds →
        case ds of wild ▲
          [] → [] ▲
          (:) x xs → (++) ▲ (rev xs) ((:) ▲ x ([] ▲)))
-[Done]
-
 let g =
       (.) ▲ ▲ ▲ (repR ▲)
           ((.) ▲ ▲ ▲
@@ -592,9 +508,8 @@ let g =
                (absR ▲))
     worker = fix ▲ g
 in absR ▲ worker
-[Done]
-
 Forcing obligation: rev-assumption
+
 Goal:
   fix ▲
       ((.) ▲ ▲ ▲ (absR ▲)
@@ -608,7 +523,8 @@ Goal:
       (λ rev ds →
          case ds of wild ▲
            [] → [] ▲
-           (:) x xs → (++) ▲ (rev xs) ((:) ▲ x ([] ▲)))Goal:
+           (:) x xs → (++) ▲ (rev xs) ((:) ▲ x ([] ▲)))
+Goal:
   let rec x =
             absR ▲
                  (repR ▲
@@ -623,8 +539,6 @@ Goal:
               [] → [] ▲
               (:) x xs → (++) ▲ (x xs) ((:) ▲ x ([] ▲))
   in x
-[Done]
-
 Goal:
   let rec x = λ x →
             (++) ▲
@@ -639,8 +553,6 @@ Goal:
               [] → [] ▲
               (:) x xs → (++) ▲ (x xs) ((:) ▲ x ([] ▲))
   in x
-[Done]
-
 Goal:
   let rec x = λ x →
             case x of wild ▲
@@ -653,9 +565,8 @@ Goal:
               [] → [] ▲
               (:) x xs → (++) ▲ (x xs) ((:) ▲ x ([] ▲))
   in x
-[Done]
-
 Successfully proven: rev-assumption
+
 let g =
       (.) ▲ ▲ ▲ (repR ▲)
           ((.) ▲ ▲ ▲
@@ -666,8 +577,6 @@ let g =
                (absR ▲))
     worker = fix ▲ g
 in absR ▲ worker
-[Done]
-
 let g =
       (.) ▲ ▲ ▲ (λ eta → (λ f → (.) ▲ ▲ ▲ (repH ▲) f) eta)
           ((.) ▲ ▲ ▲
@@ -678,8 +587,6 @@ let g =
                (λ eta → (λ g → (.) ▲ ▲ ▲ (absH ▲) g) eta))
     worker = fix ▲ g
 in (λ g → (.) ▲ ▲ ▲ (absH ▲) g) worker
-[Done]
-
 let g = λ x →
       (λ eta → (λ f x → repH ▲ (f x)) eta) ((λ x →
                                                (λ rev ds →
@@ -694,8 +601,6 @@ let g = λ x →
                                                                                      (g x)) eta) x)) x)
     worker = fix ▲ g
 in (λ g x → absH ▲ (g x)) worker
-[Done]
-
 λ x →
   absH ▲
        (fix ▲
@@ -705,8 +610,6 @@ in (λ g x → absH ▲ (g x)) worker
                        [] → [] ▲
                        (:) x xs → (++) ▲ (absH ▲ (x xs)) ((:) ▲ x ([] ▲))))
             x)
-[Done]
-
 λ x →
   absH ▲
        (fix ▲
@@ -715,18 +618,14 @@ in (λ g x → absH ▲ (g x)) worker
                  [] → repH ▲ ([] ▲)
                  (:) x xs → repH ▲ ((++) ▲ (absH ▲ (x xs)) ((:) ▲ x ([] ▲))))
             x)
-[Done]
-
 Forcing obligation: repHstrict
-Goal:
-  ∀ △. repH ▲ (undefined ▲) ≡ undefined ▲Goal:
-  ∀ △. (++) ▲ (undefined ▲) ≡ undefined ▲
-[Done]
 
+Goal:
+  ∀ △. repH ▲ (undefined ▲) ≡ undefined ▲
+Goal:
+  ∀ △. (++) ▲ (undefined ▲) ≡ undefined ▲
 Goal:
   ∀ △. myAppend ▲ (undefined ▲) ≡ undefined ▲
-[Done]
-
 Goal:
   ∀ △.
   λ ys →
@@ -735,13 +634,10 @@ Goal:
       (:) x xs → (:) ▲ x (myAppend ▲ xs ys)
   ≡
   undefined ▲
-[Done]
-
 Goal:
   ∀ △. undefined ▲ ≡ undefined ▲
-[Done]
-
 Successfully proven: repHstrict
+
 λ x →
   absH ▲
        (fix ▲
@@ -750,8 +646,6 @@ Successfully proven: repHstrict
                  [] → repH ▲ ([] ▲)
                  (:) x xs → repH ▲ ((++) ▲ (absH ▲ (x xs)) ((:) ▲ x ([] ▲))))
             x)
-[Done]
-
 λ x →
   absH ▲
        (fix ▲
@@ -761,8 +655,6 @@ Successfully proven: repHstrict
                  (:) x xs →
                    (.) ▲ ▲ ▲ (repH ▲ (absH ▲ (x xs))) (repH ▲ ((:) ▲ x ([] ▲))))
             x)
-[Done]
-
 λ x →
   absH ▲
        (fix ▲
@@ -772,8 +664,6 @@ Successfully proven: repHstrict
                  (:) x xs →
                    λ x → repH ▲ (absH ▲ (x xs)) (repH ▲ ((:) ▲ x ([] ▲)) x))
             x)
-[Done]
-
 λ x →
   absH ▲
        (fix ▲
@@ -782,11 +672,12 @@ Successfully proven: repHstrict
                  [] → repH ▲ ([] ▲)
                  (:) x xs → λ x → x xs (repH ▲ ((:) ▲ x ([] ▲)) x))
             x)
-[Done]
-
 Forcing obligation: repH-absH-fusion
+
 Goal:
-  ∀ △ h. repH ▲ (absH ▲ h) ≡ hSuccessfully proven: repH-absH-fusion
+  ∀ △ h. repH ▲ (absH ▲ h) ≡ h
+Successfully proven: repH-absH-fusion
+
 λ x →
   absH ▲
        (fix ▲
@@ -795,8 +686,6 @@ Goal:
                  [] → repH ▲ ([] ▲)
                  (:) x xs → λ x → x xs (repH ▲ ((:) ▲ x ([] ▲)) x))
             x)
-[Done]
-
 λ x →
   absH ▲
        (fix ▲
@@ -805,8 +694,6 @@ Goal:
                  [] → repH ▲ ([] ▲)
                  (:) x xs → λ x → x xs ((.) ▲ ▲ ▲ ((:) ▲ x) (repH ▲ ([] ▲)) x))
             x)
-[Done]
-
 λ x →
   absH ▲
        (fix ▲
@@ -815,8 +702,6 @@ Goal:
                  [] → id ▲
                  (:) x xs → λ x → x xs ((.) ▲ ▲ ▲ ((:) ▲ x) (id ▲) x))
             x)
-[Done]
-
 λ x →
   absH ▲
        ((let rec x =
@@ -825,8 +710,6 @@ Goal:
                         [] → id ▲
                         (:) x xs → λ x → x xs ((.) ▲ ▲ ▲ ((:) ▲ x) (id ▲) x)) x
          in x) x)
-[Done]
-
 λ x →
   (let rec x =
              (λ x x →
@@ -834,29 +717,24 @@ Goal:
                   [] → id ▲
                   (:) x xs → λ x → x xs ((.) ▲ ▲ ▲ ((:) ▲ x) (id ▲) x)) x
    in x) x ([] ▲)
-[Done]
-
 let rec x = λ x →
           case x of wild ▲
             [] → id ▲
             (:) x xs → λ x → x xs ((:) ▲ x x)
 in λ x → x x ([] ▲)
-[Done]
-
 let rec x = λ x0 →
           case x0 of wild ▲
             [] → id ▲
             (:) x1 xs → λ x2 → x xs ((:) ▲ x1 x2)
 in λ x0 → x x0 ([] ▲)
-[Done]
-
 HERMIT> Warning: Lemma appendFix was assumed but not proven.
+
 appendFix
-  ∀ △. (++) ▲ ≡ myAppend ▲Warning: Lemma repH-absH-fusion was assumed but not proven.
+  ∀ △. (++) ▲ ≡ myAppend ▲
+Warning: Lemma repH-absH-fusion was assumed but not proven.
+
 repH-absH-fusion
   ∀ △ h. repH ▲ (absH ▲ h) ≡ h
-[Done]
-
 Leaving GHCi.
 ghc: user interrupt
 Linking Reverse ...

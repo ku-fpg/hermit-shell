@@ -38,7 +38,9 @@ script = do
   apply $ anyBU (unfoldWith "myAppend" >>> undefinedExpr)
   apply $ anyBU (unfoldWith "myAppend" >>> caseReduce)
   apply simplifyLemma
-  sendCrumb forallBody ; sendCrumb consequent
+  -- TODO: (AJG) This needs generalized
+  sendCrumb forallBody ; sendCrumb forallBody ; sendCrumb forallBody
+  sendCrumb consequent
   apply $ oneTD (lemmaForward "ind-hyp-0")
   proofCmd endCase
 
@@ -46,6 +48,8 @@ script = do
   shellEffect $ proveLemma "myAppend-assoc"
   apply $ induction "xs"
   scope $ do sendCrumb forallBody
+             sendCrumb forallBody
+             sendCrumb forallBody
 
              scope $ do sendCrumb conjLhs
                         apply $ anyBU ((unfoldWith "myAppend") >>> undefinedCase)
@@ -58,13 +62,16 @@ script = do
                         apply reflexivity
 
              scope $ do sendCrumb conjRhs
-                        sendCrumb forallBody ; sendCrumb consequent
+                        sendCrumb forallBody
+                        sendCrumb forallBody
+                        sendCrumb consequent
                         apply $ anyBU (unfoldWith "myAppend")
                         apply smash
                         apply $ rhsR (oneTD (fold "myAppend"))
                         apply (oneTD (lemmaForward "ind-hyp-0"))
                         apply reflexivity
   proofCmd endProof
+
 
   eval "rule-to-lemma \"repH []\""
 
