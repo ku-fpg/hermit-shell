@@ -10,18 +10,12 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
 [1 of 1] Compiling VerifyAppendNilScript ( VerifyAppendNilScript.hs, interpreted )
 Ok, modules loaded: VerifyAppendNilScript.
 append-nil (Not Proven)
   ∀ △ xs. (++) ▲ xs ([] ▲) ≡ xs
-[Done]
-
 Goal:
   ∀ △ xs. (++) ▲ xs ([] ▲) ≡ xs
-[Done]
-
 Goal:
   ∀ △.
   ((++) ▲ (undefined ▲) ([] ▲) ≡ undefined ▲)
@@ -30,8 +24,6 @@ Goal:
    ∧
    (∀ a b.
     ((++) ▲ b ([] ▲) ≡ b) ⇒ ((++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)))
-[Done]
-
 Goal:
   ∀ △.
   ((++) ▲ (undefined ▲) ([] ▲) ≡ undefined ▲)
@@ -40,8 +32,6 @@ Goal:
    ∧
    (∀ a b.
     ((++) ▲ b ([] ▲) ≡ b) ⇒ ((++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)))
-[Done]
-
 Goal:
   ((++) ▲ (undefined ▲) ([] ▲) ≡ undefined ▲)
   ∧
@@ -49,8 +39,6 @@ Goal:
    ∧
    (∀ a b.
     ((++) ▲ b ([] ▲) ≡ b) ⇒ ((++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -58,8 +46,6 @@ Goal:
    ∧
    (∀ a b.
     ((++) ▲ b ([] ▲) ≡ b) ⇒ ((++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -67,22 +53,17 @@ Goal:
    ∧
    (∀ a b.
     ((++) ▲ b ([] ▲) ≡ b) ⇒ ((++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)))
-[Done]
-
 Goal:
   (true)
   ∧
   ((true) ∧ (∀ a b. ((++) ▲ b ([] ▲) ≡ b) ⇒ ((:) ▲ a b ≡ (:) ▲ a b)))
-[Done]
-
 Goal:
   ∀ △.
   (true)
   ∧
   ((true) ∧ (∀ a b. ((++) ▲ b ([] ▲) ≡ b) ⇒ ((:) ▲ a b ≡ (:) ▲ a b)))
-[Done]
-
 Successfully proven: append-nil
+
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]
@@ -92,12 +73,7 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
-HERMIT> 
-[Done]
-
-Leaving GHCi.
+HERMIT> Leaving GHCi.
 ghc: user interrupt
 [starting HERMIT-shell v0.1.0.0 on ListLaws.hs]
 [starting HERMIT v1.0.0.0 on ListLaws.hs]

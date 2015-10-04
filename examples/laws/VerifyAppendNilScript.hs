@@ -38,8 +38,7 @@ appendNil = do
     pathS [forallBody] $ do
       apply $ pathR [conjLhs]                                  appendNilUndefined
       apply $ pathR [conjRhs, conjLhs]                         appendNilNil
-
-      apply $ pathR [conjRhs, conjRhs, forallBody, consequent] appendNilCons
+      apply $ pathR [conjRhs, conjRhs, forallBody, forallBody, consequent] appendNilCons
 
 script :: Shell ()
 script = appendNil
