@@ -59,6 +59,7 @@ send (Shell g) = do
          ShellResult gss a -> 
              do mapM printResponse gss
                 return a
+send (Local m) = m
 send (Fail str) = fail str
 
 genMethodStr :: Bool -> Value -> String

@@ -11,6 +11,7 @@ module HERMIT.API.Types where
 
 import Control.Applicative
 import Control.Monad
+import Control.Monad.IO.Class
 
 import Data.Aeson
 import Data.Aeson.Types
@@ -30,6 +31,7 @@ import Data.Coerce
 
 data Shell :: * -> * where
   Shell  :: FromJSON a => Value -> Shell a
+  Local  :: IO a -> Shell a
   Bind   :: Shell a -> (a -> Shell b) -> Shell b
   Return :: a -> Shell a
   Fail   :: String -> Shell a
@@ -44,6 +46,10 @@ instance Applicative Shell where
 instance Monad Shell where
   return = Return
   (>>=)  = Bind
+  fail   = Fail
+
+instance MonadIO Shell where 
+   liftIO = Local    
 
 ------------------------------------------------------------------------
 
