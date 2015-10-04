@@ -21,7 +21,13 @@ Goal:
 Goal:
   ∀ △ f a as. map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
 Goal:
-  ∀ △ f a as.
+  ∀ f a as. map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
+Goal:
+  ∀ a as. map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
+Goal:
+  ∀ as. map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
+Goal:
+  ∀ as.
   case (:) ▲ a as of wild ▲
     [] → [] ▲
     (:) a as → (:) ▲ (f a) (map ▲ ▲ f as)
@@ -30,7 +36,7 @@ Goal:
 Goal:
   true
 Goal:
-  ∀ △. true
+  ∀ △ △ f a. true
 Successfully proven: map-nonempty
 
 module ListLaws where
