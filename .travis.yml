@@ -19,9 +19,8 @@ install:
  - echo "$(ghc --version) [$(ghc --print-project-git-commit-id 2> /dev/null || echo '?')]"
  - travis_retry cabal update
  - git clone https://github.com/ku-fpg/remote-json.git
- - git clone https://github.com/ku-fpg/kure.git
  - git clone https://github.com/ku-fpg/hermit.git
- - cabal install -j --reinstall remote-json/ kure/ hermit/ 
+ - cabal install -j --reinstall remote-json/ hermit/ 
  - cabal install -j --only-dependencies --enable-tests 
 
 script:
