@@ -8,6 +8,10 @@ boot::
 
 hermit::
 	cabal install  --only-dependencies      --force-reinstalls 
+	cabal configure --enable-tests
+
+build::
+	cabal build
 
 tests::
 	cabal test --show-details=streaming
