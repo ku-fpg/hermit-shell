@@ -1,0 +1,3 @@
+# Use this to mark that you need the latest HERMIT repo, by using the md5 key of the last checkin.
+# This does nothing, except force a rebuild when checked in. 
+c65499301b1f822d072c7605f85107084bc39df6
