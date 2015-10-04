@@ -983,7 +983,6 @@ Goal:
     (concat ▲ (concat ▲ ((:) ▲ a b))
      ≡
      concat ▲ (map ▲ ▲ (concat ▲) ((:) ▲ a b)))))
-"starting here"
 Goal:
   ∀ △.
   (concat ▲ (concat ▲ (undefined ▲))
@@ -1107,7 +1106,6 @@ Goal:
     (concat ▲ (concat ▲ ((:) ▲ a b))
      ≡
      concat ▲ (map ▲ ▲ (concat ▲) ((:) ▲ a b)))))
-"here"
 Goal:
   (true)
   ∧
@@ -1939,7 +1937,6 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-"got here"
 monad-assoc (Not Proven)
   ∀ △ △ △ m f g.
   bind ▲ ▲ (bind ▲ ▲ m f) g ≡ bind ▲ ▲ m (λ x → bind ▲ ▲ (f x) g)
@@ -1966,12 +1963,10 @@ Goal:
   bind ▲ ▲ (bind ▲ ▲ m f) g ≡ bind ▲ ▲ m (λ x → bind ▲ ▲ (f x) g)
 Goal:
   bind ▲ ▲ (bind ▲ ▲ m f) g ≡ bind ▲ ▲ m (λ x → bind ▲ ▲ (f x) g)
-"got here as well"
 Goal:
   concat ▲ (map ▲ ▲ (concat ▲) (map ▲ ▲ (map ▲ ▲ g) (map ▲ ▲ f m)))
   ≡
   bind ▲ ▲ m (λ x → bind ▲ ▲ (f x) g)
-"not here?"
 Goal:
   concat ▲ (map ▲ ▲ (concat ▲) (map ▲ ▲ (map ▲ ▲ g) (map ▲ ▲ f m)))
   ≡
