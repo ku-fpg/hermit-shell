@@ -50,7 +50,8 @@ send (Shell g) = do
        v <- JSONRPC.send session $ JSONRPC.method "send" $ List [g]
        case fromJust $ parseMaybe parseJSON v of
          -- Normal shell behavior; something like variable not found
-         ShellException msg ->
+         ShellException msg -> do
+             print g
              error $ "server failure: " ++ show v ++ " : " ++ msg
          -- Internal Failure; bad news
          ShellFailure msg ->
