@@ -46,7 +46,7 @@ mapAppend = do
   proof "map-append" $ do
     apply $ induction "x"
 
-    pathS [forallBody] $ do
+    pathS [forallBody,forallBody,forallBody,forallBody] $ do
         -- undefined case
       pathS [conjLhs] $ do
         apply . anyBU $ inlineWith "map"
@@ -60,7 +60,7 @@ mapAppend = do
         apply reflexivity
 
         -- cons case
-      pathS [conjRhs, conjRhs, forallBody, consequent] $ do
+      pathS [conjRhs, conjRhs, forallBody, forallBody, consequent] $ do
         apply . lhsR $ consLeft
         apply reflexivity
 

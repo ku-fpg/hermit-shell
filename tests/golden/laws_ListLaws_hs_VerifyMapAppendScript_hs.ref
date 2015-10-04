@@ -10,8 +10,6 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
 [1 of 3] Compiling VerifyMapNonemptyScript ( VerifyMapNonemptyScript.hs, interpreted )
 [2 of 3] Compiling VerifyAppendNonemptyScript ( VerifyAppendNonemptyScript.hs, interpreted )
 [3 of 3] Compiling VerifyMapAppendScript ( VerifyMapAppendScript.hs, interpreted )
@@ -19,55 +17,40 @@ Ok, modules loaded: VerifyMapAppendScript, VerifyAppendNonemptyScript, VerifyMap
 map-append (Not Proven)
   ∀ △ △ f x y.
   map ▲ ▲ f ((++) ▲ x y) ≡ (++) ▲ (map ▲ ▲ f x) (map ▲ ▲ f y)
-[Done]
-
 append-nonempty (Not Proven)
   ∀ △ x1 xs ys. (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
-[Done]
-
 Goal:
   ∀ △ x1 xs ys. (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
-[Done]
-
 Goal:
   ∀ △ x1 xs ys. (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
-[Done]
-
+Goal:
+  ∀ x1 xs ys. (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
+Goal:
+  ∀ xs ys. (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
+Goal:
+  ∀ ys. (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
 Goal:
   (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
-[Done]
-
 Goal:
   (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
-[Done]
-
 Goal:
   (++) ▲ ((:) ▲ x1 xs) ys
-[Done]
-
 Goal:
   case (:) ▲ x1 xs of wild ▲
     [] → ys
     (:) x xs → (:) ▲ x ((++) ▲ xs ys)
-[Done]
-
 Goal:
   (:) ▲ x1 ((++) ▲ xs ys)
   ≡
   case (:) ▲ x1 xs of wild ▲
     [] → ys
     (:) x xs → (:) ▲ x ((++) ▲ xs ys)
-[Done]
-
 Goal:
   true
-[Done]
-
 Goal:
   ∀ △ x1 xs ys. true
-[Done]
-
 Successfully proven: append-nonempty
+
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]
@@ -77,41 +60,33 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
 map-nonempty (Not Proven)
   ∀ △ △ f a as. map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
-[Done]
-
 Goal:
   ∀ △ △ f a as. map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
-[Done]
-
 Goal:
   ∀ △ △ f a as. map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
-[Done]
-
 Goal:
-  map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
-[Done]
-
+  ∀ △ f a as. map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
 Goal:
+  ∀ f a as. map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
+Goal:
+  ∀ a as. map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
+Goal:
+  ∀ as. map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
+Goal:
+  ∀ as.
   case (:) ▲ a as of wild ▲
     [] → [] ▲
     (:) a as → (:) ▲ (f a) (map ▲ ▲ f as)
   ≡
   (:) ▲ (f a) (map ▲ ▲ f as)
-[Done]
-
 Goal:
   true
-[Done]
-
 Goal:
-  ∀ △ △ f a as. true
-[Done]
-
+  ∀ △ △ f a. true
 Successfully proven: map-nonempty
+
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]
@@ -121,13 +96,9 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
 Goal:
   ∀ △ △ f x y.
   map ▲ ▲ f ((++) ▲ x y) ≡ (++) ▲ (map ▲ ▲ f x) (map ▲ ▲ f y)
-[Done]
-
 Goal:
   ∀ △ △ f y.
   (map ▲ ▲ f ((++) ▲ (undefined ▲) y)
@@ -144,8 +115,6 @@ Goal:
     (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
      ≡
      (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
-[Done]
-
 Goal:
   ∀ △ △ f y.
   (map ▲ ▲ f ((++) ▲ (undefined ▲) y)
@@ -162,8 +131,54 @@ Goal:
     (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
      ≡
      (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
-[Done]
-
+Goal:
+  ∀ △ f y.
+  (map ▲ ▲ f ((++) ▲ (undefined ▲) y)
+   ≡
+   (++) ▲ (map ▲ ▲ f (undefined ▲)) (map ▲ ▲ f y))
+  ∧
+  ((map ▲ ▲ f ((++) ▲ ([] ▲) y)
+    ≡
+    (++) ▲ (map ▲ ▲ f ([] ▲)) (map ▲ ▲ f y))
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
+    ⇒
+    (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
+     ≡
+     (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
+Goal:
+  ∀ f y.
+  (map ▲ ▲ f ((++) ▲ (undefined ▲) y)
+   ≡
+   (++) ▲ (map ▲ ▲ f (undefined ▲)) (map ▲ ▲ f y))
+  ∧
+  ((map ▲ ▲ f ((++) ▲ ([] ▲) y)
+    ≡
+    (++) ▲ (map ▲ ▲ f ([] ▲)) (map ▲ ▲ f y))
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
+    ⇒
+    (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
+     ≡
+     (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
+Goal:
+  ∀ y.
+  (map ▲ ▲ f ((++) ▲ (undefined ▲) y)
+   ≡
+   (++) ▲ (map ▲ ▲ f (undefined ▲)) (map ▲ ▲ f y))
+  ∧
+  ((map ▲ ▲ f ((++) ▲ ([] ▲) y)
+    ≡
+    (++) ▲ (map ▲ ▲ f ([] ▲)) (map ▲ ▲ f y))
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
+    ⇒
+    (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
+     ≡
+     (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
 Goal:
   (map ▲ ▲ f ((++) ▲ (undefined ▲) y)
    ≡
@@ -179,8 +194,6 @@ Goal:
     (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
      ≡
      (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
-[Done]
-
 Goal:
   (map ▲ ▲ f ((++) ▲ (undefined ▲) y)
    ≡
@@ -196,14 +209,10 @@ Goal:
     (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
      ≡
      (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
-[Done]
-
 Goal:
   map ▲ ▲ f ((++) ▲ (undefined ▲) y)
   ≡
   (++) ▲ (map ▲ ▲ f (undefined ▲)) (map ▲ ▲ f y)
-[Done]
-
 Goal:
   (λ △ △ ds ds →
      case ds of wild ▲
@@ -220,8 +229,6 @@ Goal:
            case ds of wild ▲
              [] → [] ▲
              (:) a as → (:) ▲ (ds a) (map ▲ ▲ ds as)) ▲ ▲ f y)
-[Done]
-
 Goal:
   (λ △ △ ds ds →
      case ds of wild ▲
@@ -253,12 +260,8 @@ Goal:
                                                 (:) a as →
                                                   (:) ▲ (ds a)
                                                       (map ▲ ▲ ds as)) ▲ ▲ f y)
-[Done]
-
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -272,8 +275,6 @@ Goal:
     (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
      ≡
      (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -287,8 +288,6 @@ Goal:
     (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
      ≡
      (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
-[Done]
-
 Goal:
   (map ▲ ▲ f ((++) ▲ ([] ▲) y)
    ≡
@@ -300,26 +299,16 @@ Goal:
    (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
     ≡
     (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y)))
-[Done]
-
 Goal:
   map ▲ ▲ f ((++) ▲ ([] ▲) y)
   ≡
   (++) ▲ (map ▲ ▲ f ([] ▲)) (map ▲ ▲ f y)
-[Done]
-
 Goal:
   map ▲ ▲ f y ≡ (++) ▲ (map ▲ ▲ f ([] ▲)) (map ▲ ▲ f y)
-[Done]
-
 Goal:
   map ▲ ▲ f y ≡ map ▲ ▲ f y
-[Done]
-
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -331,8 +320,6 @@ Goal:
     (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
      ≡
      (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -344,8 +331,6 @@ Goal:
     (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
      ≡
      (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -355,8 +340,6 @@ Goal:
    (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
     ≡
     (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y)))
-[Done]
-
 Goal:
   ∀ a b.
   (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
@@ -364,16 +347,19 @@ Goal:
   (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
    ≡
    (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))
-[Done]
-
+Goal:
+  ∀ b.
+  (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
+  ⇒
+  (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
+   ≡
+   (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))
 Goal:
   (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
   ⇒
   (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
    ≡
    (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y)
@@ -381,8 +367,6 @@ Goal:
   map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
   ≡
   (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y)
@@ -390,15 +374,11 @@ Goal:
   (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y)
   ≡
   (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y)
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -408,8 +388,6 @@ Goal:
     (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
     ⇒
     (true)))
-[Done]
-
 Goal:
   ∀ △ △ f y.
   (true)
@@ -420,9 +398,8 @@ Goal:
     (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
     ⇒
     (true)))
-[Done]
-
 Successfully proven: map-append
+
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]
@@ -432,12 +409,7 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
-HERMIT> 
-[Done]
-
-Leaving GHCi.
+HERMIT> Leaving GHCi.
 ghc: user interrupt
 [starting HERMIT-shell v0.1.0.0 on ListLaws.hs]
 [starting HERMIT v1.0.0.0 on ListLaws.hs]
