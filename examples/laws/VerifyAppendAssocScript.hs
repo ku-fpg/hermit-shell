@@ -15,10 +15,9 @@ appendAssoc = do
   proof "append-assoc" $ do
     apply $ induction "x"
 
-    pathS [forallBody] $ do
+    pathS [forallBody,forallBody, forallBody] $ do
       -- undefined case
       pathS [conjLhs] $ do
-        pathS [forallBody] $ do
           apply . bothR . oneBU $ inlineWith "++"
           apply smash
           apply . pathR [eqRhs] . oneTD $ inlineWith "++"
@@ -26,14 +25,13 @@ appendAssoc = do
 
       -- nil case
       pathS [conjRhs, conjLhs] $ do
-        pathS [forallBody] $ do
           apply . pathR [eqLhs] . oneBU $ inlineWith "++"
           apply smash
           apply . pathR [eqRhs, appFun, appArg] $ lemmaForward "nil-append"
           apply reflexivity
 
       -- cons case
-      pathS [conjRhs, conjRhs, forallBody, consequent] $ do
+      pathS [conjRhs, conjRhs, forallBody, forallBody, consequent] $ do
         apply . oneTD $ inlineWith "++"
         apply smash
         apply . oneTD $ lemmaForward "ind-hyp-0"

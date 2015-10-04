@@ -27,5 +27,6 @@ listLeftUnit = do
 
     pathS [forallBody] $ do
       apply . lhsR $ lemmaForward "concat-unit"
-      apply reflexivity
+      pathS [forallBody, forallBody] $ do
+          apply reflexivity
 

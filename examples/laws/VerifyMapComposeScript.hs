@@ -43,7 +43,7 @@ mapCompose = do
   proof "map-compose" $ do
     apply $ induction "xs"
 
-    pathS [forallBody] $ do
+    pathS [forallBody, forallBody, forallBody, forallBody, forallBody] $ do
         -- undefined case
       pathS [conjLhs] $ do
         apply . anyBU $ inlineWith "map"
@@ -56,7 +56,7 @@ mapCompose = do
         apply smash
 
         -- cons case
-      pathS [conjRhs, conjRhs, forallBody, consequent] $ do
+      pathS [conjRhs, conjRhs, forallBody, forallBody, consequent] $ do
         apply . rhsR $ consRight
         apply . oneBU $ inlineWith "map"
         apply smash

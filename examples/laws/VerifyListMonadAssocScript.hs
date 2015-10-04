@@ -63,7 +63,7 @@ listMonadAssoc = do
   eval "rule-to-lemma monad-assoc"
 
   proof "monad-assoc" $ do
-    pathS [forallBody] $ do
+    pathS [forallBody,forallBody,forallBody,forallBody,forallBody,forallBody] $ do
       apply . lhsR $ assocLhs
 
       pathS [eqRhs] $ do

@@ -10,18 +10,12 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
 [1 of 1] Compiling VerifyConcatOfToListScript ( VerifyConcatOfToListScript.hs, interpreted )
 Ok, modules loaded: VerifyConcatOfToListScript.
 concat-of-toList (Not Proven)
   ∀ △ xs. concat ▲ (map ▲ ▲ (toList ▲) xs) ≡ xs
-[Done]
-
 Goal:
   ∀ △ xs. concat ▲ (map ▲ ▲ (toList ▲) xs) ≡ xs
-[Done]
-
 Goal:
   ∀ △.
   (concat ▲ (map ▲ ▲ (toList ▲) (undefined ▲)) ≡ undefined ▲)
@@ -32,8 +26,6 @@ Goal:
     (concat ▲ (map ▲ ▲ (toList ▲) b) ≡ b)
     ⇒
     (concat ▲ (map ▲ ▲ (toList ▲) ((:) ▲ a b)) ≡ (:) ▲ a b)))
-[Done]
-
 Goal:
   ∀ △.
   (concat ▲ (map ▲ ▲ (toList ▲) (undefined ▲)) ≡ undefined ▲)
@@ -44,8 +36,6 @@ Goal:
     (concat ▲ (map ▲ ▲ (toList ▲) b) ≡ b)
     ⇒
     (concat ▲ (map ▲ ▲ (toList ▲) ((:) ▲ a b)) ≡ (:) ▲ a b)))
-[Done]
-
 Goal:
   (concat ▲ (map ▲ ▲ (toList ▲) (undefined ▲)) ≡ undefined ▲)
   ∧
@@ -55,8 +45,6 @@ Goal:
     (concat ▲ (map ▲ ▲ (toList ▲) b) ≡ b)
     ⇒
     (concat ▲ (map ▲ ▲ (toList ▲) ((:) ▲ a b)) ≡ (:) ▲ a b)))
-[Done]
-
 Goal:
   (concat ▲ (map ▲ ▲ (toList ▲) (undefined ▲)) ≡ undefined ▲)
   ∧
@@ -66,16 +54,10 @@ Goal:
     (concat ▲ (map ▲ ▲ (toList ▲) b) ≡ b)
     ⇒
     (concat ▲ (map ▲ ▲ (toList ▲) ((:) ▲ a b)) ≡ (:) ▲ a b)))
-[Done]
-
 Goal:
   concat ▲ (map ▲ ▲ (toList ▲) (undefined ▲)) ≡ undefined ▲
-[Done]
-
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -85,8 +67,6 @@ Goal:
     (concat ▲ (map ▲ ▲ (toList ▲) b) ≡ b)
     ⇒
     (concat ▲ (map ▲ ▲ (toList ▲) ((:) ▲ a b)) ≡ (:) ▲ a b)))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -96,8 +76,6 @@ Goal:
     (concat ▲ (map ▲ ▲ (toList ▲) b) ≡ b)
     ⇒
     (concat ▲ (map ▲ ▲ (toList ▲) ((:) ▲ a b)) ≡ (:) ▲ a b)))
-[Done]
-
 Goal:
   (concat ▲ (map ▲ ▲ (toList ▲) ([] ▲)) ≡ [] ▲)
   ∧
@@ -105,16 +83,10 @@ Goal:
    (concat ▲ (map ▲ ▲ (toList ▲) b) ≡ b)
    ⇒
    (concat ▲ (map ▲ ▲ (toList ▲) ((:) ▲ a b)) ≡ (:) ▲ a b))
-[Done]
-
 Goal:
   concat ▲ (map ▲ ▲ (toList ▲) ([] ▲)) ≡ [] ▲
-[Done]
-
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -124,8 +96,6 @@ Goal:
     (concat ▲ (map ▲ ▲ (toList ▲) b) ≡ b)
     ⇒
     (concat ▲ (map ▲ ▲ (toList ▲) ((:) ▲ a b)) ≡ (:) ▲ a b)))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -135,8 +105,6 @@ Goal:
     (concat ▲ (map ▲ ▲ (toList ▲) b) ≡ b)
     ⇒
     (concat ▲ (map ▲ ▲ (toList ▲) ((:) ▲ a b)) ≡ (:) ▲ a b)))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -144,49 +112,41 @@ Goal:
    (concat ▲ (map ▲ ▲ (toList ▲) b) ≡ b)
    ⇒
    (concat ▲ (map ▲ ▲ (toList ▲) ((:) ▲ a b)) ≡ (:) ▲ a b))
-[Done]
-
 Goal:
   ∀ a b.
   (concat ▲ (map ▲ ▲ (toList ▲) b) ≡ b)
   ⇒
   (concat ▲ (map ▲ ▲ (toList ▲) ((:) ▲ a b)) ≡ (:) ▲ a b)
-[Done]
-
+Goal:
+  ∀ b.
+  (concat ▲ (map ▲ ▲ (toList ▲) b) ≡ b)
+  ⇒
+  (concat ▲ (map ▲ ▲ (toList ▲) ((:) ▲ a b)) ≡ (:) ▲ a b)
 Goal:
   (concat ▲ (map ▲ ▲ (toList ▲) b) ≡ b)
   ⇒
   (concat ▲ (map ▲ ▲ (toList ▲) ((:) ▲ a b)) ≡ (:) ▲ a b)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   concat ▲ (map ▲ ▲ (toList ▲) b) ≡ b
 Goal:
   concat ▲ (map ▲ ▲ (toList ▲) ((:) ▲ a b)) ≡ (:) ▲ a b
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   concat ▲ (map ▲ ▲ (toList ▲) b) ≡ b
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
   ((true) ∧ (∀ a b. (concat ▲ (map ▲ ▲ (toList ▲) b) ≡ b) ⇒ (true)))
-[Done]
-
 Goal:
   ∀ △.
   (true)
   ∧
   ((true) ∧ (∀ a b. (concat ▲ (map ▲ ▲ (toList ▲) b) ≡ b) ⇒ (true)))
-[Done]
-
 Successfully proven: concat-of-toList
+
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]
@@ -196,12 +156,7 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
-HERMIT> 
-[Done]
-
-Leaving GHCi.
+HERMIT> Leaving GHCi.
 ghc: user interrupt
 [starting HERMIT-shell v0.1.0.0 on ListLaws.hs]
 [starting HERMIT v1.0.0.0 on ListLaws.hs]

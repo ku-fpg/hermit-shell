@@ -10,23 +10,15 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
 [1 of 2] Compiling VerifyNilAppendScript ( VerifyNilAppendScript.hs, interpreted )
 [2 of 2] Compiling VerifyAppendAssocScript ( VerifyAppendAssocScript.hs, interpreted )
 Ok, modules loaded: VerifyAppendAssocScript, VerifyNilAppendScript.
 append-assoc (Not Proven)
   ∀ △ x y z. (++) ▲ x ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ x y) z
-[Done]
-
 nil-append (Not Proven)
   ∀ △ xs. (++) ▲ ([] ▲) xs ≡ xs
-[Done]
-
 Goal:
   ∀ △ xs. (++) ▲ ([] ▲) xs ≡ xs
-[Done]
-
 Goal:
   ∀ △ xs.
   (λ △ ds ys →
@@ -35,13 +27,10 @@ Goal:
        (:) x xs → (:) ▲ x ((++) ▲ xs ys)) ▲ ([] ▲) xs
   ≡
   xs
-[Done]
-
 Goal:
   true
-[Done]
-
 Successfully proven: nil-append
+
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]
@@ -51,12 +40,8 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
 Goal:
   ∀ △ x y z. (++) ▲ x ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ x y) z
-[Done]
-
 Goal:
   ∀ △ y z.
   ((++) ▲ (undefined ▲) ((++) ▲ y z)
@@ -71,8 +56,6 @@ Goal:
     ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
      ≡
      (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
-[Done]
-
 Goal:
   ∀ △ y z.
   ((++) ▲ (undefined ▲) ((++) ▲ y z)
@@ -87,8 +70,34 @@ Goal:
     ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
      ≡
      (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
-[Done]
-
+Goal:
+  ∀ y z.
+  ((++) ▲ (undefined ▲) ((++) ▲ y z)
+   ≡
+   (++) ▲ ((++) ▲ (undefined ▲) y) z)
+  ∧
+  (((++) ▲ ([] ▲) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ([] ▲) y) z)
+   ∧
+   (∀ a b.
+    ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z)
+    ⇒
+    ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
+     ≡
+     (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
+Goal:
+  ∀ z.
+  ((++) ▲ (undefined ▲) ((++) ▲ y z)
+   ≡
+   (++) ▲ ((++) ▲ (undefined ▲) y) z)
+  ∧
+  (((++) ▲ ([] ▲) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ([] ▲) y) z)
+   ∧
+   (∀ a b.
+    ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z)
+    ⇒
+    ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
+     ≡
+     (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
 Goal:
   ((++) ▲ (undefined ▲) ((++) ▲ y z)
    ≡
@@ -102,8 +111,6 @@ Goal:
     ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
      ≡
      (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
-[Done]
-
 Goal:
   ((++) ▲ (undefined ▲) ((++) ▲ y z)
    ≡
@@ -117,26 +124,10 @@ Goal:
     ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
      ≡
      (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
-[Done]
-
 Goal:
   (++) ▲ (undefined ▲) ((++) ▲ y z)
   ≡
   (++) ▲ ((++) ▲ (undefined ▲) y) z
-[Done]
-
-Goal:
-  (++) ▲ (undefined ▲) ((++) ▲ y z)
-  ≡
-  (++) ▲ ((++) ▲ (undefined ▲) y) z
-[Done]
-
-Goal:
-  (++) ▲ (undefined ▲) ((++) ▲ y z)
-  ≡
-  (++) ▲ ((++) ▲ (undefined ▲) y) z
-[Done]
-
 Goal:
   (λ △ ds ys →
      case ds of wild ▲
@@ -147,16 +138,12 @@ Goal:
      case ds of wild ▲
        [] → ys
        (:) x xs → (:) ▲ x ((++) ▲ xs ys)) ▲ ((++) ▲ (undefined ▲) y) z
-[Done]
-
 Goal:
   undefined ▲
   ≡
   case (++) ▲ (undefined ▲) y of wild ▲
     [] → z
     (:) x xs → (:) ▲ x ((++) ▲ xs z)
-[Done]
-
 Goal:
   undefined ▲
   ≡
@@ -167,16 +154,8 @@ Goal:
    of wild ▲
     [] → z
     (:) x xs → (:) ▲ x ((++) ▲ xs z)
-[Done]
-
 Goal:
   true
-[Done]
-
-Goal:
-  true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -188,8 +167,6 @@ Goal:
     ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
      ≡
      (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -201,8 +178,6 @@ Goal:
     ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
      ≡
      (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
-[Done]
-
 Goal:
   ((++) ▲ ([] ▲) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ([] ▲) y) z)
   ∧
@@ -212,20 +187,8 @@ Goal:
    ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
     ≡
     (++) ▲ ((++) ▲ ((:) ▲ a b) y) z))
-[Done]
-
 Goal:
   (++) ▲ ([] ▲) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ([] ▲) y) z
-[Done]
-
-Goal:
-  (++) ▲ ([] ▲) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ([] ▲) y) z
-[Done]
-
-Goal:
-  (++) ▲ ([] ▲) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ([] ▲) y) z
-[Done]
-
 Goal:
   (λ △ ds ys →
      case ds of wild ▲
@@ -233,24 +196,12 @@ Goal:
        (:) x xs → (:) ▲ x ((++) ▲ xs ys)) ▲ ([] ▲) ((++) ▲ y z)
   ≡
   (++) ▲ ((++) ▲ ([] ▲) y) z
-[Done]
-
 Goal:
   (++) ▲ y z ≡ (++) ▲ ((++) ▲ ([] ▲) y) z
-[Done]
-
 Goal:
   (++) ▲ y z ≡ (++) ▲ y z
-[Done]
-
 Goal:
   true
-[Done]
-
-Goal:
-  true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -262,8 +213,6 @@ Goal:
     ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
      ≡
      (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -275,8 +224,6 @@ Goal:
     ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
      ≡
      (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -286,28 +233,25 @@ Goal:
    ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
     ≡
     (++) ▲ ((++) ▲ ((:) ▲ a b) y) z))
-[Done]
-
 Goal:
   ∀ a b.
   ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z)
   ⇒
   ((++) ▲ ((:) ▲ a b) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)
-[Done]
-
+Goal:
+  ∀ b.
+  ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z)
+  ⇒
+  ((++) ▲ ((:) ▲ a b) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)
 Goal:
   ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z)
   ⇒
   ((++) ▲ ((:) ▲ a b) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
 Goal:
   (++) ▲ ((:) ▲ a b) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ((:) ▲ a b) y) z
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
@@ -318,36 +262,26 @@ Goal:
        (:) x xs → (:) ▲ x ((++) ▲ xs ys)) ▲ ((:) ▲ a b) ((++) ▲ y z)
   ≡
   (++) ▲ ((++) ▲ ((:) ▲ a b) y) z
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
 Goal:
   (:) ▲ a ((++) ▲ b ((++) ▲ y z)) ≡ (++) ▲ ((++) ▲ ((:) ▲ a b) y) z
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
 Goal:
   (:) ▲ a ((++) ▲ ((++) ▲ b y) z) ≡ (++) ▲ ((++) ▲ ((:) ▲ a b) y) z
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
 Goal:
   (:) ▲ a ((++) ▲ ((++) ▲ b y) z) ≡ (++) ▲ ((++) ▲ ((:) ▲ a b) y) z
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
 Goal:
   (++) ▲ ((++) ▲ ((:) ▲ a b) y) z
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
@@ -356,8 +290,6 @@ Goal:
      case ds of wild ▲
        [] → ys
        (:) x xs → (:) ▲ x ((++) ▲ xs ys)) ▲ ((++) ▲ ((:) ▲ a b) y) z
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
@@ -365,8 +297,6 @@ Goal:
   case (++) ▲ ((:) ▲ a b) y of wild ▲
     [] → z
     (:) x xs → (:) ▲ x ((++) ▲ xs z)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
@@ -378,37 +308,27 @@ Goal:
    of wild ▲
     [] → z
     (:) x xs → (:) ▲ x ((++) ▲ xs z)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
 Goal:
   (:) ▲ a ((++) ▲ ((++) ▲ b y) z)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
 Goal:
   (:) ▲ a ((++) ▲ ((++) ▲ b y) z) ≡ (:) ▲ a ((++) ▲ ((++) ▲ b y) z)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
   ((true)
    ∧
    (∀ a b. ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z) ⇒ (true)))
-[Done]
-
 Goal:
   ∀ △ y z.
   (true)
@@ -416,13 +336,10 @@ Goal:
   ((true)
    ∧
    (∀ a b. ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z) ⇒ (true)))
-[Done]
-
 Goal:
   true
-[Done]
-
 Successfully proven: append-assoc
+
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]
@@ -432,12 +349,7 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
-HERMIT> 
-[Done]
-
-Leaving GHCi.
+HERMIT> Leaving GHCi.
 ghc: user interrupt
 [starting HERMIT-shell v0.1.0.0 on ListLaws.hs]
 [starting HERMIT v1.0.0.0 on ListLaws.hs]

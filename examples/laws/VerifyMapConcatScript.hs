@@ -54,7 +54,7 @@ mapConcat = do
   proof "map-concat" $ do
     apply $ induction "xs"
 
-    pathS [forallBody] $ do
+    pathS [forallBody,forallBody,forallBody] $ do
         -- undefined case
       pathS [conjLhs] $ do
         apply . anyBU $ unfoldWith "map"
@@ -68,7 +68,7 @@ mapConcat = do
         apply reflexivity
 
         -- cons case
-      pathS [conjRhs, conjRhs, forallBody, consequent] $ do
+      pathS [conjRhs, conjRhs, forallBody, forallBody, consequent] $ do
         apply . lhsR $ consLeft
         apply . rhsR $ consRight
         apply reflexivity

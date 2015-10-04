@@ -10,28 +10,18 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
 [1 of 3] Compiling VerifyAppendNilScript ( VerifyAppendNilScript.hs, interpreted )
 [2 of 3] Compiling VerifyConcatUnitScript ( VerifyConcatUnitScript.hs, interpreted )
 [3 of 3] Compiling VerifyListLeftUnitScript ( VerifyListLeftUnitScript.hs, interpreted )
 Ok, modules loaded: VerifyListLeftUnitScript, VerifyConcatUnitScript, VerifyAppendNilScript.
 left-unit (Not Proven)
   ∀ △ △ x f. bind ▲ ▲ (retur ▲ x) f ≡ f x
-[Done]
-
 concat-unit (Not Proven)
   ∀ △ x. concat ▲ ((:) ▲ x ([] ▲)) ≡ x
-[Done]
-
 append-nil (Not Proven)
   ∀ △ xs. (++) ▲ xs ([] ▲) ≡ xs
-[Done]
-
 Goal:
   ∀ △ xs. (++) ▲ xs ([] ▲) ≡ xs
-[Done]
-
 Goal:
   ∀ △.
   ((++) ▲ (undefined ▲) ([] ▲) ≡ undefined ▲)
@@ -40,8 +30,6 @@ Goal:
    ∧
    (∀ a b.
     ((++) ▲ b ([] ▲) ≡ b) ⇒ ((++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)))
-[Done]
-
 Goal:
   ∀ △.
   ((++) ▲ (undefined ▲) ([] ▲) ≡ undefined ▲)
@@ -50,8 +38,6 @@ Goal:
    ∧
    (∀ a b.
     ((++) ▲ b ([] ▲) ≡ b) ⇒ ((++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)))
-[Done]
-
 Goal:
   ((++) ▲ (undefined ▲) ([] ▲) ≡ undefined ▲)
   ∧
@@ -59,8 +45,6 @@ Goal:
    ∧
    (∀ a b.
     ((++) ▲ b ([] ▲) ≡ b) ⇒ ((++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -68,8 +52,6 @@ Goal:
    ∧
    (∀ a b.
     ((++) ▲ b ([] ▲) ≡ b) ⇒ ((++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -77,22 +59,17 @@ Goal:
    ∧
    (∀ a b.
     ((++) ▲ b ([] ▲) ≡ b) ⇒ ((++) ▲ ((:) ▲ a b) ([] ▲) ≡ (:) ▲ a b)))
-[Done]
-
 Goal:
   (true)
   ∧
   ((true) ∧ (∀ a b. ((++) ▲ b ([] ▲) ≡ b) ⇒ ((:) ▲ a b ≡ (:) ▲ a b)))
-[Done]
-
 Goal:
   ∀ △.
   (true)
   ∧
   ((true) ∧ (∀ a b. ((++) ▲ b ([] ▲) ≡ b) ⇒ ((:) ▲ a b ≡ (:) ▲ a b)))
-[Done]
-
 Successfully proven: append-nil
+
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]
@@ -102,34 +79,24 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
 Goal:
   ∀ △ x. concat ▲ ((:) ▲ x ([] ▲)) ≡ x
-[Done]
-
 Goal:
   ∀ △ x. concat ▲ ((:) ▲ x ([] ▲)) ≡ x
-[Done]
-
 Goal:
-  concat ▲ ((:) ▲ x ([] ▲)) ≡ x
-[Done]
-
+  ∀ x. concat ▲ ((:) ▲ x ([] ▲)) ≡ x
 Goal:
+  ∀ x.
   (λ △ ds →
      case ds of wild ▲
        [] → [] ▲
        (:) x xs → (++) ▲ x (concat ▲ xs)) ▲ ((:) ▲ x ([] ▲))
   ≡
   x
-[Done]
-
 Goal:
-  (++) ▲ x (concat ▲ ([] ▲)) ≡ x
-[Done]
-
+  ∀ x. (++) ▲ x (concat ▲ ([] ▲)) ≡ x
 Goal:
+  ∀ x.
   (++) ▲ x
        ((λ △ ds →
            case ds of wild ▲
@@ -137,21 +104,14 @@ Goal:
              (:) x xs → (++) ▲ x (concat ▲ xs)) ▲ ([] ▲))
   ≡
   x
-[Done]
-
 Goal:
-  (++) ▲ x ([] ▲) ≡ x
-[Done]
-
+  ∀ x. (++) ▲ x ([] ▲) ≡ x
 Goal:
-  x ≡ x
-[Done]
-
+  ∀ x. x ≡ x
 Goal:
   ∀ △ x. x ≡ x
-[Done]
-
 Successfully proven: concat-unit
+
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]
@@ -161,30 +121,18 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
 Goal:
   ∀ △ △ x f. bind ▲ ▲ (retur ▲ x) f ≡ f x
-[Done]
-
 Goal:
   ∀ △ △ x f.
   (λ △ △ as k → concat ▲ (map ▲ ▲ k as)) ▲ ▲ (toList ▲ x) f ≡ f x
-[Done]
-
 Goal:
   ∀ △ △ x f. concat ▲ (map ▲ ▲ f (toList ▲ x)) ≡ f x
-[Done]
-
 Goal:
   ∀ △ △ x f.
   concat ▲ (map ▲ ▲ f ((λ △ x → (:) ▲ x ([] ▲)) ▲ x)) ≡ f x
-[Done]
-
 Goal:
   ∀ △ △ x f. concat ▲ (map ▲ ▲ f ((:) ▲ x ([] ▲))) ≡ f x
-[Done]
-
 Goal:
   ∀ △ △ x f.
   concat ▲
@@ -194,12 +142,8 @@ Goal:
                (:) a as → (:) ▲ (ds a) (map ▲ ▲ ds as)) ▲ ▲ f ((:) ▲ x ([] ▲)))
   ≡
   f x
-[Done]
-
 Goal:
   ∀ △ △ x f. concat ▲ ((:) ▲ (f x) (map ▲ ▲ f ([] ▲))) ≡ f x
-[Done]
-
 Goal:
   ∀ △ △ x f.
   concat ▲
@@ -210,33 +154,28 @@ Goal:
                     (:) a as → (:) ▲ (ds a) (map ▲ ▲ ds as)) ▲ ▲ f ([] ▲)))
   ≡
   f x
-[Done]
-
 Goal:
   ∀ △ △ x f. concat ▲ ((:) ▲ (f x) ([] ▲)) ≡ f x
-[Done]
-
 Goal:
   ∀ △ △ x f. concat ▲ ((:) ▲ (f x) ([] ▲)) ≡ f x
-[Done]
-
 Goal:
-  concat ▲ ((:) ▲ (f x) ([] ▲)) ≡ f x
-[Done]
-
+  ∀ △ x f. concat ▲ ((:) ▲ (f x) ([] ▲)) ≡ f x
 Goal:
-  f x ≡ f x
-[Done]
-
+  ∀ △ x f. f x ≡ f x
 Goal:
-  true
-[Done]
-
+  ∀ △ x f. f x ≡ f x
+Goal:
+  ∀ x f. f x ≡ f x
+Goal:
+  ∀ f. f x ≡ f x
+Goal:
+  ∀ f. true
+Goal:
+  ∀ △ x f. true
 Goal:
   ∀ △ △ x f. true
-[Done]
-
 Successfully proven: left-unit
+
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]
@@ -246,12 +185,7 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
-HERMIT> 
-[Done]
-
-Leaving GHCi.
+HERMIT> Leaving GHCi.
 ghc: user interrupt
 [starting HERMIT-shell v0.1.0.0 on ListLaws.hs]
 [starting HERMIT v1.0.0.0 on ListLaws.hs]

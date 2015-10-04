@@ -37,7 +37,7 @@ concatOfToList = do
         apply nilCase
 
         -- cons case
-      pathS [conjRhs, conjRhs, forallBody, consequent] $ do
+      pathS [conjRhs, conjRhs, forallBody, forallBody, consequent] $ do
         apply consCase
 
 script :: Shell ()

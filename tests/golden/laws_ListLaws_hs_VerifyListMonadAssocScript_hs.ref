@@ -10,8 +10,6 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
 [ 1 of 11] Compiling VerifyNilAppendScript ( VerifyNilAppendScript.hs, interpreted )
 [ 2 of 11] Compiling VerifyAppendAssocScript ( VerifyAppendAssocScript.hs, interpreted )
 [ 3 of 11] Compiling VerifyConcatAppendScript ( VerifyConcatAppendScript.hs, interpreted )
@@ -27,13 +25,9 @@ Ok, modules loaded: VerifyListMonadAssocScript, VerifyMapComposeScript, VerifyCo
 map-compose (Not Proven)
   ∀ △ △ △ f g xs.
   map ▲ ▲ ((.) ▲ ▲ ▲ f g) xs ≡ map ▲ ▲ f (map ▲ ▲ g xs)
-[Done]
-
 Goal:
   ∀ △ △ △ f g xs.
   map ▲ ▲ ((.) ▲ ▲ ▲ f g) xs ≡ map ▲ ▲ f (map ▲ ▲ g xs)
-[Done]
-
 Goal:
   ∀ △ △ △ f g.
   (map ▲ ▲ ((.) ▲ ▲ ▲ f g) (undefined ▲)
@@ -48,8 +42,6 @@ Goal:
     (map ▲ ▲ ((.) ▲ ▲ ▲ f g) ((:) ▲ a b)
      ≡
      map ▲ ▲ f (map ▲ ▲ g ((:) ▲ a b)))))
-[Done]
-
 Goal:
   ∀ △ △ △ f g.
   (map ▲ ▲ ((.) ▲ ▲ ▲ f g) (undefined ▲)
@@ -64,8 +56,62 @@ Goal:
     (map ▲ ▲ ((.) ▲ ▲ ▲ f g) ((:) ▲ a b)
      ≡
      map ▲ ▲ f (map ▲ ▲ g ((:) ▲ a b)))))
-[Done]
-
+Goal:
+  ∀ △ △ f g.
+  (map ▲ ▲ ((.) ▲ ▲ ▲ f g) (undefined ▲)
+   ≡
+   map ▲ ▲ f (map ▲ ▲ g (undefined ▲)))
+  ∧
+  ((map ▲ ▲ ((.) ▲ ▲ ▲ f g) ([] ▲) ≡ map ▲ ▲ f (map ▲ ▲ g ([] ▲)))
+   ∧
+   (∀ a b.
+    (map ▲ ▲ ((.) ▲ ▲ ▲ f g) b ≡ map ▲ ▲ f (map ▲ ▲ g b))
+    ⇒
+    (map ▲ ▲ ((.) ▲ ▲ ▲ f g) ((:) ▲ a b)
+     ≡
+     map ▲ ▲ f (map ▲ ▲ g ((:) ▲ a b)))))
+Goal:
+  ∀ △ f g.
+  (map ▲ ▲ ((.) ▲ ▲ ▲ f g) (undefined ▲)
+   ≡
+   map ▲ ▲ f (map ▲ ▲ g (undefined ▲)))
+  ∧
+  ((map ▲ ▲ ((.) ▲ ▲ ▲ f g) ([] ▲) ≡ map ▲ ▲ f (map ▲ ▲ g ([] ▲)))
+   ∧
+   (∀ a b.
+    (map ▲ ▲ ((.) ▲ ▲ ▲ f g) b ≡ map ▲ ▲ f (map ▲ ▲ g b))
+    ⇒
+    (map ▲ ▲ ((.) ▲ ▲ ▲ f g) ((:) ▲ a b)
+     ≡
+     map ▲ ▲ f (map ▲ ▲ g ((:) ▲ a b)))))
+Goal:
+  ∀ f g.
+  (map ▲ ▲ ((.) ▲ ▲ ▲ f g) (undefined ▲)
+   ≡
+   map ▲ ▲ f (map ▲ ▲ g (undefined ▲)))
+  ∧
+  ((map ▲ ▲ ((.) ▲ ▲ ▲ f g) ([] ▲) ≡ map ▲ ▲ f (map ▲ ▲ g ([] ▲)))
+   ∧
+   (∀ a b.
+    (map ▲ ▲ ((.) ▲ ▲ ▲ f g) b ≡ map ▲ ▲ f (map ▲ ▲ g b))
+    ⇒
+    (map ▲ ▲ ((.) ▲ ▲ ▲ f g) ((:) ▲ a b)
+     ≡
+     map ▲ ▲ f (map ▲ ▲ g ((:) ▲ a b)))))
+Goal:
+  ∀ g.
+  (map ▲ ▲ ((.) ▲ ▲ ▲ f g) (undefined ▲)
+   ≡
+   map ▲ ▲ f (map ▲ ▲ g (undefined ▲)))
+  ∧
+  ((map ▲ ▲ ((.) ▲ ▲ ▲ f g) ([] ▲) ≡ map ▲ ▲ f (map ▲ ▲ g ([] ▲)))
+   ∧
+   (∀ a b.
+    (map ▲ ▲ ((.) ▲ ▲ ▲ f g) b ≡ map ▲ ▲ f (map ▲ ▲ g b))
+    ⇒
+    (map ▲ ▲ ((.) ▲ ▲ ▲ f g) ((:) ▲ a b)
+     ≡
+     map ▲ ▲ f (map ▲ ▲ g ((:) ▲ a b)))))
 Goal:
   (map ▲ ▲ ((.) ▲ ▲ ▲ f g) (undefined ▲)
    ≡
@@ -79,8 +125,6 @@ Goal:
     (map ▲ ▲ ((.) ▲ ▲ ▲ f g) ((:) ▲ a b)
      ≡
      map ▲ ▲ f (map ▲ ▲ g ((:) ▲ a b)))))
-[Done]
-
 Goal:
   (map ▲ ▲ ((.) ▲ ▲ ▲ f g) (undefined ▲)
    ≡
@@ -94,14 +138,10 @@ Goal:
     (map ▲ ▲ ((.) ▲ ▲ ▲ f g) ((:) ▲ a b)
      ≡
      map ▲ ▲ f (map ▲ ▲ g ((:) ▲ a b)))))
-[Done]
-
 Goal:
   map ▲ ▲ ((.) ▲ ▲ ▲ f g) (undefined ▲)
   ≡
   map ▲ ▲ f (map ▲ ▲ g (undefined ▲))
-[Done]
-
 Goal:
   (λ △ △ ds ds →
      case ds of wild ▲
@@ -121,12 +161,8 @@ Goal:
                                                             (map ▲ ▲ ds as)) ▲ ▲
                                                                              g
                                                                              (undefined ▲))
-[Done]
-
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -138,8 +174,6 @@ Goal:
     (map ▲ ▲ ((.) ▲ ▲ ▲ f g) ((:) ▲ a b)
      ≡
      map ▲ ▲ f (map ▲ ▲ g ((:) ▲ a b)))))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -151,8 +185,6 @@ Goal:
     (map ▲ ▲ ((.) ▲ ▲ ▲ f g) ((:) ▲ a b)
      ≡
      map ▲ ▲ f (map ▲ ▲ g ((:) ▲ a b)))))
-[Done]
-
 Goal:
   (map ▲ ▲ ((.) ▲ ▲ ▲ f g) ([] ▲) ≡ map ▲ ▲ f (map ▲ ▲ g ([] ▲)))
   ∧
@@ -162,28 +194,18 @@ Goal:
    (map ▲ ▲ ((.) ▲ ▲ ▲ f g) ((:) ▲ a b)
     ≡
     map ▲ ▲ f (map ▲ ▲ g ((:) ▲ a b))))
-[Done]
-
 Goal:
   map ▲ ▲ ((.) ▲ ▲ ▲ f g) ([] ▲) ≡ map ▲ ▲ f (map ▲ ▲ g ([] ▲))
-[Done]
-
 Goal:
   map ▲ ▲ ((.) ▲ ▲ ▲ f g) ([] ▲) ≡ [] ▲
-[Done]
-
 Goal:
   case [] ▲ of wild ▲
     [] → [] ▲
     (:) a as → (:) ▲ ((.) ▲ ▲ ▲ f g a) (map ▲ ▲ ((.) ▲ ▲ ▲ f g) as)
   ≡
   [] ▲
-[Done]
-
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -195,8 +217,6 @@ Goal:
     (map ▲ ▲ ((.) ▲ ▲ ▲ f g) ((:) ▲ a b)
      ≡
      map ▲ ▲ f (map ▲ ▲ g ((:) ▲ a b)))))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -208,8 +228,6 @@ Goal:
     (map ▲ ▲ ((.) ▲ ▲ ▲ f g) ((:) ▲ a b)
      ≡
      map ▲ ▲ f (map ▲ ▲ g ((:) ▲ a b)))))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -219,8 +237,6 @@ Goal:
    (map ▲ ▲ ((.) ▲ ▲ ▲ f g) ((:) ▲ a b)
     ≡
     map ▲ ▲ f (map ▲ ▲ g ((:) ▲ a b))))
-[Done]
-
 Goal:
   ∀ a b.
   (map ▲ ▲ ((.) ▲ ▲ ▲ f g) b ≡ map ▲ ▲ f (map ▲ ▲ g b))
@@ -228,16 +244,19 @@ Goal:
   (map ▲ ▲ ((.) ▲ ▲ ▲ f g) ((:) ▲ a b)
    ≡
    map ▲ ▲ f (map ▲ ▲ g ((:) ▲ a b)))
-[Done]
-
+Goal:
+  ∀ b.
+  (map ▲ ▲ ((.) ▲ ▲ ▲ f g) b ≡ map ▲ ▲ f (map ▲ ▲ g b))
+  ⇒
+  (map ▲ ▲ ((.) ▲ ▲ ▲ f g) ((:) ▲ a b)
+   ≡
+   map ▲ ▲ f (map ▲ ▲ g ((:) ▲ a b)))
 Goal:
   (map ▲ ▲ ((.) ▲ ▲ ▲ f g) b ≡ map ▲ ▲ f (map ▲ ▲ g b))
   ⇒
   (map ▲ ▲ ((.) ▲ ▲ ▲ f g) ((:) ▲ a b)
    ≡
    map ▲ ▲ f (map ▲ ▲ g ((:) ▲ a b)))
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   map ▲ ▲ ((.) ▲ ▲ ▲ f g) b ≡ map ▲ ▲ f (map ▲ ▲ g b)
@@ -245,8 +264,6 @@ Goal:
   map ▲ ▲ ((.) ▲ ▲ ▲ f g) ((:) ▲ a b)
   ≡
   map ▲ ▲ f (map ▲ ▲ g ((:) ▲ a b))
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   map ▲ ▲ ((.) ▲ ▲ ▲ f g) b ≡ map ▲ ▲ f (map ▲ ▲ g b)
@@ -254,8 +271,6 @@ Goal:
   map ▲ ▲ ((.) ▲ ▲ ▲ f g) ((:) ▲ a b)
   ≡
   (:) ▲ (f (g a)) (map ▲ ▲ (λ x → f (g x)) b)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   map ▲ ▲ ((.) ▲ ▲ ▲ f g) b ≡ map ▲ ▲ f (map ▲ ▲ g b)
@@ -267,8 +282,6 @@ Goal:
                                                 ((:) ▲ a b)
   ≡
   (:) ▲ (f (g a)) (map ▲ ▲ (λ x → f (g x)) b)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   map ▲ ▲ ((.) ▲ ▲ ▲ f g) b ≡ map ▲ ▲ f (map ▲ ▲ g b)
@@ -276,8 +289,6 @@ Goal:
   (:) ▲ (f (g a)) (map ▲ ▲ ((.) ▲ ▲ ▲ f g) b)
   ≡
   (:) ▲ (f (g a)) (map ▲ ▲ (λ x → f (g x)) b)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   map ▲ ▲ ((.) ▲ ▲ ▲ f g) b ≡ map ▲ ▲ f (map ▲ ▲ g b)
@@ -285,29 +296,21 @@ Goal:
   (:) ▲ (f (g a)) (map ▲ ▲ ((.) ▲ ▲ ▲ f g) b)
   ≡
   (:) ▲ (f (g a)) (map ▲ ▲ (λ x → f (g x)) b)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   map ▲ ▲ ((.) ▲ ▲ ▲ f g) b ≡ map ▲ ▲ f (map ▲ ▲ g b)
 Goal:
   (:) ▲ (f (g a)) (map ▲ ▲ ((.) ▲ ▲ ▲ f g) b)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   map ▲ ▲ ((.) ▲ ▲ ▲ f g) b ≡ map ▲ ▲ f (map ▲ ▲ g b)
 Goal:
   (:) ▲ (f (g a)) (map ▲ ▲ ((λ △ △ △ f g x → f (g x)) ▲ ▲ ▲ f g) b)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   map ▲ ▲ ((.) ▲ ▲ ▲ f g) b ≡ map ▲ ▲ f (map ▲ ▲ g b)
 Goal:
   (:) ▲ (f (g a)) (map ▲ ▲ (λ x → f (g x)) b)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   map ▲ ▲ ((.) ▲ ▲ ▲ f g) b ≡ map ▲ ▲ f (map ▲ ▲ g b)
@@ -315,15 +318,11 @@ Goal:
   (:) ▲ (f (g a)) (map ▲ ▲ (λ x → f (g x)) b)
   ≡
   (:) ▲ (f (g a)) (map ▲ ▲ (λ x → f (g x)) b)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   map ▲ ▲ ((.) ▲ ▲ ▲ f g) b ≡ map ▲ ▲ f (map ▲ ▲ g b)
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -331,8 +330,6 @@ Goal:
    ∧
    (∀ a b.
     (map ▲ ▲ ((.) ▲ ▲ ▲ f g) b ≡ map ▲ ▲ f (map ▲ ▲ g b)) ⇒ (true)))
-[Done]
-
 Goal:
   ∀ △ △ △ f g.
   (true)
@@ -341,9 +338,8 @@ Goal:
    ∧
    (∀ a b.
     (map ▲ ▲ ((.) ▲ ▲ ▲ f g) b ≡ map ▲ ▲ f (map ▲ ▲ g b)) ⇒ (true)))
-[Done]
-
 Successfully proven: map-compose
+
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]
@@ -353,33 +349,20 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
 concat-nonempty (Not Proven)
   ∀ △ x xs. concat ▲ ((:) ▲ x xs) ≡ (++) ▲ x (concat ▲ xs)
-[Done]
-
 Goal:
   ∀ △ x xs. concat ▲ ((:) ▲ x xs) ≡ (++) ▲ x (concat ▲ xs)
-[Done]
-
 Goal:
   ∀ △ x xs. concat ▲ ((:) ▲ x xs) ≡ (++) ▲ x (concat ▲ xs)
-[Done]
-
 Goal:
-  concat ▲ ((:) ▲ x xs) ≡ (++) ▲ x (concat ▲ xs)
-[Done]
-
+  ∀ x xs. concat ▲ ((:) ▲ x xs) ≡ (++) ▲ x (concat ▲ xs)
 Goal:
-  (++) ▲ x (concat ▲ xs) ≡ (++) ▲ x (concat ▲ xs)
-[Done]
-
+  ∀ x xs. (++) ▲ x (concat ▲ xs) ≡ (++) ▲ x (concat ▲ xs)
 Goal:
   ∀ △ x xs. (++) ▲ x (concat ▲ xs) ≡ (++) ▲ x (concat ▲ xs)
-[Done]
-
 Successfully proven: concat-nonempty
+
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]
@@ -389,20 +372,12 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
 append-assoc (Not Proven)
   ∀ △ x y z. (++) ▲ x ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ x y) z
-[Done]
-
 nil-append (Not Proven)
   ∀ △ xs. (++) ▲ ([] ▲) xs ≡ xs
-[Done]
-
 Goal:
   ∀ △ xs. (++) ▲ ([] ▲) xs ≡ xs
-[Done]
-
 Goal:
   ∀ △ xs.
   (λ △ ds ys →
@@ -411,13 +386,10 @@ Goal:
        (:) x xs → (:) ▲ x ((++) ▲ xs ys)) ▲ ([] ▲) xs
   ≡
   xs
-[Done]
-
 Goal:
   true
-[Done]
-
 Successfully proven: nil-append
+
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]
@@ -427,12 +399,8 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
 Goal:
   ∀ △ x y z. (++) ▲ x ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ x y) z
-[Done]
-
 Goal:
   ∀ △ y z.
   ((++) ▲ (undefined ▲) ((++) ▲ y z)
@@ -447,8 +415,6 @@ Goal:
     ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
      ≡
      (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
-[Done]
-
 Goal:
   ∀ △ y z.
   ((++) ▲ (undefined ▲) ((++) ▲ y z)
@@ -463,8 +429,34 @@ Goal:
     ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
      ≡
      (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
-[Done]
-
+Goal:
+  ∀ y z.
+  ((++) ▲ (undefined ▲) ((++) ▲ y z)
+   ≡
+   (++) ▲ ((++) ▲ (undefined ▲) y) z)
+  ∧
+  (((++) ▲ ([] ▲) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ([] ▲) y) z)
+   ∧
+   (∀ a b.
+    ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z)
+    ⇒
+    ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
+     ≡
+     (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
+Goal:
+  ∀ z.
+  ((++) ▲ (undefined ▲) ((++) ▲ y z)
+   ≡
+   (++) ▲ ((++) ▲ (undefined ▲) y) z)
+  ∧
+  (((++) ▲ ([] ▲) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ([] ▲) y) z)
+   ∧
+   (∀ a b.
+    ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z)
+    ⇒
+    ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
+     ≡
+     (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
 Goal:
   ((++) ▲ (undefined ▲) ((++) ▲ y z)
    ≡
@@ -478,8 +470,6 @@ Goal:
     ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
      ≡
      (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
-[Done]
-
 Goal:
   ((++) ▲ (undefined ▲) ((++) ▲ y z)
    ≡
@@ -493,26 +483,10 @@ Goal:
     ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
      ≡
      (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
-[Done]
-
 Goal:
   (++) ▲ (undefined ▲) ((++) ▲ y z)
   ≡
   (++) ▲ ((++) ▲ (undefined ▲) y) z
-[Done]
-
-Goal:
-  (++) ▲ (undefined ▲) ((++) ▲ y z)
-  ≡
-  (++) ▲ ((++) ▲ (undefined ▲) y) z
-[Done]
-
-Goal:
-  (++) ▲ (undefined ▲) ((++) ▲ y z)
-  ≡
-  (++) ▲ ((++) ▲ (undefined ▲) y) z
-[Done]
-
 Goal:
   (λ △ ds ys →
      case ds of wild ▲
@@ -523,16 +497,12 @@ Goal:
      case ds of wild ▲
        [] → ys
        (:) x xs → (:) ▲ x ((++) ▲ xs ys)) ▲ ((++) ▲ (undefined ▲) y) z
-[Done]
-
 Goal:
   undefined ▲
   ≡
   case (++) ▲ (undefined ▲) y of wild ▲
     [] → z
     (:) x xs → (:) ▲ x ((++) ▲ xs z)
-[Done]
-
 Goal:
   undefined ▲
   ≡
@@ -543,16 +513,8 @@ Goal:
    of wild ▲
     [] → z
     (:) x xs → (:) ▲ x ((++) ▲ xs z)
-[Done]
-
 Goal:
   true
-[Done]
-
-Goal:
-  true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -564,8 +526,6 @@ Goal:
     ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
      ≡
      (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -577,8 +537,6 @@ Goal:
     ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
      ≡
      (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
-[Done]
-
 Goal:
   ((++) ▲ ([] ▲) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ([] ▲) y) z)
   ∧
@@ -588,20 +546,8 @@ Goal:
    ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
     ≡
     (++) ▲ ((++) ▲ ((:) ▲ a b) y) z))
-[Done]
-
 Goal:
   (++) ▲ ([] ▲) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ([] ▲) y) z
-[Done]
-
-Goal:
-  (++) ▲ ([] ▲) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ([] ▲) y) z
-[Done]
-
-Goal:
-  (++) ▲ ([] ▲) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ([] ▲) y) z
-[Done]
-
 Goal:
   (λ △ ds ys →
      case ds of wild ▲
@@ -609,24 +555,12 @@ Goal:
        (:) x xs → (:) ▲ x ((++) ▲ xs ys)) ▲ ([] ▲) ((++) ▲ y z)
   ≡
   (++) ▲ ((++) ▲ ([] ▲) y) z
-[Done]
-
 Goal:
   (++) ▲ y z ≡ (++) ▲ ((++) ▲ ([] ▲) y) z
-[Done]
-
 Goal:
   (++) ▲ y z ≡ (++) ▲ y z
-[Done]
-
 Goal:
   true
-[Done]
-
-Goal:
-  true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -638,8 +572,6 @@ Goal:
     ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
      ≡
      (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -651,8 +583,6 @@ Goal:
     ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
      ≡
      (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -662,28 +592,25 @@ Goal:
    ((++) ▲ ((:) ▲ a b) ((++) ▲ y z)
     ≡
     (++) ▲ ((++) ▲ ((:) ▲ a b) y) z))
-[Done]
-
 Goal:
   ∀ a b.
   ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z)
   ⇒
   ((++) ▲ ((:) ▲ a b) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)
-[Done]
-
+Goal:
+  ∀ b.
+  ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z)
+  ⇒
+  ((++) ▲ ((:) ▲ a b) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)
 Goal:
   ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z)
   ⇒
   ((++) ▲ ((:) ▲ a b) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ((:) ▲ a b) y) z)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
 Goal:
   (++) ▲ ((:) ▲ a b) ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ ((:) ▲ a b) y) z
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
@@ -694,36 +621,26 @@ Goal:
        (:) x xs → (:) ▲ x ((++) ▲ xs ys)) ▲ ((:) ▲ a b) ((++) ▲ y z)
   ≡
   (++) ▲ ((++) ▲ ((:) ▲ a b) y) z
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
 Goal:
   (:) ▲ a ((++) ▲ b ((++) ▲ y z)) ≡ (++) ▲ ((++) ▲ ((:) ▲ a b) y) z
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
 Goal:
   (:) ▲ a ((++) ▲ ((++) ▲ b y) z) ≡ (++) ▲ ((++) ▲ ((:) ▲ a b) y) z
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
 Goal:
   (:) ▲ a ((++) ▲ ((++) ▲ b y) z) ≡ (++) ▲ ((++) ▲ ((:) ▲ a b) y) z
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
 Goal:
   (++) ▲ ((++) ▲ ((:) ▲ a b) y) z
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
@@ -732,8 +649,6 @@ Goal:
      case ds of wild ▲
        [] → ys
        (:) x xs → (:) ▲ x ((++) ▲ xs ys)) ▲ ((++) ▲ ((:) ▲ a b) y) z
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
@@ -741,8 +656,6 @@ Goal:
   case (++) ▲ ((:) ▲ a b) y of wild ▲
     [] → z
     (:) x xs → (:) ▲ x ((++) ▲ xs z)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
@@ -754,37 +667,27 @@ Goal:
    of wild ▲
     [] → z
     (:) x xs → (:) ▲ x ((++) ▲ xs z)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
 Goal:
   (:) ▲ a ((++) ▲ ((++) ▲ b y) z)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
 Goal:
   (:) ▲ a ((++) ▲ ((++) ▲ b y) z) ≡ (:) ▲ a ((++) ▲ ((++) ▲ b y) z)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   (++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
   ((true)
    ∧
    (∀ a b. ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z) ⇒ (true)))
-[Done]
-
 Goal:
   ∀ △ y z.
   (true)
@@ -792,13 +695,10 @@ Goal:
   ((true)
    ∧
    (∀ a b. ((++) ▲ b ((++) ▲ y z) ≡ (++) ▲ ((++) ▲ b y) z) ⇒ (true)))
-[Done]
-
 Goal:
   true
-[Done]
-
 Successfully proven: append-assoc
+
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]
@@ -808,16 +708,10 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
 concat-append (Not Proven)
   ∀ △ x y. concat ▲ ((++) ▲ x y) ≡ (++) ▲ (concat ▲ x) (concat ▲ y)
-[Done]
-
 Goal:
   ∀ △ x y. concat ▲ ((++) ▲ x y) ≡ (++) ▲ (concat ▲ x) (concat ▲ y)
-[Done]
-
 Goal:
   ∀ △ y.
   (concat ▲ ((++) ▲ (undefined ▲) y)
@@ -834,8 +728,6 @@ Goal:
     (concat ▲ ((++) ▲ ((:) ▲ a b) y)
      ≡
      (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y))))
-[Done]
-
 Goal:
   ∀ △ y.
   (concat ▲ ((++) ▲ (undefined ▲) y)
@@ -852,8 +744,22 @@ Goal:
     (concat ▲ ((++) ▲ ((:) ▲ a b) y)
      ≡
      (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y))))
-[Done]
-
+Goal:
+  ∀ y.
+  (concat ▲ ((++) ▲ (undefined ▲) y)
+   ≡
+   (++) ▲ (concat ▲ (undefined ▲)) (concat ▲ y))
+  ∧
+  ((concat ▲ ((++) ▲ ([] ▲) y)
+    ≡
+    (++) ▲ (concat ▲ ([] ▲)) (concat ▲ y))
+   ∧
+   (∀ a b.
+    (concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y))
+    ⇒
+    (concat ▲ ((++) ▲ ((:) ▲ a b) y)
+     ≡
+     (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y))))
 Goal:
   (concat ▲ ((++) ▲ (undefined ▲) y)
    ≡
@@ -869,8 +775,6 @@ Goal:
     (concat ▲ ((++) ▲ ((:) ▲ a b) y)
      ≡
      (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y))))
-[Done]
-
 Goal:
   (concat ▲ ((++) ▲ (undefined ▲) y)
    ≡
@@ -886,22 +790,16 @@ Goal:
     (concat ▲ ((++) ▲ ((:) ▲ a b) y)
      ≡
      (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y))))
-[Done]
-
 Goal:
   concat ▲ ((++) ▲ (undefined ▲) y)
   ≡
   (++) ▲ (concat ▲ (undefined ▲)) (concat ▲ y)
-[Done]
-
 Goal:
   undefined ▲
   ≡
   case concat ▲ (undefined ▲) of wild ▲
     [] → concat ▲ y
     (:) x xs → (:) ▲ x ((++) ▲ xs (concat ▲ y))
-[Done]
-
 Goal:
   undefined ▲
   ≡
@@ -911,12 +809,8 @@ Goal:
    of wild ▲
     [] → concat ▲ y
     (:) x xs → (:) ▲ x ((++) ▲ xs (concat ▲ y))
-[Done]
-
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -930,8 +824,6 @@ Goal:
     (concat ▲ ((++) ▲ ((:) ▲ a b) y)
      ≡
      (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y))))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -945,8 +837,6 @@ Goal:
     (concat ▲ ((++) ▲ ((:) ▲ a b) y)
      ≡
      (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y))))
-[Done]
-
 Goal:
   (concat ▲ ((++) ▲ ([] ▲) y)
    ≡
@@ -958,24 +848,14 @@ Goal:
    (concat ▲ ((++) ▲ ((:) ▲ a b) y)
     ≡
     (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y)))
-[Done]
-
 Goal:
   concat ▲ ((++) ▲ ([] ▲) y) ≡ (++) ▲ (concat ▲ ([] ▲)) (concat ▲ y)
-[Done]
-
 Goal:
   concat ▲ y ≡ (++) ▲ (concat ▲ ([] ▲)) (concat ▲ y)
-[Done]
-
 Goal:
   concat ▲ y ≡ concat ▲ y
-[Done]
-
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -987,8 +867,6 @@ Goal:
     (concat ▲ ((++) ▲ ((:) ▲ a b) y)
      ≡
      (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y))))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -1000,8 +878,6 @@ Goal:
     (concat ▲ ((++) ▲ ((:) ▲ a b) y)
      ≡
      (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y))))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -1011,8 +887,6 @@ Goal:
    (concat ▲ ((++) ▲ ((:) ▲ a b) y)
     ≡
     (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y)))
-[Done]
-
 Goal:
   ∀ a b.
   (concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y))
@@ -1020,16 +894,19 @@ Goal:
   (concat ▲ ((++) ▲ ((:) ▲ a b) y)
    ≡
    (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y))
-[Done]
-
+Goal:
+  ∀ b.
+  (concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y))
+  ⇒
+  (concat ▲ ((++) ▲ ((:) ▲ a b) y)
+   ≡
+   (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y))
 Goal:
   (concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y))
   ⇒
   (concat ▲ ((++) ▲ ((:) ▲ a b) y)
    ≡
    (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y))
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y)
@@ -1037,8 +914,6 @@ Goal:
   concat ▲ ((++) ▲ ((:) ▲ a b) y)
   ≡
   (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y)
@@ -1046,8 +921,6 @@ Goal:
   (++) ▲ a ((++) ▲ (concat ▲ b) (concat ▲ y))
   ≡
   (++) ▲ (concat ▲ ((:) ▲ a b)) (concat ▲ y)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y)
@@ -1055,15 +928,11 @@ Goal:
   (++) ▲ a ((++) ▲ (concat ▲ b) (concat ▲ y))
   ≡
   (++) ▲ a ((++) ▲ (concat ▲ b) (concat ▲ y))
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y)
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -1073,8 +942,6 @@ Goal:
     (concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y))
     ⇒
     (true)))
-[Done]
-
 Goal:
   ∀ △ y.
   (true)
@@ -1085,9 +952,8 @@ Goal:
     (concat ▲ ((++) ▲ b y) ≡ (++) ▲ (concat ▲ b) (concat ▲ y))
     ⇒
     (true)))
-[Done]
-
 Successfully proven: concat-append
+
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]
@@ -1097,16 +963,10 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
 concat-concat (Not Proven)
   ∀ △ x. concat ▲ (concat ▲ x) ≡ concat ▲ (map ▲ ▲ (concat ▲) x)
-[Done]
-
 Goal:
   ∀ △ x. concat ▲ (concat ▲ x) ≡ concat ▲ (map ▲ ▲ (concat ▲) x)
-[Done]
-
 Goal:
   ∀ △.
   (concat ▲ (concat ▲ (undefined ▲))
@@ -1123,8 +983,7 @@ Goal:
     (concat ▲ (concat ▲ ((:) ▲ a b))
      ≡
      concat ▲ (map ▲ ▲ (concat ▲) ((:) ▲ a b)))))
-[Done]
-
+"starting here"
 Goal:
   ∀ △.
   (concat ▲ (concat ▲ (undefined ▲))
@@ -1141,8 +1000,6 @@ Goal:
     (concat ▲ (concat ▲ ((:) ▲ a b))
      ≡
      concat ▲ (map ▲ ▲ (concat ▲) ((:) ▲ a b)))))
-[Done]
-
 Goal:
   (concat ▲ (concat ▲ (undefined ▲))
    ≡
@@ -1158,8 +1015,6 @@ Goal:
     (concat ▲ (concat ▲ ((:) ▲ a b))
      ≡
      concat ▲ (map ▲ ▲ (concat ▲) ((:) ▲ a b)))))
-[Done]
-
 Goal:
   (concat ▲ (concat ▲ (undefined ▲))
    ≡
@@ -1175,26 +1030,18 @@ Goal:
     (concat ▲ (concat ▲ ((:) ▲ a b))
      ≡
      concat ▲ (map ▲ ▲ (concat ▲) ((:) ▲ a b)))))
-[Done]
-
 Goal:
   concat ▲ (concat ▲ (undefined ▲))
   ≡
   concat ▲ (map ▲ ▲ (concat ▲) (undefined ▲))
-[Done]
-
 Goal:
   undefined ▲ ≡ concat ▲ (map ▲ ▲ (concat ▲) (undefined ▲))
-[Done]
-
 Goal:
   undefined ▲
   ≡
   case map ▲ ▲ (concat ▲) (undefined ▲) of wild ▲
     [] → [] ▲
     (:) x xs → (++) ▲ x (concat ▲ xs)
-[Done]
-
 Goal:
   undefined ▲
   ≡
@@ -1204,12 +1051,8 @@ Goal:
    of wild ▲
     [] → [] ▲
     (:) x xs → (++) ▲ x (concat ▲ xs)
-[Done]
-
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -1223,8 +1066,6 @@ Goal:
     (concat ▲ (concat ▲ ((:) ▲ a b))
      ≡
      concat ▲ (map ▲ ▲ (concat ▲) ((:) ▲ a b)))))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -1238,8 +1079,6 @@ Goal:
     (concat ▲ (concat ▲ ((:) ▲ a b))
      ≡
      concat ▲ (map ▲ ▲ (concat ▲) ((:) ▲ a b)))))
-[Done]
-
 Goal:
   (concat ▲ (concat ▲ ([] ▲)) ≡ concat ▲ (map ▲ ▲ (concat ▲) ([] ▲)))
   ∧
@@ -1249,24 +1088,14 @@ Goal:
    (concat ▲ (concat ▲ ((:) ▲ a b))
     ≡
     concat ▲ (map ▲ ▲ (concat ▲) ((:) ▲ a b))))
-[Done]
-
 Goal:
   concat ▲ (concat ▲ ([] ▲)) ≡ concat ▲ (map ▲ ▲ (concat ▲) ([] ▲))
-[Done]
-
 Goal:
   [] ▲ ≡ concat ▲ (map ▲ ▲ (concat ▲) ([] ▲))
-[Done]
-
 Goal:
   [] ▲ ≡ [] ▲
-[Done]
-
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -1278,8 +1107,7 @@ Goal:
     (concat ▲ (concat ▲ ((:) ▲ a b))
      ≡
      concat ▲ (map ▲ ▲ (concat ▲) ((:) ▲ a b)))))
-[Done]
-
+"here"
 Goal:
   (true)
   ∧
@@ -1291,8 +1119,6 @@ Goal:
     (concat ▲ (concat ▲ ((:) ▲ a b))
      ≡
      concat ▲ (map ▲ ▲ (concat ▲) ((:) ▲ a b)))))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -1302,8 +1128,6 @@ Goal:
    (concat ▲ (concat ▲ ((:) ▲ a b))
     ≡
     concat ▲ (map ▲ ▲ (concat ▲) ((:) ▲ a b))))
-[Done]
-
 Goal:
   ∀ a b.
   (concat ▲ (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (concat ▲) b))
@@ -1311,16 +1135,19 @@ Goal:
   (concat ▲ (concat ▲ ((:) ▲ a b))
    ≡
    concat ▲ (map ▲ ▲ (concat ▲) ((:) ▲ a b)))
-[Done]
-
+Goal:
+  ∀ b.
+  (concat ▲ (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (concat ▲) b))
+  ⇒
+  (concat ▲ (concat ▲ ((:) ▲ a b))
+   ≡
+   concat ▲ (map ▲ ▲ (concat ▲) ((:) ▲ a b)))
 Goal:
   (concat ▲ (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (concat ▲) b))
   ⇒
   (concat ▲ (concat ▲ ((:) ▲ a b))
    ≡
    concat ▲ (map ▲ ▲ (concat ▲) ((:) ▲ a b)))
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   concat ▲ (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (concat ▲) b)
@@ -1328,8 +1155,6 @@ Goal:
   concat ▲ (concat ▲ ((:) ▲ a b))
   ≡
   concat ▲ (map ▲ ▲ (concat ▲) ((:) ▲ a b))
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   concat ▲ (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (concat ▲) b)
@@ -1337,22 +1162,16 @@ Goal:
   concat ▲ ((++) ▲ a (concat ▲ b))
   ≡
   concat ▲ (map ▲ ▲ (concat ▲) ((:) ▲ a b))
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   concat ▲ (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (concat ▲) b)
 Goal:
   concat ▲ ((++) ▲ a (concat ▲ b)) ≡ concat ▲ ((++) ▲ a (concat ▲ b))
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   concat ▲ (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (concat ▲) b)
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -1362,8 +1181,6 @@ Goal:
     (concat ▲ (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (concat ▲) b))
     ⇒
     (true)))
-[Done]
-
 Goal:
   ∀ △.
   (true)
@@ -1374,9 +1191,8 @@ Goal:
     (concat ▲ (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (concat ▲) b))
     ⇒
     (true)))
-[Done]
-
 Successfully proven: concat-concat
+
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]
@@ -1386,65 +1202,46 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
 map-concat (Not Proven)
   ∀ △ △ f xs.
   map ▲ ▲ f (concat ▲ xs) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) xs)
-[Done]
-
 map-append (Not Proven)
   ∀ △ △ f x y.
   map ▲ ▲ f ((++) ▲ x y) ≡ (++) ▲ (map ▲ ▲ f x) (map ▲ ▲ f y)
-[Done]
-
 append-nonempty (Not Proven)
   ∀ △ x1 xs ys. (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
-[Done]
-
 Goal:
   ∀ △ x1 xs ys. (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
-[Done]
-
 Goal:
   ∀ △ x1 xs ys. (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
-[Done]
-
+Goal:
+  ∀ x1 xs ys. (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
+Goal:
+  ∀ xs ys. (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
+Goal:
+  ∀ ys. (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
 Goal:
   (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
-[Done]
-
 Goal:
   (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
-[Done]
-
 Goal:
   (++) ▲ ((:) ▲ x1 xs) ys
-[Done]
-
 Goal:
   case (:) ▲ x1 xs of wild ▲
     [] → ys
     (:) x xs → (:) ▲ x ((++) ▲ xs ys)
-[Done]
-
 Goal:
   (:) ▲ x1 ((++) ▲ xs ys)
   ≡
   case (:) ▲ x1 xs of wild ▲
     [] → ys
     (:) x xs → (:) ▲ x ((++) ▲ xs ys)
-[Done]
-
 Goal:
   true
-[Done]
-
 Goal:
   ∀ △ x1 xs ys. true
-[Done]
-
 Successfully proven: append-nonempty
+
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]
@@ -1454,41 +1251,33 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
 map-nonempty (Not Proven)
   ∀ △ △ f a as. map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
-[Done]
-
 Goal:
   ∀ △ △ f a as. map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
-[Done]
-
 Goal:
   ∀ △ △ f a as. map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
-[Done]
-
 Goal:
-  map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
-[Done]
-
+  ∀ △ f a as. map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
 Goal:
+  ∀ f a as. map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
+Goal:
+  ∀ a as. map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
+Goal:
+  ∀ as. map ▲ ▲ f ((:) ▲ a as) ≡ (:) ▲ (f a) (map ▲ ▲ f as)
+Goal:
+  ∀ as.
   case (:) ▲ a as of wild ▲
     [] → [] ▲
     (:) a as → (:) ▲ (f a) (map ▲ ▲ f as)
   ≡
   (:) ▲ (f a) (map ▲ ▲ f as)
-[Done]
-
 Goal:
   true
-[Done]
-
 Goal:
-  ∀ △ △ f a as. true
-[Done]
-
+  ∀ △ △ f a. true
 Successfully proven: map-nonempty
+
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]
@@ -1498,13 +1287,9 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
 Goal:
   ∀ △ △ f x y.
   map ▲ ▲ f ((++) ▲ x y) ≡ (++) ▲ (map ▲ ▲ f x) (map ▲ ▲ f y)
-[Done]
-
 Goal:
   ∀ △ △ f y.
   (map ▲ ▲ f ((++) ▲ (undefined ▲) y)
@@ -1521,8 +1306,6 @@ Goal:
     (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
      ≡
      (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
-[Done]
-
 Goal:
   ∀ △ △ f y.
   (map ▲ ▲ f ((++) ▲ (undefined ▲) y)
@@ -1539,8 +1322,54 @@ Goal:
     (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
      ≡
      (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
-[Done]
-
+Goal:
+  ∀ △ f y.
+  (map ▲ ▲ f ((++) ▲ (undefined ▲) y)
+   ≡
+   (++) ▲ (map ▲ ▲ f (undefined ▲)) (map ▲ ▲ f y))
+  ∧
+  ((map ▲ ▲ f ((++) ▲ ([] ▲) y)
+    ≡
+    (++) ▲ (map ▲ ▲ f ([] ▲)) (map ▲ ▲ f y))
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
+    ⇒
+    (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
+     ≡
+     (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
+Goal:
+  ∀ f y.
+  (map ▲ ▲ f ((++) ▲ (undefined ▲) y)
+   ≡
+   (++) ▲ (map ▲ ▲ f (undefined ▲)) (map ▲ ▲ f y))
+  ∧
+  ((map ▲ ▲ f ((++) ▲ ([] ▲) y)
+    ≡
+    (++) ▲ (map ▲ ▲ f ([] ▲)) (map ▲ ▲ f y))
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
+    ⇒
+    (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
+     ≡
+     (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
+Goal:
+  ∀ y.
+  (map ▲ ▲ f ((++) ▲ (undefined ▲) y)
+   ≡
+   (++) ▲ (map ▲ ▲ f (undefined ▲)) (map ▲ ▲ f y))
+  ∧
+  ((map ▲ ▲ f ((++) ▲ ([] ▲) y)
+    ≡
+    (++) ▲ (map ▲ ▲ f ([] ▲)) (map ▲ ▲ f y))
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
+    ⇒
+    (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
+     ≡
+     (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
 Goal:
   (map ▲ ▲ f ((++) ▲ (undefined ▲) y)
    ≡
@@ -1556,8 +1385,6 @@ Goal:
     (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
      ≡
      (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
-[Done]
-
 Goal:
   (map ▲ ▲ f ((++) ▲ (undefined ▲) y)
    ≡
@@ -1573,14 +1400,10 @@ Goal:
     (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
      ≡
      (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
-[Done]
-
 Goal:
   map ▲ ▲ f ((++) ▲ (undefined ▲) y)
   ≡
   (++) ▲ (map ▲ ▲ f (undefined ▲)) (map ▲ ▲ f y)
-[Done]
-
 Goal:
   (λ △ △ ds ds →
      case ds of wild ▲
@@ -1597,8 +1420,6 @@ Goal:
            case ds of wild ▲
              [] → [] ▲
              (:) a as → (:) ▲ (ds a) (map ▲ ▲ ds as)) ▲ ▲ f y)
-[Done]
-
 Goal:
   (λ △ △ ds ds →
      case ds of wild ▲
@@ -1630,12 +1451,8 @@ Goal:
                                                 (:) a as →
                                                   (:) ▲ (ds a)
                                                       (map ▲ ▲ ds as)) ▲ ▲ f y)
-[Done]
-
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -1649,8 +1466,6 @@ Goal:
     (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
      ≡
      (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -1664,8 +1479,6 @@ Goal:
     (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
      ≡
      (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
-[Done]
-
 Goal:
   (map ▲ ▲ f ((++) ▲ ([] ▲) y)
    ≡
@@ -1677,26 +1490,16 @@ Goal:
    (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
     ≡
     (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y)))
-[Done]
-
 Goal:
   map ▲ ▲ f ((++) ▲ ([] ▲) y)
   ≡
   (++) ▲ (map ▲ ▲ f ([] ▲)) (map ▲ ▲ f y)
-[Done]
-
 Goal:
   map ▲ ▲ f y ≡ (++) ▲ (map ▲ ▲ f ([] ▲)) (map ▲ ▲ f y)
-[Done]
-
 Goal:
   map ▲ ▲ f y ≡ map ▲ ▲ f y
-[Done]
-
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -1708,8 +1511,6 @@ Goal:
     (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
      ≡
      (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -1721,8 +1522,6 @@ Goal:
     (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
      ≡
      (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -1732,8 +1531,6 @@ Goal:
    (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
     ≡
     (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y)))
-[Done]
-
 Goal:
   ∀ a b.
   (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
@@ -1741,16 +1538,19 @@ Goal:
   (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
    ≡
    (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))
-[Done]
-
+Goal:
+  ∀ b.
+  (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
+  ⇒
+  (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
+   ≡
+   (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))
 Goal:
   (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
   ⇒
   (map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
    ≡
    (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y))
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y)
@@ -1758,8 +1558,6 @@ Goal:
   map ▲ ▲ f ((++) ▲ ((:) ▲ a b) y)
   ≡
   (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y)
@@ -1767,15 +1565,11 @@ Goal:
   (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y)
   ≡
   (++) ▲ (map ▲ ▲ f ((:) ▲ a b)) (map ▲ ▲ f y)
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y)
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -1785,8 +1579,6 @@ Goal:
     (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
     ⇒
     (true)))
-[Done]
-
 Goal:
   ∀ △ △ f y.
   (true)
@@ -1797,9 +1589,8 @@ Goal:
     (map ▲ ▲ f ((++) ▲ b y) ≡ (++) ▲ (map ▲ ▲ f b) (map ▲ ▲ f y))
     ⇒
     (true)))
-[Done]
-
 Successfully proven: map-append
+
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]
@@ -1809,33 +1600,20 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
 concat-nonempty (Not Proven)
   ∀ △ x xs. concat ▲ ((:) ▲ x xs) ≡ (++) ▲ x (concat ▲ xs)
-[Done]
-
 Goal:
   ∀ △ x xs. concat ▲ ((:) ▲ x xs) ≡ (++) ▲ x (concat ▲ xs)
-[Done]
-
 Goal:
   ∀ △ x xs. concat ▲ ((:) ▲ x xs) ≡ (++) ▲ x (concat ▲ xs)
-[Done]
-
 Goal:
-  concat ▲ ((:) ▲ x xs) ≡ (++) ▲ x (concat ▲ xs)
-[Done]
-
+  ∀ x xs. concat ▲ ((:) ▲ x xs) ≡ (++) ▲ x (concat ▲ xs)
 Goal:
-  (++) ▲ x (concat ▲ xs) ≡ (++) ▲ x (concat ▲ xs)
-[Done]
-
+  ∀ x xs. (++) ▲ x (concat ▲ xs) ≡ (++) ▲ x (concat ▲ xs)
 Goal:
   ∀ △ x xs. (++) ▲ x (concat ▲ xs) ≡ (++) ▲ x (concat ▲ xs)
-[Done]
-
 Successfully proven: concat-nonempty
+
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]
@@ -1845,13 +1623,9 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
 Goal:
   ∀ △ △ f xs.
   map ▲ ▲ f (concat ▲ xs) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) xs)
-[Done]
-
 Goal:
   ∀ △ △ f.
   (map ▲ ▲ f (concat ▲ (undefined ▲))
@@ -1868,8 +1642,6 @@ Goal:
     (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
      ≡
      concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b)))))
-[Done]
-
 Goal:
   ∀ △ △ f.
   (map ▲ ▲ f (concat ▲ (undefined ▲))
@@ -1886,8 +1658,38 @@ Goal:
     (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
      ≡
      concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b)))))
-[Done]
-
+Goal:
+  ∀ △ f.
+  (map ▲ ▲ f (concat ▲ (undefined ▲))
+   ≡
+   concat ▲ (map ▲ ▲ (map ▲ ▲ f) (undefined ▲)))
+  ∧
+  ((map ▲ ▲ f (concat ▲ ([] ▲))
+    ≡
+    concat ▲ (map ▲ ▲ (map ▲ ▲ f) ([] ▲)))
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
+    ⇒
+    (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
+     ≡
+     concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b)))))
+Goal:
+  ∀ f.
+  (map ▲ ▲ f (concat ▲ (undefined ▲))
+   ≡
+   concat ▲ (map ▲ ▲ (map ▲ ▲ f) (undefined ▲)))
+  ∧
+  ((map ▲ ▲ f (concat ▲ ([] ▲))
+    ≡
+    concat ▲ (map ▲ ▲ (map ▲ ▲ f) ([] ▲)))
+   ∧
+   (∀ a b.
+    (map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
+    ⇒
+    (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
+     ≡
+     concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b)))))
 Goal:
   (map ▲ ▲ f (concat ▲ (undefined ▲))
    ≡
@@ -1903,8 +1705,6 @@ Goal:
     (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
      ≡
      concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b)))))
-[Done]
-
 Goal:
   (map ▲ ▲ f (concat ▲ (undefined ▲))
    ≡
@@ -1920,14 +1720,10 @@ Goal:
     (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
      ≡
      concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b)))))
-[Done]
-
 Goal:
   map ▲ ▲ f (concat ▲ (undefined ▲))
   ≡
   concat ▲ (map ▲ ▲ (map ▲ ▲ f) (undefined ▲))
-[Done]
-
 Goal:
   (λ △ △ ds ds →
      case ds of wild ▲
@@ -1950,8 +1746,6 @@ Goal:
                                                                               ▲
                                                                               f)
                                                         (undefined ▲))
-[Done]
-
 Goal:
   (λ △ △ ds ds →
      case ds of wild ▲
@@ -1991,12 +1785,8 @@ Goal:
                                                                                              ▲
                                                                                              f)
                                                                        (undefined ▲))
-[Done]
-
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -2010,8 +1800,6 @@ Goal:
     (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
      ≡
      concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b)))))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -2025,8 +1813,6 @@ Goal:
     (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
      ≡
      concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b)))))
-[Done]
-
 Goal:
   (map ▲ ▲ f (concat ▲ ([] ▲))
    ≡
@@ -2038,24 +1824,14 @@ Goal:
    (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
     ≡
     concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b))))
-[Done]
-
 Goal:
   map ▲ ▲ f (concat ▲ ([] ▲)) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) ([] ▲))
-[Done]
-
 Goal:
   [] ▲ ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) ([] ▲))
-[Done]
-
 Goal:
   [] ▲ ≡ [] ▲
-[Done]
-
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -2067,8 +1843,6 @@ Goal:
     (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
      ≡
      concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b)))))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -2080,8 +1854,6 @@ Goal:
     (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
      ≡
      concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b)))))
-[Done]
-
 Goal:
   (true)
   ∧
@@ -2091,8 +1863,6 @@ Goal:
    (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
     ≡
     concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b))))
-[Done]
-
 Goal:
   ∀ a b.
   (map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
@@ -2100,16 +1870,19 @@ Goal:
   (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
    ≡
    concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b)))
-[Done]
-
+Goal:
+  ∀ b.
+  (map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
+  ⇒
+  (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
+   ≡
+   concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b)))
 Goal:
   (map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
   ⇒
   (map ▲ ▲ f (concat ▲ ((:) ▲ a b))
    ≡
    concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b)))
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b)
@@ -2117,8 +1890,6 @@ Goal:
   map ▲ ▲ f (concat ▲ ((:) ▲ a b))
   ≡
   concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b))
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b)
@@ -2126,8 +1897,6 @@ Goal:
   (++) ▲ (map ▲ ▲ f a) (concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
   ≡
   concat ▲ (map ▲ ▲ (map ▲ ▲ f) ((:) ▲ a b))
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b)
@@ -2135,15 +1904,11 @@ Goal:
   (++) ▲ (map ▲ ▲ f a) (concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
   ≡
   (++) ▲ (map ▲ ▲ f a) (concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
-[Done]
-
 Assumed lemmas: 
 ind-hyp-0 (Built In)
   map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b)
 Goal:
   true
-[Done]
-
 Goal:
   (true)
   ∧
@@ -2153,8 +1918,6 @@ Goal:
     (map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
     ⇒
     (true)))
-[Done]
-
 Goal:
   ∀ △ △ f.
   (true)
@@ -2165,9 +1928,8 @@ Goal:
     (map ▲ ▲ f (concat ▲ b) ≡ concat ▲ (map ▲ ▲ (map ▲ ▲ f) b))
     ⇒
     (true)))
-[Done]
-
 Successfully proven: map-concat
+
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]
@@ -2177,138 +1939,97 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
+"got here"
 monad-assoc (Not Proven)
   ∀ △ △ △ m f g.
   bind ▲ ▲ (bind ▲ ▲ m f) g ≡ bind ▲ ▲ m (λ x → bind ▲ ▲ (f x) g)
-[Done]
-
 Goal:
   ∀ △ △ △ m f g.
   bind ▲ ▲ (bind ▲ ▲ m f) g ≡ bind ▲ ▲ m (λ x → bind ▲ ▲ (f x) g)
-[Done]
-
 Goal:
   ∀ △ △ △ m f g.
   bind ▲ ▲ (bind ▲ ▲ m f) g ≡ bind ▲ ▲ m (λ x → bind ▲ ▲ (f x) g)
-[Done]
-
+Goal:
+  ∀ △ △ m f g.
+  bind ▲ ▲ (bind ▲ ▲ m f) g ≡ bind ▲ ▲ m (λ x → bind ▲ ▲ (f x) g)
+Goal:
+  ∀ △ m f g.
+  bind ▲ ▲ (bind ▲ ▲ m f) g ≡ bind ▲ ▲ m (λ x → bind ▲ ▲ (f x) g)
+Goal:
+  ∀ m f g.
+  bind ▲ ▲ (bind ▲ ▲ m f) g ≡ bind ▲ ▲ m (λ x → bind ▲ ▲ (f x) g)
+Goal:
+  ∀ f g.
+  bind ▲ ▲ (bind ▲ ▲ m f) g ≡ bind ▲ ▲ m (λ x → bind ▲ ▲ (f x) g)
+Goal:
+  ∀ g.
+  bind ▲ ▲ (bind ▲ ▲ m f) g ≡ bind ▲ ▲ m (λ x → bind ▲ ▲ (f x) g)
 Goal:
   bind ▲ ▲ (bind ▲ ▲ m f) g ≡ bind ▲ ▲ m (λ x → bind ▲ ▲ (f x) g)
-[Done]
-
+"got here as well"
 Goal:
   concat ▲ (map ▲ ▲ (concat ▲) (map ▲ ▲ (map ▲ ▲ g) (map ▲ ▲ f m)))
   ≡
   bind ▲ ▲ m (λ x → bind ▲ ▲ (f x) g)
-[Done]
-
+"not here?"
 Goal:
   concat ▲ (map ▲ ▲ (concat ▲) (map ▲ ▲ (map ▲ ▲ g) (map ▲ ▲ f m)))
   ≡
   bind ▲ ▲ m (λ x → bind ▲ ▲ (f x) g)
-[Done]
-
 Goal:
   bind ▲ ▲ m (λ x → bind ▲ ▲ (f x) g)
-[Done]
-
 Goal:
   concat ▲ (map ▲ ▲ (λ x → concat ▲ (map ▲ ▲ g (f x))) m)
-[Done]
-
 Goal:
   concat ▲ (map ▲ ▲ (λ x → concat ▲ (map ▲ ▲ g (f x))) m)
-[Done]
-
 Goal:
   map ▲ ▲ (λ x → concat ▲ (map ▲ ▲ g (f x))) m
-[Done]
-
 Goal:
   map ▲ ▲ (λ x → concat ▲ (map ▲ ▲ g (f x)))
-[Done]
-
 Goal:
   λ x → concat ▲ (map ▲ ▲ g (f x))
-[Done]
-
 Goal:
   concat ▲ (map ▲ ▲ g (f x))
-[Done]
-
 Goal:
   map ▲ ▲ g (f x)
-[Done]
-
 Goal:
   (.) ▲ ▲ ▲ (map ▲ ▲ g) f x
-[Done]
-
 Goal:
   concat ▲ (map ▲ ▲ (λ x → concat ▲ ((.) ▲ ▲ ▲ (map ▲ ▲ g) f x)) m)
-[Done]
-
 Goal:
   concat ▲ (map ▲ ▲ (λ x → concat ▲ ((.) ▲ ▲ ▲ (map ▲ ▲ g) f x)) m)
-[Done]
-
 Goal:
   map ▲ ▲ (λ x → concat ▲ ((.) ▲ ▲ ▲ (map ▲ ▲ g) f x)) m
-[Done]
-
 Goal:
   map ▲ ▲ (λ x → concat ▲ ((.) ▲ ▲ ▲ (map ▲ ▲ g) f x))
-[Done]
-
 Goal:
   λ x → concat ▲ ((.) ▲ ▲ ▲ (map ▲ ▲ g) f x)
-[Done]
-
 Goal:
   λ x → (.) ▲ ▲ ▲ (concat ▲) ((.) ▲ ▲ ▲ ((.) ▲ ▲ ▲) (map ▲ ▲) g f) x
-[Done]
-
 Goal:
   (.) ▲ ▲ ▲ (concat ▲) ((.) ▲ ▲ ▲ ((.) ▲ ▲ ▲) (map ▲ ▲) g f)
-[Done]
-
 Goal:
   concat ▲
          (map ▲ ▲
               ((.) ▲ ▲ ▲ (concat ▲) ((.) ▲ ▲ ▲ ((.) ▲ ▲ ▲) (map ▲ ▲) g f)) m)
-[Done]
-
 Goal:
   concat ▲
          (map ▲ ▲ (concat ▲)
               (map ▲ ▲ ((.) ▲ ▲ ▲ ((.) ▲ ▲ ▲) (map ▲ ▲) g f) m))
-[Done]
-
 Goal:
   concat ▲ (map ▲ ▲ (concat ▲) (map ▲ ▲ ((.) ▲ ▲ ▲ (map ▲ ▲ g) f) m))
-[Done]
-
 Goal:
   concat ▲ (map ▲ ▲ (concat ▲) (map ▲ ▲ (map ▲ ▲ g) (map ▲ ▲ f m)))
-[Done]
-
 Goal:
   concat ▲ (map ▲ ▲ (concat ▲) (map ▲ ▲ (map ▲ ▲ g) (map ▲ ▲ f m)))
   ≡
   concat ▲ (map ▲ ▲ (concat ▲) (map ▲ ▲ (map ▲ ▲ g) (map ▲ ▲ f m)))
-[Done]
-
 Goal:
   true
-[Done]
-
 Goal:
   ∀ △ △ △ m f g. true
-[Done]
-
 Successfully proven: monad-assoc
+
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]
@@ -2318,12 +2039,7 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
-HERMIT> 
-[Done]
-
-Leaving GHCi.
+HERMIT> Leaving GHCi.
 ghc: user interrupt
 [starting HERMIT-shell v0.1.0.0 on ListLaws.hs]
 [starting HERMIT v1.0.0.0 on ListLaws.hs]

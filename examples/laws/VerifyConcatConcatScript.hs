@@ -63,7 +63,7 @@ concatConcat = do
         apply reflexivity
 
         -- cons case
-      pathS [conjRhs, conjRhs, forallBody, consequent] $ do
+      pathS [conjRhs, conjRhs, forallBody, forallBody, consequent] $ do
         apply . lhsR $ consLeft
         apply . rhsR $ consRight
         apply reflexivity
