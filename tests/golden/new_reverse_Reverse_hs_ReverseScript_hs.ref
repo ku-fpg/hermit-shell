@@ -9,10 +9,6 @@ module Main where
   main ∷ IO ()
   main ∷ IO ()
 [1 of 1] Compiling ReverseScript    ( ReverseScript.hs, interpreted )
-
-ReverseScript.hs:66:1: Warning: Tab character
-
-ReverseScript.hs:67:1: Warning: Tab character
 Ok, modules loaded: ReverseScript.
 module Main where
   rev ∷ ∀ a . [a] → [a]
