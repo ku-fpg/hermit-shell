@@ -10,57 +10,42 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
 [1 of 1] Compiling VerifyAppendNonemptyScript ( VerifyAppendNonemptyScript.hs, interpreted )
 Ok, modules loaded: VerifyAppendNonemptyScript.
 append-nonempty (Not Proven)
   ∀ △ x1 xs ys. (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
-[Done]
-
 Goal:
   ∀ △ x1 xs ys. (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
-[Done]
-
 Goal:
   ∀ △ x1 xs ys. (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
-[Done]
-
+Goal:
+  ∀ x1 xs ys. (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
+Goal:
+  ∀ xs ys. (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
+Goal:
+  ∀ ys. (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
 Goal:
   (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
-[Done]
-
 Goal:
   (:) ▲ x1 ((++) ▲ xs ys) ≡ (++) ▲ ((:) ▲ x1 xs) ys
-[Done]
-
 Goal:
   (++) ▲ ((:) ▲ x1 xs) ys
-[Done]
-
 Goal:
   case (:) ▲ x1 xs of wild ▲
     [] → ys
     (:) x xs → (:) ▲ x ((++) ▲ xs ys)
-[Done]
-
 Goal:
   (:) ▲ x1 ((++) ▲ xs ys)
   ≡
   case (:) ▲ x1 xs of wild ▲
     [] → ys
     (:) x xs → (:) ▲ x ((++) ▲ xs ys)
-[Done]
-
 Goal:
   true
-[Done]
-
 Goal:
   ∀ △ x1 xs ys. true
-[Done]
-
 Successfully proven: append-nonempty
+
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]
@@ -70,12 +55,7 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[Done]
-
-HERMIT> 
-[Done]
-
-Leaving GHCi.
+HERMIT> Leaving GHCi.
 ghc: user interrupt
 [starting HERMIT-shell v0.1.0.0 on ListLaws.hs]
 [starting HERMIT v1.0.0.0 on ListLaws.hs]
