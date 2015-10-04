@@ -21,7 +21,7 @@ script =
         apply $ pathR [conjRhs, conjLhs] baseCase
 
           -- cons case
-        pathS [conjRhs, conjRhs, forallBody, consequent] $ do
+        pathS [conjRhs, conjRhs, forallBody, forallBody, consequent] $ do
           pathS [eqLhs] $ do
             apply inductiveStep
             apply $ pathR [appArg] $ lemmaForward "ind-hyp-0"
