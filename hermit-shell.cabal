@@ -8,7 +8,7 @@ name:                hermit-shell
 --                   | | | +--- code changes with no API change
 version:             0.1.0.0
 synopsis:            HERMIT Plugin which uses GHCi instead of HERMIT Shell
--- description:
+description:         TODO
 homepage:            http://www.ittc.ku.edu/csdl/fpg
 license:             BSD3
 license-file:        LICENSE
