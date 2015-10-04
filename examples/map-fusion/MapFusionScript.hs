@@ -14,9 +14,10 @@ script = do
 
     apply $ induction "xs"
 
-    pathS [forallBody] $ do
+    pathS [forallBody,forallBody,forallBody,forallBody,forallBody] $ do
         -- undefined case
-      pathS [conjLhs, forallBody] $ do
+
+      pathS [conjLhs] $ do
         apply . rhsR $ unfoldWith "map"
         apply . rhsR $ undefinedCase
         apply . lhsR $ anyBU (unfoldWith "map")
@@ -25,12 +26,12 @@ script = do
         apply reflexivity
 
         -- nil case
-      pathS [conjRhs, conjLhs, forallBody] $ do
+      pathS [conjRhs, conjLhs] $ do
         apply . bothR $ anyBU (unfoldWith "map" >>> caseReduce)
         apply reflexivity
 
         -- cons case
-      pathS [conjRhs, conjRhs, forallBody, consequent] $ do
+      pathS [conjRhs, conjRhs, forallBody, forallBody, consequent] $ do
         apply . bothR $ anyBU (unfoldWith "map" >>> caseReduce)
 
         apply . rhsR . oneTD $ lemmaBackward "ind-hyp-0"
