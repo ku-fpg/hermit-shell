@@ -31,7 +31,7 @@ library
                         data-default-class,
                         filepath,
                         haskeline,
-                        hermit >= 0.4,
+                        hermit              == 1.0.0.1,
                         http-types,
                         kure,
                         lens,

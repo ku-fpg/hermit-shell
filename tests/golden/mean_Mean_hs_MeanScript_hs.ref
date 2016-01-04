@@ -1,6 +1,6 @@
 [1 of 1] Compiling Main             ( Mean.hs, Mean.o )
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
-GHCi, version 7.10.2: http://www.haskell.org/ghc/  :? for help
+GHCi, version 7.10.3: http://www.haskell.org/ghc/  :? for help
 module Main where
   sum ∷ [Int] → Int
   length ∷ [Int] → Int
@@ -158,5 +158,5 @@ HERMIT> Leaving GHCi.
 ghc: user interrupt
 Linking Mean ...
 [starting HERMIT-shell v0.1.0.0 on Mean.hs]
-[starting HERMIT v1.0.0.0 on Mean.hs]
+[starting HERMIT v1.0.0.1 on Mean.hs]
 % ghc Mean.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:Main: -fplugin-opt=HERMIT.GHCI:Main:MeanScript.hs -fplugin-opt=HERMIT.GHCI:Main:resume -w

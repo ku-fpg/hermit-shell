@@ -1,7 +1,7 @@
 [1 of 2] Compiling HList            ( HList.hs, HList.o )
 [2 of 2] Compiling Main             ( Flatten.hs, Flatten.o )
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
-GHCi, version 7.10.2: http://www.haskell.org/ghc/  :? for help
+GHCi, version 7.10.3: http://www.haskell.org/ghc/  :? for help
 module Main where
   flatten ∷ ∀ a . Tree a → [a]
   $dShow ∷ Show [Char]
@@ -151,5 +151,5 @@ Leaving GHCi.
 ghc: user interrupt
 Linking Flatten ...
 [starting HERMIT-shell v0.1.0.0 on Flatten.hs]
-[starting HERMIT v1.0.0.0 on Flatten.hs]
+[starting HERMIT v1.0.0.1 on Flatten.hs]
 % ghc Flatten.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:Main: -fplugin-opt=HERMIT.GHCI:Main:FlattenScript.hs -fplugin-opt=HERMIT.GHCI:Main:resume -w

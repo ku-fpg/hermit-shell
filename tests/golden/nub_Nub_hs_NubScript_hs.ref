@@ -1,6 +1,6 @@
 [1 of 1] Compiling Main             ( Nub.hs, Nub.o )
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
-GHCi, version 7.10.2: http://www.haskell.org/ghc/  :? for help
+GHCi, version 7.10.3: http://www.haskell.org/ghc/  :? for help
 module Main where
   absN ∷ ([Int] → Set Int → [Int]) → [Int] → [Int]
   filter ∷ ∀ a . (a → Bool) → [a] → [a]
@@ -438,5 +438,5 @@ Leaving GHCi.
 ghc: user interrupt
 Linking Nub ...
 [starting HERMIT-shell v0.1.0.0 on Nub.hs]
-[starting HERMIT v1.0.0.0 on Nub.hs]
+[starting HERMIT v1.0.0.1 on Nub.hs]
 % ghc Nub.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:Main: -fplugin-opt=HERMIT.GHCI:Main:NubScript.hs -fplugin-opt=HERMIT.GHCI:Main:resume -w

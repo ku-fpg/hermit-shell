@@ -1,6 +1,6 @@
 [1 of 1] Compiling Main             ( Eval.hs, Eval.o )
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
-GHCi, version 7.10.2: http://www.haskell.org/ghc/  :? for help
+GHCi, version 7.10.3: http://www.haskell.org/ghc/  :? for help
 module Main where
   rep ∷ Mint → (Int → Mint) → Mint → Mint
   abs ∷ ((Int → Mint) → Mint → Mint) → Mint
@@ -366,5 +366,5 @@ HERMIT> Leaving GHCi.
 ghc: user interrupt
 Linking Eval ...
 [starting HERMIT-shell v0.1.0.0 on Eval.hs]
-[starting HERMIT v1.0.0.0 on Eval.hs]
+[starting HERMIT v1.0.0.1 on Eval.hs]
 % ghc Eval.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:Main: -fplugin-opt=HERMIT.GHCI:Main:EvalScript.hs -fplugin-opt=HERMIT.GHCI:Main:resume -w

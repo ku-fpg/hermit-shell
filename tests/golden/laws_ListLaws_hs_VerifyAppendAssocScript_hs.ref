@@ -1,6 +1,6 @@
 [1 of 1] Compiling ListLaws         ( ListLaws.hs, ListLaws.o )
 Setting phasers to stun... (port 3000) (ctrl-c to quit)
-GHCi, version 7.10.2: http://www.haskell.org/ghc/  :? for help
+GHCi, version 7.10.3: http://www.haskell.org/ghc/  :? for help
 module ListLaws where
   mempt ∷ ∀ a . [a]
   (++) ∷ ∀ a . [a] → [a] → [a]
@@ -352,5 +352,5 @@ module ListLaws where
 HERMIT> Leaving GHCi.
 ghc: user interrupt
 [starting HERMIT-shell v0.1.0.0 on ListLaws.hs]
-[starting HERMIT v1.0.0.0 on ListLaws.hs]
+[starting HERMIT v1.0.0.1 on ListLaws.hs]
 % ghc ListLaws.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:ListLaws: -fplugin-opt=HERMIT.GHCI:ListLaws:VerifyAppendAssocScript.hs -fplugin-opt=HERMIT.GHCI:ListLaws:resume -w
