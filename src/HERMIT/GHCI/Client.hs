@@ -1,5 +1,6 @@
-        {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE GADTs #-}
+{-# LANGUAGE RankNTypes #-}
 module HERMIT.GHCI.Client where
 
 import Control.Lens ((^.))
@@ -31,7 +32,7 @@ session :: JSONRPC.Session
 session = JSONRPC.session
         $ (if debug 
            then traceSessionAPI "HERMIT-remote-json"
-           else id :: (forall a . f a -> g a) -> (forall a . f a ~> g a))
+           else id :: (forall a . f a -> g a) -> (forall a . f a -> g a))
         $ sendr
  where
         sendr :: SessionAPI a -> IO a
