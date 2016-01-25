@@ -30,10 +30,9 @@ import Data.Vector (toList)
 
 session :: JSONRPC.Session
 session = JSONRPC.session
-        $ (if debug 
-           then traceSessionAPI "HERMIT-remote-json"
-           else id :: (forall a . f a -> g a) -> (forall a . f a -> g a))
-        $ sendr
+        $ if debug 
+          then traceSessionAPI "HERMIT-remote-json" sendr
+          else sendr
  where
         sendr :: SessionAPI a -> IO a
         sendr (Sync v) =  do
