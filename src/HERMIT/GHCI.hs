@@ -9,8 +9,8 @@ import           Control.Exception.Base
 import           Control.Monad.Compat
 import           Control.Monad.IO.Class
 import           Control.Remote.Monad.JSON
-import           Control.Remote.Monad.JSON.Types (ReceiveAPI(..),Method(..))
-import           Control.Remote.Monad.JSON.Router (router, WeakPacket(..), methodNotFound,WeakPacket(..))
+import           Control.Remote.Monad.JSON.Types (ReceiveAPI(..))
+import           Control.Remote.Monad.JSON.Router (router, methodNotFound,Call(..))
 import           Control.Monad.Trans.Except
 import           Control.Monad.Trans.Reader
 
@@ -97,7 +97,7 @@ server passInfo opts skernel initAST = do
 
     let fns :: ReceiveAPI a -> IO a
         fns = router sequence $ \ call -> case call of
-            Procedure (Method "send" (List args)) -> performTypedEffect lastCall pr clsVar args
+            CallMethod "send" (List args) -> performTypedEffect lastCall pr clsVar args
             _ -> methodNotFound
 --            [("send", performTypedEffect lastCall pr clsVar)
 --            ]
