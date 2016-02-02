@@ -8,8 +8,9 @@ import           Control.Concurrent.STM
 import           Control.Exception.Base
 import           Control.Monad.Compat
 import           Control.Monad.IO.Class
-import           Control.Monad.Remote.JSON
-import           Control.Monad.Remote.JSON.Router (router, Call(..), methodNotFound, TransportAPI(..))
+import           Control.Remote.Monad.JSON
+import           Control.Remote.Monad.JSON.Types (ReceiveAPI(..),Method(..))
+import           Control.Remote.Monad.JSON.Router (router, WeakPacket(..), methodNotFound,WeakPacket(..))
 import           Control.Monad.Trans.Except
 import           Control.Monad.Trans.Reader
 
@@ -94,18 +95,18 @@ server passInfo opts skernel initAST = do
 
     lastCall <- newTVarIO (abortK (pr_kernel pr) :: IO ())
 
-    let fns :: TransportAPI a -> IO a
+    let fns :: ReceiveAPI a -> IO a
         fns = router sequence $ \ call -> case call of
-            Method "send" (List args) _ -> performTypedEffect lastCall pr clsVar args
+            Procedure (Method "send" (List args)) -> performTypedEffect lastCall pr clsVar args
             _ -> methodNotFound
 --            [("send", performTypedEffect lastCall pr clsVar)
 --            ]
-
+      
     let jsonRpc :: ActionH ()
         jsonRpc = do
                 d <- jsonData
                 when debug . liftIO $ print d
-                r <- liftIO $ fns $ Send $ d
+                r <- liftIO $ fns $ Receive $ d
 --                when debug . liftIO $ print r
                 forM_ r json
 

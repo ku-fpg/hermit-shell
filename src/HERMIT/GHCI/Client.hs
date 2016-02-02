@@ -7,9 +7,9 @@ import Control.Monad (void, when)
 import Data.Aeson
 import Data.Aeson.Types
 import Data.Maybe
-import qualified Control.Monad.Remote.JSON as JSONRPC
-import Control.Monad.Remote.JSON.Debug
-import Control.Monad.Remote.JSON.Types (SessionAPI(..), Args(..))
+import qualified Control.Remote.Monad.JSON as JSONRPC
+import Control.Remote.Monad.JSON.Trace
+import Control.Remote.Monad.JSON.Types (SendAPI(..), Args(..))
 import Network.Wreq
 
 import HERMIT.API.Types
@@ -28,13 +28,12 @@ import Data.Vector (toList)
 --- Main call-HERMIT function
 
 session :: JSONRPC.Session
-session = JSONRPC.session
+session = JSONRPC.weakSession
         $ (if debug 
-           then traceSessionAPI "HERMIT-remote-json"
-           else id)
-        $ sendr
+           then traceSendAPI "HERMIT-remote-json" sendr
+           else sendr)
  where
-        sendr :: SessionAPI a -> IO a
+        sendr :: SendAPI a -> IO a
         sendr (Sync v) =  do
           r <- asJSON =<< post "http://localhost:3000/" (toJSON v)
           return $ r ^. responseBody
