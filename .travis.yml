@@ -53,6 +53,7 @@ install:
      rm -rf $HOME/.cabsnap;
      mkdir -p $HOME/.ghc $HOME/.cabal/lib $HOME/.cabal/share $HOME/.cabal/bin;
      cabal install -j --reinstall remote-json/ remote-json/remote-json-server/ remote-json/remote-json-client/ hermit/ --only-dependencies --enable-tests --enable-benchmarks;
+     cabal install remote-json/ remote-json/remote-json-server/ remote-json/remote-json-client/ hermit/ 
    fi
 
 
