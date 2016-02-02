@@ -1,5 +1,6 @@
-        {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE GADTs #-}
+{-# LANGUAGE RankNTypes #-}
 module HERMIT.GHCI.Client where
 
 import Control.Lens ((^.))
