@@ -42,20 +42,10 @@ install:
 
 # check whether current requested install-plan matches cached package-db snapshot
 # for now, fail the cache hit, because we need a local version of hermit, etcv
- - if false;
-   then
-     echo "cabal build-cache HIT";
-     rm -rfv .ghc;
-     cp -a $HOME/.cabsnap/ghc $HOME/.ghc;
-     cp -a $HOME/.cabsnap/lib $HOME/.cabsnap/share $HOME/.cabsnap/bin $HOME/.cabal/;
-   else
-     echo "cabal build-cache MISS";
-     rm -rf $HOME/.cabsnap;
-     mkdir -p $HOME/.ghc $HOME/.cabal/lib $HOME/.cabal/share $HOME/.cabal/bin;
-     cabal install -j --reinstall remote-json/ remote-json/remote-json-server/ remote-json/remote-json-client/ hermit/ --only-dependencies --enable-tests --enable-benchmarks;
-     cabal install remote-json/ remote-json/remote-json-server/ remote-json/remote-json-client/ hermit/ 
-   fi
-
+ - rm -rf $HOME/.cabsnap;
+ - mkdir -p $HOME/.ghc $HOME/.cabal/lib $HOME/.cabal/share $HOME/.cabal/bin;
+ - cabal install -j --reinstall remote-json/ remote-json/remote-json-server/ remote-json/remote-json-client/ hermit/ --only-dependencies --enable-tests --enable-benchmarks;
+ - cabal install remote-json/ remote-json/remote-json-server/ remote-json/remote-json-client/ hermit/ 
 
 # Here starts the actual work to be performed for the package under test;
 # any command which exits with a non-zero exit code causes the build to fail.
