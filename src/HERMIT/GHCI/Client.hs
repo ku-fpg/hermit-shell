@@ -3,15 +3,14 @@
 {-# LANGUAGE RankNTypes #-}
 module HERMIT.GHCI.Client where
 
-import Control.Lens ((^.))
 import Control.Monad (void, when)
 import Data.Aeson
 import Data.Aeson.Types
 import Data.Maybe
 import qualified Control.Remote.Monad.JSON as JSONRPC
 import Control.Remote.Monad.JSON.Trace
+import Control.Remote.Monad.JSON.Client
 import Control.Remote.Monad.JSON.Types (SendAPI(..), Args(..))
-import Network.Wreq
 
 import HERMIT.API.Types
 import HERMIT.GHCI.Types
@@ -29,18 +28,12 @@ import Data.Vector (toList)
 --- Main call-HERMIT function
 
 session :: JSONRPC.Session
-session = JSONRPC.weakSession
-        $ (if debug 
-           then traceSendAPI "HERMIT-remote-json" sendr
-           else sendr)
+session = JSONRPC.weakSession $ tracer $clientSendAPI "http://localhost:3000/"
  where
-        sendr :: SendAPI a -> IO a
-        sendr (Sync v) =  do
-          r <- asJSON =<< post "http://localhost:3000/" (toJSON v)
-          return $ r ^. responseBody
-        sendr (Async v) = do
-          void $ post "http://localhost:3000/" (toJSON v)
-
+    tracer :: (forall a. SendAPI a -> IO a) -> (forall a. SendAPI a -> IO a)
+    tracer = if debug 
+             then traceSendAPI "HERMIT-remote-json" 
+             else id
 
 send :: Shell a -> IO a
 send (Return a) = return a

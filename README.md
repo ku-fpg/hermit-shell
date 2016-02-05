@@ -40,6 +40,7 @@ To remaster any test, just remove the golden, and re-rerun.
 
 
  * HERMIT.GHCI -- The server side of the interface between the JSON/RPC and HERMIT
- * 
+ * HERMIT.GHCI.Client -- The client side of the interface between JSON/RPC and HERMIT
+
 
     

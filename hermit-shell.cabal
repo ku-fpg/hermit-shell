@@ -34,7 +34,6 @@ library
                         hermit              == 1.0.0.1,
                         http-types,
                         kure,
-                        lens,
                         mtl,
                         process,
                         remote-json         >= 0.2 && < 0.3,
@@ -53,7 +52,6 @@ library
                         vector,
                         ansi-terminal,
                         -- needed by generated code
-                        wreq,
                         -- until 7.10 only
                         marked-pretty
 
