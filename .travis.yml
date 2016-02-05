@@ -66,6 +66,12 @@ install:
 # any command which exits with a non-zero exit code causes the build to fail.
 script:
  - if [ -f configure.ac ]; then autoreconf -i; fi
+
+ - cabal install --force remote-json 
+ - cabal install --force remote-json-server
+ - cabal install --force remote-json-client 
+ - cabel install --force hermit
+
  - cabal configure -v2 --enable-tests
  - cabal build -j1
  - cabal copy
