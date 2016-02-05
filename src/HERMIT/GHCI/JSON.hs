@@ -20,8 +20,6 @@ import           Prelude.Compat
 
 import           System.Console.Haskeline.Completion (Completion(..))
 
-import           Web.Scotty (readEither)
-
 import           Data.Aeson.Encode.Pretty (encodePretty)
 import           Data.ByteString.Lazy.Char8 (unpack)
 
@@ -112,6 +110,14 @@ fromJSONString (String s) =
         Left _msg -> mzero
         Right sty -> pure sty
 fromJSONString _ = mzero
+
+-- from Web.Scotty.Action
+readEither :: Read a => TL.Text -> Either TL.Text a
+readEither t = case [ x | (x,"") <- reads (TL.unpack t) ] of
+                [x] -> Right x
+                []  -> Left "readEither: no parse"
+                _   -> Left "readEither: ambiguous parse"
+
 
 data History = History { hCmds :: [HCmd]
                        , hTags :: [HTag]

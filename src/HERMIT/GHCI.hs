@@ -11,6 +11,7 @@ import           Control.Monad.IO.Class
 import           Control.Remote.Monad.JSON
 import           Control.Remote.Monad.JSON.Types (ReceiveAPI(..))
 import           Control.Remote.Monad.JSON.Router (router, methodNotFound,Call(..))
+import           Control.Remote.Monad.JSON.Server (serverReceiveAPI)
 import           Control.Monad.Trans.Except
 import           Control.Monad.Trans.Reader
 
@@ -40,8 +41,6 @@ import           System.FilePath (takeExtension)
 import           System.IO (hPutStrLn, hClose)
 import           System.IO.Temp (withSystemTempFile)
 import           System.Process
-
-import           Web.Scotty.Trans
 
 -- import           System.Exit
 -- import           System.Posix.Signals
@@ -74,20 +73,6 @@ server passInfo opts skernel initAST = do
         forM_ otherOpts $ \opt -> putStr opt >> putChar ' '
         putStrLn ""
 
-    sync' <- newTVarIO def -- TODO: is this used anywhere?
-
-    let -- Functions required by Scotty to run our custom WebM monad.
-        response :: WebM a -> IO (Either WebAppException a)
-        response = flip runReaderT sync' . runExceptT . runWebT
-
-        runAction :: WebM Wai.Response -> IO Wai.Response
-        runAction m = do
-            r <- response m
-            case r of
-                Left err -> handleError skernel err
-                Right r' -> return r'
-
-
     cls <- initCommandLineState initAST
     clsVar <- atomically $ newTMVar cls
 
@@ -102,17 +87,10 @@ server passInfo opts skernel initAST = do
 --            [("send", performTypedEffect lastCall pr clsVar)
 --            ]
       
-    let jsonRpc :: ActionH ()
-        jsonRpc = do
-                d <- jsonData
-                when debug . liftIO $ print d
-                r <- liftIO $ fns $ Receive $ d
---                when debug . liftIO $ print r
-                forM_ r json
-
-    tid <- forkIO $ scottyT 3000 runAction $ do
-        when debug $ middleware logStdoutDev
-        post "/" jsonRpc
+    -- TODO: reintroduce
+    --   *  when debug $ middleware logStdoutDev
+    --
+    tid <- forkIO $ serverReceiveAPI 3000 "/" fns
 
     _code <- withSystemTempFile ".ghci-hermit" $ \fp h -> do
         hPutStrLn h $ hermitShellDotfile mbScript

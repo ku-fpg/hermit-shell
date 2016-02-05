@@ -4,7 +4,7 @@
 module HERMIT.GHCI.Actions
     ( initCommandLineState
     , performTypedEffect
-    , history
+--    , history
     ) where
 
 
@@ -118,5 +118,5 @@ getUntilEmpty chan = ifM (atomically $ isEmptyTChan chan)
                          (return [])
                          (atomically (readTChan chan) >>= flip liftM (getUntilEmpty chan) . (:))
 
-history :: ActionH ()
-history = fail "unimplemented"
+--history :: ActionH ()
+--history = fail "unimplemented"

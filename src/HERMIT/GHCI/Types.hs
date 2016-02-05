@@ -27,8 +27,6 @@ import           HERMIT.RemoteShell.Orphanage()
 
 import           Prelude.Compat
 
-import           Web.Scotty.Trans
-
 import           Data.Aeson
 
 -- | A note about the design here:
@@ -64,8 +62,8 @@ instance MonadTrans WebT where
 
 type WebM = WebT IO
 
-type ScottyH a = ScottyT Text WebM a
-type ActionH a = ActionT Text WebM a
+--type ScottyH a = ScottyT Text WebM a
+--type ActionH a = ActionT Text WebM a
 
 -- The monad transformer stack is quite ridiculous at this point.
 -- So here are some helpers to get things to the right place.

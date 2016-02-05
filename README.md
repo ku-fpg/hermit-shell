@@ -26,7 +26,7 @@ bash% cabal test --show-details=streaming
 
 To remaster any test, just remove the golden, and re-rerun.
 
-### Runing Examples
+### Running Examples
 
     % cabal exec bash
     % cd examples/hanoi/
@@ -36,4 +36,10 @@ To remaster any test, just remove the golden, and re-rerun.
     [...]
     HERMIT> script
     
+# Layout of Modules
+
+
+ * HERMIT.GHCI -- The server side of the interface between the JSON/RPC and HERMIT
+ * 
+
     
