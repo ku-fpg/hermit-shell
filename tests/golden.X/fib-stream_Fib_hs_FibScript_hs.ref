@@ -1,6 +1,7 @@
 [1 of 3] Compiling Nat              ( Nat.hs, Nat.o )
 [2 of 3] Compiling Stream           ( Stream.hs, Stream.o )
 [3 of 3] Compiling Main             ( Fib.hs, Fib.o )
+Setting phasers to stun... (port 3000) (ctrl-c to quit)
 GHCi, version 7.10.3: http://www.haskell.org/ghc/  :? for help
 module Main where
   unwrap ∷ ∀ a . (Nat → a) → Stream a

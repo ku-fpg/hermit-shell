@@ -1,5 +1,6 @@
 [1 of 2] Compiling HList            ( HList.hs, HList.o )
 [2 of 2] Compiling Main             ( QSort.hs, QSort.o )
+Setting phasers to stun... (port 3000) (ctrl-c to quit)
 GHCi, version 7.10.3: http://www.haskell.org/ghc/  :? for help
 module Main where
   qsort ∷ ∀ a . Ord a → [a] → [a]

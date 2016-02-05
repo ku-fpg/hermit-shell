@@ -1,15 +1,17 @@
 [1 of 2] Compiling HList            ( HList.hs, HList.o )
 [2 of 2] Compiling Main             ( Flatten.hs, Flatten.o )
+Setting phasers to stun... (port 3000) (ctrl-c to quit)
 GHCi, version 7.10.3: http://www.haskell.org/ghc/  :? for help
 module Main where
   flatten ∷ ∀ a . Tree a → [a]
   $dShow ∷ Show [Char]
   main ∷ IO ()
   main ∷ IO ()
-[1 of 3] Compiling WWAssAScript     ( WWAssAScript.hs, interpreted )
-[2 of 3] Compiling StrictRepHScript ( StrictRepHScript.hs, interpreted )
-[3 of 3] Compiling FlattenScript    ( FlattenScript.hs, interpreted )
-Ok, modules loaded: FlattenScript, StrictRepHScript, WWAssAScript.
+[1 of 4] Compiling StrictRepHScript ( StrictRepHScript.hs, interpreted )
+[2 of 4] Compiling WWAssAScript     ( WWAssAScript.hs, interpreted )
+[3 of 4] Compiling ConcatVanishesScript ( ConcatVanishesScript.hs, interpreted )
+[4 of 4] Compiling FlattenScript    ( FlattenScript.hs, interpreted )
+Ok, modules loaded: FlattenScript, ConcatVanishesScript, WWAssAScript, StrictRepHScript.
 flatten = λ △ ds →
   case ds of wild ▲
     Node l r → (++) ▲ (flatten ▲ l) (flatten ▲ r)
@@ -40,38 +42,36 @@ flatten = λ △ →
        (case x1 of wild ▲
           Node l r → (++) ▲ (absH ▲ (work l)) (absH ▲ (work r))
           Leaf a → (:) ▲ a ([] ▲))
-λ tree →
-  repH ▲
-       (case tree of wild ▲
-          Node l r → (++) ▲ (absH ▲ (work l)) (absH ▲ (work r))
-          Leaf a → (:) ▲ a ([] ▲))
 repH ▲
-     (case tree of wild ▲
+     (case x1 of wild ▲
         Node l r → (++) ▲ (absH ▲ (work l)) (absH ▲ (work r))
         Leaf a → (:) ▲ a ([] ▲))
 λ acc →
   repH ▲
-       (case tree of wild ▲
+       (case x1 of wild ▲
           Node l r → (++) ▲ (absH ▲ (work l)) (absH ▲ (work r))
           Leaf a → (:) ▲ a ([] ▲))
        acc
 repH ▲
-     (case tree of wild ▲
+     (case x1 of wild ▲
         Node l r → (++) ▲ (absH ▲ (work l)) (absH ▲ (work r))
         Leaf a → (:) ▲ a ([] ▲))
      acc
-case tree of wild ▲
+case x1 of wild ▲
+  Node l r → work l (work r acc)
+  Leaf a → (:) ▲ a acc
+case x1 of wild ▲
   Node l r → work l (work r acc)
   Leaf a → (:) ▲ a acc
 flatten = λ △ →
-  let rec work = λ tree acc →
-            case tree of wild ▲
+  let rec work = λ x1 acc →
+            case x1 of wild ▲
               Node l r → work l (work r acc)
               Leaf a → (:) ▲ a acc
   in λ x0 → absH ▲ (work x0)
 flatten = λ △ →
-  let rec work = λ tree acc →
-            case tree of wild ▲
+  let rec work = λ x1 acc →
+            case x1 of wild ▲
               Node l r → work l (work r acc)
               Leaf a → (:) ▲ a acc
   in λ x0 → work x0 ([] ▲)
@@ -80,8 +80,8 @@ Goal:
 Successfully proven: ++ []
 
 flatten = λ △ →
-  let rec work = λ tree acc →
-            case tree of wild ▲
+  let rec work = λ x1 acc →
+            case x1 of wild ▲
               Node l r → work l (work r acc)
               Leaf a → (:) ▲ a acc
   in λ x0 → work x0 ([] ▲)
@@ -90,8 +90,8 @@ Goal:
 Successfully proven: ++ strict
 
 flatten = λ △ →
-  let rec work = λ tree acc →
-            case tree of wild ▲
+  let rec work = λ x1 acc →
+            case x1 of wild ▲
               Node l r → work l (work r acc)
               Leaf a → (:) ▲ a acc
   in λ x0 → work x0 ([] ▲)
@@ -100,8 +100,8 @@ Goal:
 Successfully proven: repH (:)
 
 flatten = λ △ →
-  let rec work = λ tree acc →
-            case tree of wild ▲
+  let rec work = λ x1 acc →
+            case x1 of wild ▲
               Node l r → work l (work r acc)
               Leaf a → (:) ▲ a acc
   in λ x0 → work x0 ([] ▲)
@@ -111,8 +111,8 @@ Goal:
 Successfully proven: repH ++
 
 flatten = λ △ →
-  let rec work = λ tree acc →
-            case tree of wild ▲
+  let rec work = λ x1 acc →
+            case x1 of wild ▲
               Node l r → work l (work r acc)
               Leaf a → (:) ▲ a acc
   in λ x0 → work x0 ([] ▲)
@@ -121,8 +121,8 @@ Goal:
 Successfully proven: repH []
 
 flatten = λ △ →
-  let rec work = λ tree acc →
-            case tree of wild ▲
+  let rec work = λ x1 acc →
+            case x1 of wild ▲
               Node l r → work l (work r acc)
               Leaf a → (:) ▲ a acc
   in λ x0 → work x0 ([] ▲)

@@ -1,4 +1,5 @@
 [1 of 1] Compiling ListLaws         ( ListLaws.hs, ListLaws.o )
+Setting phasers to stun... (port 3000) (ctrl-c to quit)
 GHCi, version 7.10.3: http://www.haskell.org/ghc/  :? for help
 module ListLaws where
   mempt ∷ ∀ a . [a]
@@ -9,9 +10,12 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[1 of 2] Compiling VerifyAppendNilScript ( VerifyAppendNilScript.hs, interpreted )
-[2 of 2] Compiling VerifyConcatUnitScript ( VerifyConcatUnitScript.hs, interpreted )
-Ok, modules loaded: VerifyConcatUnitScript, VerifyAppendNilScript.
+[1 of 3] Compiling VerifyAppendNilScript ( VerifyAppendNilScript.hs, interpreted )
+[2 of 3] Compiling VerifyConcatUnitScript ( VerifyConcatUnitScript.hs, interpreted )
+[3 of 3] Compiling VerifyListLeftUnitScript ( VerifyListLeftUnitScript.hs, interpreted )
+Ok, modules loaded: VerifyListLeftUnitScript, VerifyConcatUnitScript, VerifyAppendNilScript.
+left-unit (Not Proven)
+  ∀ △ △ x f. bind ▲ ▲ (retur ▲ x) f ≡ f x
 concat-unit (Not Proven)
   ∀ △ x. concat ▲ ((:) ▲ x ([] ▲)) ≡ x
 append-nil (Not Proven)
@@ -117,8 +121,72 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
+Goal:
+  ∀ △ △ x f. bind ▲ ▲ (retur ▲ x) f ≡ f x
+Goal:
+  ∀ △ △ x f.
+  (λ △ △ as k → concat ▲ (map ▲ ▲ k as)) ▲ ▲ (toList ▲ x) f ≡ f x
+Goal:
+  ∀ △ △ x f. concat ▲ (map ▲ ▲ f (toList ▲ x)) ≡ f x
+Goal:
+  ∀ △ △ x f.
+  concat ▲ (map ▲ ▲ f ((λ △ x → (:) ▲ x ([] ▲)) ▲ x)) ≡ f x
+Goal:
+  ∀ △ △ x f. concat ▲ (map ▲ ▲ f ((:) ▲ x ([] ▲))) ≡ f x
+Goal:
+  ∀ △ △ x f.
+  concat ▲
+         ((λ △ △ ds ds →
+             case ds of wild ▲
+               [] → [] ▲
+               (:) a as → (:) ▲ (ds a) (map ▲ ▲ ds as)) ▲ ▲ f ((:) ▲ x ([] ▲)))
+  ≡
+  f x
+Goal:
+  ∀ △ △ x f. concat ▲ ((:) ▲ (f x) (map ▲ ▲ f ([] ▲))) ≡ f x
+Goal:
+  ∀ △ △ x f.
+  concat ▲
+         ((:) ▲ (f x)
+              ((λ △ △ ds ds →
+                  case ds of wild ▲
+                    [] → [] ▲
+                    (:) a as → (:) ▲ (ds a) (map ▲ ▲ ds as)) ▲ ▲ f ([] ▲)))
+  ≡
+  f x
+Goal:
+  ∀ △ △ x f. concat ▲ ((:) ▲ (f x) ([] ▲)) ≡ f x
+Goal:
+  ∀ △ △ x f. concat ▲ ((:) ▲ (f x) ([] ▲)) ≡ f x
+Goal:
+  ∀ △ x f. concat ▲ ((:) ▲ (f x) ([] ▲)) ≡ f x
+Goal:
+  ∀ △ x f. f x ≡ f x
+Goal:
+  ∀ △ x f. f x ≡ f x
+Goal:
+  ∀ x f. f x ≡ f x
+Goal:
+  ∀ f. f x ≡ f x
+Goal:
+  ∀ f. true
+Goal:
+  ∀ △ x f. true
+Goal:
+  ∀ △ △ x f. true
+Successfully proven: left-unit
+
+module ListLaws where
+  mempt ∷ ∀ a . [a]
+  (++) ∷ ∀ a . [a] → [a] → [a]
+  mappen ∷ ∀ a . [a] → [a] → [a]
+  toList ∷ ∀ a . a → [a]
+  concat ∷ ∀ a . [[a]] → [a]
+  map ∷ ∀ a b . (a → b) → [a] → [b]
+  retur ∷ ∀ a . a → [a]
+  bind ∷ ∀ a b . [a] → (a → [b]) → [b]
 HERMIT> Leaving GHCi.
 ghc: user interrupt
 [starting HERMIT-shell v0.1.0.0 on ListLaws.hs]
 [starting HERMIT v1.0.0.1 on ListLaws.hs]
-% ghc ListLaws.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:ListLaws: -fplugin-opt=HERMIT.GHCI:ListLaws:VerifyConcatUnitScript.hs -fplugin-opt=HERMIT.GHCI:ListLaws:resume -w
+% ghc ListLaws.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:ListLaws: -fplugin-opt=HERMIT.GHCI:ListLaws:VerifyListLeftUnitScript.hs -fplugin-opt=HERMIT.GHCI:ListLaws:resume -w

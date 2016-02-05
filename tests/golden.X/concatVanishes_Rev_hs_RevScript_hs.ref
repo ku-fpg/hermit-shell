@@ -1,23 +1,25 @@
 [1 of 2] Compiling HList            ( HList.hs, HList.o )
-[2 of 2] Compiling Main             ( Reverse.hs, Reverse.o )
+[2 of 2] Compiling Main             ( Rev.hs, Rev.o )
+Setting phasers to stun... (port 3000) (ctrl-c to quit)
 GHCi, version 7.10.3: http://www.haskell.org/ghc/  :? for help
 module Main where
   rev ∷ ∀ a . [a] → [a]
   main ∷ IO ()
   main ∷ IO ()
-[1 of 3] Compiling StrictRepHScript ( StrictRepHScript.hs, interpreted )
-[2 of 3] Compiling WWAssAScript     ( WWAssAScript.hs, interpreted )
-[3 of 3] Compiling ReverseScript    ( ReverseScript.hs, interpreted )
-Ok, modules loaded: ReverseScript, WWAssAScript, StrictRepHScript.
+[1 of 4] Compiling StrictRepHScript ( StrictRepHScript.hs, interpreted )
+[2 of 4] Compiling WWAssAScript     ( WWAssAScript.hs, interpreted )
+[3 of 4] Compiling ConcatVanishesScript ( ConcatVanishesScript.hs, interpreted )
+[4 of 4] Compiling RevScript        ( RevScript.hs, interpreted )
+Ok, modules loaded: RevScript, ConcatVanishesScript, WWAssAScript, StrictRepHScript.
 rev = λ △ ds →
   case ds of wild ▲
     [] → [] ▲
-    (:) x xs → (++) ▲ (rev ▲ xs) ((:) ▲ x ([] ▲))
+    (:) y ys → (++) ▲ (rev ▲ ys) ((:) ▲ y ([] ▲))
 rev = λ △ ds →
   (let f = λ rev' ds →
          case ds of wild ▲
            [] → [] ▲
-           (:) x xs → (++) ▲ (rev' xs) ((:) ▲ x ([] ▲))
+           (:) y ys → (++) ▲ (rev' ys) ((:) ▲ y ([] ▲))
        rec work = λ x1 → repH ▲ (f (λ x2 → absH ▲ (work x2)) x1)
    in λ x0 → absH ▲ (work x0)) ds
 rev = λ △ →
@@ -25,84 +27,82 @@ rev = λ △ →
             repH ▲
                  (case x1 of wild ▲
                     [] → [] ▲
-                    (:) x xs → (++) ▲ (absH ▲ (work xs)) ((:) ▲ x ([] ▲)))
+                    (:) y ys → (++) ▲ (absH ▲ (work ys)) ((:) ▲ y ([] ▲)))
   in λ x0 → absH ▲ (work x0)
 rev = λ △ →
   let rec work = λ x1 →
             repH ▲
                  (case x1 of wild ▲
                     [] → [] ▲
-                    (:) x xs → (++) ▲ (absH ▲ (work xs)) ((:) ▲ x ([] ▲)))
+                    (:) y ys → (++) ▲ (absH ▲ (work ys)) ((:) ▲ y ([] ▲)))
   in λ x0 → absH ▲ (work x0)
 λ x1 →
   repH ▲
        (case x1 of wild ▲
           [] → [] ▲
-          (:) x xs → (++) ▲ (absH ▲ (work xs)) ((:) ▲ x ([] ▲)))
-λ ys →
-  repH ▲
-       (case ys of wild ▲
-          [] → [] ▲
-          (:) x xs → (++) ▲ (absH ▲ (work xs)) ((:) ▲ x ([] ▲)))
+          (:) y ys → (++) ▲ (absH ▲ (work ys)) ((:) ▲ y ([] ▲)))
 repH ▲
-     (case ys of wild ▲
+     (case x1 of wild ▲
         [] → [] ▲
-        (:) x xs → (++) ▲ (absH ▲ (work xs)) ((:) ▲ x ([] ▲)))
+        (:) y ys → (++) ▲ (absH ▲ (work ys)) ((:) ▲ y ([] ▲)))
 λ acc →
   repH ▲
-       (case ys of wild ▲
+       (case x1 of wild ▲
           [] → [] ▲
-          (:) x xs → (++) ▲ (absH ▲ (work xs)) ((:) ▲ x ([] ▲)))
+          (:) y ys → (++) ▲ (absH ▲ (work ys)) ((:) ▲ y ([] ▲)))
        acc
 repH ▲
-     (case ys of wild ▲
+     (case x1 of wild ▲
         [] → [] ▲
-        (:) x xs → (++) ▲ (absH ▲ (work xs)) ((:) ▲ x ([] ▲)))
+        (:) y ys → (++) ▲ (absH ▲ (work ys)) ((:) ▲ y ([] ▲)))
      acc
-case ys of wild ▲
+case x1 of wild ▲
   [] → acc
-  (:) x xs → work xs ((:) ▲ x acc)
+  (:) y ys → work ys ((:) ▲ y acc)
+case x1 of wild ▲
+  [] → acc
+  (:) y ys → work ys ((:) ▲ y acc)
 rev = λ △ →
-  let rec work = λ ys acc →
-            case ys of wild ▲
+  let rec work = λ x1 acc →
+            case x1 of wild ▲
               [] → acc
-              (:) x xs → work xs ((:) ▲ x acc)
+              (:) y ys → work ys ((:) ▲ y acc)
   in λ x0 → absH ▲ (work x0)
 rev = λ △ →
-  let rec work = λ ys acc →
-            case ys of wild ▲
+  let rec work = λ x1 acc →
+            case x1 of wild ▲
               [] → acc
-              (:) x xs → work xs ((:) ▲ x acc)
+              (:) y ys → work ys ((:) ▲ y acc)
   in λ x0 → work x0 ([] ▲)
 Goal:
   ∀ △ xs. (++) ▲ xs ([] ▲) ≡ xs
 Successfully proven: ++ []
 
 rev = λ △ →
-  let rec work = λ ys acc →
-            case ys of wild ▲
+  let rec work = λ x1 acc →
+            case x1 of wild ▲
               [] → acc
-              (:) x xs → work xs ((:) ▲ x acc)
+              (:) y ys → work ys ((:) ▲ y acc)
   in λ x0 → work x0 ([] ▲)
 Goal:
   ∀ △. (++) ▲ (undefined ▲) ≡ undefined ▲
 Successfully proven: ++ strict
 
 rev = λ △ →
-  let rec work = λ ys acc →
-            case ys of wild ▲
+  let rec work = λ x1 acc →
+            case x1 of wild ▲
               [] → acc
-              (:) x xs → work xs ((:) ▲ x acc)
+              (:) y ys → work ys ((:) ▲ y acc)
   in λ x0 → work x0 ([] ▲)
 Goal:
   ∀ △ x xs. repH ▲ ((:) ▲ x xs) ≡ (.) ▲ ▲ ▲ ((:) ▲ x) (repH ▲ xs)
 Successfully proven: repH (:)
 
 rev = λ △ →
-  let rec work = λ ys acc →
-            case ys of wild ▲
+  let rec work = λ x1 acc →
+            case x1 of wild ▲
               [] → acc
-              (:) x xs → work xs ((:) ▲ x acc)
+              (:) y ys → work ys ((:) ▲ y acc)
   in λ x0 → work x0 ([] ▲)
 Goal:
   ∀ △ xs ys.
@@ -110,20 +110,20 @@ Goal:
 Successfully proven: repH ++
 
 rev = λ △ →
-  let rec work = λ ys acc →
-            case ys of wild ▲
+  let rec work = λ x1 acc →
+            case x1 of wild ▲
               [] → acc
-              (:) x xs → work xs ((:) ▲ x acc)
+              (:) y ys → work ys ((:) ▲ y acc)
   in λ x0 → work x0 ([] ▲)
 Goal:
   ∀ △. repH ▲ ([] ▲) ≡ id ▲
 Successfully proven: repH []
 
 rev = λ △ →
-  let rec work = λ ys acc →
-            case ys of wild ▲
+  let rec work = λ x1 acc →
+            case x1 of wild ▲
               [] → acc
-              (:) x xs → work xs ((:) ▲ x acc)
+              (:) y ys → work ys ((:) ▲ y acc)
   in λ x0 → work x0 ([] ▲)
 HERMIT> Warning: Lemma ++ [] was assumed but not proven.
 
@@ -148,7 +148,7 @@ repH []
   ∀ △. repH ▲ ([] ▲) ≡ id ▲
 Leaving GHCi.
 ghc: user interrupt
-Linking Reverse ...
-[starting HERMIT-shell v0.1.0.0 on Reverse.hs]
-[starting HERMIT v1.0.0.1 on Reverse.hs]
-% ghc Reverse.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:Main: -fplugin-opt=HERMIT.GHCI:Main:ReverseScript.hs -fplugin-opt=HERMIT.GHCI:Main:resume -w
+Linking Rev ...
+[starting HERMIT-shell v0.1.0.0 on Rev.hs]
+[starting HERMIT v1.0.0.1 on Rev.hs]
+% ghc Rev.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:Main: -fplugin-opt=HERMIT.GHCI:Main:RevScript.hs -fplugin-opt=HERMIT.GHCI:Main:resume -w

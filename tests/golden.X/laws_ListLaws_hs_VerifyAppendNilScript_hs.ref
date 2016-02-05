@@ -1,4 +1,5 @@
 [1 of 1] Compiling ListLaws         ( ListLaws.hs, ListLaws.o )
+Setting phasers to stun... (port 3000) (ctrl-c to quit)
 GHCi, version 7.10.3: http://www.haskell.org/ghc/  :? for help
 module ListLaws where
   mempt ∷ ∀ a . [a]
@@ -9,11 +10,8 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-[1 of 2] Compiling VerifyAppendNilScript ( VerifyAppendNilScript.hs, interpreted )
-[2 of 2] Compiling VerifyConcatUnitScript ( VerifyConcatUnitScript.hs, interpreted )
-Ok, modules loaded: VerifyConcatUnitScript, VerifyAppendNilScript.
-concat-unit (Not Proven)
-  ∀ △ x. concat ▲ ((:) ▲ x ([] ▲)) ≡ x
+[1 of 1] Compiling VerifyAppendNilScript ( VerifyAppendNilScript.hs, interpreted )
+Ok, modules loaded: VerifyAppendNilScript.
 append-nil (Not Proven)
   ∀ △ xs. (++) ▲ xs ([] ▲) ≡ xs
 Goal:
@@ -75,50 +73,8 @@ module ListLaws where
   map ∷ ∀ a b . (a → b) → [a] → [b]
   retur ∷ ∀ a . a → [a]
   bind ∷ ∀ a b . [a] → (a → [b]) → [b]
-Goal:
-  ∀ △ x. concat ▲ ((:) ▲ x ([] ▲)) ≡ x
-Goal:
-  ∀ △ x. concat ▲ ((:) ▲ x ([] ▲)) ≡ x
-Goal:
-  ∀ x. concat ▲ ((:) ▲ x ([] ▲)) ≡ x
-Goal:
-  ∀ x.
-  (λ △ ds →
-     case ds of wild ▲
-       [] → [] ▲
-       (:) x xs → (++) ▲ x (concat ▲ xs)) ▲ ((:) ▲ x ([] ▲))
-  ≡
-  x
-Goal:
-  ∀ x. (++) ▲ x (concat ▲ ([] ▲)) ≡ x
-Goal:
-  ∀ x.
-  (++) ▲ x
-       ((λ △ ds →
-           case ds of wild ▲
-             [] → [] ▲
-             (:) x xs → (++) ▲ x (concat ▲ xs)) ▲ ([] ▲))
-  ≡
-  x
-Goal:
-  ∀ x. (++) ▲ x ([] ▲) ≡ x
-Goal:
-  ∀ x. x ≡ x
-Goal:
-  ∀ △ x. x ≡ x
-Successfully proven: concat-unit
-
-module ListLaws where
-  mempt ∷ ∀ a . [a]
-  (++) ∷ ∀ a . [a] → [a] → [a]
-  mappen ∷ ∀ a . [a] → [a] → [a]
-  toList ∷ ∀ a . a → [a]
-  concat ∷ ∀ a . [[a]] → [a]
-  map ∷ ∀ a b . (a → b) → [a] → [b]
-  retur ∷ ∀ a . a → [a]
-  bind ∷ ∀ a b . [a] → (a → [b]) → [b]
 HERMIT> Leaving GHCi.
 ghc: user interrupt
 [starting HERMIT-shell v0.1.0.0 on ListLaws.hs]
 [starting HERMIT v1.0.0.1 on ListLaws.hs]
-% ghc ListLaws.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:ListLaws: -fplugin-opt=HERMIT.GHCI:ListLaws:VerifyConcatUnitScript.hs -fplugin-opt=HERMIT.GHCI:ListLaws:resume -w
+% ghc ListLaws.hs -fforce-recomp -O2 -dcore-lint -fsimple-list-literals -fexpose-all-unfoldings -fplugin=HERMIT.GHCI -fplugin-opt=HERMIT.GHCI:ListLaws: -fplugin-opt=HERMIT.GHCI:ListLaws:VerifyAppendNilScript.hs -fplugin-opt=HERMIT.GHCI:ListLaws:resume -w
