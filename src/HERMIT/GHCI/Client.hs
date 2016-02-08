@@ -1,12 +1,14 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE GADTs #-}
 {-# LANGUAGE RankNTypes #-}
+{-# LANGUAGE TypeOperators #-}
 module HERMIT.GHCI.Client where
 
 import Control.Monad (void, when)
 import Data.Aeson
 import Data.Aeson.Types
 import Data.Maybe
+import Control.Natural
 import qualified Control.Remote.Monad.JSON as JSONRPC
 import Control.Remote.Monad.JSON.Trace
 import Control.Remote.Monad.JSON.Client
@@ -30,9 +32,9 @@ import Data.Vector (toList)
 session :: JSONRPC.Session
 session = JSONRPC.weakSession $ tracer $clientSendAPI "http://localhost:3000/"
  where
-    tracer :: (forall a. SendAPI a -> IO a) -> (forall a. SendAPI a -> IO a)
-    tracer = if debug 
-             then traceSendAPI "HERMIT-remote-json" 
+    tracer :: (SendAPI :~> IO) -> SendAPI :~> IO
+    tracer = if debug
+             then traceSendAPI "HERMIT-remote-json"
              else id
 
 send :: Shell a -> IO a
@@ -50,7 +52,7 @@ send (Shell g) = do
          ShellFailure msg ->
              error $ "failed to parse result value for " ++
                      genMethodStr True g ++ ": " ++ show v ++ " : " ++ msg
-         ShellResult gss a -> 
+         ShellResult gss a ->
              do mapM printResponse gss
                 return a
 send (Local m) = m

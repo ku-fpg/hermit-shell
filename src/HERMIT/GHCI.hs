@@ -1,6 +1,7 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE GADTs #-}
+{-# LANGUAGE TypeOperators #-}
 module HERMIT.GHCI (plugin) where
 
 import           Control.Concurrent
@@ -8,6 +9,7 @@ import           Control.Concurrent.STM
 import           Control.Exception.Base
 import           Control.Monad.Compat
 import           Control.Monad.IO.Class
+import           Control.Natural
 import           Control.Remote.Monad.JSON
 import           Control.Remote.Monad.JSON.Types (ReceiveAPI(..))
 import           Control.Remote.Monad.JSON.Router (router, methodNotFound,Call(..))
@@ -80,13 +82,13 @@ server passInfo opts skernel initAST = do
 
     lastCall <- newTVarIO (abortK (pr_kernel pr) :: IO ())
 
-    let fns :: ReceiveAPI a -> IO a
-        fns = router sequence $ \ call -> case call of
+    let fns :: ReceiveAPI :~> IO
+        fns = router sequence $ nat $ \ call -> case call of
             CallMethod "send" (List args) -> performTypedEffect lastCall pr clsVar args
             _ -> methodNotFound
 --            [("send", performTypedEffect lastCall pr clsVar)
 --            ]
-      
+
     -- TODO: reintroduce
     --   *  when debug $ middleware logStdoutDev
     --
