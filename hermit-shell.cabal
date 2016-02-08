@@ -22,7 +22,9 @@ extra-source-files:  README.md, include/*.h
 
 library
   ghc-options:          -Wall
-  build-depends:        aeson               >= 0.8   && < 0.10,
+  build-depends:        aeson               >= 0.8   && < 0.10 || >= 0.11 && < 0.12,
+                        -- Using aeson-0.10 causes compilation to take an
+                        -- unreasonable amount of time. (See issue #39)
                         aeson-pretty        >= 0.7.2,
                         base                >= 4     && < 5,
                         base-compat         >= 0.8.1 && < 1,
@@ -41,7 +43,7 @@ library
                         remote-json-server  >= 0.2 && < 0.3,
                         split,
                         stm,
-                        temporary-rc,
+                        temporary,
                         text,
                         transformers        >= 0.2,
                         transformers-compat >= 0.4,
