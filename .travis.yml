@@ -33,9 +33,8 @@ install:
    fi
  - travis_retry cabal update -v
  - sed -i 's/^jobs:/-- jobs:/' ${HOME}/.cabal/config
- - git clone https://github.com/ku-fpg/remote-json.git
  - git clone https://github.com/ku-fpg/hermit.git
- - cabal install --only-dependencies --enable-tests --enable-benchmarks --dry -v ./ remote-json/ remote-json/remote-json-server/ remote-json/remote-json-client/ hermit/ > installplan.txt
+ - cabal install --only-dependencies --enable-tests --enable-benchmarks --dry -v ./ hermit/ > installplan.txt
  - sed -i -e '1,/^Resolving /d' installplan.txt; cat installplan.txt
 
 # check whether current requested install-plan matches cached package-db snapshot
@@ -49,7 +48,7 @@ install:
      echo "cabal build-cache MISS";
      rm -rf $HOME/.cabsnap;
      mkdir -p $HOME/.ghc $HOME/.cabal/lib $HOME/.cabal/share $HOME/.cabal/bin;
-     cabal install -j --only-dependencies --enable-tests --enable-benchmarks ./ remote-json/ remote-json/remote-json-server/ remote-json/remote-json-client/ hermit/;
+     cabal install -j --only-dependencies --enable-tests --enable-benchmarks ./ hermit/;
    fi
 
 # snapshot package-db on cache miss
