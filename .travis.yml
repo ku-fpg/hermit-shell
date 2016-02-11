@@ -65,9 +65,6 @@ install:
 script:
  - if [ -f configure.ac ]; then autoreconf -i; fi
 
- - cabal install --force remote-json/
- - cabal install --force remote-json/remote-json-server/
- - cabal install --force remote-json/remote-json-client/
  - cabal install --force hermit/
 
  - cabal configure -v2 --enable-tests
