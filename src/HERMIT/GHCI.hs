@@ -11,8 +11,7 @@ import           Control.Monad.Compat
 import           Control.Monad.IO.Class
 import           Control.Natural
 import           Control.Remote.Monad.JSON
-import           Control.Remote.Monad.JSON.Types (ReceiveAPI(..))
-import           Control.Remote.Monad.JSON.Router (router, methodNotFound,Call(..))
+import           Control.Remote.Monad.JSON.Router (router, methodNotFound,ReceiveAPI(..),Call(..))
 import           Control.Remote.Monad.JSON.Server (serverReceiveAPI)
 import           Control.Monad.Trans.Except
 import           Control.Monad.Trans.Reader

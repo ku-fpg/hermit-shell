@@ -12,7 +12,7 @@ import Control.Natural
 import qualified Control.Remote.Monad.JSON as JSONRPC
 import Control.Remote.Monad.JSON.Trace
 import Control.Remote.Monad.JSON.Client
-import Control.Remote.Monad.JSON.Types (SendAPI(..), Args(..))
+import Control.Remote.Monad.JSON(SendAPI(..), Args(..))
 
 import HERMIT.API.Types
 import HERMIT.GHCI.Types
