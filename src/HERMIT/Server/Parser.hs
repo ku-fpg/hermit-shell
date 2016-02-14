@@ -1,5 +1,4 @@
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE GADTs #-}
@@ -16,7 +15,7 @@ import           Data.ByteString.Lazy.Char8 (unpack)
 import           Data.Typeable (Proxy(..))
 
 import           HERMIT.Context
-import           HERMIT.Kure hiding ((<$>),(<*>))
+import           HERMIT.Kure
 import           HERMIT.PrettyPrinter.Common
 import           HERMIT.PrettyPrinter.Glyphs
 import           HERMIT.Shell.Command
@@ -37,8 +36,6 @@ import           HERMIT.Server.Parser.Crumb ()
 import           HERMIT.Server.Parser.ProofShellCommand ()
 import           HERMIT.Debug
 
-import           Prelude.Compat
-
 import           Control.Applicative ((<|>))
 
 import Debug.Trace
@@ -46,13 +43,13 @@ import Debug.Trace
 -- NOTES
 --  * exprToDyns has useful info about building types
 
-parseCLT :: (MonadIO m, Functor m) => Aeson.Value 
+parseCLT :: (MonadIO m, Functor m) => Aeson.Value
          -> Either String (CLT m Aeson.Value)
 parseCLT = parseEither parseTopLevel
 
 parseTopLevel :: (MonadIO m, Functor m)
               => Aeson.Value -> Parser (CLT m Aeson.Value)
-parseTopLevel v = performTypedEffectH' 
+parseTopLevel v = performTypedEffectH'
               <$> runExternalParser parseExternalTypedEffectH v
   where
 
@@ -71,18 +68,18 @@ parseTopLevel v = performTypedEffectH'
     performTypedEffectH' :: (MonadCatch m, CLMonad m) => TypedEffectH a -> m a
     performTypedEffectH' e = do
             when debug $ do
-              liftIO $ putStrLn $ "performTypedEffectH: " 
+              liftIO $ putStrLn $ "performTypedEffectH: "
               liftIO $ putStrLn $ pprintJSON v
               liftIO $ print $ showEffectH e
             performTypedEffectH (pprintJSON v) e
-            
-            
+
+
 
 
 parseExternalTypedEffectH :: ExternalParser (TypedEffectH Value)
-parseExternalTypedEffectH = 
+parseExternalTypedEffectH =
        ShellEffectH <$> parseExternalShellEffect
-   <|> parseToValue (Proxy :: Proxy (TypedEffectH ())) 
+   <|> parseToValue (Proxy :: Proxy (TypedEffectH ()))
    <|> parseToValue (Proxy :: Proxy (TypedEffectH String))
    <|> parseToValue (Proxy :: Proxy (TypedEffectH Glyphs))
 
@@ -105,7 +102,7 @@ instance External (TypedEffectH ()) where
 
 instance External (TypedEffectH String) where
   parseExternals =
-    [ external "query" 
+    [ external "query"
         (QueryH . QueryString :: TransformH LCore String -> TypedEffectH String)
     , external "query"
         (QueryH . QueryString :: TransformH LCoreTC String -> TypedEffectH String)

@@ -1,6 +1,5 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE LambdaCase #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TupleSections #-}
 module HERMIT.GHCI.Types where
@@ -24,8 +23,6 @@ import           HERMIT.Shell.Types hiding (clm)
 import           HERMIT.GHCI.JSON
 
 import           HERMIT.RemoteShell.Orphanage()
-
-import           Prelude.Compat
 
 import           Data.Aeson
 

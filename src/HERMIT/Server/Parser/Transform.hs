@@ -29,7 +29,6 @@ import           HERMIT.Server.Parser.Crumb ()
 import           HERMIT.Server.Parser.Utils
 
 import           Prelude hiding (abs)
-import           Data.Typeable
 
 import           Text.PrettyPrint.MarkedHughesPJ (MDoc) -- TODO: until 7.10
 -------------------------------------------------------------------------------

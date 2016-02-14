@@ -14,7 +14,7 @@ import           Data.Aeson
 
 import           HERMIT.Core (Crumb(..))
 import           HERMIT.GHCI.JSON
-import           HERMIT.Kure  hiding ((<$>),(<*>))
+import           HERMIT.Kure
 import           HERMIT.Lemma (Used(..))
 import           HERMIT.Dictionary.Navigation (Considerable(..))
 import           HERMIT.PrettyPrinter.Common (HermitMark(..), Attr(..)

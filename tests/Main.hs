@@ -1,11 +1,8 @@
-{-# LANGUAGE NoImplicitPrelude #-}
 module Main (main) where
 
-import Control.Monad.Compat (unless, when)
+import Control.Monad (unless, when)
 
-import Data.Foldable.Compat (forM_)
-
-import Prelude.Compat
+import Data.Foldable (forM_)
 
 import System.Directory
 import System.Exit
@@ -185,9 +182,9 @@ mkHermitShellTest (dir, hs, moduleName, script) =
         _ <- waitForProcess rHermitShell
 
         -- strip out the ANSI (color) escapes
-	-- we use perl -pe 's/\e\[?.*?[\@-~]//g', from 
+	-- we use perl -pe 's/\e\[?.*?[\@-~]//g', from
 	--  http://unix.stackexchange.com/questions/4527/program-that-passes-stdin-to-stdout-with-color-codes-stripped
-	
+
         fh1 <- openFile rfile ReadMode
         fh2 <- openFile dfile WriteMode
         (_,_,_,rStripANSI) <- createProcess (shell stripANSI) {
@@ -195,7 +192,7 @@ mkHermitShellTest (dir, hs, moduleName, script) =
            , std_out = UseHandle fh2
         }
         _ <- waitForProcess rStripANSI
-				     
+
         -- Ensure that the golden file exists prior to calling diff
         goldenExists <- doesFileExist gfile
         unless goldenExists $ copyFile dfile gfile

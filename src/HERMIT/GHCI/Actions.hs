@@ -1,4 +1,3 @@
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE FlexibleContexts #-}
 module HERMIT.GHCI.Actions
@@ -32,8 +31,6 @@ import           HERMIT.Shell.Proof (forceProofs)
 
 import           HERMIT.GHCI.Renderer
 import           HERMIT.GHCI.Types
-
-import           Prelude.Compat hiding ((<$>))
 
 import           System.IO (Handle)
 
@@ -74,7 +71,7 @@ performTypedEffect lastCall plug ref [val] =
     Left err -> do
             putStrLn ("Internal Error: Parser Failed" :: String)
             putStrLn $ pprintJSON $ val
-            return $ toJSON $ 
+            return $ toJSON $
               (ShellFailure ("Parse error: " ++ err) :: ShellResult ())
     Right m -> do
         when debug $ print ("sending to internal shell" :: String)

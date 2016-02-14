@@ -1,6 +1,5 @@
 {-# LANGUAGE GADTs #-}
 {-# LANGUAGE KindSignatures #-}
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
@@ -15,8 +14,6 @@ import qualified Data.Text.Lazy as TL
 
 import           HERMIT.External
 import           HERMIT.Kernel (AST)
-
-import           Prelude.Compat
 
 import           System.Console.Haskeline.Completion (Completion(..))
 

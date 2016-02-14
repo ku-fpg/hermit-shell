@@ -1,4 +1,3 @@
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE GADTs #-}
 {-# LANGUAGE TypeOperators #-}
@@ -7,7 +6,7 @@ module HERMIT.GHCI (plugin) where
 import           Control.Concurrent
 import           Control.Concurrent.STM
 import           Control.Exception.Base
-import           Control.Monad.Compat
+import           Control.Monad
 import           Control.Monad.IO.Class
 import           Control.Natural
 import           Control.Remote.Monad.JSON
@@ -19,7 +18,7 @@ import           Control.Monad.Trans.Reader
 import qualified Data.Aeson as Aeson
 import           Data.ByteString.Builder (lazyByteString)
 import           Data.Default.Class
-import           Data.List.Compat
+import           Data.List
 import           Data.Maybe (maybeToList)
 
 import           HERMIT.Debug (debug)
@@ -35,8 +34,6 @@ import           HERMIT.GHCI.Types
 import           Network.HTTP.Types (Status, status200, status500)
 import qualified Network.Wai as Wai
 import           Network.Wai.Middleware.RequestLogger (logStdoutDev)
-
-import           Prelude.Compat
 
 import           System.FilePath (takeExtension)
 import           System.IO (hPutStrLn, hClose)

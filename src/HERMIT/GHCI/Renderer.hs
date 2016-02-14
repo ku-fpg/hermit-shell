@@ -1,4 +1,3 @@
-{-# LANGUAGE NoImplicitPrelude #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 module HERMIT.GHCI.Renderer where
 
@@ -12,10 +11,8 @@ import HERMIT.PrettyPrinter.Glyphs
 import HERMIT.API.Types
 import HERMIT.GHCI.Types
 
-import Prelude.Compat
-
 import Data.Aeson
-    
+
 import System.Console.ANSI
 import System.IO
 
