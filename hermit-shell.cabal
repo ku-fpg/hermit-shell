@@ -54,6 +54,8 @@ library
                         unordered-containers,
                         vector,
                         ansi-terminal,
+                        -- TODO: Remove the following when only depending on GHC 8.0
+                        fail,
                         -- needed by generated code
                         -- until 7.10 only
                         marked-pretty

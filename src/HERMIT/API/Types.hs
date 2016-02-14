@@ -11,6 +11,7 @@ module HERMIT.API.Types where
 
 import Control.Applicative
 import Control.Monad
+import qualified Control.Monad.Fail as Fail
 import Control.Monad.IO.Class
 
 import Data.Aeson
@@ -46,10 +47,13 @@ instance Applicative Shell where
 instance Monad Shell where
   return = Return
   (>>=)  = Bind
+  fail   = Fail.fail
+
+instance Fail.MonadFail Shell where
   fail   = Fail
 
-instance MonadIO Shell where 
-   liftIO = Local    
+instance MonadIO Shell where
+   liftIO = Local
 
 ------------------------------------------------------------------------
 
@@ -211,7 +215,7 @@ instance TransCat (BiTransform a b) where
 ------------------------------------------------------------------------
 
 {-
--- The idea, for the shell, is we have one global TMVar that 
+-- The idea, for the shell, is we have one global TMVar that
 -- contains all the client-side state.
 
 class ShellOptions = ShellOptions {
@@ -222,5 +226,5 @@ class ShellOptions = ShellOptions {
 -- Should we use a lenses package here?
 setShellRenderOptions :: ..
 
--}  
+-}
 

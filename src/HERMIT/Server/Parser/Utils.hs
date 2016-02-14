@@ -67,8 +67,10 @@ instance Alternative ExternalParser where
 {-
 instance Monoid (ExternalParser a) where
   mempty = ExternalParser (const $ fail "mempty")
-  mappend (ExternalParser f) (ExternalParser g) = ExternalParser $ \ v ->
-          f v <|> g v
+  mappend = (<>)
+
+instance Semigroup (ExternalParser a) where
+  ExternalParser f <> ExternalParser g = ExternalParser $ \v -> f v <|> g v
 -}
 
 alts :: [ExternalParser b] -> ExternalParser b
@@ -93,10 +95,10 @@ external nm f = ExternalParser $ \ v -> case v of
 
 -- convert a parser to return a JSON Value
 reply :: (Functor f, ToJSON e) => ExternalParser (f e) -> ExternalParser (f Value)
-reply = fmap (fmap toJSON) 
+reply = fmap (fmap toJSON)
 
 parseExternal :: External e => ExternalParser e
-parseExternal = alts parseExternals 
+parseExternal = alts parseExternals
 
 class External e where
   type R e :: *
@@ -169,7 +171,7 @@ instance (External a, External b) => External (Either a b) where
 
 -----------------------------------------------------------------
 instance External Considerable where
-  parsePrimitive = parseJSON 
+  parsePrimitive = parseJSON
 
 instance External Used where
   parsePrimitive = parseJSON
