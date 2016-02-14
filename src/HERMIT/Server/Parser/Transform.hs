@@ -1,7 +1,5 @@
-        {-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE DeriveDataTypeable #-} -- TODO: until 7.10-only
-{-# LANGUAGE StandaloneDeriving #-} -- TODO: until 7.10-only
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module HERMIT.Server.Parser.Transform where
@@ -810,7 +808,7 @@ instance External (TransformH LCore String) where
     [
 -- HERMIT.API.Dictionary.GHC
       external "loadLemmaLibrary"
-        (loadLemmaLibraryT :: HermitName -> Maybe LemmaName 
+        (loadLemmaLibraryT :: HermitName -> Maybe LemmaName
                            -> TransformH LCore String)
 
 -- HERMIT.API.Dictionary.KURE
@@ -866,8 +864,6 @@ instance External (TransformH LCoreTC ()) where
 
 
 ------------------------------------------------------------------------------
-
-deriving instance Typeable MDoc
 
 {-
 instance External (PrettyH LCore) where

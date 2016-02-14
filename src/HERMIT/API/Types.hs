@@ -3,7 +3,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE PolyKinds #-}
 {-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE DeriveDataTypeable #-}
 {-# LANGUAGE TypeSynonymInstances #-}
 {-# LANGUAGE FlexibleInstances #-}
 
@@ -118,12 +117,10 @@ instance Response LocalPath where
 ------------------------------------------------------------------------
 
 data LCoreTC = LCoreTC
-  deriving Typeable
 
 instance Guts LCoreTC
 
 data LCore = LCore
-  deriving Typeable
 
 instance Guts LCore
 
