@@ -1,4 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE CPP #-}
 {-# OPTIONS_GHC -fno-warn-orphans #-}
 module HERMIT.Server.Parser.Crumb where
 
@@ -99,8 +100,15 @@ instance External Crumb where
     , external "appCoArg"
         AppCo_Arg
 
+#if __GLASGOW_HASKELL__ > 710
+    , external "forallCoKindCo"
+        ForAllCo_KindCo
+    , external "forallCoCo"
+        ForAllCo_Co
+#else
     , external "coForallBody"
         ForAllCo_Body
+#endif
 
     , external "axiomInst"
         AxiomInstCo_Arg
@@ -123,11 +131,17 @@ instance External Crumb where
     , external "nthCo"
         NthCo_Co
 
+#if __GLASGOW_HASKELL__ > 710
+    , external "instCoLeft"
+        InstCo_Left
+    , external "instCoRight"
+        InstCo_Right
+#else
     , external "instCo"
         InstCo_Co
-
     , external "instType"
         InstCo_Type
+#endif
 
     , external "lrCo"
         LRCo_Co

@@ -32,7 +32,7 @@ library
                         data-default-class,
                         filepath,
                         haskeline,
-                        hermit                 == 1.0.0.1,
+                        hermit                 >= 1.0.0.1 && < 1.0.2,
                         http-types,
                         kure,
                         mtl,
