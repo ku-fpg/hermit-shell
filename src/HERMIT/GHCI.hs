@@ -79,7 +79,7 @@ server passInfo opts skernel initAST = do
     lastCall <- newTVarIO (abortK (pr_kernel pr) :: IO ())
 
     let fns :: ReceiveAPI :~> IO
-        fns = router sequence $ nat $ \ call -> case call of
+        fns = router sequence $ wrapNT $ \ call -> case call of
             CallMethod "send" (List args) -> performTypedEffect lastCall pr clsVar args
             _ -> methodNotFound
 --            [("send", performTypedEffect lastCall pr clsVar)
