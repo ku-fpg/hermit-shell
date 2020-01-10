@@ -38,16 +38,18 @@ import           HERMIT.Debug
 
 import           Control.Applicative ((<|>))
 
+import           Control.Monad.Fail (MonadFail)
+
 import Debug.Trace
 
 -- NOTES
 --  * exprToDyns has useful info about building types
 
-parseCLT :: (MonadIO m, Functor m) => Aeson.Value
+parseCLT :: (MonadCatch m, MonadIO m, Functor m) => Aeson.Value
          -> Either String (CLT m Aeson.Value)
 parseCLT = parseEither parseTopLevel
 
-parseTopLevel :: (MonadIO m, Functor m)
+parseTopLevel :: (MonadCatch m, MonadIO m, Functor m)
               => Aeson.Value -> Parser (CLT m Aeson.Value)
 parseTopLevel v = performTypedEffectH'
               <$> runExternalParser parseExternalTypedEffectH v
@@ -65,7 +67,7 @@ parseTopLevel v = performTypedEffectH'
     showEffectH (FmapTypedEffectH f    e     ) = "FmapTypedEffectH: " ++ showEffectH e
 
 
-    performTypedEffectH' :: (MonadCatch m, CLMonad m) => TypedEffectH a -> m a
+    performTypedEffectH' :: (MonadFail m, MonadCatch m, CLMonad m) => TypedEffectH a -> m a
     performTypedEffectH' e = do
             when debug $ do
               liftIO $ putStrLn $ "performTypedEffectH: "

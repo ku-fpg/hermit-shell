@@ -112,7 +112,7 @@ class External e where
 
   matchExternal :: e -> [Value] -> Parser (R e)
 
-  default matchExternal :: e -> [Value] -> Parser e
+  default matchExternal :: R e ~ e => e -> [Value] -> Parser (R e)
   matchExternal e [] = return e
   matchExternal _ _ = fail "wrong number of arguments"
 

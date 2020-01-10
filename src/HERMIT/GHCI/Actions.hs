@@ -102,7 +102,7 @@ performTypedEffect lastCall plug ref [val] =
 performTypedEffect _ _ _ _ =
     fail "performTypedEffect: typed effects are expected to be unary."
 
-initProofs :: MonadIO m => CLT m ()
+initProofs :: (MonadCatch m, MonadIO m) => CLT m ()
 initProofs = tryM () forceProofs
 
 newRenderer :: (Handle -> PrettyOptions -> Either String DocH -> IO ())
